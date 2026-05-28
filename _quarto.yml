@@ -17,11 +17,21 @@ bibliography: references.bib
 
 format:
   html:
+    self-contained: false
+    css: 
+      - styles.css
+      - include/webex.css
+    include-after-body: 
+      - include/webex.js
     theme:
-      - cosmo
-      - brand
-  pdf:
-    documentclass: scrreprt
+      light: 
+        - flatly
+        #- custom.scss
+      dark: 
+        - darkly
+        #- custom.scss
+    number-sections: true
+  pdf: default
 
 editor: visual
 
