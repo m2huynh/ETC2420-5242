@@ -1,11 +1,14 @@
-# Preface styles {.unnumbered}
+## Preface {.unnumbered}
 
-This is a Quarto book.
+Some Text
 
-To learn more about Quarto books visit <https://quarto.org/docs/books>.
+<center>
 
-```{r}
-1 + 1
+```{r, echo=FALSE}
+#| classes: .enlarge-image
+knitr::include_graphics("images/unit_outline6.png")
 ```
 
-Hi Minh
+</center>
+
+Some Text

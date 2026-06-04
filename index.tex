@@ -179,7 +179,30 @@
  
 
 
+\usepackage{booktabs}
+\usepackage{caption}
+\usepackage{longtable}
+\usepackage{colortbl}
+\usepackage{array}
+\usepackage{anyfontsize}
+\usepackage{multirow}
 \KOMAoption{captions}{tableheading}
+\makeatletter
+\@ifpackageloaded{tcolorbox}{}{\usepackage[skins,breakable]{tcolorbox}}
+\@ifpackageloaded{fontawesome5}{}{\usepackage{fontawesome5}}
+\definecolor{quarto-callout-color}{HTML}{909090}
+\definecolor{quarto-callout-note-color}{HTML}{0758E5}
+\definecolor{quarto-callout-important-color}{HTML}{CC1914}
+\definecolor{quarto-callout-warning-color}{HTML}{EB9113}
+\definecolor{quarto-callout-tip-color}{HTML}{00A047}
+\definecolor{quarto-callout-caution-color}{HTML}{FC5300}
+\definecolor{quarto-callout-color-frame}{HTML}{acacac}
+\definecolor{quarto-callout-note-color-frame}{HTML}{4582ec}
+\definecolor{quarto-callout-important-color-frame}{HTML}{d9534f}
+\definecolor{quarto-callout-warning-color-frame}{HTML}{f0ad4e}
+\definecolor{quarto-callout-tip-color-frame}{HTML}{02b875}
+\definecolor{quarto-callout-caution-color-frame}{HTML}{fd7e14}
+\makeatother
 \makeatletter
 \@ifpackageloaded{bookmark}{}{\usepackage{bookmark}}
 \makeatother
@@ -228,8 +251,7 @@
 \IfFileExists{xurl.sty}{\usepackage{xurl}}{} % add URL line breaks if available
 \urlstyle{same}
 \hypersetup{
-  pdftitle={QuartoBook},
-  pdfauthor={Norah Jones},
+  pdftitle={Statistical Thinking},
   colorlinks=true,
   linkcolor={blue},
   filecolor={Maroon},
@@ -238,9 +260,16 @@
   pdfcreator={LaTeX via pandoc}}
 
 
-\title{QuartoBook}
-\author{Norah Jones}
-\date{2028-04-05}
+\title{Statistical Thinking}
+\usepackage{etoolbox}
+\makeatletter
+\providecommand{\subtitle}[1]{% add subtitle to \maketitle
+  \apptocmd{\@title}{\par {\large #1 \par}}{}{}
+}
+\makeatother
+\subtitle{ETC2420/5242}
+\author{}
+\date{}
 \begin{document}
 \maketitle
 
@@ -253,27 +282,16 @@
 
 \bookmarksetup{startatroot}
 
-\chapter*{Preface styles}\label{preface-styles}
-\addcontentsline{toc}{chapter}{Preface styles}
+\chapter*{Preface}\label{preface}
+\addcontentsline{toc}{chapter}{Preface}
 
-\markboth{Preface styles}{Preface styles}
+\markboth{Preface}{Preface}
 
-This is a Quarto book.
+Some Text
 
-To learn more about Quarto books visit
-\url{https://quarto.org/docs/books}.
+\includegraphics[width=14.67in,height=\textheight,keepaspectratio]{images/unit_outline6.png}
 
-\begin{Shaded}
-\begin{Highlighting}[]
-\DecValTok{1} \SpecialCharTok{+} \DecValTok{1}
-\end{Highlighting}
-\end{Shaded}
-
-\begin{verbatim}
-[1] 2
-\end{verbatim}
-
-Hi Minh
+Some Text
 
 \bookmarksetup{startatroot}
 
@@ -295,19 +313,1840 @@ See Knuth (1984) for additional discussion of literate programming.
 
 \bookmarksetup{startatroot}
 
-\chapter{Summary}\label{summary}
+\chapter{Thinking about Probability}\label{thinking-about-probability}
 
-In summary, this book has no content whatsoever.
+\begin{tcolorbox}[enhanced jigsaw, opacitybacktitle=0.6, colframe=quarto-callout-note-color-frame, bottomrule=.15mm, toptitle=1mm, leftrule=.75mm, rightrule=.15mm, colbacktitle=quarto-callout-note-color!10!white, coltitle=black, toprule=.15mm, titlerule=0mm, bottomtitle=1mm, breakable, left=2mm, arc=.35mm, title=\textcolor{quarto-callout-note-color}{\faInfo}\hspace{0.5em}{Learning Objectives}, opacityback=0, colback=white]
 
-\begin{Shaded}
-\begin{Highlighting}[]
-\DecValTok{1} \SpecialCharTok{+} \DecValTok{1}
-\end{Highlighting}
-\end{Shaded}
+By the end of this chapter, you should be able to:
 
-\begin{verbatim}
-[1] 2
-\end{verbatim}
+\begin{enumerate}
+\def\labelenumi{\arabic{enumi}.}
+\tightlist
+\item
+  A
+\end{enumerate}
+
+\end{tcolorbox}
+
+unit outline map goes here
+
+\section{The problem with intuition}\label{the-problem-with-intuition}
+
+\emph{Parade} magazine had been part of American popular culture for
+decades. It began publication in 1941 and, for much of its life, was
+distributed as a Sunday newspaper magazine. At its peak, it reached
+millions of readers each week. Although the print magazine eventually
+ceased regular publication in 2022, \emph{Parade} continues today as a
+website and email newsletter.
+
+One of its most popular features was the ``Ask Marilyn'' column, which
+began in 1986. The column was written by Marilyn vos Savant, who became
+well known for answering puzzles, logic problems, and questions from
+readers. People wrote to her about all kinds of things: mathematics,
+language, philosophy, everyday reasoning, and strange little problems
+that seemed simple at first but became more difficult the longer one
+thought about them.
+
+\pandocbounded{\includegraphics[keepaspectratio]{images/chapter2/askmarilyn.png}}
+
+Perhaps the most famous question Marilyn ever answered was about a game
+show. It is now famously referred to as \emph{The Monty Hall Problem},
+and has appeared in modern television shows such as \emph{NUMB3RS},
+\emph{Brooklyn Nine-Nine}, \emph{Mythbusters}, and the 2008 movie
+\emph{21}.
+
+\subsection{The Monty Hall Problem}\label{the-monty-hall-problem}
+
+In the puzzle, you are a contestant on a game show.
+
+\begin{itemize}
+\tightlist
+\item
+  In front of you are three closed doors.
+
+  \begin{itemize}
+  \tightlist
+  \item
+    Behind one door is a car.
+  \item
+    Behind the other two doors are goats.
+  \end{itemize}
+\item
+  You choose one door.
+
+  \begin{itemize}
+  \tightlist
+  \item
+    The host, who knows what is behind each door, then opens one of the
+    two doors you did not choose.
+  \item
+    The door he opens has a goat behind it.
+  \end{itemize}
+\item
+  There are now two unopened doors: the door you originally chose, and
+  one other door.
+\item
+  The host gives you a choice:
+\end{itemize}
+
+\begin{quote}
+Should you stay with your original door, or should you switch?
+\end{quote}
+
+\pandocbounded{\includegraphics[keepaspectratio]{images/chapter2/montyhall.png}}
+
+At first, the answer seems obvious. There are two doors left. One has a
+car, and one has a goat. So it feels like the probability must now be
+50/50. If there are only two possibilities, surely each is equally
+likely?
+
+This is a good moment to pause and ask yourself what you would do.
+
+\begin{itemize}
+\tightlist
+\item
+  Would you stay?
+\item
+  Would you switch?
+\item
+  Would you say it does not matter?
+\end{itemize}
+
+\begin{tcolorbox}[enhanced jigsaw, opacitybacktitle=0.6, colframe=quarto-callout-note-color-frame, bottomrule=.15mm, toptitle=1mm, leftrule=.75mm, rightrule=.15mm, colbacktitle=quarto-callout-note-color!10!white, coltitle=black, toprule=.15mm, titlerule=0mm, bottomtitle=1mm, breakable, left=2mm, arc=.35mm, title=\textcolor{quarto-callout-note-color}{\faInfo}\hspace{0.5em}{Click to see what Mariln suggests you should do}, opacityback=0, colback=white]
+
+Marilyn's answer was that: you should switch.
+
+\end{tcolorbox}
+
+This answer caused an enormous backlash. Many readers (over 10,000
+letters, including nearly 1000 PhDs) wrote in to say she was wrong. Some
+of the responses were not simply polite disagreements. People were
+confident that the answer had to be 50/50, and many were amazed that
+someone known for solving logic puzzles would make what they saw as such
+an obvious mistake.
+
+A Mathematics Professor from George Mason University wrote:
+
+\begin{quote}
+``You blew it! Let me explain. If one door is shown to be a loser, that
+information changes the probability of either remaining choice, neither
+of which has any reason to be more likely to 1/2. As a professional
+mathematician, I'm very concerned with the general public's lack of
+mathematical skills. Please help by confessing your error and in the
+future being more careful.''
+\end{quote}
+
+From Dickinson State University:
+
+\begin{quote}
+``I am in shock that after being corrected by at least three
+mathematicians, you still do not see your mistake.''
+\end{quote}
+
+From Georgetown:
+
+\begin{quote}
+``How many irate mathematicians are needed to change your mind?''
+\end{quote}
+
+But \ldots{} Marilyn's answer was the correct one. Switching gives you a
+better chance of winning the car.
+
+The Monty Hall problem has since become one of the most famous examples
+in probability. Part of its appeal is that it does not require advanced
+mathematics. You do not need calculus, algebra, or specialised
+statistical theory to solve it. What you need is a careful understanding
+of how probability works, and especially how to define the set of
+possible outcomes.
+
+This is where intuition can mislead us. We look at the final situation:
+two unopened doors, and our mind jumps to ``50/50''. But here is the
+important part:
+
+\begin{quote}
+Probability is not only about counting what we can see at the end. It is
+about understanding the full process that produced the situation we are
+in.
+\end{quote}
+
+For now, we will leave the puzzle unresolved. Instead of jumping
+straight to the answer, we will use the Monty Hall problem as a reason
+to build up the basic language of probability. We will begin with
+outcomes, events, and sample spaces. Then we will use these ideas to
+return to the Monty Hall problem and see whether our first intuition
+still holds.
+
+\section{Cardano and the law of the sample
+space}\label{cardano-and-the-law-of-the-sample-space}
+
+Long before Marilyn vos Savant received angry letters about the Monty
+Hall problem, people were already arguing, guessing, and reasoning badly
+about games of chance. One of the earliest people to think carefully
+about these questions was Gerolamo Cardano.
+
+\includegraphics[width=0.5\linewidth,height=\textheight,keepaspectratio]{images/chapter2/cardano.png}
+
+\textbf{17th-century portrait engraving of Cardano}
+
+Cardano was born in Milan in 1501. His early life was difficult. He was
+an illegitimate child, he grew up in an unstable household, and his
+health was often poor. Yet he became one of the most remarkable thinkers
+of the Renaissance: a physician, mathematician, astrologer, inventor,
+and writer. He was brilliant, difficult, restless, and often unlucky.
+
+He was also a gambler.
+
+From a young age, Cardano noticed that he had a talent for games of
+chance. In his time, gambling was common. People played games involving
+dice, cards, coins, and objects known as \emph{astrali}, which were
+small bones or dice-like objects used in games of chance. Gambling was
+not merely entertainment. For many people, including Cardano, it was
+also a way to make money, lose money, test one's nerve, and attempt to
+understand fortune.
+
+Cardano's interest in gambling eventually led him to write a book called
+\emph{Liber de Ludo Aleae}, usually translated as \emph{The Book on
+Games of Chance}. It is often described as one of the first serious
+attempts in history to understand uncertainty mathematically. Cardano
+was not writing probability in the modern language we use today, but he
+was beginning to express one of its central ideas: to reason well about
+chance, we must first understand all the possible outcomes.
+
+One of the chapters in Cardano's book was titled ``On Combined Points'',
+or ``On Possibilities''. In that chapter, Cardano described what he
+called a ``general rule''. In modern terms, this rule is closely related
+to what we now call the law of the sample space.
+
+The idea is simple, but powerful:
+
+\begin{quote}
+If all outcomes are equally likely, the probability of an event is the
+number of outcomes in which the event occurs divided by the total number
+of possible outcomes.
+\end{quote}
+
+This is one of the foundations of probability.
+
+But the simplicity is deceptive. Many probability mistakes happen
+because we do not define the possible outcomes carefully enough.
+
+\begin{tcolorbox}[enhanced jigsaw, opacitybacktitle=0.6, colframe=quarto-callout-note-color-frame, bottomrule=.15mm, toptitle=1mm, leftrule=.75mm, rightrule=.15mm, colbacktitle=quarto-callout-note-color!10!white, coltitle=black, toprule=.15mm, titlerule=0mm, bottomtitle=1mm, breakable, left=2mm, arc=.35mm, title=\textcolor{quarto-callout-note-color}{\faInfo}\hspace{0.5em}{Some terminology}, opacityback=0, colback=white]
+
+A \textbf{sample space} is the set of all possible outcomes of a random
+process.
+
+If we roll a standard six-sided die, the sample space is:
+
+\[
+S = \{1,2,3,4,5,6\}.
+\]
+
+Each number in this set is an \textbf{outcome}. An outcome is one
+possible result of the random process.
+
+An \textbf{event} is a collection of outcomes. For example:
+
+\begin{itemize}
+\tightlist
+\item
+  The event ``roll an even number'' is: \(\{2,4,6\}\)
+\item
+  The event ``roll a number greater than 4'' is: \(\{5,6\}\)
+\end{itemize}
+
+If the die is fair, each of the six outcomes is equally likely. So the
+probability of
+
+\begin{itemize}
+\tightlist
+\item
+  rolling a 4 is: \(P(4) = \frac{1}{6}\)
+\item
+  rolling an even number is:
+  \(P(\text{even}) = \frac{3}{6} = \frac{1}{2}\)
+\end{itemize}
+
+This is Cardano's general rule in modern form. First, define the set of
+possible outcomes. Then count the outcomes that match the event you care
+about.
+
+We can also see one of the basic rules, or axioms, of probability here.
+
+Probabilities must be between 0 and 1:
+
+\[
+0 \leq P(A) \leq 1.
+\]
+
+An event with probability 0 is impossible. An event with probability 1
+is certain. Most events we care about fall somewhere between these two
+extremes.
+
+For the die, rolling a 7 has probability 0, because 7 is not in the
+sample space:
+
+\[
+P(7)=0.
+\]
+
+Rolling a number from 1 to 6 has probability 1, because one of those
+outcomes must happen:
+
+\[
+P(\{1,2,3,4,5,6\})=1.
+\]
+
+This gives us another axiom of probability:
+
+\[
+P(S)=1.
+\]
+
+The probability of the entire sample space is 1. Something in the sample
+space must happen.
+
+\end{tcolorbox}
+
+\subsection{The two-daughter problem}\label{the-two-daughter-problem}
+
+Suppose a family has two children, and suppose, for simplicity, that
+each child is equally likely to be a boy or a girl. Also suppose that
+the sex of one child does not affect the sex of the other.
+
+If we record the children in birth order, the sample space is:
+
+\[
+S = \{BB, BG, GB, GG\}.
+\]
+
+Here, \(BG\) means the older child is a boy and the younger child is a
+girl. \(GB\) means the older child is a girl and the younger child is a
+boy.
+
+This distinction is important. If we ask, ``What is the probability that
+both children are girls?'', the answer is:
+
+\[
+P(GG) = \frac{1}{4}.
+\]
+
+There is one outcome in which both children are girls, out of four
+equally likely outcomes.
+
+Now consider a slightly different question:
+
+\begin{quote}
+A family has two children. At least one of them is a girl. What is the
+probability that both children are girls?
+\end{quote}
+
+Many people are tempted to reason like this: we already know one child
+is a girl, so there is only one child left to consider. That remaining
+child is either a boy or a girl, so the probability that both children
+are girls must be \(1/2\).
+
+This sounds reasonable, but it is not correct under the usual
+assumptions of the problem. The mistake is that the sample space has
+changed, but not in the way our intuition first suggests. Before
+receiving any information, the sample space was:
+
+\[
+S = \{BB, BG, GB, GG\}.
+\]
+
+Once we are told that at least one child is a girl, the outcome \(BB\)
+is no longer possible. So the reduced sample space is:
+
+\[
+S = \{BG, GB, GG\}.
+\]
+
+Of these three possible outcomes, only one has two girls:
+
+\[
+GG.
+\]
+
+So the probability is:
+
+\[
+P(\text{both girls} \mid \text{at least one girl}) = \frac{1}{3}.
+\]
+
+This is exactly the kind of situation Cardano's general rule helps us
+handle. Instead of relying on intuition, we define the possible outcomes
+and count them carefully.
+
+\subsection{Why the wording matters}\label{why-the-wording-matters}
+
+Probability problems are often sensitive to how information is obtained.
+
+Compare the previous question with this one:
+
+\begin{quote}
+A family has two children. The older child is a girl. What is the
+probability that both children are girls?
+\end{quote}
+
+Now the sample space is different again.
+
+If the older child is known to be a girl, then the only possible
+outcomes are:
+
+\[
+S = \{GB, GG\}.
+\]
+
+Only one of these outcomes has two girls, so:
+
+\[
+P(\text{both girls} \mid \text{older child is a girl}) = \frac{1}{2}.
+\]
+
+The difference between these two questions is subtle but important. ``At
+least one child is a girl'' and ``the older child is a girl'' sound
+similar, but they give different information. Different information
+means a different sample space. A different sample space can mean a
+different probability.
+
+This is one of the central lessons of probability:
+
+\begin{quote}
+To solve a probability problem, we must know not only what happened, but
+how we came to know it.
+\end{quote}
+
+\section{Solving Monty Hall with the sample
+space}\label{solving-monty-hall-with-the-sample-space}
+
+We are now in a better position to think about the Monty Hall problem
+that was introduced at the start of this chapter.
+
+At the beginning of the game, there are three possible locations for the
+car:
+
+\[
+S = \{\text{Door 1}, \text{Door 2}, \text{Door 3}\}.
+\]
+
+If you choose Door 1, then the chance that your first choice is correct
+is \(1/3\). The chance that the car is behind one of the two doors you
+did not choose is \(2/3\).
+
+This part is straightforward. The sample space has three equally likely
+possibilities.
+
+The difficult part comes after the host opens a door. Many people look
+at the two remaining closed doors and think the sample space must now
+be:
+
+\[
+S = \{\text{your door}, \text{other unopened door}\}.
+\]
+
+If those two possibilities were equally likely, the answer would be
+\(1/2\). But we have just seen that we must be careful. The correct
+sample space depends not only on what remains visible, but on how the
+information was produced.
+
+In the Monty Hall problem, the host knows where the car is. The host
+does not open a door randomly. The host deliberately opens a door with a
+goat behind it. That means the host's action carries information.
+
+Suppose, without loss of generality, that you first choose Door 1. There
+is nothing special about Door 1. We are choosing it only so that we can
+write down the possible outcomes clearly.
+
+At the moment you choose Door 1, the car could be behind Door 1, Door 2,
+or Door 3.
+
+\[
+S = \{\text{Car behind Door 1}, \text{Car behind Door 2}, \text{Car behind Door 3}\}.
+\]
+
+Each of these possibilities has probability \(1/3\).
+
+Now consider what happens in each case.
+
+\begin{longtable}[]{@{}
+  >{\raggedright\arraybackslash}p{(\linewidth - 8\tabcolsep) * \real{0.2000}}
+  >{\raggedright\arraybackslash}p{(\linewidth - 8\tabcolsep) * \real{0.2000}}
+  >{\raggedright\arraybackslash}p{(\linewidth - 8\tabcolsep) * \real{0.2000}}
+  >{\raggedright\arraybackslash}p{(\linewidth - 8\tabcolsep) * \real{0.2000}}
+  >{\raggedright\arraybackslash}p{(\linewidth - 8\tabcolsep) * \real{0.2000}}@{}}
+\toprule\noalign{}
+\begin{minipage}[b]{\linewidth}\raggedright
+Where the car is
+\end{minipage} & \begin{minipage}[b]{\linewidth}\raggedright
+Your first choice
+\end{minipage} & \begin{minipage}[b]{\linewidth}\raggedright
+What the host can open
+\end{minipage} & \begin{minipage}[b]{\linewidth}\raggedright
+If you stay
+\end{minipage} & \begin{minipage}[b]{\linewidth}\raggedright
+If you switch
+\end{minipage} \\
+\midrule\noalign{}
+\endhead
+\bottomrule\noalign{}
+\endlastfoot
+Door 1 & Door 1 & Door 2 or Door 3 & Win & Lose \\
+Door 2 & Door 1 & Door 3 & Lose & Win \\
+Door 3 & Door 1 & Door 2 & Lose & Win \\
+\end{longtable}
+
+This table is the key to the problem.
+
+If the car is behind Door 1, then your first choice was correct. The
+host can open either Door 2 or Door 3, because both of those doors have
+goats behind them. If you stay, you win. If you switch, you lose.
+
+If the car is behind Door 2, then your first choice was wrong. The host
+cannot open Door 2, because that would reveal the car. The host must
+open Door 3, revealing a goat. If you stay, you lose. If you switch, you
+win.
+
+If the car is behind Door 3, then your first choice was wrong. The host
+must open Door 2. If you stay, you lose. If you switch, you win.
+
+So switching wins in two of the three possible cases.
+
+\[
+P(\text{win by switching}) = \frac{2}{3}.
+\]
+
+Staying wins in only one of the three possible cases.
+
+\[
+P(\text{win by staying}) = \frac{1}{3}.
+\]
+
+This is why Marilyn vos Savant was right. You should switch.
+
+The most important point is that the host's action does not reset the
+probabilities to \(1/2\) and \(1/2\). Your original choice had a \(1/3\)
+chance of being correct when you made it. The host's action does not
+change the fact that your first choice was probably wrong. In fact, your
+first choice was wrong with probability \(2/3\).
+
+\begin{tcolorbox}[enhanced jigsaw, opacitybacktitle=0.6, colframe=quarto-callout-note-color-frame, bottomrule=.15mm, toptitle=1mm, leftrule=.75mm, rightrule=.15mm, colbacktitle=quarto-callout-note-color!10!white, coltitle=black, toprule=.15mm, titlerule=0mm, bottomtitle=1mm, breakable, left=2mm, arc=.35mm, title=\textcolor{quarto-callout-note-color}{\faInfo}\hspace{0.5em}{Bonus Round}, opacityback=0, colback=white]
+
+Imagine you were playing a variation of the Monty Hall game, except the
+rules are now:
+
+\begin{enumerate}
+\def\labelenumi{\arabic{enumi}.}
+\tightlist
+\item
+  There are 100 doors
+\item
+  Behind one of these doors is a car
+\item
+  Behind the other 99 doors are goats
+\item
+  You choose 1 door
+\item
+  The host (who knows there the car is), opens 98 doors that you did not
+  choose, each revealing a goat.
+\item
+  There are now 2 doors left: 1 with a car, and 1 with a goat
+\item
+  The host asks you:
+\end{enumerate}
+
+\begin{quote}
+``Do you stay or switch?''
+\end{quote}
+
+Using the same logic as above, can you determine the best choice to make
+here?
+
+\end{tcolorbox}
+
+The idea of the sample space gives us a way to begin thinking carefully
+about probability. Before we can assign probabilities, we need to know
+what the possible outcomes are.
+
+But there is another important step. Once we know the possible outcomes,
+we often need to ask:
+
+\begin{quote}
+How many different ways can the event happen?
+\end{quote}
+
+\section{Galileo and counting the ways something can
+happen}\label{galileo-and-counting-the-ways-something-can-happen}
+
+The Monty Hall problem shows why the sample space matters. At first, we
+see two unopened doors and our intuition says ``two possibilities, so
+50/50''. But once we carefully describe the full process (i.e., your
+original choice, the host's knowledge, and the door the host is forced
+to open) we see that the two remaining doors do not have the same
+probability. The lesson is not just that we need to list the possible
+outcomes. We also need to count them in the right way.
+
+This brings us to the next step in probability thinking. Sometimes the
+difficulty is not deciding what the outcomes are, but recognising that
+an event can happen in more than one way. Two events may look equally
+likely on the surface, but one may have more hidden pathways leading to
+it. This takes us to the yea 1583, where we meet a young Galileo
+Galilei.
+
+Today, Galileo Galilei is remembered as one of the great figures in the
+history of science. He is best known for his work in astronomy and
+physics, including his telescopic observations, his studies of motion,
+and his role in the controversy with the Church.
+
+\pandocbounded{\includegraphics[keepaspectratio]{images/chapter2/Galileo.png}}
+
+However, Galileo also made a rather unusual contribution to the early
+understanding of probability. While connected with the University of
+Pisa, Galileo was hired by the Grand Duke of Tuscany to explain a
+problem involving dice:
+
+\begin{quote}
+When you throw three dice, why does the sum of 10 appear more frequently
+than the sum of 9?
+\end{quote}
+
+At first, this seems strange. There are six combinations that can
+produce a total of 9:
+
+\[
+1+2+6 = 9
+\]
+
+\[
+1+3+5 = 9
+\]
+
+\[
+1+4+4 = 9
+\]
+
+\[
+2+2+5 = 9
+\]
+
+\[
+2+3+4 = 9
+\]
+
+\[
+3+3+3 = 9
+\]
+
+There are also six combinations that can produce a total of 10:
+
+\[
+1+3+6 = 10
+\]
+
+\[
+1+4+5 = 10
+\]
+
+\[
+2+2+6 = 10
+\]
+
+\[
+2+3+5 = 10
+\]
+
+\[
+2+4+4 = 10
+\]
+
+\[
+3+3+4 = 10
+\]
+
+So it seems as though 9 and 10 should be equally likely. However, the
+Grand Duke had noticed that 10 appeared more often. Galileo explained
+why. The mistake is that the lists above do not count all the possible
+ways the dice can land. They count combinations, but they do not count
+order.
+
+For example:
+
+\[
+1+2+6
+\]
+
+can occur in several different ways:
+
+\[
+(1,2,6)
+\]
+
+\[
+(1,6,2)
+\]
+
+\[
+(2,1,6)
+\]
+
+\[
+(2,6,1)
+\]
+
+\[
+(6,1,2)
+\]
+
+\[
+(6,2,1)
+\]
+
+These are different outcomes when three dice are rolled, because the
+first die, second die, and third die can each show different numbers.
+
+So although 9 and 10 each appear to have six combinations, those
+combinations do not produce the same number of ordered outcomes.
+
+For a total of 9, there are 25 ordered outcomes.
+
+For a total of 10, there are 27 ordered outcomes.
+
+Therefore:
+
+\[
+P(\text{sum is 9}) = \frac{25}{216}
+\]
+
+while
+
+\[
+P(\text{sum is 10}) = \frac{27}{216}.
+\]
+
+A total of 10 is slightly more likely.
+
+The difference is small, but gamblers who played often enough (such as
+the Grand Duke) could notice it. Galileo's contribution was to show that
+the pattern was not magic, luck, or superstition. It came from counting
+the possible outcomes properly.
+
+This gives us another important rule:
+
+\begin{quote}
+The probability of an event depends on the number of ways in which it
+can occur.
+\end{quote}
+
+\subsection{The birthday problem}\label{the-birthday-problem}
+
+One of the most famous examples of counting the ways an event can happen
+is the birthday problem. Imagine a class of students. Ignore leap years
+and assume that each birthday is equally likely to fall on any of the
+365 days of the year. Here is the question:
+
+\begin{quote}
+How many people need to be in a room before there is a better than 50\%
+chance that at least two people share a birthday?
+\end{quote}
+
+Most people guess a number much larger than the true answer. There are
+365 possible birthdays, so it feels as though we would need a very large
+group before a shared birthday becomes likely. Many people guess 100,
+150, or even more.
+
+\begin{tcolorbox}[enhanced jigsaw, opacitybacktitle=0.6, colframe=quarto-callout-note-color-frame, bottomrule=.15mm, toptitle=1mm, leftrule=.75mm, rightrule=.15mm, colbacktitle=quarto-callout-note-color!10!white, coltitle=black, toprule=.15mm, titlerule=0mm, bottomtitle=1mm, breakable, left=2mm, arc=.35mm, title=\textcolor{quarto-callout-note-color}{\faInfo}\hspace{0.5em}{Click to see answer}, opacityback=0, colback=white]
+
+The surprising answer is 23.
+
+With just 23 people, the probability that at least two people share a
+birthday is slightly greater than 50\%.
+
+\end{tcolorbox}
+
+The easiest way to calculate the birthday problem is to work backwards.
+Instead of first calculating the probability that at least two people
+share a birthday, we calculate the probability that nobody shares a
+birthday.
+
+The first person can have any birthday, since there is no one else to
+match with. The second person must avoid that first birthday, leaving
+364 possible birthdays that would keep everyone unique. The third person
+must avoid the two birthdays already taken, leaving 363 possible
+choices. The fourth person must avoid three birthdays, leaving 362
+possible choices. Continuing this pattern, each new person has one fewer
+safe birthday available than the person before them.
+
+\begin{longtable}[]{@{}
+  >{\raggedright\arraybackslash}p{(\linewidth - 6\tabcolsep) * \real{0.1200}}
+  >{\raggedright\arraybackslash}p{(\linewidth - 6\tabcolsep) * \real{0.4800}}
+  >{\raggedright\arraybackslash}p{(\linewidth - 6\tabcolsep) * \real{0.2200}}
+  >{\raggedright\arraybackslash}p{(\linewidth - 6\tabcolsep) * \real{0.1800}}@{}}
+\toprule\noalign{}
+\begin{minipage}[b]{\linewidth}\raggedright
+Person
+\end{minipage} & \begin{minipage}[b]{\linewidth}\raggedright
+What must happen
+\end{minipage} & \begin{minipage}[b]{\linewidth}\raggedright
+Safe birthday choices
+\end{minipage} & \begin{minipage}[b]{\linewidth}\raggedright
+Probability
+\end{minipage} \\
+\midrule\noalign{}
+\endhead
+\bottomrule\noalign{}
+\endlastfoot
+1st person & Can have any birthday & 365 & \(\frac{365}{365}\) \\
+2nd person & Must avoid the first person's birthday & 364 &
+\(\frac{364}{365}\) \\
+3rd person & Must avoid the first two birthdays & 363 &
+\(\frac{363}{365}\) \\
+4th person & Must avoid the first three birthdays & 362 &
+\(\frac{362}{365}\) \\
+\ldots{} & Continue in the same way & \ldots{} & \(\cdots\) \\
+23rd person & Must avoid the birthdays of the first 22 people & 343 &
+\(\frac{343}{365}\) \\
+\end{longtable}
+
+Multiplying these probabilities together, for 23 people the probability
+that nobody shares a birthday is:
+
+\[
+\frac{365}{365}
+\times
+\frac{364}{365}
+\times
+\frac{363}{365}
+\times
+\cdots
+\times
+\frac{343}{365}
+\approx 0.493.
+\]
+
+Notice that the probability we have just calculated is \textbf{not} the
+probability that someone shares a birthday. We have calculated the
+probability that nobody shares a birthday.
+
+We can now apply the \textbf{complement rule} to solve this.
+
+The \textbf{complement rule} says that if an event has probability
+(P(A)), then the probability that the event does \textbf{not} happen is:
+
+\[
+P(\text{not } A) = 1 - P(A).
+\]
+
+Equivalently,
+
+\[
+P(A) = 1 - P(\text{not } A).
+\]
+
+In the birthday problem, let (A) be the event that \textbf{at least two
+people share a birthday}.
+
+Then the complement of (A), written (A\^{}c), is the event that
+\textbf{nobody shares a birthday}.
+
+So:
+
+\[
+A = \text{at least two people share a birthday}
+\]
+
+and
+
+\[
+A^c = \text{nobody shares a birthday}.
+\]
+
+These two events cover all possible outcomes. Either there is at least
+one shared birthday, or there is no shared birthday. Since one of these
+must happen, their probabilities add to 1:
+
+\[
+P(A) + P(A^c) = 1.
+\]
+
+Rearranging this gives:
+
+\[
+P(A) = 1 - P(A^c).
+\]
+
+In this example, we calculated:
+
+\[
+P(A^c) = P(\text{nobody shares a birthday}) \approx 0.493.
+\]
+
+Therefore:
+
+\[
+P(A)
+=
+1 - P(A^c)
+=
+1 - 0.493
+=
+0.507.
+\]
+
+So the probability that at least two people share a birthday is
+approximately (0.507), or \textbf{50.7\%}.
+
+In the birthday problem, it is easier to calculate the probability of no
+shared birthdays and then subtract from 1. This is a common strategy in
+probability. When the event we care about is hard to count directly, it
+may be easier to count its complement.
+
+\begin{quote}
+The birthday problem is surprising because a shared birthday feels
+unlikely when we think about one comparison at a time. But it becomes
+much more likely when we count all the possible comparisons. This is one
+reason probability often feels unintuitive. Our minds tend to focus on
+one person, one comparison, or one outcome. Probability often asks us to
+step back and count the whole structure of possibilities.
+\end{quote}
+
+\section{Pascal, Fermat, and the mathematics of
+chance}\label{pascal-fermat-and-the-mathematics-of-chance}
+
+Galileo's work with dice showed that probability depends on counting the
+ways an event can happen. Some outcomes are more likely than others, not
+because they are favoured by fate, but because there are more ways for
+them to occur.
+
+This idea also helps explain events that look astonishing at first
+glance. In Germany's Lotto 6/49, six winning numbers are drawn from the
+numbers 1 to 49. On June 21, 1995, the winning numbers were:
+
+\[
+15,\ 25,\ 27,\ 30,\ 42,\ 48.
+\]
+
+What made this draw remarkable was that the exact same set of numbers
+had already appeared on December 20, 1986. It was the first repeated
+winning sequence in 3,016 drawings.
+
+At first, this sounds almost impossible. But, as with the birthday
+problem, the important question is not just
+
+\begin{quote}
+``What is the chance of this exact sequence appearing again?''
+\end{quote}
+
+A better question is
+
+\begin{quote}
+``Across thousands of drawings, how many opportunities were there for
+some sequence to repeat?''
+\end{quote}
+
+But how do we actually calculate a probability like this? (by the way,
+the answer is 28\% - a value we'll learn how to compute later). The
+numbers are too large to list every possible lottery draw, and the event
+we care about is not just one specific repeat. We want to know the
+chance that any repeat occurs somewhere among thousands of draws.
+
+This is where the work of Blaise Pascal and Pierre de Fermat becomes
+important. Pascal is remembered for many contributions to mathematics
+and science, including Pascal's triangle, work on pressure and fluids,
+and his writing on philosophy and religion. Fermat is best known for his
+work in number theory, including the famous Fermat's Last Theorem, as
+well as important ideas in analytic geometry and calculus.
+
+\includegraphics[width=0.5\linewidth,height=\textheight,keepaspectratio]{images/chapter2/pascal_and_fermat.jpg}
+
+However, in this section, we are interested in a famous correspondence
+between the two of them about games of chance. In the seventeenth
+century, Pascal and Fermat exchanged letters about how to solve problems
+involving uncertainty, especially the question of how to divide the
+stakes of an unfinished game fairly (i.e.~``\emph{The problem of
+Points}). These questions came from gambling, but the ideas behind them
+became much more important. Their correspondence helped establish
+probability as a mathematical subject: a way of counting possible
+outcomes, comparing favourable cases with all cases, and reasoning
+systematically about chance.
+
+\begin{tcolorbox}[enhanced jigsaw, opacitybacktitle=0.6, colframe=quarto-callout-note-color-frame, bottomrule=.15mm, toptitle=1mm, leftrule=.75mm, rightrule=.15mm, colbacktitle=quarto-callout-note-color!10!white, coltitle=black, toprule=.15mm, titlerule=0mm, bottomtitle=1mm, breakable, left=2mm, arc=.35mm, title=\textcolor{quarto-callout-note-color}{\faInfo}\hspace{0.5em}{The Problem of Points}, opacityback=0, colback=white]
+
+The Problem of Points goes something like this:
+
+\begin{quote}
+Imagine two players are playing a game of chance. They agree that the
+first person to win a certain number of rounds will receive the prize.
+But before the game is finished, something interrupts play. One player
+is ahead, but neither player has yet won. How should the prize be
+divided?
+\end{quote}
+
+At first, this might seem like a simple matter. Perhaps the prize should
+be divided according to the score when the game stopped. If one player
+has won twice as many rounds as the other player, perhaps that player
+should receive twice as much of the prize.
+
+But this does not quite answer the right question.
+
+The prize was not meant to reward the number of rounds already won. It
+was meant to reward the person who would eventually win the whole game.
+If the game is interrupted, we do not know who that would have been. So
+the fair division of the prize should depend on each player's
+\textbf{chance} of eventually winning from the point at which the game
+stopped.
+
+Consider a simple version of the problem:
+
+\begin{itemize}
+\tightlist
+\item
+  Two players, A and B, are playing a match.
+\item
+  The first player to win 3 rounds wins the prize.
+\item
+  The game is interrupted with the score showing A having won 2 rounds,
+  and B having won 1 round.
+\item
+  Player A is ahead. But Player B is not out of the contest. If the
+  match continued, A would need one more win, while B would need two
+  more wins.
+\item
+  And suppose each player is equally likely to win each future game.
+\end{itemize}
+
+How should the prize be divided?
+
+One tempting answer is to divide the prize according to the current
+score. A has won 2 rounds and B has won 1 round, so A should receive
+two-thirds of the prize and B should receive one-third.
+
+But Pascal and Fermat's reasoning gives a different answer.
+
+To see why, list the possible future paths.
+
+Since A needs one more win and B needs two more wins, the match can last
+at most two more rounds. Imagine writing down the winners of the next
+two possible rounds (Note: Player A only needs to win one more game, so
+if A wins round 4, a 5th game is not needed, but we'll list all possible
+combinations out for now.)
+
+\[
+AA
+\]
+
+\[
+AB
+\]
+
+\[
+BA
+\]
+
+\[
+BB
+\]
+
+These four future paths are equally likely if each round is a fair
+contest.
+
+Now ask: in which of these paths does A win the match?
+
+If the future path is:
+
+\[
+AA
+\]
+
+then A wins the next round, and the match is over.
+
+If the future path is:
+
+\[
+AB
+\]
+
+then A wins the next round, and the match is over. The second letter
+does not really matter, because the game would have already finished,
+but including it helps us keep the future paths equally structured.
+
+If the future path is:
+
+\[
+BA
+\]
+
+then B wins the next round, making the score 2 to 2. A then wins the
+following round, so A wins the match.
+
+If the future path is:
+
+\[
+BB
+\]
+
+then B wins both remaining rounds, so B wins the match.
+
+So A wins in three of the four possible future paths:
+
+\[
+AA,; AB,; BA
+\]
+
+B wins in only one:
+
+\[
+BB
+\]
+
+Therefore:
+
+\[
+P(A \text{ wins}) = \frac{3}{4}
+\]
+
+and
+
+\[
+P(B \text{ wins}) = \frac{1}{4}
+\]
+
+So the fair division of the prize is not based on the current score of 2
+to 1. It is based on the probability of eventually winning.
+
+If the prize is \$100, then A should receive:
+
+\[
+\frac{3}{4} \times 100 = 75
+\]
+
+and B should receive:
+
+\[
+\frac{1}{4} \times 100 = 25
+\]
+
+So the fair split is:
+
+\[
+A = 75
+\]
+
+\[
+B = 25
+\]
+
+This is a powerful idea.
+
+The value of a player's position is not determined only by what has
+already happened. It is determined by the possible futures still
+available from that position.
+
+This is why the problem of points was so important. It shifted
+probability from a way of describing games of chance to a way of valuing
+uncertain situations.
+
+The same thinking applies far beyond gambling. Whenever a process is
+unfinished, probability can help us reason about what the current
+situation is worth. A sports series interrupted by weather (see the
+\href{https://en.wikipedia.org/wiki/Duckworth\%E2\%80\%93Lewis\%E2\%80\%93Stern_method}{DLS
+method}), a business deal partway through negotiation, a project with
+uncertain future milestones, or a medical trial stopped early all raise
+a similar kind of question:
+
+Given what has happened so far, what are the possible futures, and how
+likely is each one? Pascal and Fermat's answer was to look forward, not
+backward. Probability gives us a way to divide value under uncertainty.
+
+\end{tcolorbox}
+
+\subsection{When there are too many
+futures}\label{when-there-are-too-many-futures}
+
+The problem of points shows us how probability can be used to reason
+about unfinished situations. In the example above, the future was small
+enough that we could simply write down all the possibilities:
+
+\[
+AA; AB; BA; BB
+\]
+
+There were only four possible future paths. Once we had listed them, the
+rest was straightforward. Player A won in three of the four paths, and
+Player B won in one of the four paths. But this kind of listing only
+works when the number of possibilities is small.
+
+As soon as a problem becomes even moderately larger, the number of
+possible arrangements can grow very quickly. In probability, this is a
+common challenge. The idea is simple: count the possible outcomes. But
+the practice can become difficult because there may be too many outcomes
+to list.
+
+Consider something ordinary: planning the seating arrangement for a
+wedding reception. Suppose there is one table with 6 seats, and 6 guests
+need to be seated at that table.
+
+How many different seating arrangements are possible?
+
+\begin{itemize}
+\tightlist
+\item
+  For the first seat, there are 6 possible guests.
+\item
+  Once that seat is filled, there are 5 guests left for the second seat.
+\item
+  Once the second seat is filled, there are 4 guests left for the third
+  seat.
+\item
+  Then 3 guests remain, then 2, then 1.
+\end{itemize}
+
+So the total number of seating arrangements is:
+
+\[
+6 \times 5 \times 4 \times 3 \times 2 \times 1 = 720
+\]
+
+So even with only 6 guests at one table, there are 720 possible ways to
+arrange them.
+
+Now suppose the table has 10 seats and there are 10 guests. The number
+of arrangements is:
+
+\[
+10 \times 9 \times 8 \times 7 \times 6 \times 5 \times 4 \times 3 \times 2 \times 1 = 3,628,800
+\] So with just 10 guests, there are more than 3.6 million possible
+seating arrangements.
+
+This kind of product appears so often that mathematicians have a special
+notation for it. It is called a factorial.
+
+We write (and read it as ``10 factorial''):
+
+\[
+10! = 10 \times 9 \times 8 \times 7 \times 6 \times 5 \times 4 \times 3 \times 2 \times 1
+\]
+
+So:
+
+\[
+10! = 3,628,800
+\]
+
+In general:
+
+\[
+n! = n \times (n-1) \times (n-2) \times \cdots \times 3 \times 2 \times 1
+\]
+
+Factorials are useful when we are arranging items in order.
+
+If there are (n) guests and (n) seats, then the number of possible
+seating arrangements is:
+
+\[
+n!
+\]
+
+This is already a big step away from listing the sample space by hand.
+Nobody wants to write out 3,628,800 possible seating plans.
+
+But the mathematics lets us count them without listing them. This
+matters because probability often depends on counting. If each seating
+arrangement were equally likely, and we wanted to know the probability
+of a particular arrangement, we would need to know the total number of
+possible arrangements.
+
+For 10 guests at one table, the probability of one exact seating plan
+would be:
+
+\[
+\frac{1}{10!}
+\]
+
+That is:
+
+\[
+\frac{1}{3,628,800}
+\]
+
+The event is possible, but highly unlikely.
+
+This is the same logic we have used throughout the chapter. Probability
+depends on the number of possible outcomes and the number of outcomes
+that match the event we care about.
+
+But now the number of possible outcomes is too large to list. So we need
+tools for counting.
+
+\subsubsection{Arranging versus
+choosing}\label{arranging-versus-choosing}
+
+The wedding example is about arranging people. In an arrangement, order
+matters.
+
+If Minh sits in Seat 1 and Damjan sits in Seat 2, that is different from
+Damjan sitting in Seat 1 and Minh sitting in Seat 2.
+
+So these two arrangements are different:
+
+\[
+\text{Minh, Damjan}
+\]
+
+\[
+\text{Damjan, Minh}
+\]
+
+But not every probability problem is about arranging things in order.
+Sometimes we only care about choosing a group. Suppose there are 10
+guests, and we need to choose 4 of them to sit at a smaller table near
+the front. If we only care about who is chosen, and not the order in
+which they sit, then the problem is different.
+
+Choosing Minh, Damjan, Lachlan, and Catherine is the same group as
+choosing Catherine, Lachlan, Damjan, and Minh. The order has changed,
+but the group has not. This difference between arranging and choosing is
+important.
+
+\begin{itemize}
+\tightlist
+\item
+  When order matters, we are usually dealing with arrangements.
+\item
+  When order does not matter, we are usually dealing with combinations.
+\end{itemize}
+
+We will soon need a way to count combinations: the number of ways to
+choose a group from a larger set. One of the most famous tools for doing
+this is Pascal's triangle.
+
+Pascal's triangle gives us a way to count how many different groups can
+be chosen without writing them all out. It also connects directly to
+probability, especially when we think about repeated events like coin
+tosses.
+
+Before we introduce the triangle, keep the wedding example in mind.
+
+Arranging 10 guests at 10 seats gives us:
+
+\[
+10!
+\]
+
+possible arrangements.
+
+But choosing 4 guests from 10 is a different kind of counting problem.
+That shift, from arranging to choosing, is where Pascal's triangle
+becomes useful.
+
+\subsection{Pascal's triangle and
+combinations}\label{pascals-triangle-and-combinations}
+
+This is the difference between an \textbf{arrangement} and a
+\textbf{combination}.
+
+\begin{itemize}
+\tightlist
+\item
+  An arrangement counts different orders.
+\item
+  A combination counts different groups.
+\end{itemize}
+
+This distinction matters because probability depends on counting the
+right thing. Let us use a small example to illustrate this. Suppose
+there are 4 guests:
+
+\[
+A,B,C,D
+\]
+
+and we want to choose 2 of them. The possible pairs are:
+
+\[
+AB, AC, AD, BC, BD, CD
+\]
+
+There are 6 possible pairs. So the number of ways to choose 2 guests
+from 4 is:
+
+\[
+6
+\]
+
+We write this as (and read it as ``4 choose 2''):
+
+\[
+\binom{4}{2}=6
+\]
+
+This notation means:
+
+\begin{quote}
+How many ways are there to choose 2 items from 4, when order does not
+matter?
+\end{quote}
+
+Now suppose we wanted to choose 1 guest from 4. There are obviously 4
+ways:
+
+\[
+\binom{4}{1} = 4
+\]
+
+If we wanted to choose all 4 guests from 4, there is only 1 way:
+
+\[
+\binom{4}{4} = 1
+\]
+
+If we wanted to choose no guests from 4, there is also only 1 way:
+
+\[
+\binom{4}{0} = 1
+\]
+
+That last one may feel strange at first. But there is exactly one way to
+choose nothing: choose nobody.
+
+So for 4 guests, the numbers are:
+
+\[
+\binom{4}{0}=1
+\]
+
+\[
+\binom{4}{1}=4
+\]
+
+\[
+\binom{4}{2}=6
+\]
+
+\[
+\binom{4}{3}=4
+\]
+
+\[
+\binom{4}{4}=1
+\]
+
+Written in a row, this gives:
+
+\[
+1 \quad 4 \quad 6 \quad 4 \quad 1
+\]
+
+This row appears in Pascal's triangle. Pascal's triangle is a pattern of
+numbers that begins like this:
+
+\[
+1
+\]
+
+\[
+1 \quad 1
+\]
+
+\[
+1 \quad 2 \quad 1
+\]
+
+\[
+1 \quad 3 \quad 3 \quad 1
+\]
+
+\[
+1 \quad 4 \quad 6 \quad 4 \quad 1
+\]
+
+\[
+1 \quad 5 \quad 10 \quad 10 \quad 5 \quad 1
+\]
+
+Pascal's triangle gives us a compact way to count possibilities without
+writing them all out. This is useful because counting problems become
+large very quickly. Choosing 2 guests from 4 is easy. Choosing 10 guests
+from 100 is not. But the same idea applies. We are still asking:
+
+\begin{quote}
+How many different groups can be formed?
+\end{quote}
+
+Pascal's triangle gives one way to answer that question. The
+combinations formula gives another:
+
+\[
+\frac{n!}{k!(n-k)!}
+\]
+
+This means:
+
+The number of ways to choose (k) items from (n) items, when order does
+not matter.
+
+For example, the number of ways to choose 10 guests from 100 is:
+
+\[
+\frac{100!}{10!90!}
+\]
+
+This number is enormous. The important point is not that we need to
+memorise it. The important point is that probability often depends on
+counting possibilities that are far too numerous to list by hand.
+Pascal's triangle is one tool for doing that counting systematically.
+
+\subsection{Mathematical Expectation}\label{mathematical-expectation}
+
+Pascal's contribution to probability did not stop with counting.
+Counting tells us how many ways an event can happen. Pascal also helped
+develop another idea: how to place a value on an uncertain situation.
+That idea is called mathematical expectation.
+
+The problem of points asked how a prize should be divided when a game is
+interrupted. Pascal and Fermat's solution was to look forward. Instead
+of asking only what had already happened, they asked what could still
+happen, how likely those futures were, and what each future was worth.
+
+This way of thinking leads naturally to mathematical expectation. The
+basic idea is simple:
+
+To value an uncertain situation, multiply each possible outcome by its
+probability, then add the results.
+
+If a random quantity (X) can take values:
+
+\[
+x_1,x_2,x_3,\ldots,x_k
+\]
+
+with probabilities:
+
+\[
+p_1,p_2,p_3,\ldots,p_k
+\]
+
+then the expected value is:
+
+\[
+p_1x_1+p_2x_2+p_3x_3+\cdots+p_kx_k
+\]
+
+Expected value is not necessarily what will happen. It is not a
+prediction of the next outcome. Instead, it is a long-run average, or a
+way of placing a value on uncertainty before the outcome is known.
+
+Expected value is easiest to understand through a simple game. Suppose
+you pay \texttt{\$10} to play a game in which a fair coin is tossed. If
+the coin lands heads, you receive \texttt{\$30}. If it lands tails, you
+receive nothing.
+
+\begin{table}
+
+\caption{\label{tbl-positive-ev-game}}
+
+\centering{
+
+\fontsize{12.0pt}{14.4pt}\selectfont
+\begin{tabular*}{\linewidth}{@{\extracolsep{\fill}}lcr}
+\toprule
+Outcome & Probability & Winnings \\ 
+\midrule\addlinespace[2.5pt]
+Heads & 1/2 & \$30 \\ 
+Tails & 1/2 & \$0 \\ 
+\bottomrule
+\end{tabular*}
+
+}
+
+\end{table}%
+
+To calculate the expected winnings, we multiply each possible outcome by
+its probability and then add the results:
+
+\[
+E(\text{winnings})=
+\left(\frac{1}{2}\times 30\right)
++
+\left(\frac{1}{2}\times 0\right)
+= 15
+\]
+
+So the game pays, on average, \texttt{\$15}. However, it costs
+\texttt{\$10} to play, so the expected profit is:
+
+\[
+15 - 10 = 5
+\]
+
+This game has a \textbf{positive expected value}. That does not mean you
+will win \texttt{\$5} every time you play. In any single game, you
+either receive \texttt{\$30} or receive nothing. But over many repeated
+plays, the average profit would tend towards \texttt{\$5} per game.
+
+Now change the game slightly. Suppose it still costs \texttt{\$10} to
+play, and the coin is still fair, but the prize for heads is now only
+\texttt{\$15}.
+
+\begin{table}
+
+\caption{\label{tbl-negative-ev-game}}
+
+\centering{
+
+\fontsize{12.0pt}{14.4pt}\selectfont
+\begin{tabular*}{\linewidth}{@{\extracolsep{\fill}}lcr}
+\toprule
+Outcome & Probability & Winnings \\ 
+\midrule\addlinespace[2.5pt]
+Heads & 1/2 & \$15 \\ 
+Tails & 1/2 & \$0 \\ 
+\bottomrule
+\end{tabular*}
+
+}
+
+\end{table}%
+
+The expected winnings are now:
+
+\[
+E(\text{winnings})
+=
+\left(\frac{1}{2}\times 15\right)
++
+\left(\frac{1}{2}\times 0\right) 
+= 7.50
+\]
+
+Since the game still costs \texttt{\$10} to play, the expected profit
+is:
+
+\[
+7.50 - 10 = -2.50
+\]
+
+This game has a \textbf{negative expected value}. You might still win if
+you play once, but the structure of the game works against you in the
+long run.
+
+The important lesson is this:
+
+\begin{quote}
+A game can be possible to win and still be a bad bet.
+\end{quote}
+
+\subsection{Everyday expectation}\label{everyday-expectation}
+
+Expected value can make ordinary decisions look different.
+
+Suppose a parking meter costs \texttt{\$2}. If you do not pay, there is
+a chance you will receive a \texttt{\$100} fine. If the chance of
+receiving a fine is 1 in 20, then the expected cost of the fine is:
+
+\[
+\frac{1}{20}\times 100 = 5
+\]
+
+So the expected cost of not paying is \texttt{\$5}.
+
+\begin{table}
+
+\caption{\label{tbl-parking-meter}The expected cost of paying or not
+paying a parking meter}
+
+\centering{
+
+\fontsize{12.0pt}{14.4pt}\selectfont
+\begin{tabular*}{\linewidth}{@{\extracolsep{\fill}}lrlr}
+\toprule
+Choice & Immediate cost & Possible later cost & Expected cost \\ 
+\midrule\addlinespace[2.5pt]
+Pay the meter & \$2 & \$0 & \$2 \\ 
+Do not pay & \$0 & \$100 fine with probability 1/20 & \$5 \\ 
+\bottomrule
+\end{tabular*}
+
+}
+
+\end{table}%
+
+From this point of view, the \texttt{\$2} meter is not really competing
+against a cost of zero. It is competing against an expected fine of
+\texttt{\$5}. Paying the meter is the better financial decision.
+
+Or suppose you regularly reverse out of a narrow driveway. Most of the
+time, nothing happens. But every so often, you clip the side mirror and
+it costs \texttt{\$400} to repair. If this happens about once every 200
+times, then the expected cost each time you reverse out is:
+
+\[
+\frac{1}{200}\times 400 = 2
+\]
+
+That does not mean you literally pay \texttt{\$2} each time you leave
+the driveway. Most trips cost nothing. One unlucky trip costs
+\texttt{\$400}. But averaged over many trips, each one carries an
+expected cost of \texttt{\$2}.
+
+Expected value allows us to see these hidden averages.
+
+\subsection{Lotteries and expectation}\label{lotteries-and-expectation}
+
+Lotteries are one of the clearest examples of expectation.
+
+A lottery ticket offers a small chance of a very large prize. That is
+what makes it exciting. But the expected value of a ticket is usually
+much lower than the ticket price.
+
+The general structure is:
+
+\[
+\begin{aligned}
+E(\text{ticket})
+&=
+P(\text{major prize})\times(\text{major prize}) \\
+&\quad +
+P(\text{minor prize})\times(\text{minor prize}) \\
+&\quad +
+P(\text{no prize})\times 0 \\
+&\quad -
+\text{ticket cost}
+\end{aligned}
+\]
+
+In most lotteries, this expected value is negative. Lottery organisers
+usually design the game so that the average amount returned to players
+is less than the amount collected through ticket sales.
+
+This does not mean nobody should ever buy a lottery ticket. People may
+buy tickets for entertainment, hope, excitement, or the pleasure of
+imagining what they would do if they won. But mathematically, lotteries
+are usually poor financial bets.
+
+This is another example of probability helping us separate two different
+questions:
+
+\begin{table}
+
+\caption{\label{tbl-lottery-questions}}
+
+\centering{
+
+\fontsize{12.0pt}{14.4pt}\selectfont
+\begin{tabular*}{\linewidth}{@{\extracolsep{\fill}}ll}
+\toprule
+Question & Meaning \\ 
+\midrule\addlinespace[2.5pt]
+Could I win? & Is the outcome possible? \\ 
+Is this a favourable bet? & Is the expected value positive? \\ 
+\bottomrule
+\end{tabular*}
+
+}
+
+\end{table}%
+
+For a lottery ticket, the answer to the first question may be yes. The
+answer to the second is usually no.
+
+Sometimes, however, the expected value can briefly favour the player. In
+1992, a group of investors connected to Melbourne noticed an unusual
+opportunity in the Virginia Lottery in the United States. The lottery
+required players to choose 6 numbers from 44.
+
+The number of possible combinations was:
+
+\[
+\begin{aligned}
+\binom{44}{6}
+&= 7,059,052
+\end{aligned}
+\]
+
+So, in principle, if someone bought one ticket for every possible
+combination, they could guarantee holding the winning ticket.
+
+Usually, this would not be worth doing, because the total cost of buying
+all possible tickets would exceed the expected prize. But in this case,
+the jackpot had grown very large. Including smaller prizes, the total
+prize pool was about \texttt{\$27.9} million.
+
+If there were 7,059,052 possible tickets, then the average value per
+ticket was roughly:
+
+\[
+\frac{27,900,000}{7,059,052}
+\approx 3.95
+\]
+
+Each ticket cost \texttt{\$1}.
+
+\begin{table}
+
+\caption{\label{tbl-virginia-lottery}}
+
+\centering{
+
+\fontsize{12.0pt}{14.4pt}\selectfont
+\begin{tabular*}{\linewidth}{@{\extracolsep{\fill}}lr}
+\toprule
+Quantity & Value \\ 
+\midrule\addlinespace[2.5pt]
+Possible number combinations & 7,059,052 \\ 
+Approximate total prize pool & \$27.9 million \\ 
+Approximate value per combination & \$3.95 \\ 
+Ticket price & \$1 \\ 
+\bottomrule
+\end{tabular*}
+
+}
+
+\end{table}%
+
+On the surface, this looked like a favourable opportunity. Each
+\texttt{\$1} ticket had an average value much higher than its cost. Of
+course, the plan was not risk-free. Someone else might also choose the
+winning numbers, forcing the prize to be shared. There was also a major
+practical problem: the investors had to buy millions of tickets before
+the deadline.
+
+Still, the basic reasoning was expectation.
+
+They were not asking:
+
+\begin{quote}
+Will this particular ticket win?
+\end{quote}
+
+They were asking:
+
+\begin{quote}
+What is the average value of this strategy, given the probabilities and
+payoffs?
+\end{quote}
+
+That is the power of mathematical expectation. It turns uncertainty into
+something we can compare.
+
+\subsubsection{The main lesson}\label{the-main-lesson}
+
+Pascal's triangle helps us count possibilities. Mathematical expectation
+helps us value them.
+
+Together, these ideas mark an important shift in probability.
+Probability is no longer only about describing games of chance. It
+becomes a way of making decisions under uncertainty.
+
+Cardano helped us see the importance of the sample space. Galileo helped
+us see that events can happen in different numbers of ways. Pascal and
+Fermat helped us see that possible futures can be counted and valued.
+
+With mathematical expectation, probability becomes a practical tool for
+asking:
+
+\begin{quote}
+What is this uncertain situation worth?
+\end{quote}
 
 \bookmarksetup{startatroot}
 
