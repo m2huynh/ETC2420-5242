@@ -17,7 +17,7 @@ book:
     
   chapters:
     - index.qmd
-    - intro.qmd
+    - Questions.qmd
     - Probability.qmd
     - apples.qmd
     - references.qmd
