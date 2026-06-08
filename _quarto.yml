@@ -12,15 +12,21 @@ book:
   sidebar:
     align: left
     style: floating
-    collapse-level: 2
-    pinned: false
+    collapse-level: 3
+    pinned: true
     
   chapters:
     - index.qmd
-    - Questions.qmd
-    - Probability.qmd
-    - apples.qmd
-    - references.qmd
+    - part: Foundations
+      chapters: 
+        - Questions.qmd
+        - Probability.qmd
+        - MeasurementError.qmd
+    
+    - part: Thinking about Frequentist Uncertainty
+      chapters:
+        - 4_Estimation.qmd
+        - 5_HypothesisTesting.qmd
 
 bibliography: references.bib
 

@@ -15,14 +15,14 @@ library(gt)
 By the end of this chapter, you should be able to:
 
 1.  Explain why statistical thinking begins with asking clear and useful questions.
-2. Distinguish between reasoning before an outcome is known and reasoning after an outcome has occurred.
-3. Describe the relationship between what could have happened and what did happen.
-4. Explain why probability provides a language for uncertainty, rather than a guarantee of certainty.
-5. Recognise how vague expressions of uncertainty, such as “unlikely” or “a fair chance”, can lead to misunderstanding.
-6. Explain why rare events are not impossible, and why rare descriptions are not necessarily unique.
-7. Use simple probability rules to reason about uncertain events, including addition, multiplication, overlap, and independence.
-8. Explain why pieces of evidence should not be combined without considering whether they are independent.
-9. Identify when a probability calculation answers the wrong question.
+2.  Distinguish between reasoning before an outcome is known and reasoning after an outcome has occurred.
+3.  Describe the relationship between what could have happened and what did happen.
+4.  Explain why probability provides a language for uncertainty, rather than a guarantee of certainty.
+5.  Recognise how vague expressions of uncertainty, such as “unlikely” or “a fair chance”, can lead to misunderstanding.
+6.  Explain why rare events are not impossible, and why rare descriptions are not necessarily unique.
+7.  Use simple probability rules to reason about uncertain events, including addition, multiplication, overlap, and independence.
+8.  Explain why pieces of evidence should not be combined without considering whether they are independent.
+9.  Identify when a probability calculation answers the wrong question.
 10. Reframe intuitive questions into better statistical questions involving uncertainty, evidence, comparison, assumptions, and process.
 :::
 
@@ -39,17 +39,19 @@ knitr::include_graphics("images/chapter1/outline.png")
 
 ## Three Boats, Many Possible Futures
 
-After the Vietnam War (1975), millions of Vietnamese people left the country, many as refugees. A large number fled by sea and became known as the Vietnamese boat people. They travelled in crowded and often fragile boats, hoping to reach refugee camps in places such as Hong Kong, Malaysia, Indonesia, Thailand, or the Philippines. From there, some were resettled in countries such as Australia, the United States, Canada, and France. 
+After the Vietnam War (1975), millions of Vietnamese people left the country, many as refugees. A large number fled by sea and became known as the Vietnamese boat people. They travelled in crowded and often fragile boats, hoping to reach refugee camps in places such as Hong Kong, Malaysia, Indonesia, Thailand, or the Philippines. From there, some were resettled in countries such as Australia, the United States, Canada, and France.
 
 The journeys were dangerous. Boats faced storms, hunger, dehydration, mechanical failure, piracy, and the possibility of being turned away before reaching land.
 
 <center>
+
 ```{r}
 #| fig-cap: "Image Source: PH2 Phil Eggman"
 #| echo: false
 
 knitr::include_graphics("images/chapter1/boatpeople.JPEG")
 ```
+
 </center>
 
 This history is also part of my own family history, even though it happened before I was born.
@@ -60,14 +62,14 @@ During a family dinner, one of my uncles was recalling the events of that day an
 
 > "This way, we have a higher chance of at least some family members surviving."
 
-That sentence is about probability, although nobody needed a formula to understand it. It is about uncertainty, risk, and the terrible logic of making decisions when every option is dangerous. 
+That sentence is about probability, although nobody needed a formula to understand it. It is about uncertainty, risk, and the terrible logic of making decisions when every option is dangerous.
 
 So how did this strategy work out for my family?
 
-- Two boats made it safely to different refugee camps. From there, one side of the family was eventually sent to America, and the other to Australia. 
-- To this day, we have no information about those on the third boat. No one knows what happened: whether they sank at sea, were attacked by pirates, or met some other fate that was never recorded and never returned to us as an answer.
+-   Two boats made it safely to different refugee camps. From there, one side of the family was eventually sent to America, and the other to Australia.
+-   To this day, we have no information about those on the third boat. No one knows what happened: whether they sank at sea, were attacked by pirates, or met some other fate that was never recorded and never returned to us as an answer.
 
-My grandmother once told me that: 
+My grandmother once told me that:
 
 > "The decision about who went on which boat had nothing to do with you. After all, you did not exist yet. But if that decision had gone differently, you would may have been born."
 
@@ -230,18 +232,17 @@ And that begins by learning to ask better questions.
 Learning to ask better questions requires a language for uncertainty. In everyday life, we often speak about uncertainty vaguely. We say that something is *unlikely*, *possible*, *risky*, *a good chance*, *a long shot*, or *almost certain*. These words are useful, but they can also be slippery. One person’s *unlikely* might be another person’s *still worth worrying about.* One person’s *good chance* might mean 60 percent, while another person might use the same phrase for 90 percent.
 
 ::: callout-note
-### A cautionary tale about expressing uncertainty 
+### A cautionary tale about expressing uncertainty
 
 After Fidel Castro’s forces came to power in Cuba in 1959, the CIA worked with Cuban exiles on a plan to remove the new government and replace it with one more favorable to the United States. When John F. Kennedy became president in January 1961, the invasion plan was already far advanced. However, the US Joint Chiefs of Staff were doubtful about its prospects and estimated its chance of success at only about 30%. In a report prepared for Kennedy, Brigadier General David Gray expressed this as
 
-> “a fair chance.” 
+> “a fair chance.”
 
 Kennedy, however, appears to have understood the phrase more optimistically, as suggesting that the operation had a reasonable likelihood of success. He later approved the invasion. On 17 April 1961, around 1,500 Cuban exiles landed at the Bay of Pigs on Cuba’s southern coast, where they encountered fierce resistance led by Castro. More than one hundred were killed and most of the remaining fighters were captured. The failed invasion was a major humiliation for the United States and helped push Cuba closer to the Soviet Union, contributing to the tensions that culminated in the Cuban Missile Crisis the following year.
 
 Years later, General Taylor carried out an enquiry of this disaster and reported
 
 > "There is a time when you can’t advise by innuendos and suggestions. You have to look him in the eye and say, “I think it’s a lousy idea, Mr President. The chances of us succeeding are about one in ten.”'
-
 :::
 
 Probability gives us a more careful language. It does not remove uncertainty, and it does not guarantee that we will make the right decision. What it does is help us organise our thinking. It asks us to be clearer about what could happen, how likely different outcomes are, and what assumptions we are making when we reason about an uncertain situation.
@@ -250,7 +251,6 @@ Probability gives us a more careful language. It does not remove uncertainty, an
 ### Note about probability
 
 Note: we will cover more concepts about probability in Chapter 2 (Thinking about Probability), but it will be good to briefly introduce it here.
-
 :::
 
 ## The Ancient Greeks: Masters of certainty, not uncertainty
@@ -260,12 +260,14 @@ It may seem strange that probability developed so late in human history. People 
 The ancient Greeks made extraordinary contributions to mathematics. Much of the style of mathematics we still learn today comes from them: definitions, axioms, logical arguments, proofs, theorems, and then more proofs. Greek mathematics aimed at certainty. A theorem in geometry was not a guess, a pattern, or a rough guide. It was something to be demonstrated through reason.
 
 <center>
+
 ```{r}
 #| fig-cap: "Euclid: the father of Geometry"
 #| echo: false
 
 knitr::include_graphics("images/chapter1/euclid.jpg")
 ```
+
 </center>
 
 Euclid’s geometry is the classic example. Starting from a small number of assumptions, Greek mathematicians proved results about lines, angles, triangles, circles, and other shapes. Their work was so powerful that it helped people reason about the shape of the Earth and even estimate its size. This was mathematics as certainty: begin with agreed foundations, follow the logic carefully, and arrive at a conclusion that must be true.
@@ -332,9 +334,9 @@ These are not questions of pure certainty. They are questions for a world in whi
 
 ## The Ancient Romans and The Problem of Half-Truths
 
-The Ancient Greeks were drawn to mathematics as a search for certainty. They gave us geometry, proof, axioms, and the ideal of conclusions that follow necessarily from first principles. 
+The Ancient Greeks were drawn to mathematics as a search for certainty. They gave us geometry, proof, axioms, and the ideal of conclusions that follow necessarily from first principles.
 
-The Romans were different. 
+The Romans were different.
 
 They were less interested in mathematics as abstract beauty and more interested in mathematics as a practical tool. They wanted measurement, counting, engineering, administration, military planning, and law. That practical orientation matters for the history of probability.
 
@@ -351,12 +353,14 @@ That is a statistical question.
 One of the most important Roman figures in this story is Cicero. Cicero was a statesman, lawyer, philosopher, and writer who lived in the first century BCE. He was not a mathematician in the Greek sense, but he understood something deeply important about uncertainty: life often requires judgement before proof is complete.
 
 <center>
+
 ```{r}
 #| fig-cap: "Marcus Tullius Cicero"
 #| echo: false
 
 knitr::include_graphics("images/chapter1/cicero.jpg")
 ```
+
 </center>
 
 Cicero argued against the idea that unusual gambling outcomes should automatically be interpreted as divine intervention. If someone plays a game often enough, rare events will sometimes occur. A surprising throw does not necessarily mean that the gods have intervened. It may simply be the kind of thing that happens when chance is allowed to operate repeatedly. This is a simple idea, but it is a powerful one.
@@ -381,23 +385,23 @@ $$
 
 A probability of (1/36) is small, but it is not impossible. If many people roll dice many times, outcomes with probability (1/36) will occur regularly somewhere. Probability helps us see that a rare event is not the same as an impossible event, and that a surprising outcome is not automatically evidence of a hidden cause.
 
-The Roman contribution becomes even more interesting when we turn to law. 
+The Roman contribution becomes even more interesting when we turn to law.
 
-- Legal decision-making is full of uncertainty. 
-- Witnesses may disagree. 
-- Evidence may be incomplete. 
-- A person may seem suspicious but not certainly guilty. 
-- A document may be partly reliable. 
-- A testimony may be plausible but not decisive. 
-- Courts must often make decisions in the space between ignorance and certainty.
+-   Legal decision-making is full of uncertainty.
+-   Witnesses may disagree.
+-   Evidence may be incomplete.
+-   A person may seem suspicious but not certainly guilty.
+-   A document may be partly reliable.
+-   A testimony may be plausible but not decisive.
+-   Courts must often make decisions in the space between ignorance and certainty.
 
 In this setting, the Romans developed the idea of partial proof. A piece of evidence might not establish a claim completely, but it might still count for something. It might be, in effect, a *half proof*.
 
-At first, this seems like a sensible idea. Not all evidence has the same strength. 
+At first, this seems like a sensible idea. Not all evidence has the same strength.
 
-- One witness might be uncertain. Two witnesses might be more convincing. 
-- A confession might be stronger than a rumour. 
-- Physical evidence might be stronger than hearsay. 
+-   One witness might be uncertain. Two witnesses might be more convincing.
+-   A confession might be stronger than a rumour.
+-   Physical evidence might be stronger than hearsay.
 
 Even today, we often speak this way. We say that evidence is weak, strong, suggestive, compelling, or inconclusive. The Romans were trying to do something recognisably statistical: they were trying to reason with degrees of uncertainty.
 
@@ -522,7 +526,6 @@ That is an important question, but it is not the only question. There is another
 
 Suppose there are two possible ways a false match could occur:
 
-
 ```{r}
 #| echo: false
 
@@ -591,7 +594,6 @@ The better question is therefore not simply:
 The better question is:
 
 > What are all the ways this DNA evidence could be wrong, and how likely are those errors?
-
 :::
 
 ::: callout-note
@@ -599,18 +601,18 @@ The better question is:
 
 In People v. Collins (1964), a couple was accused of robbery. The evidence against them was weak. The victim could not confidently identify the accused woman, and another witness could not confidently identify the accused man. But the couple appeared to match a set of features described by witnesses.
 
-The prosecution presented a probability argument. The couple, they claimed, matched a combination of characteristics: 
+The prosecution presented a probability argument. The couple, they claimed, matched a combination of characteristics:
 
 > a partly yellow car, a man with a moustache, a man with a beard, a woman with a ponytail, a woman with blond hair, and an interracial couple in a car.
 
 The prosecution assigned probabilities to these features and multiplied them together:
 
-- Partly yellow car	(1/10)
-- Man with moustache	(1/4)
-- Man with beard	(1/10)
-- Woman with ponytail	(1/10)
-- Woman with blond hair	(1/3)
-- Interracial couple in car	(1/1000)
+-   Partly yellow car (1/10)
+-   Man with moustache (1/4)
+-   Man with beard (1/10)
+-   Woman with ponytail (1/10)
+-   Woman with blond hair (1/3)
+-   Interracial couple in car (1/1000)
 
 The prosecution treated these characteristics as independent and multiplied the probabilities:
 
@@ -681,7 +683,6 @@ The better question is:
 > How many people could match this description, and what evidence connects this particular person to the crime?
 
 This case is a powerful example of why statistical thinking begins with questions, not calculations. A calculation can be mathematically impressive and still answer the wrong question.
-
 :::
 
 ## Probability as Disciplined Questioning
@@ -805,7 +806,7 @@ By the end of this unit, you will have learned many technical tools: graphs, sim
 
 So before we calculate, we pause.
 
-We ask what could have happened? We ask what did happen? We ask how was the data were produced? We ask what assumptions are being made? We ask what comparison matters? We ask whether chance alone could explain what we see? That is the first habit of statistical thinking. 
+We ask what could have happened? We ask what did happen? We ask how was the data were produced? We ask what assumptions are being made? We ask what comparison matters? We ask whether chance alone could explain what we see? That is the first habit of statistical thinking.
 
 > Statistics does not begin with a formula. It begins with a better question.
 
@@ -835,10 +836,10 @@ Before the applications were assessed, however, the outcome was unknown.
 
 **b.** Possible outcomes include:
 
-- receiving no offers;
-- receiving two or three offers;
-- receiving an offer from a different internship;
-- receiving three rejections.
+-   receiving no offers;
+-   receiving two or three offers;
+-   receiving an offer from a different internship;
+-   receiving three rejections.
 
 **c.** It can be misleading because good outcomes do not always come from good decisions, and bad outcomes do not always come from bad decisions. The application strategy should be judged using the information available at the time, not only by the result that happened afterward.
 :::
@@ -955,9 +956,9 @@ rain |>
 
 **c.** Possible answers:
 
-- "A fair chance" might be interpreted as around 40% or 50%.
-- "Unlikely" might be interpreted as around 10% or 20%.
-- "Almost certain" might be interpreted as around 90% or 95%.
+-   "A fair chance" might be interpreted as around 40% or 50%.
+-   "Unlikely" might be interpreted as around 10% or 20%.
+-   "Almost certain" might be interpreted as around 90% or 95%.
 
 The exact numbers are less important than recognising that verbal descriptions can be interpreted differently by different people.
 :::
@@ -968,9 +969,9 @@ The exact numbers are less important than recognising that verbal descriptions c
 
 A cafe is deciding whether to open on a public holiday. The owner thinks there are three broad possible outcomes:
 
-1. High demand  
-2. Moderate demand  
-3. Low demand
+1.  High demand\
+2.  Moderate demand\
+3.  Low demand
 
 **a.** Explain why these three outcomes should be clearly defined before any probability is assigned.
 
@@ -1098,8 +1099,8 @@ We would expect about 40 people to match the description.
 
 A computer file can fail to open for two reasons:
 
-- the file is corrupted;
-- the software is out of date.
+-   the file is corrupted;
+-   the software is out of date.
 
 Suppose:
 
@@ -1266,7 +1267,7 @@ $$
 
 **b.** The assumption is that the coin tosses are independent. The result of one toss does not change the probability of heads on the next toss.
 
-**c.** Three heads in a row can happen by chance. A probability of \(1/8\) is not so small that it requires a special explanation. We would need more evidence before concluding that the coin is unfair.
+**c.** Three heads in a row can happen by chance. A probability of (1/8) is not so small that it requires a special explanation. We would need more evidence before concluding that the coin is unfair.
 :::
 ::::
 
@@ -1365,8 +1366,8 @@ The doctor answers:
 
 A student is late to class. Consider these two explanations:
 
-1. The student missed the bus.  
-2. The student missed the bus because their alarm did not go off, they spilled coffee on their notes, and then the bus arrived three minutes early.
+1.  The student missed the bus.\
+2.  The student missed the bus because their alarm did not go off, they spilled coffee on their notes, and then the bus arrived three minutes early.
 
 **a.** Which explanation is more detailed?
 
@@ -1389,7 +1390,7 @@ $$
 
 **c.** A detailed story can feel more convincing because it sounds vivid and coherent. However, each extra detail adds another condition that must be true.
 
-**d.** Let \(A\) be the event that the student missed the bus. Let \(B\) be the event that the alarm did not go off. Then:
+**d.** Let (A) be the event that the student missed the bus. Let (B) be the event that the alarm did not go off. Then:
 
 $$
 P(A \text{ and } B) \leq P(A).
@@ -1404,10 +1405,10 @@ The probability that the student missed the bus and their alarm did not go off c
 
 A workplace investigation finds that an employee matches several characteristics of the person who accessed a restricted file:
 
-- works in the relevant department;
-- was in the building that day;
-- has access to the database;
-- uses the same type of laptop seen in security footage.
+-   works in the relevant department;
+-   was in the building that day;
+-   has access to the database;
+-   uses the same type of laptop seen in security footage.
 
 A manager says:
 
@@ -1464,12 +1465,12 @@ q16 |>
 
 Choose from the following ideas:
 
-- vague uncertainty;
-- hindsight;
-- overlap;
-- independence;
-- rare does not mean unique;
-- vividness is not probability.
+-   vague uncertainty;
+-   hindsight;
+-   overlap;
+-   independence;
+-   rare does not mean unique;
+-   vividness is not probability.
 
 ::: {.callout-important collapse="true"}
 ### Click for Solutions
@@ -1509,23 +1510,23 @@ q16_solution |>
 
 Choose one of the following situations:
 
-- a sports team has a surprising winning streak;
-- a university survey finds that most respondents are unhappy;
-- an online advertisement receives many clicks;
-- a friend wins a small prize twice in one week;
-- a weather forecast turns out to be wrong.
+-   a sports team has a surprising winning streak;
+-   a university survey finds that most respondents are unhappy;
+-   an online advertisement receives many clicks;
+-   a friend wins a small prize twice in one week;
+-   a weather forecast turns out to be wrong.
 
 Write a short paragraph explaining how a statistician might think about the situation. Your paragraph should include at least three of the following phrases:
 
-- possible outcomes;
-- what could have happened;
-- what did happen;
-- compared with what;
-- by chance;
-- assumptions;
-- process;
-- evidence;
-- better question.
+-   possible outcomes;
+-   what could have happened;
+-   what did happen;
+-   compared with what;
+-   by chance;
+-   assumptions;
+-   process;
+-   evidence;
+-   better question.
 
 ::: {.callout-important collapse="true"}
 ### Click for Solutions
@@ -1558,25 +1559,17 @@ A strong answer for **a** should explain that statistical methods are tools for 
 
 For **b** and **c**, the rewritten question should usually include at least one of the following ideas:
 
-- comparison;
-- possible outcomes;
-- uncertainty;
-- assumptions;
-- evidence;
-- process;
-- what would have happened otherwise.
+-   comparison;
+-   possible outcomes;
+-   uncertainty;
+-   assumptions;
+-   evidence;
+-   process;
+-   what would have happened otherwise.
 
 For example:
 
-> Original question: Did I fail because I am bad at statistics?  
+> Original question: Did I fail because I am bad at statistics?\
 > Better statistical question: How did my preparation, the exam difficulty, and my performance compare with previous assessments and with other students?
 :::
 ::::
-
-
-
-
-
-
-
-

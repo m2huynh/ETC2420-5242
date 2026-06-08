@@ -24,13 +24,12 @@ ul.task-list li input[type="checkbox"] {
 
 
 <script src="site_libs/quarto-nav/quarto-nav.js"></script>
-<script src="site_libs/quarto-nav/headroom.min.js"></script>
 <script src="site_libs/clipboard/clipboard.min.js"></script>
 <script src="site_libs/quarto-search/autocomplete.umd.js"></script>
 <script src="site_libs/quarto-search/fuse.min.js"></script>
 <script src="site_libs/quarto-search/quarto-search.js"></script>
 <meta name="quarto:offset" content="./">
-<link href="./apples.html" rel="next">
+<link href="./MeasurementError.html" rel="next">
 <link href="./Questions.html" rel="prev">
 <script src="site_libs/quarto-html/quarto.js" type="module"></script>
 <script src="site_libs/quarto-html/tabsets/tabsets.js" type="module"></script>
@@ -279,7 +278,7 @@ window.Quarto = {
       <button type="button" class="quarto-btn-toggle btn" data-bs-toggle="collapse" role="button" data-bs-target=".quarto-sidebar-collapse-item" aria-controls="quarto-sidebar" aria-expanded="false" aria-label="Toggle sidebar navigation" onclick="if (window.quartoToggleHeadroom) { window.quartoToggleHeadroom(); }">
         <i class="bi bi-layout-text-sidebar-reverse"></i>
       </button>
-        <nav class="quarto-page-breadcrumbs" aria-label="breadcrumb"><ol class="breadcrumb"><li class="breadcrumb-item"><a href="./Probability.html"><span class="chapter-number">2</span>&nbsp; <span class="chapter-title">Thinking about Probability</span></a></li></ol></nav>
+        <nav class="quarto-page-breadcrumbs" aria-label="breadcrumb"><ol class="breadcrumb"><li class="breadcrumb-item"><a href="./Questions.html">Foundations</a></li><li class="breadcrumb-item"><a href="./Probability.html"><span class="chapter-number">2</span>&nbsp; <span class="chapter-title">Thinking about Probability</span></a></li></ol></nav>
         <a class="flex-grow-1" role="navigation" data-bs-toggle="collapse" data-bs-target=".quarto-sidebar-collapse-item" aria-controls="quarto-sidebar" aria-expanded="false" aria-label="Toggle sidebar navigation" onclick="if (window.quartoToggleHeadroom) { window.quartoToggleHeadroom(); }">      
         </a>
       <button type="button" class="btn quarto-search-button" aria-label="Search" onclick="window.quartoOpenSearch();">
@@ -319,30 +318,58 @@ window.Quarto = {
  <span class="menu-text">Preface</span></a>
   </div>
 </li>
-        <li class="sidebar-item">
+        <li class="sidebar-item sidebar-item-section">
+      <div class="sidebar-item-container"> 
+            <a class="sidebar-item-text sidebar-link text-start" data-bs-toggle="collapse" data-bs-target="#quarto-sidebar-section-1" role="navigation" aria-expanded="true">
+ <span class="menu-text">Foundations</span></a>
+          <a class="sidebar-item-toggle text-start" data-bs-toggle="collapse" data-bs-target="#quarto-sidebar-section-1" role="navigation" aria-expanded="true" aria-label="Toggle section">
+            <i class="bi bi-chevron-right ms-2"></i>
+          </a> 
+      </div>
+      <ul id="quarto-sidebar-section-1" class="collapse list-unstyled sidebar-section depth1 show">  
+          <li class="sidebar-item">
   <div class="sidebar-item-container"> 
   <a href="./Questions.html" class="sidebar-item-text sidebar-link">
  <span class="menu-text"><span class="chapter-number">1</span>&nbsp; <span class="chapter-title">Thinking about Questions</span></span></a>
   </div>
 </li>
-        <li class="sidebar-item">
+          <li class="sidebar-item">
   <div class="sidebar-item-container"> 
   <a href="./Probability.html" class="sidebar-item-text sidebar-link active">
  <span class="menu-text"><span class="chapter-number">2</span>&nbsp; <span class="chapter-title">Thinking about Probability</span></span></a>
   </div>
 </li>
-        <li class="sidebar-item">
+          <li class="sidebar-item">
   <div class="sidebar-item-container"> 
-  <a href="./apples.html" class="sidebar-item-text sidebar-link">
- <span class="menu-text"><span class="chapter-number">3</span>&nbsp; <span class="chapter-title">Apples Styles</span></span></a>
+  <a href="./MeasurementError.html" class="sidebar-item-text sidebar-link">
+ <span class="menu-text"><span class="chapter-number">3</span>&nbsp; <span class="chapter-title">Thinking about Measurement and Error</span></span></a>
   </div>
 </li>
-        <li class="sidebar-item">
+      </ul>
+  </li>
+        <li class="sidebar-item sidebar-item-section">
+      <div class="sidebar-item-container"> 
+            <a class="sidebar-item-text sidebar-link text-start" data-bs-toggle="collapse" data-bs-target="#quarto-sidebar-section-2" role="navigation" aria-expanded="true">
+ <span class="menu-text">Thinking about Frequentist Uncertainty</span></a>
+          <a class="sidebar-item-toggle text-start" data-bs-toggle="collapse" data-bs-target="#quarto-sidebar-section-2" role="navigation" aria-expanded="true" aria-label="Toggle section">
+            <i class="bi bi-chevron-right ms-2"></i>
+          </a> 
+      </div>
+      <ul id="quarto-sidebar-section-2" class="collapse list-unstyled sidebar-section depth1 show">  
+          <li class="sidebar-item">
   <div class="sidebar-item-container"> 
-  <a href="./references.html" class="sidebar-item-text sidebar-link">
- <span class="menu-text">References</span></a>
+  <a href="./4_Estimation.html" class="sidebar-item-text sidebar-link">
+ <span class="menu-text"><span class="chapter-number">4</span>&nbsp; <span class="chapter-title">Estimation</span></span></a>
   </div>
 </li>
+          <li class="sidebar-item">
+  <div class="sidebar-item-container"> 
+  <a href="./5_HypothesisTesting.html" class="sidebar-item-text sidebar-link">
+ <span class="menu-text"><span class="chapter-number">5</span>&nbsp; <span class="chapter-title">Hypothesis Testing</span></span></a>
+  </div>
+</li>
+      </ul>
+  </li>
     </ul>
     </div>
 </nav>
@@ -372,6 +399,8 @@ window.Quarto = {
   <li><a href="#pascals-triangle-and-combinations" id="toc-pascals-triangle-and-combinations" class="nav-link" data-scroll-target="#pascals-triangle-and-combinations"><span class="header-section-number">2.5.1</span> Pascal’s triangle and combinations</a></li>
   <li><a href="#mathematical-expectation" id="toc-mathematical-expectation" class="nav-link" data-scroll-target="#mathematical-expectation"><span class="header-section-number">2.5.2</span> Mathematical expectation</a></li>
   </ul></li>
+  <li><a href="#chapter-summary" id="toc-chapter-summary" class="nav-link" data-scroll-target="#chapter-summary"><span class="header-section-number">2.6</span> Chapter summary</a></li>
+  <li><a href="#exercises" id="toc-exercises" class="nav-link" data-scroll-target="#exercises"><span class="header-section-number">2.7</span> Exercises</a></li>
   </ul>
 </nav>
     </div>
@@ -379,7 +408,7 @@ window.Quarto = {
 <main class="content" id="quarto-document-content">
 
 
-<header id="title-block-header" class="quarto-title-block default">
+<header id="title-block-header" class="quarto-title-block default"><nav class="quarto-page-breadcrumbs quarto-title-breadcrumbs d-none d-lg-block" aria-label="breadcrumb"><ol class="breadcrumb"><li class="breadcrumb-item"><a href="./Questions.html">Foundations</a></li><li class="breadcrumb-item"><a href="./Probability.html"><span class="chapter-number">2</span>&nbsp; <span class="chapter-title">Thinking about Probability</span></a></li></ol></nav>
 <div class="quarto-title">
 <h1 class="title"><span class="chapter-number">2</span>&nbsp; <span class="chapter-title">Thinking about Probability</span></h1>
 </div>
@@ -410,13 +439,31 @@ Learning Objectives
 <div class="callout-body-container callout-body">
 <p>By the end of this chapter, you should be able to:</p>
 <ol type="1">
-<li>A</li>
+<li>Define a sample space, an outcome, and an event.</li>
+<li>Use sample spaces to describe simple random processes.</li>
+<li>Apply basic probability rules, including that probabilities lie between 0 and 1, and that the probability of the full sample space is 1.</li>
+<li>Calculate probabilities by counting favourable outcomes and total possible outcomes when outcomes are equally likely.</li>
+<li>Recognise when the wording of a probability problem changes the relevant sample space.</li>
+<li>Explain why the process that produces information matters when reasoning under uncertainty.</li>
+<li>Distinguish between outcomes where order matters and outcomes where order does not matter.</li>
+<li>Explain why some events are more likely because they can occur in more ways.</li>
+<li>Use examples such as dice, birthdays, and lotteries to explain why surprising events may be less surprising than they first appear.</li>
+<li>Interpret combinations notation and explain how Pascal’s triangle helps count combinations.</li>
 </ol>
 </div>
 </div>
 <center>
-unit outline map goes here
+<div class="cell enlarge-image">
+<div class="cell-output-display">
+<div>
+<figure class="figure">
+<p><img src="images/chapter2/outline.png" class="img-fluid figure-img" width="2200"></p>
+</figure>
+</div>
+</div>
+</div>
 </center>
+<p><br></p>
 <section id="the-problem-with-intuition" class="level2" data-number="2.1">
 <h2 data-number="2.1" class="anchored" data-anchor-id="the-problem-with-intuition"><span class="header-section-number">2.1</span> The problem with intuition</h2>
 <p><em>Parade</em> magazine had been part of American popular culture for decades. It began publication in 1941 and, for much of its life, was distributed as a Sunday newspaper magazine. At its peak, it reached millions of readers each week. Although the print magazine eventually ceased regular publication in 2022, <em>Parade</em> continues today as a website and email newsletter.</p>
@@ -1047,23 +1094,23 @@ P(TT)=\frac{1}{2}\times\frac{1}{2}=\frac{1}{4}
 \]</span></p>
 <div class="cell">
 <div class="cell-output-display">
-<div id="spqqtkhehj" style="padding-left:0px;padding-right:0px;padding-top:10px;padding-bottom:10px;overflow-x:auto;overflow-y:auto;width:auto;height:auto;">
-<style>#spqqtkhehj table {
+<div id="oyywnvawiw" style="padding-left:0px;padding-right:0px;padding-top:10px;padding-bottom:10px;overflow-x:auto;overflow-y:auto;width:auto;height:auto;">
+<style>#oyywnvawiw table {
   font-family: system-ui, 'Segoe UI', Roboto, Helvetica, Arial, sans-serif, 'Apple Color Emoji', 'Segoe UI Emoji', 'Segoe UI Symbol', 'Noto Color Emoji';
   -webkit-font-smoothing: antialiased;
   -moz-osx-font-smoothing: grayscale;
 }
 
-#spqqtkhehj thead, #spqqtkhehj tbody, #spqqtkhehj tfoot, #spqqtkhehj tr, #spqqtkhehj td, #spqqtkhehj th {
+#oyywnvawiw thead, #oyywnvawiw tbody, #oyywnvawiw tfoot, #oyywnvawiw tr, #oyywnvawiw td, #oyywnvawiw th {
   border-style: none;
 }
 
-#spqqtkhehj p {
+#oyywnvawiw p {
   margin: 0;
   padding: 0;
 }
 
-#spqqtkhehj .gt_table {
+#oyywnvawiw .gt_table {
   display: table;
   border-collapse: collapse;
   line-height: normal;
@@ -1089,12 +1136,12 @@ P(TT)=\frac{1}{2}\times\frac{1}{2}=\frac{1}{4}
   border-left-color: #D3D3D3;
 }
 
-#spqqtkhehj .gt_caption {
+#oyywnvawiw .gt_caption {
   padding-top: 4px;
   padding-bottom: 4px;
 }
 
-#spqqtkhehj .gt_title {
+#oyywnvawiw .gt_title {
   color: #333333;
   font-size: 125%;
   font-weight: initial;
@@ -1106,7 +1153,7 @@ P(TT)=\frac{1}{2}\times\frac{1}{2}=\frac{1}{4}
   border-bottom-width: 0;
 }
 
-#spqqtkhehj .gt_subtitle {
+#oyywnvawiw .gt_subtitle {
   color: #333333;
   font-size: 85%;
   font-weight: initial;
@@ -1118,7 +1165,7 @@ P(TT)=\frac{1}{2}\times\frac{1}{2}=\frac{1}{4}
   border-top-width: 0;
 }
 
-#spqqtkhehj .gt_heading {
+#oyywnvawiw .gt_heading {
   background-color: #FFFFFF;
   text-align: center;
   border-bottom-color: #FFFFFF;
@@ -1130,13 +1177,13 @@ P(TT)=\frac{1}{2}\times\frac{1}{2}=\frac{1}{4}
   border-right-color: #D3D3D3;
 }
 
-#spqqtkhehj .gt_bottom_border {
+#oyywnvawiw .gt_bottom_border {
   border-bottom-style: solid;
   border-bottom-width: 2px;
   border-bottom-color: #D3D3D3;
 }
 
-#spqqtkhehj .gt_col_headings {
+#oyywnvawiw .gt_col_headings {
   border-top-style: solid;
   border-top-width: 2px;
   border-top-color: #D3D3D3;
@@ -1151,7 +1198,7 @@ P(TT)=\frac{1}{2}\times\frac{1}{2}=\frac{1}{4}
   border-right-color: #D3D3D3;
 }
 
-#spqqtkhehj .gt_col_heading {
+#oyywnvawiw .gt_col_heading {
   color: #333333;
   background-color: #FFFFFF;
   font-size: 100%;
@@ -1171,7 +1218,7 @@ P(TT)=\frac{1}{2}\times\frac{1}{2}=\frac{1}{4}
   overflow-x: hidden;
 }
 
-#spqqtkhehj .gt_column_spanner_outer {
+#oyywnvawiw .gt_column_spanner_outer {
   color: #333333;
   background-color: #FFFFFF;
   font-size: 100%;
@@ -1183,15 +1230,15 @@ P(TT)=\frac{1}{2}\times\frac{1}{2}=\frac{1}{4}
   padding-right: 4px;
 }
 
-#spqqtkhehj .gt_column_spanner_outer:first-child {
+#oyywnvawiw .gt_column_spanner_outer:first-child {
   padding-left: 0;
 }
 
-#spqqtkhehj .gt_column_spanner_outer:last-child {
+#oyywnvawiw .gt_column_spanner_outer:last-child {
   padding-right: 0;
 }
 
-#spqqtkhehj .gt_column_spanner {
+#oyywnvawiw .gt_column_spanner {
   border-bottom-style: solid;
   border-bottom-width: 2px;
   border-bottom-color: #D3D3D3;
@@ -1203,11 +1250,11 @@ P(TT)=\frac{1}{2}\times\frac{1}{2}=\frac{1}{4}
   width: 100%;
 }
 
-#spqqtkhehj .gt_spanner_row {
+#oyywnvawiw .gt_spanner_row {
   border-bottom-style: hidden;
 }
 
-#spqqtkhehj .gt_group_heading {
+#oyywnvawiw .gt_group_heading {
   padding-top: 8px;
   padding-bottom: 8px;
   padding-left: 5px;
@@ -1233,7 +1280,7 @@ P(TT)=\frac{1}{2}\times\frac{1}{2}=\frac{1}{4}
   text-align: left;
 }
 
-#spqqtkhehj .gt_empty_group_heading {
+#oyywnvawiw .gt_empty_group_heading {
   padding: 0.5px;
   color: #333333;
   background-color: #FFFFFF;
@@ -1248,15 +1295,15 @@ P(TT)=\frac{1}{2}\times\frac{1}{2}=\frac{1}{4}
   vertical-align: middle;
 }
 
-#spqqtkhehj .gt_from_md > :first-child {
+#oyywnvawiw .gt_from_md > :first-child {
   margin-top: 0;
 }
 
-#spqqtkhehj .gt_from_md > :last-child {
+#oyywnvawiw .gt_from_md > :last-child {
   margin-bottom: 0;
 }
 
-#spqqtkhehj .gt_row {
+#oyywnvawiw .gt_row {
   padding-top: 8px;
   padding-bottom: 8px;
   padding-left: 5px;
@@ -1275,7 +1322,7 @@ P(TT)=\frac{1}{2}\times\frac{1}{2}=\frac{1}{4}
   overflow-x: hidden;
 }
 
-#spqqtkhehj .gt_stub {
+#oyywnvawiw .gt_stub {
   color: #333333;
   background-color: #FFFFFF;
   font-size: 100%;
@@ -1288,7 +1335,7 @@ P(TT)=\frac{1}{2}\times\frac{1}{2}=\frac{1}{4}
   padding-right: 5px;
 }
 
-#spqqtkhehj .gt_stub_row_group {
+#oyywnvawiw .gt_stub_row_group {
   color: #333333;
   background-color: #FFFFFF;
   font-size: 100%;
@@ -1302,15 +1349,15 @@ P(TT)=\frac{1}{2}\times\frac{1}{2}=\frac{1}{4}
   vertical-align: top;
 }
 
-#spqqtkhehj .gt_row_group_first td {
+#oyywnvawiw .gt_row_group_first td {
   border-top-width: 2px;
 }
 
-#spqqtkhehj .gt_row_group_first th {
+#oyywnvawiw .gt_row_group_first th {
   border-top-width: 2px;
 }
 
-#spqqtkhehj .gt_summary_row {
+#oyywnvawiw .gt_summary_row {
   color: #333333;
   background-color: #FFFFFF;
   text-transform: inherit;
@@ -1320,16 +1367,16 @@ P(TT)=\frac{1}{2}\times\frac{1}{2}=\frac{1}{4}
   padding-right: 5px;
 }
 
-#spqqtkhehj .gt_first_summary_row {
+#oyywnvawiw .gt_first_summary_row {
   border-top-style: solid;
   border-top-color: #D3D3D3;
 }
 
-#spqqtkhehj .gt_first_summary_row.thick {
+#oyywnvawiw .gt_first_summary_row.thick {
   border-top-width: 2px;
 }
 
-#spqqtkhehj .gt_last_summary_row {
+#oyywnvawiw .gt_last_summary_row {
   padding-top: 8px;
   padding-bottom: 8px;
   padding-left: 5px;
@@ -1339,7 +1386,7 @@ P(TT)=\frac{1}{2}\times\frac{1}{2}=\frac{1}{4}
   border-bottom-color: #D3D3D3;
 }
 
-#spqqtkhehj .gt_grand_summary_row {
+#oyywnvawiw .gt_grand_summary_row {
   color: #333333;
   background-color: #FFFFFF;
   text-transform: inherit;
@@ -1349,7 +1396,7 @@ P(TT)=\frac{1}{2}\times\frac{1}{2}=\frac{1}{4}
   padding-right: 5px;
 }
 
-#spqqtkhehj .gt_first_grand_summary_row {
+#oyywnvawiw .gt_first_grand_summary_row {
   padding-top: 8px;
   padding-bottom: 8px;
   padding-left: 5px;
@@ -1359,7 +1406,7 @@ P(TT)=\frac{1}{2}\times\frac{1}{2}=\frac{1}{4}
   border-top-color: #D3D3D3;
 }
 
-#spqqtkhehj .gt_last_grand_summary_row_top {
+#oyywnvawiw .gt_last_grand_summary_row_top {
   padding-top: 8px;
   padding-bottom: 8px;
   padding-left: 5px;
@@ -1369,11 +1416,11 @@ P(TT)=\frac{1}{2}\times\frac{1}{2}=\frac{1}{4}
   border-bottom-color: #D3D3D3;
 }
 
-#spqqtkhehj .gt_striped {
+#oyywnvawiw .gt_striped {
   background-color: rgba(128, 128, 128, 0.05);
 }
 
-#spqqtkhehj .gt_table_body {
+#oyywnvawiw .gt_table_body {
   border-top-style: solid;
   border-top-width: 2px;
   border-top-color: #D3D3D3;
@@ -1382,7 +1429,7 @@ P(TT)=\frac{1}{2}\times\frac{1}{2}=\frac{1}{4}
   border-bottom-color: #D3D3D3;
 }
 
-#spqqtkhehj .gt_footnotes {
+#oyywnvawiw .gt_footnotes {
   color: #333333;
   background-color: #FFFFFF;
   border-bottom-style: none;
@@ -1396,7 +1443,7 @@ P(TT)=\frac{1}{2}\times\frac{1}{2}=\frac{1}{4}
   border-right-color: #D3D3D3;
 }
 
-#spqqtkhehj .gt_footnote {
+#oyywnvawiw .gt_footnote {
   margin: 0px;
   font-size: 90%;
   padding-top: 4px;
@@ -1405,7 +1452,7 @@ P(TT)=\frac{1}{2}\times\frac{1}{2}=\frac{1}{4}
   padding-right: 5px;
 }
 
-#spqqtkhehj .gt_sourcenotes {
+#oyywnvawiw .gt_sourcenotes {
   color: #333333;
   background-color: #FFFFFF;
   border-bottom-style: none;
@@ -1419,7 +1466,7 @@ P(TT)=\frac{1}{2}\times\frac{1}{2}=\frac{1}{4}
   border-right-color: #D3D3D3;
 }
 
-#spqqtkhehj .gt_sourcenote {
+#oyywnvawiw .gt_sourcenote {
   font-size: 90%;
   padding-top: 4px;
   padding-bottom: 4px;
@@ -1427,72 +1474,72 @@ P(TT)=\frac{1}{2}\times\frac{1}{2}=\frac{1}{4}
   padding-right: 5px;
 }
 
-#spqqtkhehj .gt_left {
+#oyywnvawiw .gt_left {
   text-align: left;
 }
 
-#spqqtkhehj .gt_center {
+#oyywnvawiw .gt_center {
   text-align: center;
 }
 
-#spqqtkhehj .gt_right {
+#oyywnvawiw .gt_right {
   text-align: right;
   font-variant-numeric: tabular-nums;
 }
 
-#spqqtkhehj .gt_font_normal {
+#oyywnvawiw .gt_font_normal {
   font-weight: normal;
 }
 
-#spqqtkhehj .gt_font_bold {
+#oyywnvawiw .gt_font_bold {
   font-weight: bold;
 }
 
-#spqqtkhehj .gt_font_italic {
+#oyywnvawiw .gt_font_italic {
   font-style: italic;
 }
 
-#spqqtkhehj .gt_super {
+#oyywnvawiw .gt_super {
   font-size: 65%;
 }
 
-#spqqtkhehj .gt_footnote_marks {
+#oyywnvawiw .gt_footnote_marks {
   font-size: 75%;
   vertical-align: 0.4em;
   position: initial;
 }
 
-#spqqtkhehj .gt_asterisk {
+#oyywnvawiw .gt_asterisk {
   font-size: 100%;
   vertical-align: 0;
 }
 
-#spqqtkhehj .gt_indent_1 {
+#oyywnvawiw .gt_indent_1 {
   text-indent: 5px;
 }
 
-#spqqtkhehj .gt_indent_2 {
+#oyywnvawiw .gt_indent_2 {
   text-indent: 10px;
 }
 
-#spqqtkhehj .gt_indent_3 {
+#oyywnvawiw .gt_indent_3 {
   text-indent: 15px;
 }
 
-#spqqtkhehj .gt_indent_4 {
+#oyywnvawiw .gt_indent_4 {
   text-indent: 20px;
 }
 
-#spqqtkhehj .gt_indent_5 {
+#oyywnvawiw .gt_indent_5 {
   text-indent: 25px;
 }
 
-#spqqtkhehj .katex-display {
+#oyywnvawiw .katex-display {
   display: inline-flex !important;
   margin-bottom: 0.75em !important;
 }
 
-#spqqtkhehj div.Reactable > div.rt-table > div.rt-thead > div.rt-tr.rt-tr-group-header > div.rt-th-group:after {
+#oyywnvawiw div.Reactable > div.rt-table > div.rt-thead > div.rt-tr.rt-tr-group-header > div.rt-th-group:after {
   height: 0px !important;
 }
 </style>
@@ -1676,23 +1723,23 @@ p_1x_1+p_2x_2+p_3x_3+\cdots+p_kx_k
 <p>Expected value is easiest to understand through a simple game. Suppose you pay $10 to play a game in which a fair coin is tossed. If the coin lands heads, you receive $30. If it lands tails, you receive nothing.</p>
 <div class="cell">
 <div class="cell-output-display">
-<div id="sxdhasyhav" style="padding-left:0px;padding-right:0px;padding-top:10px;padding-bottom:10px;overflow-x:auto;overflow-y:auto;width:auto;height:auto;">
-<style>#sxdhasyhav table {
+<div id="wexfhtpwvl" style="padding-left:0px;padding-right:0px;padding-top:10px;padding-bottom:10px;overflow-x:auto;overflow-y:auto;width:auto;height:auto;">
+<style>#wexfhtpwvl table {
   font-family: system-ui, 'Segoe UI', Roboto, Helvetica, Arial, sans-serif, 'Apple Color Emoji', 'Segoe UI Emoji', 'Segoe UI Symbol', 'Noto Color Emoji';
   -webkit-font-smoothing: antialiased;
   -moz-osx-font-smoothing: grayscale;
 }
 
-#sxdhasyhav thead, #sxdhasyhav tbody, #sxdhasyhav tfoot, #sxdhasyhav tr, #sxdhasyhav td, #sxdhasyhav th {
+#wexfhtpwvl thead, #wexfhtpwvl tbody, #wexfhtpwvl tfoot, #wexfhtpwvl tr, #wexfhtpwvl td, #wexfhtpwvl th {
   border-style: none;
 }
 
-#sxdhasyhav p {
+#wexfhtpwvl p {
   margin: 0;
   padding: 0;
 }
 
-#sxdhasyhav .gt_table {
+#wexfhtpwvl .gt_table {
   display: table;
   border-collapse: collapse;
   line-height: normal;
@@ -1718,12 +1765,12 @@ p_1x_1+p_2x_2+p_3x_3+\cdots+p_kx_k
   border-left-color: #D3D3D3;
 }
 
-#sxdhasyhav .gt_caption {
+#wexfhtpwvl .gt_caption {
   padding-top: 4px;
   padding-bottom: 4px;
 }
 
-#sxdhasyhav .gt_title {
+#wexfhtpwvl .gt_title {
   color: #333333;
   font-size: 125%;
   font-weight: initial;
@@ -1735,7 +1782,7 @@ p_1x_1+p_2x_2+p_3x_3+\cdots+p_kx_k
   border-bottom-width: 0;
 }
 
-#sxdhasyhav .gt_subtitle {
+#wexfhtpwvl .gt_subtitle {
   color: #333333;
   font-size: 85%;
   font-weight: initial;
@@ -1747,7 +1794,7 @@ p_1x_1+p_2x_2+p_3x_3+\cdots+p_kx_k
   border-top-width: 0;
 }
 
-#sxdhasyhav .gt_heading {
+#wexfhtpwvl .gt_heading {
   background-color: #FFFFFF;
   text-align: center;
   border-bottom-color: #FFFFFF;
@@ -1759,13 +1806,13 @@ p_1x_1+p_2x_2+p_3x_3+\cdots+p_kx_k
   border-right-color: #D3D3D3;
 }
 
-#sxdhasyhav .gt_bottom_border {
+#wexfhtpwvl .gt_bottom_border {
   border-bottom-style: solid;
   border-bottom-width: 2px;
   border-bottom-color: #D3D3D3;
 }
 
-#sxdhasyhav .gt_col_headings {
+#wexfhtpwvl .gt_col_headings {
   border-top-style: solid;
   border-top-width: 2px;
   border-top-color: #D3D3D3;
@@ -1780,7 +1827,7 @@ p_1x_1+p_2x_2+p_3x_3+\cdots+p_kx_k
   border-right-color: #D3D3D3;
 }
 
-#sxdhasyhav .gt_col_heading {
+#wexfhtpwvl .gt_col_heading {
   color: #333333;
   background-color: #FFFFFF;
   font-size: 100%;
@@ -1800,7 +1847,7 @@ p_1x_1+p_2x_2+p_3x_3+\cdots+p_kx_k
   overflow-x: hidden;
 }
 
-#sxdhasyhav .gt_column_spanner_outer {
+#wexfhtpwvl .gt_column_spanner_outer {
   color: #333333;
   background-color: #FFFFFF;
   font-size: 100%;
@@ -1812,15 +1859,15 @@ p_1x_1+p_2x_2+p_3x_3+\cdots+p_kx_k
   padding-right: 4px;
 }
 
-#sxdhasyhav .gt_column_spanner_outer:first-child {
+#wexfhtpwvl .gt_column_spanner_outer:first-child {
   padding-left: 0;
 }
 
-#sxdhasyhav .gt_column_spanner_outer:last-child {
+#wexfhtpwvl .gt_column_spanner_outer:last-child {
   padding-right: 0;
 }
 
-#sxdhasyhav .gt_column_spanner {
+#wexfhtpwvl .gt_column_spanner {
   border-bottom-style: solid;
   border-bottom-width: 2px;
   border-bottom-color: #D3D3D3;
@@ -1832,11 +1879,11 @@ p_1x_1+p_2x_2+p_3x_3+\cdots+p_kx_k
   width: 100%;
 }
 
-#sxdhasyhav .gt_spanner_row {
+#wexfhtpwvl .gt_spanner_row {
   border-bottom-style: hidden;
 }
 
-#sxdhasyhav .gt_group_heading {
+#wexfhtpwvl .gt_group_heading {
   padding-top: 8px;
   padding-bottom: 8px;
   padding-left: 5px;
@@ -1862,7 +1909,7 @@ p_1x_1+p_2x_2+p_3x_3+\cdots+p_kx_k
   text-align: left;
 }
 
-#sxdhasyhav .gt_empty_group_heading {
+#wexfhtpwvl .gt_empty_group_heading {
   padding: 0.5px;
   color: #333333;
   background-color: #FFFFFF;
@@ -1877,15 +1924,15 @@ p_1x_1+p_2x_2+p_3x_3+\cdots+p_kx_k
   vertical-align: middle;
 }
 
-#sxdhasyhav .gt_from_md > :first-child {
+#wexfhtpwvl .gt_from_md > :first-child {
   margin-top: 0;
 }
 
-#sxdhasyhav .gt_from_md > :last-child {
+#wexfhtpwvl .gt_from_md > :last-child {
   margin-bottom: 0;
 }
 
-#sxdhasyhav .gt_row {
+#wexfhtpwvl .gt_row {
   padding-top: 8px;
   padding-bottom: 8px;
   padding-left: 5px;
@@ -1904,7 +1951,7 @@ p_1x_1+p_2x_2+p_3x_3+\cdots+p_kx_k
   overflow-x: hidden;
 }
 
-#sxdhasyhav .gt_stub {
+#wexfhtpwvl .gt_stub {
   color: #333333;
   background-color: #FFFFFF;
   font-size: 100%;
@@ -1917,7 +1964,7 @@ p_1x_1+p_2x_2+p_3x_3+\cdots+p_kx_k
   padding-right: 5px;
 }
 
-#sxdhasyhav .gt_stub_row_group {
+#wexfhtpwvl .gt_stub_row_group {
   color: #333333;
   background-color: #FFFFFF;
   font-size: 100%;
@@ -1931,15 +1978,15 @@ p_1x_1+p_2x_2+p_3x_3+\cdots+p_kx_k
   vertical-align: top;
 }
 
-#sxdhasyhav .gt_row_group_first td {
+#wexfhtpwvl .gt_row_group_first td {
   border-top-width: 2px;
 }
 
-#sxdhasyhav .gt_row_group_first th {
+#wexfhtpwvl .gt_row_group_first th {
   border-top-width: 2px;
 }
 
-#sxdhasyhav .gt_summary_row {
+#wexfhtpwvl .gt_summary_row {
   color: #333333;
   background-color: #FFFFFF;
   text-transform: inherit;
@@ -1949,16 +1996,16 @@ p_1x_1+p_2x_2+p_3x_3+\cdots+p_kx_k
   padding-right: 5px;
 }
 
-#sxdhasyhav .gt_first_summary_row {
+#wexfhtpwvl .gt_first_summary_row {
   border-top-style: solid;
   border-top-color: #D3D3D3;
 }
 
-#sxdhasyhav .gt_first_summary_row.thick {
+#wexfhtpwvl .gt_first_summary_row.thick {
   border-top-width: 2px;
 }
 
-#sxdhasyhav .gt_last_summary_row {
+#wexfhtpwvl .gt_last_summary_row {
   padding-top: 8px;
   padding-bottom: 8px;
   padding-left: 5px;
@@ -1968,7 +2015,7 @@ p_1x_1+p_2x_2+p_3x_3+\cdots+p_kx_k
   border-bottom-color: #D3D3D3;
 }
 
-#sxdhasyhav .gt_grand_summary_row {
+#wexfhtpwvl .gt_grand_summary_row {
   color: #333333;
   background-color: #FFFFFF;
   text-transform: inherit;
@@ -1978,7 +2025,7 @@ p_1x_1+p_2x_2+p_3x_3+\cdots+p_kx_k
   padding-right: 5px;
 }
 
-#sxdhasyhav .gt_first_grand_summary_row {
+#wexfhtpwvl .gt_first_grand_summary_row {
   padding-top: 8px;
   padding-bottom: 8px;
   padding-left: 5px;
@@ -1988,7 +2035,7 @@ p_1x_1+p_2x_2+p_3x_3+\cdots+p_kx_k
   border-top-color: #D3D3D3;
 }
 
-#sxdhasyhav .gt_last_grand_summary_row_top {
+#wexfhtpwvl .gt_last_grand_summary_row_top {
   padding-top: 8px;
   padding-bottom: 8px;
   padding-left: 5px;
@@ -1998,11 +2045,11 @@ p_1x_1+p_2x_2+p_3x_3+\cdots+p_kx_k
   border-bottom-color: #D3D3D3;
 }
 
-#sxdhasyhav .gt_striped {
+#wexfhtpwvl .gt_striped {
   background-color: rgba(128, 128, 128, 0.05);
 }
 
-#sxdhasyhav .gt_table_body {
+#wexfhtpwvl .gt_table_body {
   border-top-style: solid;
   border-top-width: 2px;
   border-top-color: #D3D3D3;
@@ -2011,7 +2058,7 @@ p_1x_1+p_2x_2+p_3x_3+\cdots+p_kx_k
   border-bottom-color: #D3D3D3;
 }
 
-#sxdhasyhav .gt_footnotes {
+#wexfhtpwvl .gt_footnotes {
   color: #333333;
   background-color: #FFFFFF;
   border-bottom-style: none;
@@ -2025,7 +2072,7 @@ p_1x_1+p_2x_2+p_3x_3+\cdots+p_kx_k
   border-right-color: #D3D3D3;
 }
 
-#sxdhasyhav .gt_footnote {
+#wexfhtpwvl .gt_footnote {
   margin: 0px;
   font-size: 90%;
   padding-top: 4px;
@@ -2034,7 +2081,7 @@ p_1x_1+p_2x_2+p_3x_3+\cdots+p_kx_k
   padding-right: 5px;
 }
 
-#sxdhasyhav .gt_sourcenotes {
+#wexfhtpwvl .gt_sourcenotes {
   color: #333333;
   background-color: #FFFFFF;
   border-bottom-style: none;
@@ -2048,7 +2095,7 @@ p_1x_1+p_2x_2+p_3x_3+\cdots+p_kx_k
   border-right-color: #D3D3D3;
 }
 
-#sxdhasyhav .gt_sourcenote {
+#wexfhtpwvl .gt_sourcenote {
   font-size: 90%;
   padding-top: 4px;
   padding-bottom: 4px;
@@ -2056,72 +2103,72 @@ p_1x_1+p_2x_2+p_3x_3+\cdots+p_kx_k
   padding-right: 5px;
 }
 
-#sxdhasyhav .gt_left {
+#wexfhtpwvl .gt_left {
   text-align: left;
 }
 
-#sxdhasyhav .gt_center {
+#wexfhtpwvl .gt_center {
   text-align: center;
 }
 
-#sxdhasyhav .gt_right {
+#wexfhtpwvl .gt_right {
   text-align: right;
   font-variant-numeric: tabular-nums;
 }
 
-#sxdhasyhav .gt_font_normal {
+#wexfhtpwvl .gt_font_normal {
   font-weight: normal;
 }
 
-#sxdhasyhav .gt_font_bold {
+#wexfhtpwvl .gt_font_bold {
   font-weight: bold;
 }
 
-#sxdhasyhav .gt_font_italic {
+#wexfhtpwvl .gt_font_italic {
   font-style: italic;
 }
 
-#sxdhasyhav .gt_super {
+#wexfhtpwvl .gt_super {
   font-size: 65%;
 }
 
-#sxdhasyhav .gt_footnote_marks {
+#wexfhtpwvl .gt_footnote_marks {
   font-size: 75%;
   vertical-align: 0.4em;
   position: initial;
 }
 
-#sxdhasyhav .gt_asterisk {
+#wexfhtpwvl .gt_asterisk {
   font-size: 100%;
   vertical-align: 0;
 }
 
-#sxdhasyhav .gt_indent_1 {
+#wexfhtpwvl .gt_indent_1 {
   text-indent: 5px;
 }
 
-#sxdhasyhav .gt_indent_2 {
+#wexfhtpwvl .gt_indent_2 {
   text-indent: 10px;
 }
 
-#sxdhasyhav .gt_indent_3 {
+#wexfhtpwvl .gt_indent_3 {
   text-indent: 15px;
 }
 
-#sxdhasyhav .gt_indent_4 {
+#wexfhtpwvl .gt_indent_4 {
   text-indent: 20px;
 }
 
-#sxdhasyhav .gt_indent_5 {
+#wexfhtpwvl .gt_indent_5 {
   text-indent: 25px;
 }
 
-#sxdhasyhav .katex-display {
+#wexfhtpwvl .katex-display {
   display: inline-flex !important;
   margin-bottom: 0.75em !important;
 }
 
-#sxdhasyhav div.Reactable > div.rt-table > div.rt-thead > div.rt-tr.rt-tr-group-header > div.rt-th-group:after {
+#wexfhtpwvl div.Reactable > div.rt-table > div.rt-thead > div.rt-tr.rt-tr-group-header > div.rt-th-group:after {
   height: 0px !important;
 }
 </style>
@@ -2170,23 +2217,23 @@ E(\text{winnings})
 <p>Now change the game slightly. Suppose it still costs $10 to play, and the coin is still fair, but the prize for heads is now only $15.</p>
 <div class="cell">
 <div class="cell-output-display">
-<div id="npgmwxdhks" style="padding-left:0px;padding-right:0px;padding-top:10px;padding-bottom:10px;overflow-x:auto;overflow-y:auto;width:auto;height:auto;">
-<style>#npgmwxdhks table {
+<div id="dfguwmecqm" style="padding-left:0px;padding-right:0px;padding-top:10px;padding-bottom:10px;overflow-x:auto;overflow-y:auto;width:auto;height:auto;">
+<style>#dfguwmecqm table {
   font-family: system-ui, 'Segoe UI', Roboto, Helvetica, Arial, sans-serif, 'Apple Color Emoji', 'Segoe UI Emoji', 'Segoe UI Symbol', 'Noto Color Emoji';
   -webkit-font-smoothing: antialiased;
   -moz-osx-font-smoothing: grayscale;
 }
 
-#npgmwxdhks thead, #npgmwxdhks tbody, #npgmwxdhks tfoot, #npgmwxdhks tr, #npgmwxdhks td, #npgmwxdhks th {
+#dfguwmecqm thead, #dfguwmecqm tbody, #dfguwmecqm tfoot, #dfguwmecqm tr, #dfguwmecqm td, #dfguwmecqm th {
   border-style: none;
 }
 
-#npgmwxdhks p {
+#dfguwmecqm p {
   margin: 0;
   padding: 0;
 }
 
-#npgmwxdhks .gt_table {
+#dfguwmecqm .gt_table {
   display: table;
   border-collapse: collapse;
   line-height: normal;
@@ -2212,12 +2259,12 @@ E(\text{winnings})
   border-left-color: #D3D3D3;
 }
 
-#npgmwxdhks .gt_caption {
+#dfguwmecqm .gt_caption {
   padding-top: 4px;
   padding-bottom: 4px;
 }
 
-#npgmwxdhks .gt_title {
+#dfguwmecqm .gt_title {
   color: #333333;
   font-size: 125%;
   font-weight: initial;
@@ -2229,7 +2276,7 @@ E(\text{winnings})
   border-bottom-width: 0;
 }
 
-#npgmwxdhks .gt_subtitle {
+#dfguwmecqm .gt_subtitle {
   color: #333333;
   font-size: 85%;
   font-weight: initial;
@@ -2241,7 +2288,7 @@ E(\text{winnings})
   border-top-width: 0;
 }
 
-#npgmwxdhks .gt_heading {
+#dfguwmecqm .gt_heading {
   background-color: #FFFFFF;
   text-align: center;
   border-bottom-color: #FFFFFF;
@@ -2253,13 +2300,13 @@ E(\text{winnings})
   border-right-color: #D3D3D3;
 }
 
-#npgmwxdhks .gt_bottom_border {
+#dfguwmecqm .gt_bottom_border {
   border-bottom-style: solid;
   border-bottom-width: 2px;
   border-bottom-color: #D3D3D3;
 }
 
-#npgmwxdhks .gt_col_headings {
+#dfguwmecqm .gt_col_headings {
   border-top-style: solid;
   border-top-width: 2px;
   border-top-color: #D3D3D3;
@@ -2274,7 +2321,7 @@ E(\text{winnings})
   border-right-color: #D3D3D3;
 }
 
-#npgmwxdhks .gt_col_heading {
+#dfguwmecqm .gt_col_heading {
   color: #333333;
   background-color: #FFFFFF;
   font-size: 100%;
@@ -2294,7 +2341,7 @@ E(\text{winnings})
   overflow-x: hidden;
 }
 
-#npgmwxdhks .gt_column_spanner_outer {
+#dfguwmecqm .gt_column_spanner_outer {
   color: #333333;
   background-color: #FFFFFF;
   font-size: 100%;
@@ -2306,15 +2353,15 @@ E(\text{winnings})
   padding-right: 4px;
 }
 
-#npgmwxdhks .gt_column_spanner_outer:first-child {
+#dfguwmecqm .gt_column_spanner_outer:first-child {
   padding-left: 0;
 }
 
-#npgmwxdhks .gt_column_spanner_outer:last-child {
+#dfguwmecqm .gt_column_spanner_outer:last-child {
   padding-right: 0;
 }
 
-#npgmwxdhks .gt_column_spanner {
+#dfguwmecqm .gt_column_spanner {
   border-bottom-style: solid;
   border-bottom-width: 2px;
   border-bottom-color: #D3D3D3;
@@ -2326,11 +2373,11 @@ E(\text{winnings})
   width: 100%;
 }
 
-#npgmwxdhks .gt_spanner_row {
+#dfguwmecqm .gt_spanner_row {
   border-bottom-style: hidden;
 }
 
-#npgmwxdhks .gt_group_heading {
+#dfguwmecqm .gt_group_heading {
   padding-top: 8px;
   padding-bottom: 8px;
   padding-left: 5px;
@@ -2356,7 +2403,7 @@ E(\text{winnings})
   text-align: left;
 }
 
-#npgmwxdhks .gt_empty_group_heading {
+#dfguwmecqm .gt_empty_group_heading {
   padding: 0.5px;
   color: #333333;
   background-color: #FFFFFF;
@@ -2371,15 +2418,15 @@ E(\text{winnings})
   vertical-align: middle;
 }
 
-#npgmwxdhks .gt_from_md > :first-child {
+#dfguwmecqm .gt_from_md > :first-child {
   margin-top: 0;
 }
 
-#npgmwxdhks .gt_from_md > :last-child {
+#dfguwmecqm .gt_from_md > :last-child {
   margin-bottom: 0;
 }
 
-#npgmwxdhks .gt_row {
+#dfguwmecqm .gt_row {
   padding-top: 8px;
   padding-bottom: 8px;
   padding-left: 5px;
@@ -2398,7 +2445,7 @@ E(\text{winnings})
   overflow-x: hidden;
 }
 
-#npgmwxdhks .gt_stub {
+#dfguwmecqm .gt_stub {
   color: #333333;
   background-color: #FFFFFF;
   font-size: 100%;
@@ -2411,7 +2458,7 @@ E(\text{winnings})
   padding-right: 5px;
 }
 
-#npgmwxdhks .gt_stub_row_group {
+#dfguwmecqm .gt_stub_row_group {
   color: #333333;
   background-color: #FFFFFF;
   font-size: 100%;
@@ -2425,15 +2472,15 @@ E(\text{winnings})
   vertical-align: top;
 }
 
-#npgmwxdhks .gt_row_group_first td {
+#dfguwmecqm .gt_row_group_first td {
   border-top-width: 2px;
 }
 
-#npgmwxdhks .gt_row_group_first th {
+#dfguwmecqm .gt_row_group_first th {
   border-top-width: 2px;
 }
 
-#npgmwxdhks .gt_summary_row {
+#dfguwmecqm .gt_summary_row {
   color: #333333;
   background-color: #FFFFFF;
   text-transform: inherit;
@@ -2443,16 +2490,16 @@ E(\text{winnings})
   padding-right: 5px;
 }
 
-#npgmwxdhks .gt_first_summary_row {
+#dfguwmecqm .gt_first_summary_row {
   border-top-style: solid;
   border-top-color: #D3D3D3;
 }
 
-#npgmwxdhks .gt_first_summary_row.thick {
+#dfguwmecqm .gt_first_summary_row.thick {
   border-top-width: 2px;
 }
 
-#npgmwxdhks .gt_last_summary_row {
+#dfguwmecqm .gt_last_summary_row {
   padding-top: 8px;
   padding-bottom: 8px;
   padding-left: 5px;
@@ -2462,7 +2509,7 @@ E(\text{winnings})
   border-bottom-color: #D3D3D3;
 }
 
-#npgmwxdhks .gt_grand_summary_row {
+#dfguwmecqm .gt_grand_summary_row {
   color: #333333;
   background-color: #FFFFFF;
   text-transform: inherit;
@@ -2472,7 +2519,7 @@ E(\text{winnings})
   padding-right: 5px;
 }
 
-#npgmwxdhks .gt_first_grand_summary_row {
+#dfguwmecqm .gt_first_grand_summary_row {
   padding-top: 8px;
   padding-bottom: 8px;
   padding-left: 5px;
@@ -2482,7 +2529,7 @@ E(\text{winnings})
   border-top-color: #D3D3D3;
 }
 
-#npgmwxdhks .gt_last_grand_summary_row_top {
+#dfguwmecqm .gt_last_grand_summary_row_top {
   padding-top: 8px;
   padding-bottom: 8px;
   padding-left: 5px;
@@ -2492,11 +2539,11 @@ E(\text{winnings})
   border-bottom-color: #D3D3D3;
 }
 
-#npgmwxdhks .gt_striped {
+#dfguwmecqm .gt_striped {
   background-color: rgba(128, 128, 128, 0.05);
 }
 
-#npgmwxdhks .gt_table_body {
+#dfguwmecqm .gt_table_body {
   border-top-style: solid;
   border-top-width: 2px;
   border-top-color: #D3D3D3;
@@ -2505,7 +2552,7 @@ E(\text{winnings})
   border-bottom-color: #D3D3D3;
 }
 
-#npgmwxdhks .gt_footnotes {
+#dfguwmecqm .gt_footnotes {
   color: #333333;
   background-color: #FFFFFF;
   border-bottom-style: none;
@@ -2519,7 +2566,7 @@ E(\text{winnings})
   border-right-color: #D3D3D3;
 }
 
-#npgmwxdhks .gt_footnote {
+#dfguwmecqm .gt_footnote {
   margin: 0px;
   font-size: 90%;
   padding-top: 4px;
@@ -2528,7 +2575,7 @@ E(\text{winnings})
   padding-right: 5px;
 }
 
-#npgmwxdhks .gt_sourcenotes {
+#dfguwmecqm .gt_sourcenotes {
   color: #333333;
   background-color: #FFFFFF;
   border-bottom-style: none;
@@ -2542,7 +2589,7 @@ E(\text{winnings})
   border-right-color: #D3D3D3;
 }
 
-#npgmwxdhks .gt_sourcenote {
+#dfguwmecqm .gt_sourcenote {
   font-size: 90%;
   padding-top: 4px;
   padding-bottom: 4px;
@@ -2550,72 +2597,72 @@ E(\text{winnings})
   padding-right: 5px;
 }
 
-#npgmwxdhks .gt_left {
+#dfguwmecqm .gt_left {
   text-align: left;
 }
 
-#npgmwxdhks .gt_center {
+#dfguwmecqm .gt_center {
   text-align: center;
 }
 
-#npgmwxdhks .gt_right {
+#dfguwmecqm .gt_right {
   text-align: right;
   font-variant-numeric: tabular-nums;
 }
 
-#npgmwxdhks .gt_font_normal {
+#dfguwmecqm .gt_font_normal {
   font-weight: normal;
 }
 
-#npgmwxdhks .gt_font_bold {
+#dfguwmecqm .gt_font_bold {
   font-weight: bold;
 }
 
-#npgmwxdhks .gt_font_italic {
+#dfguwmecqm .gt_font_italic {
   font-style: italic;
 }
 
-#npgmwxdhks .gt_super {
+#dfguwmecqm .gt_super {
   font-size: 65%;
 }
 
-#npgmwxdhks .gt_footnote_marks {
+#dfguwmecqm .gt_footnote_marks {
   font-size: 75%;
   vertical-align: 0.4em;
   position: initial;
 }
 
-#npgmwxdhks .gt_asterisk {
+#dfguwmecqm .gt_asterisk {
   font-size: 100%;
   vertical-align: 0;
 }
 
-#npgmwxdhks .gt_indent_1 {
+#dfguwmecqm .gt_indent_1 {
   text-indent: 5px;
 }
 
-#npgmwxdhks .gt_indent_2 {
+#dfguwmecqm .gt_indent_2 {
   text-indent: 10px;
 }
 
-#npgmwxdhks .gt_indent_3 {
+#dfguwmecqm .gt_indent_3 {
   text-indent: 15px;
 }
 
-#npgmwxdhks .gt_indent_4 {
+#dfguwmecqm .gt_indent_4 {
   text-indent: 20px;
 }
 
-#npgmwxdhks .gt_indent_5 {
+#dfguwmecqm .gt_indent_5 {
   text-indent: 25px;
 }
 
-#npgmwxdhks .katex-display {
+#dfguwmecqm .katex-display {
   display: inline-flex !important;
   margin-bottom: 0.75em !important;
 }
 
-#npgmwxdhks div.Reactable > div.rt-table > div.rt-thead > div.rt-tr.rt-tr-group-header > div.rt-th-group:after {
+#dfguwmecqm div.Reactable > div.rt-table > div.rt-thead > div.rt-tr.rt-tr-group-header > div.rt-th-group:after {
   height: 0px !important;
 }
 </style>
@@ -2685,23 +2732,23 @@ Everyday expectation
 <p>The choice can be summarised like this:</p>
 <div class="cell">
 <div class="cell-output-display">
-<div id="opjiukfndc" style="padding-left:0px;padding-right:0px;padding-top:10px;padding-bottom:10px;overflow-x:auto;overflow-y:auto;width:auto;height:auto;">
-<style>#opjiukfndc table {
+<div id="ovtrqoermj" style="padding-left:0px;padding-right:0px;padding-top:10px;padding-bottom:10px;overflow-x:auto;overflow-y:auto;width:auto;height:auto;">
+<style>#ovtrqoermj table {
   font-family: system-ui, 'Segoe UI', Roboto, Helvetica, Arial, sans-serif, 'Apple Color Emoji', 'Segoe UI Emoji', 'Segoe UI Symbol', 'Noto Color Emoji';
   -webkit-font-smoothing: antialiased;
   -moz-osx-font-smoothing: grayscale;
 }
 
-#opjiukfndc thead, #opjiukfndc tbody, #opjiukfndc tfoot, #opjiukfndc tr, #opjiukfndc td, #opjiukfndc th {
+#ovtrqoermj thead, #ovtrqoermj tbody, #ovtrqoermj tfoot, #ovtrqoermj tr, #ovtrqoermj td, #ovtrqoermj th {
   border-style: none;
 }
 
-#opjiukfndc p {
+#ovtrqoermj p {
   margin: 0;
   padding: 0;
 }
 
-#opjiukfndc .gt_table {
+#ovtrqoermj .gt_table {
   display: table;
   border-collapse: collapse;
   line-height: normal;
@@ -2727,12 +2774,12 @@ Everyday expectation
   border-left-color: #D3D3D3;
 }
 
-#opjiukfndc .gt_caption {
+#ovtrqoermj .gt_caption {
   padding-top: 4px;
   padding-bottom: 4px;
 }
 
-#opjiukfndc .gt_title {
+#ovtrqoermj .gt_title {
   color: #333333;
   font-size: 125%;
   font-weight: initial;
@@ -2744,7 +2791,7 @@ Everyday expectation
   border-bottom-width: 0;
 }
 
-#opjiukfndc .gt_subtitle {
+#ovtrqoermj .gt_subtitle {
   color: #333333;
   font-size: 85%;
   font-weight: initial;
@@ -2756,7 +2803,7 @@ Everyday expectation
   border-top-width: 0;
 }
 
-#opjiukfndc .gt_heading {
+#ovtrqoermj .gt_heading {
   background-color: #FFFFFF;
   text-align: center;
   border-bottom-color: #FFFFFF;
@@ -2768,13 +2815,13 @@ Everyday expectation
   border-right-color: #D3D3D3;
 }
 
-#opjiukfndc .gt_bottom_border {
+#ovtrqoermj .gt_bottom_border {
   border-bottom-style: solid;
   border-bottom-width: 2px;
   border-bottom-color: #D3D3D3;
 }
 
-#opjiukfndc .gt_col_headings {
+#ovtrqoermj .gt_col_headings {
   border-top-style: solid;
   border-top-width: 2px;
   border-top-color: #D3D3D3;
@@ -2789,7 +2836,7 @@ Everyday expectation
   border-right-color: #D3D3D3;
 }
 
-#opjiukfndc .gt_col_heading {
+#ovtrqoermj .gt_col_heading {
   color: #333333;
   background-color: #FFFFFF;
   font-size: 100%;
@@ -2809,7 +2856,7 @@ Everyday expectation
   overflow-x: hidden;
 }
 
-#opjiukfndc .gt_column_spanner_outer {
+#ovtrqoermj .gt_column_spanner_outer {
   color: #333333;
   background-color: #FFFFFF;
   font-size: 100%;
@@ -2821,15 +2868,15 @@ Everyday expectation
   padding-right: 4px;
 }
 
-#opjiukfndc .gt_column_spanner_outer:first-child {
+#ovtrqoermj .gt_column_spanner_outer:first-child {
   padding-left: 0;
 }
 
-#opjiukfndc .gt_column_spanner_outer:last-child {
+#ovtrqoermj .gt_column_spanner_outer:last-child {
   padding-right: 0;
 }
 
-#opjiukfndc .gt_column_spanner {
+#ovtrqoermj .gt_column_spanner {
   border-bottom-style: solid;
   border-bottom-width: 2px;
   border-bottom-color: #D3D3D3;
@@ -2841,11 +2888,11 @@ Everyday expectation
   width: 100%;
 }
 
-#opjiukfndc .gt_spanner_row {
+#ovtrqoermj .gt_spanner_row {
   border-bottom-style: hidden;
 }
 
-#opjiukfndc .gt_group_heading {
+#ovtrqoermj .gt_group_heading {
   padding-top: 8px;
   padding-bottom: 8px;
   padding-left: 5px;
@@ -2871,7 +2918,7 @@ Everyday expectation
   text-align: left;
 }
 
-#opjiukfndc .gt_empty_group_heading {
+#ovtrqoermj .gt_empty_group_heading {
   padding: 0.5px;
   color: #333333;
   background-color: #FFFFFF;
@@ -2886,15 +2933,15 @@ Everyday expectation
   vertical-align: middle;
 }
 
-#opjiukfndc .gt_from_md > :first-child {
+#ovtrqoermj .gt_from_md > :first-child {
   margin-top: 0;
 }
 
-#opjiukfndc .gt_from_md > :last-child {
+#ovtrqoermj .gt_from_md > :last-child {
   margin-bottom: 0;
 }
 
-#opjiukfndc .gt_row {
+#ovtrqoermj .gt_row {
   padding-top: 8px;
   padding-bottom: 8px;
   padding-left: 5px;
@@ -2913,7 +2960,7 @@ Everyday expectation
   overflow-x: hidden;
 }
 
-#opjiukfndc .gt_stub {
+#ovtrqoermj .gt_stub {
   color: #333333;
   background-color: #FFFFFF;
   font-size: 100%;
@@ -2926,7 +2973,7 @@ Everyday expectation
   padding-right: 5px;
 }
 
-#opjiukfndc .gt_stub_row_group {
+#ovtrqoermj .gt_stub_row_group {
   color: #333333;
   background-color: #FFFFFF;
   font-size: 100%;
@@ -2940,15 +2987,15 @@ Everyday expectation
   vertical-align: top;
 }
 
-#opjiukfndc .gt_row_group_first td {
+#ovtrqoermj .gt_row_group_first td {
   border-top-width: 2px;
 }
 
-#opjiukfndc .gt_row_group_first th {
+#ovtrqoermj .gt_row_group_first th {
   border-top-width: 2px;
 }
 
-#opjiukfndc .gt_summary_row {
+#ovtrqoermj .gt_summary_row {
   color: #333333;
   background-color: #FFFFFF;
   text-transform: inherit;
@@ -2958,16 +3005,16 @@ Everyday expectation
   padding-right: 5px;
 }
 
-#opjiukfndc .gt_first_summary_row {
+#ovtrqoermj .gt_first_summary_row {
   border-top-style: solid;
   border-top-color: #D3D3D3;
 }
 
-#opjiukfndc .gt_first_summary_row.thick {
+#ovtrqoermj .gt_first_summary_row.thick {
   border-top-width: 2px;
 }
 
-#opjiukfndc .gt_last_summary_row {
+#ovtrqoermj .gt_last_summary_row {
   padding-top: 8px;
   padding-bottom: 8px;
   padding-left: 5px;
@@ -2977,7 +3024,7 @@ Everyday expectation
   border-bottom-color: #D3D3D3;
 }
 
-#opjiukfndc .gt_grand_summary_row {
+#ovtrqoermj .gt_grand_summary_row {
   color: #333333;
   background-color: #FFFFFF;
   text-transform: inherit;
@@ -2987,7 +3034,7 @@ Everyday expectation
   padding-right: 5px;
 }
 
-#opjiukfndc .gt_first_grand_summary_row {
+#ovtrqoermj .gt_first_grand_summary_row {
   padding-top: 8px;
   padding-bottom: 8px;
   padding-left: 5px;
@@ -2997,7 +3044,7 @@ Everyday expectation
   border-top-color: #D3D3D3;
 }
 
-#opjiukfndc .gt_last_grand_summary_row_top {
+#ovtrqoermj .gt_last_grand_summary_row_top {
   padding-top: 8px;
   padding-bottom: 8px;
   padding-left: 5px;
@@ -3007,11 +3054,11 @@ Everyday expectation
   border-bottom-color: #D3D3D3;
 }
 
-#opjiukfndc .gt_striped {
+#ovtrqoermj .gt_striped {
   background-color: rgba(128, 128, 128, 0.05);
 }
 
-#opjiukfndc .gt_table_body {
+#ovtrqoermj .gt_table_body {
   border-top-style: solid;
   border-top-width: 2px;
   border-top-color: #D3D3D3;
@@ -3020,7 +3067,7 @@ Everyday expectation
   border-bottom-color: #D3D3D3;
 }
 
-#opjiukfndc .gt_footnotes {
+#ovtrqoermj .gt_footnotes {
   color: #333333;
   background-color: #FFFFFF;
   border-bottom-style: none;
@@ -3034,7 +3081,7 @@ Everyday expectation
   border-right-color: #D3D3D3;
 }
 
-#opjiukfndc .gt_footnote {
+#ovtrqoermj .gt_footnote {
   margin: 0px;
   font-size: 90%;
   padding-top: 4px;
@@ -3043,7 +3090,7 @@ Everyday expectation
   padding-right: 5px;
 }
 
-#opjiukfndc .gt_sourcenotes {
+#ovtrqoermj .gt_sourcenotes {
   color: #333333;
   background-color: #FFFFFF;
   border-bottom-style: none;
@@ -3057,7 +3104,7 @@ Everyday expectation
   border-right-color: #D3D3D3;
 }
 
-#opjiukfndc .gt_sourcenote {
+#ovtrqoermj .gt_sourcenote {
   font-size: 90%;
   padding-top: 4px;
   padding-bottom: 4px;
@@ -3065,72 +3112,72 @@ Everyday expectation
   padding-right: 5px;
 }
 
-#opjiukfndc .gt_left {
+#ovtrqoermj .gt_left {
   text-align: left;
 }
 
-#opjiukfndc .gt_center {
+#ovtrqoermj .gt_center {
   text-align: center;
 }
 
-#opjiukfndc .gt_right {
+#ovtrqoermj .gt_right {
   text-align: right;
   font-variant-numeric: tabular-nums;
 }
 
-#opjiukfndc .gt_font_normal {
+#ovtrqoermj .gt_font_normal {
   font-weight: normal;
 }
 
-#opjiukfndc .gt_font_bold {
+#ovtrqoermj .gt_font_bold {
   font-weight: bold;
 }
 
-#opjiukfndc .gt_font_italic {
+#ovtrqoermj .gt_font_italic {
   font-style: italic;
 }
 
-#opjiukfndc .gt_super {
+#ovtrqoermj .gt_super {
   font-size: 65%;
 }
 
-#opjiukfndc .gt_footnote_marks {
+#ovtrqoermj .gt_footnote_marks {
   font-size: 75%;
   vertical-align: 0.4em;
   position: initial;
 }
 
-#opjiukfndc .gt_asterisk {
+#ovtrqoermj .gt_asterisk {
   font-size: 100%;
   vertical-align: 0;
 }
 
-#opjiukfndc .gt_indent_1 {
+#ovtrqoermj .gt_indent_1 {
   text-indent: 5px;
 }
 
-#opjiukfndc .gt_indent_2 {
+#ovtrqoermj .gt_indent_2 {
   text-indent: 10px;
 }
 
-#opjiukfndc .gt_indent_3 {
+#ovtrqoermj .gt_indent_3 {
   text-indent: 15px;
 }
 
-#opjiukfndc .gt_indent_4 {
+#ovtrqoermj .gt_indent_4 {
   text-indent: 20px;
 }
 
-#opjiukfndc .gt_indent_5 {
+#ovtrqoermj .gt_indent_5 {
   text-indent: 25px;
 }
 
-#opjiukfndc .katex-display {
+#ovtrqoermj .katex-display {
   display: inline-flex !important;
   margin-bottom: 0.75em !important;
 }
 
-#opjiukfndc div.Reactable > div.rt-table > div.rt-thead > div.rt-tr.rt-tr-group-header > div.rt-th-group:after {
+#ovtrqoermj div.Reactable > div.rt-table > div.rt-thead > div.rt-tr.rt-tr-group-header > div.rt-th-group:after {
   height: 0px !important;
 }
 </style>
@@ -3228,23 +3275,23 @@ P(\text{no prize})\times 0 \\
 <p>This is another example of probability helping us separate two different questions:</p>
 <div class="cell">
 <div class="cell-output-display">
-<div id="pqssbauhae" style="padding-left:0px;padding-right:0px;padding-top:10px;padding-bottom:10px;overflow-x:auto;overflow-y:auto;width:auto;height:auto;">
-<style>#pqssbauhae table {
+<div id="tcywwwvpzc" style="padding-left:0px;padding-right:0px;padding-top:10px;padding-bottom:10px;overflow-x:auto;overflow-y:auto;width:auto;height:auto;">
+<style>#tcywwwvpzc table {
   font-family: system-ui, 'Segoe UI', Roboto, Helvetica, Arial, sans-serif, 'Apple Color Emoji', 'Segoe UI Emoji', 'Segoe UI Symbol', 'Noto Color Emoji';
   -webkit-font-smoothing: antialiased;
   -moz-osx-font-smoothing: grayscale;
 }
 
-#pqssbauhae thead, #pqssbauhae tbody, #pqssbauhae tfoot, #pqssbauhae tr, #pqssbauhae td, #pqssbauhae th {
+#tcywwwvpzc thead, #tcywwwvpzc tbody, #tcywwwvpzc tfoot, #tcywwwvpzc tr, #tcywwwvpzc td, #tcywwwvpzc th {
   border-style: none;
 }
 
-#pqssbauhae p {
+#tcywwwvpzc p {
   margin: 0;
   padding: 0;
 }
 
-#pqssbauhae .gt_table {
+#tcywwwvpzc .gt_table {
   display: table;
   border-collapse: collapse;
   line-height: normal;
@@ -3270,12 +3317,12 @@ P(\text{no prize})\times 0 \\
   border-left-color: #D3D3D3;
 }
 
-#pqssbauhae .gt_caption {
+#tcywwwvpzc .gt_caption {
   padding-top: 4px;
   padding-bottom: 4px;
 }
 
-#pqssbauhae .gt_title {
+#tcywwwvpzc .gt_title {
   color: #333333;
   font-size: 125%;
   font-weight: initial;
@@ -3287,7 +3334,7 @@ P(\text{no prize})\times 0 \\
   border-bottom-width: 0;
 }
 
-#pqssbauhae .gt_subtitle {
+#tcywwwvpzc .gt_subtitle {
   color: #333333;
   font-size: 85%;
   font-weight: initial;
@@ -3299,7 +3346,7 @@ P(\text{no prize})\times 0 \\
   border-top-width: 0;
 }
 
-#pqssbauhae .gt_heading {
+#tcywwwvpzc .gt_heading {
   background-color: #FFFFFF;
   text-align: center;
   border-bottom-color: #FFFFFF;
@@ -3311,13 +3358,13 @@ P(\text{no prize})\times 0 \\
   border-right-color: #D3D3D3;
 }
 
-#pqssbauhae .gt_bottom_border {
+#tcywwwvpzc .gt_bottom_border {
   border-bottom-style: solid;
   border-bottom-width: 2px;
   border-bottom-color: #D3D3D3;
 }
 
-#pqssbauhae .gt_col_headings {
+#tcywwwvpzc .gt_col_headings {
   border-top-style: solid;
   border-top-width: 2px;
   border-top-color: #D3D3D3;
@@ -3332,7 +3379,7 @@ P(\text{no prize})\times 0 \\
   border-right-color: #D3D3D3;
 }
 
-#pqssbauhae .gt_col_heading {
+#tcywwwvpzc .gt_col_heading {
   color: #333333;
   background-color: #FFFFFF;
   font-size: 100%;
@@ -3352,7 +3399,7 @@ P(\text{no prize})\times 0 \\
   overflow-x: hidden;
 }
 
-#pqssbauhae .gt_column_spanner_outer {
+#tcywwwvpzc .gt_column_spanner_outer {
   color: #333333;
   background-color: #FFFFFF;
   font-size: 100%;
@@ -3364,15 +3411,15 @@ P(\text{no prize})\times 0 \\
   padding-right: 4px;
 }
 
-#pqssbauhae .gt_column_spanner_outer:first-child {
+#tcywwwvpzc .gt_column_spanner_outer:first-child {
   padding-left: 0;
 }
 
-#pqssbauhae .gt_column_spanner_outer:last-child {
+#tcywwwvpzc .gt_column_spanner_outer:last-child {
   padding-right: 0;
 }
 
-#pqssbauhae .gt_column_spanner {
+#tcywwwvpzc .gt_column_spanner {
   border-bottom-style: solid;
   border-bottom-width: 2px;
   border-bottom-color: #D3D3D3;
@@ -3384,11 +3431,11 @@ P(\text{no prize})\times 0 \\
   width: 100%;
 }
 
-#pqssbauhae .gt_spanner_row {
+#tcywwwvpzc .gt_spanner_row {
   border-bottom-style: hidden;
 }
 
-#pqssbauhae .gt_group_heading {
+#tcywwwvpzc .gt_group_heading {
   padding-top: 8px;
   padding-bottom: 8px;
   padding-left: 5px;
@@ -3414,7 +3461,7 @@ P(\text{no prize})\times 0 \\
   text-align: left;
 }
 
-#pqssbauhae .gt_empty_group_heading {
+#tcywwwvpzc .gt_empty_group_heading {
   padding: 0.5px;
   color: #333333;
   background-color: #FFFFFF;
@@ -3429,15 +3476,15 @@ P(\text{no prize})\times 0 \\
   vertical-align: middle;
 }
 
-#pqssbauhae .gt_from_md > :first-child {
+#tcywwwvpzc .gt_from_md > :first-child {
   margin-top: 0;
 }
 
-#pqssbauhae .gt_from_md > :last-child {
+#tcywwwvpzc .gt_from_md > :last-child {
   margin-bottom: 0;
 }
 
-#pqssbauhae .gt_row {
+#tcywwwvpzc .gt_row {
   padding-top: 8px;
   padding-bottom: 8px;
   padding-left: 5px;
@@ -3456,7 +3503,7 @@ P(\text{no prize})\times 0 \\
   overflow-x: hidden;
 }
 
-#pqssbauhae .gt_stub {
+#tcywwwvpzc .gt_stub {
   color: #333333;
   background-color: #FFFFFF;
   font-size: 100%;
@@ -3469,7 +3516,7 @@ P(\text{no prize})\times 0 \\
   padding-right: 5px;
 }
 
-#pqssbauhae .gt_stub_row_group {
+#tcywwwvpzc .gt_stub_row_group {
   color: #333333;
   background-color: #FFFFFF;
   font-size: 100%;
@@ -3483,15 +3530,15 @@ P(\text{no prize})\times 0 \\
   vertical-align: top;
 }
 
-#pqssbauhae .gt_row_group_first td {
+#tcywwwvpzc .gt_row_group_first td {
   border-top-width: 2px;
 }
 
-#pqssbauhae .gt_row_group_first th {
+#tcywwwvpzc .gt_row_group_first th {
   border-top-width: 2px;
 }
 
-#pqssbauhae .gt_summary_row {
+#tcywwwvpzc .gt_summary_row {
   color: #333333;
   background-color: #FFFFFF;
   text-transform: inherit;
@@ -3501,16 +3548,16 @@ P(\text{no prize})\times 0 \\
   padding-right: 5px;
 }
 
-#pqssbauhae .gt_first_summary_row {
+#tcywwwvpzc .gt_first_summary_row {
   border-top-style: solid;
   border-top-color: #D3D3D3;
 }
 
-#pqssbauhae .gt_first_summary_row.thick {
+#tcywwwvpzc .gt_first_summary_row.thick {
   border-top-width: 2px;
 }
 
-#pqssbauhae .gt_last_summary_row {
+#tcywwwvpzc .gt_last_summary_row {
   padding-top: 8px;
   padding-bottom: 8px;
   padding-left: 5px;
@@ -3520,7 +3567,7 @@ P(\text{no prize})\times 0 \\
   border-bottom-color: #D3D3D3;
 }
 
-#pqssbauhae .gt_grand_summary_row {
+#tcywwwvpzc .gt_grand_summary_row {
   color: #333333;
   background-color: #FFFFFF;
   text-transform: inherit;
@@ -3530,7 +3577,7 @@ P(\text{no prize})\times 0 \\
   padding-right: 5px;
 }
 
-#pqssbauhae .gt_first_grand_summary_row {
+#tcywwwvpzc .gt_first_grand_summary_row {
   padding-top: 8px;
   padding-bottom: 8px;
   padding-left: 5px;
@@ -3540,7 +3587,7 @@ P(\text{no prize})\times 0 \\
   border-top-color: #D3D3D3;
 }
 
-#pqssbauhae .gt_last_grand_summary_row_top {
+#tcywwwvpzc .gt_last_grand_summary_row_top {
   padding-top: 8px;
   padding-bottom: 8px;
   padding-left: 5px;
@@ -3550,11 +3597,11 @@ P(\text{no prize})\times 0 \\
   border-bottom-color: #D3D3D3;
 }
 
-#pqssbauhae .gt_striped {
+#tcywwwvpzc .gt_striped {
   background-color: rgba(128, 128, 128, 0.05);
 }
 
-#pqssbauhae .gt_table_body {
+#tcywwwvpzc .gt_table_body {
   border-top-style: solid;
   border-top-width: 2px;
   border-top-color: #D3D3D3;
@@ -3563,7 +3610,7 @@ P(\text{no prize})\times 0 \\
   border-bottom-color: #D3D3D3;
 }
 
-#pqssbauhae .gt_footnotes {
+#tcywwwvpzc .gt_footnotes {
   color: #333333;
   background-color: #FFFFFF;
   border-bottom-style: none;
@@ -3577,7 +3624,7 @@ P(\text{no prize})\times 0 \\
   border-right-color: #D3D3D3;
 }
 
-#pqssbauhae .gt_footnote {
+#tcywwwvpzc .gt_footnote {
   margin: 0px;
   font-size: 90%;
   padding-top: 4px;
@@ -3586,7 +3633,7 @@ P(\text{no prize})\times 0 \\
   padding-right: 5px;
 }
 
-#pqssbauhae .gt_sourcenotes {
+#tcywwwvpzc .gt_sourcenotes {
   color: #333333;
   background-color: #FFFFFF;
   border-bottom-style: none;
@@ -3600,7 +3647,7 @@ P(\text{no prize})\times 0 \\
   border-right-color: #D3D3D3;
 }
 
-#pqssbauhae .gt_sourcenote {
+#tcywwwvpzc .gt_sourcenote {
   font-size: 90%;
   padding-top: 4px;
   padding-bottom: 4px;
@@ -3608,72 +3655,72 @@ P(\text{no prize})\times 0 \\
   padding-right: 5px;
 }
 
-#pqssbauhae .gt_left {
+#tcywwwvpzc .gt_left {
   text-align: left;
 }
 
-#pqssbauhae .gt_center {
+#tcywwwvpzc .gt_center {
   text-align: center;
 }
 
-#pqssbauhae .gt_right {
+#tcywwwvpzc .gt_right {
   text-align: right;
   font-variant-numeric: tabular-nums;
 }
 
-#pqssbauhae .gt_font_normal {
+#tcywwwvpzc .gt_font_normal {
   font-weight: normal;
 }
 
-#pqssbauhae .gt_font_bold {
+#tcywwwvpzc .gt_font_bold {
   font-weight: bold;
 }
 
-#pqssbauhae .gt_font_italic {
+#tcywwwvpzc .gt_font_italic {
   font-style: italic;
 }
 
-#pqssbauhae .gt_super {
+#tcywwwvpzc .gt_super {
   font-size: 65%;
 }
 
-#pqssbauhae .gt_footnote_marks {
+#tcywwwvpzc .gt_footnote_marks {
   font-size: 75%;
   vertical-align: 0.4em;
   position: initial;
 }
 
-#pqssbauhae .gt_asterisk {
+#tcywwwvpzc .gt_asterisk {
   font-size: 100%;
   vertical-align: 0;
 }
 
-#pqssbauhae .gt_indent_1 {
+#tcywwwvpzc .gt_indent_1 {
   text-indent: 5px;
 }
 
-#pqssbauhae .gt_indent_2 {
+#tcywwwvpzc .gt_indent_2 {
   text-indent: 10px;
 }
 
-#pqssbauhae .gt_indent_3 {
+#tcywwwvpzc .gt_indent_3 {
   text-indent: 15px;
 }
 
-#pqssbauhae .gt_indent_4 {
+#tcywwwvpzc .gt_indent_4 {
   text-indent: 20px;
 }
 
-#pqssbauhae .gt_indent_5 {
+#tcywwwvpzc .gt_indent_5 {
   text-indent: 25px;
 }
 
-#pqssbauhae .katex-display {
+#tcywwwvpzc .katex-display {
   display: inline-flex !important;
   margin-bottom: 0.75em !important;
 }
 
-#pqssbauhae div.Reactable > div.rt-table > div.rt-thead > div.rt-tr.rt-tr-group-header > div.rt-th-group:after {
+#tcywwwvpzc div.Reactable > div.rt-table > div.rt-thead > div.rt-tr.rt-tr-group-header > div.rt-th-group:after {
   height: 0px !important;
 }
 </style>
@@ -3715,23 +3762,23 @@ P(\text{no prize})\times 0 \\
 \]</span></p>
 <div class="cell">
 <div class="cell-output-display">
-<div id="tyfzcsxxtl" style="padding-left:0px;padding-right:0px;padding-top:10px;padding-bottom:10px;overflow-x:auto;overflow-y:auto;width:auto;height:auto;">
-<style>#tyfzcsxxtl table {
+<div id="xtfegaddqi" style="padding-left:0px;padding-right:0px;padding-top:10px;padding-bottom:10px;overflow-x:auto;overflow-y:auto;width:auto;height:auto;">
+<style>#xtfegaddqi table {
   font-family: system-ui, 'Segoe UI', Roboto, Helvetica, Arial, sans-serif, 'Apple Color Emoji', 'Segoe UI Emoji', 'Segoe UI Symbol', 'Noto Color Emoji';
   -webkit-font-smoothing: antialiased;
   -moz-osx-font-smoothing: grayscale;
 }
 
-#tyfzcsxxtl thead, #tyfzcsxxtl tbody, #tyfzcsxxtl tfoot, #tyfzcsxxtl tr, #tyfzcsxxtl td, #tyfzcsxxtl th {
+#xtfegaddqi thead, #xtfegaddqi tbody, #xtfegaddqi tfoot, #xtfegaddqi tr, #xtfegaddqi td, #xtfegaddqi th {
   border-style: none;
 }
 
-#tyfzcsxxtl p {
+#xtfegaddqi p {
   margin: 0;
   padding: 0;
 }
 
-#tyfzcsxxtl .gt_table {
+#xtfegaddqi .gt_table {
   display: table;
   border-collapse: collapse;
   line-height: normal;
@@ -3757,12 +3804,12 @@ P(\text{no prize})\times 0 \\
   border-left-color: #D3D3D3;
 }
 
-#tyfzcsxxtl .gt_caption {
+#xtfegaddqi .gt_caption {
   padding-top: 4px;
   padding-bottom: 4px;
 }
 
-#tyfzcsxxtl .gt_title {
+#xtfegaddqi .gt_title {
   color: #333333;
   font-size: 125%;
   font-weight: initial;
@@ -3774,7 +3821,7 @@ P(\text{no prize})\times 0 \\
   border-bottom-width: 0;
 }
 
-#tyfzcsxxtl .gt_subtitle {
+#xtfegaddqi .gt_subtitle {
   color: #333333;
   font-size: 85%;
   font-weight: initial;
@@ -3786,7 +3833,7 @@ P(\text{no prize})\times 0 \\
   border-top-width: 0;
 }
 
-#tyfzcsxxtl .gt_heading {
+#xtfegaddqi .gt_heading {
   background-color: #FFFFFF;
   text-align: center;
   border-bottom-color: #FFFFFF;
@@ -3798,13 +3845,13 @@ P(\text{no prize})\times 0 \\
   border-right-color: #D3D3D3;
 }
 
-#tyfzcsxxtl .gt_bottom_border {
+#xtfegaddqi .gt_bottom_border {
   border-bottom-style: solid;
   border-bottom-width: 2px;
   border-bottom-color: #D3D3D3;
 }
 
-#tyfzcsxxtl .gt_col_headings {
+#xtfegaddqi .gt_col_headings {
   border-top-style: solid;
   border-top-width: 2px;
   border-top-color: #D3D3D3;
@@ -3819,7 +3866,7 @@ P(\text{no prize})\times 0 \\
   border-right-color: #D3D3D3;
 }
 
-#tyfzcsxxtl .gt_col_heading {
+#xtfegaddqi .gt_col_heading {
   color: #333333;
   background-color: #FFFFFF;
   font-size: 100%;
@@ -3839,7 +3886,7 @@ P(\text{no prize})\times 0 \\
   overflow-x: hidden;
 }
 
-#tyfzcsxxtl .gt_column_spanner_outer {
+#xtfegaddqi .gt_column_spanner_outer {
   color: #333333;
   background-color: #FFFFFF;
   font-size: 100%;
@@ -3851,15 +3898,15 @@ P(\text{no prize})\times 0 \\
   padding-right: 4px;
 }
 
-#tyfzcsxxtl .gt_column_spanner_outer:first-child {
+#xtfegaddqi .gt_column_spanner_outer:first-child {
   padding-left: 0;
 }
 
-#tyfzcsxxtl .gt_column_spanner_outer:last-child {
+#xtfegaddqi .gt_column_spanner_outer:last-child {
   padding-right: 0;
 }
 
-#tyfzcsxxtl .gt_column_spanner {
+#xtfegaddqi .gt_column_spanner {
   border-bottom-style: solid;
   border-bottom-width: 2px;
   border-bottom-color: #D3D3D3;
@@ -3871,11 +3918,11 @@ P(\text{no prize})\times 0 \\
   width: 100%;
 }
 
-#tyfzcsxxtl .gt_spanner_row {
+#xtfegaddqi .gt_spanner_row {
   border-bottom-style: hidden;
 }
 
-#tyfzcsxxtl .gt_group_heading {
+#xtfegaddqi .gt_group_heading {
   padding-top: 8px;
   padding-bottom: 8px;
   padding-left: 5px;
@@ -3901,7 +3948,7 @@ P(\text{no prize})\times 0 \\
   text-align: left;
 }
 
-#tyfzcsxxtl .gt_empty_group_heading {
+#xtfegaddqi .gt_empty_group_heading {
   padding: 0.5px;
   color: #333333;
   background-color: #FFFFFF;
@@ -3916,15 +3963,15 @@ P(\text{no prize})\times 0 \\
   vertical-align: middle;
 }
 
-#tyfzcsxxtl .gt_from_md > :first-child {
+#xtfegaddqi .gt_from_md > :first-child {
   margin-top: 0;
 }
 
-#tyfzcsxxtl .gt_from_md > :last-child {
+#xtfegaddqi .gt_from_md > :last-child {
   margin-bottom: 0;
 }
 
-#tyfzcsxxtl .gt_row {
+#xtfegaddqi .gt_row {
   padding-top: 8px;
   padding-bottom: 8px;
   padding-left: 5px;
@@ -3943,7 +3990,7 @@ P(\text{no prize})\times 0 \\
   overflow-x: hidden;
 }
 
-#tyfzcsxxtl .gt_stub {
+#xtfegaddqi .gt_stub {
   color: #333333;
   background-color: #FFFFFF;
   font-size: 100%;
@@ -3956,7 +4003,7 @@ P(\text{no prize})\times 0 \\
   padding-right: 5px;
 }
 
-#tyfzcsxxtl .gt_stub_row_group {
+#xtfegaddqi .gt_stub_row_group {
   color: #333333;
   background-color: #FFFFFF;
   font-size: 100%;
@@ -3970,15 +4017,15 @@ P(\text{no prize})\times 0 \\
   vertical-align: top;
 }
 
-#tyfzcsxxtl .gt_row_group_first td {
+#xtfegaddqi .gt_row_group_first td {
   border-top-width: 2px;
 }
 
-#tyfzcsxxtl .gt_row_group_first th {
+#xtfegaddqi .gt_row_group_first th {
   border-top-width: 2px;
 }
 
-#tyfzcsxxtl .gt_summary_row {
+#xtfegaddqi .gt_summary_row {
   color: #333333;
   background-color: #FFFFFF;
   text-transform: inherit;
@@ -3988,16 +4035,16 @@ P(\text{no prize})\times 0 \\
   padding-right: 5px;
 }
 
-#tyfzcsxxtl .gt_first_summary_row {
+#xtfegaddqi .gt_first_summary_row {
   border-top-style: solid;
   border-top-color: #D3D3D3;
 }
 
-#tyfzcsxxtl .gt_first_summary_row.thick {
+#xtfegaddqi .gt_first_summary_row.thick {
   border-top-width: 2px;
 }
 
-#tyfzcsxxtl .gt_last_summary_row {
+#xtfegaddqi .gt_last_summary_row {
   padding-top: 8px;
   padding-bottom: 8px;
   padding-left: 5px;
@@ -4007,7 +4054,7 @@ P(\text{no prize})\times 0 \\
   border-bottom-color: #D3D3D3;
 }
 
-#tyfzcsxxtl .gt_grand_summary_row {
+#xtfegaddqi .gt_grand_summary_row {
   color: #333333;
   background-color: #FFFFFF;
   text-transform: inherit;
@@ -4017,7 +4064,7 @@ P(\text{no prize})\times 0 \\
   padding-right: 5px;
 }
 
-#tyfzcsxxtl .gt_first_grand_summary_row {
+#xtfegaddqi .gt_first_grand_summary_row {
   padding-top: 8px;
   padding-bottom: 8px;
   padding-left: 5px;
@@ -4027,7 +4074,7 @@ P(\text{no prize})\times 0 \\
   border-top-color: #D3D3D3;
 }
 
-#tyfzcsxxtl .gt_last_grand_summary_row_top {
+#xtfegaddqi .gt_last_grand_summary_row_top {
   padding-top: 8px;
   padding-bottom: 8px;
   padding-left: 5px;
@@ -4037,11 +4084,11 @@ P(\text{no prize})\times 0 \\
   border-bottom-color: #D3D3D3;
 }
 
-#tyfzcsxxtl .gt_striped {
+#xtfegaddqi .gt_striped {
   background-color: rgba(128, 128, 128, 0.05);
 }
 
-#tyfzcsxxtl .gt_table_body {
+#xtfegaddqi .gt_table_body {
   border-top-style: solid;
   border-top-width: 2px;
   border-top-color: #D3D3D3;
@@ -4050,7 +4097,7 @@ P(\text{no prize})\times 0 \\
   border-bottom-color: #D3D3D3;
 }
 
-#tyfzcsxxtl .gt_footnotes {
+#xtfegaddqi .gt_footnotes {
   color: #333333;
   background-color: #FFFFFF;
   border-bottom-style: none;
@@ -4064,7 +4111,7 @@ P(\text{no prize})\times 0 \\
   border-right-color: #D3D3D3;
 }
 
-#tyfzcsxxtl .gt_footnote {
+#xtfegaddqi .gt_footnote {
   margin: 0px;
   font-size: 90%;
   padding-top: 4px;
@@ -4073,7 +4120,7 @@ P(\text{no prize})\times 0 \\
   padding-right: 5px;
 }
 
-#tyfzcsxxtl .gt_sourcenotes {
+#xtfegaddqi .gt_sourcenotes {
   color: #333333;
   background-color: #FFFFFF;
   border-bottom-style: none;
@@ -4087,7 +4134,7 @@ P(\text{no prize})\times 0 \\
   border-right-color: #D3D3D3;
 }
 
-#tyfzcsxxtl .gt_sourcenote {
+#xtfegaddqi .gt_sourcenote {
   font-size: 90%;
   padding-top: 4px;
   padding-bottom: 4px;
@@ -4095,72 +4142,72 @@ P(\text{no prize})\times 0 \\
   padding-right: 5px;
 }
 
-#tyfzcsxxtl .gt_left {
+#xtfegaddqi .gt_left {
   text-align: left;
 }
 
-#tyfzcsxxtl .gt_center {
+#xtfegaddqi .gt_center {
   text-align: center;
 }
 
-#tyfzcsxxtl .gt_right {
+#xtfegaddqi .gt_right {
   text-align: right;
   font-variant-numeric: tabular-nums;
 }
 
-#tyfzcsxxtl .gt_font_normal {
+#xtfegaddqi .gt_font_normal {
   font-weight: normal;
 }
 
-#tyfzcsxxtl .gt_font_bold {
+#xtfegaddqi .gt_font_bold {
   font-weight: bold;
 }
 
-#tyfzcsxxtl .gt_font_italic {
+#xtfegaddqi .gt_font_italic {
   font-style: italic;
 }
 
-#tyfzcsxxtl .gt_super {
+#xtfegaddqi .gt_super {
   font-size: 65%;
 }
 
-#tyfzcsxxtl .gt_footnote_marks {
+#xtfegaddqi .gt_footnote_marks {
   font-size: 75%;
   vertical-align: 0.4em;
   position: initial;
 }
 
-#tyfzcsxxtl .gt_asterisk {
+#xtfegaddqi .gt_asterisk {
   font-size: 100%;
   vertical-align: 0;
 }
 
-#tyfzcsxxtl .gt_indent_1 {
+#xtfegaddqi .gt_indent_1 {
   text-indent: 5px;
 }
 
-#tyfzcsxxtl .gt_indent_2 {
+#xtfegaddqi .gt_indent_2 {
   text-indent: 10px;
 }
 
-#tyfzcsxxtl .gt_indent_3 {
+#xtfegaddqi .gt_indent_3 {
   text-indent: 15px;
 }
 
-#tyfzcsxxtl .gt_indent_4 {
+#xtfegaddqi .gt_indent_4 {
   text-indent: 20px;
 }
 
-#tyfzcsxxtl .gt_indent_5 {
+#xtfegaddqi .gt_indent_5 {
   text-indent: 25px;
 }
 
-#tyfzcsxxtl .katex-display {
+#xtfegaddqi .katex-display {
   display: inline-flex !important;
   margin-bottom: 0.75em !important;
 }
 
-#tyfzcsxxtl div.Reactable > div.rt-table > div.rt-thead > div.rt-tr.rt-tr-group-header > div.rt-th-group:after {
+#xtfegaddqi div.Reactable > div.rt-table > div.rt-thead > div.rt-tr.rt-tr-group-header > div.rt-th-group:after {
   height: 0px !important;
 }
 </style>
@@ -4206,9 +4253,2198 @@ P(\text{no prize})\times 0 \\
 <p>What is the average value of this strategy, given the probabilities and payoffs?</p>
 </blockquote>
 <p>In the end, the group ran out of time and only managed to purchase around 5 million tickets. Fortunately, their gamble paid off and the did hold the only winning ticket for that draw.</p>
-
-
 </section>
+</section>
+<section id="chapter-summary" class="level2" data-number="2.6">
+<h2 data-number="2.6" class="anchored" data-anchor-id="chapter-summary"><span class="header-section-number">2.6</span> Chapter summary</h2>
+<p>Probability gives us a language for thinking clearly when more than one outcome is possible. In this chapter, we began with situations where intuition can be misleading. A problem may look simple on the surface, but the answer can change once we define the possible outcomes carefully, understand how information was produced, and count the number of ways an event can occur.</p>
+<p>We looked at many examples, such as the Monty Hall Problem, the Birthday Problem, the Problem of Points, the Lottery - all of which used probability to help us solve a question.</p>
+<p>Across all of these examples, the main lesson is that probability is not just about formulas. It is about structure. To reason well under uncertainty, we need to ask:</p>
+<ul>
+<li>What are the possible outcomes?</li>
+<li>Are they equally likely?</li>
+<li>What event do we care about?</li>
+<li>How many ways can that event occur?</li>
+<li>What information have we received?</li>
+<li>How was that information produced?</li>
+<li>Are we counting arrangements or combinations?</li>
+<li>Are we treating rare events as impossible, or merely as unlikely?</li>
+</ul>
+<p>Probability helps us slow down, define the situation carefully, and reason with uncertainty rather than simply relying on intuition.</p>
+</section>
+<section id="exercises" class="level2" data-number="2.7">
+<h2 data-number="2.7" class="anchored" data-anchor-id="exercises"><span class="header-section-number">2.7</span> Exercises</h2>
+<p>These questions are designed to help you practise the main ideas from this chapter: sample spaces, events, probability rules, wording, information, counting, combinations, and possible futures. Some questions require calculations, while others ask you to explain the reasoning behind the calculation.</p>
+<div class="callout callout-style-default callout-note callout-titled">
+<div class="callout-header d-flex align-content-center">
+<div class="callout-icon-container">
+<i class="callout-icon"></i>
+</div>
+<div class="callout-title-container flex-fill">
+Question 1
+</div>
+</div>
+<div class="callout-body-container callout-body">
+<p>A fair six-sided die is rolled once.</p>
+<p><strong>a.</strong> Write down the sample space.</p>
+<p><strong>b.</strong> Write the event “roll a number greater than 4” as a set.</p>
+<p><strong>c.</strong> Calculate the probability of rolling a number greater than 4.</p>
+<div class="callout callout-style-default callout-important callout-titled">
+<div class="callout-header d-flex align-content-center" data-bs-toggle="collapse" data-bs-target=".callout-8-contents" aria-controls="callout-8" aria-expanded="false" aria-label="Toggle callout">
+<div class="callout-icon-container">
+<i class="callout-icon"></i>
+</div>
+<div class="callout-title-container flex-fill">
+Click for Solutions
+</div>
+<div class="callout-btn-toggle d-inline-block border-0 py-1 ps-1 pe-0 float-end"><i class="callout-toggle"></i></div>
+</div>
+<div id="callout-8" class="callout-8-contents callout-collapse collapse">
+<div class="callout-body-container callout-body">
+<p><strong>a.</strong> The sample space is:</p>
+<p><span class="math display">\[
+S = \{1,2,3,4,5,6\}
+\]</span></p>
+<p><strong>b.</strong> The event “roll a number greater than 4” is:</p>
+<p><span class="math display">\[
+\{5,6\}
+\]</span></p>
+<p><strong>c.</strong> There are 2 favourable outcomes out of 6 possible outcomes:</p>
+<p><span class="math display">\[
+P(\text{greater than 4}) = \frac{2}{6} = \frac{1}{3}
+\]</span></p>
+</div>
+</div>
+</div>
+</div>
+</div>
+<div class="callout callout-style-default callout-note callout-titled">
+<div class="callout-header d-flex align-content-center">
+<div class="callout-icon-container">
+<i class="callout-icon"></i>
+</div>
+<div class="callout-title-container flex-fill">
+Question 2
+</div>
+</div>
+<div class="callout-body-container callout-body">
+<p>A fair coin is tossed three times.</p>
+<p><strong>a.</strong> Write down the sample space.</p>
+<p><strong>b.</strong> What is the probability of getting exactly two heads?</p>
+<p><strong>c.</strong> What is the probability of getting at least one tail?</p>
+<div class="callout callout-style-default callout-important callout-titled">
+<div class="callout-header d-flex align-content-center" data-bs-toggle="collapse" data-bs-target=".callout-10-contents" aria-controls="callout-10" aria-expanded="false" aria-label="Toggle callout">
+<div class="callout-icon-container">
+<i class="callout-icon"></i>
+</div>
+<div class="callout-title-container flex-fill">
+Click for Solutions
+</div>
+<div class="callout-btn-toggle d-inline-block border-0 py-1 ps-1 pe-0 float-end"><i class="callout-toggle"></i></div>
+</div>
+<div id="callout-10" class="callout-10-contents callout-collapse collapse">
+<div class="callout-body-container callout-body">
+<p><strong>a.</strong> The sample space is:</p>
+<p><span class="math display">\[
+S = \{HHH,HHT,HTH,HTT,THH,THT,TTH,TTT\}
+\]</span></p>
+<p><strong>b.</strong> Exactly two heads occurs in:</p>
+<p><span class="math display">\[
+HHT,\;HTH,\;THH
+\]</span></p>
+<p>So:</p>
+<p><span class="math display">\[
+P(\text{exactly two heads}) = \frac{3}{8}
+\]</span></p>
+<p><strong>c.</strong> At least one tail means one tail, two tails, or three tails. It may be easier to use the complement. The only outcome with no tails is:</p>
+<p><span class="math display">\[
+HHH
+\]</span></p>
+<p>So:</p>
+<p><span class="math display">\[
+P(\text{at least one tail}) = 1 - P(\text{no tails})
+\]</span></p>
+<p><span class="math display">\[
+= 1 - \frac{1}{8}
+\]</span></p>
+<p><span class="math display">\[
+= \frac{7}{8}
+\]</span></p>
+</div>
+</div>
+</div>
+</div>
+</div>
+<div class="callout callout-style-default callout-note callout-titled">
+<div class="callout-header d-flex align-content-center">
+<div class="callout-icon-container">
+<i class="callout-icon"></i>
+</div>
+<div class="callout-title-container flex-fill">
+Question 3
+</div>
+</div>
+<div class="callout-body-container callout-body">
+<p>A family has two children. Assume that each child is equally likely to be a boy or a girl, and that the sex of one child does not affect the sex of the other.</p>
+<p><strong>a.</strong> Write the sample space if children are recorded in birth order.</p>
+<p><strong>b.</strong> What is the probability that both children are girls?</p>
+<p><strong>c.</strong> If you are told that at least one child is a girl, what is the probability that both children are girls?</p>
+<p><strong>d.</strong> If you are told that the older child is a girl, what is the probability that both children are girls?</p>
+<div class="callout callout-style-default callout-important callout-titled">
+<div class="callout-header d-flex align-content-center" data-bs-toggle="collapse" data-bs-target=".callout-12-contents" aria-controls="callout-12" aria-expanded="false" aria-label="Toggle callout">
+<div class="callout-icon-container">
+<i class="callout-icon"></i>
+</div>
+<div class="callout-title-container flex-fill">
+Click for Solutions
+</div>
+<div class="callout-btn-toggle d-inline-block border-0 py-1 ps-1 pe-0 float-end"><i class="callout-toggle"></i></div>
+</div>
+<div id="callout-12" class="callout-12-contents callout-collapse collapse">
+<div class="callout-body-container callout-body">
+<p><strong>a.</strong> The sample space is:</p>
+<p><span class="math display">\[
+S = \{BB,BG,GB,GG\}
+\]</span></p>
+<p><strong>b.</strong> There is one outcome with two girls:</p>
+<p><span class="math display">\[
+P(GG) = \frac{1}{4}
+\]</span></p>
+<p><strong>c.</strong> If at least one child is a girl, then (BB) is removed from the sample space. The remaining possibilities are:</p>
+<p><span class="math display">\[
+\{BG,GB,GG\}
+\]</span></p>
+<p>Only one of these has two girls, so:</p>
+<p><span class="math display">\[
+P(\text{both girls} \mid \text{at least one girl}) = \frac{1}{3}
+\]</span></p>
+<p><strong>d.</strong> If the older child is a girl, the remaining possibilities are:</p>
+<p><span class="math display">\[
+\{GB,GG\}
+\]</span></p>
+<p>Only one of these has two girls, so:</p>
+<p><span class="math display">\[
+P(\text{both girls} \mid \text{older child is a girl}) = \frac{1}{2}
+\]</span></p>
+</div>
+</div>
+</div>
+</div>
+</div>
+<div class="callout callout-style-default callout-note callout-titled">
+<div class="callout-header d-flex align-content-center">
+<div class="callout-icon-container">
+<i class="callout-icon"></i>
+</div>
+<div class="callout-title-container flex-fill">
+Question 4
+</div>
+</div>
+<div class="callout-body-container callout-body">
+<p>A car has four tyres: front left, front right, rear left, and rear right. Exactly one tyre has a slow leak, but you do not know which one.</p>
+<p><strong>a.</strong> Write down the sample space.</p>
+<p><strong>b.</strong> What is the probability that the leaking tyre is a front tyre?</p>
+<p><strong>c.</strong> A mechanic checks the rear left tyre and finds that it is not leaking. What is the probability that the leaking tyre is now a front tyre?</p>
+<div class="callout callout-style-default callout-important callout-titled">
+<div class="callout-header d-flex align-content-center" data-bs-toggle="collapse" data-bs-target=".callout-14-contents" aria-controls="callout-14" aria-expanded="false" aria-label="Toggle callout">
+<div class="callout-icon-container">
+<i class="callout-icon"></i>
+</div>
+<div class="callout-title-container flex-fill">
+Click for Solutions
+</div>
+<div class="callout-btn-toggle d-inline-block border-0 py-1 ps-1 pe-0 float-end"><i class="callout-toggle"></i></div>
+</div>
+<div id="callout-14" class="callout-14-contents callout-collapse collapse">
+<div class="callout-body-container callout-body">
+<p><strong>a.</strong> The sample space is:</p>
+<p><span class="math display">\[
+S = \{\text{front left},\text{front right},\text{rear left},\text{rear right}\}
+\]</span></p>
+<p><strong>b.</strong> There are two front tyres out of four tyres:</p>
+<p><span class="math display">\[
+P(\text{front tyre}) = \frac{2}{4} = \frac{1}{2}
+\]</span></p>
+<p><strong>c.</strong> Once the rear left tyre is ruled out, the remaining possibilities are:</p>
+<p><span class="math display">\[
+\{\text{front left},\text{front right},\text{rear right}\}
+\]</span></p>
+<p>Two of these three possibilities are front tyres, so:</p>
+<p><span class="math display">\[
+P(\text{front tyre} \mid \text{rear left is not leaking}) = \frac{2}{3}
+\]</span></p>
+</div>
+</div>
+</div>
+</div>
+</div>
+<div class="callout callout-style-default callout-note callout-titled">
+<div class="callout-header d-flex align-content-center">
+<div class="callout-icon-container">
+<i class="callout-icon"></i>
+</div>
+<div class="callout-title-container flex-fill">
+Question 5
+</div>
+</div>
+<div class="callout-body-container callout-body">
+<p>Three fair six-sided dice are rolled.</p>
+<p>The unordered combinations below can each produce a total of 9 or 10:</p>
+<div class="cell">
+<div class="cell-output-display">
+<div id="vahygcinif" style="padding-left:0px;padding-right:0px;padding-top:10px;padding-bottom:10px;overflow-x:auto;overflow-y:auto;width:auto;height:auto;">
+<style>#vahygcinif table {
+  font-family: system-ui, 'Segoe UI', Roboto, Helvetica, Arial, sans-serif, 'Apple Color Emoji', 'Segoe UI Emoji', 'Segoe UI Symbol', 'Noto Color Emoji';
+  -webkit-font-smoothing: antialiased;
+  -moz-osx-font-smoothing: grayscale;
+}
+
+#vahygcinif thead, #vahygcinif tbody, #vahygcinif tfoot, #vahygcinif tr, #vahygcinif td, #vahygcinif th {
+  border-style: none;
+}
+
+#vahygcinif p {
+  margin: 0;
+  padding: 0;
+}
+
+#vahygcinif .gt_table {
+  display: table;
+  border-collapse: collapse;
+  line-height: normal;
+  margin-left: auto;
+  margin-right: auto;
+  color: #333333;
+  font-size: 16px;
+  font-weight: normal;
+  font-style: normal;
+  background-color: #FFFFFF;
+  width: auto;
+  border-top-style: solid;
+  border-top-width: 2px;
+  border-top-color: #A8A8A8;
+  border-right-style: none;
+  border-right-width: 2px;
+  border-right-color: #D3D3D3;
+  border-bottom-style: solid;
+  border-bottom-width: 2px;
+  border-bottom-color: #A8A8A8;
+  border-left-style: none;
+  border-left-width: 2px;
+  border-left-color: #D3D3D3;
+}
+
+#vahygcinif .gt_caption {
+  padding-top: 4px;
+  padding-bottom: 4px;
+}
+
+#vahygcinif .gt_title {
+  color: #333333;
+  font-size: 125%;
+  font-weight: initial;
+  padding-top: 4px;
+  padding-bottom: 4px;
+  padding-left: 5px;
+  padding-right: 5px;
+  border-bottom-color: #FFFFFF;
+  border-bottom-width: 0;
+}
+
+#vahygcinif .gt_subtitle {
+  color: #333333;
+  font-size: 85%;
+  font-weight: initial;
+  padding-top: 3px;
+  padding-bottom: 5px;
+  padding-left: 5px;
+  padding-right: 5px;
+  border-top-color: #FFFFFF;
+  border-top-width: 0;
+}
+
+#vahygcinif .gt_heading {
+  background-color: #FFFFFF;
+  text-align: center;
+  border-bottom-color: #FFFFFF;
+  border-left-style: none;
+  border-left-width: 1px;
+  border-left-color: #D3D3D3;
+  border-right-style: none;
+  border-right-width: 1px;
+  border-right-color: #D3D3D3;
+}
+
+#vahygcinif .gt_bottom_border {
+  border-bottom-style: solid;
+  border-bottom-width: 2px;
+  border-bottom-color: #D3D3D3;
+}
+
+#vahygcinif .gt_col_headings {
+  border-top-style: solid;
+  border-top-width: 2px;
+  border-top-color: #D3D3D3;
+  border-bottom-style: solid;
+  border-bottom-width: 2px;
+  border-bottom-color: #D3D3D3;
+  border-left-style: none;
+  border-left-width: 1px;
+  border-left-color: #D3D3D3;
+  border-right-style: none;
+  border-right-width: 1px;
+  border-right-color: #D3D3D3;
+}
+
+#vahygcinif .gt_col_heading {
+  color: #333333;
+  background-color: #FFFFFF;
+  font-size: 100%;
+  font-weight: normal;
+  text-transform: inherit;
+  border-left-style: none;
+  border-left-width: 1px;
+  border-left-color: #D3D3D3;
+  border-right-style: none;
+  border-right-width: 1px;
+  border-right-color: #D3D3D3;
+  vertical-align: bottom;
+  padding-top: 5px;
+  padding-bottom: 6px;
+  padding-left: 5px;
+  padding-right: 5px;
+  overflow-x: hidden;
+}
+
+#vahygcinif .gt_column_spanner_outer {
+  color: #333333;
+  background-color: #FFFFFF;
+  font-size: 100%;
+  font-weight: normal;
+  text-transform: inherit;
+  padding-top: 0;
+  padding-bottom: 0;
+  padding-left: 4px;
+  padding-right: 4px;
+}
+
+#vahygcinif .gt_column_spanner_outer:first-child {
+  padding-left: 0;
+}
+
+#vahygcinif .gt_column_spanner_outer:last-child {
+  padding-right: 0;
+}
+
+#vahygcinif .gt_column_spanner {
+  border-bottom-style: solid;
+  border-bottom-width: 2px;
+  border-bottom-color: #D3D3D3;
+  vertical-align: bottom;
+  padding-top: 5px;
+  padding-bottom: 5px;
+  overflow-x: hidden;
+  display: inline-block;
+  width: 100%;
+}
+
+#vahygcinif .gt_spanner_row {
+  border-bottom-style: hidden;
+}
+
+#vahygcinif .gt_group_heading {
+  padding-top: 8px;
+  padding-bottom: 8px;
+  padding-left: 5px;
+  padding-right: 5px;
+  color: #333333;
+  background-color: #FFFFFF;
+  font-size: 100%;
+  font-weight: initial;
+  text-transform: inherit;
+  border-top-style: solid;
+  border-top-width: 2px;
+  border-top-color: #D3D3D3;
+  border-bottom-style: solid;
+  border-bottom-width: 2px;
+  border-bottom-color: #D3D3D3;
+  border-left-style: none;
+  border-left-width: 1px;
+  border-left-color: #D3D3D3;
+  border-right-style: none;
+  border-right-width: 1px;
+  border-right-color: #D3D3D3;
+  vertical-align: middle;
+  text-align: left;
+}
+
+#vahygcinif .gt_empty_group_heading {
+  padding: 0.5px;
+  color: #333333;
+  background-color: #FFFFFF;
+  font-size: 100%;
+  font-weight: initial;
+  border-top-style: solid;
+  border-top-width: 2px;
+  border-top-color: #D3D3D3;
+  border-bottom-style: solid;
+  border-bottom-width: 2px;
+  border-bottom-color: #D3D3D3;
+  vertical-align: middle;
+}
+
+#vahygcinif .gt_from_md > :first-child {
+  margin-top: 0;
+}
+
+#vahygcinif .gt_from_md > :last-child {
+  margin-bottom: 0;
+}
+
+#vahygcinif .gt_row {
+  padding-top: 8px;
+  padding-bottom: 8px;
+  padding-left: 5px;
+  padding-right: 5px;
+  margin: 10px;
+  border-top-style: solid;
+  border-top-width: 1px;
+  border-top-color: #D3D3D3;
+  border-left-style: none;
+  border-left-width: 1px;
+  border-left-color: #D3D3D3;
+  border-right-style: none;
+  border-right-width: 1px;
+  border-right-color: #D3D3D3;
+  vertical-align: middle;
+  overflow-x: hidden;
+}
+
+#vahygcinif .gt_stub {
+  color: #333333;
+  background-color: #FFFFFF;
+  font-size: 100%;
+  font-weight: initial;
+  text-transform: inherit;
+  border-right-style: solid;
+  border-right-width: 2px;
+  border-right-color: #D3D3D3;
+  padding-left: 5px;
+  padding-right: 5px;
+}
+
+#vahygcinif .gt_stub_row_group {
+  color: #333333;
+  background-color: #FFFFFF;
+  font-size: 100%;
+  font-weight: initial;
+  text-transform: inherit;
+  border-right-style: solid;
+  border-right-width: 2px;
+  border-right-color: #D3D3D3;
+  padding-left: 5px;
+  padding-right: 5px;
+  vertical-align: top;
+}
+
+#vahygcinif .gt_row_group_first td {
+  border-top-width: 2px;
+}
+
+#vahygcinif .gt_row_group_first th {
+  border-top-width: 2px;
+}
+
+#vahygcinif .gt_summary_row {
+  color: #333333;
+  background-color: #FFFFFF;
+  text-transform: inherit;
+  padding-top: 8px;
+  padding-bottom: 8px;
+  padding-left: 5px;
+  padding-right: 5px;
+}
+
+#vahygcinif .gt_first_summary_row {
+  border-top-style: solid;
+  border-top-color: #D3D3D3;
+}
+
+#vahygcinif .gt_first_summary_row.thick {
+  border-top-width: 2px;
+}
+
+#vahygcinif .gt_last_summary_row {
+  padding-top: 8px;
+  padding-bottom: 8px;
+  padding-left: 5px;
+  padding-right: 5px;
+  border-bottom-style: solid;
+  border-bottom-width: 2px;
+  border-bottom-color: #D3D3D3;
+}
+
+#vahygcinif .gt_grand_summary_row {
+  color: #333333;
+  background-color: #FFFFFF;
+  text-transform: inherit;
+  padding-top: 8px;
+  padding-bottom: 8px;
+  padding-left: 5px;
+  padding-right: 5px;
+}
+
+#vahygcinif .gt_first_grand_summary_row {
+  padding-top: 8px;
+  padding-bottom: 8px;
+  padding-left: 5px;
+  padding-right: 5px;
+  border-top-style: double;
+  border-top-width: 6px;
+  border-top-color: #D3D3D3;
+}
+
+#vahygcinif .gt_last_grand_summary_row_top {
+  padding-top: 8px;
+  padding-bottom: 8px;
+  padding-left: 5px;
+  padding-right: 5px;
+  border-bottom-style: double;
+  border-bottom-width: 6px;
+  border-bottom-color: #D3D3D3;
+}
+
+#vahygcinif .gt_striped {
+  background-color: rgba(128, 128, 128, 0.05);
+}
+
+#vahygcinif .gt_table_body {
+  border-top-style: solid;
+  border-top-width: 2px;
+  border-top-color: #D3D3D3;
+  border-bottom-style: solid;
+  border-bottom-width: 2px;
+  border-bottom-color: #D3D3D3;
+}
+
+#vahygcinif .gt_footnotes {
+  color: #333333;
+  background-color: #FFFFFF;
+  border-bottom-style: none;
+  border-bottom-width: 2px;
+  border-bottom-color: #D3D3D3;
+  border-left-style: none;
+  border-left-width: 2px;
+  border-left-color: #D3D3D3;
+  border-right-style: none;
+  border-right-width: 2px;
+  border-right-color: #D3D3D3;
+}
+
+#vahygcinif .gt_footnote {
+  margin: 0px;
+  font-size: 90%;
+  padding-top: 4px;
+  padding-bottom: 4px;
+  padding-left: 5px;
+  padding-right: 5px;
+}
+
+#vahygcinif .gt_sourcenotes {
+  color: #333333;
+  background-color: #FFFFFF;
+  border-bottom-style: none;
+  border-bottom-width: 2px;
+  border-bottom-color: #D3D3D3;
+  border-left-style: none;
+  border-left-width: 2px;
+  border-left-color: #D3D3D3;
+  border-right-style: none;
+  border-right-width: 2px;
+  border-right-color: #D3D3D3;
+}
+
+#vahygcinif .gt_sourcenote {
+  font-size: 90%;
+  padding-top: 4px;
+  padding-bottom: 4px;
+  padding-left: 5px;
+  padding-right: 5px;
+}
+
+#vahygcinif .gt_left {
+  text-align: left;
+}
+
+#vahygcinif .gt_center {
+  text-align: center;
+}
+
+#vahygcinif .gt_right {
+  text-align: right;
+  font-variant-numeric: tabular-nums;
+}
+
+#vahygcinif .gt_font_normal {
+  font-weight: normal;
+}
+
+#vahygcinif .gt_font_bold {
+  font-weight: bold;
+}
+
+#vahygcinif .gt_font_italic {
+  font-style: italic;
+}
+
+#vahygcinif .gt_super {
+  font-size: 65%;
+}
+
+#vahygcinif .gt_footnote_marks {
+  font-size: 75%;
+  vertical-align: 0.4em;
+  position: initial;
+}
+
+#vahygcinif .gt_asterisk {
+  font-size: 100%;
+  vertical-align: 0;
+}
+
+#vahygcinif .gt_indent_1 {
+  text-indent: 5px;
+}
+
+#vahygcinif .gt_indent_2 {
+  text-indent: 10px;
+}
+
+#vahygcinif .gt_indent_3 {
+  text-indent: 15px;
+}
+
+#vahygcinif .gt_indent_4 {
+  text-indent: 20px;
+}
+
+#vahygcinif .gt_indent_5 {
+  text-indent: 25px;
+}
+
+#vahygcinif .katex-display {
+  display: inline-flex !important;
+  margin-bottom: 0.75em !important;
+}
+
+#vahygcinif div.Reactable > div.rt-table > div.rt-thead > div.rt-tr.rt-tr-group-header > div.rt-th-group:after {
+  height: 0px !important;
+}
+</style>
+
+<table class="gt_table caption-top table table-sm table-striped small" data-quarto-postprocess="true" data-quarto-disable-processing="false" data-quarto-bootstrap="false">
+<thead>
+<tr class="gt_col_headings header">
+<th id="Total-of-9" class="gt_col_heading gt_columns_bottom_border gt_center" data-quarto-table-cell-role="th" scope="col">Total of 9</th>
+<th id="Total-of-10" class="gt_col_heading gt_columns_bottom_border gt_center" data-quarto-table-cell-role="th" scope="col">Total of 10</th>
+</tr>
+</thead>
+<tbody class="gt_table_body">
+<tr class="odd">
+<td class="gt_row gt_center" headers="Total of 9">1 + 2 + 6</td>
+<td class="gt_row gt_center" headers="Total of 10">1 + 3 + 6</td>
+</tr>
+<tr class="even">
+<td class="gt_row gt_center" headers="Total of 9">1 + 3 + 5</td>
+<td class="gt_row gt_center" headers="Total of 10">1 + 4 + 5</td>
+</tr>
+<tr class="odd">
+<td class="gt_row gt_center" headers="Total of 9">1 + 4 + 4</td>
+<td class="gt_row gt_center" headers="Total of 10">2 + 2 + 6</td>
+</tr>
+<tr class="even">
+<td class="gt_row gt_center" headers="Total of 9">2 + 2 + 5</td>
+<td class="gt_row gt_center" headers="Total of 10">2 + 3 + 5</td>
+</tr>
+<tr class="odd">
+<td class="gt_row gt_center" headers="Total of 9">2 + 3 + 4</td>
+<td class="gt_row gt_center" headers="Total of 10">2 + 4 + 4</td>
+</tr>
+<tr class="even">
+<td class="gt_row gt_center" headers="Total of 9">3 + 3 + 3</td>
+<td class="gt_row gt_center" headers="Total of 10">3 + 3 + 4</td>
+</tr>
+</tbody>
+</table>
+
+</div>
+</div>
+</div>
+<p>Both totals appear to have six combinations.</p>
+<p><strong>a.</strong> Why does this not mean that totals 9 and 10 are equally likely?</p>
+<p><strong>b.</strong> If there are 25 ordered outcomes that sum to 9 and 27 ordered outcomes that sum to 10, calculate both probabilities.</p>
+<p><strong>c.</strong> Which total is more likely?</p>
+<div class="callout callout-style-default callout-important callout-titled">
+<div class="callout-header d-flex align-content-center" data-bs-toggle="collapse" data-bs-target=".callout-16-contents" aria-controls="callout-16" aria-expanded="false" aria-label="Toggle callout">
+<div class="callout-icon-container">
+<i class="callout-icon"></i>
+</div>
+<div class="callout-title-container flex-fill">
+Click for Solutions
+</div>
+<div class="callout-btn-toggle d-inline-block border-0 py-1 ps-1 pe-0 float-end"><i class="callout-toggle"></i></div>
+</div>
+<div id="callout-16" class="callout-16-contents callout-collapse collapse">
+<div class="callout-body-container callout-body">
+<p><strong>a.</strong> The listed combinations do not account for order. With three dice, ((1,2,6)), ((2,1,6)), and ((6,2,1)) are different ordered outcomes. Some unordered combinations can occur in more ordered ways than others.</p>
+<p><strong>b.</strong> There are:</p>
+<p><span class="math display">\[
+6^3 = 216
+\]</span></p>
+<p>ordered outcomes when three dice are rolled.</p>
+<p>So:</p>
+<p><span class="math display">\[
+P(\text{sum is 9}) = \frac{25}{216}
+\]</span></p>
+<p>and:</p>
+<p><span class="math display">\[
+P(\text{sum is 10}) = \frac{27}{216}
+\]</span></p>
+<p><strong>c.</strong> A total of 10 is more likely because:</p>
+<p><span class="math display">\[
+\frac{27}{216} &gt; \frac{25}{216}
+\]</span></p>
+</div>
+</div>
+</div>
+</div>
+</div>
+<div class="callout callout-style-default callout-note callout-titled">
+<div class="callout-header d-flex align-content-center">
+<div class="callout-icon-container">
+<i class="callout-icon"></i>
+</div>
+<div class="callout-title-container flex-fill">
+Question 6
+</div>
+</div>
+<div class="callout-body-container callout-body">
+<p>A group of 23 students are in a classroom. Ignore leap years and assume that birthdays are equally likely across 365 days.</p>
+<p><strong>a.</strong> How many pairs of students are there in the room?</p>
+<p><strong>b.</strong> Why is the birthday problem not mainly about the probability that one particular student shares your birthday?</p>
+<p><strong>c.</strong> Explain in words why a shared birthday becomes more likely than many people expect.</p>
+<div class="callout callout-style-default callout-important callout-titled">
+<div class="callout-header d-flex align-content-center" data-bs-toggle="collapse" data-bs-target=".callout-18-contents" aria-controls="callout-18" aria-expanded="false" aria-label="Toggle callout">
+<div class="callout-icon-container">
+<i class="callout-icon"></i>
+</div>
+<div class="callout-title-container flex-fill">
+Click for Solutions
+</div>
+<div class="callout-btn-toggle d-inline-block border-0 py-1 ps-1 pe-0 float-end"><i class="callout-toggle"></i></div>
+</div>
+<div id="callout-18" class="callout-18-contents callout-collapse collapse">
+<div class="callout-body-container callout-body">
+<p><strong>a.</strong> The number of pairs is:</p>
+<p><span class="math display">\[
+\frac{23\times 22}{2} = 253
+\]</span></p>
+<p><strong>b.</strong> The birthday problem is not mainly about one person matching your birthday. It is about whether any pair in the room shares a birthday.</p>
+<p><strong>c.</strong> Each individual pair has a small chance of matching, but there are many possible pairs. With 23 people, there are 253 opportunities for a match. Many opportunities can make a seemingly rare event much more likely.</p>
+</div>
+</div>
+</div>
+</div>
+</div>
+<div class="callout callout-style-default callout-note callout-titled">
+<div class="callout-header d-flex align-content-center">
+<div class="callout-icon-container">
+<i class="callout-icon"></i>
+</div>
+<div class="callout-title-container flex-fill">
+Question 7
+</div>
+</div>
+<div class="callout-body-container callout-body">
+<p>A lottery draws 6 numbers from 49 numbers. The number of possible combinations is:</p>
+<p><span class="math display">\[
+\binom{49}{6} = 13{,}983{,}816
+\]</span></p>
+<p><strong>a.</strong> What is the probability of one particular combination being drawn in a single draw?</p>
+<p><strong>b.</strong> Why is this different from asking whether some combination will repeat after many lottery draws?</p>
+<p><strong>c.</strong> If there have been 3,016 lottery draws, how many pairs of draws are there?</p>
+<div class="callout callout-style-default callout-important callout-titled">
+<div class="callout-header d-flex align-content-center" data-bs-toggle="collapse" data-bs-target=".callout-20-contents" aria-controls="callout-20" aria-expanded="false" aria-label="Toggle callout">
+<div class="callout-icon-container">
+<i class="callout-icon"></i>
+</div>
+<div class="callout-title-container flex-fill">
+Click for Solutions
+</div>
+<div class="callout-btn-toggle d-inline-block border-0 py-1 ps-1 pe-0 float-end"><i class="callout-toggle"></i></div>
+</div>
+<div id="callout-20" class="callout-20-contents callout-collapse collapse">
+<div class="callout-body-container callout-body">
+<p><strong>a.</strong> The probability of one particular combination is:</p>
+<p><span class="math display">\[
+\frac{1}{13{,}983{,}816}
+\]</span></p>
+<p><strong>b.</strong> One particular combination appearing in one draw is very unlikely. But over many draws, there are many pairs of draws that could potentially match. The repeated-draw question has many more opportunities for a coincidence.</p>
+<p><strong>c.</strong> The number of pairs is:</p>
+<p><span class="math display">\[
+\frac{3016\times 3015}{2}
+\]</span></p>
+<p><span class="math display">\[
+= 4{,}546{,}620
+\]</span></p>
+</div>
+</div>
+</div>
+</div>
+</div>
+<div class="callout callout-style-default callout-note callout-titled">
+<div class="callout-header d-flex align-content-center">
+<div class="callout-icon-container">
+<i class="callout-icon"></i>
+</div>
+<div class="callout-title-container flex-fill">
+Question 8
+</div>
+</div>
+<div class="callout-body-container callout-body">
+<p>Harry and Tom are playing a coin-flipping game. Harry scores a point when the coin lands Heads. Tom scores a point when the coin lands Tails. The first player to reach 3 points wins a prize of $100.</p>
+<p>After three flips, the sequence is:</p>
+<p><span class="math display">\[
+H,\;T,\;H
+\]</span></p>
+<p>So Harry has 2 points and Tom has 1 point. The game is interrupted.</p>
+<p><strong>a.</strong> What are the possible future paths from this point if the game stops as soon as someone reaches 3 points?</p>
+<p><strong>b.</strong> What is the probability of each path?</p>
+<p><strong>c.</strong> What is the probability that Harry eventually wins?</p>
+<p><strong>d.</strong> How should the $100 prize be divided fairly?</p>
+<div class="callout callout-style-default callout-important callout-titled">
+<div class="callout-header d-flex align-content-center" data-bs-toggle="collapse" data-bs-target=".callout-22-contents" aria-controls="callout-22" aria-expanded="false" aria-label="Toggle callout">
+<div class="callout-icon-container">
+<i class="callout-icon"></i>
+</div>
+<div class="callout-title-container flex-fill">
+Click for Solutions
+</div>
+<div class="callout-btn-toggle d-inline-block border-0 py-1 ps-1 pe-0 float-end"><i class="callout-toggle"></i></div>
+</div>
+<div id="callout-22" class="callout-22-contents callout-collapse collapse">
+<div class="callout-body-container callout-body">
+<p><strong>a.</strong> The possible future paths are:</p>
+<p><span class="math display">\[
+S = \{H,TH,TT\}
+\]</span></p>
+<p>If the next flip is Heads, Harry wins immediately. If the next flip is Tails, then one more flip is needed.</p>
+<p><strong>b.</strong> The probabilities are:</p>
+<p><span class="math display">\[
+P(H)=\frac{1}{2}
+\]</span></p>
+<p><span class="math display">\[
+P(TH)=\frac{1}{2}\times\frac{1}{2}=\frac{1}{4}
+\]</span></p>
+<p><span class="math display">\[
+P(TT)=\frac{1}{2}\times\frac{1}{2}=\frac{1}{4}
+\]</span></p>
+<p><strong>c.</strong> Harry wins if the future path is (H) or (TH):</p>
+<p><span class="math display">\[
+\begin{aligned}
+P(\text{Harry wins})
+&amp;= P(H)+P(TH) \\
+&amp;= \frac{1}{2}+\frac{1}{4} \\
+&amp;= \frac{3}{4}
+\end{aligned}
+\]</span></p>
+<p><strong>d.</strong> Harry should receive:</p>
+<p><span class="math display">\[
+\frac{3}{4}\times 100 = 75
+\]</span></p>
+<p>Tom should receive:</p>
+<p><span class="math display">\[
+\frac{1}{4}\times 100 = 25
+\]</span></p>
+<p>So the fair split is $75 for Harry and $25 for Tom.</p>
+</div>
+</div>
+</div>
+</div>
+</div>
+<div class="callout callout-style-default callout-note callout-titled">
+<div class="callout-header d-flex align-content-center">
+<div class="callout-icon-container">
+<i class="callout-icon"></i>
+</div>
+<div class="callout-title-container flex-fill">
+Question 9
+</div>
+</div>
+<div class="callout-body-container callout-body">
+<p>In Question 8, the possible future paths were:</p>
+<p><span class="math display">\[
+\{H,TH,TT\}
+\]</span></p>
+<p>A student says:</p>
+<blockquote class="blockquote">
+<p>Harry wins in two of the three paths, so Harry’s probability of winning is (2/3).</p>
+</blockquote>
+<p><strong>a.</strong> What is wrong with this reasoning?</p>
+<p><strong>b.</strong> What does this teach us about sample spaces?</p>
+<div class="callout callout-style-default callout-important callout-titled">
+<div class="callout-header d-flex align-content-center" data-bs-toggle="collapse" data-bs-target=".callout-24-contents" aria-controls="callout-24" aria-expanded="false" aria-label="Toggle callout">
+<div class="callout-icon-container">
+<i class="callout-icon"></i>
+</div>
+<div class="callout-title-container flex-fill">
+Click for Solutions
+</div>
+<div class="callout-btn-toggle d-inline-block border-0 py-1 ps-1 pe-0 float-end"><i class="callout-toggle"></i></div>
+</div>
+<div id="callout-24" class="callout-24-contents callout-collapse collapse">
+<div class="callout-body-container callout-body">
+<p><strong>a.</strong> The paths are not equally likely. The path (H) has probability (1/2), while (TH) and (TT) each have probability (1/4). We cannot count paths equally unless they are equally likely.</p>
+<p><strong>b.</strong> A sample space is not enough on its own. We must also ask whether the outcomes in the sample space are equally likely. If they are not equally likely, we need to account for their different probabilities.</p>
+</div>
+</div>
+</div>
+</div>
+</div>
+<div class="callout callout-style-default callout-note callout-titled">
+<div class="callout-header d-flex align-content-center">
+<div class="callout-icon-container">
+<i class="callout-icon"></i>
+</div>
+<div class="callout-title-container flex-fill">
+Question 10
+</div>
+</div>
+<div class="callout-body-container callout-body">
+<p>Suppose there are 8 guests at a small dinner party.</p>
+<p><strong>a.</strong> How many ways are there to arrange all 8 guests in 8 labelled seats?</p>
+<p><strong>b.</strong> How many ways are there to choose 3 guests from the 8 guests to sit at a small side table, if order does not matter?</p>
+<p><strong>c.</strong> Explain the difference between parts <strong>a</strong> and <strong>b</strong>.</p>
+<div class="callout callout-style-default callout-important callout-titled">
+<div class="callout-header d-flex align-content-center" data-bs-toggle="collapse" data-bs-target=".callout-26-contents" aria-controls="callout-26" aria-expanded="false" aria-label="Toggle callout">
+<div class="callout-icon-container">
+<i class="callout-icon"></i>
+</div>
+<div class="callout-title-container flex-fill">
+Click for Solutions
+</div>
+<div class="callout-btn-toggle d-inline-block border-0 py-1 ps-1 pe-0 float-end"><i class="callout-toggle"></i></div>
+</div>
+<div id="callout-26" class="callout-26-contents callout-collapse collapse">
+<div class="callout-body-container callout-body">
+<p><strong>a.</strong> Since order matters, the number of arrangements is:</p>
+<p><span class="math display">\[
+8! = 8\times7\times6\times5\times4\times3\times2\times1 = 40{,}320
+\]</span></p>
+<p><strong>b.</strong> Since order does not matter, we use combinations:</p>
+<p><span class="math display">\[
+\binom{8}{3} = \frac{8!}{3!5!}
+\]</span></p>
+<p><span class="math display">\[
+= 56
+\]</span></p>
+<p><strong>c.</strong> In part <strong>a</strong>, different seat orders count as different arrangements. In part <strong>b</strong>, only the group of 3 guests matters, not the order in which they are listed or seated.</p>
+</div>
+</div>
+</div>
+</div>
+</div>
+<div class="callout callout-style-default callout-note callout-titled">
+<div class="callout-header d-flex align-content-center">
+<div class="callout-icon-container">
+<i class="callout-icon"></i>
+</div>
+<div class="callout-title-container flex-fill">
+Question 11
+</div>
+</div>
+<div class="callout-body-container callout-body">
+<p>Use Pascal’s triangle:</p>
+<p><span class="math display">\[
+1
+\]</span></p>
+<p><span class="math display">\[
+1 \quad 1
+\]</span></p>
+<p><span class="math display">\[
+1 \quad 2 \quad 1
+\]</span></p>
+<p><span class="math display">\[
+1 \quad 3 \quad 3 \quad 1
+\]</span></p>
+<p><span class="math display">\[
+1 \quad 4 \quad 6 \quad 4 \quad 1
+\]</span></p>
+<p><span class="math display">\[
+1 \quad 5 \quad 10 \quad 10 \quad 5 \quad 1
+\]</span></p>
+<p><strong>a.</strong> What is <span class="math inline">\(\binom{5}{2}\)</span>?</p>
+<p><strong>b.</strong> What is <span class="math inline">\(\binom{5}{3}\)</span>?</p>
+<p><strong>c.</strong> Why are these two values the same?</p>
+<div class="callout callout-style-default callout-important callout-titled">
+<div class="callout-header d-flex align-content-center" data-bs-toggle="collapse" data-bs-target=".callout-28-contents" aria-controls="callout-28" aria-expanded="false" aria-label="Toggle callout">
+<div class="callout-icon-container">
+<i class="callout-icon"></i>
+</div>
+<div class="callout-title-container flex-fill">
+Click for Solutions
+</div>
+<div class="callout-btn-toggle d-inline-block border-0 py-1 ps-1 pe-0 float-end"><i class="callout-toggle"></i></div>
+</div>
+<div id="callout-28" class="callout-28-contents callout-collapse collapse">
+<div class="callout-body-container callout-body">
+<p><strong>a.</strong> From the row for 5 items:</p>
+<p><span class="math display">\[
+\binom{5}{2}=10
+\]</span></p>
+<p><strong>b.</strong> Also from the row for 5 items:</p>
+<p><span class="math display">\[
+\binom{5}{3}=10
+\]</span></p>
+<p><strong>c.</strong> Choosing 2 items to include is equivalent to choosing 3 items to leave out. That is why:</p>
+<p><span class="math display">\[
+\binom{5}{2}=\binom{5}{3}
+\]</span></p>
+</div>
+</div>
+</div>
+</div>
+</div>
+<div class="callout callout-style-default callout-note callout-titled">
+<div class="callout-header d-flex align-content-center">
+<div class="callout-icon-container">
+<i class="callout-icon"></i>
+</div>
+<div class="callout-title-container flex-fill">
+Question 12
+</div>
+</div>
+<div class="callout-body-container callout-body">
+<p>A fair coin is tossed 5 times.</p>
+<p><strong>a.</strong> Use Pascal’s triangle to determine how many sequences have exactly 2 heads.</p>
+<p><strong>b.</strong> How many total sequences are possible when a fair coin is tossed 5 times?</p>
+<p><strong>c.</strong> What is the probability of getting exactly 2 heads?</p>
+<div class="callout callout-style-default callout-important callout-titled">
+<div class="callout-header d-flex align-content-center" data-bs-toggle="collapse" data-bs-target=".callout-30-contents" aria-controls="callout-30" aria-expanded="false" aria-label="Toggle callout">
+<div class="callout-icon-container">
+<i class="callout-icon"></i>
+</div>
+<div class="callout-title-container flex-fill">
+Click for Solutions
+</div>
+<div class="callout-btn-toggle d-inline-block border-0 py-1 ps-1 pe-0 float-end"><i class="callout-toggle"></i></div>
+</div>
+<div id="callout-30" class="callout-30-contents callout-collapse collapse">
+<div class="callout-body-container callout-body">
+<p><strong>a.</strong> The row for 5 tosses is:</p>
+<p><span class="math display">\[
+1 \quad 5 \quad 10 \quad 10 \quad 5 \quad 1
+\]</span></p>
+<p>The number of ways to get exactly 2 heads is:</p>
+<p><span class="math display">\[
+\binom{5}{2}=10
+\]</span></p>
+<p><strong>b.</strong> Each toss has 2 possible outcomes, so the total number of sequences is:</p>
+<p><span class="math display">\[
+2^5 = 32
+\]</span></p>
+<p><strong>c.</strong> Therefore:</p>
+<p><span class="math display">\[
+P(\text{exactly 2 heads}) = \frac{10}{32} = \frac{5}{16}
+\]</span></p>
+</div>
+</div>
+</div>
+</div>
+</div>
+<div class="callout callout-style-default callout-note callout-titled">
+<div class="callout-header d-flex align-content-center">
+<div class="callout-icon-container">
+<i class="callout-icon"></i>
+</div>
+<div class="callout-title-container flex-fill">
+Question 13
+</div>
+</div>
+<div class="callout-body-container callout-body">
+<p>For each situation below, identify whether order matters.</p>
+<div class="cell">
+<div class="cell-output-display">
+<div id="xzupobiigr" style="padding-left:0px;padding-right:0px;padding-top:10px;padding-bottom:10px;overflow-x:auto;overflow-y:auto;width:auto;height:auto;">
+<style>#xzupobiigr table {
+  font-family: system-ui, 'Segoe UI', Roboto, Helvetica, Arial, sans-serif, 'Apple Color Emoji', 'Segoe UI Emoji', 'Segoe UI Symbol', 'Noto Color Emoji';
+  -webkit-font-smoothing: antialiased;
+  -moz-osx-font-smoothing: grayscale;
+}
+
+#xzupobiigr thead, #xzupobiigr tbody, #xzupobiigr tfoot, #xzupobiigr tr, #xzupobiigr td, #xzupobiigr th {
+  border-style: none;
+}
+
+#xzupobiigr p {
+  margin: 0;
+  padding: 0;
+}
+
+#xzupobiigr .gt_table {
+  display: table;
+  border-collapse: collapse;
+  line-height: normal;
+  margin-left: auto;
+  margin-right: auto;
+  color: #333333;
+  font-size: 16px;
+  font-weight: normal;
+  font-style: normal;
+  background-color: #FFFFFF;
+  width: auto;
+  border-top-style: solid;
+  border-top-width: 2px;
+  border-top-color: #A8A8A8;
+  border-right-style: none;
+  border-right-width: 2px;
+  border-right-color: #D3D3D3;
+  border-bottom-style: solid;
+  border-bottom-width: 2px;
+  border-bottom-color: #A8A8A8;
+  border-left-style: none;
+  border-left-width: 2px;
+  border-left-color: #D3D3D3;
+}
+
+#xzupobiigr .gt_caption {
+  padding-top: 4px;
+  padding-bottom: 4px;
+}
+
+#xzupobiigr .gt_title {
+  color: #333333;
+  font-size: 125%;
+  font-weight: initial;
+  padding-top: 4px;
+  padding-bottom: 4px;
+  padding-left: 5px;
+  padding-right: 5px;
+  border-bottom-color: #FFFFFF;
+  border-bottom-width: 0;
+}
+
+#xzupobiigr .gt_subtitle {
+  color: #333333;
+  font-size: 85%;
+  font-weight: initial;
+  padding-top: 3px;
+  padding-bottom: 5px;
+  padding-left: 5px;
+  padding-right: 5px;
+  border-top-color: #FFFFFF;
+  border-top-width: 0;
+}
+
+#xzupobiigr .gt_heading {
+  background-color: #FFFFFF;
+  text-align: center;
+  border-bottom-color: #FFFFFF;
+  border-left-style: none;
+  border-left-width: 1px;
+  border-left-color: #D3D3D3;
+  border-right-style: none;
+  border-right-width: 1px;
+  border-right-color: #D3D3D3;
+}
+
+#xzupobiigr .gt_bottom_border {
+  border-bottom-style: solid;
+  border-bottom-width: 2px;
+  border-bottom-color: #D3D3D3;
+}
+
+#xzupobiigr .gt_col_headings {
+  border-top-style: solid;
+  border-top-width: 2px;
+  border-top-color: #D3D3D3;
+  border-bottom-style: solid;
+  border-bottom-width: 2px;
+  border-bottom-color: #D3D3D3;
+  border-left-style: none;
+  border-left-width: 1px;
+  border-left-color: #D3D3D3;
+  border-right-style: none;
+  border-right-width: 1px;
+  border-right-color: #D3D3D3;
+}
+
+#xzupobiigr .gt_col_heading {
+  color: #333333;
+  background-color: #FFFFFF;
+  font-size: 100%;
+  font-weight: normal;
+  text-transform: inherit;
+  border-left-style: none;
+  border-left-width: 1px;
+  border-left-color: #D3D3D3;
+  border-right-style: none;
+  border-right-width: 1px;
+  border-right-color: #D3D3D3;
+  vertical-align: bottom;
+  padding-top: 5px;
+  padding-bottom: 6px;
+  padding-left: 5px;
+  padding-right: 5px;
+  overflow-x: hidden;
+}
+
+#xzupobiigr .gt_column_spanner_outer {
+  color: #333333;
+  background-color: #FFFFFF;
+  font-size: 100%;
+  font-weight: normal;
+  text-transform: inherit;
+  padding-top: 0;
+  padding-bottom: 0;
+  padding-left: 4px;
+  padding-right: 4px;
+}
+
+#xzupobiigr .gt_column_spanner_outer:first-child {
+  padding-left: 0;
+}
+
+#xzupobiigr .gt_column_spanner_outer:last-child {
+  padding-right: 0;
+}
+
+#xzupobiigr .gt_column_spanner {
+  border-bottom-style: solid;
+  border-bottom-width: 2px;
+  border-bottom-color: #D3D3D3;
+  vertical-align: bottom;
+  padding-top: 5px;
+  padding-bottom: 5px;
+  overflow-x: hidden;
+  display: inline-block;
+  width: 100%;
+}
+
+#xzupobiigr .gt_spanner_row {
+  border-bottom-style: hidden;
+}
+
+#xzupobiigr .gt_group_heading {
+  padding-top: 8px;
+  padding-bottom: 8px;
+  padding-left: 5px;
+  padding-right: 5px;
+  color: #333333;
+  background-color: #FFFFFF;
+  font-size: 100%;
+  font-weight: initial;
+  text-transform: inherit;
+  border-top-style: solid;
+  border-top-width: 2px;
+  border-top-color: #D3D3D3;
+  border-bottom-style: solid;
+  border-bottom-width: 2px;
+  border-bottom-color: #D3D3D3;
+  border-left-style: none;
+  border-left-width: 1px;
+  border-left-color: #D3D3D3;
+  border-right-style: none;
+  border-right-width: 1px;
+  border-right-color: #D3D3D3;
+  vertical-align: middle;
+  text-align: left;
+}
+
+#xzupobiigr .gt_empty_group_heading {
+  padding: 0.5px;
+  color: #333333;
+  background-color: #FFFFFF;
+  font-size: 100%;
+  font-weight: initial;
+  border-top-style: solid;
+  border-top-width: 2px;
+  border-top-color: #D3D3D3;
+  border-bottom-style: solid;
+  border-bottom-width: 2px;
+  border-bottom-color: #D3D3D3;
+  vertical-align: middle;
+}
+
+#xzupobiigr .gt_from_md > :first-child {
+  margin-top: 0;
+}
+
+#xzupobiigr .gt_from_md > :last-child {
+  margin-bottom: 0;
+}
+
+#xzupobiigr .gt_row {
+  padding-top: 8px;
+  padding-bottom: 8px;
+  padding-left: 5px;
+  padding-right: 5px;
+  margin: 10px;
+  border-top-style: solid;
+  border-top-width: 1px;
+  border-top-color: #D3D3D3;
+  border-left-style: none;
+  border-left-width: 1px;
+  border-left-color: #D3D3D3;
+  border-right-style: none;
+  border-right-width: 1px;
+  border-right-color: #D3D3D3;
+  vertical-align: middle;
+  overflow-x: hidden;
+}
+
+#xzupobiigr .gt_stub {
+  color: #333333;
+  background-color: #FFFFFF;
+  font-size: 100%;
+  font-weight: initial;
+  text-transform: inherit;
+  border-right-style: solid;
+  border-right-width: 2px;
+  border-right-color: #D3D3D3;
+  padding-left: 5px;
+  padding-right: 5px;
+}
+
+#xzupobiigr .gt_stub_row_group {
+  color: #333333;
+  background-color: #FFFFFF;
+  font-size: 100%;
+  font-weight: initial;
+  text-transform: inherit;
+  border-right-style: solid;
+  border-right-width: 2px;
+  border-right-color: #D3D3D3;
+  padding-left: 5px;
+  padding-right: 5px;
+  vertical-align: top;
+}
+
+#xzupobiigr .gt_row_group_first td {
+  border-top-width: 2px;
+}
+
+#xzupobiigr .gt_row_group_first th {
+  border-top-width: 2px;
+}
+
+#xzupobiigr .gt_summary_row {
+  color: #333333;
+  background-color: #FFFFFF;
+  text-transform: inherit;
+  padding-top: 8px;
+  padding-bottom: 8px;
+  padding-left: 5px;
+  padding-right: 5px;
+}
+
+#xzupobiigr .gt_first_summary_row {
+  border-top-style: solid;
+  border-top-color: #D3D3D3;
+}
+
+#xzupobiigr .gt_first_summary_row.thick {
+  border-top-width: 2px;
+}
+
+#xzupobiigr .gt_last_summary_row {
+  padding-top: 8px;
+  padding-bottom: 8px;
+  padding-left: 5px;
+  padding-right: 5px;
+  border-bottom-style: solid;
+  border-bottom-width: 2px;
+  border-bottom-color: #D3D3D3;
+}
+
+#xzupobiigr .gt_grand_summary_row {
+  color: #333333;
+  background-color: #FFFFFF;
+  text-transform: inherit;
+  padding-top: 8px;
+  padding-bottom: 8px;
+  padding-left: 5px;
+  padding-right: 5px;
+}
+
+#xzupobiigr .gt_first_grand_summary_row {
+  padding-top: 8px;
+  padding-bottom: 8px;
+  padding-left: 5px;
+  padding-right: 5px;
+  border-top-style: double;
+  border-top-width: 6px;
+  border-top-color: #D3D3D3;
+}
+
+#xzupobiigr .gt_last_grand_summary_row_top {
+  padding-top: 8px;
+  padding-bottom: 8px;
+  padding-left: 5px;
+  padding-right: 5px;
+  border-bottom-style: double;
+  border-bottom-width: 6px;
+  border-bottom-color: #D3D3D3;
+}
+
+#xzupobiigr .gt_striped {
+  background-color: rgba(128, 128, 128, 0.05);
+}
+
+#xzupobiigr .gt_table_body {
+  border-top-style: solid;
+  border-top-width: 2px;
+  border-top-color: #D3D3D3;
+  border-bottom-style: solid;
+  border-bottom-width: 2px;
+  border-bottom-color: #D3D3D3;
+}
+
+#xzupobiigr .gt_footnotes {
+  color: #333333;
+  background-color: #FFFFFF;
+  border-bottom-style: none;
+  border-bottom-width: 2px;
+  border-bottom-color: #D3D3D3;
+  border-left-style: none;
+  border-left-width: 2px;
+  border-left-color: #D3D3D3;
+  border-right-style: none;
+  border-right-width: 2px;
+  border-right-color: #D3D3D3;
+}
+
+#xzupobiigr .gt_footnote {
+  margin: 0px;
+  font-size: 90%;
+  padding-top: 4px;
+  padding-bottom: 4px;
+  padding-left: 5px;
+  padding-right: 5px;
+}
+
+#xzupobiigr .gt_sourcenotes {
+  color: #333333;
+  background-color: #FFFFFF;
+  border-bottom-style: none;
+  border-bottom-width: 2px;
+  border-bottom-color: #D3D3D3;
+  border-left-style: none;
+  border-left-width: 2px;
+  border-left-color: #D3D3D3;
+  border-right-style: none;
+  border-right-width: 2px;
+  border-right-color: #D3D3D3;
+}
+
+#xzupobiigr .gt_sourcenote {
+  font-size: 90%;
+  padding-top: 4px;
+  padding-bottom: 4px;
+  padding-left: 5px;
+  padding-right: 5px;
+}
+
+#xzupobiigr .gt_left {
+  text-align: left;
+}
+
+#xzupobiigr .gt_center {
+  text-align: center;
+}
+
+#xzupobiigr .gt_right {
+  text-align: right;
+  font-variant-numeric: tabular-nums;
+}
+
+#xzupobiigr .gt_font_normal {
+  font-weight: normal;
+}
+
+#xzupobiigr .gt_font_bold {
+  font-weight: bold;
+}
+
+#xzupobiigr .gt_font_italic {
+  font-style: italic;
+}
+
+#xzupobiigr .gt_super {
+  font-size: 65%;
+}
+
+#xzupobiigr .gt_footnote_marks {
+  font-size: 75%;
+  vertical-align: 0.4em;
+  position: initial;
+}
+
+#xzupobiigr .gt_asterisk {
+  font-size: 100%;
+  vertical-align: 0;
+}
+
+#xzupobiigr .gt_indent_1 {
+  text-indent: 5px;
+}
+
+#xzupobiigr .gt_indent_2 {
+  text-indent: 10px;
+}
+
+#xzupobiigr .gt_indent_3 {
+  text-indent: 15px;
+}
+
+#xzupobiigr .gt_indent_4 {
+  text-indent: 20px;
+}
+
+#xzupobiigr .gt_indent_5 {
+  text-indent: 25px;
+}
+
+#xzupobiigr .katex-display {
+  display: inline-flex !important;
+  margin-bottom: 0.75em !important;
+}
+
+#xzupobiigr div.Reactable > div.rt-table > div.rt-thead > div.rt-tr.rt-tr-group-header > div.rt-th-group:after {
+  height: 0px !important;
+}
+</style>
+
+<table class="gt_table caption-top table table-sm table-striped small" data-quarto-postprocess="true" data-quarto-disable-processing="false" data-quarto-bootstrap="false">
+<thead>
+<tr class="gt_col_headings header">
+<th id="Situation" class="gt_col_heading gt_columns_bottom_border gt_left" data-quarto-table-cell-role="th" scope="col">Situation</th>
+<th id="Does-order-matter?" class="gt_col_heading gt_columns_bottom_border gt_left" data-quarto-table-cell-role="th" scope="col">Does order matter?</th>
+</tr>
+</thead>
+<tbody class="gt_table_body">
+<tr class="odd">
+<td class="gt_row gt_left" headers="Situation">Choosing 4 students from a class of 30 for a committee</td>
+<td class="gt_row gt_left" headers="Does order matter?"></td>
+</tr>
+<tr class="even">
+<td class="gt_row gt_left" headers="Situation">Awarding gold, silver, and bronze medals in a race</td>
+<td class="gt_row gt_left" headers="Does order matter?"></td>
+</tr>
+<tr class="odd">
+<td class="gt_row gt_left" headers="Situation">Choosing 6 lottery numbers from 45 numbers</td>
+<td class="gt_row gt_left" headers="Does order matter?"></td>
+</tr>
+<tr class="even">
+<td class="gt_row gt_left" headers="Situation">Creating a ranked top 5 list of songs</td>
+<td class="gt_row gt_left" headers="Does order matter?"></td>
+</tr>
+<tr class="odd">
+<td class="gt_row gt_left" headers="Situation">Selecting 3 suburbs for a pilot transport program</td>
+<td class="gt_row gt_left" headers="Does order matter?"></td>
+</tr>
+</tbody>
+</table>
+
+</div>
+</div>
+</div>
+<div class="callout callout-style-default callout-important callout-titled">
+<div class="callout-header d-flex align-content-center" data-bs-toggle="collapse" data-bs-target=".callout-32-contents" aria-controls="callout-32" aria-expanded="false" aria-label="Toggle callout">
+<div class="callout-icon-container">
+<i class="callout-icon"></i>
+</div>
+<div class="callout-title-container flex-fill">
+Click for Solutions
+</div>
+<div class="callout-btn-toggle d-inline-block border-0 py-1 ps-1 pe-0 float-end"><i class="callout-toggle"></i></div>
+</div>
+<div id="callout-32" class="callout-32-contents callout-collapse collapse">
+<div class="callout-body-container callout-body">
+<div class="cell">
+<div class="cell-output-display">
+<div id="jypknfipvk" style="padding-left:0px;padding-right:0px;padding-top:10px;padding-bottom:10px;overflow-x:auto;overflow-y:auto;width:auto;height:auto;">
+<style>#jypknfipvk table {
+  font-family: system-ui, 'Segoe UI', Roboto, Helvetica, Arial, sans-serif, 'Apple Color Emoji', 'Segoe UI Emoji', 'Segoe UI Symbol', 'Noto Color Emoji';
+  -webkit-font-smoothing: antialiased;
+  -moz-osx-font-smoothing: grayscale;
+}
+
+#jypknfipvk thead, #jypknfipvk tbody, #jypknfipvk tfoot, #jypknfipvk tr, #jypknfipvk td, #jypknfipvk th {
+  border-style: none;
+}
+
+#jypknfipvk p {
+  margin: 0;
+  padding: 0;
+}
+
+#jypknfipvk .gt_table {
+  display: table;
+  border-collapse: collapse;
+  line-height: normal;
+  margin-left: auto;
+  margin-right: auto;
+  color: #333333;
+  font-size: 16px;
+  font-weight: normal;
+  font-style: normal;
+  background-color: #FFFFFF;
+  width: auto;
+  border-top-style: solid;
+  border-top-width: 2px;
+  border-top-color: #A8A8A8;
+  border-right-style: none;
+  border-right-width: 2px;
+  border-right-color: #D3D3D3;
+  border-bottom-style: solid;
+  border-bottom-width: 2px;
+  border-bottom-color: #A8A8A8;
+  border-left-style: none;
+  border-left-width: 2px;
+  border-left-color: #D3D3D3;
+}
+
+#jypknfipvk .gt_caption {
+  padding-top: 4px;
+  padding-bottom: 4px;
+}
+
+#jypknfipvk .gt_title {
+  color: #333333;
+  font-size: 125%;
+  font-weight: initial;
+  padding-top: 4px;
+  padding-bottom: 4px;
+  padding-left: 5px;
+  padding-right: 5px;
+  border-bottom-color: #FFFFFF;
+  border-bottom-width: 0;
+}
+
+#jypknfipvk .gt_subtitle {
+  color: #333333;
+  font-size: 85%;
+  font-weight: initial;
+  padding-top: 3px;
+  padding-bottom: 5px;
+  padding-left: 5px;
+  padding-right: 5px;
+  border-top-color: #FFFFFF;
+  border-top-width: 0;
+}
+
+#jypknfipvk .gt_heading {
+  background-color: #FFFFFF;
+  text-align: center;
+  border-bottom-color: #FFFFFF;
+  border-left-style: none;
+  border-left-width: 1px;
+  border-left-color: #D3D3D3;
+  border-right-style: none;
+  border-right-width: 1px;
+  border-right-color: #D3D3D3;
+}
+
+#jypknfipvk .gt_bottom_border {
+  border-bottom-style: solid;
+  border-bottom-width: 2px;
+  border-bottom-color: #D3D3D3;
+}
+
+#jypknfipvk .gt_col_headings {
+  border-top-style: solid;
+  border-top-width: 2px;
+  border-top-color: #D3D3D3;
+  border-bottom-style: solid;
+  border-bottom-width: 2px;
+  border-bottom-color: #D3D3D3;
+  border-left-style: none;
+  border-left-width: 1px;
+  border-left-color: #D3D3D3;
+  border-right-style: none;
+  border-right-width: 1px;
+  border-right-color: #D3D3D3;
+}
+
+#jypknfipvk .gt_col_heading {
+  color: #333333;
+  background-color: #FFFFFF;
+  font-size: 100%;
+  font-weight: normal;
+  text-transform: inherit;
+  border-left-style: none;
+  border-left-width: 1px;
+  border-left-color: #D3D3D3;
+  border-right-style: none;
+  border-right-width: 1px;
+  border-right-color: #D3D3D3;
+  vertical-align: bottom;
+  padding-top: 5px;
+  padding-bottom: 6px;
+  padding-left: 5px;
+  padding-right: 5px;
+  overflow-x: hidden;
+}
+
+#jypknfipvk .gt_column_spanner_outer {
+  color: #333333;
+  background-color: #FFFFFF;
+  font-size: 100%;
+  font-weight: normal;
+  text-transform: inherit;
+  padding-top: 0;
+  padding-bottom: 0;
+  padding-left: 4px;
+  padding-right: 4px;
+}
+
+#jypknfipvk .gt_column_spanner_outer:first-child {
+  padding-left: 0;
+}
+
+#jypknfipvk .gt_column_spanner_outer:last-child {
+  padding-right: 0;
+}
+
+#jypknfipvk .gt_column_spanner {
+  border-bottom-style: solid;
+  border-bottom-width: 2px;
+  border-bottom-color: #D3D3D3;
+  vertical-align: bottom;
+  padding-top: 5px;
+  padding-bottom: 5px;
+  overflow-x: hidden;
+  display: inline-block;
+  width: 100%;
+}
+
+#jypknfipvk .gt_spanner_row {
+  border-bottom-style: hidden;
+}
+
+#jypknfipvk .gt_group_heading {
+  padding-top: 8px;
+  padding-bottom: 8px;
+  padding-left: 5px;
+  padding-right: 5px;
+  color: #333333;
+  background-color: #FFFFFF;
+  font-size: 100%;
+  font-weight: initial;
+  text-transform: inherit;
+  border-top-style: solid;
+  border-top-width: 2px;
+  border-top-color: #D3D3D3;
+  border-bottom-style: solid;
+  border-bottom-width: 2px;
+  border-bottom-color: #D3D3D3;
+  border-left-style: none;
+  border-left-width: 1px;
+  border-left-color: #D3D3D3;
+  border-right-style: none;
+  border-right-width: 1px;
+  border-right-color: #D3D3D3;
+  vertical-align: middle;
+  text-align: left;
+}
+
+#jypknfipvk .gt_empty_group_heading {
+  padding: 0.5px;
+  color: #333333;
+  background-color: #FFFFFF;
+  font-size: 100%;
+  font-weight: initial;
+  border-top-style: solid;
+  border-top-width: 2px;
+  border-top-color: #D3D3D3;
+  border-bottom-style: solid;
+  border-bottom-width: 2px;
+  border-bottom-color: #D3D3D3;
+  vertical-align: middle;
+}
+
+#jypknfipvk .gt_from_md > :first-child {
+  margin-top: 0;
+}
+
+#jypknfipvk .gt_from_md > :last-child {
+  margin-bottom: 0;
+}
+
+#jypknfipvk .gt_row {
+  padding-top: 8px;
+  padding-bottom: 8px;
+  padding-left: 5px;
+  padding-right: 5px;
+  margin: 10px;
+  border-top-style: solid;
+  border-top-width: 1px;
+  border-top-color: #D3D3D3;
+  border-left-style: none;
+  border-left-width: 1px;
+  border-left-color: #D3D3D3;
+  border-right-style: none;
+  border-right-width: 1px;
+  border-right-color: #D3D3D3;
+  vertical-align: middle;
+  overflow-x: hidden;
+}
+
+#jypknfipvk .gt_stub {
+  color: #333333;
+  background-color: #FFFFFF;
+  font-size: 100%;
+  font-weight: initial;
+  text-transform: inherit;
+  border-right-style: solid;
+  border-right-width: 2px;
+  border-right-color: #D3D3D3;
+  padding-left: 5px;
+  padding-right: 5px;
+}
+
+#jypknfipvk .gt_stub_row_group {
+  color: #333333;
+  background-color: #FFFFFF;
+  font-size: 100%;
+  font-weight: initial;
+  text-transform: inherit;
+  border-right-style: solid;
+  border-right-width: 2px;
+  border-right-color: #D3D3D3;
+  padding-left: 5px;
+  padding-right: 5px;
+  vertical-align: top;
+}
+
+#jypknfipvk .gt_row_group_first td {
+  border-top-width: 2px;
+}
+
+#jypknfipvk .gt_row_group_first th {
+  border-top-width: 2px;
+}
+
+#jypknfipvk .gt_summary_row {
+  color: #333333;
+  background-color: #FFFFFF;
+  text-transform: inherit;
+  padding-top: 8px;
+  padding-bottom: 8px;
+  padding-left: 5px;
+  padding-right: 5px;
+}
+
+#jypknfipvk .gt_first_summary_row {
+  border-top-style: solid;
+  border-top-color: #D3D3D3;
+}
+
+#jypknfipvk .gt_first_summary_row.thick {
+  border-top-width: 2px;
+}
+
+#jypknfipvk .gt_last_summary_row {
+  padding-top: 8px;
+  padding-bottom: 8px;
+  padding-left: 5px;
+  padding-right: 5px;
+  border-bottom-style: solid;
+  border-bottom-width: 2px;
+  border-bottom-color: #D3D3D3;
+}
+
+#jypknfipvk .gt_grand_summary_row {
+  color: #333333;
+  background-color: #FFFFFF;
+  text-transform: inherit;
+  padding-top: 8px;
+  padding-bottom: 8px;
+  padding-left: 5px;
+  padding-right: 5px;
+}
+
+#jypknfipvk .gt_first_grand_summary_row {
+  padding-top: 8px;
+  padding-bottom: 8px;
+  padding-left: 5px;
+  padding-right: 5px;
+  border-top-style: double;
+  border-top-width: 6px;
+  border-top-color: #D3D3D3;
+}
+
+#jypknfipvk .gt_last_grand_summary_row_top {
+  padding-top: 8px;
+  padding-bottom: 8px;
+  padding-left: 5px;
+  padding-right: 5px;
+  border-bottom-style: double;
+  border-bottom-width: 6px;
+  border-bottom-color: #D3D3D3;
+}
+
+#jypknfipvk .gt_striped {
+  background-color: rgba(128, 128, 128, 0.05);
+}
+
+#jypknfipvk .gt_table_body {
+  border-top-style: solid;
+  border-top-width: 2px;
+  border-top-color: #D3D3D3;
+  border-bottom-style: solid;
+  border-bottom-width: 2px;
+  border-bottom-color: #D3D3D3;
+}
+
+#jypknfipvk .gt_footnotes {
+  color: #333333;
+  background-color: #FFFFFF;
+  border-bottom-style: none;
+  border-bottom-width: 2px;
+  border-bottom-color: #D3D3D3;
+  border-left-style: none;
+  border-left-width: 2px;
+  border-left-color: #D3D3D3;
+  border-right-style: none;
+  border-right-width: 2px;
+  border-right-color: #D3D3D3;
+}
+
+#jypknfipvk .gt_footnote {
+  margin: 0px;
+  font-size: 90%;
+  padding-top: 4px;
+  padding-bottom: 4px;
+  padding-left: 5px;
+  padding-right: 5px;
+}
+
+#jypknfipvk .gt_sourcenotes {
+  color: #333333;
+  background-color: #FFFFFF;
+  border-bottom-style: none;
+  border-bottom-width: 2px;
+  border-bottom-color: #D3D3D3;
+  border-left-style: none;
+  border-left-width: 2px;
+  border-left-color: #D3D3D3;
+  border-right-style: none;
+  border-right-width: 2px;
+  border-right-color: #D3D3D3;
+}
+
+#jypknfipvk .gt_sourcenote {
+  font-size: 90%;
+  padding-top: 4px;
+  padding-bottom: 4px;
+  padding-left: 5px;
+  padding-right: 5px;
+}
+
+#jypknfipvk .gt_left {
+  text-align: left;
+}
+
+#jypknfipvk .gt_center {
+  text-align: center;
+}
+
+#jypknfipvk .gt_right {
+  text-align: right;
+  font-variant-numeric: tabular-nums;
+}
+
+#jypknfipvk .gt_font_normal {
+  font-weight: normal;
+}
+
+#jypknfipvk .gt_font_bold {
+  font-weight: bold;
+}
+
+#jypknfipvk .gt_font_italic {
+  font-style: italic;
+}
+
+#jypknfipvk .gt_super {
+  font-size: 65%;
+}
+
+#jypknfipvk .gt_footnote_marks {
+  font-size: 75%;
+  vertical-align: 0.4em;
+  position: initial;
+}
+
+#jypknfipvk .gt_asterisk {
+  font-size: 100%;
+  vertical-align: 0;
+}
+
+#jypknfipvk .gt_indent_1 {
+  text-indent: 5px;
+}
+
+#jypknfipvk .gt_indent_2 {
+  text-indent: 10px;
+}
+
+#jypknfipvk .gt_indent_3 {
+  text-indent: 15px;
+}
+
+#jypknfipvk .gt_indent_4 {
+  text-indent: 20px;
+}
+
+#jypknfipvk .gt_indent_5 {
+  text-indent: 25px;
+}
+
+#jypknfipvk .katex-display {
+  display: inline-flex !important;
+  margin-bottom: 0.75em !important;
+}
+
+#jypknfipvk div.Reactable > div.rt-table > div.rt-thead > div.rt-tr.rt-tr-group-header > div.rt-th-group:after {
+  height: 0px !important;
+}
+</style>
+
+<table class="gt_table caption-top table table-sm table-striped small" data-quarto-postprocess="true" data-quarto-disable-processing="false" data-quarto-bootstrap="false">
+<thead>
+<tr class="gt_col_headings header">
+<th id="Situation" class="gt_col_heading gt_columns_bottom_border gt_left" data-quarto-table-cell-role="th" scope="col">Situation</th>
+<th id="Does-order-matter?" class="gt_col_heading gt_columns_bottom_border gt_left" data-quarto-table-cell-role="th" scope="col">Does order matter?</th>
+</tr>
+</thead>
+<tbody class="gt_table_body">
+<tr class="odd">
+<td class="gt_row gt_left" headers="Situation">Choosing 4 students from a class of 30 for a committee</td>
+<td class="gt_row gt_left" headers="Does order matter?">No. The same committee is formed regardless of order.</td>
+</tr>
+<tr class="even">
+<td class="gt_row gt_left" headers="Situation">Awarding gold, silver, and bronze medals in a race</td>
+<td class="gt_row gt_left" headers="Does order matter?">Yes. Gold, silver, and bronze are different positions.</td>
+</tr>
+<tr class="odd">
+<td class="gt_row gt_left" headers="Situation">Choosing 6 lottery numbers from 45 numbers</td>
+<td class="gt_row gt_left" headers="Does order matter?">No. The selected set of numbers matters, not the order drawn.</td>
+</tr>
+<tr class="even">
+<td class="gt_row gt_left" headers="Situation">Creating a ranked top 5 list of songs</td>
+<td class="gt_row gt_left" headers="Does order matter?">Yes. A ranked list depends on order.</td>
+</tr>
+<tr class="odd">
+<td class="gt_row gt_left" headers="Situation">Selecting 3 suburbs for a pilot transport program</td>
+<td class="gt_row gt_left" headers="Does order matter?">No. The same three suburbs are selected regardless of order.</td>
+</tr>
+</tbody>
+</table>
+
+</div>
+</div>
+</div>
+</div>
+</div>
+</div>
+</div>
+</div>
+<div class="callout callout-style-default callout-note callout-titled">
+<div class="callout-header d-flex align-content-center">
+<div class="callout-icon-container">
+<i class="callout-icon"></i>
+</div>
+<div class="callout-title-container flex-fill">
+Question 14
+</div>
+</div>
+<div class="callout-body-container callout-body">
+<p>A survey researcher wants to choose 5 people from a group of 20 volunteers for a focus group.</p>
+<p><strong>a.</strong> Should this be treated as an arrangement or a combination if the order of selection does not matter?</p>
+<p><strong>b.</strong> Calculate the number of possible focus groups.</p>
+<p><strong>c.</strong> Why would listing all possible focus groups by hand be impractical?</p>
+<div class="callout callout-style-default callout-important callout-titled">
+<div class="callout-header d-flex align-content-center" data-bs-toggle="collapse" data-bs-target=".callout-34-contents" aria-controls="callout-34" aria-expanded="false" aria-label="Toggle callout">
+<div class="callout-icon-container">
+<i class="callout-icon"></i>
+</div>
+<div class="callout-title-container flex-fill">
+Click for Solutions
+</div>
+<div class="callout-btn-toggle d-inline-block border-0 py-1 ps-1 pe-0 float-end"><i class="callout-toggle"></i></div>
+</div>
+<div id="callout-34" class="callout-34-contents callout-collapse collapse">
+<div class="callout-body-container callout-body">
+<p><strong>a.</strong> This is a combination because the order of selection does not matter.</p>
+<p><strong>b.</strong> The number of possible focus groups is:</p>
+<p><span class="math display">\[
+\binom{20}{5} = \frac{20!}{5!15!}
+\]</span></p>
+<p><span class="math display">\[
+= 15{,}504
+\]</span></p>
+<p><strong>c.</strong> There are 15,504 possible focus groups, so listing all of them by hand would be tedious and impractical. Combinations give us a way to count them systematically.</p>
+</div>
+</div>
+</div>
+</div>
+</div>
+<div class="callout callout-style-default callout-note callout-titled">
+<div class="callout-header d-flex align-content-center">
+<div class="callout-icon-container">
+<i class="callout-icon"></i>
+</div>
+<div class="callout-title-container flex-fill">
+Question 15
+</div>
+</div>
+<div class="callout-body-container callout-body">
+<p>A student says:</p>
+<blockquote class="blockquote">
+<p>If an event is rare, then it probably has a special explanation.</p>
+</blockquote>
+<p><strong>a.</strong> Explain why this statement is not always true.</p>
+<p><strong>b.</strong> Use either the birthday problem, lottery example, or social media example to support your answer.</p>
+<p><strong>c.</strong> Write a better statistical question to ask when a rare event occurs.</p>
+<div class="callout callout-style-default callout-important callout-titled">
+<div class="callout-header d-flex align-content-center" data-bs-toggle="collapse" data-bs-target=".callout-36-contents" aria-controls="callout-36" aria-expanded="false" aria-label="Toggle callout">
+<div class="callout-icon-container">
+<i class="callout-icon"></i>
+</div>
+<div class="callout-title-container flex-fill">
+Click for Solutions
+</div>
+<div class="callout-btn-toggle d-inline-block border-0 py-1 ps-1 pe-0 float-end"><i class="callout-toggle"></i></div>
+</div>
+<div id="callout-36" class="callout-36-contents callout-collapse collapse">
+<div class="callout-body-container callout-body">
+<p><strong>a.</strong> Rare events can happen by chance, especially when there are many opportunities for them to occur. Rare does not mean impossible, and it does not automatically mean there is a special cause.</p>
+<p><strong>b.</strong> In the birthday problem, any one pair of people sharing a birthday is unlikely. But in a room of 23 people, there are 253 pairs, so a shared birthday becomes much more likely than intuition suggests.</p>
+<p>The lottery example is similar. A particular repeated draw is unlikely, but with thousands of lottery draws, there are millions of pairs of draws that could potentially match.</p>
+<p><strong>c.</strong> A better question is:</p>
+<blockquote class="blockquote">
+<p>How many opportunities were there for an event like this to occur by chance?</p>
+</blockquote>
+</div>
+</div>
+</div>
+</div>
+</div>
+
+
 </section>
 
 </main> <!-- /main -->
@@ -4837,8 +7073,8 @@ window.onload = function() {
       </a>          
   </div>
   <div class="nav-page nav-page-next">
-      <a href="./apples.html" class="pagination-link" aria-label="Apples Styles">
-        <span class="nav-page-text"><span class="chapter-number">3</span>&nbsp; <span class="chapter-title">Apples Styles</span></span> <i class="bi bi-arrow-right-short"></i>
+      <a href="./MeasurementError.html" class="pagination-link" aria-label="Thinking about Measurement and Error">
+        <span class="nav-page-text"><span class="chapter-number">3</span>&nbsp; <span class="chapter-title">Thinking about Measurement and Error</span></span> <i class="bi bi-arrow-right-short"></i>
       </a>
   </div>
 </nav>

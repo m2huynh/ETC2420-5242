@@ -14,10 +14,28 @@ library(gt)
 
 By the end of this chapter, you should be able to:
 
-1.  A
+1. Define a sample space, an outcome, and an event.
+2. Use sample spaces to describe simple random processes.
+3. Apply basic probability rules, including that probabilities lie between 0 and 1, and that the probability of the full sample space is 1.
+4. Calculate probabilities by counting favourable outcomes and total possible outcomes when outcomes are equally likely.
+5. Recognise when the wording of a probability problem changes the relevant sample space.
+6. Explain why the process that produces information matters when reasoning under uncertainty.
+7. Distinguish between outcomes where order matters and outcomes where order does not matter.
+8. Explain why some events are more likely because they can occur in more ways.
+9. Use examples such as dice, birthdays, and lotteries to explain why surprising events may be less surprising than they first appear.
+10. Interpret combinations notation and explain how Pascal's triangle helps count combinations.
 :::
 
-<center>unit outline map goes here</center>
+<center>
+
+```{r, echo=FALSE}
+#| classes: .enlarge-image
+knitr::include_graphics("images/chapter2/outline.png")
+```
+
+</center>
+
+<br>
 
 ## The problem with intuition
 
@@ -1201,6 +1219,681 @@ They were asking:
 
 In the end, the group ran out of time and only managed to purchase around 5 million tickets. Fortunately, their gamble paid off and the did hold the only winning ticket for that draw. 
 
+## Chapter summary
+
+Probability gives us a language for thinking clearly when more than one outcome is possible. In this chapter, we began with situations where intuition can be misleading. A problem may look simple on the surface, but the answer can change once we define the possible outcomes carefully, understand how information was produced, and count the number of ways an event can occur.
+
+We looked at many examples, such as the Monty Hall Problem, the Birthday Problem, the Problem of Points, the Lottery - all of which used probability to help us solve a question.
+
+Across all of these examples, the main lesson is that probability is not just about formulas. It is about structure. To reason well under uncertainty, we need to ask:
+
+- What are the possible outcomes?
+- Are they equally likely?
+- What event do we care about?
+- How many ways can that event occur?
+- What information have we received?
+- How was that information produced?
+- Are we counting arrangements or combinations?
+- Are we treating rare events as impossible, or merely as unlikely?
+
+Probability helps us slow down, define the situation carefully, and reason with uncertainty rather than simply relying on intuition.
+
+## Exercises
+
+These questions are designed to help you practise the main ideas from this chapter: sample spaces, events, probability rules, wording, information, counting, combinations, and possible futures. Some questions require calculations, while others ask you to explain the reasoning behind the calculation.
+
+:::: callout-note
+### Question 1
+
+A fair six-sided die is rolled once.
+
+**a.** Write down the sample space.
+
+**b.** Write the event “roll a number greater than 4” as a set.
+
+**c.** Calculate the probability of rolling a number greater than 4.
+
+::: {.callout-important collapse="true"}
+### Click for Solutions
+
+**a.** The sample space is:
+
+$$
+S = \{1,2,3,4,5,6\}
+$$
+
+**b.** The event “roll a number greater than 4” is:
+
+$$
+\{5,6\}
+$$
+
+**c.** There are 2 favourable outcomes out of 6 possible outcomes:
+
+$$
+P(\text{greater than 4}) = \frac{2}{6} = \frac{1}{3}
+$$
+:::
+::::
+
+:::: callout-note
+### Question 2
+
+A fair coin is tossed three times.
+
+**a.** Write down the sample space.
+
+**b.** What is the probability of getting exactly two heads?
+
+**c.** What is the probability of getting at least one tail?
+
+::: {.callout-important collapse="true"}
+### Click for Solutions
+
+**a.** The sample space is:
+
+$$
+S = \{HHH,HHT,HTH,HTT,THH,THT,TTH,TTT\}
+$$
+
+**b.** Exactly two heads occurs in:
+
+$$
+HHT,\;HTH,\;THH
+$$
+
+So:
+
+$$
+P(\text{exactly two heads}) = \frac{3}{8}
+$$
+
+**c.** At least one tail means one tail, two tails, or three tails. It may be easier to use the complement. The only outcome with no tails is:
+
+$$
+HHH
+$$
+
+So:
+
+$$
+P(\text{at least one tail}) = 1 - P(\text{no tails})
+$$
+
+$$
+= 1 - \frac{1}{8}
+$$
+
+$$
+= \frac{7}{8}
+$$
+:::
+::::
+
+:::: callout-note
+### Question 3
+
+A family has two children. Assume that each child is equally likely to be a boy or a girl, and that the sex of one child does not affect the sex of the other.
+
+**a.** Write the sample space if children are recorded in birth order.
+
+**b.** What is the probability that both children are girls?
+
+**c.** If you are told that at least one child is a girl, what is the probability that both children are girls?
+
+**d.** If you are told that the older child is a girl, what is the probability that both children are girls?
+
+::: {.callout-important collapse="true"}
+### Click for Solutions
+
+**a.** The sample space is:
+
+$$
+S = \{BB,BG,GB,GG\}
+$$
+
+**b.** There is one outcome with two girls:
+
+$$
+P(GG) = \frac{1}{4}
+$$
+
+**c.** If at least one child is a girl, then \(BB\) is removed from the sample space. The remaining possibilities are:
+
+$$
+\{BG,GB,GG\}
+$$
+
+Only one of these has two girls, so:
+
+$$
+P(\text{both girls} \mid \text{at least one girl}) = \frac{1}{3}
+$$
+
+**d.** If the older child is a girl, the remaining possibilities are:
+
+$$
+\{GB,GG\}
+$$
+
+Only one of these has two girls, so:
+
+$$
+P(\text{both girls} \mid \text{older child is a girl}) = \frac{1}{2}
+$$
+:::
+::::
+
+:::: callout-note
+### Question 4
+
+A car has four tyres: front left, front right, rear left, and rear right. Exactly one tyre has a slow leak, but you do not know which one.
+
+**a.** Write down the sample space.
+
+**b.** What is the probability that the leaking tyre is a front tyre?
+
+**c.** A mechanic checks the rear left tyre and finds that it is not leaking. What is the probability that the leaking tyre is now a front tyre?
+
+::: {.callout-important collapse="true"}
+### Click for Solutions
+
+**a.** The sample space is:
+
+$$
+S = \{\text{front left},\text{front right},\text{rear left},\text{rear right}\}
+$$
+
+**b.** There are two front tyres out of four tyres:
+
+$$
+P(\text{front tyre}) = \frac{2}{4} = \frac{1}{2}
+$$
+
+**c.** Once the rear left tyre is ruled out, the remaining possibilities are:
+
+$$
+\{\text{front left},\text{front right},\text{rear right}\}
+$$
+
+Two of these three possibilities are front tyres, so:
+
+$$
+P(\text{front tyre} \mid \text{rear left is not leaking}) = \frac{2}{3}
+$$
+:::
+::::
+
+:::: callout-note
+### Question 5
+
+Three fair six-sided dice are rolled.
+
+The unordered combinations below can each produce a total of 9 or 10:
+
+```{r}
+#| echo: false
+
+sum_combinations <- data.frame(
+  `Total of 9` = c("1 + 2 + 6", "1 + 3 + 5", "1 + 4 + 4", "2 + 2 + 5", "2 + 3 + 4", "3 + 3 + 3"),
+  `Total of 10` = c("1 + 3 + 6", "1 + 4 + 5", "2 + 2 + 6", "2 + 3 + 5", "2 + 4 + 4", "3 + 3 + 4"),
+  check.names = FALSE
+)
+
+sum_combinations |>
+  gt() |>
+  cols_align(align = "center", columns = everything())
+```
+
+Both totals appear to have six combinations.
+
+**a.** Why does this not mean that totals 9 and 10 are equally likely?
+
+**b.** If there are 25 ordered outcomes that sum to 9 and 27 ordered outcomes that sum to 10, calculate both probabilities.
+
+**c.** Which total is more likely?
+
+::: {.callout-important collapse="true"}
+### Click for Solutions
+
+**a.** The listed combinations do not account for order. With three dice, \((1,2,6)\), \((2,1,6)\), and \((6,2,1)\) are different ordered outcomes. Some unordered combinations can occur in more ordered ways than others.
+
+**b.** There are:
+
+$$
+6^3 = 216
+$$
+
+ordered outcomes when three dice are rolled.
+
+So:
+
+$$
+P(\text{sum is 9}) = \frac{25}{216}
+$$
+
+and:
+
+$$
+P(\text{sum is 10}) = \frac{27}{216}
+$$
+
+**c.** A total of 10 is more likely because:
+
+$$
+\frac{27}{216} > \frac{25}{216}
+$$
+:::
+::::
+
+:::: callout-note
+### Question 6
+
+A group of 23 students are in a classroom. Ignore leap years and assume that birthdays are equally likely across 365 days.
+
+**a.** How many pairs of students are there in the room?
+
+**b.** Why is the birthday problem not mainly about the probability that one particular student shares your birthday?
+
+**c.** Explain in words why a shared birthday becomes more likely than many people expect.
+
+::: {.callout-important collapse="true"}
+### Click for Solutions
+
+**a.** The number of pairs is:
+
+$$
+\frac{23\times 22}{2} = 253
+$$
+
+**b.** The birthday problem is not mainly about one person matching your birthday. It is about whether any pair in the room shares a birthday.
+
+**c.** Each individual pair has a small chance of matching, but there are many possible pairs. With 23 people, there are 253 opportunities for a match. Many opportunities can make a seemingly rare event much more likely.
+:::
+::::
+
+:::: callout-note
+### Question 7
+
+A lottery draws 6 numbers from 49 numbers. The number of possible combinations is:
+
+$$
+\binom{49}{6} = 13{,}983{,}816
+$$
+
+**a.** What is the probability of one particular combination being drawn in a single draw?
+
+**b.** Why is this different from asking whether some combination will repeat after many lottery draws?
+
+**c.** If there have been 3,016 lottery draws, how many pairs of draws are there?
+
+::: {.callout-important collapse="true"}
+### Click for Solutions
+
+**a.** The probability of one particular combination is:
+
+$$
+\frac{1}{13{,}983{,}816}
+$$
+
+**b.** One particular combination appearing in one draw is very unlikely. But over many draws, there are many pairs of draws that could potentially match. The repeated-draw question has many more opportunities for a coincidence.
+
+**c.** The number of pairs is:
+
+$$
+\frac{3016\times 3015}{2}
+$$
+
+$$
+= 4{,}546{,}620
+$$
+:::
+::::
+
+:::: callout-note
+### Question 8
+
+Harry and Tom are playing a coin-flipping game. Harry scores a point when the coin lands Heads. Tom scores a point when the coin lands Tails. The first player to reach 3 points wins a prize of \$100.
+
+After three flips, the sequence is:
+
+$$
+H,\;T,\;H
+$$
+
+So Harry has 2 points and Tom has 1 point. The game is interrupted.
+
+**a.** What are the possible future paths from this point if the game stops as soon as someone reaches 3 points?
+
+**b.** What is the probability of each path?
+
+**c.** What is the probability that Harry eventually wins?
+
+**d.** How should the \$100 prize be divided fairly?
+
+::: {.callout-important collapse="true"}
+### Click for Solutions
+
+**a.** The possible future paths are:
+
+$$
+S = \{H,TH,TT\}
+$$
+
+If the next flip is Heads, Harry wins immediately. If the next flip is Tails, then one more flip is needed.
+
+**b.** The probabilities are:
+
+$$
+P(H)=\frac{1}{2}
+$$
+
+$$
+P(TH)=\frac{1}{2}\times\frac{1}{2}=\frac{1}{4}
+$$
+
+$$
+P(TT)=\frac{1}{2}\times\frac{1}{2}=\frac{1}{4}
+$$
+
+**c.** Harry wins if the future path is \(H\) or \(TH\):
+
+$$
+\begin{aligned}
+P(\text{Harry wins})
+&= P(H)+P(TH) \\
+&= \frac{1}{2}+\frac{1}{4} \\
+&= \frac{3}{4}
+\end{aligned}
+$$
+
+**d.** Harry should receive:
+
+$$
+\frac{3}{4}\times 100 = 75
+$$
+
+Tom should receive:
+
+$$
+\frac{1}{4}\times 100 = 25
+$$
+
+So the fair split is \$75 for Harry and \$25 for Tom.
+:::
+::::
+
+:::: callout-note
+### Question 9
+
+In Question 8, the possible future paths were:
+
+$$
+\{H,TH,TT\}
+$$
+
+A student says:
+
+> Harry wins in two of the three paths, so Harry's probability of winning is \(2/3\).
+
+**a.** What is wrong with this reasoning?
+
+**b.** What does this teach us about sample spaces?
+
+::: {.callout-important collapse="true"}
+### Click for Solutions
+
+**a.** The paths are not equally likely. The path \(H\) has probability \(1/2\), while \(TH\) and \(TT\) each have probability \(1/4\). We cannot count paths equally unless they are equally likely.
+
+**b.** A sample space is not enough on its own. We must also ask whether the outcomes in the sample space are equally likely. If they are not equally likely, we need to account for their different probabilities.
+:::
+::::
+
+:::: callout-note
+### Question 10
+
+Suppose there are 8 guests at a small dinner party.
+
+**a.** How many ways are there to arrange all 8 guests in 8 labelled seats?
+
+**b.** How many ways are there to choose 3 guests from the 8 guests to sit at a small side table, if order does not matter?
+
+**c.** Explain the difference between parts **a** and **b**.
+
+::: {.callout-important collapse="true"}
+### Click for Solutions
+
+**a.** Since order matters, the number of arrangements is:
+
+$$
+8! = 8\times7\times6\times5\times4\times3\times2\times1 = 40{,}320
+$$
+
+**b.** Since order does not matter, we use combinations:
+
+$$
+\binom{8}{3} = \frac{8!}{3!5!}
+$$
+
+$$
+= 56
+$$
+
+**c.** In part **a**, different seat orders count as different arrangements. In part **b**, only the group of 3 guests matters, not the order in which they are listed or seated.
+:::
+::::
+
+:::: callout-note
+### Question 11
+
+Use Pascal’s triangle:
+
+$$
+1
+$$
+
+$$
+1 \quad 1
+$$
+
+$$
+1 \quad 2 \quad 1
+$$
+
+$$
+1 \quad 3 \quad 3 \quad 1
+$$
+
+$$
+1 \quad 4 \quad 6 \quad 4 \quad 1
+$$
+
+$$
+1 \quad 5 \quad 10 \quad 10 \quad 5 \quad 1
+$$
+
+**a.** What is $\binom{5}{2}$?
+
+**b.** What is $\binom{5}{3}$?
+
+**c.** Why are these two values the same?
+
+::: {.callout-important collapse="true"}
+### Click for Solutions
+
+**a.** From the row for 5 items:
+
+$$
+\binom{5}{2}=10
+$$
+
+**b.** Also from the row for 5 items:
+
+$$
+\binom{5}{3}=10
+$$
+
+**c.** Choosing 2 items to include is equivalent to choosing 3 items to leave out. That is why:
+
+$$
+\binom{5}{2}=\binom{5}{3}
+$$
+:::
+::::
+
+:::: callout-note
+### Question 12
+
+A fair coin is tossed 5 times.
+
+**a.** Use Pascal’s triangle to determine how many sequences have exactly 2 heads.
+
+**b.** How many total sequences are possible when a fair coin is tossed 5 times?
+
+**c.** What is the probability of getting exactly 2 heads?
+
+::: {.callout-important collapse="true"}
+### Click for Solutions
+
+**a.** The row for 5 tosses is:
+
+$$
+1 \quad 5 \quad 10 \quad 10 \quad 5 \quad 1
+$$
+
+The number of ways to get exactly 2 heads is:
+
+$$
+\binom{5}{2}=10
+$$
+
+**b.** Each toss has 2 possible outcomes, so the total number of sequences is:
+
+$$
+2^5 = 32
+$$
+
+**c.** Therefore:
+
+$$
+P(\text{exactly 2 heads}) = \frac{10}{32} = \frac{5}{16}
+$$
+:::
+::::
+
+:::: callout-note
+### Question 13
+
+For each situation below, identify whether order matters.
+
+```{r}
+#| echo: false
+
+order_matters <- data.frame(
+  Situation = c(
+    "Choosing 4 students from a class of 30 for a committee",
+    "Awarding gold, silver, and bronze medals in a race",
+    "Choosing 6 lottery numbers from 45 numbers",
+    "Creating a ranked top 5 list of songs",
+    "Selecting 3 suburbs for a pilot transport program"
+  ),
+  `Does order matter?` = c("", "", "", "", ""),
+  check.names = FALSE
+)
+
+order_matters |>
+  gt() |>
+  cols_align(align = "left", columns = everything())
+```
+
+::: {.callout-important collapse="true"}
+### Click for Solutions
+
+```{r}
+#| echo: false
+
+order_matters_solution <- data.frame(
+  Situation = c(
+    "Choosing 4 students from a class of 30 for a committee",
+    "Awarding gold, silver, and bronze medals in a race",
+    "Choosing 6 lottery numbers from 45 numbers",
+    "Creating a ranked top 5 list of songs",
+    "Selecting 3 suburbs for a pilot transport program"
+  ),
+  `Does order matter?` = c(
+    "No. The same committee is formed regardless of order.",
+    "Yes. Gold, silver, and bronze are different positions.",
+    "No. The selected set of numbers matters, not the order drawn.",
+    "Yes. A ranked list depends on order.",
+    "No. The same three suburbs are selected regardless of order."
+  ),
+  check.names = FALSE
+)
+
+order_matters_solution |>
+  gt() |>
+  cols_align(align = "left", columns = everything())
+```
+:::
+::::
+
+:::: callout-note
+### Question 14
+
+A survey researcher wants to choose 5 people from a group of 20 volunteers for a focus group.
+
+**a.** Should this be treated as an arrangement or a combination if the order of selection does not matter?
+
+**b.** Calculate the number of possible focus groups.
+
+**c.** Why would listing all possible focus groups by hand be impractical?
+
+::: {.callout-important collapse="true"}
+### Click for Solutions
+
+**a.** This is a combination because the order of selection does not matter.
+
+**b.** The number of possible focus groups is:
+
+$$
+\binom{20}{5} = \frac{20!}{5!15!}
+$$
+
+$$
+= 15{,}504
+$$
+
+**c.** There are 15,504 possible focus groups, so listing all of them by hand would be tedious and impractical. Combinations give us a way to count them systematically.
+:::
+::::
+
+:::: callout-note
+### Question 15
+
+A student says:
+
+> If an event is rare, then it probably has a special explanation.
+
+**a.** Explain why this statement is not always true.
+
+**b.** Use either the birthday problem, lottery example, or social media example to support your answer.
+
+**c.** Write a better statistical question to ask when a rare event occurs.
+
+::: {.callout-important collapse="true"}
+### Click for Solutions
+
+**a.** Rare events can happen by chance, especially when there are many opportunities for them to occur. Rare does not mean impossible, and it does not automatically mean there is a special cause.
+
+**b.** In the birthday problem, any one pair of people sharing a birthday is unlikely. But in a room of 23 people, there are 253 pairs, so a shared birthday becomes much more likely than intuition suggests.
+
+The lottery example is similar. A particular repeated draw is unlikely, but with thousands of lottery draws, there are millions of pairs of draws that could potentially match.
+
+**c.** A better question is:
+
+> How many opportunities were there for an event like this to occur by chance?
+:::
+::::
 
 
 
