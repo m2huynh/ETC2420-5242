@@ -6,7 +6,7 @@ Some Text
 
 ```{r, echo=FALSE}
 #| classes: .enlarge-image
-knitr::include_graphics("images/unit_outline6.png")
+knitr::include_graphics("images/unit_outline_main.png")
 ```
 
 </center>

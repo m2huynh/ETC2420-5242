@@ -1,0 +1,4448 @@
+<!DOCTYPE html>
+<html xmlns="http://www.w3.org/1999/xhtml" lang="en" xml:lang="en"><head>
+
+<meta charset="utf-8">
+<meta name="generator" content="quarto-1.7.32">
+
+<meta name="viewport" content="width=device-width, initial-scale=1.0, user-scalable=yes">
+
+
+<title>7&nbsp; Likelihood – Statistical Thinking</title>
+<style>
+code{white-space: pre-wrap;}
+span.smallcaps{font-variant: small-caps;}
+div.columns{display: flex; gap: min(4vw, 1.5em);}
+div.column{flex: auto; overflow-x: auto;}
+div.hanging-indent{margin-left: 1.5em; text-indent: -1.5em;}
+ul.task-list{list-style: none;}
+ul.task-list li input[type="checkbox"] {
+  width: 0.8em;
+  margin: 0 0.8em 0.2em -1em; /* quarto-specific, see https://github.com/quarto-dev/quarto-cli/issues/4556 */ 
+  vertical-align: middle;
+}
+</style>
+
+
+<script src="site_libs/quarto-nav/quarto-nav.js"></script>
+<script src="site_libs/clipboard/clipboard.min.js"></script>
+<script src="site_libs/quarto-search/autocomplete.umd.js"></script>
+<script src="site_libs/quarto-search/fuse.min.js"></script>
+<script src="site_libs/quarto-search/quarto-search.js"></script>
+<meta name="quarto:offset" content="./">
+<link href="./8_Bayes.html" rel="next">
+<link href="./6_SimulationBasedInference.html" rel="prev">
+<script src="site_libs/quarto-html/quarto.js" type="module"></script>
+<script src="site_libs/quarto-html/tabsets/tabsets.js" type="module"></script>
+<script src="site_libs/quarto-html/popper.min.js"></script>
+<script src="site_libs/quarto-html/tippy.umd.min.js"></script>
+<script src="site_libs/quarto-html/anchor.min.js"></script>
+<link href="site_libs/quarto-html/tippy.css" rel="stylesheet">
+<link href="site_libs/quarto-html/quarto-syntax-highlighting-37eea08aefeeee20ff55810ff984fec1.css" rel="stylesheet" class="quarto-color-scheme" id="quarto-text-highlighting-styles">
+<link href="site_libs/quarto-html/quarto-syntax-highlighting-dark-2fef5ea3f8957b3e4ecc936fc74692ca.css" rel="stylesheet" class="quarto-color-scheme quarto-color-alternate" id="quarto-text-highlighting-styles">
+<link href="site_libs/quarto-html/quarto-syntax-highlighting-37eea08aefeeee20ff55810ff984fec1.css" rel="stylesheet" class="quarto-color-scheme-extra" id="quarto-text-highlighting-styles">
+<script src="site_libs/bootstrap/bootstrap.min.js"></script>
+<link href="site_libs/bootstrap/bootstrap-icons.css" rel="stylesheet">
+<link href="site_libs/bootstrap/bootstrap-c27fdc8e5b00b532d2d5a75ada188648.min.css" rel="stylesheet" append-hash="true" class="quarto-color-scheme" id="quarto-bootstrap" data-mode="light">
+<link href="site_libs/bootstrap/bootstrap-dark-b9e11ad5a37ead2aabff839d95ae3857.min.css" rel="stylesheet" append-hash="true" class="quarto-color-scheme quarto-color-alternate" id="quarto-bootstrap" data-mode="dark">
+<link href="site_libs/bootstrap/bootstrap-c27fdc8e5b00b532d2d5a75ada188648.min.css" rel="stylesheet" append-hash="true" class="quarto-color-scheme-extra" id="quarto-bootstrap" data-mode="light">
+<script id="quarto-search-options" type="application/json">{
+  "location": "sidebar",
+  "copy-button": false,
+  "collapse-after": 3,
+  "panel-placement": "start",
+  "type": "textbox",
+  "limit": 50,
+  "keyboard-shortcut": [
+    "f",
+    "/",
+    "s"
+  ],
+  "show-item-context": false,
+  "language": {
+    "search-no-results-text": "No results",
+    "search-matching-documents-text": "matching documents",
+    "search-copy-link-title": "Copy link to search",
+    "search-hide-matches-text": "Hide additional matches",
+    "search-more-match-text": "more match in this document",
+    "search-more-matches-text": "more matches in this document",
+    "search-clear-button-title": "Clear",
+    "search-text-placeholder": "",
+    "search-detached-cancel-button-title": "Cancel",
+    "search-submit-button-title": "Submit",
+    "search-label": "Search"
+  }
+}</script>
+
+  <script src="https://cdnjs.cloudflare.com/polyfill/v3/polyfill.min.js?features=es6"></script>
+  <script src="https://cdn.jsdelivr.net/npm/mathjax@3/es5/tex-chtml-full.js" type="text/javascript"></script>
+
+<script type="text/javascript">
+const typesetMath = (el) => {
+  if (window.MathJax) {
+    // MathJax Typeset
+    window.MathJax.typeset([el]);
+  } else if (window.katex) {
+    // KaTeX Render
+    var mathElements = el.getElementsByClassName("math");
+    var macros = [];
+    for (var i = 0; i < mathElements.length; i++) {
+      var texText = mathElements[i].firstChild;
+      if (mathElements[i].tagName == "SPAN") {
+        window.katex.render(texText.data, mathElements[i], {
+          displayMode: mathElements[i].classList.contains('display'),
+          throwOnError: false,
+          macros: macros,
+          fleqn: false
+        });
+      }
+    }
+  }
+}
+window.Quarto = {
+  typesetMath
+};
+</script>
+
+<link rel="stylesheet" href="styles.css">
+<link rel="stylesheet" href="include/webex.css">
+</head>
+
+<body class="nav-sidebar floating quarto-light"><script id="quarto-html-before-body" type="application/javascript">
+    const toggleBodyColorMode = (bsSheetEl) => {
+      const mode = bsSheetEl.getAttribute("data-mode");
+      const bodyEl = window.document.querySelector("body");
+      if (mode === "dark") {
+        bodyEl.classList.add("quarto-dark");
+        bodyEl.classList.remove("quarto-light");
+      } else {
+        bodyEl.classList.add("quarto-light");
+        bodyEl.classList.remove("quarto-dark");
+      }
+    }
+    const toggleBodyColorPrimary = () => {
+      const bsSheetEl = window.document.querySelector("link#quarto-bootstrap:not([rel=disabled-stylesheet])");
+      if (bsSheetEl) {
+        toggleBodyColorMode(bsSheetEl);
+      }
+    }
+    const setColorSchemeToggle = (alternate) => {
+      const toggles = window.document.querySelectorAll('.quarto-color-scheme-toggle');
+      for (let i=0; i < toggles.length; i++) {
+        const toggle = toggles[i];
+        if (toggle) {
+          if (alternate) {
+            toggle.classList.add("alternate");
+          } else {
+            toggle.classList.remove("alternate");
+          }
+        }
+      }
+    };
+    const toggleColorMode = (alternate) => {
+      // Switch the stylesheets
+      const primaryStylesheets = window.document.querySelectorAll('link.quarto-color-scheme:not(.quarto-color-alternate)');
+      const alternateStylesheets = window.document.querySelectorAll('link.quarto-color-scheme.quarto-color-alternate');
+      manageTransitions('#quarto-margin-sidebar .nav-link', false);
+      if (alternate) {
+        // note: dark is layered on light, we don't disable primary!
+        enableStylesheet(alternateStylesheets);
+        for (const sheetNode of alternateStylesheets) {
+          if (sheetNode.id === "quarto-bootstrap") {
+            toggleBodyColorMode(sheetNode);
+          }
+        }
+      } else {
+        disableStylesheet(alternateStylesheets);
+        enableStylesheet(primaryStylesheets)
+        toggleBodyColorPrimary();
+      }
+      manageTransitions('#quarto-margin-sidebar .nav-link', true);
+      // Switch the toggles
+      setColorSchemeToggle(alternate)
+      // Hack to workaround the fact that safari doesn't
+      // properly recolor the scrollbar when toggling (#1455)
+      if (navigator.userAgent.indexOf('Safari') > 0 && navigator.userAgent.indexOf('Chrome') == -1) {
+        manageTransitions("body", false);
+        window.scrollTo(0, 1);
+        setTimeout(() => {
+          window.scrollTo(0, 0);
+          manageTransitions("body", true);
+        }, 40);
+      }
+    }
+    const disableStylesheet = (stylesheets) => {
+      for (let i=0; i < stylesheets.length; i++) {
+        const stylesheet = stylesheets[i];
+        stylesheet.rel = 'disabled-stylesheet';
+      }
+    }
+    const enableStylesheet = (stylesheets) => {
+      for (let i=0; i < stylesheets.length; i++) {
+        const stylesheet = stylesheets[i];
+        if(stylesheet.rel !== 'stylesheet') { // for Chrome, which will still FOUC without this check
+          stylesheet.rel = 'stylesheet';
+        }
+      }
+    }
+    const manageTransitions = (selector, allowTransitions) => {
+      const els = window.document.querySelectorAll(selector);
+      for (let i=0; i < els.length; i++) {
+        const el = els[i];
+        if (allowTransitions) {
+          el.classList.remove('notransition');
+        } else {
+          el.classList.add('notransition');
+        }
+      }
+    }
+    const isFileUrl = () => {
+      return window.location.protocol === 'file:';
+    }
+    const hasAlternateSentinel = () => {
+      let styleSentinel = getColorSchemeSentinel();
+      if (styleSentinel !== null) {
+        return styleSentinel === "alternate";
+      } else {
+        return false;
+      }
+    }
+    const setStyleSentinel = (alternate) => {
+      const value = alternate ? "alternate" : "default";
+      if (!isFileUrl()) {
+        window.localStorage.setItem("quarto-color-scheme", value);
+      } else {
+        localAlternateSentinel = value;
+      }
+    }
+    const getColorSchemeSentinel = () => {
+      if (!isFileUrl()) {
+        const storageValue = window.localStorage.getItem("quarto-color-scheme");
+        return storageValue != null ? storageValue : localAlternateSentinel;
+      } else {
+        return localAlternateSentinel;
+      }
+    }
+    const toggleGiscusIfUsed = (isAlternate, darkModeDefault) => {
+      const baseTheme = document.querySelector('#giscus-base-theme')?.value ?? 'light';
+      const alternateTheme = document.querySelector('#giscus-alt-theme')?.value ?? 'dark';
+      let newTheme = '';
+      if(authorPrefersDark) {
+        newTheme = isAlternate ? baseTheme : alternateTheme;
+      } else {
+        newTheme = isAlternate ? alternateTheme : baseTheme;
+      }
+      const changeGiscusTheme = () => {
+        // From: https://github.com/giscus/giscus/issues/336
+        const sendMessage = (message) => {
+          const iframe = document.querySelector('iframe.giscus-frame');
+          if (!iframe) return;
+          iframe.contentWindow.postMessage({ giscus: message }, 'https://giscus.app');
+        }
+        sendMessage({
+          setConfig: {
+            theme: newTheme
+          }
+        });
+      }
+      const isGiscussLoaded = window.document.querySelector('iframe.giscus-frame') !== null;
+      if (isGiscussLoaded) {
+        changeGiscusTheme();
+      }
+    };
+    const authorPrefersDark = false;
+    const darkModeDefault = authorPrefersDark;
+      document.querySelector('link#quarto-text-highlighting-styles.quarto-color-scheme-extra').rel = 'disabled-stylesheet';
+      document.querySelector('link#quarto-bootstrap.quarto-color-scheme-extra').rel = 'disabled-stylesheet';
+    let localAlternateSentinel = darkModeDefault ? 'alternate' : 'default';
+    // Dark / light mode switch
+    window.quartoToggleColorScheme = () => {
+      // Read the current dark / light value
+      let toAlternate = !hasAlternateSentinel();
+      toggleColorMode(toAlternate);
+      setStyleSentinel(toAlternate);
+      toggleGiscusIfUsed(toAlternate, darkModeDefault);
+      window.dispatchEvent(new Event('resize'));
+    };
+    // Switch to dark mode if need be
+    if (hasAlternateSentinel()) {
+      toggleColorMode(true);
+    } else {
+      toggleColorMode(false);
+    }
+  </script>
+
+<div id="quarto-search-results"></div>
+  <header id="quarto-header" class="headroom fixed-top">
+  <nav class="quarto-secondary-nav">
+    <div class="container-fluid d-flex">
+      <button type="button" class="quarto-btn-toggle btn" data-bs-toggle="collapse" role="button" data-bs-target=".quarto-sidebar-collapse-item" aria-controls="quarto-sidebar" aria-expanded="false" aria-label="Toggle sidebar navigation" onclick="if (window.quartoToggleHeadroom) { window.quartoToggleHeadroom(); }">
+        <i class="bi bi-layout-text-sidebar-reverse"></i>
+      </button>
+        <nav class="quarto-page-breadcrumbs" aria-label="breadcrumb"><ol class="breadcrumb"><li class="breadcrumb-item"><a href="./7_Likelihood.html"><span class="chapter-number">7</span>&nbsp; <span class="chapter-title">Likelihood</span></a></li></ol></nav>
+        <a class="flex-grow-1" role="navigation" data-bs-toggle="collapse" data-bs-target=".quarto-sidebar-collapse-item" aria-controls="quarto-sidebar" aria-expanded="false" aria-label="Toggle sidebar navigation" onclick="if (window.quartoToggleHeadroom) { window.quartoToggleHeadroom(); }">      
+        </a>
+      <button type="button" class="btn quarto-search-button" aria-label="Search" onclick="window.quartoOpenSearch();">
+        <i class="bi bi-search"></i>
+      </button>
+    </div>
+  </nav>
+</header>
+<!-- content -->
+<div id="quarto-content" class="quarto-container page-columns page-rows-contents page-layout-article">
+<!-- sidebar -->
+  <nav id="quarto-sidebar" class="sidebar collapse collapse-horizontal quarto-sidebar-collapse-item sidebar-navigation floating overflow-auto">
+    <div class="pt-lg-2 mt-2 text-left sidebar-header">
+    <div class="sidebar-title mb-0 py-0">
+      <a href="./">Statistical Thinking</a> 
+        <div class="sidebar-tools-main tools-wide">
+    <a href="./Statistical-Thinking.pdf" title="Download PDF" class="quarto-navigation-tool px-1" aria-label="Download PDF"><i class="bi bi-file-pdf"></i></a>
+  <a href="" class="quarto-color-scheme-toggle quarto-navigation-tool  px-1" onclick="window.quartoToggleColorScheme(); return false;" title="Toggle dark mode"><i class="bi"></i></a>
+  <a href="" class="quarto-reader-toggle quarto-navigation-tool px-1" onclick="window.quartoToggleReader(); return false;" title="Toggle reader mode">
+  <div class="quarto-reader-toggle-btn">
+  <i class="bi"></i>
+  </div>
+</a>
+</div>
+    </div>
+      </div>
+        <div class="mt-2 flex-shrink-0 align-items-center">
+        <div class="sidebar-search">
+        <div id="quarto-search" class="" title="Search"></div>
+        </div>
+        </div>
+    <div class="sidebar-menu-container"> 
+    <ul class="list-unstyled mt-1">
+        <li class="sidebar-item">
+  <div class="sidebar-item-container"> 
+  <a href="./index.html" class="sidebar-item-text sidebar-link">
+ <span class="menu-text">Preface</span></a>
+  </div>
+</li>
+        <li class="sidebar-item">
+  <div class="sidebar-item-container"> 
+  <a href="./Questions.html" class="sidebar-item-text sidebar-link">
+ <span class="menu-text"><span class="chapter-number">1</span>&nbsp; <span class="chapter-title">Better Questions</span></span></a>
+  </div>
+</li>
+        <li class="sidebar-item">
+  <div class="sidebar-item-container"> 
+  <a href="./Probability.html" class="sidebar-item-text sidebar-link">
+ <span class="menu-text"><span class="chapter-number">2</span>&nbsp; <span class="chapter-title">Probability</span></span></a>
+  </div>
+</li>
+        <li class="sidebar-item">
+  <div class="sidebar-item-container"> 
+  <a href="./MeasurementError.html" class="sidebar-item-text sidebar-link">
+ <span class="menu-text"><span class="chapter-number">3</span>&nbsp; <span class="chapter-title">Measurement and Error</span></span></a>
+  </div>
+</li>
+        <li class="sidebar-item">
+  <div class="sidebar-item-container"> 
+  <a href="./4_Estimation.html" class="sidebar-item-text sidebar-link">
+ <span class="menu-text"><span class="chapter-number">4</span>&nbsp; <span class="chapter-title">Estimation</span></span></a>
+  </div>
+</li>
+        <li class="sidebar-item">
+  <div class="sidebar-item-container"> 
+  <a href="./5_HypothesisTesting.html" class="sidebar-item-text sidebar-link">
+ <span class="menu-text"><span class="chapter-number">5</span>&nbsp; <span class="chapter-title">Hypothesis Testing</span></span></a>
+  </div>
+</li>
+        <li class="sidebar-item">
+  <div class="sidebar-item-container"> 
+  <a href="./6_SimulationBasedInference.html" class="sidebar-item-text sidebar-link">
+ <span class="menu-text"><span class="chapter-number">6</span>&nbsp; <span class="chapter-title">Simulation-Based Inference</span></span></a>
+  </div>
+</li>
+        <li class="sidebar-item">
+  <div class="sidebar-item-container"> 
+  <a href="./7_Likelihood.html" class="sidebar-item-text sidebar-link active">
+ <span class="menu-text"><span class="chapter-number">7</span>&nbsp; <span class="chapter-title">Likelihood</span></span></a>
+  </div>
+</li>
+        <li class="sidebar-item">
+  <div class="sidebar-item-container"> 
+  <a href="./8_Bayes.html" class="sidebar-item-text sidebar-link">
+ <span class="menu-text"><span class="chapter-number">8</span>&nbsp; <span class="chapter-title">Bayesian Inference</span></span></a>
+  </div>
+</li>
+        <li class="sidebar-item">
+  <div class="sidebar-item-container"> 
+  <a href="./9_bayes2.html" class="sidebar-item-text sidebar-link">
+ <span class="menu-text"><span class="chapter-number">9</span>&nbsp; <span class="chapter-title">Bayesian Simulation and Decisions</span></span></a>
+  </div>
+</li>
+    </ul>
+    </div>
+</nav>
+<div id="quarto-sidebar-glass" class="quarto-sidebar-collapse-item" data-bs-toggle="collapse" data-bs-target=".quarto-sidebar-collapse-item"></div>
+<!-- margin-sidebar -->
+    <div id="quarto-margin-sidebar" class="sidebar margin-sidebar">
+        <nav id="TOC" role="doc-toc" class="toc-active">
+    <h2 id="toc-title">Table of contents</h2>
+   
+  <ul>
+  <li><a href="#introduction" id="toc-introduction" class="nav-link active" data-scroll-target="#introduction"><span class="header-section-number">7.1</span> Introduction</a></li>
+  <li><a href="#beyond-the-bell-curve" id="toc-beyond-the-bell-curve" class="nav-link" data-scroll-target="#beyond-the-bell-curve"><span class="header-section-number">7.2</span> Beyond the bell curve</a></li>
+  <li><a href="#discrete-and-continuous-data" id="toc-discrete-and-continuous-data" class="nav-link" data-scroll-target="#discrete-and-continuous-data"><span class="header-section-number">7.3</span> Discrete and continuous data</a></li>
+  <li><a href="#a-small-gallery-of-probability-models" id="toc-a-small-gallery-of-probability-models" class="nav-link" data-scroll-target="#a-small-gallery-of-probability-models"><span class="header-section-number">7.4</span> A small gallery of probability models</a>
+  <ul class="collapse">
+  <li><a href="#bernoulli-model-one-yesno-outcome" id="toc-bernoulli-model-one-yesno-outcome" class="nav-link" data-scroll-target="#bernoulli-model-one-yesno-outcome"><span class="header-section-number">7.4.1</span> Bernoulli model: one yes/no outcome</a></li>
+  <li><a href="#binomial-model-number-of-successes" id="toc-binomial-model-number-of-successes" class="nav-link" data-scroll-target="#binomial-model-number-of-successes"><span class="header-section-number">7.4.2</span> Binomial model: number of successes</a></li>
+  <li><a href="#poisson-model-counts-in-time-or-space" id="toc-poisson-model-counts-in-time-or-space" class="nav-link" data-scroll-target="#poisson-model-counts-in-time-or-space"><span class="header-section-number">7.4.3</span> Poisson model: counts in time or space</a></li>
+  <li><a href="#exponential-model-waiting-time-until-an-event" id="toc-exponential-model-waiting-time-until-an-event" class="nav-link" data-scroll-target="#exponential-model-waiting-time-until-an-event"><span class="header-section-number">7.4.4</span> Exponential model: waiting time until an event</a></li>
+  <li><a href="#gamma-model-positive-skewed-measurements" id="toc-gamma-model-positive-skewed-measurements" class="nav-link" data-scroll-target="#gamma-model-positive-skewed-measurements"><span class="header-section-number">7.4.5</span> Gamma model: positive skewed measurements</a></li>
+  <li><a href="#normal-model-symmetric-continuous-measurements" id="toc-normal-model-symmetric-continuous-measurements" class="nav-link" data-scroll-target="#normal-model-symmetric-continuous-measurements"><span class="header-section-number">7.4.6</span> Normal model: symmetric continuous measurements</a></li>
+  </ul></li>
+  <li><a href="#what-is-a-statistical-model" id="toc-what-is-a-statistical-model" class="nav-link" data-scroll-target="#what-is-a-statistical-model"><span class="header-section-number">7.5</span> What is a statistical model?</a></li>
+  <li><a href="#probability-and-likelihood" id="toc-probability-and-likelihood" class="nav-link" data-scroll-target="#probability-and-likelihood"><span class="header-section-number">7.6</span> Probability and likelihood</a>
+  <ul class="collapse">
+  <li><a href="#an-example-public-transport-use" id="toc-an-example-public-transport-use" class="nav-link" data-scroll-target="#an-example-public-transport-use"><span class="header-section-number">7.6.1</span> An example: public transport use</a></li>
+  </ul></li>
+  <li><a href="#maximum-likelihood-estimation" id="toc-maximum-likelihood-estimation" class="nav-link" data-scroll-target="#maximum-likelihood-estimation"><span class="header-section-number">7.7</span> Maximum likelihood estimation</a>
+  <ul class="collapse">
+  <li><a href="#why-log-likelihoods-are-useful" id="toc-why-log-likelihoods-are-useful" class="nav-link" data-scroll-target="#why-log-likelihoods-are-useful"><span class="header-section-number">7.7.1</span> Why log-likelihoods are useful</a></li>
+  <li><a href="#a-second-likelihood-example-waiting-times" id="toc-a-second-likelihood-example-waiting-times" class="nav-link" data-scroll-target="#a-second-likelihood-example-waiting-times"><span class="header-section-number">7.7.2</span> A second likelihood example: waiting times</a></li>
+  <li><a href="#a-normal-model-example" id="toc-a-normal-model-example" class="nav-link" data-scroll-target="#a-normal-model-example"><span class="header-section-number">7.7.3</span> A normal model example</a></li>
+  <li><a href="#mle-cannot-fix-a-bad-model" id="toc-mle-cannot-fix-a-bad-model" class="nav-link" data-scroll-target="#mle-cannot-fix-a-bad-model"><span class="header-section-number">7.7.4</span> MLE cannot fix a bad model</a></li>
+  </ul></li>
+  <li><a href="#checking-fitted-models" id="toc-checking-fitted-models" class="nav-link" data-scroll-target="#checking-fitted-models"><span class="header-section-number">7.8</span> Checking fitted models</a></li>
+  <li><a href="#our-journey-ahead" id="toc-our-journey-ahead" class="nav-link" data-scroll-target="#our-journey-ahead"><span class="header-section-number">7.9</span> Our journey ahead</a></li>
+  <li><a href="#exercises" id="toc-exercises" class="nav-link" data-scroll-target="#exercises"><span class="header-section-number">7.10</span> Exercises</a></li>
+  </ul>
+</nav>
+    </div>
+<!-- main -->
+<main class="content" id="quarto-document-content">
+
+
+<header id="title-block-header" class="quarto-title-block default">
+<div class="quarto-title">
+<h1 class="title"><span class="chapter-number">7</span>&nbsp; <span class="chapter-title">Likelihood</span></h1>
+</div>
+
+
+
+<div class="quarto-title-meta">
+
+    
+  
+    
+  </div>
+  
+
+
+</header>
+
+
+<div class="callout callout-style-default callout-note callout-titled">
+<div class="callout-header d-flex align-content-center">
+<div class="callout-icon-container">
+<i class="callout-icon"></i>
+</div>
+<div class="callout-title-container flex-fill">
+Learning Objectives
+</div>
+</div>
+<div class="callout-body-container callout-body">
+<p>By the end of this chapter, you should be able to:</p>
+<ol type="1">
+<li>Explain why likelihood requires a probability model for the data.</li>
+<li>Describe a statistical model as a simplified probability story about how data might have been generated.</li>
+<li>Recognise why the normal distribution is not appropriate for every kind of data.</li>
+<li>Match common data types to plausible probability models, including Bernoulli, binomial, Poisson, exponential, gamma, and normal models.</li>
+<li>Distinguish between a probability mass function and a probability density function.</li>
+<li>Distinguish between probability and likelihood.</li>
+<li>Construct and interpret a simple likelihood function for binary data.</li>
+<li>Explain maximum likelihood estimation as choosing the parameter value that makes the observed data most likely.</li>
+<li>Explain why log-likelihoods are often easier to work with than likelihoods.</li>
+</ol>
+</div>
+</div>
+<section id="introduction" class="level2" data-number="7.1">
+<h2 data-number="7.1" class="anchored" data-anchor-id="introduction"><span class="header-section-number">7.1</span> Introduction</h2>
+<p>Thus far, our journey has mostly been situated within the block labelled <em>Thinking about uncertainty</em>. We learned how uncertainty enters statistical questions, probability, measurement, estimation, hypothesis testing, and simulation-based inference. These tools helped us ask what the data show, how much estimates vary, and what kinds of patterns chance alone can produce.</p>
+<p>We now move into the next part of the story: Thinking with likelihood. The focus is still uncertainty, but the question changes. Instead of only asking what the sample tells us directly, we begin to ask what kind of probability model could have produced data like these. Likelihood gives us a way to compare possible explanations within a chosen model, and it becomes the bridge from data-based inference to model-based thinking.</p>
+<p><centre></centre></p>
+<div class="cell enlarge-image">
+<div class="cell-output-display">
+<div>
+<figure class="figure">
+<p><img src="images/chapter7/outline.png" class="img-fluid figure-img" width="2200"></p>
+</figure>
+</div>
+</div>
+</div>
+<p></p>
+<p><br></p>
+</section>
+<section id="beyond-the-bell-curve" class="level2" data-number="7.2">
+<h2 data-number="7.2" class="anchored" data-anchor-id="beyond-the-bell-curve"><span class="header-section-number">7.2</span> Beyond the bell curve</h2>
+<p>The normal distribution has already played an important role in this book. It helped us think about measurement error. It helped us understand why sample means can behave predictably across repeated samples. It helped us construct approximate confidence intervals and hypothesis tests. The normal distribution is powerful because many small, roughly independent sources of variation can combine to produce a bell-shaped pattern.</p>
+<p>But not all data are bell-shaped.</p>
+<p>Some data are <strong>binary</strong>:</p>
+<blockquote class="blockquote">
+<p>Did a student attend class? Did a patient recover? Did a household own its home?</p>
+</blockquote>
+<p>Some data are <strong>counts</strong>:</p>
+<blockquote class="blockquote">
+<p>How many hospital admissions occurred this week? How many goals were scored? How many insurance claims were lodged?</p>
+</blockquote>
+<p>Some data are <strong>positive and skewed</strong>:</p>
+<blockquote class="blockquote">
+<p>How long did someone wait? How much income did a household report? How much rainfall fell in a day?</p>
+</blockquote>
+<p>For these examples, the bell curve may not be a sensible model. A normal distribution can take negative values, but waiting times, incomes, rainfall amounts, and counts cannot be negative. A normal distribution is symmetric, but many real variables have a long right tail. A normal distribution describes continuous measurements, but yes/no outcomes only take the values 0 and 1.</p>
+<p>So we need a broader idea.</p>
+<p>Instead of asking:</p>
+<blockquote class="blockquote">
+<p>Can we use the normal distribution here?</p>
+</blockquote>
+<p>we ask:</p>
+<blockquote class="blockquote">
+<p>What kind of probability model could have generated data like these?</p>
+</blockquote>
+<p>That question does not mean there is one perfect model waiting to be discovered. A model is always a simplification. But some simplifications respect the structure of the data better than others.</p>
+<div class="cell">
+<div class="cell-output-display">
+<div id="faopsnlgoz" style="padding-left:0px;padding-right:0px;padding-top:10px;padding-bottom:10px;overflow-x:auto;overflow-y:auto;width:auto;height:auto;">
+<style>#faopsnlgoz table {
+  font-family: system-ui, 'Segoe UI', Roboto, Helvetica, Arial, sans-serif, 'Apple Color Emoji', 'Segoe UI Emoji', 'Segoe UI Symbol', 'Noto Color Emoji';
+  -webkit-font-smoothing: antialiased;
+  -moz-osx-font-smoothing: grayscale;
+}
+
+#faopsnlgoz thead, #faopsnlgoz tbody, #faopsnlgoz tfoot, #faopsnlgoz tr, #faopsnlgoz td, #faopsnlgoz th {
+  border-style: none;
+}
+
+#faopsnlgoz p {
+  margin: 0;
+  padding: 0;
+}
+
+#faopsnlgoz .gt_table {
+  display: table;
+  border-collapse: collapse;
+  line-height: normal;
+  margin-left: auto;
+  margin-right: auto;
+  color: #333333;
+  font-size: 16px;
+  font-weight: normal;
+  font-style: normal;
+  background-color: #FFFFFF;
+  width: 100%;
+  border-top-style: solid;
+  border-top-width: 2px;
+  border-top-color: #A8A8A8;
+  border-right-style: none;
+  border-right-width: 2px;
+  border-right-color: #D3D3D3;
+  border-bottom-style: solid;
+  border-bottom-width: 2px;
+  border-bottom-color: #A8A8A8;
+  border-left-style: none;
+  border-left-width: 2px;
+  border-left-color: #D3D3D3;
+}
+
+#faopsnlgoz .gt_caption {
+  padding-top: 4px;
+  padding-bottom: 4px;
+}
+
+#faopsnlgoz .gt_title {
+  color: #333333;
+  font-size: 125%;
+  font-weight: initial;
+  padding-top: 4px;
+  padding-bottom: 4px;
+  padding-left: 5px;
+  padding-right: 5px;
+  border-bottom-color: #FFFFFF;
+  border-bottom-width: 0;
+}
+
+#faopsnlgoz .gt_subtitle {
+  color: #333333;
+  font-size: 85%;
+  font-weight: initial;
+  padding-top: 3px;
+  padding-bottom: 5px;
+  padding-left: 5px;
+  padding-right: 5px;
+  border-top-color: #FFFFFF;
+  border-top-width: 0;
+}
+
+#faopsnlgoz .gt_heading {
+  background-color: #FFFFFF;
+  text-align: center;
+  border-bottom-color: #FFFFFF;
+  border-left-style: none;
+  border-left-width: 1px;
+  border-left-color: #D3D3D3;
+  border-right-style: none;
+  border-right-width: 1px;
+  border-right-color: #D3D3D3;
+}
+
+#faopsnlgoz .gt_bottom_border {
+  border-bottom-style: solid;
+  border-bottom-width: 2px;
+  border-bottom-color: #D3D3D3;
+}
+
+#faopsnlgoz .gt_col_headings {
+  border-top-style: solid;
+  border-top-width: 2px;
+  border-top-color: #D3D3D3;
+  border-bottom-style: solid;
+  border-bottom-width: 2px;
+  border-bottom-color: #D3D3D3;
+  border-left-style: none;
+  border-left-width: 1px;
+  border-left-color: #D3D3D3;
+  border-right-style: none;
+  border-right-width: 1px;
+  border-right-color: #D3D3D3;
+}
+
+#faopsnlgoz .gt_col_heading {
+  color: #333333;
+  background-color: #FFFFFF;
+  font-size: 100%;
+  font-weight: normal;
+  text-transform: inherit;
+  border-left-style: none;
+  border-left-width: 1px;
+  border-left-color: #D3D3D3;
+  border-right-style: none;
+  border-right-width: 1px;
+  border-right-color: #D3D3D3;
+  vertical-align: bottom;
+  padding-top: 5px;
+  padding-bottom: 6px;
+  padding-left: 5px;
+  padding-right: 5px;
+  overflow-x: hidden;
+}
+
+#faopsnlgoz .gt_column_spanner_outer {
+  color: #333333;
+  background-color: #FFFFFF;
+  font-size: 100%;
+  font-weight: normal;
+  text-transform: inherit;
+  padding-top: 0;
+  padding-bottom: 0;
+  padding-left: 4px;
+  padding-right: 4px;
+}
+
+#faopsnlgoz .gt_column_spanner_outer:first-child {
+  padding-left: 0;
+}
+
+#faopsnlgoz .gt_column_spanner_outer:last-child {
+  padding-right: 0;
+}
+
+#faopsnlgoz .gt_column_spanner {
+  border-bottom-style: solid;
+  border-bottom-width: 2px;
+  border-bottom-color: #D3D3D3;
+  vertical-align: bottom;
+  padding-top: 5px;
+  padding-bottom: 5px;
+  overflow-x: hidden;
+  display: inline-block;
+  width: 100%;
+}
+
+#faopsnlgoz .gt_spanner_row {
+  border-bottom-style: hidden;
+}
+
+#faopsnlgoz .gt_group_heading {
+  padding-top: 8px;
+  padding-bottom: 8px;
+  padding-left: 5px;
+  padding-right: 5px;
+  color: #333333;
+  background-color: #FFFFFF;
+  font-size: 100%;
+  font-weight: initial;
+  text-transform: inherit;
+  border-top-style: solid;
+  border-top-width: 2px;
+  border-top-color: #D3D3D3;
+  border-bottom-style: solid;
+  border-bottom-width: 2px;
+  border-bottom-color: #D3D3D3;
+  border-left-style: none;
+  border-left-width: 1px;
+  border-left-color: #D3D3D3;
+  border-right-style: none;
+  border-right-width: 1px;
+  border-right-color: #D3D3D3;
+  vertical-align: middle;
+  text-align: left;
+}
+
+#faopsnlgoz .gt_empty_group_heading {
+  padding: 0.5px;
+  color: #333333;
+  background-color: #FFFFFF;
+  font-size: 100%;
+  font-weight: initial;
+  border-top-style: solid;
+  border-top-width: 2px;
+  border-top-color: #D3D3D3;
+  border-bottom-style: solid;
+  border-bottom-width: 2px;
+  border-bottom-color: #D3D3D3;
+  vertical-align: middle;
+}
+
+#faopsnlgoz .gt_from_md > :first-child {
+  margin-top: 0;
+}
+
+#faopsnlgoz .gt_from_md > :last-child {
+  margin-bottom: 0;
+}
+
+#faopsnlgoz .gt_row {
+  padding-top: 8px;
+  padding-bottom: 8px;
+  padding-left: 5px;
+  padding-right: 5px;
+  margin: 10px;
+  border-top-style: solid;
+  border-top-width: 1px;
+  border-top-color: #D3D3D3;
+  border-left-style: none;
+  border-left-width: 1px;
+  border-left-color: #D3D3D3;
+  border-right-style: none;
+  border-right-width: 1px;
+  border-right-color: #D3D3D3;
+  vertical-align: middle;
+  overflow-x: hidden;
+}
+
+#faopsnlgoz .gt_stub {
+  color: #333333;
+  background-color: #FFFFFF;
+  font-size: 100%;
+  font-weight: initial;
+  text-transform: inherit;
+  border-right-style: solid;
+  border-right-width: 2px;
+  border-right-color: #D3D3D3;
+  padding-left: 5px;
+  padding-right: 5px;
+}
+
+#faopsnlgoz .gt_stub_row_group {
+  color: #333333;
+  background-color: #FFFFFF;
+  font-size: 100%;
+  font-weight: initial;
+  text-transform: inherit;
+  border-right-style: solid;
+  border-right-width: 2px;
+  border-right-color: #D3D3D3;
+  padding-left: 5px;
+  padding-right: 5px;
+  vertical-align: top;
+}
+
+#faopsnlgoz .gt_row_group_first td {
+  border-top-width: 2px;
+}
+
+#faopsnlgoz .gt_row_group_first th {
+  border-top-width: 2px;
+}
+
+#faopsnlgoz .gt_summary_row {
+  color: #333333;
+  background-color: #FFFFFF;
+  text-transform: inherit;
+  padding-top: 8px;
+  padding-bottom: 8px;
+  padding-left: 5px;
+  padding-right: 5px;
+}
+
+#faopsnlgoz .gt_first_summary_row {
+  border-top-style: solid;
+  border-top-color: #D3D3D3;
+}
+
+#faopsnlgoz .gt_first_summary_row.thick {
+  border-top-width: 2px;
+}
+
+#faopsnlgoz .gt_last_summary_row {
+  padding-top: 8px;
+  padding-bottom: 8px;
+  padding-left: 5px;
+  padding-right: 5px;
+  border-bottom-style: solid;
+  border-bottom-width: 2px;
+  border-bottom-color: #D3D3D3;
+}
+
+#faopsnlgoz .gt_grand_summary_row {
+  color: #333333;
+  background-color: #FFFFFF;
+  text-transform: inherit;
+  padding-top: 8px;
+  padding-bottom: 8px;
+  padding-left: 5px;
+  padding-right: 5px;
+}
+
+#faopsnlgoz .gt_first_grand_summary_row {
+  padding-top: 8px;
+  padding-bottom: 8px;
+  padding-left: 5px;
+  padding-right: 5px;
+  border-top-style: double;
+  border-top-width: 6px;
+  border-top-color: #D3D3D3;
+}
+
+#faopsnlgoz .gt_last_grand_summary_row_top {
+  padding-top: 8px;
+  padding-bottom: 8px;
+  padding-left: 5px;
+  padding-right: 5px;
+  border-bottom-style: double;
+  border-bottom-width: 6px;
+  border-bottom-color: #D3D3D3;
+}
+
+#faopsnlgoz .gt_striped {
+  background-color: rgba(128, 128, 128, 0.05);
+}
+
+#faopsnlgoz .gt_table_body {
+  border-top-style: solid;
+  border-top-width: 2px;
+  border-top-color: #D3D3D3;
+  border-bottom-style: solid;
+  border-bottom-width: 2px;
+  border-bottom-color: #D3D3D3;
+}
+
+#faopsnlgoz .gt_footnotes {
+  color: #333333;
+  background-color: #FFFFFF;
+  border-bottom-style: none;
+  border-bottom-width: 2px;
+  border-bottom-color: #D3D3D3;
+  border-left-style: none;
+  border-left-width: 2px;
+  border-left-color: #D3D3D3;
+  border-right-style: none;
+  border-right-width: 2px;
+  border-right-color: #D3D3D3;
+}
+
+#faopsnlgoz .gt_footnote {
+  margin: 0px;
+  font-size: 90%;
+  padding-top: 4px;
+  padding-bottom: 4px;
+  padding-left: 5px;
+  padding-right: 5px;
+}
+
+#faopsnlgoz .gt_sourcenotes {
+  color: #333333;
+  background-color: #FFFFFF;
+  border-bottom-style: none;
+  border-bottom-width: 2px;
+  border-bottom-color: #D3D3D3;
+  border-left-style: none;
+  border-left-width: 2px;
+  border-left-color: #D3D3D3;
+  border-right-style: none;
+  border-right-width: 2px;
+  border-right-color: #D3D3D3;
+}
+
+#faopsnlgoz .gt_sourcenote {
+  font-size: 90%;
+  padding-top: 4px;
+  padding-bottom: 4px;
+  padding-left: 5px;
+  padding-right: 5px;
+}
+
+#faopsnlgoz .gt_left {
+  text-align: left;
+}
+
+#faopsnlgoz .gt_center {
+  text-align: center;
+}
+
+#faopsnlgoz .gt_right {
+  text-align: right;
+  font-variant-numeric: tabular-nums;
+}
+
+#faopsnlgoz .gt_font_normal {
+  font-weight: normal;
+}
+
+#faopsnlgoz .gt_font_bold {
+  font-weight: bold;
+}
+
+#faopsnlgoz .gt_font_italic {
+  font-style: italic;
+}
+
+#faopsnlgoz .gt_super {
+  font-size: 65%;
+}
+
+#faopsnlgoz .gt_footnote_marks {
+  font-size: 75%;
+  vertical-align: 0.4em;
+  position: initial;
+}
+
+#faopsnlgoz .gt_asterisk {
+  font-size: 100%;
+  vertical-align: 0;
+}
+
+#faopsnlgoz .gt_indent_1 {
+  text-indent: 5px;
+}
+
+#faopsnlgoz .gt_indent_2 {
+  text-indent: 10px;
+}
+
+#faopsnlgoz .gt_indent_3 {
+  text-indent: 15px;
+}
+
+#faopsnlgoz .gt_indent_4 {
+  text-indent: 20px;
+}
+
+#faopsnlgoz .gt_indent_5 {
+  text-indent: 25px;
+}
+
+#faopsnlgoz .katex-display {
+  display: inline-flex !important;
+  margin-bottom: 0.75em !important;
+}
+
+#faopsnlgoz div.Reactable > div.rt-table > div.rt-thead > div.rt-tr.rt-tr-group-header > div.rt-th-group:after {
+  height: 0px !important;
+}
+</style>
+
+<table class="gt_table caption-top table table-sm table-striped small" data-quarto-postprocess="true" data-quarto-disable-processing="false" data-quarto-bootstrap="false">
+<thead>
+<tr class="gt_col_headings header">
+<th id="Kind-of-data" class="gt_col_heading gt_columns_bottom_border gt_left" data-quarto-table-cell-role="th" scope="col">Kind of data</th>
+<th id="Possible-values" class="gt_col_heading gt_columns_bottom_border gt_left" data-quarto-table-cell-role="th" scope="col">Possible values</th>
+<th id="Possible-model" class="gt_col_heading gt_columns_bottom_border gt_left" data-quarto-table-cell-role="th" scope="col">Possible model</th>
+<th id="Example" class="gt_col_heading gt_columns_bottom_border gt_left" data-quarto-table-cell-role="th" scope="col">Example</th>
+</tr>
+</thead>
+<tbody class="gt_table_body">
+<tr class="odd">
+<td class="gt_row gt_left" headers="Kind of data">Yes/no outcome</td>
+<td class="gt_row gt_left" headers="Possible values">0 or 1</td>
+<td class="gt_row gt_left" headers="Possible model">Bernoulli</td>
+<td class="gt_row gt_left" headers="Example">Did a student use public transport?</td>
+</tr>
+<tr class="even">
+<td class="gt_row gt_left" headers="Kind of data">Number of successes out of n trials</td>
+<td class="gt_row gt_left" headers="Possible values">0, 1, ..., n</td>
+<td class="gt_row gt_left" headers="Possible model">Binomial</td>
+<td class="gt_row gt_left" headers="Example">How many of 20 forms were returned?</td>
+</tr>
+<tr class="odd">
+<td class="gt_row gt_left" headers="Kind of data">Count in a fixed time or place</td>
+<td class="gt_row gt_left" headers="Possible values">0, 1, 2, ...</td>
+<td class="gt_row gt_left" headers="Possible model">Poisson</td>
+<td class="gt_row gt_left" headers="Example">Number of arrivals at a clinic per hour</td>
+</tr>
+<tr class="even">
+<td class="gt_row gt_left" headers="Kind of data">Waiting time until an event</td>
+<td class="gt_row gt_left" headers="Possible values">Positive values</td>
+<td class="gt_row gt_left" headers="Possible model">Exponential</td>
+<td class="gt_row gt_left" headers="Example">Time until the next tram arrives</td>
+</tr>
+<tr class="odd">
+<td class="gt_row gt_left" headers="Kind of data">Positive skewed measurement</td>
+<td class="gt_row gt_left" headers="Possible values">Positive values</td>
+<td class="gt_row gt_left" headers="Possible model">Gamma or log-normal</td>
+<td class="gt_row gt_left" headers="Example">Household income or rainfall</td>
+</tr>
+<tr class="even">
+<td class="gt_row gt_left" headers="Kind of data">Roughly symmetric measurement</td>
+<td class="gt_row gt_left" headers="Possible values">Any real value</td>
+<td class="gt_row gt_left" headers="Possible model">Normal</td>
+<td class="gt_row gt_left" headers="Example">Repeated measurement error</td>
+</tr>
+</tbody>
+</table>
+
+</div>
+</div>
+</div>
+<p>This table is not a list to memorise. It is a habit of thought. Before fitting a model, ask what values the variable can take and what shape the data might reasonably have.</p>
+<div class="callout callout-style-default callout-important callout-titled">
+<div class="callout-header d-flex align-content-center">
+<div class="callout-icon-container">
+<i class="callout-icon"></i>
+</div>
+<div class="callout-title-container flex-fill">
+A useful habit
+</div>
+</div>
+<div class="callout-body-container callout-body">
+<p>Before choosing a model, ask:</p>
+<ol type="1">
+<li>What values are possible?</li>
+<li>Are the data discrete or continuous?</li>
+<li>Are there natural bounds, such as 0 or 1?</li>
+<li>Is the distribution likely to be symmetric or skewed?</li>
+<li>What process might have generated the observations?</li>
+</ol>
+</div>
+</div>
+<p>This chapter is about what happens after we choose such a model. Once we have a probability model, the data can tell us which versions of that model are more or less plausible. If the model contains an unknown parameter, different parameter values describe different possible data-generating processes. Some values would make the observed data seem quite likely. Other values would make the observed data seem surprising.</p>
+<p>The tool we use to compare these possibilities is called <strong>likelihood</strong>.</p>
+</section>
+<section id="discrete-and-continuous-data" class="level2" data-number="7.3">
+<h2 data-number="7.3" class="anchored" data-anchor-id="discrete-and-continuous-data"><span class="header-section-number">7.3</span> Discrete and continuous data</h2>
+<p>A useful first distinction is between <strong>discrete</strong> and <strong>continuous</strong> random variables. A discrete random variable takes values that can be counted. For example, the number of children in a household could be 0, 1, 2, 3, and so on. The number of hospital admissions in a day is also discrete. We can list the possible values, even if the list is long.</p>
+<p>For discrete random variables, probabilities are assigned to individual values using a <strong>probability mass function</strong>, or pmf. For example, a pmf might tell us:</p>
+<p><span class="math display">\[
+P(Y = 3) = 0.18.
+\]</span></p>
+<div class="cell">
+<div class="cell-output-display">
+<div>
+<figure class="figure">
+<p><img src="7_Likelihood_files/figure-html/unnamed-chunk-4-1.png" class="img-fluid figure-img" width="672"></p>
+</figure>
+</div>
+</div>
+</div>
+<p>This means that the probability of observing exactly 3 events is 0.18.</p>
+<p>A continuous random variable can take values on a continuum. Waiting time, height, rainfall, and income are often treated as continuous. For continuous variables, we do not usually assign probabilities to exact values. Instead, probabilities are areas over intervals.</p>
+<p>For example, if <span class="math inline">\(Y\)</span> is a waiting time, we might ask:</p>
+<p><span class="math display">\[
+P(5 \leq Y \leq 10).
+\]</span></p>
+<div class="cell">
+<div class="cell-output-display">
+<div>
+<figure class="figure">
+<p><img src="7_Likelihood_files/figure-html/unnamed-chunk-5-1.png" class="img-fluid figure-img" width="672"></p>
+</figure>
+</div>
+</div>
+</div>
+<p>This is the probability that the waiting time is between 5 and 10 minutes. For continuous random variables, probabilities are described using a <strong>probability density function</strong>, or pdf.</p>
+<p>The distinction matters because likelihood uses the model’s probability rule. For discrete data, likelihood is built from probabilities of observed values. For continuous data, likelihood is built from densities at observed values.</p>
+<div class="cell">
+<div class="cell-output-display">
+<div id="pilkrekfwc" style="padding-left:0px;padding-right:0px;padding-top:10px;padding-bottom:10px;overflow-x:auto;overflow-y:auto;width:auto;height:auto;">
+<style>#pilkrekfwc table {
+  font-family: system-ui, 'Segoe UI', Roboto, Helvetica, Arial, sans-serif, 'Apple Color Emoji', 'Segoe UI Emoji', 'Segoe UI Symbol', 'Noto Color Emoji';
+  -webkit-font-smoothing: antialiased;
+  -moz-osx-font-smoothing: grayscale;
+}
+
+#pilkrekfwc thead, #pilkrekfwc tbody, #pilkrekfwc tfoot, #pilkrekfwc tr, #pilkrekfwc td, #pilkrekfwc th {
+  border-style: none;
+}
+
+#pilkrekfwc p {
+  margin: 0;
+  padding: 0;
+}
+
+#pilkrekfwc .gt_table {
+  display: table;
+  border-collapse: collapse;
+  line-height: normal;
+  margin-left: auto;
+  margin-right: auto;
+  color: #333333;
+  font-size: 16px;
+  font-weight: normal;
+  font-style: normal;
+  background-color: #FFFFFF;
+  width: 100%;
+  border-top-style: solid;
+  border-top-width: 2px;
+  border-top-color: #A8A8A8;
+  border-right-style: none;
+  border-right-width: 2px;
+  border-right-color: #D3D3D3;
+  border-bottom-style: solid;
+  border-bottom-width: 2px;
+  border-bottom-color: #A8A8A8;
+  border-left-style: none;
+  border-left-width: 2px;
+  border-left-color: #D3D3D3;
+}
+
+#pilkrekfwc .gt_caption {
+  padding-top: 4px;
+  padding-bottom: 4px;
+}
+
+#pilkrekfwc .gt_title {
+  color: #333333;
+  font-size: 125%;
+  font-weight: initial;
+  padding-top: 4px;
+  padding-bottom: 4px;
+  padding-left: 5px;
+  padding-right: 5px;
+  border-bottom-color: #FFFFFF;
+  border-bottom-width: 0;
+}
+
+#pilkrekfwc .gt_subtitle {
+  color: #333333;
+  font-size: 85%;
+  font-weight: initial;
+  padding-top: 3px;
+  padding-bottom: 5px;
+  padding-left: 5px;
+  padding-right: 5px;
+  border-top-color: #FFFFFF;
+  border-top-width: 0;
+}
+
+#pilkrekfwc .gt_heading {
+  background-color: #FFFFFF;
+  text-align: center;
+  border-bottom-color: #FFFFFF;
+  border-left-style: none;
+  border-left-width: 1px;
+  border-left-color: #D3D3D3;
+  border-right-style: none;
+  border-right-width: 1px;
+  border-right-color: #D3D3D3;
+}
+
+#pilkrekfwc .gt_bottom_border {
+  border-bottom-style: solid;
+  border-bottom-width: 2px;
+  border-bottom-color: #D3D3D3;
+}
+
+#pilkrekfwc .gt_col_headings {
+  border-top-style: solid;
+  border-top-width: 2px;
+  border-top-color: #D3D3D3;
+  border-bottom-style: solid;
+  border-bottom-width: 2px;
+  border-bottom-color: #D3D3D3;
+  border-left-style: none;
+  border-left-width: 1px;
+  border-left-color: #D3D3D3;
+  border-right-style: none;
+  border-right-width: 1px;
+  border-right-color: #D3D3D3;
+}
+
+#pilkrekfwc .gt_col_heading {
+  color: #333333;
+  background-color: #FFFFFF;
+  font-size: 100%;
+  font-weight: normal;
+  text-transform: inherit;
+  border-left-style: none;
+  border-left-width: 1px;
+  border-left-color: #D3D3D3;
+  border-right-style: none;
+  border-right-width: 1px;
+  border-right-color: #D3D3D3;
+  vertical-align: bottom;
+  padding-top: 5px;
+  padding-bottom: 6px;
+  padding-left: 5px;
+  padding-right: 5px;
+  overflow-x: hidden;
+}
+
+#pilkrekfwc .gt_column_spanner_outer {
+  color: #333333;
+  background-color: #FFFFFF;
+  font-size: 100%;
+  font-weight: normal;
+  text-transform: inherit;
+  padding-top: 0;
+  padding-bottom: 0;
+  padding-left: 4px;
+  padding-right: 4px;
+}
+
+#pilkrekfwc .gt_column_spanner_outer:first-child {
+  padding-left: 0;
+}
+
+#pilkrekfwc .gt_column_spanner_outer:last-child {
+  padding-right: 0;
+}
+
+#pilkrekfwc .gt_column_spanner {
+  border-bottom-style: solid;
+  border-bottom-width: 2px;
+  border-bottom-color: #D3D3D3;
+  vertical-align: bottom;
+  padding-top: 5px;
+  padding-bottom: 5px;
+  overflow-x: hidden;
+  display: inline-block;
+  width: 100%;
+}
+
+#pilkrekfwc .gt_spanner_row {
+  border-bottom-style: hidden;
+}
+
+#pilkrekfwc .gt_group_heading {
+  padding-top: 8px;
+  padding-bottom: 8px;
+  padding-left: 5px;
+  padding-right: 5px;
+  color: #333333;
+  background-color: #FFFFFF;
+  font-size: 100%;
+  font-weight: initial;
+  text-transform: inherit;
+  border-top-style: solid;
+  border-top-width: 2px;
+  border-top-color: #D3D3D3;
+  border-bottom-style: solid;
+  border-bottom-width: 2px;
+  border-bottom-color: #D3D3D3;
+  border-left-style: none;
+  border-left-width: 1px;
+  border-left-color: #D3D3D3;
+  border-right-style: none;
+  border-right-width: 1px;
+  border-right-color: #D3D3D3;
+  vertical-align: middle;
+  text-align: left;
+}
+
+#pilkrekfwc .gt_empty_group_heading {
+  padding: 0.5px;
+  color: #333333;
+  background-color: #FFFFFF;
+  font-size: 100%;
+  font-weight: initial;
+  border-top-style: solid;
+  border-top-width: 2px;
+  border-top-color: #D3D3D3;
+  border-bottom-style: solid;
+  border-bottom-width: 2px;
+  border-bottom-color: #D3D3D3;
+  vertical-align: middle;
+}
+
+#pilkrekfwc .gt_from_md > :first-child {
+  margin-top: 0;
+}
+
+#pilkrekfwc .gt_from_md > :last-child {
+  margin-bottom: 0;
+}
+
+#pilkrekfwc .gt_row {
+  padding-top: 8px;
+  padding-bottom: 8px;
+  padding-left: 5px;
+  padding-right: 5px;
+  margin: 10px;
+  border-top-style: solid;
+  border-top-width: 1px;
+  border-top-color: #D3D3D3;
+  border-left-style: none;
+  border-left-width: 1px;
+  border-left-color: #D3D3D3;
+  border-right-style: none;
+  border-right-width: 1px;
+  border-right-color: #D3D3D3;
+  vertical-align: middle;
+  overflow-x: hidden;
+}
+
+#pilkrekfwc .gt_stub {
+  color: #333333;
+  background-color: #FFFFFF;
+  font-size: 100%;
+  font-weight: initial;
+  text-transform: inherit;
+  border-right-style: solid;
+  border-right-width: 2px;
+  border-right-color: #D3D3D3;
+  padding-left: 5px;
+  padding-right: 5px;
+}
+
+#pilkrekfwc .gt_stub_row_group {
+  color: #333333;
+  background-color: #FFFFFF;
+  font-size: 100%;
+  font-weight: initial;
+  text-transform: inherit;
+  border-right-style: solid;
+  border-right-width: 2px;
+  border-right-color: #D3D3D3;
+  padding-left: 5px;
+  padding-right: 5px;
+  vertical-align: top;
+}
+
+#pilkrekfwc .gt_row_group_first td {
+  border-top-width: 2px;
+}
+
+#pilkrekfwc .gt_row_group_first th {
+  border-top-width: 2px;
+}
+
+#pilkrekfwc .gt_summary_row {
+  color: #333333;
+  background-color: #FFFFFF;
+  text-transform: inherit;
+  padding-top: 8px;
+  padding-bottom: 8px;
+  padding-left: 5px;
+  padding-right: 5px;
+}
+
+#pilkrekfwc .gt_first_summary_row {
+  border-top-style: solid;
+  border-top-color: #D3D3D3;
+}
+
+#pilkrekfwc .gt_first_summary_row.thick {
+  border-top-width: 2px;
+}
+
+#pilkrekfwc .gt_last_summary_row {
+  padding-top: 8px;
+  padding-bottom: 8px;
+  padding-left: 5px;
+  padding-right: 5px;
+  border-bottom-style: solid;
+  border-bottom-width: 2px;
+  border-bottom-color: #D3D3D3;
+}
+
+#pilkrekfwc .gt_grand_summary_row {
+  color: #333333;
+  background-color: #FFFFFF;
+  text-transform: inherit;
+  padding-top: 8px;
+  padding-bottom: 8px;
+  padding-left: 5px;
+  padding-right: 5px;
+}
+
+#pilkrekfwc .gt_first_grand_summary_row {
+  padding-top: 8px;
+  padding-bottom: 8px;
+  padding-left: 5px;
+  padding-right: 5px;
+  border-top-style: double;
+  border-top-width: 6px;
+  border-top-color: #D3D3D3;
+}
+
+#pilkrekfwc .gt_last_grand_summary_row_top {
+  padding-top: 8px;
+  padding-bottom: 8px;
+  padding-left: 5px;
+  padding-right: 5px;
+  border-bottom-style: double;
+  border-bottom-width: 6px;
+  border-bottom-color: #D3D3D3;
+}
+
+#pilkrekfwc .gt_striped {
+  background-color: rgba(128, 128, 128, 0.05);
+}
+
+#pilkrekfwc .gt_table_body {
+  border-top-style: solid;
+  border-top-width: 2px;
+  border-top-color: #D3D3D3;
+  border-bottom-style: solid;
+  border-bottom-width: 2px;
+  border-bottom-color: #D3D3D3;
+}
+
+#pilkrekfwc .gt_footnotes {
+  color: #333333;
+  background-color: #FFFFFF;
+  border-bottom-style: none;
+  border-bottom-width: 2px;
+  border-bottom-color: #D3D3D3;
+  border-left-style: none;
+  border-left-width: 2px;
+  border-left-color: #D3D3D3;
+  border-right-style: none;
+  border-right-width: 2px;
+  border-right-color: #D3D3D3;
+}
+
+#pilkrekfwc .gt_footnote {
+  margin: 0px;
+  font-size: 90%;
+  padding-top: 4px;
+  padding-bottom: 4px;
+  padding-left: 5px;
+  padding-right: 5px;
+}
+
+#pilkrekfwc .gt_sourcenotes {
+  color: #333333;
+  background-color: #FFFFFF;
+  border-bottom-style: none;
+  border-bottom-width: 2px;
+  border-bottom-color: #D3D3D3;
+  border-left-style: none;
+  border-left-width: 2px;
+  border-left-color: #D3D3D3;
+  border-right-style: none;
+  border-right-width: 2px;
+  border-right-color: #D3D3D3;
+}
+
+#pilkrekfwc .gt_sourcenote {
+  font-size: 90%;
+  padding-top: 4px;
+  padding-bottom: 4px;
+  padding-left: 5px;
+  padding-right: 5px;
+}
+
+#pilkrekfwc .gt_left {
+  text-align: left;
+}
+
+#pilkrekfwc .gt_center {
+  text-align: center;
+}
+
+#pilkrekfwc .gt_right {
+  text-align: right;
+  font-variant-numeric: tabular-nums;
+}
+
+#pilkrekfwc .gt_font_normal {
+  font-weight: normal;
+}
+
+#pilkrekfwc .gt_font_bold {
+  font-weight: bold;
+}
+
+#pilkrekfwc .gt_font_italic {
+  font-style: italic;
+}
+
+#pilkrekfwc .gt_super {
+  font-size: 65%;
+}
+
+#pilkrekfwc .gt_footnote_marks {
+  font-size: 75%;
+  vertical-align: 0.4em;
+  position: initial;
+}
+
+#pilkrekfwc .gt_asterisk {
+  font-size: 100%;
+  vertical-align: 0;
+}
+
+#pilkrekfwc .gt_indent_1 {
+  text-indent: 5px;
+}
+
+#pilkrekfwc .gt_indent_2 {
+  text-indent: 10px;
+}
+
+#pilkrekfwc .gt_indent_3 {
+  text-indent: 15px;
+}
+
+#pilkrekfwc .gt_indent_4 {
+  text-indent: 20px;
+}
+
+#pilkrekfwc .gt_indent_5 {
+  text-indent: 25px;
+}
+
+#pilkrekfwc .katex-display {
+  display: inline-flex !important;
+  margin-bottom: 0.75em !important;
+}
+
+#pilkrekfwc div.Reactable > div.rt-table > div.rt-thead > div.rt-tr.rt-tr-group-header > div.rt-th-group:after {
+  height: 0px !important;
+}
+</style>
+
+<table class="gt_table caption-top table table-sm table-striped small" data-quarto-postprocess="true" data-quarto-disable-processing="false" data-quarto-bootstrap="false">
+<thead>
+<tr class="gt_col_headings header">
+<th id="Type-of-variable" class="gt_col_heading gt_columns_bottom_border gt_left" data-quarto-table-cell-role="th" scope="col">Type of variable</th>
+<th id="Examples" class="gt_col_heading gt_columns_bottom_border gt_left" data-quarto-table-cell-role="th" scope="col">Examples</th>
+<th id="Model-uses" class="gt_col_heading gt_columns_bottom_border gt_left" data-quarto-table-cell-role="th" scope="col">Model uses</th>
+<th id="Probability-statement" class="gt_col_heading gt_columns_bottom_border gt_left" data-quarto-table-cell-role="th" scope="col">Probability statement</th>
+</tr>
+</thead>
+<tbody class="gt_table_body">
+<tr class="odd">
+<td class="gt_row gt_left" headers="Type of variable">Discrete</td>
+<td class="gt_row gt_left" headers="Examples">Counts, yes/no outcomes</td>
+<td class="gt_row gt_left" headers="Model uses">Probability mass function (pmf)</td>
+<td class="gt_row gt_left" headers="Probability statement">P(Y = y)</td>
+</tr>
+<tr class="even">
+<td class="gt_row gt_left" headers="Type of variable">Continuous</td>
+<td class="gt_row gt_left" headers="Examples">Waiting times, heights, rainfall</td>
+<td class="gt_row gt_left" headers="Model uses">Probability density function (pdf)</td>
+<td class="gt_row gt_left" headers="Probability statement">P(a &lt;= Y &lt;= b)</td>
+</tr>
+</tbody>
+</table>
+
+</div>
+</div>
+</div>
+</section>
+<section id="a-small-gallery-of-probability-models" class="level2" data-number="7.4">
+<h2 data-number="7.4" class="anchored" data-anchor-id="a-small-gallery-of-probability-models"><span class="header-section-number">7.4</span> A small gallery of probability models</h2>
+<p>We do not need a complete catalogue of distributions before learning likelihood. But we do need enough distribution theory to understand why different models suit different kinds of data. This section introduces a few common probability models. We will use some of them in this chapter and return to others when we begin thinking more deeply with models.</p>
+<p><strong>Note</strong>: some of the probability theories behind these models has been covered in earlier chapters.</p>
+<section id="bernoulli-model-one-yesno-outcome" class="level3" data-number="7.4.1">
+<h3 data-number="7.4.1" class="anchored" data-anchor-id="bernoulli-model-one-yesno-outcome"><span class="header-section-number">7.4.1</span> Bernoulli model: one yes/no outcome</h3>
+<p>A <strong>Bernoulli</strong> model is used for a single binary outcome.</p>
+<p>Suppose:</p>
+<p><span class="math display">\[
+Y =
+\begin{cases}
+1, &amp; \text{if a student used public transport}\\
+0, &amp; \text{otherwise}
+\end{cases}
+\]</span> The model has one parameter:</p>
+<p><span class="math display">\[
+p = P(Y = 1).
+\]</span></p>
+<p>So:</p>
+<p><span class="math display">\[
+P(Y = 1) = p, \qquad P(Y = 0) = 1-p.
+\]</span></p>
+<p>A compact way to write both cases is:</p>
+<p><span class="math display">\[
+P(Y = y) = p^y(1-p)^{1-y}, \qquad y = 0,1.
+\]</span></p>
+<p>This formula can look strange at first, but it is just a shortcut. If <span class="math inline">\(y=1\)</span>, then:</p>
+<p><span class="math display">\[
+p^1(1-p)^0 = p.
+\]</span></p>
+<p>If <span class="math inline">\(y=0\)</span>, then:</p>
+<p><span class="math display">\[
+p^0(1-p)^1 = 1-p.
+\]</span></p>
+<p>The Bernoulli model is useful because many real questions have binary outcomes. Did someone vote? Did a customer return? Did a person recover? Did a household have internet access?</p>
+<div class="cell">
+<div class="cell-output-display">
+<div>
+<figure class="figure">
+<p><img src="7_Likelihood_files/figure-html/unnamed-chunk-7-1.png" class="img-fluid figure-img" width="672"></p>
+</figure>
+</div>
+</div>
+</div>
+</section>
+<section id="binomial-model-number-of-successes" class="level3" data-number="7.4.2">
+<h3 data-number="7.4.2" class="anchored" data-anchor-id="binomial-model-number-of-successes"><span class="header-section-number">7.4.2</span> Binomial model: number of successes</h3>
+<p>A <strong>binomial</strong> model is used when we count the number of successes in a fixed number of independent trials, each with the same probability of success.</p>
+<p>For example, suppose 20 students are asked whether they used public transport to campus. If each student has probability <span class="math inline">\(p\)</span> of saying yes, and if we treat the responses as independent, then the number of yes responses can be modelled as:</p>
+<p><span class="math display">\[
+Y \sim \text{Binomial}(n = 20, p).
+\]</span></p>
+<p>The possible values are:</p>
+<p><span class="math display">\[
+0, 1, 2, \ldots, 20.
+\]</span></p>
+<p>The binomial model is closely related to the Bernoulli model. A Bernoulli variable is like one yes/no trial. A binomial variable counts how many successes occurred across several yes/no trials.</p>
+<p>For example, suppose 20 students are asked whether they used public transport to campus. If each student has probability <span class="math inline">\(p\)</span> of saying yes, and if we treat the responses as independent, then the number of yes responses can be modeled as:</p>
+<p><span class="math display">\[Y \sim \text{Binomial}(20, p)\]</span></p>
+<p>The possible values are:</p>
+<p><span class="math display">\[Y = 0, 1, 2, \ldots, 20\]</span></p>
+<div class="cell">
+<div class="cell-output-display">
+<div>
+<figure class="figure">
+<p><img src="7_Likelihood_files/figure-html/unnamed-chunk-8-1.png" class="img-fluid figure-img" width="672"></p>
+</figure>
+</div>
+</div>
+</div>
+</section>
+<section id="poisson-model-counts-in-time-or-space" class="level3" data-number="7.4.3">
+<h3 data-number="7.4.3" class="anchored" data-anchor-id="poisson-model-counts-in-time-or-space"><span class="header-section-number">7.4.3</span> Poisson model: counts in time or space</h3>
+<p>A <strong>Poisson</strong> model is often used for counts of events in a fixed amount of time or space.</p>
+<p>Examples include:</p>
+<ul>
+<li>the number of calls to a service centre in an hour;</li>
+<li>the number of hospital admissions in a week;</li>
+<li>the number of traffic accidents at an intersection in a month;</li>
+<li>the number of goals scored by a team in a match.</li>
+</ul>
+<p>A Poisson model has one parameter, usually written as <span class="math inline">\(\lambda\)</span>. This parameter is the expected count in the interval of interest.</p>
+<p>If:</p>
+<p><span class="math display">\[
+Y \sim \text{Poisson}(\lambda),
+\]</span></p>
+<p>then:</p>
+<p><span class="math display">\[
+P(Y = y) = \frac{e^{-\lambda}\lambda^y}{y!}, \qquad y = 0,1,2,\ldots.
+\]</span></p>
+<div class="cell">
+<div class="cell-output-display">
+<div>
+<figure class="figure">
+<p><img src="7_Likelihood_files/figure-html/unnamed-chunk-9-1.png" class="img-fluid figure-img" width="672"></p>
+</figure>
+</div>
+</div>
+</div>
+<p>In this example, <span class="math inline">\(\lambda = 4\)</span>, so the model is centred around 4 events. Counts near 4 are more plausible than counts much smaller or much larger than 4, but the model still allows any non-negative count.</p>
+</section>
+<section id="exponential-model-waiting-time-until-an-event" class="level3" data-number="7.4.4">
+<h3 data-number="7.4.4" class="anchored" data-anchor-id="exponential-model-waiting-time-until-an-event"><span class="header-section-number">7.4.4</span> Exponential model: waiting time until an event</h3>
+<p>An <strong>exponential</strong> model is often used for waiting times.</p>
+<p>For example:</p>
+<ul>
+<li>time until the next bus arrives;</li>
+<li>time until a machine fails;</li>
+<li>time until the next customer arrives;</li>
+<li>time between calls to a hotline.</li>
+</ul>
+<p>If <span class="math inline">\(Y\)</span> is a waiting time, then <span class="math inline">\(Y\)</span> cannot be negative. This is one reason the normal distribution may not be appropriate.</p>
+<p>One way to write the exponential model is in terms of the mean waiting time <span class="math inline">\(\theta\)</span>:</p>
+<p><span class="math display">\[
+f(y \mid \theta) = \frac{1}{\theta}e^{-y/\theta}, \qquad y &gt; 0.
+\]</span></p>
+<p>Here, <span class="math inline">\(\theta\)</span> is the average waiting time. Larger values of <span class="math inline">\(\theta\)</span> produce longer waits on average.</p>
+<div class="cell">
+<div class="cell-output-display">
+<div>
+<figure class="figure">
+<p><img src="7_Likelihood_files/figure-html/unnamed-chunk-10-1.png" class="img-fluid figure-img" width="672"></p>
+</figure>
+</div>
+</div>
+</div>
+<p>In this example, <span class="math inline">\(\theta = 6\)</span>, so the average waiting time is 6 minutes. The curve is highest near zero, meaning short waits are more common than long waits, but the model still allows longer waits with decreasing probability.</p>
+</section>
+<section id="gamma-model-positive-skewed-measurements" class="level3" data-number="7.4.5">
+<h3 data-number="7.4.5" class="anchored" data-anchor-id="gamma-model-positive-skewed-measurements"><span class="header-section-number">7.4.5</span> Gamma model: positive skewed measurements</h3>
+<p>A <strong>gamma</strong> model is also used for positive, right-skewed data. It is more flexible than the exponential model.</p>
+<p>Examples include:</p>
+<ul>
+<li>rainfall amounts on wet days;</li>
+<li>insurance claim sizes;</li>
+<li>some kinds of waiting times;</li>
+<li>some biomedical measurements;</li>
+<li>household income, at least as a rough first model.</li>
+</ul>
+<p>The gamma distribution has two parameters, often called a shape and a rate. We will not derive its formula here. The important idea is that the gamma model can represent a range of positive skewed shapes.</p>
+<div class="cell">
+<div class="cell-output-display">
+<div>
+<figure class="figure">
+<p><img src="7_Likelihood_files/figure-html/unnamed-chunk-11-1.png" class="img-fluid figure-img" width="672"></p>
+</figure>
+</div>
+</div>
+</div>
+<p>The plot shows three gamma models with the same rate but different shape values. When the shape is small, the distribution is strongly right-skewed, with many small values and a long right tail. As the shape increases, the distribution becomes less sharply concentrated near zero and begins to look more mound-shaped, while still only allowing positive values. This flexibility is why the gamma model is often useful for positive quantities such as rainfall, waiting times, claim sizes, and other measurements that cannot be negative.</p>
+</section>
+<section id="normal-model-symmetric-continuous-measurements" class="level3" data-number="7.4.6">
+<h3 data-number="7.4.6" class="anchored" data-anchor-id="normal-model-symmetric-continuous-measurements"><span class="header-section-number">7.4.6</span> Normal model: symmetric continuous measurements</h3>
+<p>The <strong>normal</strong> model is still important. It remains useful for many continuous measurements that are roughly symmetric, and for modelling measurement error.</p>
+<p>If:</p>
+<p><span class="math display">\[
+Y \sim N(\mu, \sigma^2),
+\]</span></p>
+<p>then <span class="math inline">\(\mu\)</span> controls the centre and <span class="math inline">\(\sigma\)</span> controls the spread.</p>
+<p>The key point is not that the normal model is wrong. The key point is that it is not always the right first choice.</p>
+<div class="cell">
+<div class="cell-output-display">
+<div>
+<figure class="figure">
+<p><img src="7_Likelihood_files/figure-html/unnamed-chunk-12-1.png" class="img-fluid figure-img" width="672"></p>
+</figure>
+</div>
+</div>
+</div>
+</section>
+</section>
+<section id="what-is-a-statistical-model" class="level2" data-number="7.5">
+<h2 data-number="7.5" class="anchored" data-anchor-id="what-is-a-statistical-model"><span class="header-section-number">7.5</span> What is a statistical model?</h2>
+<p>A statistical model has two parts. First, it specifies a probability pattern for the data. Second, it contains one or more unknown quantities called <strong>parameters</strong>.</p>
+<div class="cell">
+<div class="cell-output-display">
+<div id="obbleiwwwz" style="padding-left:0px;padding-right:0px;padding-top:10px;padding-bottom:10px;overflow-x:auto;overflow-y:auto;width:auto;height:auto;">
+<style>#obbleiwwwz table {
+  font-family: system-ui, 'Segoe UI', Roboto, Helvetica, Arial, sans-serif, 'Apple Color Emoji', 'Segoe UI Emoji', 'Segoe UI Symbol', 'Noto Color Emoji';
+  -webkit-font-smoothing: antialiased;
+  -moz-osx-font-smoothing: grayscale;
+}
+
+#obbleiwwwz thead, #obbleiwwwz tbody, #obbleiwwwz tfoot, #obbleiwwwz tr, #obbleiwwwz td, #obbleiwwwz th {
+  border-style: none;
+}
+
+#obbleiwwwz p {
+  margin: 0;
+  padding: 0;
+}
+
+#obbleiwwwz .gt_table {
+  display: table;
+  border-collapse: collapse;
+  line-height: normal;
+  margin-left: auto;
+  margin-right: auto;
+  color: #333333;
+  font-size: 16px;
+  font-weight: normal;
+  font-style: normal;
+  background-color: #FFFFFF;
+  width: auto;
+  border-top-style: solid;
+  border-top-width: 2px;
+  border-top-color: #A8A8A8;
+  border-right-style: none;
+  border-right-width: 2px;
+  border-right-color: #D3D3D3;
+  border-bottom-style: solid;
+  border-bottom-width: 2px;
+  border-bottom-color: #A8A8A8;
+  border-left-style: none;
+  border-left-width: 2px;
+  border-left-color: #D3D3D3;
+}
+
+#obbleiwwwz .gt_caption {
+  padding-top: 4px;
+  padding-bottom: 4px;
+}
+
+#obbleiwwwz .gt_title {
+  color: #333333;
+  font-size: 125%;
+  font-weight: initial;
+  padding-top: 4px;
+  padding-bottom: 4px;
+  padding-left: 5px;
+  padding-right: 5px;
+  border-bottom-color: #FFFFFF;
+  border-bottom-width: 0;
+}
+
+#obbleiwwwz .gt_subtitle {
+  color: #333333;
+  font-size: 85%;
+  font-weight: initial;
+  padding-top: 3px;
+  padding-bottom: 5px;
+  padding-left: 5px;
+  padding-right: 5px;
+  border-top-color: #FFFFFF;
+  border-top-width: 0;
+}
+
+#obbleiwwwz .gt_heading {
+  background-color: #FFFFFF;
+  text-align: center;
+  border-bottom-color: #FFFFFF;
+  border-left-style: none;
+  border-left-width: 1px;
+  border-left-color: #D3D3D3;
+  border-right-style: none;
+  border-right-width: 1px;
+  border-right-color: #D3D3D3;
+}
+
+#obbleiwwwz .gt_bottom_border {
+  border-bottom-style: solid;
+  border-bottom-width: 2px;
+  border-bottom-color: #D3D3D3;
+}
+
+#obbleiwwwz .gt_col_headings {
+  border-top-style: solid;
+  border-top-width: 2px;
+  border-top-color: #D3D3D3;
+  border-bottom-style: solid;
+  border-bottom-width: 2px;
+  border-bottom-color: #D3D3D3;
+  border-left-style: none;
+  border-left-width: 1px;
+  border-left-color: #D3D3D3;
+  border-right-style: none;
+  border-right-width: 1px;
+  border-right-color: #D3D3D3;
+}
+
+#obbleiwwwz .gt_col_heading {
+  color: #333333;
+  background-color: #FFFFFF;
+  font-size: 100%;
+  font-weight: normal;
+  text-transform: inherit;
+  border-left-style: none;
+  border-left-width: 1px;
+  border-left-color: #D3D3D3;
+  border-right-style: none;
+  border-right-width: 1px;
+  border-right-color: #D3D3D3;
+  vertical-align: bottom;
+  padding-top: 5px;
+  padding-bottom: 6px;
+  padding-left: 5px;
+  padding-right: 5px;
+  overflow-x: hidden;
+}
+
+#obbleiwwwz .gt_column_spanner_outer {
+  color: #333333;
+  background-color: #FFFFFF;
+  font-size: 100%;
+  font-weight: normal;
+  text-transform: inherit;
+  padding-top: 0;
+  padding-bottom: 0;
+  padding-left: 4px;
+  padding-right: 4px;
+}
+
+#obbleiwwwz .gt_column_spanner_outer:first-child {
+  padding-left: 0;
+}
+
+#obbleiwwwz .gt_column_spanner_outer:last-child {
+  padding-right: 0;
+}
+
+#obbleiwwwz .gt_column_spanner {
+  border-bottom-style: solid;
+  border-bottom-width: 2px;
+  border-bottom-color: #D3D3D3;
+  vertical-align: bottom;
+  padding-top: 5px;
+  padding-bottom: 5px;
+  overflow-x: hidden;
+  display: inline-block;
+  width: 100%;
+}
+
+#obbleiwwwz .gt_spanner_row {
+  border-bottom-style: hidden;
+}
+
+#obbleiwwwz .gt_group_heading {
+  padding-top: 8px;
+  padding-bottom: 8px;
+  padding-left: 5px;
+  padding-right: 5px;
+  color: #333333;
+  background-color: #FFFFFF;
+  font-size: 100%;
+  font-weight: initial;
+  text-transform: inherit;
+  border-top-style: solid;
+  border-top-width: 2px;
+  border-top-color: #D3D3D3;
+  border-bottom-style: solid;
+  border-bottom-width: 2px;
+  border-bottom-color: #D3D3D3;
+  border-left-style: none;
+  border-left-width: 1px;
+  border-left-color: #D3D3D3;
+  border-right-style: none;
+  border-right-width: 1px;
+  border-right-color: #D3D3D3;
+  vertical-align: middle;
+  text-align: left;
+}
+
+#obbleiwwwz .gt_empty_group_heading {
+  padding: 0.5px;
+  color: #333333;
+  background-color: #FFFFFF;
+  font-size: 100%;
+  font-weight: initial;
+  border-top-style: solid;
+  border-top-width: 2px;
+  border-top-color: #D3D3D3;
+  border-bottom-style: solid;
+  border-bottom-width: 2px;
+  border-bottom-color: #D3D3D3;
+  vertical-align: middle;
+}
+
+#obbleiwwwz .gt_from_md > :first-child {
+  margin-top: 0;
+}
+
+#obbleiwwwz .gt_from_md > :last-child {
+  margin-bottom: 0;
+}
+
+#obbleiwwwz .gt_row {
+  padding-top: 8px;
+  padding-bottom: 8px;
+  padding-left: 5px;
+  padding-right: 5px;
+  margin: 10px;
+  border-top-style: solid;
+  border-top-width: 1px;
+  border-top-color: #D3D3D3;
+  border-left-style: none;
+  border-left-width: 1px;
+  border-left-color: #D3D3D3;
+  border-right-style: none;
+  border-right-width: 1px;
+  border-right-color: #D3D3D3;
+  vertical-align: middle;
+  overflow-x: hidden;
+}
+
+#obbleiwwwz .gt_stub {
+  color: #333333;
+  background-color: #FFFFFF;
+  font-size: 100%;
+  font-weight: initial;
+  text-transform: inherit;
+  border-right-style: solid;
+  border-right-width: 2px;
+  border-right-color: #D3D3D3;
+  padding-left: 5px;
+  padding-right: 5px;
+}
+
+#obbleiwwwz .gt_stub_row_group {
+  color: #333333;
+  background-color: #FFFFFF;
+  font-size: 100%;
+  font-weight: initial;
+  text-transform: inherit;
+  border-right-style: solid;
+  border-right-width: 2px;
+  border-right-color: #D3D3D3;
+  padding-left: 5px;
+  padding-right: 5px;
+  vertical-align: top;
+}
+
+#obbleiwwwz .gt_row_group_first td {
+  border-top-width: 2px;
+}
+
+#obbleiwwwz .gt_row_group_first th {
+  border-top-width: 2px;
+}
+
+#obbleiwwwz .gt_summary_row {
+  color: #333333;
+  background-color: #FFFFFF;
+  text-transform: inherit;
+  padding-top: 8px;
+  padding-bottom: 8px;
+  padding-left: 5px;
+  padding-right: 5px;
+}
+
+#obbleiwwwz .gt_first_summary_row {
+  border-top-style: solid;
+  border-top-color: #D3D3D3;
+}
+
+#obbleiwwwz .gt_first_summary_row.thick {
+  border-top-width: 2px;
+}
+
+#obbleiwwwz .gt_last_summary_row {
+  padding-top: 8px;
+  padding-bottom: 8px;
+  padding-left: 5px;
+  padding-right: 5px;
+  border-bottom-style: solid;
+  border-bottom-width: 2px;
+  border-bottom-color: #D3D3D3;
+}
+
+#obbleiwwwz .gt_grand_summary_row {
+  color: #333333;
+  background-color: #FFFFFF;
+  text-transform: inherit;
+  padding-top: 8px;
+  padding-bottom: 8px;
+  padding-left: 5px;
+  padding-right: 5px;
+}
+
+#obbleiwwwz .gt_first_grand_summary_row {
+  padding-top: 8px;
+  padding-bottom: 8px;
+  padding-left: 5px;
+  padding-right: 5px;
+  border-top-style: double;
+  border-top-width: 6px;
+  border-top-color: #D3D3D3;
+}
+
+#obbleiwwwz .gt_last_grand_summary_row_top {
+  padding-top: 8px;
+  padding-bottom: 8px;
+  padding-left: 5px;
+  padding-right: 5px;
+  border-bottom-style: double;
+  border-bottom-width: 6px;
+  border-bottom-color: #D3D3D3;
+}
+
+#obbleiwwwz .gt_striped {
+  background-color: rgba(128, 128, 128, 0.05);
+}
+
+#obbleiwwwz .gt_table_body {
+  border-top-style: solid;
+  border-top-width: 2px;
+  border-top-color: #D3D3D3;
+  border-bottom-style: solid;
+  border-bottom-width: 2px;
+  border-bottom-color: #D3D3D3;
+}
+
+#obbleiwwwz .gt_footnotes {
+  color: #333333;
+  background-color: #FFFFFF;
+  border-bottom-style: none;
+  border-bottom-width: 2px;
+  border-bottom-color: #D3D3D3;
+  border-left-style: none;
+  border-left-width: 2px;
+  border-left-color: #D3D3D3;
+  border-right-style: none;
+  border-right-width: 2px;
+  border-right-color: #D3D3D3;
+}
+
+#obbleiwwwz .gt_footnote {
+  margin: 0px;
+  font-size: 90%;
+  padding-top: 4px;
+  padding-bottom: 4px;
+  padding-left: 5px;
+  padding-right: 5px;
+}
+
+#obbleiwwwz .gt_sourcenotes {
+  color: #333333;
+  background-color: #FFFFFF;
+  border-bottom-style: none;
+  border-bottom-width: 2px;
+  border-bottom-color: #D3D3D3;
+  border-left-style: none;
+  border-left-width: 2px;
+  border-left-color: #D3D3D3;
+  border-right-style: none;
+  border-right-width: 2px;
+  border-right-color: #D3D3D3;
+}
+
+#obbleiwwwz .gt_sourcenote {
+  font-size: 90%;
+  padding-top: 4px;
+  padding-bottom: 4px;
+  padding-left: 5px;
+  padding-right: 5px;
+}
+
+#obbleiwwwz .gt_left {
+  text-align: left;
+}
+
+#obbleiwwwz .gt_center {
+  text-align: center;
+}
+
+#obbleiwwwz .gt_right {
+  text-align: right;
+  font-variant-numeric: tabular-nums;
+}
+
+#obbleiwwwz .gt_font_normal {
+  font-weight: normal;
+}
+
+#obbleiwwwz .gt_font_bold {
+  font-weight: bold;
+}
+
+#obbleiwwwz .gt_font_italic {
+  font-style: italic;
+}
+
+#obbleiwwwz .gt_super {
+  font-size: 65%;
+}
+
+#obbleiwwwz .gt_footnote_marks {
+  font-size: 75%;
+  vertical-align: 0.4em;
+  position: initial;
+}
+
+#obbleiwwwz .gt_asterisk {
+  font-size: 100%;
+  vertical-align: 0;
+}
+
+#obbleiwwwz .gt_indent_1 {
+  text-indent: 5px;
+}
+
+#obbleiwwwz .gt_indent_2 {
+  text-indent: 10px;
+}
+
+#obbleiwwwz .gt_indent_3 {
+  text-indent: 15px;
+}
+
+#obbleiwwwz .gt_indent_4 {
+  text-indent: 20px;
+}
+
+#obbleiwwwz .gt_indent_5 {
+  text-indent: 25px;
+}
+
+#obbleiwwwz .katex-display {
+  display: inline-flex !important;
+  margin-bottom: 0.75em !important;
+}
+
+#obbleiwwwz div.Reactable > div.rt-table > div.rt-thead > div.rt-tr.rt-tr-group-header > div.rt-th-group:after {
+  height: 0px !important;
+}
+</style>
+
+<table class="gt_table caption-top table table-sm table-striped small" data-quarto-postprocess="true" data-quarto-disable-processing="false" data-quarto-bootstrap="false">
+<thead>
+<tr class="gt_heading header">
+<th colspan="4" class="gt_heading gt_title gt_font_normal">Two parts of a statistical model</th>
+</tr>
+<tr class="gt_heading even">
+<th colspan="4" class="gt_heading gt_subtitle gt_font_normal gt_bottom_border">A model specifies a probability pattern and one or more unknown parameters.</th>
+</tr>
+<tr class="gt_col_headings header">
+<th id="Model" class="gt_col_heading gt_columns_bottom_border gt_left" data-quarto-table-cell-role="th" scope="col"><strong>Model</strong></th>
+<th id="Probability-pattern" class="gt_col_heading gt_columns_bottom_border gt_left" data-quarto-table-cell-role="th" scope="col"><strong>Probability pattern</strong></th>
+<th id="Parameter(s)" class="gt_col_heading gt_columns_bottom_border gt_left" data-quarto-table-cell-role="th" scope="col"><strong>Parameter(s)</strong></th>
+<th id="What-the-parameter-changes" class="gt_col_heading gt_columns_bottom_border gt_left" data-quarto-table-cell-role="th" scope="col"><strong>What the parameter changes</strong></th>
+</tr>
+</thead>
+<tbody class="gt_table_body">
+<tr class="odd">
+<td class="gt_row gt_left" headers="Model">Bernoulli</td>
+<td class="gt_row gt_left" headers="Probability pattern">Each observation is either 0 or 1.</td>
+<td class="gt_row gt_left" headers="Parameter(s)"><span class="math inline">\(p\)</span></td>
+<td class="gt_row gt_left" headers="What the parameter changes">The probability that <span class="math inline">\(Y = 1\)</span>.</td>
+</tr>
+<tr class="even">
+<td class="gt_row gt_left" headers="Model">Binomial</td>
+<td class="gt_row gt_left" headers="Probability pattern">Counts the number of successes in a fixed number of trials.</td>
+<td class="gt_row gt_left" headers="Parameter(s)"><span class="math inline">\(n, p\)</span></td>
+<td class="gt_row gt_left" headers="What the parameter changes"><span class="math inline">\(n\)</span> is the number of trials; <span class="math inline">\(p\)</span> is the probability of success on each trial.</td>
+</tr>
+<tr class="odd">
+<td class="gt_row gt_left" headers="Model">Poisson</td>
+<td class="gt_row gt_left" headers="Probability pattern">The observation is a non-negative count: 0, 1, 2, …</td>
+<td class="gt_row gt_left" headers="Parameter(s)"><span class="math inline">\(\lambda\)</span></td>
+<td class="gt_row gt_left" headers="What the parameter changes">The expected count in the interval of interest.</td>
+</tr>
+<tr class="even">
+<td class="gt_row gt_left" headers="Model">Exponential</td>
+<td class="gt_row gt_left" headers="Probability pattern">The observation is a positive waiting time.</td>
+<td class="gt_row gt_left" headers="Parameter(s)"><span class="math inline">\(\theta\)</span></td>
+<td class="gt_row gt_left" headers="What the parameter changes">The mean waiting time.</td>
+</tr>
+<tr class="odd">
+<td class="gt_row gt_left" headers="Model">Gamma</td>
+<td class="gt_row gt_left" headers="Probability pattern">The observation is positive and right-skewed.</td>
+<td class="gt_row gt_left" headers="Parameter(s)">Shape and rate</td>
+<td class="gt_row gt_left" headers="What the parameter changes">The shape and spread of the positive, skewed distribution.</td>
+</tr>
+<tr class="even">
+<td class="gt_row gt_left" headers="Model">Normal</td>
+<td class="gt_row gt_left" headers="Probability pattern">The observation is continuous and roughly bell-shaped.</td>
+<td class="gt_row gt_left" headers="Parameter(s)"><span class="math inline">\(\mu, \sigma\)</span></td>
+<td class="gt_row gt_left" headers="What the parameter changes"><span class="math inline">\(\mu\)</span> controls the centre; <span class="math inline">\(\sigma\)</span> controls the spread.</td>
+</tr>
+</tbody>
+</table>
+
+</div>
+</div>
+</div>
+<p>Different parameter values describe different versions of the same model. For example, suppose <span class="math inline">\(Y\)</span> is whether a student uses public transport. A Bernoulli model with <span class="math inline">\(p = 0.20\)</span> describes a world where public transport use is uncommon. A Bernoulli model with <span class="math inline">\(p = 0.80\)</span> describes a world where public transport use is common.</p>
+<p>The model family is the same. The parameter value changes the story.</p>
+<div class="callout callout-style-default callout-important callout-titled">
+<div class="callout-header d-flex align-content-center">
+<div class="callout-icon-container">
+<i class="callout-icon"></i>
+</div>
+<div class="callout-title-container flex-fill">
+Model family and fitted model
+</div>
+</div>
+<div class="callout-body-container callout-body">
+<p>A <strong>model family</strong> is a set of possible models, such as all Bernoulli models with different values of <span class="math inline">\(p\)</span>.</p>
+<p>A <strong>fitted model</strong> is what we get after using data to choose particular parameter values from that family.</p>
+</div>
+</div>
+<p>This gives us a three-step process:</p>
+<ol type="1">
+<li>Choose a model family.</li>
+<li>Use data to estimate the parameter values.</li>
+<li>Check whether the fitted model is reasonable for the data.</li>
+</ol>
+<p>In this chapter, likelihood gives us a method for the second step. But the first and third steps are just as important.</p>
+</section>
+<section id="probability-and-likelihood" class="level2" data-number="7.6">
+<h2 data-number="7.6" class="anchored" data-anchor-id="probability-and-likelihood"><span class="header-section-number">7.6</span> Probability and likelihood</h2>
+<p>Likelihood is easiest to understand by contrasting it with probability. Probability usually starts with a model and asks what data we might see.</p>
+<p>For example:</p>
+<blockquote class="blockquote">
+<p>Suppose the probability that a student uses public transport is <span class="math inline">\(p = 0.50\)</span>. What is the probability that 13 out of 20 students say yes?</p>
+</blockquote>
+<p>Here, the parameter is fixed. The data vary.</p>
+<p>Likelihood turns the question around.</p>
+<blockquote class="blockquote">
+<p>We observed 13 yes responses out of 20. Which values of <span class="math inline">\(p\)</span> make this result more or less plausible?</p>
+</blockquote>
+<p>Here, the data are fixed. The parameter varies.</p>
+<div class="cell">
+<div class="cell-output-display">
+<div id="jkzvryhkzi" style="padding-left:0px;padding-right:0px;padding-top:10px;padding-bottom:10px;overflow-x:auto;overflow-y:auto;width:auto;height:auto;">
+<style>#jkzvryhkzi table {
+  font-family: system-ui, 'Segoe UI', Roboto, Helvetica, Arial, sans-serif, 'Apple Color Emoji', 'Segoe UI Emoji', 'Segoe UI Symbol', 'Noto Color Emoji';
+  -webkit-font-smoothing: antialiased;
+  -moz-osx-font-smoothing: grayscale;
+}
+
+#jkzvryhkzi thead, #jkzvryhkzi tbody, #jkzvryhkzi tfoot, #jkzvryhkzi tr, #jkzvryhkzi td, #jkzvryhkzi th {
+  border-style: none;
+}
+
+#jkzvryhkzi p {
+  margin: 0;
+  padding: 0;
+}
+
+#jkzvryhkzi .gt_table {
+  display: table;
+  border-collapse: collapse;
+  line-height: normal;
+  margin-left: auto;
+  margin-right: auto;
+  color: #333333;
+  font-size: 16px;
+  font-weight: normal;
+  font-style: normal;
+  background-color: #FFFFFF;
+  width: 100%;
+  border-top-style: solid;
+  border-top-width: 2px;
+  border-top-color: #A8A8A8;
+  border-right-style: none;
+  border-right-width: 2px;
+  border-right-color: #D3D3D3;
+  border-bottom-style: solid;
+  border-bottom-width: 2px;
+  border-bottom-color: #A8A8A8;
+  border-left-style: none;
+  border-left-width: 2px;
+  border-left-color: #D3D3D3;
+}
+
+#jkzvryhkzi .gt_caption {
+  padding-top: 4px;
+  padding-bottom: 4px;
+}
+
+#jkzvryhkzi .gt_title {
+  color: #333333;
+  font-size: 125%;
+  font-weight: initial;
+  padding-top: 4px;
+  padding-bottom: 4px;
+  padding-left: 5px;
+  padding-right: 5px;
+  border-bottom-color: #FFFFFF;
+  border-bottom-width: 0;
+}
+
+#jkzvryhkzi .gt_subtitle {
+  color: #333333;
+  font-size: 85%;
+  font-weight: initial;
+  padding-top: 3px;
+  padding-bottom: 5px;
+  padding-left: 5px;
+  padding-right: 5px;
+  border-top-color: #FFFFFF;
+  border-top-width: 0;
+}
+
+#jkzvryhkzi .gt_heading {
+  background-color: #FFFFFF;
+  text-align: center;
+  border-bottom-color: #FFFFFF;
+  border-left-style: none;
+  border-left-width: 1px;
+  border-left-color: #D3D3D3;
+  border-right-style: none;
+  border-right-width: 1px;
+  border-right-color: #D3D3D3;
+}
+
+#jkzvryhkzi .gt_bottom_border {
+  border-bottom-style: solid;
+  border-bottom-width: 2px;
+  border-bottom-color: #D3D3D3;
+}
+
+#jkzvryhkzi .gt_col_headings {
+  border-top-style: solid;
+  border-top-width: 2px;
+  border-top-color: #D3D3D3;
+  border-bottom-style: solid;
+  border-bottom-width: 2px;
+  border-bottom-color: #D3D3D3;
+  border-left-style: none;
+  border-left-width: 1px;
+  border-left-color: #D3D3D3;
+  border-right-style: none;
+  border-right-width: 1px;
+  border-right-color: #D3D3D3;
+}
+
+#jkzvryhkzi .gt_col_heading {
+  color: #333333;
+  background-color: #FFFFFF;
+  font-size: 100%;
+  font-weight: normal;
+  text-transform: inherit;
+  border-left-style: none;
+  border-left-width: 1px;
+  border-left-color: #D3D3D3;
+  border-right-style: none;
+  border-right-width: 1px;
+  border-right-color: #D3D3D3;
+  vertical-align: bottom;
+  padding-top: 5px;
+  padding-bottom: 6px;
+  padding-left: 5px;
+  padding-right: 5px;
+  overflow-x: hidden;
+}
+
+#jkzvryhkzi .gt_column_spanner_outer {
+  color: #333333;
+  background-color: #FFFFFF;
+  font-size: 100%;
+  font-weight: normal;
+  text-transform: inherit;
+  padding-top: 0;
+  padding-bottom: 0;
+  padding-left: 4px;
+  padding-right: 4px;
+}
+
+#jkzvryhkzi .gt_column_spanner_outer:first-child {
+  padding-left: 0;
+}
+
+#jkzvryhkzi .gt_column_spanner_outer:last-child {
+  padding-right: 0;
+}
+
+#jkzvryhkzi .gt_column_spanner {
+  border-bottom-style: solid;
+  border-bottom-width: 2px;
+  border-bottom-color: #D3D3D3;
+  vertical-align: bottom;
+  padding-top: 5px;
+  padding-bottom: 5px;
+  overflow-x: hidden;
+  display: inline-block;
+  width: 100%;
+}
+
+#jkzvryhkzi .gt_spanner_row {
+  border-bottom-style: hidden;
+}
+
+#jkzvryhkzi .gt_group_heading {
+  padding-top: 8px;
+  padding-bottom: 8px;
+  padding-left: 5px;
+  padding-right: 5px;
+  color: #333333;
+  background-color: #FFFFFF;
+  font-size: 100%;
+  font-weight: initial;
+  text-transform: inherit;
+  border-top-style: solid;
+  border-top-width: 2px;
+  border-top-color: #D3D3D3;
+  border-bottom-style: solid;
+  border-bottom-width: 2px;
+  border-bottom-color: #D3D3D3;
+  border-left-style: none;
+  border-left-width: 1px;
+  border-left-color: #D3D3D3;
+  border-right-style: none;
+  border-right-width: 1px;
+  border-right-color: #D3D3D3;
+  vertical-align: middle;
+  text-align: left;
+}
+
+#jkzvryhkzi .gt_empty_group_heading {
+  padding: 0.5px;
+  color: #333333;
+  background-color: #FFFFFF;
+  font-size: 100%;
+  font-weight: initial;
+  border-top-style: solid;
+  border-top-width: 2px;
+  border-top-color: #D3D3D3;
+  border-bottom-style: solid;
+  border-bottom-width: 2px;
+  border-bottom-color: #D3D3D3;
+  vertical-align: middle;
+}
+
+#jkzvryhkzi .gt_from_md > :first-child {
+  margin-top: 0;
+}
+
+#jkzvryhkzi .gt_from_md > :last-child {
+  margin-bottom: 0;
+}
+
+#jkzvryhkzi .gt_row {
+  padding-top: 8px;
+  padding-bottom: 8px;
+  padding-left: 5px;
+  padding-right: 5px;
+  margin: 10px;
+  border-top-style: solid;
+  border-top-width: 1px;
+  border-top-color: #D3D3D3;
+  border-left-style: none;
+  border-left-width: 1px;
+  border-left-color: #D3D3D3;
+  border-right-style: none;
+  border-right-width: 1px;
+  border-right-color: #D3D3D3;
+  vertical-align: middle;
+  overflow-x: hidden;
+}
+
+#jkzvryhkzi .gt_stub {
+  color: #333333;
+  background-color: #FFFFFF;
+  font-size: 100%;
+  font-weight: initial;
+  text-transform: inherit;
+  border-right-style: solid;
+  border-right-width: 2px;
+  border-right-color: #D3D3D3;
+  padding-left: 5px;
+  padding-right: 5px;
+}
+
+#jkzvryhkzi .gt_stub_row_group {
+  color: #333333;
+  background-color: #FFFFFF;
+  font-size: 100%;
+  font-weight: initial;
+  text-transform: inherit;
+  border-right-style: solid;
+  border-right-width: 2px;
+  border-right-color: #D3D3D3;
+  padding-left: 5px;
+  padding-right: 5px;
+  vertical-align: top;
+}
+
+#jkzvryhkzi .gt_row_group_first td {
+  border-top-width: 2px;
+}
+
+#jkzvryhkzi .gt_row_group_first th {
+  border-top-width: 2px;
+}
+
+#jkzvryhkzi .gt_summary_row {
+  color: #333333;
+  background-color: #FFFFFF;
+  text-transform: inherit;
+  padding-top: 8px;
+  padding-bottom: 8px;
+  padding-left: 5px;
+  padding-right: 5px;
+}
+
+#jkzvryhkzi .gt_first_summary_row {
+  border-top-style: solid;
+  border-top-color: #D3D3D3;
+}
+
+#jkzvryhkzi .gt_first_summary_row.thick {
+  border-top-width: 2px;
+}
+
+#jkzvryhkzi .gt_last_summary_row {
+  padding-top: 8px;
+  padding-bottom: 8px;
+  padding-left: 5px;
+  padding-right: 5px;
+  border-bottom-style: solid;
+  border-bottom-width: 2px;
+  border-bottom-color: #D3D3D3;
+}
+
+#jkzvryhkzi .gt_grand_summary_row {
+  color: #333333;
+  background-color: #FFFFFF;
+  text-transform: inherit;
+  padding-top: 8px;
+  padding-bottom: 8px;
+  padding-left: 5px;
+  padding-right: 5px;
+}
+
+#jkzvryhkzi .gt_first_grand_summary_row {
+  padding-top: 8px;
+  padding-bottom: 8px;
+  padding-left: 5px;
+  padding-right: 5px;
+  border-top-style: double;
+  border-top-width: 6px;
+  border-top-color: #D3D3D3;
+}
+
+#jkzvryhkzi .gt_last_grand_summary_row_top {
+  padding-top: 8px;
+  padding-bottom: 8px;
+  padding-left: 5px;
+  padding-right: 5px;
+  border-bottom-style: double;
+  border-bottom-width: 6px;
+  border-bottom-color: #D3D3D3;
+}
+
+#jkzvryhkzi .gt_striped {
+  background-color: rgba(128, 128, 128, 0.05);
+}
+
+#jkzvryhkzi .gt_table_body {
+  border-top-style: solid;
+  border-top-width: 2px;
+  border-top-color: #D3D3D3;
+  border-bottom-style: solid;
+  border-bottom-width: 2px;
+  border-bottom-color: #D3D3D3;
+}
+
+#jkzvryhkzi .gt_footnotes {
+  color: #333333;
+  background-color: #FFFFFF;
+  border-bottom-style: none;
+  border-bottom-width: 2px;
+  border-bottom-color: #D3D3D3;
+  border-left-style: none;
+  border-left-width: 2px;
+  border-left-color: #D3D3D3;
+  border-right-style: none;
+  border-right-width: 2px;
+  border-right-color: #D3D3D3;
+}
+
+#jkzvryhkzi .gt_footnote {
+  margin: 0px;
+  font-size: 90%;
+  padding-top: 4px;
+  padding-bottom: 4px;
+  padding-left: 5px;
+  padding-right: 5px;
+}
+
+#jkzvryhkzi .gt_sourcenotes {
+  color: #333333;
+  background-color: #FFFFFF;
+  border-bottom-style: none;
+  border-bottom-width: 2px;
+  border-bottom-color: #D3D3D3;
+  border-left-style: none;
+  border-left-width: 2px;
+  border-left-color: #D3D3D3;
+  border-right-style: none;
+  border-right-width: 2px;
+  border-right-color: #D3D3D3;
+}
+
+#jkzvryhkzi .gt_sourcenote {
+  font-size: 90%;
+  padding-top: 4px;
+  padding-bottom: 4px;
+  padding-left: 5px;
+  padding-right: 5px;
+}
+
+#jkzvryhkzi .gt_left {
+  text-align: left;
+}
+
+#jkzvryhkzi .gt_center {
+  text-align: center;
+}
+
+#jkzvryhkzi .gt_right {
+  text-align: right;
+  font-variant-numeric: tabular-nums;
+}
+
+#jkzvryhkzi .gt_font_normal {
+  font-weight: normal;
+}
+
+#jkzvryhkzi .gt_font_bold {
+  font-weight: bold;
+}
+
+#jkzvryhkzi .gt_font_italic {
+  font-style: italic;
+}
+
+#jkzvryhkzi .gt_super {
+  font-size: 65%;
+}
+
+#jkzvryhkzi .gt_footnote_marks {
+  font-size: 75%;
+  vertical-align: 0.4em;
+  position: initial;
+}
+
+#jkzvryhkzi .gt_asterisk {
+  font-size: 100%;
+  vertical-align: 0;
+}
+
+#jkzvryhkzi .gt_indent_1 {
+  text-indent: 5px;
+}
+
+#jkzvryhkzi .gt_indent_2 {
+  text-indent: 10px;
+}
+
+#jkzvryhkzi .gt_indent_3 {
+  text-indent: 15px;
+}
+
+#jkzvryhkzi .gt_indent_4 {
+  text-indent: 20px;
+}
+
+#jkzvryhkzi .gt_indent_5 {
+  text-indent: 25px;
+}
+
+#jkzvryhkzi .katex-display {
+  display: inline-flex !important;
+  margin-bottom: 0.75em !important;
+}
+
+#jkzvryhkzi div.Reactable > div.rt-table > div.rt-thead > div.rt-tr.rt-tr-group-header > div.rt-th-group:after {
+  height: 0px !important;
+}
+</style>
+
+<table class="gt_table caption-top table table-sm table-striped small" data-quarto-postprocess="true" data-quarto-disable-processing="false" data-quarto-bootstrap="false">
+<thead>
+<tr class="gt_col_headings header">
+<th id="Way-of-thinking" class="gt_col_heading gt_columns_bottom_border gt_left" data-quarto-table-cell-role="th" scope="col">Way of thinking</th>
+<th id="Held-fixed" class="gt_col_heading gt_columns_bottom_border gt_left" data-quarto-table-cell-role="th" scope="col">Held fixed</th>
+<th id="Allowed-to-vary" class="gt_col_heading gt_columns_bottom_border gt_left" data-quarto-table-cell-role="th" scope="col">Allowed to vary</th>
+<th id="Question" class="gt_col_heading gt_columns_bottom_border gt_left" data-quarto-table-cell-role="th" scope="col">Question</th>
+</tr>
+</thead>
+<tbody class="gt_table_body">
+<tr class="odd">
+<td class="gt_row gt_left" headers="Way of thinking">Probability</td>
+<td class="gt_row gt_left" headers="Held fixed">The parameter or model</td>
+<td class="gt_row gt_left" headers="Allowed to vary">The possible data</td>
+<td class="gt_row gt_left" headers="Question">If the model were true, what data might we see?</td>
+</tr>
+<tr class="even">
+<td class="gt_row gt_left" headers="Way of thinking">Likelihood</td>
+<td class="gt_row gt_left" headers="Held fixed">The observed data</td>
+<td class="gt_row gt_left" headers="Allowed to vary">The possible parameter values</td>
+<td class="gt_row gt_left" headers="Question">Given the data, which parameter values make them plausible?</td>
+</tr>
+</tbody>
+</table>
+
+</div>
+</div>
+</div>
+<p>This reversal is subtle, but it is the heart of the chapter.</p>
+<section id="an-example-public-transport-use" class="level3" data-number="7.6.1">
+<h3 data-number="7.6.1" class="anchored" data-anchor-id="an-example-public-transport-use"><span class="header-section-number">7.6.1</span> An example: public transport use</h3>
+<p>Suppose we ask 20 students whether they used public transport to get to campus today. We record:</p>
+<p><span class="math display">\[
+1 = \text{yes}, \qquad 0 = \text{no}.
+\]</span></p>
+<p>Suppose 13 students say yes and 7 students say no.</p>
+<p>A natural estimate of the probability that a student uses public transport is:</p>
+<p><span class="math display">\[
+\hat{p} = \frac{13}{20} = 0.65.
+\]</span></p>
+<p>Maximum likelihood will give the same answer, but it reaches the answer using a different way of thinking.</p>
+<p>It asks:</p>
+<blockquote class="blockquote">
+<p>If the true probability were <span class="math inline">\(p = 0.30\)</span>, how likely would it be to see 13 yes responses and 7 no responses?</p>
+</blockquote>
+<blockquote class="blockquote">
+<p>If the true probability were <span class="math inline">\(p = 0.65\)</span>, how likely would it be?</p>
+</blockquote>
+<blockquote class="blockquote">
+<p>If the true probability were <span class="math inline">\(p = 0.90\)</span>, how likely would it be?</p>
+</blockquote>
+<p>Under a Bernoulli model, the likelihood for the observed sequence is:</p>
+<p><span class="math display">\[
+L(p) = p^{13}(1-p)^7.
+\]</span></p>
+<p>This expression comes from multiplying the probability of each observed response. Each yes contributes a factor of <span class="math inline">\(p\)</span>. Each no contributes a factor of <span class="math inline">\(1-p\)</span>. Since there are 13 yes responses and 7 no responses, the likelihood is:</p>
+<p><span class="math display">\[
+\underbrace{p \times p \times \cdots \times p}_{13\ \text{times}}
+\times
+\underbrace{(1-p) \times (1-p) \times \cdots \times (1-p)}_{7\ \text{times}}.
+\]</span></p>
+<p>That product is:</p>
+<p><span class="math display">\[
+L(p) = p^{13}(1-p)^7.
+\]</span></p>
+<p>Now we can evaluate this likelihood for many possible values of <span class="math inline">\(p\)</span>.</p>
+<div class="cell">
+<div class="cell-output-display">
+<div id="sgqdbvmyao" style="padding-left:0px;padding-right:0px;padding-top:10px;padding-bottom:10px;overflow-x:auto;overflow-y:auto;width:auto;height:auto;">
+<style>#sgqdbvmyao table {
+  font-family: system-ui, 'Segoe UI', Roboto, Helvetica, Arial, sans-serif, 'Apple Color Emoji', 'Segoe UI Emoji', 'Segoe UI Symbol', 'Noto Color Emoji';
+  -webkit-font-smoothing: antialiased;
+  -moz-osx-font-smoothing: grayscale;
+}
+
+#sgqdbvmyao thead, #sgqdbvmyao tbody, #sgqdbvmyao tfoot, #sgqdbvmyao tr, #sgqdbvmyao td, #sgqdbvmyao th {
+  border-style: none;
+}
+
+#sgqdbvmyao p {
+  margin: 0;
+  padding: 0;
+}
+
+#sgqdbvmyao .gt_table {
+  display: table;
+  border-collapse: collapse;
+  line-height: normal;
+  margin-left: auto;
+  margin-right: auto;
+  color: #333333;
+  font-size: 16px;
+  font-weight: normal;
+  font-style: normal;
+  background-color: #FFFFFF;
+  width: auto;
+  border-top-style: solid;
+  border-top-width: 2px;
+  border-top-color: #A8A8A8;
+  border-right-style: none;
+  border-right-width: 2px;
+  border-right-color: #D3D3D3;
+  border-bottom-style: solid;
+  border-bottom-width: 2px;
+  border-bottom-color: #A8A8A8;
+  border-left-style: none;
+  border-left-width: 2px;
+  border-left-color: #D3D3D3;
+}
+
+#sgqdbvmyao .gt_caption {
+  padding-top: 4px;
+  padding-bottom: 4px;
+}
+
+#sgqdbvmyao .gt_title {
+  color: #333333;
+  font-size: 125%;
+  font-weight: initial;
+  padding-top: 4px;
+  padding-bottom: 4px;
+  padding-left: 5px;
+  padding-right: 5px;
+  border-bottom-color: #FFFFFF;
+  border-bottom-width: 0;
+}
+
+#sgqdbvmyao .gt_subtitle {
+  color: #333333;
+  font-size: 85%;
+  font-weight: initial;
+  padding-top: 3px;
+  padding-bottom: 5px;
+  padding-left: 5px;
+  padding-right: 5px;
+  border-top-color: #FFFFFF;
+  border-top-width: 0;
+}
+
+#sgqdbvmyao .gt_heading {
+  background-color: #FFFFFF;
+  text-align: center;
+  border-bottom-color: #FFFFFF;
+  border-left-style: none;
+  border-left-width: 1px;
+  border-left-color: #D3D3D3;
+  border-right-style: none;
+  border-right-width: 1px;
+  border-right-color: #D3D3D3;
+}
+
+#sgqdbvmyao .gt_bottom_border {
+  border-bottom-style: solid;
+  border-bottom-width: 2px;
+  border-bottom-color: #D3D3D3;
+}
+
+#sgqdbvmyao .gt_col_headings {
+  border-top-style: solid;
+  border-top-width: 2px;
+  border-top-color: #D3D3D3;
+  border-bottom-style: solid;
+  border-bottom-width: 2px;
+  border-bottom-color: #D3D3D3;
+  border-left-style: none;
+  border-left-width: 1px;
+  border-left-color: #D3D3D3;
+  border-right-style: none;
+  border-right-width: 1px;
+  border-right-color: #D3D3D3;
+}
+
+#sgqdbvmyao .gt_col_heading {
+  color: #333333;
+  background-color: #FFFFFF;
+  font-size: 100%;
+  font-weight: normal;
+  text-transform: inherit;
+  border-left-style: none;
+  border-left-width: 1px;
+  border-left-color: #D3D3D3;
+  border-right-style: none;
+  border-right-width: 1px;
+  border-right-color: #D3D3D3;
+  vertical-align: bottom;
+  padding-top: 5px;
+  padding-bottom: 6px;
+  padding-left: 5px;
+  padding-right: 5px;
+  overflow-x: hidden;
+}
+
+#sgqdbvmyao .gt_column_spanner_outer {
+  color: #333333;
+  background-color: #FFFFFF;
+  font-size: 100%;
+  font-weight: normal;
+  text-transform: inherit;
+  padding-top: 0;
+  padding-bottom: 0;
+  padding-left: 4px;
+  padding-right: 4px;
+}
+
+#sgqdbvmyao .gt_column_spanner_outer:first-child {
+  padding-left: 0;
+}
+
+#sgqdbvmyao .gt_column_spanner_outer:last-child {
+  padding-right: 0;
+}
+
+#sgqdbvmyao .gt_column_spanner {
+  border-bottom-style: solid;
+  border-bottom-width: 2px;
+  border-bottom-color: #D3D3D3;
+  vertical-align: bottom;
+  padding-top: 5px;
+  padding-bottom: 5px;
+  overflow-x: hidden;
+  display: inline-block;
+  width: 100%;
+}
+
+#sgqdbvmyao .gt_spanner_row {
+  border-bottom-style: hidden;
+}
+
+#sgqdbvmyao .gt_group_heading {
+  padding-top: 8px;
+  padding-bottom: 8px;
+  padding-left: 5px;
+  padding-right: 5px;
+  color: #333333;
+  background-color: #FFFFFF;
+  font-size: 100%;
+  font-weight: initial;
+  text-transform: inherit;
+  border-top-style: solid;
+  border-top-width: 2px;
+  border-top-color: #D3D3D3;
+  border-bottom-style: solid;
+  border-bottom-width: 2px;
+  border-bottom-color: #D3D3D3;
+  border-left-style: none;
+  border-left-width: 1px;
+  border-left-color: #D3D3D3;
+  border-right-style: none;
+  border-right-width: 1px;
+  border-right-color: #D3D3D3;
+  vertical-align: middle;
+  text-align: left;
+}
+
+#sgqdbvmyao .gt_empty_group_heading {
+  padding: 0.5px;
+  color: #333333;
+  background-color: #FFFFFF;
+  font-size: 100%;
+  font-weight: initial;
+  border-top-style: solid;
+  border-top-width: 2px;
+  border-top-color: #D3D3D3;
+  border-bottom-style: solid;
+  border-bottom-width: 2px;
+  border-bottom-color: #D3D3D3;
+  vertical-align: middle;
+}
+
+#sgqdbvmyao .gt_from_md > :first-child {
+  margin-top: 0;
+}
+
+#sgqdbvmyao .gt_from_md > :last-child {
+  margin-bottom: 0;
+}
+
+#sgqdbvmyao .gt_row {
+  padding-top: 8px;
+  padding-bottom: 8px;
+  padding-left: 5px;
+  padding-right: 5px;
+  margin: 10px;
+  border-top-style: solid;
+  border-top-width: 1px;
+  border-top-color: #D3D3D3;
+  border-left-style: none;
+  border-left-width: 1px;
+  border-left-color: #D3D3D3;
+  border-right-style: none;
+  border-right-width: 1px;
+  border-right-color: #D3D3D3;
+  vertical-align: middle;
+  overflow-x: hidden;
+}
+
+#sgqdbvmyao .gt_stub {
+  color: #333333;
+  background-color: #FFFFFF;
+  font-size: 100%;
+  font-weight: initial;
+  text-transform: inherit;
+  border-right-style: solid;
+  border-right-width: 2px;
+  border-right-color: #D3D3D3;
+  padding-left: 5px;
+  padding-right: 5px;
+}
+
+#sgqdbvmyao .gt_stub_row_group {
+  color: #333333;
+  background-color: #FFFFFF;
+  font-size: 100%;
+  font-weight: initial;
+  text-transform: inherit;
+  border-right-style: solid;
+  border-right-width: 2px;
+  border-right-color: #D3D3D3;
+  padding-left: 5px;
+  padding-right: 5px;
+  vertical-align: top;
+}
+
+#sgqdbvmyao .gt_row_group_first td {
+  border-top-width: 2px;
+}
+
+#sgqdbvmyao .gt_row_group_first th {
+  border-top-width: 2px;
+}
+
+#sgqdbvmyao .gt_summary_row {
+  color: #333333;
+  background-color: #FFFFFF;
+  text-transform: inherit;
+  padding-top: 8px;
+  padding-bottom: 8px;
+  padding-left: 5px;
+  padding-right: 5px;
+}
+
+#sgqdbvmyao .gt_first_summary_row {
+  border-top-style: solid;
+  border-top-color: #D3D3D3;
+}
+
+#sgqdbvmyao .gt_first_summary_row.thick {
+  border-top-width: 2px;
+}
+
+#sgqdbvmyao .gt_last_summary_row {
+  padding-top: 8px;
+  padding-bottom: 8px;
+  padding-left: 5px;
+  padding-right: 5px;
+  border-bottom-style: solid;
+  border-bottom-width: 2px;
+  border-bottom-color: #D3D3D3;
+}
+
+#sgqdbvmyao .gt_grand_summary_row {
+  color: #333333;
+  background-color: #FFFFFF;
+  text-transform: inherit;
+  padding-top: 8px;
+  padding-bottom: 8px;
+  padding-left: 5px;
+  padding-right: 5px;
+}
+
+#sgqdbvmyao .gt_first_grand_summary_row {
+  padding-top: 8px;
+  padding-bottom: 8px;
+  padding-left: 5px;
+  padding-right: 5px;
+  border-top-style: double;
+  border-top-width: 6px;
+  border-top-color: #D3D3D3;
+}
+
+#sgqdbvmyao .gt_last_grand_summary_row_top {
+  padding-top: 8px;
+  padding-bottom: 8px;
+  padding-left: 5px;
+  padding-right: 5px;
+  border-bottom-style: double;
+  border-bottom-width: 6px;
+  border-bottom-color: #D3D3D3;
+}
+
+#sgqdbvmyao .gt_striped {
+  background-color: rgba(128, 128, 128, 0.05);
+}
+
+#sgqdbvmyao .gt_table_body {
+  border-top-style: solid;
+  border-top-width: 2px;
+  border-top-color: #D3D3D3;
+  border-bottom-style: solid;
+  border-bottom-width: 2px;
+  border-bottom-color: #D3D3D3;
+}
+
+#sgqdbvmyao .gt_footnotes {
+  color: #333333;
+  background-color: #FFFFFF;
+  border-bottom-style: none;
+  border-bottom-width: 2px;
+  border-bottom-color: #D3D3D3;
+  border-left-style: none;
+  border-left-width: 2px;
+  border-left-color: #D3D3D3;
+  border-right-style: none;
+  border-right-width: 2px;
+  border-right-color: #D3D3D3;
+}
+
+#sgqdbvmyao .gt_footnote {
+  margin: 0px;
+  font-size: 90%;
+  padding-top: 4px;
+  padding-bottom: 4px;
+  padding-left: 5px;
+  padding-right: 5px;
+}
+
+#sgqdbvmyao .gt_sourcenotes {
+  color: #333333;
+  background-color: #FFFFFF;
+  border-bottom-style: none;
+  border-bottom-width: 2px;
+  border-bottom-color: #D3D3D3;
+  border-left-style: none;
+  border-left-width: 2px;
+  border-left-color: #D3D3D3;
+  border-right-style: none;
+  border-right-width: 2px;
+  border-right-color: #D3D3D3;
+}
+
+#sgqdbvmyao .gt_sourcenote {
+  font-size: 90%;
+  padding-top: 4px;
+  padding-bottom: 4px;
+  padding-left: 5px;
+  padding-right: 5px;
+}
+
+#sgqdbvmyao .gt_left {
+  text-align: left;
+}
+
+#sgqdbvmyao .gt_center {
+  text-align: center;
+}
+
+#sgqdbvmyao .gt_right {
+  text-align: right;
+  font-variant-numeric: tabular-nums;
+}
+
+#sgqdbvmyao .gt_font_normal {
+  font-weight: normal;
+}
+
+#sgqdbvmyao .gt_font_bold {
+  font-weight: bold;
+}
+
+#sgqdbvmyao .gt_font_italic {
+  font-style: italic;
+}
+
+#sgqdbvmyao .gt_super {
+  font-size: 65%;
+}
+
+#sgqdbvmyao .gt_footnote_marks {
+  font-size: 75%;
+  vertical-align: 0.4em;
+  position: initial;
+}
+
+#sgqdbvmyao .gt_asterisk {
+  font-size: 100%;
+  vertical-align: 0;
+}
+
+#sgqdbvmyao .gt_indent_1 {
+  text-indent: 5px;
+}
+
+#sgqdbvmyao .gt_indent_2 {
+  text-indent: 10px;
+}
+
+#sgqdbvmyao .gt_indent_3 {
+  text-indent: 15px;
+}
+
+#sgqdbvmyao .gt_indent_4 {
+  text-indent: 20px;
+}
+
+#sgqdbvmyao .gt_indent_5 {
+  text-indent: 25px;
+}
+
+#sgqdbvmyao .katex-display {
+  display: inline-flex !important;
+  margin-bottom: 0.75em !important;
+}
+
+#sgqdbvmyao div.Reactable > div.rt-table > div.rt-thead > div.rt-tr.rt-tr-group-header > div.rt-th-group:after {
+  height: 0px !important;
+}
+</style>
+
+<table class="gt_table caption-top table table-sm table-striped small" data-quarto-postprocess="true" data-quarto-disable-processing="false" data-quarto-bootstrap="false">
+<thead>
+<tr class="gt_col_headings header">
+<th id="Possible-p" class="gt_col_heading gt_columns_bottom_border gt_right" data-quarto-table-cell-role="th" scope="col">Possible p</th>
+<th id="Likelihood" class="gt_col_heading gt_columns_bottom_border gt_right" data-quarto-table-cell-role="th" scope="col">Likelihood</th>
+</tr>
+</thead>
+<tbody class="gt_table_body">
+<tr class="odd">
+<td class="gt_row gt_right" headers="Possible p">0.30</td>
+<td class="gt_row gt_right" headers="Likelihood">0.00000001</td>
+</tr>
+<tr class="even">
+<td class="gt_row gt_right" headers="Possible p">0.50</td>
+<td class="gt_row gt_right" headers="Likelihood">0.00000090</td>
+</tr>
+<tr class="odd">
+<td class="gt_row gt_right" headers="Possible p">0.65</td>
+<td class="gt_row gt_right" headers="Likelihood">0.00000238</td>
+</tr>
+<tr class="even">
+<td class="gt_row gt_right" headers="Possible p">0.80</td>
+<td class="gt_row gt_right" headers="Likelihood">0.00000077</td>
+</tr>
+<tr class="odd">
+<td class="gt_row gt_right" headers="Possible p">0.90</td>
+<td class="gt_row gt_right" headers="Likelihood">0.00000003</td>
+</tr>
+</tbody>
+</table>
+
+</div>
+</div>
+</div>
+<p>The likelihood is not largest at very small values of <span class="math inline">\(p\)</span>, because 13 yes responses would be surprising if public transport use were rare. It is not largest at values close to 1 either, because then we would expect almost everyone to say yes. The likelihood is highest around <span class="math inline">\(p = 0.65\)</span>.</p>
+<div class="cell">
+<div class="cell-output-display">
+<div>
+<figure class="figure">
+<p><img src="7_Likelihood_files/figure-html/unnamed-chunk-16-1.png" class="img-fluid figure-img" width="672"></p>
+</figure>
+</div>
+</div>
+</div>
+<p>The dashed line marks <span class="math inline">\(p = 13/20 = 0.65\)</span>. This is the value of <span class="math inline">\(p\)</span> that makes the observed data most likely.</p>
+</section>
+</section>
+<section id="maximum-likelihood-estimation" class="level2" data-number="7.7">
+<h2 data-number="7.7" class="anchored" data-anchor-id="maximum-likelihood-estimation"><span class="header-section-number">7.7</span> Maximum likelihood estimation</h2>
+<p>Once we have a likelihood curve, one obvious thing to do is choose the parameter value where the curve is highest. That value is the <strong>maximum likelihood estimate</strong>, or MLE. For the public transport example:</p>
+<p><span class="math display">\[
+\hat{p}_{\text{MLE}} = \frac{13}{20} = 0.65.
+\]</span></p>
+<p>This should feel reassuring. In this simple case, maximum likelihood gives the same estimate we would have used anyway: the sample proportion. But MLE is more than a new name for the sample proportion. Its power is that it gives a general principle:</p>
+<blockquote class="blockquote">
+<p>Choose the parameter value that makes the observed data most likely under the model.</p>
+</blockquote>
+<p>For binary data, this gives the sample proportion. For other models, it gives other estimates.</p>
+<p>In general, if the data are <span class="math inline">\(x_1, x_2, \ldots, x_n\)</span> and the model has parameter <span class="math inline">\(\theta\)</span>, we write the likelihood as:</p>
+<p><span class="math display">\[
+L(\theta) = \prod_{i=1}^n f(x_i \mid \theta).
+\]</span></p>
+<p>The MLE is the value of <span class="math inline">\(\theta\)</span> that maximises this likelihood:</p>
+<p><span class="math display">\[
+\hat{\theta}_{\text{MLE}} = \arg\max_{\theta} L(\theta).
+\]</span></p>
+<p>This notation can look intimidating, but it is saying something simple:</p>
+<blockquote class="blockquote">
+<p>Try different parameter values and find the one that gives the largest likelihood.</p>
+</blockquote>
+<p>In simple examples, we can sometimes find the answer using algebra or calculus. In more complicated examples, the computer searches for the maximum numerically.</p>
+<section id="why-log-likelihoods-are-useful" class="level3" data-number="7.7.1">
+<h3 data-number="7.7.1" class="anchored" data-anchor-id="why-log-likelihoods-are-useful"><span class="header-section-number">7.7.1</span> Why log-likelihoods are useful</h3>
+<p>Likelihoods often involve multiplying many probabilities or densities together. When the sample size is large, these products can become extremely small. They can also be awkward to differentiate. For this reason, we often work with the <strong>log-likelihood</strong>.</p>
+<p>The log-likelihood is:</p>
+<p><span class="math display">\[
+\ell(\theta) = \log L(\theta)
+\]</span></p>
+<p>The key fact is:</p>
+<blockquote class="blockquote">
+<p>The likelihood and log-likelihood are maximised at the same parameter value.</p>
+</blockquote>
+<p>This is because the log function is increasing. If one likelihood is larger than another, then its log is also larger.</p>
+<p>For the public transport example:</p>
+<p><span class="math display">\[
+L(p) = p^{13}(1-p)^7.
+\]</span></p>
+<p>Taking logs gives:</p>
+<p><span class="math display">\[
+\ell(p) = 13\log(p) + 7\log(1-p).
+\]</span></p>
+<p>Multiplication has become addition, and powers have become multiplication. This is much easier to work with.</p>
+<div class="cell">
+<div class="cell-output-display">
+<div>
+<figure class="figure">
+<p><img src="7_Likelihood_files/figure-html/unnamed-chunk-17-1.png" class="img-fluid figure-img" width="672"></p>
+</figure>
+</div>
+</div>
+</div>
+<p>The scale has changed, but the peak is in the same place.</p>
+<div class="callout callout-style-default callout-note callout-titled">
+<div class="callout-header d-flex align-content-center" data-bs-toggle="collapse" data-bs-target=".callout-4-contents" aria-controls="callout-4" aria-expanded="false" aria-label="Toggle callout">
+<div class="callout-icon-container">
+<i class="callout-icon"></i>
+</div>
+<div class="callout-title-container flex-fill">
+Optional: finding the maximum using calculus
+</div>
+<div class="callout-btn-toggle d-inline-block border-0 py-1 ps-1 pe-0 float-end"><i class="callout-toggle"></i></div>
+</div>
+<div id="callout-4" class="callout-4-contents callout-collapse collapse">
+<div class="callout-body-container callout-body">
+<p>For the public transport example, the log-likelihood is:</p>
+<p><span class="math display">\[
+\ell(p) = 13\log(p) + 7\log(1-p).
+\]</span></p>
+<p>Differentiate with respect to <span class="math inline">\(p\)</span>:</p>
+<p><span class="math display">\[
+\frac{d\ell(p)}{dp} = \frac{13}{p} - \frac{7}{1-p}.
+\]</span></p>
+<p>Set the derivative equal to zero:</p>
+<p><span class="math display">\[
+\frac{13}{p} - \frac{7}{1-p} = 0.
+\]</span></p>
+<p>Solving gives:</p>
+<p><span class="math display">\[
+13(1-p) = 7p.
+\]</span></p>
+<p>So:</p>
+<p><span class="math display">\[
+13 = 20p.
+\]</span></p>
+<p>Therefore:</p>
+<p><span class="math display">\[
+\hat{p}_{\text{MLE}} = \frac{13}{20} = 0.65
+\]</span></p>
+</div>
+</div>
+</div>
+</section>
+<section id="a-second-likelihood-example-waiting-times" class="level3" data-number="7.7.2">
+<h3 data-number="7.7.2" class="anchored" data-anchor-id="a-second-likelihood-example-waiting-times"><span class="header-section-number">7.7.2</span> A second likelihood example: waiting times</h3>
+<p>The binary example is useful because it connects likelihood to the sample proportion. But likelihood is more general than binary data.</p>
+<p>Suppose we record how long six students wait for a tram, in minutes:</p>
+<p><span class="math display">\[
+4.2,\ 1.7,\ 6.5,\ 3.1,\ 2.8,\ 5.4
+\]</span></p>
+<p>Waiting times are positive and often right-skewed. A normal model might not be ideal. A simple alternative is the exponential model.</p>
+<p>Let <span class="math inline">\(\theta\)</span> be the mean waiting time. The exponential density is:</p>
+<p><span class="math display">\[
+f(x \mid \theta) = \frac{1}{\theta}e^{-x/\theta}, \qquad x &gt; 0
+\]</span></p>
+<p>For independent waiting times <span class="math inline">\(x_1, x_2, \ldots, x_n\)</span>, the likelihood is:</p>
+<p><span class="math display">\[
+L(\theta) = \prod_{i=1}^n \frac{1}{\theta}e^{-x_i/\theta}
+\]</span></p>
+<p>The log-likelihood is:</p>
+<p><span class="math display">\[
+\ell(\theta) = -n\log(\theta) - \frac{1}{\theta}\sum_{i=1}^n x_i
+\]</span></p>
+<p>For the exponential model using this parameterisation, the MLE of the mean waiting time is the sample mean:</p>
+<p><span class="math display">\[
+\hat{\theta}_{\text{MLE}} = \bar{x}
+\]</span></p>
+<p>For our sample of 6 waiting times, the maximum likelihood estimate of the mean waiting time is approximately</p>
+<p><span class="math display">\[
+\hat{\theta}_{\text{MLE}}
+=
+\bar{x}
+=
+\frac{4.2 + 1.7 + 6.5 + 3.1 + 2.8 + 5.4}{6}
+=
+3.95 \text{ minutes}
+\]</span></p>
+<p>Again, the answer is familiar. But the reasoning is model-based. We did not just calculate the mean as a description of the sample. We calculated the parameter value that makes these waiting times most likely under an exponential model.</p>
+<div class="cell">
+<div class="cell-output-display">
+<div>
+<figure class="figure">
+<p><img src="7_Likelihood_files/figure-html/unnamed-chunk-19-1.png" class="img-fluid figure-img" width="672"></p>
+</figure>
+</div>
+</div>
+</div>
+</section>
+<section id="a-normal-model-example" class="level3" data-number="7.7.3">
+<h3 data-number="7.7.3" class="anchored" data-anchor-id="a-normal-model-example"><span class="header-section-number">7.7.3</span> A normal model example</h3>
+<p>The normal model also fits naturally into the likelihood framework.</p>
+<p>Suppose:</p>
+<p><span class="math display">\[
+X_1, X_2, \ldots, X_n \sim N(\mu, \sigma^2).
+\]</span></p>
+<p>The unknown parameters are the mean <span class="math inline">\(\mu\)</span> and variance <span class="math inline">\(\sigma^2\)</span>.</p>
+<p>Using maximum likelihood, the estimate of <span class="math inline">\(\mu\)</span> is:</p>
+<p><span class="math display">\[
+\hat{\mu}_{\text{MLE}} = \bar{x}.
+\]</span></p>
+<p>The estimate of <span class="math inline">\(\sigma^2\)</span> is:</p>
+<p><span class="math display">\[
+\hat{\sigma}^2_{\text{MLE}} = \frac{1}{n}\sum_{i=1}^n (x_i - \bar{x})^2.
+\]</span></p>
+<p>Notice the denominator: it is <span class="math inline">\(n\)</span>, not <span class="math inline">\(n-1\)</span>.</p>
+<p>Earlier, when we estimated the population variance using the usual sample variance, we used <span class="math inline">\(n-1\)</span> in the denominator. That estimator is designed to be unbiased. The MLE uses <span class="math inline">\(n\)</span> because it is the value that maximises the likelihood under the normal model.</p>
+<p>This is a useful reminder:</p>
+<blockquote class="blockquote">
+<p>Maximum likelihood estimates are not always unbiased. They are chosen to maximise likelihood.</p>
+</blockquote>
+<p>MLEs often have strong large-sample properties, but in small samples they can still be biased.</p>
+<div class="cell">
+<div class="cell-output-display">
+<div>
+<figure class="figure">
+<p><img src="7_Likelihood_files/figure-html/unnamed-chunk-20-1.png" class="img-fluid figure-img" width="672"></p>
+</figure>
+</div>
+</div>
+</div>
+<p>The rug marks show the observed data values. Both curves are centred at the sample mean. The difference is in the spread: the MLE variance uses <span class="math inline">\(n\)</span>, so it is slightly smaller than the usual sample variance, which uses <span class="math inline">\(n - 1\)</span>. This makes the MLE curve slightly narrower.</p>
+</section>
+<section id="mle-cannot-fix-a-bad-model" class="level3" data-number="7.7.4">
+<h3 data-number="7.7.4" class="anchored" data-anchor-id="mle-cannot-fix-a-bad-model"><span class="header-section-number">7.7.4</span> MLE cannot fix a bad model</h3>
+<p>Maximum likelihood finds the best-fitting parameter value <strong>within the model we chose</strong>. Howwever, it does not prove that the model itself was a good idea. This is similar to the warning from the bootstrap chapter:</p>
+<blockquote class="blockquote">
+<p>The bootstrap cannot fix a bad sample.</p>
+</blockquote>
+<p>Here, the warning is:</p>
+<blockquote class="blockquote">
+<p>MLE cannot fix a bad model.</p>
+</blockquote>
+<p>If we fit a normal model to strongly right-skewed data, maximum likelihood will still return a mean and standard deviation. The computer will not object. But the fitted model may be a poor description of the data.</p>
+<div class="cell">
+<div class="cell-output-display">
+<div>
+<figure class="figure">
+<p><img src="7_Likelihood_files/figure-html/unnamed-chunk-21-1.png" class="img-fluid figure-img" width="672"></p>
+</figure>
+</div>
+</div>
+</div>
+<p>Both curves come from fitted models. But the question is not only which parameters maximise the likelihood. The question is whether the model captures the main features of the data.</p>
+</section>
+</section>
+<section id="checking-fitted-models" class="level2" data-number="7.8">
+<h2 data-number="7.8" class="anchored" data-anchor-id="checking-fitted-models"><span class="header-section-number">7.8</span> Checking fitted models</h2>
+<p>A fitted model should be checked against the data.</p>
+<p>There are many ways to do this. At this stage, the most important habit is visual:</p>
+<ul>
+<li>plot the data;</li>
+<li>overlay the fitted model where appropriate;</li>
+<li>compare the empirical distribution with the fitted distribution;</li>
+<li>use quantile-quantile plots for continuous data;</li>
+<li>ask whether simulated data from the model look like the real data.</li>
+</ul>
+<p>A <strong>quantile-quantile plot</strong>, or QQ plot, compares the quantiles of the observed data with the quantiles expected under the fitted model. If the model is a good description of the data, the points should lie roughly along a straight line.</p>
+<p>They will never be perfectly straight. Random samples are always irregular. The question is whether the departures from the line look systematic.</p>
+<div class="cell">
+<div class="cell-output-display">
+<div>
+<figure class="figure">
+<p><img src="7_Likelihood_files/figure-html/unnamed-chunk-22-1.png" class="img-fluid figure-img" width="672"></p>
+</figure>
+</div>
+</div>
+</div>
+<p>The curved pattern suggests that the normal model is struggling to describe the skewness in the data.</p>
+<p>This is not a failure of maximum likelihood. MLE did exactly what it was asked to do: it found the best-fitting normal model. The issue is that the normal family may not have been a sensible family for these data.</p>
+<div class="callout callout-style-default callout-important callout-titled">
+<div class="callout-header d-flex align-content-center">
+<div class="callout-icon-container">
+<i class="callout-icon"></i>
+</div>
+<div class="callout-title-container flex-fill">
+The model-checking question
+</div>
+</div>
+<div class="callout-body-container callout-body">
+<p>Do not only ask:</p>
+<blockquote class="blockquote">
+<p>What are the fitted parameter values?</p>
+</blockquote>
+<p>Also ask:</p>
+<blockquote class="blockquote">
+<p>Does the fitted model generate data that look like the data we observed?</p>
+</blockquote>
+</div>
+</div>
+</section>
+<section id="our-journey-ahead" class="level2" data-number="7.9">
+<h2 data-number="7.9" class="anchored" data-anchor-id="our-journey-ahead"><span class="header-section-number">7.9</span> Our journey ahead</h2>
+<p>We will return to likelihood in the next chapter.</p>
+<p>In this chapter, we have used likelihood mainly for maximum likelihood estimation. We chose the parameter value that made the observed data most likely. This gave us a point estimate: one best-fitting value inside the model we had chosen.</p>
+<p>But likelihood can be used in another way.</p>
+<p>Instead of using the likelihood to choose a single value, Bayesian inference uses likelihood as part of an updating process. It starts with a prior, which represents what we are willing to say about the parameter before seeing the data. It then combines that prior with the likelihood, which represents what the observed data say about different parameter values.</p>
+<p>In its simplest form, the idea is:</p>
+<p><span class="math display">\[
+\text{posterior} \propto \text{prior} \times \text{likelihood}.
+\]</span></p>
+<p>We do not need to unpack this formula yet. For now, the important point is that likelihood is the bridge. In maximum likelihood estimation, we look for the highest point of the likelihood curve. In Bayesian inference, we combine the whole likelihood curve with prior information to form a posterior distribution.</p>
+<p><centre></centre></p>
+<div class="cell enlarge-image">
+<div class="cell-output-display">
+<div>
+<figure class="figure">
+<p><img src="images/chapter7/outlineteaser.png" class="img-fluid figure-img" width="2200"></p>
+</figure>
+</div>
+</div>
+</div>
+<p></p>
+<p><br></p>
+<p>This is why likelihood sits in the middle of the course. It grows out of probability and uncertainty. It gives us maximum likelihood estimation in this chapter. It also prepares us for Bayesian inference, where the same likelihood becomes part of a broader story about learning from data.</p>
+</section>
+<section id="exercises" class="level2" data-number="7.10">
+<h2 data-number="7.10" class="anchored" data-anchor-id="exercises"><span class="header-section-number">7.10</span> Exercises</h2>
+<div class="callout callout-style-default callout-note callout-titled">
+<div class="callout-header d-flex align-content-center">
+<div class="callout-icon-container">
+<i class="callout-icon"></i>
+</div>
+<div class="callout-title-container flex-fill">
+Question 1
+</div>
+</div>
+<div class="callout-body-container callout-body">
+<p>For each variable below, suggest a possible probability model and briefly explain your choice.</p>
+<ol type="a">
+<li><p>Whether a student submitted an assignment on time.</p></li>
+<li><p>The number of emails received by a help desk in one hour.</p></li>
+<li><p>The time until the next customer arrives at a cafe.</p></li>
+<li><p>The amount of rainfall recorded on wet days.</p></li>
+<li><p>Measurement error from repeatedly weighing the same object on a scale.</p></li>
+</ol>
+<div class="callout callout-style-default callout-important callout-titled">
+<div class="callout-header d-flex align-content-center" data-bs-toggle="collapse" data-bs-target=".callout-6-contents" aria-controls="callout-6" aria-expanded="false" aria-label="Toggle callout">
+<div class="callout-icon-container">
+<i class="callout-icon"></i>
+</div>
+<div class="callout-title-container flex-fill">
+Click for Solutions
+</div>
+<div class="callout-btn-toggle d-inline-block border-0 py-1 ps-1 pe-0 float-end"><i class="callout-toggle"></i></div>
+</div>
+<div id="callout-6" class="callout-6-contents callout-collapse collapse">
+<div class="callout-body-container callout-body">
+<ol type="a">
+<li><p>A Bernoulli model is plausible because the outcome is binary: submitted on time or did not submit on time.</p></li>
+<li><p>A Poisson model may be plausible because the variable is a count of events in a fixed time interval.</p></li>
+<li><p>An exponential model may be plausible as a simple model for waiting time until the next event.</p></li>
+<li><p>A gamma or log-normal model may be plausible because rainfall amounts are positive and often right-skewed.</p></li>
+<li><p>A normal model may be plausible if the measurement errors are produced by many small sources of variation and are roughly symmetric around zero.</p></li>
+</ol>
+</div>
+</div>
+</div>
+</div>
+</div>
+<div class="callout callout-style-default callout-note callout-titled">
+<div class="callout-header d-flex align-content-center">
+<div class="callout-icon-container">
+<i class="callout-icon"></i>
+</div>
+<div class="callout-title-container flex-fill">
+Question 2
+</div>
+</div>
+<div class="callout-body-container callout-body">
+<p>Suppose 16 out of 25 students say they used public transport to get to campus.</p>
+<ol type="a">
+<li><p>Write down the likelihood function for <span class="math inline">\(p\)</span>, the probability that a student uses public transport.</p></li>
+<li><p>What is the maximum likelihood estimate of <span class="math inline">\(p\)</span>?</p></li>
+<li><p>Explain the estimate in context.</p></li>
+</ol>
+<div class="callout callout-style-default callout-important callout-titled">
+<div class="callout-header d-flex align-content-center" data-bs-toggle="collapse" data-bs-target=".callout-8-contents" aria-controls="callout-8" aria-expanded="false" aria-label="Toggle callout">
+<div class="callout-icon-container">
+<i class="callout-icon"></i>
+</div>
+<div class="callout-title-container flex-fill">
+Click for Solutions
+</div>
+<div class="callout-btn-toggle d-inline-block border-0 py-1 ps-1 pe-0 float-end"><i class="callout-toggle"></i></div>
+</div>
+<div id="callout-8" class="callout-8-contents callout-collapse collapse">
+<div class="callout-body-container callout-body">
+<ol type="a">
+<li>There are 16 yes responses and 9 no responses, so the likelihood is:</li>
+</ol>
+<p><span class="math display">\[
+L(p) = p^{16}(1-p)^9.
+\]</span></p>
+<ol start="2" type="a">
+<li>For Bernoulli or binomial data, the MLE is the sample proportion:</li>
+</ol>
+<p><span class="math display">\[
+\hat{p}_{\text{MLE}} = \frac{16}{25} = 0.64.
+\]</span></p>
+<ol start="3" type="a">
+<li>The estimate suggests that the probability a student uses public transport to get to campus is about 0.64, based on this sample and the Bernoulli model.</li>
+</ol>
+</div>
+</div>
+</div>
+</div>
+</div>
+<div class="callout callout-style-default callout-note callout-titled">
+<div class="callout-header d-flex align-content-center">
+<div class="callout-icon-container">
+<i class="callout-icon"></i>
+</div>
+<div class="callout-title-container flex-fill">
+Question 3
+</div>
+</div>
+<div class="callout-body-container callout-body">
+<p>A researcher observes the following waiting times, in minutes:</p>
+<p><span class="math display">\[
+2.1,\ 3.4,\ 1.8,\ 5.6,\ 4.0,\ 2.7.
+\]</span></p>
+<p>Suppose an exponential model is used, parameterised by the mean waiting time <span class="math inline">\(\theta\)</span>.</p>
+<ol type="a">
+<li><p>Calculate the maximum likelihood estimate of <span class="math inline">\(\theta\)</span>.</p></li>
+<li><p>Interpret the estimate.</p></li>
+<li><p>Why might an exponential model be more plausible than a normal model for waiting times?</p></li>
+</ol>
+<div class="callout callout-style-default callout-important callout-titled">
+<div class="callout-header d-flex align-content-center" data-bs-toggle="collapse" data-bs-target=".callout-10-contents" aria-controls="callout-10" aria-expanded="false" aria-label="Toggle callout">
+<div class="callout-icon-container">
+<i class="callout-icon"></i>
+</div>
+<div class="callout-title-container flex-fill">
+Click for Solutions
+</div>
+<div class="callout-btn-toggle d-inline-block border-0 py-1 ps-1 pe-0 float-end"><i class="callout-toggle"></i></div>
+</div>
+<div id="callout-10" class="callout-10-contents callout-collapse collapse">
+<div class="callout-body-container callout-body">
+<ol type="a">
+<li>For the exponential model parameterised by the mean, the MLE is the sample mean:</li>
+</ol>
+<p><span class="math display">\[
+\hat{\theta}_{\text{MLE}} = \bar{x}.
+\]</span></p>
+<p>The sample mean is:</p>
+<p><span class="math display">\[
+\frac{2.1+3.4+1.8+5.6+4.0+2.7}{6} = 3.27.
+\]</span></p>
+<p>So the MLE is approximately 3.27 minutes.</p>
+<ol start="2" type="a">
+<li><p>The fitted exponential model has an estimated mean waiting time of about 3.27 minutes.</p></li>
+<li><p>Waiting times cannot be negative and are often right-skewed. A normal model allows negative values and is symmetric, so it may not be appropriate.</p></li>
+</ol>
+</div>
+</div>
+</div>
+</div>
+</div>
+<div class="callout callout-style-default callout-note callout-titled">
+<div class="callout-header d-flex align-content-center">
+<div class="callout-icon-container">
+<i class="callout-icon"></i>
+</div>
+<div class="callout-title-container flex-fill">
+Question 4
+</div>
+</div>
+<div class="callout-body-container callout-body">
+<p>Explain the difference between probability and likelihood using the following example:</p>
+<blockquote class="blockquote">
+<p>We observe 7 successes out of 10 trials.</p>
+</blockquote>
+<p>In your answer, describe what is fixed and what varies in each case.</p>
+<div class="callout callout-style-default callout-important callout-titled">
+<div class="callout-header d-flex align-content-center" data-bs-toggle="collapse" data-bs-target=".callout-12-contents" aria-controls="callout-12" aria-expanded="false" aria-label="Toggle callout">
+<div class="callout-icon-container">
+<i class="callout-icon"></i>
+</div>
+<div class="callout-title-container flex-fill">
+Click for Solutions
+</div>
+<div class="callout-btn-toggle d-inline-block border-0 py-1 ps-1 pe-0 float-end"><i class="callout-toggle"></i></div>
+</div>
+<div id="callout-12" class="callout-12-contents callout-collapse collapse">
+<div class="callout-body-container callout-body">
+<p>A probability question fixes the parameter and varies the possible data. For example, if <span class="math inline">\(p = 0.5\)</span>, what is the probability of seeing 7 successes out of 10?</p>
+<p>A likelihood question fixes the observed data and varies the parameter. We observed 7 successes out of 10, so we ask which values of <span class="math inline">\(p\)</span> make this result more or less plausible.</p>
+<p>In probability, the model is fixed and the data vary. In likelihood, the data are fixed and the parameter varies.</p>
+</div>
+</div>
+</div>
+</div>
+</div>
+<div class="callout callout-style-default callout-note callout-titled">
+<div class="callout-header d-flex align-content-center">
+<div class="callout-icon-container">
+<i class="callout-icon"></i>
+</div>
+<div class="callout-title-container flex-fill">
+Question 5
+</div>
+</div>
+<div class="callout-body-container callout-body">
+<p>A dataset of insurance claim sizes is positive and strongly right-skewed. A researcher fits a normal model using maximum likelihood.</p>
+<ol type="a">
+<li><p>Will maximum likelihood still produce estimates for the normal mean and standard deviation?</p></li>
+<li><p>Does this prove the normal model is appropriate?</p></li>
+<li><p>What plots or checks could the researcher use?</p></li>
+</ol>
+<div class="callout callout-style-default callout-important callout-titled">
+<div class="callout-header d-flex align-content-center" data-bs-toggle="collapse" data-bs-target=".callout-14-contents" aria-controls="callout-14" aria-expanded="false" aria-label="Toggle callout">
+<div class="callout-icon-container">
+<i class="callout-icon"></i>
+</div>
+<div class="callout-title-container flex-fill">
+Click for Solutions
+</div>
+<div class="callout-btn-toggle d-inline-block border-0 py-1 ps-1 pe-0 float-end"><i class="callout-toggle"></i></div>
+</div>
+<div id="callout-14" class="callout-14-contents callout-collapse collapse">
+<div class="callout-body-container callout-body">
+<ol type="a">
+<li><p>Yes. Maximum likelihood can find the best-fitting normal mean and standard deviation within the normal family.</p></li>
+<li><p>No.&nbsp;MLE finds the best-fitting parameters within the chosen model. It does not prove that the chosen model is sensible.</p></li>
+<li><p>The researcher could plot a histogram with the fitted density, compare the empirical and fitted distributions, use a QQ plot, or simulate data from the fitted model and compare the simulated data with the observed data.</p></li>
+</ol>
+</div>
+</div>
+</div>
+</div>
+</div>
+<div class="callout callout-style-default callout-note callout-titled">
+<div class="callout-header d-flex align-content-center">
+<div class="callout-icon-container">
+<i class="callout-icon"></i>
+</div>
+<div class="callout-title-container flex-fill">
+Question 6
+</div>
+</div>
+<div class="callout-body-container callout-body">
+<p>Complete the following sentences.</p>
+<ol type="a">
+<li><p>Maximum likelihood estimation uses likelihood by…</p></li>
+<li><p>Bayesian inference uses likelihood by…</p></li>
+<li><p>Likelihood is a bridge between frequentist and Bayesian inference because…</p></li>
+</ol>
+<div class="callout callout-style-default callout-important callout-titled">
+<div class="callout-header d-flex align-content-center" data-bs-toggle="collapse" data-bs-target=".callout-16-contents" aria-controls="callout-16" aria-expanded="false" aria-label="Toggle callout">
+<div class="callout-icon-container">
+<i class="callout-icon"></i>
+</div>
+<div class="callout-title-container flex-fill">
+Click for Solutions
+</div>
+<div class="callout-btn-toggle d-inline-block border-0 py-1 ps-1 pe-0 float-end"><i class="callout-toggle"></i></div>
+</div>
+<div id="callout-16" class="callout-16-contents callout-collapse collapse">
+<div class="callout-body-container callout-body">
+<ol type="a">
+<li><p>Maximum likelihood estimation uses likelihood by choosing the parameter value that maximises it.</p></li>
+<li><p>Bayesian inference uses likelihood by combining it with prior information to form a posterior distribution.</p></li>
+<li><p>Likelihood is a bridge because it represents what the data say about different parameter values. Frequentists can maximise it; Bayesians can update prior beliefs with it.</p></li>
+</ol>
+</div>
+</div>
+</div>
+</div>
+</div>
+
+
+</section>
+
+</main> <!-- /main -->
+<script>
+
+/* update total correct if #webex-total_correct exists */
+update_total_correct = function() {
+  console.log("webex: update total_correct");
+
+  var t = document.getElementsByClassName("webex-total_correct");
+  for (var i = 0; i < t.length; i++) {
+    p = t[i].parentElement;
+    var correct = p.getElementsByClassName("webex-correct").length;
+    var solvemes = p.getElementsByClassName("webex-solveme").length;
+    var radiogroups = p.getElementsByClassName("webex-radiogroup").length;
+    var selects = p.getElementsByClassName("webex-select").length;
+
+    t[i].innerHTML = correct + " of " + (solvemes + radiogroups + selects) + " correct";
+  }
+}
+
+/* webex-solution button toggling function */
+b_func = function() {
+  console.log("webex: toggle hide");
+
+  var cl = this.parentElement.classList;
+  if (cl.contains('open')) {
+    cl.remove("open");
+  } else {
+    cl.add("open");
+  }
+}
+
+/* check answers */
+check_func = function() {
+  console.log("webex: check answers");
+
+  var cl = this.parentElement.classList;
+  if (cl.contains('unchecked')) {
+    cl.remove("unchecked");
+    this.innerHTML = "Hide Answers";
+  } else {
+    cl.add("unchecked");
+    this.innerHTML = "Show Answers";
+  }
+}
+
+/* function for checking solveme answers */
+solveme_func = function(e) {
+  console.log("webex: check solveme");
+
+  var real_answers = JSON.parse(this.dataset.answer);
+  var my_answer = this.value;
+  var cl = this.classList;
+  if (cl.contains("ignorecase")) {
+    my_answer = my_answer.toLowerCase();
+  }
+  if (cl.contains("nospaces")) {
+    my_answer = my_answer.replace(/ /g, "")
+  }
+
+  if (my_answer == "") {
+    cl.remove("webex-correct");
+    cl.remove("webex-incorrect");
+  } else if (real_answers.includes(my_answer)) {
+    cl.add("webex-correct");
+    cl.remove("webex-incorrect");
+  } else {
+    cl.add("webex-incorrect");
+    cl.remove("webex-correct");
+  }
+
+  // match numeric answers within a specified tolerance
+  if(this.dataset.tol > 0){
+    var tol = JSON.parse(this.dataset.tol);
+    var matches = real_answers.map(x => Math.abs(x - my_answer) < tol)
+    if (matches.reduce((a, b) => a + b, 0) > 0) {
+      cl.add("webex-correct");
+    } else {
+      cl.remove("webex-correct");
+    }
+  }
+
+  // added regex bit
+  if (cl.contains("regex")){
+    answer_regex = RegExp(real_answers.join("|"))
+    if (answer_regex.test(my_answer)) {
+      cl.add("webex-correct");
+    }
+  }
+
+  update_total_correct();
+}
+
+/* function for checking select answers */
+select_func = function(e) {
+  console.log("webex: check select");
+
+  var cl = this.classList
+
+  /* add style */
+  cl.remove("webex-incorrect");
+  cl.remove("webex-correct");
+  if (this.value == "answer") {
+    cl.add("webex-correct");
+  } else if (this.value != "blank") {
+    cl.add("webex-incorrect");
+  }
+
+  update_total_correct();
+}
+
+/* function for checking radiogroups answers */
+radiogroups_func = function(e) {
+  console.log("webex: check radiogroups");
+
+  var checked_button = document.querySelector('input[name=' + this.id + ']:checked');
+  var cl = checked_button.parentElement.classList;
+  var labels = checked_button.parentElement.parentElement.children;
+
+  /* get rid of styles */
+  for (i = 0; i < labels.length; i++) {
+    labels[i].classList.remove("webex-incorrect");
+    labels[i].classList.remove("webex-correct");
+  }
+
+  /* add style */
+  if (checked_button.value == "answer") {
+    cl.add("webex-correct");
+  } else {
+    cl.add("webex-incorrect");
+  }
+
+  update_total_correct();
+}
+
+window.onload = function() {
+  console.log("webex onload");
+  /* set up solution buttons */
+  var buttons = document.getElementsByTagName("button");
+
+  for (var i = 0; i < buttons.length; i++) {
+    if (buttons[i].parentElement.classList.contains('webex-solution')) {
+      buttons[i].onclick = b_func;
+    }
+  }
+
+  var check_sections = document.getElementsByClassName("webex-check");
+  console.log("check:", check_sections.length);
+  for (var i = 0; i < check_sections.length; i++) {
+    check_sections[i].classList.add("unchecked");
+
+    let btn = document.createElement("button");
+    btn.innerHTML = "Show Answers";
+    btn.classList.add("webex-check-button");
+    btn.onclick = check_func;
+    check_sections[i].appendChild(btn);
+
+    let spn = document.createElement("span");
+    spn.classList.add("webex-total_correct");
+    check_sections[i].appendChild(spn);
+  }
+
+  /* set up webex-solveme inputs */
+  var solveme = document.getElementsByClassName("webex-solveme");
+
+  for (var i = 0; i < solveme.length; i++) {
+    /* make sure input boxes don't auto-anything */
+    solveme[i].setAttribute("autocomplete","off");
+    solveme[i].setAttribute("autocorrect", "off");
+    solveme[i].setAttribute("autocapitalize", "off");
+    solveme[i].setAttribute("spellcheck", "false");
+    solveme[i].value = "";
+
+    /* adjust answer for ignorecase or nospaces */
+    var cl = solveme[i].classList;
+    var real_answer = solveme[i].dataset.answer;
+    if (cl.contains("ignorecase")) {
+      real_answer = real_answer.toLowerCase();
+    }
+    if (cl.contains("nospaces")) {
+      real_answer = real_answer.replace(/ /g, "");
+    }
+    solveme[i].dataset.answer = real_answer;
+
+    /* attach checking function */
+    solveme[i].onkeyup = solveme_func;
+    solveme[i].onchange = solveme_func;
+
+    solveme[i].insertAdjacentHTML("afterend", " <span class='webex-icon'></span>")
+  }
+
+  /* set up radiogroups */
+  var radiogroups = document.getElementsByClassName("webex-radiogroup");
+  for (var i = 0; i < radiogroups.length; i++) {
+    radiogroups[i].onchange = radiogroups_func;
+  }
+
+  /* set up selects */
+  var selects = document.getElementsByClassName("webex-select");
+  for (var i = 0; i < selects.length; i++) {
+    selects[i].onchange = select_func;
+    selects[i].insertAdjacentHTML("afterend", " <span class='webex-icon'></span>")
+  }
+
+  update_total_correct();
+}
+
+</script>
+<script id="quarto-html-after-body" type="application/javascript">
+  window.document.addEventListener("DOMContentLoaded", function (event) {
+    // Ensure there is a toggle, if there isn't float one in the top right
+    if (window.document.querySelector('.quarto-color-scheme-toggle') === null) {
+      const a = window.document.createElement('a');
+      a.classList.add('top-right');
+      a.classList.add('quarto-color-scheme-toggle');
+      a.href = "";
+      a.onclick = function() { try { window.quartoToggleColorScheme(); } catch {} return false; };
+      const i = window.document.createElement("i");
+      i.classList.add('bi');
+      a.appendChild(i);
+      window.document.body.appendChild(a);
+    }
+    setColorSchemeToggle(hasAlternateSentinel())
+    const icon = "";
+    const anchorJS = new window.AnchorJS();
+    anchorJS.options = {
+      placement: 'right',
+      icon: icon
+    };
+    anchorJS.add('.anchored');
+    const isCodeAnnotation = (el) => {
+      for (const clz of el.classList) {
+        if (clz.startsWith('code-annotation-')) {                     
+          return true;
+        }
+      }
+      return false;
+    }
+    const onCopySuccess = function(e) {
+      // button target
+      const button = e.trigger;
+      // don't keep focus
+      button.blur();
+      // flash "checked"
+      button.classList.add('code-copy-button-checked');
+      var currentTitle = button.getAttribute("title");
+      button.setAttribute("title", "Copied!");
+      let tooltip;
+      if (window.bootstrap) {
+        button.setAttribute("data-bs-toggle", "tooltip");
+        button.setAttribute("data-bs-placement", "left");
+        button.setAttribute("data-bs-title", "Copied!");
+        tooltip = new bootstrap.Tooltip(button, 
+          { trigger: "manual", 
+            customClass: "code-copy-button-tooltip",
+            offset: [0, -8]});
+        tooltip.show();    
+      }
+      setTimeout(function() {
+        if (tooltip) {
+          tooltip.hide();
+          button.removeAttribute("data-bs-title");
+          button.removeAttribute("data-bs-toggle");
+          button.removeAttribute("data-bs-placement");
+        }
+        button.setAttribute("title", currentTitle);
+        button.classList.remove('code-copy-button-checked');
+      }, 1000);
+      // clear code selection
+      e.clearSelection();
+    }
+    const getTextToCopy = function(trigger) {
+        const codeEl = trigger.previousElementSibling.cloneNode(true);
+        for (const childEl of codeEl.children) {
+          if (isCodeAnnotation(childEl)) {
+            childEl.remove();
+          }
+        }
+        return codeEl.innerText;
+    }
+    const clipboard = new window.ClipboardJS('.code-copy-button:not([data-in-quarto-modal])', {
+      text: getTextToCopy
+    });
+    clipboard.on('success', onCopySuccess);
+    if (window.document.getElementById('quarto-embedded-source-code-modal')) {
+      const clipboardModal = new window.ClipboardJS('.code-copy-button[data-in-quarto-modal]', {
+        text: getTextToCopy,
+        container: window.document.getElementById('quarto-embedded-source-code-modal')
+      });
+      clipboardModal.on('success', onCopySuccess);
+    }
+      var localhostRegex = new RegExp(/^(?:http|https):\/\/localhost\:?[0-9]*\//);
+      var mailtoRegex = new RegExp(/^mailto:/);
+        var filterRegex = new RegExp('/' + window.location.host + '/');
+      var isInternal = (href) => {
+          return filterRegex.test(href) || localhostRegex.test(href) || mailtoRegex.test(href);
+      }
+      // Inspect non-navigation links and adorn them if external
+     var links = window.document.querySelectorAll('a[href]:not(.nav-link):not(.navbar-brand):not(.toc-action):not(.sidebar-link):not(.sidebar-item-toggle):not(.pagination-link):not(.no-external):not([aria-hidden]):not(.dropdown-item):not(.quarto-navigation-tool):not(.about-link)');
+      for (var i=0; i<links.length; i++) {
+        const link = links[i];
+        if (!isInternal(link.href)) {
+          // undo the damage that might have been done by quarto-nav.js in the case of
+          // links that we want to consider external
+          if (link.dataset.originalHref !== undefined) {
+            link.href = link.dataset.originalHref;
+          }
+        }
+      }
+    function tippyHover(el, contentFn, onTriggerFn, onUntriggerFn) {
+      const config = {
+        allowHTML: true,
+        maxWidth: 500,
+        delay: 100,
+        arrow: false,
+        appendTo: function(el) {
+            return el.parentElement;
+        },
+        interactive: true,
+        interactiveBorder: 10,
+        theme: 'quarto',
+        placement: 'bottom-start',
+      };
+      if (contentFn) {
+        config.content = contentFn;
+      }
+      if (onTriggerFn) {
+        config.onTrigger = onTriggerFn;
+      }
+      if (onUntriggerFn) {
+        config.onUntrigger = onUntriggerFn;
+      }
+      window.tippy(el, config); 
+    }
+    const noterefs = window.document.querySelectorAll('a[role="doc-noteref"]');
+    for (var i=0; i<noterefs.length; i++) {
+      const ref = noterefs[i];
+      tippyHover(ref, function() {
+        // use id or data attribute instead here
+        let href = ref.getAttribute('data-footnote-href') || ref.getAttribute('href');
+        try { href = new URL(href).hash; } catch {}
+        const id = href.replace(/^#\/?/, "");
+        const note = window.document.getElementById(id);
+        if (note) {
+          return note.innerHTML;
+        } else {
+          return "";
+        }
+      });
+    }
+    const xrefs = window.document.querySelectorAll('a.quarto-xref');
+    const processXRef = (id, note) => {
+      // Strip column container classes
+      const stripColumnClz = (el) => {
+        el.classList.remove("page-full", "page-columns");
+        if (el.children) {
+          for (const child of el.children) {
+            stripColumnClz(child);
+          }
+        }
+      }
+      stripColumnClz(note)
+      if (id === null || id.startsWith('sec-')) {
+        // Special case sections, only their first couple elements
+        const container = document.createElement("div");
+        if (note.children && note.children.length > 2) {
+          container.appendChild(note.children[0].cloneNode(true));
+          for (let i = 1; i < note.children.length; i++) {
+            const child = note.children[i];
+            if (child.tagName === "P" && child.innerText === "") {
+              continue;
+            } else {
+              container.appendChild(child.cloneNode(true));
+              break;
+            }
+          }
+          if (window.Quarto?.typesetMath) {
+            window.Quarto.typesetMath(container);
+          }
+          return container.innerHTML
+        } else {
+          if (window.Quarto?.typesetMath) {
+            window.Quarto.typesetMath(note);
+          }
+          return note.innerHTML;
+        }
+      } else {
+        // Remove any anchor links if they are present
+        const anchorLink = note.querySelector('a.anchorjs-link');
+        if (anchorLink) {
+          anchorLink.remove();
+        }
+        if (window.Quarto?.typesetMath) {
+          window.Quarto.typesetMath(note);
+        }
+        if (note.classList.contains("callout")) {
+          return note.outerHTML;
+        } else {
+          return note.innerHTML;
+        }
+      }
+    }
+    for (var i=0; i<xrefs.length; i++) {
+      const xref = xrefs[i];
+      tippyHover(xref, undefined, function(instance) {
+        instance.disable();
+        let url = xref.getAttribute('href');
+        let hash = undefined; 
+        if (url.startsWith('#')) {
+          hash = url;
+        } else {
+          try { hash = new URL(url).hash; } catch {}
+        }
+        if (hash) {
+          const id = hash.replace(/^#\/?/, "");
+          const note = window.document.getElementById(id);
+          if (note !== null) {
+            try {
+              const html = processXRef(id, note.cloneNode(true));
+              instance.setContent(html);
+            } finally {
+              instance.enable();
+              instance.show();
+            }
+          } else {
+            // See if we can fetch this
+            fetch(url.split('#')[0])
+            .then(res => res.text())
+            .then(html => {
+              const parser = new DOMParser();
+              const htmlDoc = parser.parseFromString(html, "text/html");
+              const note = htmlDoc.getElementById(id);
+              if (note !== null) {
+                const html = processXRef(id, note);
+                instance.setContent(html);
+              } 
+            }).finally(() => {
+              instance.enable();
+              instance.show();
+            });
+          }
+        } else {
+          // See if we can fetch a full url (with no hash to target)
+          // This is a special case and we should probably do some content thinning / targeting
+          fetch(url)
+          .then(res => res.text())
+          .then(html => {
+            const parser = new DOMParser();
+            const htmlDoc = parser.parseFromString(html, "text/html");
+            const note = htmlDoc.querySelector('main.content');
+            if (note !== null) {
+              // This should only happen for chapter cross references
+              // (since there is no id in the URL)
+              // remove the first header
+              if (note.children.length > 0 && note.children[0].tagName === "HEADER") {
+                note.children[0].remove();
+              }
+              const html = processXRef(null, note);
+              instance.setContent(html);
+            } 
+          }).finally(() => {
+            instance.enable();
+            instance.show();
+          });
+        }
+      }, function(instance) {
+      });
+    }
+        let selectedAnnoteEl;
+        const selectorForAnnotation = ( cell, annotation) => {
+          let cellAttr = 'data-code-cell="' + cell + '"';
+          let lineAttr = 'data-code-annotation="' +  annotation + '"';
+          const selector = 'span[' + cellAttr + '][' + lineAttr + ']';
+          return selector;
+        }
+        const selectCodeLines = (annoteEl) => {
+          const doc = window.document;
+          const targetCell = annoteEl.getAttribute("data-target-cell");
+          const targetAnnotation = annoteEl.getAttribute("data-target-annotation");
+          const annoteSpan = window.document.querySelector(selectorForAnnotation(targetCell, targetAnnotation));
+          const lines = annoteSpan.getAttribute("data-code-lines").split(",");
+          const lineIds = lines.map((line) => {
+            return targetCell + "-" + line;
+          })
+          let top = null;
+          let height = null;
+          let parent = null;
+          if (lineIds.length > 0) {
+              //compute the position of the single el (top and bottom and make a div)
+              const el = window.document.getElementById(lineIds[0]);
+              top = el.offsetTop;
+              height = el.offsetHeight;
+              parent = el.parentElement.parentElement;
+            if (lineIds.length > 1) {
+              const lastEl = window.document.getElementById(lineIds[lineIds.length - 1]);
+              const bottom = lastEl.offsetTop + lastEl.offsetHeight;
+              height = bottom - top;
+            }
+            if (top !== null && height !== null && parent !== null) {
+              // cook up a div (if necessary) and position it 
+              let div = window.document.getElementById("code-annotation-line-highlight");
+              if (div === null) {
+                div = window.document.createElement("div");
+                div.setAttribute("id", "code-annotation-line-highlight");
+                div.style.position = 'absolute';
+                parent.appendChild(div);
+              }
+              div.style.top = top - 2 + "px";
+              div.style.height = height + 4 + "px";
+              div.style.left = 0;
+              let gutterDiv = window.document.getElementById("code-annotation-line-highlight-gutter");
+              if (gutterDiv === null) {
+                gutterDiv = window.document.createElement("div");
+                gutterDiv.setAttribute("id", "code-annotation-line-highlight-gutter");
+                gutterDiv.style.position = 'absolute';
+                const codeCell = window.document.getElementById(targetCell);
+                const gutter = codeCell.querySelector('.code-annotation-gutter');
+                gutter.appendChild(gutterDiv);
+              }
+              gutterDiv.style.top = top - 2 + "px";
+              gutterDiv.style.height = height + 4 + "px";
+            }
+            selectedAnnoteEl = annoteEl;
+          }
+        };
+        const unselectCodeLines = () => {
+          const elementsIds = ["code-annotation-line-highlight", "code-annotation-line-highlight-gutter"];
+          elementsIds.forEach((elId) => {
+            const div = window.document.getElementById(elId);
+            if (div) {
+              div.remove();
+            }
+          });
+          selectedAnnoteEl = undefined;
+        };
+          // Handle positioning of the toggle
+      window.addEventListener(
+        "resize",
+        throttle(() => {
+          elRect = undefined;
+          if (selectedAnnoteEl) {
+            selectCodeLines(selectedAnnoteEl);
+          }
+        }, 10)
+      );
+      function throttle(fn, ms) {
+      let throttle = false;
+      let timer;
+        return (...args) => {
+          if(!throttle) { // first call gets through
+              fn.apply(this, args);
+              throttle = true;
+          } else { // all the others get throttled
+              if(timer) clearTimeout(timer); // cancel #2
+              timer = setTimeout(() => {
+                fn.apply(this, args);
+                timer = throttle = false;
+              }, ms);
+          }
+        };
+      }
+        // Attach click handler to the DT
+        const annoteDls = window.document.querySelectorAll('dt[data-target-cell]');
+        for (const annoteDlNode of annoteDls) {
+          annoteDlNode.addEventListener('click', (event) => {
+            const clickedEl = event.target;
+            if (clickedEl !== selectedAnnoteEl) {
+              unselectCodeLines();
+              const activeEl = window.document.querySelector('dt[data-target-cell].code-annotation-active');
+              if (activeEl) {
+                activeEl.classList.remove('code-annotation-active');
+              }
+              selectCodeLines(clickedEl);
+              clickedEl.classList.add('code-annotation-active');
+            } else {
+              // Unselect the line
+              unselectCodeLines();
+              clickedEl.classList.remove('code-annotation-active');
+            }
+          });
+        }
+    const findCites = (el) => {
+      const parentEl = el.parentElement;
+      if (parentEl) {
+        const cites = parentEl.dataset.cites;
+        if (cites) {
+          return {
+            el,
+            cites: cites.split(' ')
+          };
+        } else {
+          return findCites(el.parentElement)
+        }
+      } else {
+        return undefined;
+      }
+    };
+    var bibliorefs = window.document.querySelectorAll('a[role="doc-biblioref"]');
+    for (var i=0; i<bibliorefs.length; i++) {
+      const ref = bibliorefs[i];
+      const citeInfo = findCites(ref);
+      if (citeInfo) {
+        tippyHover(citeInfo.el, function() {
+          var popup = window.document.createElement('div');
+          citeInfo.cites.forEach(function(cite) {
+            var citeDiv = window.document.createElement('div');
+            citeDiv.classList.add('hanging-indent');
+            citeDiv.classList.add('csl-entry');
+            var biblioDiv = window.document.getElementById('ref-' + cite);
+            if (biblioDiv) {
+              citeDiv.innerHTML = biblioDiv.innerHTML;
+            }
+            popup.appendChild(citeDiv);
+          });
+          return popup.innerHTML;
+        });
+      }
+    }
+  });
+  </script>
+<nav class="page-navigation">
+  <div class="nav-page nav-page-previous">
+      <a href="./6_SimulationBasedInference.html" class="pagination-link" aria-label="Simulation-Based Inference">
+        <i class="bi bi-arrow-left-short"></i> <span class="nav-page-text"><span class="chapter-number">6</span>&nbsp; <span class="chapter-title">Simulation-Based Inference</span></span>
+      </a>          
+  </div>
+  <div class="nav-page nav-page-next">
+      <a href="./8_Bayes.html" class="pagination-link" aria-label="Bayesian Inference">
+        <span class="nav-page-text"><span class="chapter-number">8</span>&nbsp; <span class="chapter-title">Bayesian Inference</span></span> <i class="bi bi-arrow-right-short"></i>
+      </a>
+  </div>
+</nav>
+</div> <!-- /content -->
+
+
+
+
+</body></html>

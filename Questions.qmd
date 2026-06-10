@@ -1,5 +1,5 @@
 ---
-title: "Thinking about Questions"
+title: "Better Questions"
 ---
 
 ```{r, include=FALSE}
