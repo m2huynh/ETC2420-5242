@@ -2395,189 +2395,464 @@ Once we combine this prior with the binomial likelihood, we get a posterior dist
 
 ## Conjugate priors
 
-In the late-night bus example, we used a beta prior for an unknown proportion:
+The beta distribution is especially useful with binomial data because it is **conjugate** to the binomial likelihood. A prior is conjugate to a likelihood when the posterior distribution belongs to the same family as the prior. That sounds technical, but the idea is simple. Some prior and likelihood pairs fit together neatly. When they do, Bayes' theorem produces a posterior with the same general shape as the prior, but with updated parameters.
+
+Different data types have different likelihoods, and those likelihoods have different conjugate priors. This connects back to the previous chapter. We do not use the same probability model for every kind of data. A proportion, a count, a waiting time, and a measurement are different kinds of quantities. They need different distributions. The same is true for priors.
+
+```{r}
+#| echo: false
+#| message: false
+#| warning: false
+
+other_conjugate_priors <- tibble(
+  `Data type` = c(
+    "Successes out of trials",
+    "Counts over time or space",
+    "Waiting times",
+    "Measurements around a mean"
+  ),
+  `Likelihood` = c(
+    "$X \\mid p \\sim \\text{Binomial}(n,p)$",
+    "$Y_i \\mid \\lambda \\sim \\text{Poisson}(\\lambda)$",
+    "$Y_i \\mid \\lambda \\sim \\text{Exponential}(\\lambda)$",
+    "$Y_i \\mid \\mu \\sim N(\\mu, \\sigma^2)$"
+  ),
+  `Conjugate prior` = c(
+    "$p \\sim \\text{Beta}(\\alpha,\\beta)$",
+    "$\\lambda \\sim \\text{Gamma}(\\alpha,\\beta)$",
+    "$\\lambda \\sim \\text{Gamma}(\\alpha,\\beta)$",
+    "$\\mu \\sim N(\\mu_0,\\tau_0^2)$"
+  ),
+  `Posterior family` = c(
+    "Beta",
+    "Gamma",
+    "Gamma",
+    "Normal"
+  ),
+  `Example question` = c(
+    "What proportion of residents support a policy?",
+    "What is the average number of help-desk calls per hour?",
+    "What is the rate at which buses arrive?",
+    "What is the average exam mark in a population?"
+  )
+)
+
+other_conjugate_priors |>
+  gt() |>
+  fmt_markdown(columns = everything()) |>
+  tab_options(table.width = pct(100))
+```
+
+
+### Beta-binomial
+
+For binomial data:
 
 $$
-\theta \sim \text{Beta}(1,1)
+X \mid p \sim \text{Binomial}(n,p)
 $$
 
-We also used a binomial likelihood:
+If the prior is:
 
 $$
-X \mid \theta \sim \text{Binomial}(40,\theta)
+p \sim \text{Beta}(\alpha,\beta)
 $$
 
-The beta distribution and the binomial distribution work especially well together. When we combine a beta prior with a binomial likelihood, the posterior is also a beta distribution. This is called **conjugacy**.
-
-A prior is called **conjugate** to a likelihood when the posterior belongs to the same family of distributions as the prior.
-
-For the beta-binomial model:
+then after observing $x$ successes out of $n$ trials, the posterior is:
 
 $$
-X \mid \theta \sim \text{Binomial}(n,\theta)
+p \mid X=x \sim \text{Beta}(\alpha + x,\beta + n - x)
 $$
 
-and
+The data add $x$ successes and $n-x$ failures to the prior.
+
+```{r}
+#| echo: false
+#| message: false
+#| warning: false
+
+conjugate_table <- tibble(
+  `Quantity` = c("Prior", "Data", "Posterior"),
+  `Expression` = c(
+    "$p \\sim \\text{Beta}(\\alpha, \\beta)$",
+    "$X \\mid p \\sim \\text{Binomial}(n,p)$ and $X=x$",
+    "$p \\mid X=x \\sim \\text{Beta}(\\alpha+x, \\beta+n-x)$"
+  ),
+  `Interpretation` = c(
+    "Initial uncertainty about the unknown proportion",
+    "Observed successes and failures",
+    "Updated uncertainty after adding the data to the prior"
+  )
+)
+
+conjugate_table |>
+  gt() |>
+  fmt_markdown(columns = everything()) |>
+  tab_options(table.width = pct(100))
+```
+
+Suppose a local council is considering whether to introduce a late-night bus service. A survey of 40 residents asks whether they would use the service. In the survey, 26 people say yes.
+
+Let:
 
 $$
-\theta \sim \text{Beta}(\alpha,\beta)
+p = \text{the proportion of residents who would use the service}
 $$
 
-the posterior is:
+The data are:
 
 $$
-\theta \mid X=x
+x = 26, \qquad n = 40
+$$
+
+The likelihood comes from the binomial model:
+
+$$
+X \mid p \sim \text{Binomial}(40,p)
+$$
+
+If we used maximum likelihood, the estimate would be:
+
+$$
+\hat{p} = \frac{26}{40} = 0.65
+$$
+
+A Bayesian analysis asks for a posterior distribution for $p$.
+
+Start with a uniform prior:
+
+$$
+p \sim \text{Beta}(1,1)
+$$
+
+Using beta-binomial conjugacy:
+
+$$
+p \mid X=26 \sim \text{Beta}(1+26,1+40-26)
+$$
+
+So:
+
+$$
+p \mid X=26 \sim \text{Beta}(27,15)
+$$
+
+
+
+
+<centre>
+
+```{r, echo=FALSE}
+knitr::include_graphics("images/chapter8/beta.gif")
+```
+
+</centre>
+
+
+The posterior distribution is more concentrated than the prior because the data have given us information. It is centred near the observed proportion, but it still shows uncertainty about the true value of $p$.
+
+
+### Poisson-gamma
+
+Suppose a library wants to estimate the average number of people arriving at the front desk each hour.
+
+Let
+
+$$
+\lambda = \text{average number of arrivals per hour}
+$$
+
+A natural model for hourly counts is the Poisson distribution:
+
+$$
+Y_i \mid \lambda \sim \text{Poisson}(\lambda)
+$$
+
+A common conjugate prior for the Poisson rate is the gamma distribution:
+
+$$
+\lambda \sim \text{Gamma}(\alpha,\beta)
+$$
+
+Here we are using the shape-rate version of the gamma distribution. The first parameter, $\alpha$, is the shape. The second parameter, $\beta$, is the rate.
+
+If we observe counts from $n$ hours:
+
+$$
+y_1, y_2, \ldots, y_n
+$$
+
+then the posterior is:
+
+$$
+\lambda \mid y_1,\ldots,y_n
 \sim
-\text{Beta}(\alpha + x,\ \beta + n - x)
+\text{Gamma}\left(\alpha + \sum_{i=1}^n y_i,\ \beta + n\right)
 $$
 
-This formula has a simple interpretation.
+This update has the same flavour as the beta-binomial update. The data add information to the prior. For the Poisson-gamma model, the total count, $\sum_{i=1}^n y_i$, updates the shape parameter, and the number of observed time periods, $n$, updates the rate parameter.
 
-The prior contains two parameters:
-
-$$
-\alpha
-\quad \text{and} \quad
-\beta
-$$
-
-For a binomial problem, we can think of $\alpha$ as prior successes and $\beta$ as prior failures. This interpretation is not always exact, but it is often a useful way to build intuition.
-
-Then the data add:
+For example, suppose the prior is:
 
 $$
-x = \text{observed successes}
+\lambda \sim \text{Gamma}(3,1)
 $$
 
-and
+This prior has mean:
 
 $$
-n - x = \text{observed failures}
+\frac{3}{1}=3
 $$
 
-So the posterior becomes:
+So before collecting new data, the library expects about 3 arrivals per hour.
+
+Now suppose the library observes arrivals over 4 hours:
 
 $$
-\text{posterior successes}
-=
-\alpha + x
+2,\ 5,\ 4,\ 3
 $$
 
-and
+The total number of arrivals is:
 
 $$
-\text{posterior failures}
-=
-\beta + n - x
-$$
-
-In words:
-
-> The posterior is formed by adding the observed successes and failures to the prior.
-
-For the late-night bus example, the prior was:
-
-$$
-\theta \sim \text{Beta}(1,1)
-$$
-
-The survey found:
-
-$$
-x = 26
-$$
-
-yes responses out of:
-
-$$
-n = 40
+2 + 5 + 4 + 3 = 14
 $$
 
 So the posterior is:
 
 $$
 \begin{aligned}
-\theta \mid X=26
+\lambda \mid \text{data}
 &\sim
-\text{Beta}(1 + 26,\ 1 + 40 - 26) \\
+\text{Gamma}(3 + 14,\ 1 + 4) \\
 &\sim
-\text{Beta}(27,\ 15)
+\text{Gamma}(17,5)
 \end{aligned}
 $$
 
-```{r}
-#| echo: false
-#| message: false
-#| warning: false
+The posterior mean is:
 
-beta_update_plot <- tibble(
-  theta = seq(0.001, 0.999, length.out = 1000)
-) |>
-  mutate(
-    `Prior: Beta(1,1)` = dbeta(theta, shape1 = 1, shape2 = 1),
-    `Posterior: Beta(27,15)` = dbeta(theta, shape1 = 27, shape2 = 15)
-  ) |>
-  pivot_longer(
-    cols = c(`Prior: Beta(1,1)`, `Posterior: Beta(27,15)`),
-    names_to = "Distribution",
-    values_to = "density"
-  )
+$$
+\frac{17}{5}=3.4
+$$
 
-ggplot(beta_update_plot, aes(x = theta, y = density, linetype = Distribution, color = Distribution)) +
-  geom_line(linewidth = 0.8) +
-  geom_vline(xintercept = 26 / 40, linetype = "dashed") +
-  annotate(
-    "text",
-    x = 26 / 40,
-    y = 3.2,
-    label = "Observed proportion = 26/40",
-    hjust = -0.05
-  ) +
-  labs(
-    x = expression(theta),
-    y = "Density"
-  ) +
-  theme_minimal()
+The data have shifted the estimated arrival rate from 3 arrivals per hour to about 3.4 arrivals per hour.
+
+<centre>
+
+```{r, echo=FALSE}
+knitr::include_graphics("images/chapter8/gamma.gif")
 ```
 
-The result is useful because it gives a full distribution over the possible values of $\theta$, not just a single estimate. Values of $\theta$ near the observed proportion receive more posterior weight, but there is still uncertainty.
+</centre>
 
-We can summarise the update in a small table.
+The posterior is narrower than the prior because the four hours of data have reduced our uncertainty about the arrival rate.
 
-```{r}
-#| echo: false
-#| message: false
-#| warning: false
+### Exponential-gamma
 
-beta_update_table <- tibble(
-  `Quantity` = c(
-    "Prior",
-    "Data",
-    "Posterior"
-  ),
-  `Value` = c(
-    "$\\text{Beta}(1,1)$",
-    "$x = 26,\\ n = 40$",
-    "$\\text{Beta}(27,15)$"
-  ),
-  `Interpretation` = c(
-    "Start with a flat prior over possible values of $\\theta$",
-    "Observe 26 yes responses and 14 no responses",
-    "Update the prior using the observed data"
-  )
-)
+The gamma distribution is also conjugate for the rate of an exponential distribution.
 
-beta_update_table |>
-  gt() |>
-  fmt_markdown(columns = everything()) |>
-  tab_options(table.width = pct(100))
+Suppose we are studying the time between bus arrivals at a stop. Let
+
+$$
+\lambda = \text{arrival rate of buses per minute}
+$$
+
+If buses arrive according to a constant rate, then waiting times can be modelled using an exponential distribution:
+
+$$
+Y_i \mid \lambda \sim \text{Exponential}(\lambda)
+$$
+
+Again, a conjugate prior is:
+
+$$
+\lambda \sim \text{Gamma}(\alpha,\beta)
+$$
+
+If we observe waiting times:
+
+$$
+y_1, y_2, \ldots, y_n
+$$
+
+then the posterior is:
+
+$$
+\lambda \mid y_1,\ldots,y_n
+\sim
+\text{Gamma}\left(\alpha + n,\ \beta + \sum_{i=1}^n y_i\right)
+$$
+
+Here the number of waiting times, $n$, updates the shape parameter, while the total waiting time, $\sum_{i=1}^n y_i$, updates the rate parameter.
+
+For example, suppose:
+
+$$
+\lambda \sim \text{Gamma}(2,10)
+$$
+
+This prior has mean:
+
+$$
+\frac{2}{10}=0.20
+$$
+
+So before seeing the new data, the expected arrival rate is 0.20 buses per minute, or about one bus every 5 minutes.
+
+Now suppose we observe three waiting times, in minutes:
+
+$$
+6,\ 8,\ 11
+$$
+
+The total waiting time is:
+
+$$
+6 + 8 + 11 = 25
+$$
+
+So the posterior is:
+
+$$
+\begin{aligned}
+\lambda \mid \text{data}
+&\sim
+\text{Gamma}(2 + 3,\ 10 + 25) \\
+&\sim
+\text{Gamma}(5,35)
+\end{aligned}
+$$
+
+The posterior mean is:
+
+$$
+\frac{5}{35}=0.143
+$$
+
+This corresponds to an average waiting time of about:
+
+$$
+\frac{1}{0.143}=7.0 \text{ minutes}
+$$
+
+<centre>
+
+```{r, echo=FALSE}
+knitr::include_graphics("images/chapter8/gamma2.gif")
 ```
 
-Conjugacy is convenient because it gives us a neat update rule. We do not need simulation, numerical integration, or complicated computation to find the posterior.
+</centre>
 
-But it is important not to overstate the idea. Conjugacy is not what makes an analysis Bayesian. The Bayesian idea is the combination of a prior and a likelihood to produce a posterior. Conjugacy is just a mathematical shortcut that makes this combination especially simple.
+The observed waiting times were longer than the prior expectation. As a result, the posterior shifts toward a lower arrival rate.
 
-In many real problems, the posterior does not have a neat formula. In those cases, Bayesian inference can still be done, but we need computational methods. For this chapter, the beta-binomial case gives us a simple way to see the main idea clearly.
+### Normal-normal
+
+For measurements, the normal distribution often appears again.
+
+Suppose a researcher wants to estimate the average mark on a difficult exam. Let
+
+$$
+\mu = \text{average mark in the population}
+$$
+
+Assume individual marks follow a normal distribution with known standard deviation $\sigma$:
+
+$$
+Y_i \mid \mu \sim N(\mu,\sigma^2)
+$$
+
+A conjugate prior for $\mu$ is also normal:
+
+$$
+\mu \sim N(\mu_0,\tau_0^2)
+$$
+
+After observing data, the posterior distribution for $\mu$ is still normal. The formula is a little more complicated than the beta-binomial case, but the idea is the same. The posterior mean is a weighted average of the prior mean and the sample mean.
+
+For example, suppose the prior is:
+
+$$
+\mu \sim N(65,10^2)
+$$
+
+This prior says that, before seeing the new exam results, the average mark is expected to be around 65, but there is still uncertainty.
+
+Suppose the known standard deviation of individual marks is:
+
+$$
+\sigma = 12
+$$
+
+Now suppose we observe five marks:
+
+$$
+58,\ 62,\ 71,\ 67,\ 74
+$$
+
+The sample mean is:
+
+$$
+\bar{y}=66.4
+$$
+
+For the normal-normal model, the posterior variance is:
+
+$$
+\tau_n^2
+=
+\frac{1}
+{\frac{1}{\tau_0^2}+\frac{n}{\sigma^2}}
+$$
+
+and the posterior mean is:
+
+$$
+\mu_n
+=
+\tau_n^2
+\left(
+\frac{\mu_0}{\tau_0^2}
++
+\frac{n\bar{y}}{\sigma^2}
+\right)
+$$
+
+Using these values, the posterior distribution is approximately:
+
+$$
+\mu \mid \text{data} \sim N(66.0,4.72^2)
+$$
+
+<centre>
+
+```{r, echo=FALSE}
+knitr::include_graphics("images/chapter8/normal.gif")
+```
+
+</centre>
+
+The posterior is centred close to the sample mean, but it is still influenced by the prior. It is also narrower than the prior because the data have reduced our uncertainty about $\mu$.
+
+This is a useful way to understand conjugacy more generally:
+
+> A conjugate prior gives us an update rule that keeps the posterior in the same distribution family as the prior.
+
+:::: {.callout-important}
+### Conjugacy is a shortcut, not the whole idea
+
+Conjugacy is not what makes inference Bayesian. It is a mathematical convenience. The core Bayesian idea is still:
+
+$$
+\text{posterior} \propto \text{prior} \times \text{likelihood}
+$$
+
+Conjugate priors are useful because they make the update easy to calculate and easy to explain. But many useful Bayesian models are not conjugate. When the posterior does not have a neat formula, we can still do Bayesian inference using computation.
+
+For this chapter, we will continue with the beta-binomial model because it is simple, visual, and directly connected to proportions.
+::::
+
+
 
 ## Summarising the posterior
 

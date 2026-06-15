@@ -355,7 +355,7 @@ window.Quarto = {
 </li>
         <li class="sidebar-item">
   <div class="sidebar-item-container"> 
-  <a href="./Questions.html" class="sidebar-item-text sidebar-link">
+  <a href="./1_Questions.html" class="sidebar-item-text sidebar-link">
  <span class="menu-text"><span class="chapter-number">1</span>&nbsp; <span class="chapter-title">Better Questions</span></span></a>
   </div>
 </li>
@@ -450,7 +450,13 @@ window.Quarto = {
   <li><a href="#a-proportion-example" id="toc-a-proportion-example" class="nav-link" data-scroll-target="#a-proportion-example"><span class="header-section-number">8.7.2</span> A proportion example</a></li>
   </ul></li>
   <li><a href="#the-beta-distribution" id="toc-the-beta-distribution" class="nav-link" data-scroll-target="#the-beta-distribution"><span class="header-section-number">8.8</span> The beta distribution</a></li>
-  <li><a href="#conjugate-priors" id="toc-conjugate-priors" class="nav-link" data-scroll-target="#conjugate-priors"><span class="header-section-number">8.9</span> Conjugate priors</a></li>
+  <li><a href="#conjugate-priors" id="toc-conjugate-priors" class="nav-link" data-scroll-target="#conjugate-priors"><span class="header-section-number">8.9</span> Conjugate priors</a>
+  <ul class="collapse">
+  <li><a href="#beta-binomial" id="toc-beta-binomial" class="nav-link" data-scroll-target="#beta-binomial"><span class="header-section-number">8.9.1</span> Beta-binomial</a></li>
+  <li><a href="#poisson-gamma" id="toc-poisson-gamma" class="nav-link" data-scroll-target="#poisson-gamma"><span class="header-section-number">8.9.2</span> Poisson-gamma</a></li>
+  <li><a href="#exponential-gamma" id="toc-exponential-gamma" class="nav-link" data-scroll-target="#exponential-gamma"><span class="header-section-number">8.9.3</span> Exponential-gamma</a></li>
+  <li><a href="#normal-normal" id="toc-normal-normal" class="nav-link" data-scroll-target="#normal-normal"><span class="header-section-number">8.9.4</span> Normal-normal</a></li>
+  </ul></li>
   <li><a href="#summarising-the-posterior" id="toc-summarising-the-posterior" class="nav-link" data-scroll-target="#summarising-the-posterior"><span class="header-section-number">8.10</span> Summarising the posterior</a></li>
   <li><a href="#prior-sensitivity" id="toc-prior-sensitivity" class="nav-link" data-scroll-target="#prior-sensitivity"><span class="header-section-number">8.11</span> Prior sensitivity</a>
   <ul class="collapse">
@@ -7660,95 +7666,8 @@ E(\theta)
 </section>
 <section id="conjugate-priors" class="level2" data-number="8.9">
 <h2 data-number="8.9" class="anchored" data-anchor-id="conjugate-priors"><span class="header-section-number">8.9</span> Conjugate priors</h2>
-<p>In the late-night bus example, we used a beta prior for an unknown proportion:</p>
-<p><span class="math display">\[
-\theta \sim \text{Beta}(1,1)
-\]</span></p>
-<p>We also used a binomial likelihood:</p>
-<p><span class="math display">\[
-X \mid \theta \sim \text{Binomial}(40,\theta)
-\]</span></p>
-<p>The beta distribution and the binomial distribution work especially well together. When we combine a beta prior with a binomial likelihood, the posterior is also a beta distribution. This is called <strong>conjugacy</strong>.</p>
-<p>A prior is called <strong>conjugate</strong> to a likelihood when the posterior belongs to the same family of distributions as the prior.</p>
-<p>For the beta-binomial model:</p>
-<p><span class="math display">\[
-X \mid \theta \sim \text{Binomial}(n,\theta)
-\]</span></p>
-<p>and</p>
-<p><span class="math display">\[
-\theta \sim \text{Beta}(\alpha,\beta)
-\]</span></p>
-<p>the posterior is:</p>
-<p><span class="math display">\[
-\theta \mid X=x
-\sim
-\text{Beta}(\alpha + x,\ \beta + n - x)
-\]</span></p>
-<p>This formula has a simple interpretation.</p>
-<p>The prior contains two parameters:</p>
-<p><span class="math display">\[
-\alpha
-\quad \text{and} \quad
-\beta
-\]</span></p>
-<p>For a binomial problem, we can think of <span class="math inline">\(\alpha\)</span> as prior successes and <span class="math inline">\(\beta\)</span> as prior failures. This interpretation is not always exact, but it is often a useful way to build intuition.</p>
-<p>Then the data add:</p>
-<p><span class="math display">\[
-x = \text{observed successes}
-\]</span></p>
-<p>and</p>
-<p><span class="math display">\[
-n - x = \text{observed failures}
-\]</span></p>
-<p>So the posterior becomes:</p>
-<p><span class="math display">\[
-\text{posterior successes}
-=
-\alpha + x
-\]</span></p>
-<p>and</p>
-<p><span class="math display">\[
-\text{posterior failures}
-=
-\beta + n - x
-\]</span></p>
-<p>In words:</p>
-<blockquote class="blockquote">
-<p>The posterior is formed by adding the observed successes and failures to the prior.</p>
-</blockquote>
-<p>For the late-night bus example, the prior was:</p>
-<p><span class="math display">\[
-\theta \sim \text{Beta}(1,1)
-\]</span></p>
-<p>The survey found:</p>
-<p><span class="math display">\[
-x = 26
-\]</span></p>
-<p>yes responses out of:</p>
-<p><span class="math display">\[
-n = 40
-\]</span></p>
-<p>So the posterior is:</p>
-<p><span class="math display">\[
-\begin{aligned}
-\theta \mid X=26
-&amp;\sim
-\text{Beta}(1 + 26,\ 1 + 40 - 26) \\
-&amp;\sim
-\text{Beta}(27,\ 15)
-\end{aligned}
-\]</span></p>
-<div class="cell">
-<div class="cell-output-display">
-<div>
-<figure class="figure">
-<p><img src="8_Bayes_files/figure-html/unnamed-chunk-24-1.png" class="img-fluid figure-img" width="672"></p>
-</figure>
-</div>
-</div>
-</div>
-<p>The result is useful because it gives a full distribution over the possible values of <span class="math inline">\(\theta\)</span>, not just a single estimate. Values of <span class="math inline">\(\theta\)</span> near the observed proportion receive more posterior weight, but there is still uncertainty.</p>
-<p>We can summarise the update in a small table.</p>
+<p>The beta distribution is especially useful with binomial data because it is <strong>conjugate</strong> to the binomial likelihood. A prior is conjugate to a likelihood when the posterior distribution belongs to the same family as the prior. That sounds technical, but the idea is simple. Some prior and likelihood pairs fit together neatly. When they do, Bayes’ theorem produces a posterior with the same general shape as the prior, but with updated parameters.</p>
+<p>Different data types have different likelihoods, and those likelihoods have different conjugate priors. This connects back to the previous chapter. We do not use the same probability model for every kind of data. A proportion, a count, a waiting time, and a measurement are different kinds of quantities. They need different distributions. The same is true for priors.</p>
 <div class="cell">
 <div class="cell-output-display">
 <div id="txfvzdddfw" style="padding-left:0px;padding-right:0px;padding-top:10px;padding-bottom:10px;overflow-x:auto;overflow-y:auto;width:auto;height:auto;">
@@ -8204,26 +8123,41 @@ n = 40
 <table class="gt_table caption-top table table-sm table-striped small" data-quarto-postprocess="true" data-quarto-disable-processing="false" data-quarto-bootstrap="false">
 <thead>
 <tr class="gt_col_headings header">
-<th id="Quantity" class="gt_col_heading gt_columns_bottom_border gt_left" data-quarto-table-cell-role="th" scope="col">Quantity</th>
-<th id="Value" class="gt_col_heading gt_columns_bottom_border gt_left" data-quarto-table-cell-role="th" scope="col">Value</th>
-<th id="Interpretation" class="gt_col_heading gt_columns_bottom_border gt_left" data-quarto-table-cell-role="th" scope="col">Interpretation</th>
+<th id="Data-type" class="gt_col_heading gt_columns_bottom_border gt_left" data-quarto-table-cell-role="th" scope="col">Data type</th>
+<th id="Likelihood" class="gt_col_heading gt_columns_bottom_border gt_left" data-quarto-table-cell-role="th" scope="col">Likelihood</th>
+<th id="Conjugate-prior" class="gt_col_heading gt_columns_bottom_border gt_left" data-quarto-table-cell-role="th" scope="col">Conjugate prior</th>
+<th id="Posterior-family" class="gt_col_heading gt_columns_bottom_border gt_left" data-quarto-table-cell-role="th" scope="col">Posterior family</th>
+<th id="Example-question" class="gt_col_heading gt_columns_bottom_border gt_left" data-quarto-table-cell-role="th" scope="col">Example question</th>
 </tr>
 </thead>
 <tbody class="gt_table_body">
 <tr class="odd">
-<td class="gt_row gt_left" headers="Quantity">Prior</td>
-<td class="gt_row gt_left" headers="Value"><span class="math inline">\(\text{Beta}(1,1)\)</span></td>
-<td class="gt_row gt_left" headers="Interpretation">Start with a flat prior over possible values of <span class="math inline">\(\theta\)</span></td>
+<td class="gt_row gt_left" headers="Data type">Successes out of trials</td>
+<td class="gt_row gt_left" headers="Likelihood"><span class="math inline">\(X \mid p \sim \text{Binomial}(n,p)\)</span></td>
+<td class="gt_row gt_left" headers="Conjugate prior"><span class="math inline">\(p \sim \text{Beta}(\alpha,\beta)\)</span></td>
+<td class="gt_row gt_left" headers="Posterior family">Beta</td>
+<td class="gt_row gt_left" headers="Example question">What proportion of residents support a policy?</td>
 </tr>
 <tr class="even">
-<td class="gt_row gt_left" headers="Quantity">Data</td>
-<td class="gt_row gt_left" headers="Value"><span class="math inline">\(x = 26,\ n = 40\)</span></td>
-<td class="gt_row gt_left" headers="Interpretation">Observe 26 yes responses and 14 no responses</td>
+<td class="gt_row gt_left" headers="Data type">Counts over time or space</td>
+<td class="gt_row gt_left" headers="Likelihood"><span class="math inline">\(Y_i \mid \lambda \sim \text{Poisson}(\lambda)\)</span></td>
+<td class="gt_row gt_left" headers="Conjugate prior"><span class="math inline">\(\lambda \sim \text{Gamma}(\alpha,\beta)\)</span></td>
+<td class="gt_row gt_left" headers="Posterior family">Gamma</td>
+<td class="gt_row gt_left" headers="Example question">What is the average number of help-desk calls per hour?</td>
 </tr>
 <tr class="odd">
-<td class="gt_row gt_left" headers="Quantity">Posterior</td>
-<td class="gt_row gt_left" headers="Value"><span class="math inline">\(\text{Beta}(27,15)\)</span></td>
-<td class="gt_row gt_left" headers="Interpretation">Update the prior using the observed data</td>
+<td class="gt_row gt_left" headers="Data type">Waiting times</td>
+<td class="gt_row gt_left" headers="Likelihood"><span class="math inline">\(Y_i \mid \lambda \sim \text{Exponential}(\lambda)\)</span></td>
+<td class="gt_row gt_left" headers="Conjugate prior"><span class="math inline">\(\lambda \sim \text{Gamma}(\alpha,\beta)\)</span></td>
+<td class="gt_row gt_left" headers="Posterior family">Gamma</td>
+<td class="gt_row gt_left" headers="Example question">What is the rate at which buses arrive?</td>
+</tr>
+<tr class="even">
+<td class="gt_row gt_left" headers="Data type">Measurements around a mean</td>
+<td class="gt_row gt_left" headers="Likelihood"><span class="math inline">\(Y_i \mid \mu \sim N(\mu, \sigma^2)\)</span></td>
+<td class="gt_row gt_left" headers="Conjugate prior"><span class="math inline">\(\mu \sim N(\mu_0,\tau_0^2)\)</span></td>
+<td class="gt_row gt_left" headers="Posterior family">Normal</td>
+<td class="gt_row gt_left" headers="Example question">What is the average exam mark in a population?</td>
 </tr>
 </tbody>
 </table>
@@ -8231,50 +8165,40 @@ n = 40
 </div>
 </div>
 </div>
-<p>Conjugacy is convenient because it gives us a neat update rule. We do not need simulation, numerical integration, or complicated computation to find the posterior.</p>
-<p>But it is important not to overstate the idea. Conjugacy is not what makes an analysis Bayesian. The Bayesian idea is the combination of a prior and a likelihood to produce a posterior. Conjugacy is just a mathematical shortcut that makes this combination especially simple.</p>
-<p>In many real problems, the posterior does not have a neat formula. In those cases, Bayesian inference can still be done, but we need computational methods. For this chapter, the beta-binomial case gives us a simple way to see the main idea clearly.</p>
-</section>
-<section id="summarising-the-posterior" class="level2" data-number="8.10">
-<h2 data-number="8.10" class="anchored" data-anchor-id="summarising-the-posterior"><span class="header-section-number">8.10</span> Summarising the posterior</h2>
-<p>The posterior distribution contains our updated uncertainty about <span class="math inline">\(\theta\)</span>. In the late-night bus example, after observing 26 yes responses out of 40, we found:</p>
+<section id="beta-binomial" class="level3" data-number="8.9.1">
+<h3 data-number="8.9.1" class="anchored" data-anchor-id="beta-binomial"><span class="header-section-number">8.9.1</span> Beta-binomial</h3>
+<p>For binomial data:</p>
 <p><span class="math display">\[
-\theta \mid X = 26
-\sim
-\text{Beta}(27,15)
+X \mid p \sim \text{Binomial}(n,p)
 \]</span></p>
-<p>This posterior distribution is the full Bayesian answer. It tells us which values of <span class="math inline">\(\theta\)</span> are more plausible and which values are less plausible after seeing the data.</p>
-<p>However, it is often useful to summarise the posterior with a few numbers. For example, we might want to know:</p>
-<ul>
-<li>What is the centre of the posterior?</li>
-<li>What range of values contains most of the posterior probability?</li>
-<li>What is the probability that () is above some meaningful threshold?</li>
-</ul>
-<p>For the late-night bus example, a meaningful threshold might be:</p>
+<p>If the prior is:</p>
 <p><span class="math display">\[
-\theta &gt; 0.50
+p \sim \text{Beta}(\alpha,\beta)
 \]</span></p>
-<p>That is, more than half of residents would use the service.</p>
-<p>We can calculate several posterior summaries using the beta distribution.</p>
+<p>then after observing <span class="math inline">\(x\)</span> successes out of <span class="math inline">\(n\)</span> trials, the posterior is:</p>
+<p><span class="math display">\[
+p \mid X=x \sim \text{Beta}(\alpha + x,\beta + n - x)
+\]</span></p>
+<p>The data add <span class="math inline">\(x\)</span> successes and <span class="math inline">\(n-x\)</span> failures to the prior.</p>
 <div class="cell">
 <div class="cell-output-display">
-<div id="vzxrrkibsx" style="padding-left:0px;padding-right:0px;padding-top:10px;padding-bottom:10px;overflow-x:auto;overflow-y:auto;width:auto;height:auto;">
-<style>#vzxrrkibsx table {
+<div id="xymxoqfeum" style="padding-left:0px;padding-right:0px;padding-top:10px;padding-bottom:10px;overflow-x:auto;overflow-y:auto;width:auto;height:auto;">
+<style>#xymxoqfeum table {
   font-family: system-ui, 'Segoe UI', Roboto, Helvetica, Arial, sans-serif, 'Apple Color Emoji', 'Segoe UI Emoji', 'Segoe UI Symbol', 'Noto Color Emoji';
   -webkit-font-smoothing: antialiased;
   -moz-osx-font-smoothing: grayscale;
 }
 
-#vzxrrkibsx thead, #vzxrrkibsx tbody, #vzxrrkibsx tfoot, #vzxrrkibsx tr, #vzxrrkibsx td, #vzxrrkibsx th {
+#xymxoqfeum thead, #xymxoqfeum tbody, #xymxoqfeum tfoot, #xymxoqfeum tr, #xymxoqfeum td, #xymxoqfeum th {
   border-style: none;
 }
 
-#vzxrrkibsx p {
+#xymxoqfeum p {
   margin: 0;
   padding: 0;
 }
 
-#vzxrrkibsx .gt_table {
+#xymxoqfeum .gt_table {
   display: table;
   border-collapse: collapse;
   line-height: normal;
@@ -8300,12 +8224,12 @@ n = 40
   border-left-color: #D3D3D3;
 }
 
-#vzxrrkibsx .gt_caption {
+#xymxoqfeum .gt_caption {
   padding-top: 4px;
   padding-bottom: 4px;
 }
 
-#vzxrrkibsx .gt_title {
+#xymxoqfeum .gt_title {
   color: #333333;
   font-size: 125%;
   font-weight: initial;
@@ -8317,7 +8241,7 @@ n = 40
   border-bottom-width: 0;
 }
 
-#vzxrrkibsx .gt_subtitle {
+#xymxoqfeum .gt_subtitle {
   color: #333333;
   font-size: 85%;
   font-weight: initial;
@@ -8329,7 +8253,7 @@ n = 40
   border-top-width: 0;
 }
 
-#vzxrrkibsx .gt_heading {
+#xymxoqfeum .gt_heading {
   background-color: #FFFFFF;
   text-align: center;
   border-bottom-color: #FFFFFF;
@@ -8341,13 +8265,13 @@ n = 40
   border-right-color: #D3D3D3;
 }
 
-#vzxrrkibsx .gt_bottom_border {
+#xymxoqfeum .gt_bottom_border {
   border-bottom-style: solid;
   border-bottom-width: 2px;
   border-bottom-color: #D3D3D3;
 }
 
-#vzxrrkibsx .gt_col_headings {
+#xymxoqfeum .gt_col_headings {
   border-top-style: solid;
   border-top-width: 2px;
   border-top-color: #D3D3D3;
@@ -8362,7 +8286,7 @@ n = 40
   border-right-color: #D3D3D3;
 }
 
-#vzxrrkibsx .gt_col_heading {
+#xymxoqfeum .gt_col_heading {
   color: #333333;
   background-color: #FFFFFF;
   font-size: 100%;
@@ -8382,7 +8306,7 @@ n = 40
   overflow-x: hidden;
 }
 
-#vzxrrkibsx .gt_column_spanner_outer {
+#xymxoqfeum .gt_column_spanner_outer {
   color: #333333;
   background-color: #FFFFFF;
   font-size: 100%;
@@ -8394,15 +8318,15 @@ n = 40
   padding-right: 4px;
 }
 
-#vzxrrkibsx .gt_column_spanner_outer:first-child {
+#xymxoqfeum .gt_column_spanner_outer:first-child {
   padding-left: 0;
 }
 
-#vzxrrkibsx .gt_column_spanner_outer:last-child {
+#xymxoqfeum .gt_column_spanner_outer:last-child {
   padding-right: 0;
 }
 
-#vzxrrkibsx .gt_column_spanner {
+#xymxoqfeum .gt_column_spanner {
   border-bottom-style: solid;
   border-bottom-width: 2px;
   border-bottom-color: #D3D3D3;
@@ -8414,11 +8338,11 @@ n = 40
   width: 100%;
 }
 
-#vzxrrkibsx .gt_spanner_row {
+#xymxoqfeum .gt_spanner_row {
   border-bottom-style: hidden;
 }
 
-#vzxrrkibsx .gt_group_heading {
+#xymxoqfeum .gt_group_heading {
   padding-top: 8px;
   padding-bottom: 8px;
   padding-left: 5px;
@@ -8444,7 +8368,7 @@ n = 40
   text-align: left;
 }
 
-#vzxrrkibsx .gt_empty_group_heading {
+#xymxoqfeum .gt_empty_group_heading {
   padding: 0.5px;
   color: #333333;
   background-color: #FFFFFF;
@@ -8459,15 +8383,15 @@ n = 40
   vertical-align: middle;
 }
 
-#vzxrrkibsx .gt_from_md > :first-child {
+#xymxoqfeum .gt_from_md > :first-child {
   margin-top: 0;
 }
 
-#vzxrrkibsx .gt_from_md > :last-child {
+#xymxoqfeum .gt_from_md > :last-child {
   margin-bottom: 0;
 }
 
-#vzxrrkibsx .gt_row {
+#xymxoqfeum .gt_row {
   padding-top: 8px;
   padding-bottom: 8px;
   padding-left: 5px;
@@ -8486,7 +8410,7 @@ n = 40
   overflow-x: hidden;
 }
 
-#vzxrrkibsx .gt_stub {
+#xymxoqfeum .gt_stub {
   color: #333333;
   background-color: #FFFFFF;
   font-size: 100%;
@@ -8499,7 +8423,7 @@ n = 40
   padding-right: 5px;
 }
 
-#vzxrrkibsx .gt_stub_row_group {
+#xymxoqfeum .gt_stub_row_group {
   color: #333333;
   background-color: #FFFFFF;
   font-size: 100%;
@@ -8513,15 +8437,15 @@ n = 40
   vertical-align: top;
 }
 
-#vzxrrkibsx .gt_row_group_first td {
+#xymxoqfeum .gt_row_group_first td {
   border-top-width: 2px;
 }
 
-#vzxrrkibsx .gt_row_group_first th {
+#xymxoqfeum .gt_row_group_first th {
   border-top-width: 2px;
 }
 
-#vzxrrkibsx .gt_summary_row {
+#xymxoqfeum .gt_summary_row {
   color: #333333;
   background-color: #FFFFFF;
   text-transform: inherit;
@@ -8531,16 +8455,16 @@ n = 40
   padding-right: 5px;
 }
 
-#vzxrrkibsx .gt_first_summary_row {
+#xymxoqfeum .gt_first_summary_row {
   border-top-style: solid;
   border-top-color: #D3D3D3;
 }
 
-#vzxrrkibsx .gt_first_summary_row.thick {
+#xymxoqfeum .gt_first_summary_row.thick {
   border-top-width: 2px;
 }
 
-#vzxrrkibsx .gt_last_summary_row {
+#xymxoqfeum .gt_last_summary_row {
   padding-top: 8px;
   padding-bottom: 8px;
   padding-left: 5px;
@@ -8550,7 +8474,7 @@ n = 40
   border-bottom-color: #D3D3D3;
 }
 
-#vzxrrkibsx .gt_grand_summary_row {
+#xymxoqfeum .gt_grand_summary_row {
   color: #333333;
   background-color: #FFFFFF;
   text-transform: inherit;
@@ -8560,7 +8484,7 @@ n = 40
   padding-right: 5px;
 }
 
-#vzxrrkibsx .gt_first_grand_summary_row {
+#xymxoqfeum .gt_first_grand_summary_row {
   padding-top: 8px;
   padding-bottom: 8px;
   padding-left: 5px;
@@ -8570,7 +8494,7 @@ n = 40
   border-top-color: #D3D3D3;
 }
 
-#vzxrrkibsx .gt_last_grand_summary_row_top {
+#xymxoqfeum .gt_last_grand_summary_row_top {
   padding-top: 8px;
   padding-bottom: 8px;
   padding-left: 5px;
@@ -8580,11 +8504,11 @@ n = 40
   border-bottom-color: #D3D3D3;
 }
 
-#vzxrrkibsx .gt_striped {
+#xymxoqfeum .gt_striped {
   background-color: rgba(128, 128, 128, 0.05);
 }
 
-#vzxrrkibsx .gt_table_body {
+#xymxoqfeum .gt_table_body {
   border-top-style: solid;
   border-top-width: 2px;
   border-top-color: #D3D3D3;
@@ -8593,7 +8517,7 @@ n = 40
   border-bottom-color: #D3D3D3;
 }
 
-#vzxrrkibsx .gt_footnotes {
+#xymxoqfeum .gt_footnotes {
   color: #333333;
   background-color: #FFFFFF;
   border-bottom-style: none;
@@ -8607,7 +8531,7 @@ n = 40
   border-right-color: #D3D3D3;
 }
 
-#vzxrrkibsx .gt_footnote {
+#xymxoqfeum .gt_footnote {
   margin: 0px;
   font-size: 90%;
   padding-top: 4px;
@@ -8616,7 +8540,7 @@ n = 40
   padding-right: 5px;
 }
 
-#vzxrrkibsx .gt_sourcenotes {
+#xymxoqfeum .gt_sourcenotes {
   color: #333333;
   background-color: #FFFFFF;
   border-bottom-style: none;
@@ -8630,7 +8554,7 @@ n = 40
   border-right-color: #D3D3D3;
 }
 
-#vzxrrkibsx .gt_sourcenote {
+#xymxoqfeum .gt_sourcenote {
   font-size: 90%;
   padding-top: 4px;
   padding-bottom: 4px;
@@ -8638,72 +8562,855 @@ n = 40
   padding-right: 5px;
 }
 
-#vzxrrkibsx .gt_left {
+#xymxoqfeum .gt_left {
   text-align: left;
 }
 
-#vzxrrkibsx .gt_center {
+#xymxoqfeum .gt_center {
   text-align: center;
 }
 
-#vzxrrkibsx .gt_right {
+#xymxoqfeum .gt_right {
   text-align: right;
   font-variant-numeric: tabular-nums;
 }
 
-#vzxrrkibsx .gt_font_normal {
+#xymxoqfeum .gt_font_normal {
   font-weight: normal;
 }
 
-#vzxrrkibsx .gt_font_bold {
+#xymxoqfeum .gt_font_bold {
   font-weight: bold;
 }
 
-#vzxrrkibsx .gt_font_italic {
+#xymxoqfeum .gt_font_italic {
   font-style: italic;
 }
 
-#vzxrrkibsx .gt_super {
+#xymxoqfeum .gt_super {
   font-size: 65%;
 }
 
-#vzxrrkibsx .gt_footnote_marks {
+#xymxoqfeum .gt_footnote_marks {
   font-size: 75%;
   vertical-align: 0.4em;
   position: initial;
 }
 
-#vzxrrkibsx .gt_asterisk {
+#xymxoqfeum .gt_asterisk {
   font-size: 100%;
   vertical-align: 0;
 }
 
-#vzxrrkibsx .gt_indent_1 {
+#xymxoqfeum .gt_indent_1 {
   text-indent: 5px;
 }
 
-#vzxrrkibsx .gt_indent_2 {
+#xymxoqfeum .gt_indent_2 {
   text-indent: 10px;
 }
 
-#vzxrrkibsx .gt_indent_3 {
+#xymxoqfeum .gt_indent_3 {
   text-indent: 15px;
 }
 
-#vzxrrkibsx .gt_indent_4 {
+#xymxoqfeum .gt_indent_4 {
   text-indent: 20px;
 }
 
-#vzxrrkibsx .gt_indent_5 {
+#xymxoqfeum .gt_indent_5 {
   text-indent: 25px;
 }
 
-#vzxrrkibsx .katex-display {
+#xymxoqfeum .katex-display {
   display: inline-flex !important;
   margin-bottom: 0.75em !important;
 }
 
-#vzxrrkibsx div.Reactable > div.rt-table > div.rt-thead > div.rt-tr.rt-tr-group-header > div.rt-th-group:after {
+#xymxoqfeum div.Reactable > div.rt-table > div.rt-thead > div.rt-tr.rt-tr-group-header > div.rt-th-group:after {
+  height: 0px !important;
+}
+</style>
+
+<table class="gt_table caption-top table table-sm table-striped small" data-quarto-postprocess="true" data-quarto-disable-processing="false" data-quarto-bootstrap="false">
+<thead>
+<tr class="gt_col_headings header">
+<th id="Quantity" class="gt_col_heading gt_columns_bottom_border gt_left" data-quarto-table-cell-role="th" scope="col">Quantity</th>
+<th id="Expression" class="gt_col_heading gt_columns_bottom_border gt_left" data-quarto-table-cell-role="th" scope="col">Expression</th>
+<th id="Interpretation" class="gt_col_heading gt_columns_bottom_border gt_left" data-quarto-table-cell-role="th" scope="col">Interpretation</th>
+</tr>
+</thead>
+<tbody class="gt_table_body">
+<tr class="odd">
+<td class="gt_row gt_left" headers="Quantity">Prior</td>
+<td class="gt_row gt_left" headers="Expression"><span class="math inline">\(p \sim \text{Beta}(\alpha, \beta)\)</span></td>
+<td class="gt_row gt_left" headers="Interpretation">Initial uncertainty about the unknown proportion</td>
+</tr>
+<tr class="even">
+<td class="gt_row gt_left" headers="Quantity">Data</td>
+<td class="gt_row gt_left" headers="Expression"><span class="math inline">\(X \mid p \sim \text{Binomial}(n,p)\)</span> and <span class="math inline">\(X=x\)</span></td>
+<td class="gt_row gt_left" headers="Interpretation">Observed successes and failures</td>
+</tr>
+<tr class="odd">
+<td class="gt_row gt_left" headers="Quantity">Posterior</td>
+<td class="gt_row gt_left" headers="Expression"><span class="math inline">\(p \mid X=x \sim \text{Beta}(\alpha+x, \beta+n-x)\)</span></td>
+<td class="gt_row gt_left" headers="Interpretation">Updated uncertainty after adding the data to the prior</td>
+</tr>
+</tbody>
+</table>
+
+</div>
+</div>
+</div>
+<p>Suppose a local council is considering whether to introduce a late-night bus service. A survey of 40 residents asks whether they would use the service. In the survey, 26 people say yes.</p>
+<p>Let:</p>
+<p><span class="math display">\[
+p = \text{the proportion of residents who would use the service}
+\]</span></p>
+<p>The data are:</p>
+<p><span class="math display">\[
+x = 26, \qquad n = 40
+\]</span></p>
+<p>The likelihood comes from the binomial model:</p>
+<p><span class="math display">\[
+X \mid p \sim \text{Binomial}(40,p)
+\]</span></p>
+<p>If we used maximum likelihood, the estimate would be:</p>
+<p><span class="math display">\[
+\hat{p} = \frac{26}{40} = 0.65
+\]</span></p>
+<p>A Bayesian analysis asks for a posterior distribution for <span class="math inline">\(p\)</span>.</p>
+<p>Start with a uniform prior:</p>
+<p><span class="math display">\[
+p \sim \text{Beta}(1,1)
+\]</span></p>
+<p>Using beta-binomial conjugacy:</p>
+<p><span class="math display">\[
+p \mid X=26 \sim \text{Beta}(1+26,1+40-26)
+\]</span></p>
+<p>So:</p>
+<p><span class="math display">\[
+p \mid X=26 \sim \text{Beta}(27,15)
+\]</span></p>
+<p><centre></centre></p>
+<div class="cell">
+<div class="cell-output-display">
+<div>
+<figure class="figure">
+<p><img src="images/chapter8/beta.gif" class="img-fluid figure-img"></p>
+</figure>
+</div>
+</div>
+</div>
+<p></p>
+<p>The posterior distribution is more concentrated than the prior because the data have given us information. It is centred near the observed proportion, but it still shows uncertainty about the true value of <span class="math inline">\(p\)</span>.</p>
+</section>
+<section id="poisson-gamma" class="level3" data-number="8.9.2">
+<h3 data-number="8.9.2" class="anchored" data-anchor-id="poisson-gamma"><span class="header-section-number">8.9.2</span> Poisson-gamma</h3>
+<p>Suppose a library wants to estimate the average number of people arriving at the front desk each hour.</p>
+<p>Let</p>
+<p><span class="math display">\[
+\lambda = \text{average number of arrivals per hour}
+\]</span></p>
+<p>A natural model for hourly counts is the Poisson distribution:</p>
+<p><span class="math display">\[
+Y_i \mid \lambda \sim \text{Poisson}(\lambda)
+\]</span></p>
+<p>A common conjugate prior for the Poisson rate is the gamma distribution:</p>
+<p><span class="math display">\[
+\lambda \sim \text{Gamma}(\alpha,\beta)
+\]</span></p>
+<p>Here we are using the shape-rate version of the gamma distribution. The first parameter, <span class="math inline">\(\alpha\)</span>, is the shape. The second parameter, <span class="math inline">\(\beta\)</span>, is the rate.</p>
+<p>If we observe counts from <span class="math inline">\(n\)</span> hours:</p>
+<p><span class="math display">\[
+y_1, y_2, \ldots, y_n
+\]</span></p>
+<p>then the posterior is:</p>
+<p><span class="math display">\[
+\lambda \mid y_1,\ldots,y_n
+\sim
+\text{Gamma}\left(\alpha + \sum_{i=1}^n y_i,\ \beta + n\right)
+\]</span></p>
+<p>This update has the same flavour as the beta-binomial update. The data add information to the prior. For the Poisson-gamma model, the total count, <span class="math inline">\(\sum_{i=1}^n y_i\)</span>, updates the shape parameter, and the number of observed time periods, <span class="math inline">\(n\)</span>, updates the rate parameter.</p>
+<p>For example, suppose the prior is:</p>
+<p><span class="math display">\[
+\lambda \sim \text{Gamma}(3,1)
+\]</span></p>
+<p>This prior has mean:</p>
+<p><span class="math display">\[
+\frac{3}{1}=3
+\]</span></p>
+<p>So before collecting new data, the library expects about 3 arrivals per hour.</p>
+<p>Now suppose the library observes arrivals over 4 hours:</p>
+<p><span class="math display">\[
+2,\ 5,\ 4,\ 3
+\]</span></p>
+<p>The total number of arrivals is:</p>
+<p><span class="math display">\[
+2 + 5 + 4 + 3 = 14
+\]</span></p>
+<p>So the posterior is:</p>
+<p><span class="math display">\[
+\begin{aligned}
+\lambda \mid \text{data}
+&amp;\sim
+\text{Gamma}(3 + 14,\ 1 + 4) \\
+&amp;\sim
+\text{Gamma}(17,5)
+\end{aligned}
+\]</span></p>
+<p>The posterior mean is:</p>
+<p><span class="math display">\[
+\frac{17}{5}=3.4
+\]</span></p>
+<p>The data have shifted the estimated arrival rate from 3 arrivals per hour to about 3.4 arrivals per hour.</p>
+<p><centre></centre></p>
+<div class="cell">
+<div class="cell-output-display">
+<div>
+<figure class="figure">
+<p><img src="images/chapter8/gamma.gif" class="img-fluid figure-img"></p>
+</figure>
+</div>
+</div>
+</div>
+<p></p>
+<p>The posterior is narrower than the prior because the four hours of data have reduced our uncertainty about the arrival rate.</p>
+</section>
+<section id="exponential-gamma" class="level3" data-number="8.9.3">
+<h3 data-number="8.9.3" class="anchored" data-anchor-id="exponential-gamma"><span class="header-section-number">8.9.3</span> Exponential-gamma</h3>
+<p>The gamma distribution is also conjugate for the rate of an exponential distribution.</p>
+<p>Suppose we are studying the time between bus arrivals at a stop. Let</p>
+<p><span class="math display">\[
+\lambda = \text{arrival rate of buses per minute}
+\]</span></p>
+<p>If buses arrive according to a constant rate, then waiting times can be modelled using an exponential distribution:</p>
+<p><span class="math display">\[
+Y_i \mid \lambda \sim \text{Exponential}(\lambda)
+\]</span></p>
+<p>Again, a conjugate prior is:</p>
+<p><span class="math display">\[
+\lambda \sim \text{Gamma}(\alpha,\beta)
+\]</span></p>
+<p>If we observe waiting times:</p>
+<p><span class="math display">\[
+y_1, y_2, \ldots, y_n
+\]</span></p>
+<p>then the posterior is:</p>
+<p><span class="math display">\[
+\lambda \mid y_1,\ldots,y_n
+\sim
+\text{Gamma}\left(\alpha + n,\ \beta + \sum_{i=1}^n y_i\right)
+\]</span></p>
+<p>Here the number of waiting times, <span class="math inline">\(n\)</span>, updates the shape parameter, while the total waiting time, <span class="math inline">\(\sum_{i=1}^n y_i\)</span>, updates the rate parameter.</p>
+<p>For example, suppose:</p>
+<p><span class="math display">\[
+\lambda \sim \text{Gamma}(2,10)
+\]</span></p>
+<p>This prior has mean:</p>
+<p><span class="math display">\[
+\frac{2}{10}=0.20
+\]</span></p>
+<p>So before seeing the new data, the expected arrival rate is 0.20 buses per minute, or about one bus every 5 minutes.</p>
+<p>Now suppose we observe three waiting times, in minutes:</p>
+<p><span class="math display">\[
+6,\ 8,\ 11
+\]</span></p>
+<p>The total waiting time is:</p>
+<p><span class="math display">\[
+6 + 8 + 11 = 25
+\]</span></p>
+<p>So the posterior is:</p>
+<p><span class="math display">\[
+\begin{aligned}
+\lambda \mid \text{data}
+&amp;\sim
+\text{Gamma}(2 + 3,\ 10 + 25) \\
+&amp;\sim
+\text{Gamma}(5,35)
+\end{aligned}
+\]</span></p>
+<p>The posterior mean is:</p>
+<p><span class="math display">\[
+\frac{5}{35}=0.143
+\]</span></p>
+<p>This corresponds to an average waiting time of about:</p>
+<p><span class="math display">\[
+\frac{1}{0.143}=7.0 \text{ minutes}
+\]</span></p>
+<p><centre></centre></p>
+<div class="cell">
+<div class="cell-output-display">
+<div>
+<figure class="figure">
+<p><img src="images/chapter8/gamma2.gif" class="img-fluid figure-img"></p>
+</figure>
+</div>
+</div>
+</div>
+<p></p>
+<p>The observed waiting times were longer than the prior expectation. As a result, the posterior shifts toward a lower arrival rate.</p>
+</section>
+<section id="normal-normal" class="level3" data-number="8.9.4">
+<h3 data-number="8.9.4" class="anchored" data-anchor-id="normal-normal"><span class="header-section-number">8.9.4</span> Normal-normal</h3>
+<p>For measurements, the normal distribution often appears again.</p>
+<p>Suppose a researcher wants to estimate the average mark on a difficult exam. Let</p>
+<p><span class="math display">\[
+\mu = \text{average mark in the population}
+\]</span></p>
+<p>Assume individual marks follow a normal distribution with known standard deviation <span class="math inline">\(\sigma\)</span>:</p>
+<p><span class="math display">\[
+Y_i \mid \mu \sim N(\mu,\sigma^2)
+\]</span></p>
+<p>A conjugate prior for <span class="math inline">\(\mu\)</span> is also normal:</p>
+<p><span class="math display">\[
+\mu \sim N(\mu_0,\tau_0^2)
+\]</span></p>
+<p>After observing data, the posterior distribution for <span class="math inline">\(\mu\)</span> is still normal. The formula is a little more complicated than the beta-binomial case, but the idea is the same. The posterior mean is a weighted average of the prior mean and the sample mean.</p>
+<p>For example, suppose the prior is:</p>
+<p><span class="math display">\[
+\mu \sim N(65,10^2)
+\]</span></p>
+<p>This prior says that, before seeing the new exam results, the average mark is expected to be around 65, but there is still uncertainty.</p>
+<p>Suppose the known standard deviation of individual marks is:</p>
+<p><span class="math display">\[
+\sigma = 12
+\]</span></p>
+<p>Now suppose we observe five marks:</p>
+<p><span class="math display">\[
+58,\ 62,\ 71,\ 67,\ 74
+\]</span></p>
+<p>The sample mean is:</p>
+<p><span class="math display">\[
+\bar{y}=66.4
+\]</span></p>
+<p>For the normal-normal model, the posterior variance is:</p>
+<p><span class="math display">\[
+\tau_n^2
+=
+\frac{1}
+{\frac{1}{\tau_0^2}+\frac{n}{\sigma^2}}
+\]</span></p>
+<p>and the posterior mean is:</p>
+<p><span class="math display">\[
+\mu_n
+=
+\tau_n^2
+\left(
+\frac{\mu_0}{\tau_0^2}
++
+\frac{n\bar{y}}{\sigma^2}
+\right)
+\]</span></p>
+<p>Using these values, the posterior distribution is approximately:</p>
+<p><span class="math display">\[
+\mu \mid \text{data} \sim N(66.0,4.72^2)
+\]</span></p>
+<p><centre></centre></p>
+<div class="cell">
+<div class="cell-output-display">
+<div>
+<figure class="figure">
+<p><img src="images/chapter8/normal.gif" class="img-fluid figure-img"></p>
+</figure>
+</div>
+</div>
+</div>
+<p></p>
+<p>The posterior is centred close to the sample mean, but it is still influenced by the prior. It is also narrower than the prior because the data have reduced our uncertainty about <span class="math inline">\(\mu\)</span>.</p>
+<p>This is a useful way to understand conjugacy more generally:</p>
+<blockquote class="blockquote">
+<p>A conjugate prior gives us an update rule that keeps the posterior in the same distribution family as the prior.</p>
+</blockquote>
+<div class="callout callout-style-default callout-important callout-titled">
+<div class="callout-header d-flex align-content-center">
+<div class="callout-icon-container">
+<i class="callout-icon"></i>
+</div>
+<div class="callout-title-container flex-fill">
+Conjugacy is a shortcut, not the whole idea
+</div>
+</div>
+<div class="callout-body-container callout-body">
+<p>Conjugacy is not what makes inference Bayesian. It is a mathematical convenience. The core Bayesian idea is still:</p>
+<p><span class="math display">\[
+\text{posterior} \propto \text{prior} \times \text{likelihood}
+\]</span></p>
+<p>Conjugate priors are useful because they make the update easy to calculate and easy to explain. But many useful Bayesian models are not conjugate. When the posterior does not have a neat formula, we can still do Bayesian inference using computation.</p>
+<p>For this chapter, we will continue with the beta-binomial model because it is simple, visual, and directly connected to proportions.</p>
+</div>
+</div>
+</section>
+</section>
+<section id="summarising-the-posterior" class="level2" data-number="8.10">
+<h2 data-number="8.10" class="anchored" data-anchor-id="summarising-the-posterior"><span class="header-section-number">8.10</span> Summarising the posterior</h2>
+<p>The posterior distribution contains our updated uncertainty about <span class="math inline">\(\theta\)</span>. In the late-night bus example, after observing 26 yes responses out of 40, we found:</p>
+<p><span class="math display">\[
+\theta \mid X = 26
+\sim
+\text{Beta}(27,15)
+\]</span></p>
+<p>This posterior distribution is the full Bayesian answer. It tells us which values of <span class="math inline">\(\theta\)</span> are more plausible and which values are less plausible after seeing the data.</p>
+<p>However, it is often useful to summarise the posterior with a few numbers. For example, we might want to know:</p>
+<ul>
+<li>What is the centre of the posterior?</li>
+<li>What range of values contains most of the posterior probability?</li>
+<li>What is the probability that () is above some meaningful threshold?</li>
+</ul>
+<p>For the late-night bus example, a meaningful threshold might be:</p>
+<p><span class="math display">\[
+\theta &gt; 0.50
+\]</span></p>
+<p>That is, more than half of residents would use the service.</p>
+<p>We can calculate several posterior summaries using the beta distribution.</p>
+<div class="cell">
+<div class="cell-output-display">
+<div id="steamknvvb" style="padding-left:0px;padding-right:0px;padding-top:10px;padding-bottom:10px;overflow-x:auto;overflow-y:auto;width:auto;height:auto;">
+<style>#steamknvvb table {
+  font-family: system-ui, 'Segoe UI', Roboto, Helvetica, Arial, sans-serif, 'Apple Color Emoji', 'Segoe UI Emoji', 'Segoe UI Symbol', 'Noto Color Emoji';
+  -webkit-font-smoothing: antialiased;
+  -moz-osx-font-smoothing: grayscale;
+}
+
+#steamknvvb thead, #steamknvvb tbody, #steamknvvb tfoot, #steamknvvb tr, #steamknvvb td, #steamknvvb th {
+  border-style: none;
+}
+
+#steamknvvb p {
+  margin: 0;
+  padding: 0;
+}
+
+#steamknvvb .gt_table {
+  display: table;
+  border-collapse: collapse;
+  line-height: normal;
+  margin-left: auto;
+  margin-right: auto;
+  color: #333333;
+  font-size: 16px;
+  font-weight: normal;
+  font-style: normal;
+  background-color: #FFFFFF;
+  width: 100%;
+  border-top-style: solid;
+  border-top-width: 2px;
+  border-top-color: #A8A8A8;
+  border-right-style: none;
+  border-right-width: 2px;
+  border-right-color: #D3D3D3;
+  border-bottom-style: solid;
+  border-bottom-width: 2px;
+  border-bottom-color: #A8A8A8;
+  border-left-style: none;
+  border-left-width: 2px;
+  border-left-color: #D3D3D3;
+}
+
+#steamknvvb .gt_caption {
+  padding-top: 4px;
+  padding-bottom: 4px;
+}
+
+#steamknvvb .gt_title {
+  color: #333333;
+  font-size: 125%;
+  font-weight: initial;
+  padding-top: 4px;
+  padding-bottom: 4px;
+  padding-left: 5px;
+  padding-right: 5px;
+  border-bottom-color: #FFFFFF;
+  border-bottom-width: 0;
+}
+
+#steamknvvb .gt_subtitle {
+  color: #333333;
+  font-size: 85%;
+  font-weight: initial;
+  padding-top: 3px;
+  padding-bottom: 5px;
+  padding-left: 5px;
+  padding-right: 5px;
+  border-top-color: #FFFFFF;
+  border-top-width: 0;
+}
+
+#steamknvvb .gt_heading {
+  background-color: #FFFFFF;
+  text-align: center;
+  border-bottom-color: #FFFFFF;
+  border-left-style: none;
+  border-left-width: 1px;
+  border-left-color: #D3D3D3;
+  border-right-style: none;
+  border-right-width: 1px;
+  border-right-color: #D3D3D3;
+}
+
+#steamknvvb .gt_bottom_border {
+  border-bottom-style: solid;
+  border-bottom-width: 2px;
+  border-bottom-color: #D3D3D3;
+}
+
+#steamknvvb .gt_col_headings {
+  border-top-style: solid;
+  border-top-width: 2px;
+  border-top-color: #D3D3D3;
+  border-bottom-style: solid;
+  border-bottom-width: 2px;
+  border-bottom-color: #D3D3D3;
+  border-left-style: none;
+  border-left-width: 1px;
+  border-left-color: #D3D3D3;
+  border-right-style: none;
+  border-right-width: 1px;
+  border-right-color: #D3D3D3;
+}
+
+#steamknvvb .gt_col_heading {
+  color: #333333;
+  background-color: #FFFFFF;
+  font-size: 100%;
+  font-weight: normal;
+  text-transform: inherit;
+  border-left-style: none;
+  border-left-width: 1px;
+  border-left-color: #D3D3D3;
+  border-right-style: none;
+  border-right-width: 1px;
+  border-right-color: #D3D3D3;
+  vertical-align: bottom;
+  padding-top: 5px;
+  padding-bottom: 6px;
+  padding-left: 5px;
+  padding-right: 5px;
+  overflow-x: hidden;
+}
+
+#steamknvvb .gt_column_spanner_outer {
+  color: #333333;
+  background-color: #FFFFFF;
+  font-size: 100%;
+  font-weight: normal;
+  text-transform: inherit;
+  padding-top: 0;
+  padding-bottom: 0;
+  padding-left: 4px;
+  padding-right: 4px;
+}
+
+#steamknvvb .gt_column_spanner_outer:first-child {
+  padding-left: 0;
+}
+
+#steamknvvb .gt_column_spanner_outer:last-child {
+  padding-right: 0;
+}
+
+#steamknvvb .gt_column_spanner {
+  border-bottom-style: solid;
+  border-bottom-width: 2px;
+  border-bottom-color: #D3D3D3;
+  vertical-align: bottom;
+  padding-top: 5px;
+  padding-bottom: 5px;
+  overflow-x: hidden;
+  display: inline-block;
+  width: 100%;
+}
+
+#steamknvvb .gt_spanner_row {
+  border-bottom-style: hidden;
+}
+
+#steamknvvb .gt_group_heading {
+  padding-top: 8px;
+  padding-bottom: 8px;
+  padding-left: 5px;
+  padding-right: 5px;
+  color: #333333;
+  background-color: #FFFFFF;
+  font-size: 100%;
+  font-weight: initial;
+  text-transform: inherit;
+  border-top-style: solid;
+  border-top-width: 2px;
+  border-top-color: #D3D3D3;
+  border-bottom-style: solid;
+  border-bottom-width: 2px;
+  border-bottom-color: #D3D3D3;
+  border-left-style: none;
+  border-left-width: 1px;
+  border-left-color: #D3D3D3;
+  border-right-style: none;
+  border-right-width: 1px;
+  border-right-color: #D3D3D3;
+  vertical-align: middle;
+  text-align: left;
+}
+
+#steamknvvb .gt_empty_group_heading {
+  padding: 0.5px;
+  color: #333333;
+  background-color: #FFFFFF;
+  font-size: 100%;
+  font-weight: initial;
+  border-top-style: solid;
+  border-top-width: 2px;
+  border-top-color: #D3D3D3;
+  border-bottom-style: solid;
+  border-bottom-width: 2px;
+  border-bottom-color: #D3D3D3;
+  vertical-align: middle;
+}
+
+#steamknvvb .gt_from_md > :first-child {
+  margin-top: 0;
+}
+
+#steamknvvb .gt_from_md > :last-child {
+  margin-bottom: 0;
+}
+
+#steamknvvb .gt_row {
+  padding-top: 8px;
+  padding-bottom: 8px;
+  padding-left: 5px;
+  padding-right: 5px;
+  margin: 10px;
+  border-top-style: solid;
+  border-top-width: 1px;
+  border-top-color: #D3D3D3;
+  border-left-style: none;
+  border-left-width: 1px;
+  border-left-color: #D3D3D3;
+  border-right-style: none;
+  border-right-width: 1px;
+  border-right-color: #D3D3D3;
+  vertical-align: middle;
+  overflow-x: hidden;
+}
+
+#steamknvvb .gt_stub {
+  color: #333333;
+  background-color: #FFFFFF;
+  font-size: 100%;
+  font-weight: initial;
+  text-transform: inherit;
+  border-right-style: solid;
+  border-right-width: 2px;
+  border-right-color: #D3D3D3;
+  padding-left: 5px;
+  padding-right: 5px;
+}
+
+#steamknvvb .gt_stub_row_group {
+  color: #333333;
+  background-color: #FFFFFF;
+  font-size: 100%;
+  font-weight: initial;
+  text-transform: inherit;
+  border-right-style: solid;
+  border-right-width: 2px;
+  border-right-color: #D3D3D3;
+  padding-left: 5px;
+  padding-right: 5px;
+  vertical-align: top;
+}
+
+#steamknvvb .gt_row_group_first td {
+  border-top-width: 2px;
+}
+
+#steamknvvb .gt_row_group_first th {
+  border-top-width: 2px;
+}
+
+#steamknvvb .gt_summary_row {
+  color: #333333;
+  background-color: #FFFFFF;
+  text-transform: inherit;
+  padding-top: 8px;
+  padding-bottom: 8px;
+  padding-left: 5px;
+  padding-right: 5px;
+}
+
+#steamknvvb .gt_first_summary_row {
+  border-top-style: solid;
+  border-top-color: #D3D3D3;
+}
+
+#steamknvvb .gt_first_summary_row.thick {
+  border-top-width: 2px;
+}
+
+#steamknvvb .gt_last_summary_row {
+  padding-top: 8px;
+  padding-bottom: 8px;
+  padding-left: 5px;
+  padding-right: 5px;
+  border-bottom-style: solid;
+  border-bottom-width: 2px;
+  border-bottom-color: #D3D3D3;
+}
+
+#steamknvvb .gt_grand_summary_row {
+  color: #333333;
+  background-color: #FFFFFF;
+  text-transform: inherit;
+  padding-top: 8px;
+  padding-bottom: 8px;
+  padding-left: 5px;
+  padding-right: 5px;
+}
+
+#steamknvvb .gt_first_grand_summary_row {
+  padding-top: 8px;
+  padding-bottom: 8px;
+  padding-left: 5px;
+  padding-right: 5px;
+  border-top-style: double;
+  border-top-width: 6px;
+  border-top-color: #D3D3D3;
+}
+
+#steamknvvb .gt_last_grand_summary_row_top {
+  padding-top: 8px;
+  padding-bottom: 8px;
+  padding-left: 5px;
+  padding-right: 5px;
+  border-bottom-style: double;
+  border-bottom-width: 6px;
+  border-bottom-color: #D3D3D3;
+}
+
+#steamknvvb .gt_striped {
+  background-color: rgba(128, 128, 128, 0.05);
+}
+
+#steamknvvb .gt_table_body {
+  border-top-style: solid;
+  border-top-width: 2px;
+  border-top-color: #D3D3D3;
+  border-bottom-style: solid;
+  border-bottom-width: 2px;
+  border-bottom-color: #D3D3D3;
+}
+
+#steamknvvb .gt_footnotes {
+  color: #333333;
+  background-color: #FFFFFF;
+  border-bottom-style: none;
+  border-bottom-width: 2px;
+  border-bottom-color: #D3D3D3;
+  border-left-style: none;
+  border-left-width: 2px;
+  border-left-color: #D3D3D3;
+  border-right-style: none;
+  border-right-width: 2px;
+  border-right-color: #D3D3D3;
+}
+
+#steamknvvb .gt_footnote {
+  margin: 0px;
+  font-size: 90%;
+  padding-top: 4px;
+  padding-bottom: 4px;
+  padding-left: 5px;
+  padding-right: 5px;
+}
+
+#steamknvvb .gt_sourcenotes {
+  color: #333333;
+  background-color: #FFFFFF;
+  border-bottom-style: none;
+  border-bottom-width: 2px;
+  border-bottom-color: #D3D3D3;
+  border-left-style: none;
+  border-left-width: 2px;
+  border-left-color: #D3D3D3;
+  border-right-style: none;
+  border-right-width: 2px;
+  border-right-color: #D3D3D3;
+}
+
+#steamknvvb .gt_sourcenote {
+  font-size: 90%;
+  padding-top: 4px;
+  padding-bottom: 4px;
+  padding-left: 5px;
+  padding-right: 5px;
+}
+
+#steamknvvb .gt_left {
+  text-align: left;
+}
+
+#steamknvvb .gt_center {
+  text-align: center;
+}
+
+#steamknvvb .gt_right {
+  text-align: right;
+  font-variant-numeric: tabular-nums;
+}
+
+#steamknvvb .gt_font_normal {
+  font-weight: normal;
+}
+
+#steamknvvb .gt_font_bold {
+  font-weight: bold;
+}
+
+#steamknvvb .gt_font_italic {
+  font-style: italic;
+}
+
+#steamknvvb .gt_super {
+  font-size: 65%;
+}
+
+#steamknvvb .gt_footnote_marks {
+  font-size: 75%;
+  vertical-align: 0.4em;
+  position: initial;
+}
+
+#steamknvvb .gt_asterisk {
+  font-size: 100%;
+  vertical-align: 0;
+}
+
+#steamknvvb .gt_indent_1 {
+  text-indent: 5px;
+}
+
+#steamknvvb .gt_indent_2 {
+  text-indent: 10px;
+}
+
+#steamknvvb .gt_indent_3 {
+  text-indent: 15px;
+}
+
+#steamknvvb .gt_indent_4 {
+  text-indent: 20px;
+}
+
+#steamknvvb .gt_indent_5 {
+  text-indent: 25px;
+}
+
+#steamknvvb .katex-display {
+  display: inline-flex !important;
+  margin-bottom: 0.75em !important;
+}
+
+#steamknvvb div.Reactable > div.rt-table > div.rt-thead > div.rt-tr.rt-tr-group-header > div.rt-th-group:after {
   height: 0px !important;
 }
 </style>
@@ -8832,23 +9539,23 @@ n = 40
 <p>we get the following posteriors.</p>
 <div class="cell">
 <div class="cell-output-display">
-<div id="hdsyvxyzws" style="padding-left:0px;padding-right:0px;padding-top:10px;padding-bottom:10px;overflow-x:auto;overflow-y:auto;width:auto;height:auto;">
-<style>#hdsyvxyzws table {
+<div id="dkupghzzah" style="padding-left:0px;padding-right:0px;padding-top:10px;padding-bottom:10px;overflow-x:auto;overflow-y:auto;width:auto;height:auto;">
+<style>#dkupghzzah table {
   font-family: system-ui, 'Segoe UI', Roboto, Helvetica, Arial, sans-serif, 'Apple Color Emoji', 'Segoe UI Emoji', 'Segoe UI Symbol', 'Noto Color Emoji';
   -webkit-font-smoothing: antialiased;
   -moz-osx-font-smoothing: grayscale;
 }
 
-#hdsyvxyzws thead, #hdsyvxyzws tbody, #hdsyvxyzws tfoot, #hdsyvxyzws tr, #hdsyvxyzws td, #hdsyvxyzws th {
+#dkupghzzah thead, #dkupghzzah tbody, #dkupghzzah tfoot, #dkupghzzah tr, #dkupghzzah td, #dkupghzzah th {
   border-style: none;
 }
 
-#hdsyvxyzws p {
+#dkupghzzah p {
   margin: 0;
   padding: 0;
 }
 
-#hdsyvxyzws .gt_table {
+#dkupghzzah .gt_table {
   display: table;
   border-collapse: collapse;
   line-height: normal;
@@ -8874,12 +9581,12 @@ n = 40
   border-left-color: #D3D3D3;
 }
 
-#hdsyvxyzws .gt_caption {
+#dkupghzzah .gt_caption {
   padding-top: 4px;
   padding-bottom: 4px;
 }
 
-#hdsyvxyzws .gt_title {
+#dkupghzzah .gt_title {
   color: #333333;
   font-size: 125%;
   font-weight: initial;
@@ -8891,7 +9598,7 @@ n = 40
   border-bottom-width: 0;
 }
 
-#hdsyvxyzws .gt_subtitle {
+#dkupghzzah .gt_subtitle {
   color: #333333;
   font-size: 85%;
   font-weight: initial;
@@ -8903,7 +9610,7 @@ n = 40
   border-top-width: 0;
 }
 
-#hdsyvxyzws .gt_heading {
+#dkupghzzah .gt_heading {
   background-color: #FFFFFF;
   text-align: center;
   border-bottom-color: #FFFFFF;
@@ -8915,13 +9622,13 @@ n = 40
   border-right-color: #D3D3D3;
 }
 
-#hdsyvxyzws .gt_bottom_border {
+#dkupghzzah .gt_bottom_border {
   border-bottom-style: solid;
   border-bottom-width: 2px;
   border-bottom-color: #D3D3D3;
 }
 
-#hdsyvxyzws .gt_col_headings {
+#dkupghzzah .gt_col_headings {
   border-top-style: solid;
   border-top-width: 2px;
   border-top-color: #D3D3D3;
@@ -8936,7 +9643,7 @@ n = 40
   border-right-color: #D3D3D3;
 }
 
-#hdsyvxyzws .gt_col_heading {
+#dkupghzzah .gt_col_heading {
   color: #333333;
   background-color: #FFFFFF;
   font-size: 100%;
@@ -8956,7 +9663,7 @@ n = 40
   overflow-x: hidden;
 }
 
-#hdsyvxyzws .gt_column_spanner_outer {
+#dkupghzzah .gt_column_spanner_outer {
   color: #333333;
   background-color: #FFFFFF;
   font-size: 100%;
@@ -8968,15 +9675,15 @@ n = 40
   padding-right: 4px;
 }
 
-#hdsyvxyzws .gt_column_spanner_outer:first-child {
+#dkupghzzah .gt_column_spanner_outer:first-child {
   padding-left: 0;
 }
 
-#hdsyvxyzws .gt_column_spanner_outer:last-child {
+#dkupghzzah .gt_column_spanner_outer:last-child {
   padding-right: 0;
 }
 
-#hdsyvxyzws .gt_column_spanner {
+#dkupghzzah .gt_column_spanner {
   border-bottom-style: solid;
   border-bottom-width: 2px;
   border-bottom-color: #D3D3D3;
@@ -8988,11 +9695,11 @@ n = 40
   width: 100%;
 }
 
-#hdsyvxyzws .gt_spanner_row {
+#dkupghzzah .gt_spanner_row {
   border-bottom-style: hidden;
 }
 
-#hdsyvxyzws .gt_group_heading {
+#dkupghzzah .gt_group_heading {
   padding-top: 8px;
   padding-bottom: 8px;
   padding-left: 5px;
@@ -9018,7 +9725,7 @@ n = 40
   text-align: left;
 }
 
-#hdsyvxyzws .gt_empty_group_heading {
+#dkupghzzah .gt_empty_group_heading {
   padding: 0.5px;
   color: #333333;
   background-color: #FFFFFF;
@@ -9033,15 +9740,15 @@ n = 40
   vertical-align: middle;
 }
 
-#hdsyvxyzws .gt_from_md > :first-child {
+#dkupghzzah .gt_from_md > :first-child {
   margin-top: 0;
 }
 
-#hdsyvxyzws .gt_from_md > :last-child {
+#dkupghzzah .gt_from_md > :last-child {
   margin-bottom: 0;
 }
 
-#hdsyvxyzws .gt_row {
+#dkupghzzah .gt_row {
   padding-top: 8px;
   padding-bottom: 8px;
   padding-left: 5px;
@@ -9060,7 +9767,7 @@ n = 40
   overflow-x: hidden;
 }
 
-#hdsyvxyzws .gt_stub {
+#dkupghzzah .gt_stub {
   color: #333333;
   background-color: #FFFFFF;
   font-size: 100%;
@@ -9073,7 +9780,7 @@ n = 40
   padding-right: 5px;
 }
 
-#hdsyvxyzws .gt_stub_row_group {
+#dkupghzzah .gt_stub_row_group {
   color: #333333;
   background-color: #FFFFFF;
   font-size: 100%;
@@ -9087,15 +9794,15 @@ n = 40
   vertical-align: top;
 }
 
-#hdsyvxyzws .gt_row_group_first td {
+#dkupghzzah .gt_row_group_first td {
   border-top-width: 2px;
 }
 
-#hdsyvxyzws .gt_row_group_first th {
+#dkupghzzah .gt_row_group_first th {
   border-top-width: 2px;
 }
 
-#hdsyvxyzws .gt_summary_row {
+#dkupghzzah .gt_summary_row {
   color: #333333;
   background-color: #FFFFFF;
   text-transform: inherit;
@@ -9105,16 +9812,16 @@ n = 40
   padding-right: 5px;
 }
 
-#hdsyvxyzws .gt_first_summary_row {
+#dkupghzzah .gt_first_summary_row {
   border-top-style: solid;
   border-top-color: #D3D3D3;
 }
 
-#hdsyvxyzws .gt_first_summary_row.thick {
+#dkupghzzah .gt_first_summary_row.thick {
   border-top-width: 2px;
 }
 
-#hdsyvxyzws .gt_last_summary_row {
+#dkupghzzah .gt_last_summary_row {
   padding-top: 8px;
   padding-bottom: 8px;
   padding-left: 5px;
@@ -9124,7 +9831,7 @@ n = 40
   border-bottom-color: #D3D3D3;
 }
 
-#hdsyvxyzws .gt_grand_summary_row {
+#dkupghzzah .gt_grand_summary_row {
   color: #333333;
   background-color: #FFFFFF;
   text-transform: inherit;
@@ -9134,7 +9841,7 @@ n = 40
   padding-right: 5px;
 }
 
-#hdsyvxyzws .gt_first_grand_summary_row {
+#dkupghzzah .gt_first_grand_summary_row {
   padding-top: 8px;
   padding-bottom: 8px;
   padding-left: 5px;
@@ -9144,7 +9851,7 @@ n = 40
   border-top-color: #D3D3D3;
 }
 
-#hdsyvxyzws .gt_last_grand_summary_row_top {
+#dkupghzzah .gt_last_grand_summary_row_top {
   padding-top: 8px;
   padding-bottom: 8px;
   padding-left: 5px;
@@ -9154,11 +9861,11 @@ n = 40
   border-bottom-color: #D3D3D3;
 }
 
-#hdsyvxyzws .gt_striped {
+#dkupghzzah .gt_striped {
   background-color: rgba(128, 128, 128, 0.05);
 }
 
-#hdsyvxyzws .gt_table_body {
+#dkupghzzah .gt_table_body {
   border-top-style: solid;
   border-top-width: 2px;
   border-top-color: #D3D3D3;
@@ -9167,7 +9874,7 @@ n = 40
   border-bottom-color: #D3D3D3;
 }
 
-#hdsyvxyzws .gt_footnotes {
+#dkupghzzah .gt_footnotes {
   color: #333333;
   background-color: #FFFFFF;
   border-bottom-style: none;
@@ -9181,7 +9888,7 @@ n = 40
   border-right-color: #D3D3D3;
 }
 
-#hdsyvxyzws .gt_footnote {
+#dkupghzzah .gt_footnote {
   margin: 0px;
   font-size: 90%;
   padding-top: 4px;
@@ -9190,7 +9897,7 @@ n = 40
   padding-right: 5px;
 }
 
-#hdsyvxyzws .gt_sourcenotes {
+#dkupghzzah .gt_sourcenotes {
   color: #333333;
   background-color: #FFFFFF;
   border-bottom-style: none;
@@ -9204,7 +9911,7 @@ n = 40
   border-right-color: #D3D3D3;
 }
 
-#hdsyvxyzws .gt_sourcenote {
+#dkupghzzah .gt_sourcenote {
   font-size: 90%;
   padding-top: 4px;
   padding-bottom: 4px;
@@ -9212,72 +9919,72 @@ n = 40
   padding-right: 5px;
 }
 
-#hdsyvxyzws .gt_left {
+#dkupghzzah .gt_left {
   text-align: left;
 }
 
-#hdsyvxyzws .gt_center {
+#dkupghzzah .gt_center {
   text-align: center;
 }
 
-#hdsyvxyzws .gt_right {
+#dkupghzzah .gt_right {
   text-align: right;
   font-variant-numeric: tabular-nums;
 }
 
-#hdsyvxyzws .gt_font_normal {
+#dkupghzzah .gt_font_normal {
   font-weight: normal;
 }
 
-#hdsyvxyzws .gt_font_bold {
+#dkupghzzah .gt_font_bold {
   font-weight: bold;
 }
 
-#hdsyvxyzws .gt_font_italic {
+#dkupghzzah .gt_font_italic {
   font-style: italic;
 }
 
-#hdsyvxyzws .gt_super {
+#dkupghzzah .gt_super {
   font-size: 65%;
 }
 
-#hdsyvxyzws .gt_footnote_marks {
+#dkupghzzah .gt_footnote_marks {
   font-size: 75%;
   vertical-align: 0.4em;
   position: initial;
 }
 
-#hdsyvxyzws .gt_asterisk {
+#dkupghzzah .gt_asterisk {
   font-size: 100%;
   vertical-align: 0;
 }
 
-#hdsyvxyzws .gt_indent_1 {
+#dkupghzzah .gt_indent_1 {
   text-indent: 5px;
 }
 
-#hdsyvxyzws .gt_indent_2 {
+#dkupghzzah .gt_indent_2 {
   text-indent: 10px;
 }
 
-#hdsyvxyzws .gt_indent_3 {
+#dkupghzzah .gt_indent_3 {
   text-indent: 15px;
 }
 
-#hdsyvxyzws .gt_indent_4 {
+#dkupghzzah .gt_indent_4 {
   text-indent: 20px;
 }
 
-#hdsyvxyzws .gt_indent_5 {
+#dkupghzzah .gt_indent_5 {
   text-indent: 25px;
 }
 
-#hdsyvxyzws .katex-display {
+#dkupghzzah .katex-display {
   display: inline-flex !important;
   margin-bottom: 0.75em !important;
 }
 
-#hdsyvxyzws div.Reactable > div.rt-table > div.rt-thead > div.rt-tr.rt-tr-group-header > div.rt-th-group:after {
+#dkupghzzah div.Reactable > div.rt-table > div.rt-thead > div.rt-tr.rt-tr-group-header > div.rt-th-group:after {
   height: 0px !important;
 }
 </style>
@@ -9330,7 +10037,7 @@ n = 40
 <div class="cell-output-display">
 <div class="quarto-figure quarto-figure-center">
 <figure class="figure">
-<p><img src="8_Bayes_files/figure-html/unnamed-chunk-28-1.png" class="img-fluid figure-img" width="672"></p>
+<p><img src="8_Bayes_files/figure-html/unnamed-chunk-32-1.png" class="img-fluid figure-img" width="672"></p>
 <figcaption>Different priors lead to different posterior distributions, even after seeing the same data.</figcaption>
 </figure>
 </div>
@@ -9363,23 +10070,23 @@ n = 400
 <p>We can repeat the same prior sensitivity analysis using the three priors from the previous section.</p>
 <div class="cell">
 <div class="cell-output-display">
-<div id="ejlpwrfozo" style="padding-left:0px;padding-right:0px;padding-top:10px;padding-bottom:10px;overflow-x:auto;overflow-y:auto;width:auto;height:auto;">
-<style>#ejlpwrfozo table {
+<div id="jalfxrqkbg" style="padding-left:0px;padding-right:0px;padding-top:10px;padding-bottom:10px;overflow-x:auto;overflow-y:auto;width:auto;height:auto;">
+<style>#jalfxrqkbg table {
   font-family: system-ui, 'Segoe UI', Roboto, Helvetica, Arial, sans-serif, 'Apple Color Emoji', 'Segoe UI Emoji', 'Segoe UI Symbol', 'Noto Color Emoji';
   -webkit-font-smoothing: antialiased;
   -moz-osx-font-smoothing: grayscale;
 }
 
-#ejlpwrfozo thead, #ejlpwrfozo tbody, #ejlpwrfozo tfoot, #ejlpwrfozo tr, #ejlpwrfozo td, #ejlpwrfozo th {
+#jalfxrqkbg thead, #jalfxrqkbg tbody, #jalfxrqkbg tfoot, #jalfxrqkbg tr, #jalfxrqkbg td, #jalfxrqkbg th {
   border-style: none;
 }
 
-#ejlpwrfozo p {
+#jalfxrqkbg p {
   margin: 0;
   padding: 0;
 }
 
-#ejlpwrfozo .gt_table {
+#jalfxrqkbg .gt_table {
   display: table;
   border-collapse: collapse;
   line-height: normal;
@@ -9405,12 +10112,12 @@ n = 400
   border-left-color: #D3D3D3;
 }
 
-#ejlpwrfozo .gt_caption {
+#jalfxrqkbg .gt_caption {
   padding-top: 4px;
   padding-bottom: 4px;
 }
 
-#ejlpwrfozo .gt_title {
+#jalfxrqkbg .gt_title {
   color: #333333;
   font-size: 125%;
   font-weight: initial;
@@ -9422,7 +10129,7 @@ n = 400
   border-bottom-width: 0;
 }
 
-#ejlpwrfozo .gt_subtitle {
+#jalfxrqkbg .gt_subtitle {
   color: #333333;
   font-size: 85%;
   font-weight: initial;
@@ -9434,7 +10141,7 @@ n = 400
   border-top-width: 0;
 }
 
-#ejlpwrfozo .gt_heading {
+#jalfxrqkbg .gt_heading {
   background-color: #FFFFFF;
   text-align: center;
   border-bottom-color: #FFFFFF;
@@ -9446,13 +10153,13 @@ n = 400
   border-right-color: #D3D3D3;
 }
 
-#ejlpwrfozo .gt_bottom_border {
+#jalfxrqkbg .gt_bottom_border {
   border-bottom-style: solid;
   border-bottom-width: 2px;
   border-bottom-color: #D3D3D3;
 }
 
-#ejlpwrfozo .gt_col_headings {
+#jalfxrqkbg .gt_col_headings {
   border-top-style: solid;
   border-top-width: 2px;
   border-top-color: #D3D3D3;
@@ -9467,7 +10174,7 @@ n = 400
   border-right-color: #D3D3D3;
 }
 
-#ejlpwrfozo .gt_col_heading {
+#jalfxrqkbg .gt_col_heading {
   color: #333333;
   background-color: #FFFFFF;
   font-size: 100%;
@@ -9487,7 +10194,7 @@ n = 400
   overflow-x: hidden;
 }
 
-#ejlpwrfozo .gt_column_spanner_outer {
+#jalfxrqkbg .gt_column_spanner_outer {
   color: #333333;
   background-color: #FFFFFF;
   font-size: 100%;
@@ -9499,15 +10206,15 @@ n = 400
   padding-right: 4px;
 }
 
-#ejlpwrfozo .gt_column_spanner_outer:first-child {
+#jalfxrqkbg .gt_column_spanner_outer:first-child {
   padding-left: 0;
 }
 
-#ejlpwrfozo .gt_column_spanner_outer:last-child {
+#jalfxrqkbg .gt_column_spanner_outer:last-child {
   padding-right: 0;
 }
 
-#ejlpwrfozo .gt_column_spanner {
+#jalfxrqkbg .gt_column_spanner {
   border-bottom-style: solid;
   border-bottom-width: 2px;
   border-bottom-color: #D3D3D3;
@@ -9519,11 +10226,11 @@ n = 400
   width: 100%;
 }
 
-#ejlpwrfozo .gt_spanner_row {
+#jalfxrqkbg .gt_spanner_row {
   border-bottom-style: hidden;
 }
 
-#ejlpwrfozo .gt_group_heading {
+#jalfxrqkbg .gt_group_heading {
   padding-top: 8px;
   padding-bottom: 8px;
   padding-left: 5px;
@@ -9549,7 +10256,7 @@ n = 400
   text-align: left;
 }
 
-#ejlpwrfozo .gt_empty_group_heading {
+#jalfxrqkbg .gt_empty_group_heading {
   padding: 0.5px;
   color: #333333;
   background-color: #FFFFFF;
@@ -9564,15 +10271,15 @@ n = 400
   vertical-align: middle;
 }
 
-#ejlpwrfozo .gt_from_md > :first-child {
+#jalfxrqkbg .gt_from_md > :first-child {
   margin-top: 0;
 }
 
-#ejlpwrfozo .gt_from_md > :last-child {
+#jalfxrqkbg .gt_from_md > :last-child {
   margin-bottom: 0;
 }
 
-#ejlpwrfozo .gt_row {
+#jalfxrqkbg .gt_row {
   padding-top: 8px;
   padding-bottom: 8px;
   padding-left: 5px;
@@ -9591,7 +10298,7 @@ n = 400
   overflow-x: hidden;
 }
 
-#ejlpwrfozo .gt_stub {
+#jalfxrqkbg .gt_stub {
   color: #333333;
   background-color: #FFFFFF;
   font-size: 100%;
@@ -9604,7 +10311,7 @@ n = 400
   padding-right: 5px;
 }
 
-#ejlpwrfozo .gt_stub_row_group {
+#jalfxrqkbg .gt_stub_row_group {
   color: #333333;
   background-color: #FFFFFF;
   font-size: 100%;
@@ -9618,15 +10325,15 @@ n = 400
   vertical-align: top;
 }
 
-#ejlpwrfozo .gt_row_group_first td {
+#jalfxrqkbg .gt_row_group_first td {
   border-top-width: 2px;
 }
 
-#ejlpwrfozo .gt_row_group_first th {
+#jalfxrqkbg .gt_row_group_first th {
   border-top-width: 2px;
 }
 
-#ejlpwrfozo .gt_summary_row {
+#jalfxrqkbg .gt_summary_row {
   color: #333333;
   background-color: #FFFFFF;
   text-transform: inherit;
@@ -9636,16 +10343,16 @@ n = 400
   padding-right: 5px;
 }
 
-#ejlpwrfozo .gt_first_summary_row {
+#jalfxrqkbg .gt_first_summary_row {
   border-top-style: solid;
   border-top-color: #D3D3D3;
 }
 
-#ejlpwrfozo .gt_first_summary_row.thick {
+#jalfxrqkbg .gt_first_summary_row.thick {
   border-top-width: 2px;
 }
 
-#ejlpwrfozo .gt_last_summary_row {
+#jalfxrqkbg .gt_last_summary_row {
   padding-top: 8px;
   padding-bottom: 8px;
   padding-left: 5px;
@@ -9655,7 +10362,7 @@ n = 400
   border-bottom-color: #D3D3D3;
 }
 
-#ejlpwrfozo .gt_grand_summary_row {
+#jalfxrqkbg .gt_grand_summary_row {
   color: #333333;
   background-color: #FFFFFF;
   text-transform: inherit;
@@ -9665,7 +10372,7 @@ n = 400
   padding-right: 5px;
 }
 
-#ejlpwrfozo .gt_first_grand_summary_row {
+#jalfxrqkbg .gt_first_grand_summary_row {
   padding-top: 8px;
   padding-bottom: 8px;
   padding-left: 5px;
@@ -9675,7 +10382,7 @@ n = 400
   border-top-color: #D3D3D3;
 }
 
-#ejlpwrfozo .gt_last_grand_summary_row_top {
+#jalfxrqkbg .gt_last_grand_summary_row_top {
   padding-top: 8px;
   padding-bottom: 8px;
   padding-left: 5px;
@@ -9685,11 +10392,11 @@ n = 400
   border-bottom-color: #D3D3D3;
 }
 
-#ejlpwrfozo .gt_striped {
+#jalfxrqkbg .gt_striped {
   background-color: rgba(128, 128, 128, 0.05);
 }
 
-#ejlpwrfozo .gt_table_body {
+#jalfxrqkbg .gt_table_body {
   border-top-style: solid;
   border-top-width: 2px;
   border-top-color: #D3D3D3;
@@ -9698,7 +10405,7 @@ n = 400
   border-bottom-color: #D3D3D3;
 }
 
-#ejlpwrfozo .gt_footnotes {
+#jalfxrqkbg .gt_footnotes {
   color: #333333;
   background-color: #FFFFFF;
   border-bottom-style: none;
@@ -9712,7 +10419,7 @@ n = 400
   border-right-color: #D3D3D3;
 }
 
-#ejlpwrfozo .gt_footnote {
+#jalfxrqkbg .gt_footnote {
   margin: 0px;
   font-size: 90%;
   padding-top: 4px;
@@ -9721,7 +10428,7 @@ n = 400
   padding-right: 5px;
 }
 
-#ejlpwrfozo .gt_sourcenotes {
+#jalfxrqkbg .gt_sourcenotes {
   color: #333333;
   background-color: #FFFFFF;
   border-bottom-style: none;
@@ -9735,7 +10442,7 @@ n = 400
   border-right-color: #D3D3D3;
 }
 
-#ejlpwrfozo .gt_sourcenote {
+#jalfxrqkbg .gt_sourcenote {
   font-size: 90%;
   padding-top: 4px;
   padding-bottom: 4px;
@@ -9743,72 +10450,72 @@ n = 400
   padding-right: 5px;
 }
 
-#ejlpwrfozo .gt_left {
+#jalfxrqkbg .gt_left {
   text-align: left;
 }
 
-#ejlpwrfozo .gt_center {
+#jalfxrqkbg .gt_center {
   text-align: center;
 }
 
-#ejlpwrfozo .gt_right {
+#jalfxrqkbg .gt_right {
   text-align: right;
   font-variant-numeric: tabular-nums;
 }
 
-#ejlpwrfozo .gt_font_normal {
+#jalfxrqkbg .gt_font_normal {
   font-weight: normal;
 }
 
-#ejlpwrfozo .gt_font_bold {
+#jalfxrqkbg .gt_font_bold {
   font-weight: bold;
 }
 
-#ejlpwrfozo .gt_font_italic {
+#jalfxrqkbg .gt_font_italic {
   font-style: italic;
 }
 
-#ejlpwrfozo .gt_super {
+#jalfxrqkbg .gt_super {
   font-size: 65%;
 }
 
-#ejlpwrfozo .gt_footnote_marks {
+#jalfxrqkbg .gt_footnote_marks {
   font-size: 75%;
   vertical-align: 0.4em;
   position: initial;
 }
 
-#ejlpwrfozo .gt_asterisk {
+#jalfxrqkbg .gt_asterisk {
   font-size: 100%;
   vertical-align: 0;
 }
 
-#ejlpwrfozo .gt_indent_1 {
+#jalfxrqkbg .gt_indent_1 {
   text-indent: 5px;
 }
 
-#ejlpwrfozo .gt_indent_2 {
+#jalfxrqkbg .gt_indent_2 {
   text-indent: 10px;
 }
 
-#ejlpwrfozo .gt_indent_3 {
+#jalfxrqkbg .gt_indent_3 {
   text-indent: 15px;
 }
 
-#ejlpwrfozo .gt_indent_4 {
+#jalfxrqkbg .gt_indent_4 {
   text-indent: 20px;
 }
 
-#ejlpwrfozo .gt_indent_5 {
+#jalfxrqkbg .gt_indent_5 {
   text-indent: 25px;
 }
 
-#ejlpwrfozo .katex-display {
+#jalfxrqkbg .katex-display {
   display: inline-flex !important;
   margin-bottom: 0.75em !important;
 }
 
-#ejlpwrfozo div.Reactable > div.rt-table > div.rt-thead > div.rt-tr.rt-tr-group-header > div.rt-th-group:after {
+#jalfxrqkbg div.Reactable > div.rt-table > div.rt-thead > div.rt-tr.rt-tr-group-header > div.rt-th-group:after {
   height: 0px !important;
 }
 </style>
@@ -9860,7 +10567,7 @@ n = 400
 <div class="cell-output-display">
 <div>
 <figure class="figure">
-<p><img src="8_Bayes_files/figure-html/unnamed-chunk-30-1.png" class="img-fluid figure-img" width="672"></p>
+<p><img src="8_Bayes_files/figure-html/unnamed-chunk-34-1.png" class="img-fluid figure-img" width="672"></p>
 </figure>
 </div>
 </div>
@@ -10017,7 +10724,7 @@ E = \text{student attended the welcome event}
 </ol>
 <p>Interpret <span class="math inline">\(P(H \mid E)\)</span> in words.</p>
 <div class="callout callout-style-default callout-important callout-titled">
-<div class="callout-header d-flex align-content-center" data-bs-toggle="collapse" data-bs-target=".callout-5-contents" aria-controls="callout-5" aria-expanded="false" aria-label="Toggle callout">
+<div class="callout-header d-flex align-content-center" data-bs-toggle="collapse" data-bs-target=".callout-6-contents" aria-controls="callout-6" aria-expanded="false" aria-label="Toggle callout">
 <div class="callout-icon-container">
 <i class="callout-icon"></i>
 </div>
@@ -10026,7 +10733,7 @@ Click for Solutions
 </div>
 <div class="callout-btn-toggle d-inline-block border-0 py-1 ps-1 pe-0 float-end"><i class="callout-toggle"></i></div>
 </div>
-<div id="callout-5" class="callout-5-contents callout-collapse collapse">
+<div id="callout-6" class="callout-6-contents callout-collapse collapse">
 <div class="callout-body-container callout-body">
 <p>There are 80 students in total.</p>
 <p>The number who joined the club is:</p>
@@ -10109,7 +10816,7 @@ E = \text{user watched the full show}
 P(H \mid E)
 \]</span></p>
 <div class="callout callout-style-default callout-important callout-titled">
-<div class="callout-header d-flex align-content-center" data-bs-toggle="collapse" data-bs-target=".callout-7-contents" aria-controls="callout-7" aria-expanded="false" aria-label="Toggle callout">
+<div class="callout-header d-flex align-content-center" data-bs-toggle="collapse" data-bs-target=".callout-8-contents" aria-controls="callout-8" aria-expanded="false" aria-label="Toggle callout">
 <div class="callout-icon-container">
 <i class="callout-icon"></i>
 </div>
@@ -10118,7 +10825,7 @@ Click for Solutions
 </div>
 <div class="callout-btn-toggle d-inline-block border-0 py-1 ps-1 pe-0 float-end"><i class="callout-toggle"></i></div>
 </div>
-<div id="callout-7" class="callout-7-contents callout-collapse collapse">
+<div id="callout-8" class="callout-8-contents callout-collapse collapse">
 <div class="callout-body-container callout-body">
 <p>We are given:</p>
 <p><span class="math display">\[
@@ -10188,7 +10895,7 @@ E = \text{Sam tests positive}
 \]</span></p>
 <p>Calculate the probability that Sam has the allergy given the positive test.</p>
 <div class="callout callout-style-default callout-important callout-titled">
-<div class="callout-header d-flex align-content-center" data-bs-toggle="collapse" data-bs-target=".callout-9-contents" aria-controls="callout-9" aria-expanded="false" aria-label="Toggle callout">
+<div class="callout-header d-flex align-content-center" data-bs-toggle="collapse" data-bs-target=".callout-10-contents" aria-controls="callout-10" aria-expanded="false" aria-label="Toggle callout">
 <div class="callout-icon-container">
 <i class="callout-icon"></i>
 </div>
@@ -10197,7 +10904,7 @@ Click for Solutions
 </div>
 <div class="callout-btn-toggle d-inline-block border-0 py-1 ps-1 pe-0 float-end"><i class="callout-toggle"></i></div>
 </div>
-<div id="callout-9" class="callout-9-contents callout-collapse collapse">
+<div id="callout-10" class="callout-10-contents callout-collapse collapse">
 <div class="callout-body-container callout-body">
 <p>We are given:</p>
 <p><span class="math display">\[
@@ -10250,7 +10957,7 @@ Question 4
 </blockquote>
 <p>Use conditional probability notation in your answer.</p>
 <div class="callout callout-style-default callout-important callout-titled">
-<div class="callout-header d-flex align-content-center" data-bs-toggle="collapse" data-bs-target=".callout-11-contents" aria-controls="callout-11" aria-expanded="false" aria-label="Toggle callout">
+<div class="callout-header d-flex align-content-center" data-bs-toggle="collapse" data-bs-target=".callout-12-contents" aria-controls="callout-12" aria-expanded="false" aria-label="Toggle callout">
 <div class="callout-icon-container">
 <i class="callout-icon"></i>
 </div>
@@ -10259,7 +10966,7 @@ Click for Solutions
 </div>
 <div class="callout-btn-toggle d-inline-block border-0 py-1 ps-1 pe-0 float-end"><i class="callout-toggle"></i></div>
 </div>
-<div id="callout-11" class="callout-11-contents callout-collapse collapse">
+<div id="callout-12" class="callout-12-contents callout-collapse collapse">
 <div class="callout-body-container callout-body">
 <p>The statement confuses two different conditional probabilities.</p>
 <p>A false positive rate of 5% means:</p>
@@ -10321,7 +11028,7 @@ E = \text{transaction is flagged}
 \]</span></p>
 <p>Then calculate <span class="math inline">\(P(H \mid E)\)</span>.</p>
 <div class="callout callout-style-default callout-important callout-titled">
-<div class="callout-header d-flex align-content-center" data-bs-toggle="collapse" data-bs-target=".callout-13-contents" aria-controls="callout-13" aria-expanded="false" aria-label="Toggle callout">
+<div class="callout-header d-flex align-content-center" data-bs-toggle="collapse" data-bs-target=".callout-14-contents" aria-controls="callout-14" aria-expanded="false" aria-label="Toggle callout">
 <div class="callout-icon-container">
 <i class="callout-icon"></i>
 </div>
@@ -10330,7 +11037,7 @@ Click for Solutions
 </div>
 <div class="callout-btn-toggle d-inline-block border-0 py-1 ps-1 pe-0 float-end"><i class="callout-toggle"></i></div>
 </div>
-<div id="callout-13" class="callout-13-contents callout-collapse collapse">
+<div id="callout-14" class="callout-14-contents callout-collapse collapse">
 <div class="callout-body-container callout-body">
 <p>The likelihood ratio is:</p>
 <p><span class="math display">\[
@@ -10404,7 +11111,7 @@ P(\text{evidence} \mid \text{honest})
 P(\text{honest} \mid \text{evidence})
 \]</span></p>
 <div class="callout callout-style-default callout-important callout-titled">
-<div class="callout-header d-flex align-content-center" data-bs-toggle="collapse" data-bs-target=".callout-15-contents" aria-controls="callout-15" aria-expanded="false" aria-label="Toggle callout">
+<div class="callout-header d-flex align-content-center" data-bs-toggle="collapse" data-bs-target=".callout-16-contents" aria-controls="callout-16" aria-expanded="false" aria-label="Toggle callout">
 <div class="callout-icon-container">
 <i class="callout-icon"></i>
 </div>
@@ -10413,7 +11120,7 @@ Click for Solutions
 </div>
 <div class="callout-btn-toggle d-inline-block border-0 py-1 ps-1 pe-0 float-end"><i class="callout-toggle"></i></div>
 </div>
-<div id="callout-15" class="callout-15-contents callout-collapse collapse">
+<div id="callout-16" class="callout-16-contents callout-collapse collapse">
 <div class="callout-body-container callout-body">
 <p>The report is making a version of the prosecutor’s fallacy.</p>
 <p>The statement “only 1 in 500 honest applicants would produce this document pattern” is about:</p>
@@ -10454,7 +11161,7 @@ Question 7
 \]</span></p>
 <p>Use the beta-binomial update rule to find the posterior distribution.</p>
 <div class="callout callout-style-default callout-important callout-titled">
-<div class="callout-header d-flex align-content-center" data-bs-toggle="collapse" data-bs-target=".callout-17-contents" aria-controls="callout-17" aria-expanded="false" aria-label="Toggle callout">
+<div class="callout-header d-flex align-content-center" data-bs-toggle="collapse" data-bs-target=".callout-18-contents" aria-controls="callout-18" aria-expanded="false" aria-label="Toggle callout">
 <div class="callout-icon-container">
 <i class="callout-icon"></i>
 </div>
@@ -10463,7 +11170,7 @@ Click for Solutions
 </div>
 <div class="callout-btn-toggle d-inline-block border-0 py-1 ps-1 pe-0 float-end"><i class="callout-toggle"></i></div>
 </div>
-<div id="callout-17" class="callout-17-contents callout-collapse collapse">
+<div id="callout-18" class="callout-18-contents callout-collapse collapse">
 <div class="callout-body-container callout-body">
 <p>We are given:</p>
 <p><span class="math display">\[
@@ -10523,7 +11230,7 @@ Question 8
 <p>Calculate the posterior mean.</p>
 <p>Then interpret it in words.</p>
 <div class="callout callout-style-default callout-important callout-titled">
-<div class="callout-header d-flex align-content-center" data-bs-toggle="collapse" data-bs-target=".callout-19-contents" aria-controls="callout-19" aria-expanded="false" aria-label="Toggle callout">
+<div class="callout-header d-flex align-content-center" data-bs-toggle="collapse" data-bs-target=".callout-20-contents" aria-controls="callout-20" aria-expanded="false" aria-label="Toggle callout">
 <div class="callout-icon-container">
 <i class="callout-icon"></i>
 </div>
@@ -10532,7 +11239,7 @@ Click for Solutions
 </div>
 <div class="callout-btn-toggle d-inline-block border-0 py-1 ps-1 pe-0 float-end"><i class="callout-toggle"></i></div>
 </div>
-<div id="callout-19" class="callout-19-contents callout-collapse collapse">
+<div id="callout-20" class="callout-20-contents callout-collapse collapse">
 <div class="callout-body-container callout-body">
 <p>For a beta distribution:</p>
 <p><span class="math display">\[
@@ -10592,7 +11299,7 @@ n = 30
 <p>Find the posterior distribution and posterior mean.</p>
 <p>How does this compare with the posterior mean from Question 8?</p>
 <div class="callout callout-style-default callout-important callout-titled">
-<div class="callout-header d-flex align-content-center" data-bs-toggle="collapse" data-bs-target=".callout-21-contents" aria-controls="callout-21" aria-expanded="false" aria-label="Toggle callout">
+<div class="callout-header d-flex align-content-center" data-bs-toggle="collapse" data-bs-target=".callout-22-contents" aria-controls="callout-22" aria-expanded="false" aria-label="Toggle callout">
 <div class="callout-icon-container">
 <i class="callout-icon"></i>
 </div>
@@ -10601,7 +11308,7 @@ Click for Solutions
 </div>
 <div class="callout-btn-toggle d-inline-block border-0 py-1 ps-1 pe-0 float-end"><i class="callout-toggle"></i></div>
 </div>
-<div id="callout-21" class="callout-21-contents callout-collapse collapse">
+<div id="callout-22" class="callout-22-contents callout-collapse collapse">
 <div class="callout-body-container callout-body">
 <p>The prior is:</p>
 <p><span class="math display">\[
@@ -10665,7 +11372,7 @@ Question 10
 <li>Explain why the prior may matter more in this example than in a survey of 1200 people with 800 yes responses.</li>
 </ol>
 <div class="callout callout-style-default callout-important callout-titled">
-<div class="callout-header d-flex align-content-center" data-bs-toggle="collapse" data-bs-target=".callout-23-contents" aria-controls="callout-23" aria-expanded="false" aria-label="Toggle callout">
+<div class="callout-header d-flex align-content-center" data-bs-toggle="collapse" data-bs-target=".callout-24-contents" aria-controls="callout-24" aria-expanded="false" aria-label="Toggle callout">
 <div class="callout-icon-container">
 <i class="callout-icon"></i>
 </div>
@@ -10674,7 +11381,7 @@ Click for Solutions
 </div>
 <div class="callout-btn-toggle d-inline-block border-0 py-1 ps-1 pe-0 float-end"><i class="callout-toggle"></i></div>
 </div>
-<div id="callout-23" class="callout-23-contents callout-collapse collapse">
+<div id="callout-24" class="callout-24-contents callout-collapse collapse">
 <div class="callout-body-container callout-body">
 <p>The prior is:</p>
 <p><span class="math display">\[
@@ -10740,7 +11447,7 @@ Question 11
 <li>Explain why this is not simply 95%.</li>
 </ol>
 <div class="callout callout-style-default callout-important callout-titled">
-<div class="callout-header d-flex align-content-center" data-bs-toggle="collapse" data-bs-target=".callout-25-contents" aria-controls="callout-25" aria-expanded="false" aria-label="Toggle callout">
+<div class="callout-header d-flex align-content-center" data-bs-toggle="collapse" data-bs-target=".callout-26-contents" aria-controls="callout-26" aria-expanded="false" aria-label="Toggle callout">
 <div class="callout-icon-container">
 <i class="callout-icon"></i>
 </div>
@@ -10749,7 +11456,7 @@ Click for Solutions
 </div>
 <div class="callout-btn-toggle d-inline-block border-0 py-1 ps-1 pe-0 float-end"><i class="callout-toggle"></i></div>
 </div>
-<div id="callout-25" class="callout-25-contents callout-collapse collapse">
+<div id="callout-26" class="callout-26-contents callout-collapse collapse">
 <div class="callout-body-container callout-body">
 <p>Let:</p>
 <p><span class="math display">\[
@@ -10838,7 +11545,7 @@ P(H \mid E)
 \]</span></p>
 <p>Then explain why the answer is not simply 80%.</p>
 <div class="callout callout-style-default callout-important callout-titled">
-<div class="callout-header d-flex align-content-center" data-bs-toggle="collapse" data-bs-target=".callout-27-contents" aria-controls="callout-27" aria-expanded="false" aria-label="Toggle callout">
+<div class="callout-header d-flex align-content-center" data-bs-toggle="collapse" data-bs-target=".callout-28-contents" aria-controls="callout-28" aria-expanded="false" aria-label="Toggle callout">
 <div class="callout-icon-container">
 <i class="callout-icon"></i>
 </div>
@@ -10847,7 +11554,7 @@ Click for Solutions
 </div>
 <div class="callout-btn-toggle d-inline-block border-0 py-1 ps-1 pe-0 float-end"><i class="callout-toggle"></i></div>
 </div>
-<div id="callout-27" class="callout-27-contents callout-collapse collapse">
+<div id="callout-28" class="callout-28-contents callout-collapse collapse">
 <div class="callout-body-container callout-body">
 <p>First calculate the base rates.</p>
 <p>There are:</p>
