@@ -14,19 +14,17 @@ library(gt)
 
 By the end of this chapter, you should be able to:
 
-1. Explain the role of estimation in moving from sample data to claims about a wider population.
-2. Distinguish between populations, samples, observations, parameters, statistics, estimators, and estimates.
-3. Explain the difference between observed values and random variables.
-4. Use sample statistics, such as the mean, median, and proportion, as point estimates of population parameters.
-5. Describe sampling variation and explain why different samples can produce different estimates.
-6. Explain what a sampling distribution is and why it is central to frequentist inference.
-7. Calculate and interpret the standard error of a sample mean.
-8. Construct and interpret interval estimates and confidence intervals for a population mean.
-9. Explain the Central Limit Theorem and describe why sample means can be approximately normal even when the original data are not.
+1.  Explain the role of estimation in moving from sample data to claims about a wider population.
+2.  Distinguish between populations, samples, observations, parameters, statistics, estimators, and estimates.
+3.  Explain the difference between observed values and random variables.
+4.  Use sample statistics, such as the mean, median, and proportion, as point estimates of population parameters.
+5.  Describe sampling variation and explain why different samples can produce different estimates.
+6.  Explain what a sampling distribution is and why it is central to frequentist inference.
+7.  Calculate and interpret the standard error of a sample mean.
+8.  Construct and interpret interval estimates and confidence intervals for a population mean.
+9.  Explain the Central Limit Theorem and describe why sample means can be approximately normal even when the original data are not.
 10. Compare two means using independent and paired sample structures, and explain why the structure of the data matters.
 :::
-
-
 
 ## Introduction
 
@@ -43,22 +41,22 @@ knitr::include_graphics("images/chapter4/outline.png")
 
 <br>
 
-As the diagram above shows, we now move into the centre of the unit: uncertainty. Some of this may feel familiar, because the first three chapters have already been circling around uncertainty from different directions. But from this point on, uncertainty becomes the main object of study. For the next six weeks, we will ask how we can learn from data when the data could have turned out differently. 
+As the diagram above shows, we now move into the centre of the unit: uncertainty. Some of this may feel familiar, because the first three chapters have already been circling around uncertainty from different directions. But from this point on, uncertainty becomes the main object of study. For the next six weeks, we will ask how we can learn from data when the data could have turned out differently.
 
 We begin with the frequentist view, where uncertainty is understood by imagining repeated samples, repeated experiments, and repeated analyses. Specifically, we begin this section with a discussion around estimation.
 
-Estimation sounds simple. We want to know some quantity, so we use data to estimate it. 
+Estimation sounds simple. We want to know some quantity, so we use data to estimate it.
 
-- What is the average number of school days missed by students? 
-- What proportion of voters support a policy? 
-- What is the average rent near campus? 
-- How much time do students spend studying each week?
+-   What is the average number of school days missed by students?
+-   What proportion of voters support a policy?
+-   What is the average rent near campus?
+-   How much time do students spend studying each week?
 
 But think back to what we have already covered in the first three chapters:
 
-- the answer depends on the question being asked
-- the data we observe are only one version of what could have happened
-- the numbers themselves are produced by imperfect measurement processes.
+-   the answer depends on the question being asked
+-   the data we observe are only one version of what could have happened
+-   the numbers themselves are produced by imperfect measurement processes.
 
 So estimation is not simply the act of calculating an average, a proportion, or a difference. It is the act of using an imperfect number from a particular dataset to say something careful about a wider world. A sample average is not the population average. A poll percentage is not the exact level of public support. A study result is not a perfect mirror of reality. These numbers are estimates: useful, informative, sometimes powerful, but still estimates.
 
@@ -76,11 +74,17 @@ That question will guide the rest of the chapter. We will begin with point estim
 
 We'll use the following example to explain most of the concepts in this chapter:
 
-::: {.callout-note}
-
+::: callout-note
 ### Household income
 
 Suppose you work for the Australian Bureau of Statistics. You have been asked to report the typical annual income of Australian households. This sounds simple, but it immediately raises statistical questions. What counts as a household? What counts as income? Are we interested in the mean, the median, or the proportion of households below a particular income level? And if we only survey a sample of households, how close will our answer be to the truth?
+
+<center>
+```{r, echo=FALSE}
+#| classes: .enlarge-image
+knitr::include_graphics("images/chapter4/income.jpg")
+```
+</center>
 
 :::
 
@@ -125,7 +129,7 @@ $$
 =
 \frac{52000 + 61000 + \cdots + 420000}{10}
 =
-119100.
+119100
 $$
 
 But does \$119,100 feel typical? Looking at the table above, seven of the ten households have incomes below this value. The mean is not wrong, but it has been pulled upward by the high-income household.
@@ -138,8 +142,7 @@ $$
 \frac{81000 + 89000}{2}
 =
 85000
-$$
-The same data have produced two different answers:
+$$ The same data have produced two different answers:
 
 ```{r}
 #| echo: false
@@ -218,7 +221,7 @@ tibble(
 
 These are all statistics: numbers calculated from the sample. But in estimation, the sample is not usually the final destination. We want to use the sample to learn something about a larger population. In this example, the population might be all Australian households. The ten households in our table are the sample. Each household is one observation.
 
-:::: {.callout-note}
+::: callout-note
 ### Terminology: population, sample, and observation
 
 A **population** is the full group we want to learn about.
@@ -228,53 +231,51 @@ A **sample** is the smaller group we actually observe.
 An **observation** is the information recorded for one unit in the sample.
 
 In the household income example, the population might be all Australian households. The sample is the households whose incomes are recorded. Each household contributes one observation.
-::::
+:::
 
-Now we can introduce one of the most important distinctions in statistics.
+Now we can introduce an important distinctions in statistics: 
 
-A **parameter** is a numerical feature of a population. A **statistic** is a numerical feature calculated from a sample.
+- A **parameter** is a numerical feature of a population. 
+- A **statistic** is a numerical feature calculated from a sample.
 
-For example, the true median annual income of all Australian households is a parameter. We usually do not know it. The median income calculated from our sample is a statistic. We do know it, once the data have been collected.
+For example, the true median annual income of all Australian households is a parameter. We usually do not know it. The median income calculated from our sample is a statistic. We do know it, once the data have been collected. This distinction can feel small at first, but it is the beginning of statistical inference. We use what we can calculate to estimate what we cannot directly see.
 
-This distinction can feel small at first, but it is the beginning of statistical inference. We use what we can calculate to estimate what we cannot directly see.
+For instance, suppose we are interested in two quantities from the household income example:
 
-For instance, suppose our target is the true mean annual income of all Australian households. We might call this unknown population mean $\mu$. We do not know $\mu$, because we have not observed every household. Instead, we calculate the sample mean $\bar{x}$, and use it as an estimate of $\mu$.
+```{r}
+#| echo: false
+#| message: false
+#| warning: false
 
-$$
-\mu = \text{population mean}
-$$
+tibble(
+  `Target question` = c(
+    "What is the true mean annual income of all Australian households?",
+    "What proportion of Australian households have annual income below $60,000?"
+  ),
+  `Population parameter` = c(
+    "$\\mu$ = population mean",
+    "$p$ = population proportion"
+  ),
+  `Sample statistic / estimate` = c(
+    "$\\bar{x}$ = sample mean",
+    "$\\hat{p}$ = sample proportion"
+  ),
+  `Value in illustrative sample` = c(
+    "$\\bar{x} = 119{,}100$",
+    "$\\hat{p} = 0.10$"
+  ),
+  `Interpretation` = c(
+    "$119,100 is our estimate of the unknown population mean.",
+    "10% is our estimate of the unknown population proportion below $60,000."
+  )
+) |>
+  gt() |>
+  fmt_markdown(columns = everything())
+```
 
-$$
-\bar{x} = \text{sample mean}
-$$
 
-In our illustrative sample:
 
-$$
-\bar{x} = 119{,}100
-$$
-
-So \$119,100 is our estimate of the unknown population mean.
-
-If our target is the true proportion of Australian households below \$60,000, we might call the parameter $p$. The sample proportion is written as $\hat{p}$, pronounced “p-hat”.
-
-$$
-p = \text{population proportion}
-$$
-
-$$
-\hat{p} = \text{sample proportion}
-$$
-
-In our illustrative sample:
-
-$$
-\hat{p} = 0.10.
-$$
-
-So 10% is our estimate of the unknown population proportion. The small hat symbol is often used to show that something is an estimate. More generally, if $\theta$ is an unknown parameter, then $\hat{\theta}$ is an estimate of that parameter.
-
-:::: {.callout-note}
+::: callout-note
 ### Terminology: estimate and point estimate
 
 An **estimate** is a value calculated from sample data and used to approximate an unknown parameter.
@@ -282,35 +283,8 @@ An **estimate** is a value calculated from sample data and used to approximate a
 A **point estimate** is a single-number estimate.
 
 For example, if the unknown population mean income is $\mu$, then the sample mean $\bar{x}$ can be used as a point estimate of $\mu$.
-::::
+:::
 
-At this stage, we should be careful with language. It is tempting to say:
-
-> The average household income is \$119,100.
-
-But that sentence quietly drops the uncertainty. A better sentence is:
-
-> In this sample, the average household income is \$119,100.
-
-An even better sentence is:
-
-> In this sample, the average household income is \$119,100, which we use as an estimate of the average income in the wider population.
-
-The difference may seem subtle, but it changes the claim. The first sentence sounds like a fact about Australia. The second is a fact about the sample. The third is an inferential statement: it uses the sample to say something cautious about the population.
-
-This also connects back to measurement. Household income sounds simple, but it depends on definitions. Are we measuring income before tax or after tax? Do we include government payments? Do we include investment income? What about irregular income? Are we measuring household income, personal income, or income adjusted for household size?
-
-A household of one person earning \$80,000 and a household of five people earning \$80,000 are not in the same financial position. The number is the same, but its meaning is different.
-
-So the task is not simply:
-
-> Calculate household income.
-
-The task is closer to:
-
-> Define the population, choose the parameter, collect a sample, calculate a statistic, and use that statistic as an estimate.
-
-The arithmetic is the easy part. The statistical thinking is deciding what the arithmetic means.
 
 To close this section, let us summarise the structure.
 
@@ -350,12 +324,12 @@ The estimate depends on the sample. A different sample would give a different sa
 
 In the previous section, we used the household income example to separate the number we want to know from the number we can calculate. The unknown population quantity is the **parameter**. The sample quantity is the **statistic**. When we use that statistic to approximate the parameter, it becomes an **estimate**.
 
-But there is another distinction that is just as important, and it is one of the reasons statistical notation can feel strange at first. The data we have observed are fixed. They are already in the spreadsheet. But before we collected the data, the values could have been different. A different set of households could have been surveyed. Their incomes could have led to a different sample mean, a different sample median, and a different sample proportion.
+But there is another distinction that is just as important, and it is one of the reasons statistical notation can feel strange at first. The data we have observed are fixed. They are already in the spreadsheet / dataframe / etc. But before we collected the data, the values could have been different. A different set of households could have been surveyed. Their incomes could have led to a different sample mean, a different sample median, and a different sample proportion.
 
 Statistics needs a way to talk about both of these things:
 
-- the data we actually observed;
-- the data we could have observed.
+-   the data we actually observed;
+-   the data we could have observed.
 
 This is why we distinguish between **observed values** and **random variables**.
 
@@ -396,13 +370,13 @@ Once these values are observed, they are fixed. Household A has income \$52,000 
 We write the observed values using lowercase letters:
 
 $$
-x_1, x_2, \ldots, x_n.
+x_1, x_2, \ldots, x_n
 $$
 
 For our ten households, this means:
 
 $$
-x_1 = 52000,\quad x_2 = 61000,\quad \ldots,\quad x_{10} = 420000.
+x_1 = 52000,\quad x_2 = 61000,\quad \ldots,\quad x_{10} = 420000
 $$
 
 The lowercase letter $x$ refers to the data after they have been observed. But before the survey was conducted, we did not know which incomes would appear. The first household selected might have had an income of \$52,000, or \$83,000, or \$210,000, or something else. The second selected household also could have had many possible incomes. The whole sample could have turned out differently.
@@ -410,7 +384,7 @@ The lowercase letter $x$ refers to the data after they have been observed. But b
 To represent this pre-observation uncertainty, we use uppercase letters:
 
 $$
-X_1, X_2, \ldots, X_n.
+X_1, X_2, \ldots, X_n
 $$
 
 Here, $X_1$ represents the income of the first household before we know what it will be. It is a **random variable**. It has not yet landed on a value. After the sample is collected, $X_1$ becomes $x_1$. The random variable has produced an observed value.
@@ -512,9 +486,7 @@ income_comparison |>
   )
 ```
 
-The two samples give different estimates. This is not a contradiction, and it is not necessarily an error. It is sampling variation.
-
-This is why we need uppercase notation. When we write the sample mean using lowercase values,
+The two samples give different estimates. This is not a contradiction, and it is not necessarily an error. It is sampling variation. This is why we need uppercase notation. When we write the sample mean using lowercase values,
 
 $$
 \bar{x}
@@ -525,7 +497,7 @@ $$
 we are talking about the mean of the data we actually observed. In the first sample, this is:
 
 $$
-\bar{x} = 119100.
+\bar{x} = 119100
 $$
 
 But before data collection, the sample mean itself is uncertain. It depends on the random variables $X_1, X_2, \ldots, X_n$. So we write the estimator as:
@@ -585,15 +557,7 @@ $$
 \frac{X_1 + X_2 + \cdots + X_n}{n},
 $$
 
-we are describing the method before the data arrive. The first is an **estimate**. The second is an **estimator**. The formulas look almost identical. The difference is the case of the letter. But that small difference carries a big idea.
-
-Uppercase says:
-
-> This could have turned out differently.
-
-Lowercase says:
-
-> This is what we observed.
+we are describing the method before the data arrive. The first is an **estimate**. The second is an **estimator**. 
 
 ## Sampling distributions
 
@@ -605,23 +569,19 @@ $$
 \bar{x} = 119{,}100
 $$
 
-But if a different set of households had been selected, the sample mean would probably have been different. The population parameter we are trying to estimate has not changed. The sample has changed, and therefore the estimate has changed.
+But if a different set of households had been selected, the sample mean would probably have been different. The population parameter we are trying to estimate has not changed. The sample has changed, and therefore the estimate has changed. This is the key idea behind a **sampling distribution**.
 
-This is the key idea behind a **sampling distribution**.
-
-:::: {.callout-note}
+::: callout-note
 ### Terminology: sampling distribution
 
 A **sampling distribution** is the probability distribution of a statistic over repeated samples.
 
 It describes how a statistic, such as the sample mean, would vary if we repeated the data collection process again and again.
-::::
-
-This definition can sound abstract, so let us return to the Australian household income example.
+:::
 
 Imagine that the ABS could perform a strange experiment. Suppose it could repeatedly draw new samples of 10 households from the same population. For each sample, it calculates the sample mean income. The first sample might give one mean. The second sample might give another. The third sample might give another again.
 
-The population has not changed. Only the sample has changed.
+The population has not changed. Only the sample has changed. The table below shows the results of 8 different samples, each with 10 households.
 
 ```{r}
 #| echo: false
@@ -651,22 +611,25 @@ hypothetical_samples |>
 
 Each row in the table is a possible result from the same sampling process. If we took enough samples and plotted all the sample means, we would get the sampling distribution of the sample mean.
 
-This is a distribution of **statistics**, not a distribution of individual household incomes. That distinction is easy to miss.
+In the app below, click on the **Take sample** button to draw a sample of size 10 from the population. This will plot the sample mean on the second and third panel. Repeat this ~10 times to see what the distribution starts to looks like. You can click the **Take many** button, which simulates you clicking the **Take sample** button multiple times in one go.
 
-The original data distribution is about households:
 
-> What incomes do individual households have?
+```{=html}
+<iframe 
+  src="interactive/sampling_distribution_app_animated_density_spaced.html"
+  width="100%" 
+  height="740"
+  style="border: none;"
+></iframe>
+```
 
-The sampling distribution is about estimates:
 
-> What sample means would we get across repeated samples?
-
-These are different kinds of variation.
 
 ```{r}
 #| echo: false
 #| message: false
 #| warning: false
+#| include: false
 
 library(ggplot2)
 library(scales)
@@ -717,28 +680,26 @@ p2 <- ggplot(plot_data_means, aes(x = sample_mean)) +
 p1+p2
 ```
 
-The first plot shows variation between households in one sample. Some households earn more than others. That is ordinary data variation. The second plot shows variation between sample means. Each value in this plot is itself an average from a sample of 10 households. That is sampling variation.
-
 This repeated-sampling idea is at the centre of Frequentist statistics. We usually do not get to take thousands of real samples. In practice, the ABS would take one carefully designed sample and publish estimates from that one sample. But to understand the uncertainty in those estimates, we imagine what would happen if the sampling process were repeated.
 
 This imagined repetition allows us to ask questions such as:
 
-- Would the sample mean usually be close to the population mean?
-- How far away from the population mean might it be?
-- Are some estimators more stable than others?
-- How much does the sample size matter?
+-   Would the sample mean usually be close to the population mean?
+-   How far away from the population mean might it be?
+-   Are some estimators more stable than others?
+-   How much does the sample size matter?
 
 A good estimator is one that tends to land close to the parameter. But there are two different ways an estimator can fail. It can be systematically off target. Or it can be highly unstable.
 
 Suppose two teams are asked to estimate the average household income in Australia.
 
-- Team A samples only households in wealthy inner-city suburbs. Their estimate may be high every time. Even with a large sample, the method is systematically tilted upward.
+-   Team A samples only households in wealthy inner-city suburbs. Their estimate may be high every time. Even with a large sample, the method is systematically tilted upward.
 
-- Team B samples households randomly from across the country, but only samples five households. Their method may be fair, but their estimate will jump around a lot from sample to sample.
+-   Team B samples households randomly from across the country, but only samples five households. Their method may be fair, but their estimate will jump around a lot from sample to sample.
 
 These two problems are called **bias** and **variance**.
 
-:::: {.callout-note}
+::: callout-note
 ### Terminology: bias and variance
 
 **Bias** describes whether an estimator tends to miss the parameter systematically.
@@ -746,7 +707,7 @@ These two problems are called **bias** and **variance**.
 **Variance** describes how much an estimator changes from sample to sample.
 
 A good estimator is usually one that is centred near the truth and does not wobble too much.
-::::
+:::
 
 In notation, if $\hat{\theta}$ is an estimator for a parameter $\theta$, the bias is:
 
@@ -846,11 +807,11 @@ The individual household incomes are still uneven and right-skewed. But the samp
 
 But notice the wording: **some** of the disorder. Averages do not remove all uncertainty. They reduce sampling variation, especially when the sample size is large and the sampling process is well designed. They do not automatically remove bias, measurement problems, or poor definitions.
 
-:::: {.callout-warning}
+::: callout-warning
 ### Larger samples do not fix every problem
 
 A larger random sample usually reduces sampling variation. But a larger sample does not automatically remove bias. If the sampling process misses some kinds of households, or if income is measured inconsistently, a large sample can still produce a misleading estimate.
-::::
+:::
 
 The sampling distribution is therefore not just a technical idea. It is the picture behind uncertainty.
 
@@ -876,12 +837,12 @@ To do that, we need to measure the **wobble** of the estimate.
 
 In the household income example, there are two different kinds of wobble we might care about.
 
-- First, individual households differ from one another. Some households have lower incomes, some have middle incomes, and a few have much higher incomes. This is variation in the data.
-- Second, sample means differ from one sample to another. One sample might produce a mean of $\$119{,}100$. Another might produce $\$102{,}600$. Another might produce something else. This is variation in the estimate.
+-   First, individual households differ from one another. Some households have lower incomes, some have middle incomes, and a few have much higher incomes. This is variation in the data.
+-   Second, sample means differ from one sample to another. One sample might produce a mean of $\$119{,}100$. Another might produce $\$102{,}600$. Another might produce something else. This is variation in the estimate.
 
 These are related, but they are not the same thing.
 
-:::: {.callout-important}
+::: callout-important
 ### Do not confuse these two quantities
 
 The **standard deviation** describes how much individual observations vary.
@@ -889,7 +850,7 @@ The **standard deviation** describes how much individual observations vary.
 The **standard error** describes how much an estimate varies from sample to sample.
 
 In the household income example, the standard deviation is about variation among household incomes. The standard error is about variation among sample mean incomes.
-::::
+:::
 
 Let us return to the small household income sample, which had a sample mean of:
 
@@ -910,7 +871,6 @@ s
 =108{,}735
 $$
 
-
 The sample standard deviation is large because the incomes themselves are spread out, especially because of the high-income household.
 
 For a sample mean, the standard error has a particularly important form:
@@ -921,8 +881,8 @@ $$
 
 Here, $\sigma$ is the population standard deviation and $n$ is the sample size. This formula says two important things.
 
-- First, if individual households are highly variable, then sample means will also be more variable. Income is much harder to estimate precisely when households differ greatly from one another.
-- Second, larger samples produce more stable sample means. The sample size appears under a square root, so increasing $n$ reduces the standard error.
+-   First, if individual households are highly variable, then sample means will also be more variable. Income is much harder to estimate precisely when households differ greatly from one another.
+-   Second, larger samples produce more stable sample means. The sample size appears under a square root, so increasing $n$ reduces the standard error.
 
 But there is a catch. In real life, we usually do not know $\sigma$, the population standard deviation. If we knew the population standard deviation, we might already know a lot about the population. Instead, we estimate $\sigma$ using $s$, the sample standard deviation.
 
@@ -966,7 +926,7 @@ This is already more informative than reporting $\$119{,}100$ alone. It tells th
 
 The idea is simple but powerful:
 
-> A point estimate tells us where we landed.  
+> A point estimate tells us where we landed.\
 > A standard error tells us how much that landing point tends to wobble.
 
 Now let us look at why sample size matters. Suppose the household incomes in the wider population are highly variable. That variability is a fact about the population. We cannot make Australian households less economically diverse by collecting more data. But we can make our estimate of the mean more stable by collecting a larger sample.
@@ -1045,11 +1005,11 @@ ggplot(se_curve, aes(x = n, y = se)) +
 
 The curve drops quickly at first, then flattens out. This is the mathematical version of a familiar practical problem: early improvements can be large, but each additional gain in precision costs more and more data.
 
-:::: {.callout-important}
+::: callout-important
 ### Precision has a cost
 
 Increasing the sample size reduces the standard error, but with diminishing returns. To halve the standard error, we generally need about four times the sample size.
-::::
+:::
 
 The standard error also helps us compare two estimates that look similar on the surface.
 
@@ -1132,7 +1092,7 @@ $$
 \text{estimate} \pm \text{error}.
 $$
 
-:::: {.callout-note}
+::: callout-note
 ### Terminology: interval estimate
 
 An **interval estimate** gives a range of plausible values for a parameter.
@@ -1140,7 +1100,7 @@ An **interval estimate** gives a range of plausible values for a parameter.
 A **point estimate** gives one number.
 
 An **interval estimate** gives a lower value and an upper value.
-::::
+:::
 
 For the household income example, the point estimate is the sample mean:
 
@@ -1280,11 +1240,11 @@ This is one of the habits we want to develop in statistical thinking:
 
 A difference between two point estimates can look meaningful simply because we have hidden the wobble. Once the uncertainty is visible, the difference may look less dramatic.
 
-:::: {.callout-important}
+::: callout-important
 ### Point estimates can overstate certainty
 
 A point estimate is useful, but it can make a result look more precise than it really is. An interval estimate reminds us that the statistic came from one sample, and another sample could have produced another value.
-::::
+:::
 
 So far, we have used a rough rule:
 
@@ -1323,7 +1283,7 @@ $$
 
 The point estimate tells us where the interval is centred. The standard error tells us the scale of the uncertainty. The multiplier tells us how wide the interval should be for the confidence level we want.
 
-:::: {.callout-note}
+::: callout-note
 ### The general shape of many intervals
 
 Many statistical intervals have the form:
@@ -1337,7 +1297,7 @@ $$
 $$
 
 The details change from problem to problem, but the basic logic is the same.
-::::
+:::
 
 For our small household income sample, the rough interval using $2$ as the multiplier was:
 
@@ -1445,8 +1405,8 @@ This interval was calculated from the sample. Once we have observed the data, th
 
 So after the interval has been calculated, there are only two possibilities:
 
-- the interval contains $\mu$;
-- or the interval does not contain $\mu$.
+-   the interval contains $\mu$;
+-   or the interval does not contain $\mu$.
 
 There is no longer any randomness in this particular interval. The randomness was in the sampling process that produced it.
 
@@ -1454,13 +1414,13 @@ So what does the 95% refer to? It refers to the long-run behaviour of the method
 
 Some of those intervals will contain the true population mean. Some will miss it. A 95% confidence interval procedure is designed so that, in the long run, about 95% of the intervals produced by that method will contain the true parameter. The confidence is in the **procedure**, not in the one interval after it has been calculated.
 
-:::: {.callout-note}
+::: callout-note
 ### Terminology: confidence interval
 
 A **confidence interval** is an interval estimate constructed by a method that has a specified long-run success rate.
 
 A 95% confidence interval procedure is one that, under the assumptions of the model, produces intervals that contain the true parameter in 95% of repeated samples.
-::::
+:::
 
 This is a bit of a mouthful. But the idea is easier to see than to say. Suppose the true average household income were known to be $\mu = 100{,}000$. In real life, we would not know this value. But for the purpose of illustration, imagine that we do. Now suppose we repeatedly take samples and construct 95% confidence intervals. Each interval is different, because each sample is different.
 
@@ -1539,13 +1499,13 @@ But we should still be careful. A confidence interval only accounts for the unce
 
 If the households were sampled only from wealthy suburbs, the confidence interval might be narrow but centred in the wrong place. If income was measured inconsistently, the interval would not magically correct the measurement problem. If the sample missed some kinds of households altogether, the interval would not know that.
 
-:::: {.callout-warning}
+::: callout-warning
 ### Confidence intervals do not fix bad data
 
 A confidence interval describes uncertainty from sampling variation, under a set of assumptions.
 
 It does not automatically correct bias, poor measurement, non-response, or a badly chosen sample.
-::::
+:::
 
 This is why confidence intervals should be reported with context. The interval tells us about uncertainty in the estimate, but the quality of the estimate still depends on the quality of the data collection.
 
@@ -1636,7 +1596,7 @@ A narrower interval says:
 
 But a narrow interval is not automatically better if it is built from biased or poor-quality data. Precision and truth are not the same thing.
 
-:::: {.callout-note}
+::: callout-note
 ### Precision and accuracy
 
 A **precise** estimate has little sampling variation, so its confidence interval is narrow.
@@ -1644,7 +1604,7 @@ A **precise** estimate has little sampling variation, so its confidence interval
 An **accurate** estimate is close to the true parameter.
 
 A large, biased sample can produce a precise estimate of the wrong quantity.
-::::
+:::
 
 This distinction matters in official statistics. A national income estimate should not merely be precise. It should be meaningful, well-defined, and based on a sample that represents the population of interest.
 
@@ -1654,9 +1614,9 @@ So the question is not only:
 
 It is also:
 
-> What population does this interval refer to?  
-> How were the households selected?  
-> How was income defined and measured?  
+> What population does this interval refer to?\
+> How were the households selected?\
+> How was income defined and measured?\
 > What assumptions are being made?
 
 This takes us back to the beginning of the chapter. Estimation is not just calculation. It is a chain of reasoning from question, to data, to statistic, to parameter, to uncertainty.
@@ -1680,8 +1640,8 @@ This formula may look like it appeared out of nowhere. Why is the sample mean at
 
 To answer these questions, we need to separate two ideas that are often confused:
 
-- the distribution of the **data**;
-- the distribution of the **estimate**.
+-   the distribution of the **data**;
+-   the distribution of the **estimate**.
 
 The household income data are right-skewed. Most households have incomes in a lower or middle range, while a smaller number have much higher incomes. This means a histogram of household incomes will usually not look like a neat bell curve.
 
@@ -1689,11 +1649,11 @@ But the confidence interval is not based on the claim that household incomes the
 
 That distinction matters.
 
-:::: {.callout-important}
+::: callout-important
 ### The bell curve does not need to describe the data
 
 For many confidence intervals, the bell curve describes the sampling distribution of the estimate, not necessarily the distribution of the original data. Household incomes can be skewed, while sample means can still be approximately bell-shaped.
-::::
+:::
 
 Let us build the idea visually. Imagine a large population of household incomes. In this example, we deliberately create a right-skewed population, because income data often have that shape.
 
@@ -1786,11 +1746,11 @@ The individual household incomes are still skewed. Nothing has changed about the
 
 This is the idea behind the **Central Limit Theorem**.
 
-:::: {.callout-note}
+::: callout-note
 ### Reminder: Central Limit Theorem
 
 The **Central Limit Theorem** says that, under broad conditions, the sampling distribution of the sample mean becomes approximately normal as the sample size increases. This can happen even when the original data are not normally distributed.
-::::
+:::
 
 In symbols, suppose we have a random sample:
 
@@ -1845,7 +1805,7 @@ But the Central Limit Theorem is not magic. It has conditions.
 
 The usual version assumes that the observations are independent and identically distributed. This is often shortened to **iid**.
 
-:::: {.callout-note}
+::: callout-note
 ### Terminology: iid
 
 The abbreviation **iid** means **independent and identically distributed**.
@@ -1853,7 +1813,7 @@ The abbreviation **iid** means **independent and identically distributed**.
 **Independent** means that one observation does not directly determine another.
 
 **Identically distributed** means that the observations are treated as coming from the same underlying distribution.
-::::
+:::
 
 In the household income example, the iid assumption would mean that each household in the sample is treated as an independent draw from the same population of households.
 
@@ -1867,11 +1827,11 @@ $$
 
 we are saying that the observations are modelled as independent draws from the same population distribution $F$. We are not saying that this is automatically true. We are making a modelling assumption.
 
-:::: {.callout-warning}
+::: callout-warning
 ### Assumptions are not decorations
 
 The iid assumption is not a technical detail to skip over. It is a claim about how the data were generated. If the sampling process is biased, clustered, dependent, or poorly measured, then the usual formulas may not describe the uncertainty correctly.
-::::
+:::
 
 This is why official statistics agencies spend so much effort on survey design. The calculation of a sample mean is easy. The hard part is making sure the sample can support the inference we want to make.
 
@@ -1881,7 +1841,7 @@ The reason is that we usually do not know the population standard deviation $\si
 
 That extra uncertainty is handled by the **t-distribution**.
 
-:::: {.callout-note}
+::: callout-note
 ### Terminology: t-distribution
 
 The **t-distribution** is a bell-shaped distribution similar to the standard normal distribution, but with heavier tails.
@@ -1889,7 +1849,7 @@ The **t-distribution** is a bell-shaped distribution similar to the standard nor
 It is used when estimating a population mean and the population standard deviation is unknown.
 
 The shape depends on the **degrees of freedom**, commonly $n-1$ for a one-sample mean.
-::::
+:::
 
 The $t$-distribution has heavier tails than the standard normal distribution. This means it allows for more extreme values. When the sample size is small, the tails are noticeably heavier. As the sample size increases, the $t$-distribution becomes almost identical to the standard normal distribution.
 
@@ -2029,20 +1989,20 @@ Comparison is one of the main reasons we collect data. We often want to know whe
 
 The simplest version is a comparison of two means.
 
-:::: {.callout-note}
+::: callout-note
 ### Running example: household income in two regions
 
 Suppose the ABS wants to compare annual household income between two types of areas:
 
-- capital city households;
-- regional households.
+-   capital city households;
+-   regional households.
 
 The question is:
 
 > What is the difference in mean annual household income between capital city and regional households?
 
 The numbers below are illustrative, not official ABS estimates. They are used so we can see the statistical logic clearly.
-::::
+:::
 
 Suppose we collect the following small samples.
 
@@ -2585,7 +2545,6 @@ The important distinction is that **parameters belong to populations**, while **
 :::
 ::::
 
-
 :::: callout-note
 ## Question 2
 
@@ -2602,9 +2561,9 @@ $$
 10.
 $$
 
-1. Calculate the sample mean.
-2. Calculate the sample median.
-3. Which summary better describes a “typical” student in this small sample? Explain briefly.
+1.  Calculate the sample mean.
+2.  Calculate the sample median.
+3.  Which summary better describes a “typical” student in this small sample? Explain briefly.
 
 ::: {.callout-important collapse="true"}
 ## Click for Solutions
@@ -2660,7 +2619,6 @@ Both summaries are reasonable. The mean is slightly larger than the median becau
 :::
 ::::
 
-
 :::: callout-note
 ## Question 3
 
@@ -2693,8 +2651,8 @@ $$
 s=1.54.
 $$
 
-1. Calculate the estimated standard error of the sample mean.
-2. Explain what the standard error means in this context.
+1.  Calculate the estimated standard error of the sample mean.
+2.  Explain what the standard error means in this context.
 
 ::: {.callout-important collapse="true"}
 ## Click for Solutions
@@ -2735,7 +2693,6 @@ This does **not** mean that individual customers are usually 0.44 minutes away f
 :::
 ::::
 
-
 :::: callout-note
 ## Question 4
 
@@ -2751,14 +2708,14 @@ $$
 s = 48.
 $$
 
-1. Calculate the standard error of the sample mean.
-2. Construct a rough interval estimate using:
+1.  Calculate the standard error of the sample mean.
+2.  Construct a rough interval estimate using:
 
 $$
 \bar{x} \pm 2 \times se(\bar{x}).
 $$
 
-3. Write one sentence interpreting the interval.
+3.  Write one sentence interpreting the interval.
 
 ::: {.callout-important collapse="true"}
 ## Click for Solutions
@@ -2794,12 +2751,11 @@ $$
 
 A suitable interpretation is:
 
-> Based on this sample, the average monthly electricity bill is estimated to be $184, with a rough plausible range from about $168 to $200.
+> Based on this sample, the average monthly electricity bill is estimated to be \$184, with a rough plausible range from about \$168 to \$200.
 
 This is not yet a formal confidence interval, but it communicates uncertainty more honestly than the point estimate alone.
 :::
 ::::
-
 
 :::: callout-note
 ## Question 5
@@ -2878,7 +2834,6 @@ In words:
 :::
 ::::
 
-
 :::: callout-note
 ## Question 6
 
@@ -2905,7 +2860,6 @@ In practice, we might also say:
 :::
 ::::
 
-
 :::: callout-note
 ## Question 7
 
@@ -2929,13 +2883,13 @@ spending_summary |>
   fmt_currency(columns = c(Mean, SD), currency = "AUD", decimals = 0)
 ```
 
-1. What is the point estimate of the difference in means, using:
+1.  What is the point estimate of the difference in means, using:
 
 $$
 \bar{x}_{\text{on campus}} - \bar{x}_{\text{off campus}}?
 $$
 
-2. Calculate the standard error of the difference using:
+2.  Calculate the standard error of the difference using:
 
 $$
 se(\bar{x}_1 - \bar{x}_2)
@@ -2960,7 +2914,7 @@ $$
 8.
 $$
 
-So the sample suggests that students living on campus spend, on average, $8 more per week on takeaway food.
+So the sample suggests that students living on campus spend, on average, \$8 more per week on takeaway food.
 
 The standard error is:
 
@@ -3012,10 +2966,9 @@ $$
 4.12.
 $$
 
-The observed difference is $8, but the standard error reminds us that this difference would wobble from sample to sample.
+The observed difference is \$8, but the standard error reminds us that this difference would wobble from sample to sample.
 :::
 ::::
-
 
 :::: callout-note
 ## Question 8
@@ -3042,14 +2995,14 @@ grocery |>
   fmt_currency(columns = c(Before, After), currency = "AUD", decimals = 0)
 ```
 
-1. Are these independent samples or paired samples? Explain.
-2. Calculate the difference for each household using:
+1.  Are these independent samples or paired samples? Explain.
+2.  Calculate the difference for each household using:
 
 $$
 d_i = \text{Before}_i - \text{After}_i.
 $$
 
-3. Calculate the mean difference.
+3.  Calculate the mean difference.
 
 ::: {.callout-important collapse="true"}
 ## Click for Solutions
@@ -3083,12 +3036,11 @@ $$
 16.17.
 $$
 
-So the households spent, on average, about $16.17 less per week after the workshop.
+So the households spent, on average, about \$16.17 less per week after the workshop.
 
 The paired structure matters because we are comparing each household to itself. This removes some of the background variation between households.
 :::
 ::::
-
 
 :::: callout-note
 ## Question 9
@@ -3114,7 +3066,6 @@ A better statement is:
 :::
 ::::
 
-
 :::: callout-note
 ## Question 10
 
@@ -3138,7 +3089,7 @@ rent |>
 
 A reader says:
 
-> Suburb B definitely has higher average rent because $560 is larger than $530.
+> Suburb B definitely has higher average rent because \$560 is larger than \$530.
 
 Explain why this conclusion is too strong.
 
@@ -3190,7 +3141,3 @@ The intervals overlap substantially. The estimate for Suburb B is higher, but th
 > In this sample, Suburb B has a higher estimated average rent, but the estimate is much less precise. We should not conclude too strongly from the point estimates alone.
 :::
 ::::
-
-
-
-

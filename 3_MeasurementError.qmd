@@ -30,7 +30,7 @@ By the end of this chapter, you should be able to:
 
 ```{r, echo=FALSE}
 #| classes: .enlarge-image
-knitr::include_graphics("images/chapter2/outline.png")
+knitr::include_graphics("images/chapter3/outline.png")
 ```
 
 </centre>
