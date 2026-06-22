@@ -103,11 +103,11 @@ Statistics often begins in the space between what could happen and what did happ
 
 This is true in ordinary situations as well as extraordinary ones.
 
-- Before a doctor recommends a treatment, they do not know exactly how a particular patient will respond.
-- Before a student sits an exam, they do not know exactly which questions will appear. 
-- Before a business launches a product, it does not know how customers will react. 
-- Before a government introduces a policy, it does not know exactly what effects the policy will have.
-- Before we collect data, we do not know exactly what pattern the data will show.
+-   Before a doctor recommends a treatment, they do not know exactly how a particular patient will respond.
+-   Before a student sits an exam, they do not know exactly which questions will appear.
+-   Before a business launches a product, it does not know how customers will react.
+-   Before a government introduces a policy, it does not know exactly what effects the policy will have.
+-   Before we collect data, we do not know exactly what pattern the data will show.
 
 In each case, there is a difference between asking the question before the outcome and asking it afterwards.
 
@@ -220,7 +220,7 @@ Learning to ask better questions requires a language for uncertainty. In everyda
 ::: callout-note
 ### A cautionary tale about expressing uncertainty
 
-After Fidel Castro’s forces came to power in Cuba in 1959, the CIA worked with Cuban exiles on a plan to remove the new government and replace it with one more favorable to the United States. When John F. Kennedy became president in January 1961, the invasion plan was already far advanced. 
+After Fidel Castro’s forces came to power in Cuba in 1959, the CIA worked with Cuban exiles on a plan to remove the new government and replace it with one more favorable to the United States. When John F. Kennedy became president in January 1961, the invasion plan was already far advanced.
 
 <center>
 
@@ -317,13 +317,13 @@ There was also a philosophical obstacle. Greek mathematics valued certainty. Pro
 
 But in real life, that modest kind of reasoning is often exactly what we need.
 
-When we ask 
+When we ask
 
-- whether it will rain, 
-- whether a treatment will help, 
-- whether a witness is reliable, 
-- whether a pattern in data is surprising, or 
-- whether a decision is worth the risk, 
+-   whether it will rain,
+-   whether a treatment will help,
+-   whether a witness is reliable,
+-   whether a pattern in data is surprising, or
+-   whether a decision is worth the risk,
 
 we are usually not in the world of geometric certainty. We are in the world of uncertain evidence and possible outcomes. This is the world probability was built for.
 
@@ -521,9 +521,7 @@ But the Romans also show us the danger of having the right intuition without the
 
 As an example, the ancient Romans had established the following rule for evidence against members of the church:
 
-“*A bishop should not be condemned except with seventy-two witnesses. A cardinal priest should not be
-condemned except with forty-four witnesses A cardinal deacon of the city of Rome without thirty-six
-witnesses A subdeacon, acolyte, exorcist, lector, or doorkeeper except with seven witnesses.*”
+“*A bishop should not be condemned except with seventy-two witnesses. A cardinal priest should not be condemned except with forty-four witnesses A cardinal deacon of the city of Rome without thirty-six witnesses A subdeacon, acolyte, exorcist, lector, or doorkeeper except with seven witnesses.*”
 
 <center>
 
@@ -535,7 +533,6 @@ knitr::include_graphics("images/chapter1/bishop.png")
 ```
 
 </center>
-
 :::
 
 This is why probability matters. It gives structure to uncertainty. It helps us avoid treating partial evidence as certainty. It helps us see when evidence should be added, when probabilities should be multiplied, and when a calculation depends on an assumption such as independence.
@@ -559,13 +556,13 @@ $$\frac{1}{1,000,000,000}$$
 
 then it is tempting to think that the suspect must be guilty.
 
-In Durham’s case, however, there was also evidence pointing in the other direction. Eleven defence witnesses testified that he was in Dallas, Texas, at a skeet shooting competition when the crime occurred. Records were presented showing purchases he had made there, and a handwriting expert confirmed that the signatures were his. Despite this evidence, the jury believed the DNA evidence (or the number of 1 in one billion) was stonger. They convicted him. He was sentenced to prison terms totaling more than 3,000 years. 
+In Durham’s case, however, there was also evidence pointing in the other direction. Eleven defence witnesses testified that he was in Dallas, Texas, at a skeet shooting competition when the crime occurred. Records were presented showing purchases he had made there, and a handwriting expert confirmed that the signatures were his. Despite this evidence, the jury believed the DNA evidence (or the number of 1 in one billion) was stonger. They convicted him. He was sentenced to prison terms totaling more than 3,000 years.
 
 But there was another statistic that was not presented in this case: the probability of laboratory error. A DNA result can also be wrong because of the testing process itself. Samples can be mixed up, contaminated, incompletely separated, mislabelled, misread, or incorrectly reported. These errors may be rare, but they may be much more common than a random DNA match.
 
 The true estimate for lab error is unknown, but experts place it around 1%. Suppose we compare the two possible sources of error:
 
-``` {r}
+```{r}
 #| echo: false
 
 dna <- data.frame(
@@ -630,9 +627,6 @@ P(\text{false match})
 \frac{1}{100}
 $$
 
-
-
-
 The recalculation changes how we read the evidence. The “1 in 1 billion” figure sounds overwhelming, but it only answers one question: how unlikely a random DNA match would be. It does not tell us how likely it is that the test was mishandled, misinterpreted, or incorrectly reported.
 
 Years later, further DNA testing showed that Durham was not the source of the semen found on the victim’s swimsuit. The earlier DNA result had been misleading because the laboratory had failed to completely separate the male DNA from the female DNA during testing. Durham was released after spending nearly four years in prison.
@@ -644,7 +638,6 @@ Years later, further DNA testing showed that Durham was not the source of the se
 But the better statistical question is:
 
 > What are all the ways this DNA evidence could be wrong, and how likely are those errors?
-
 :::
 
 ::: callout-note
@@ -861,7 +854,7 @@ So before we calculate, we pause.
 
 So far, this chapter has focused on statistical thinking: possible outcomes, uncertainty, evidence, independence, rare events, and better questions. We can also use R to make these ideas more concrete. The goal of this section is not to turn probability into programming. The goal is to show how simple code can help us organise uncertainty. R allows us to define possible outcomes, assign probabilities, calculate simple results, and simulate uncertain processes many times.
 
-Because this is the first chapter, we will move slowly. Each example introduces only a small number of functions. 
+Because this is the first chapter, we will move slowly. Each example introduces only a small number of functions.
 
 ```{r}
 #| echo: false
@@ -916,8 +909,8 @@ r_functions |>
 
 You do not need to memorise all of these immediately. The aim is to see how the functions are used in context. If you would like a more detailed refresher of R/RStudio see:
 
-- Source 1
-- Source 2
+-   Source 1
+-   Source 2
 
 ### Example 1: Three boats and possible futures
 
@@ -974,15 +967,15 @@ The previous calculation used probability rules. Another way to explore the same
 
 In the code below, TRUE means a boat arrives safely and FALSE means it does not. The function `sample()` randomly selects values. In the code there are four main parts:
 
-- `c(TRUE, FALSE)` gives the possible values that can be selected;
-- `size = n_sim` says how many values to select;
-- `replace = TRUE` means the same value can be selected again and again;
-- `prob = c(p_survive, p_lost)` gives the probabilities of selecting TRUE and FALSE.
+-   `c(TRUE, FALSE)` gives the possible values that can be selected;
+-   `size = n_sim` says how many values to select;
+-   `replace = TRUE` means the same value can be selected again and again;
+-   `prob = c(p_survive, p_lost)` gives the probabilities of selecting TRUE and FALSE.
 
 Because p_survive = 0.60 and p_lost = 0.40, this means:
 
-- `TRUE` is selected with probability 0.60;
-- `FALSE `is selected with probability 0.40.
+-   `TRUE` is selected with probability 0.60;
+-   `FALSE`is selected with probability 0.40.
 
 ```{r}
 set.seed(2420)
@@ -1063,10 +1056,10 @@ astragali_probabilities |>
 
 This means:
 
-* Side 1 appears 10% of the time;
-* Side 2 appears 40% of the time;
-* Side 3 appears 40% of the time;
-* Side 4 appears 10% of the time.
+-   Side 1 appears 10% of the time;
+-   Side 2 appears 40% of the time;
+-   Side 3 appears 40% of the time;
+-   Side 4 appears 10% of the time.
 
 The probabilities still add to 1:
 
@@ -1074,7 +1067,7 @@ $$
 0.10 + 0.40 + 0.40 + 0.10 = 1
 $$
 
-But the outcomes are not equally likely. 
+But the outcomes are not equally likely.
 
 Now we can simulate tossing one astragalus.
 
@@ -1153,13 +1146,12 @@ ggplot(astragali_comparison, aes(x = side, y = observed_proportion)) +
   )
 ```
 
-
 ### Example 3: Timothy Durham and lab error
 
 In the chapter, we compared two possible sources of error in DNA evidence:
 
-* a random DNA match;
-* a laboratory error.
+-   a random DNA match;
+-   a laboratory error.
 
 Here is how we can code that comparison in R.
 
@@ -1280,7 +1272,6 @@ To reproduce the prosecution’s calculation, we multiply all the probabilities.
 ```{r}
 combined_probability <- prod(collins$probability)
 ```
-
 
 We can convert this into a “1 in ...” number.
 
@@ -1446,7 +1437,6 @@ single_update_comparison |>
 ```
 
 The point is not that the updated probabilities are correct. The point is that the conclusion depends on assumptions. In *People v Collins*, the issue was not only the final number. It was whether the calculation was answering the right question in the first place.
-
 
 ## Exercises
 

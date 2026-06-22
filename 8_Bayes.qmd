@@ -18,15 +18,15 @@ set.seed(2420)
 
 By the end of this chapter, you should be able to:
 
-1. Explain the difference between frequentist and Bayesian interpretations of probability.
-2. Use conditional probability to describe how evidence narrows the sample space.
-3. Distinguish between $P(A \mid B)$ and $P(B \mid A)$, and explain why confusing them can lead to errors.
-4. Apply Bayes' theorem to update the probability of a hypothesis after observing evidence.
-5. Identify the roles of the prior, likelihood, evidence, and posterior in Bayesian inference.
-6. Explain why base rates matter when interpreting evidence such as test results or descriptions.
-7. Use likelihood ratios to describe how strongly evidence supports one explanation over another.
-8. Recognise common Bayesian reasoning errors, including the base-rate fallacy and the prosecutor's fallacy.
-9. Apply Bayesian inference to an unknown proportion using a beta prior and binomial likelihood.
+1.  Explain the difference between frequentist and Bayesian interpretations of probability.
+2.  Use conditional probability to describe how evidence narrows the sample space.
+3.  Distinguish between $P(A \mid B)$ and $P(B \mid A)$, and explain why confusing them can lead to errors.
+4.  Apply Bayes' theorem to update the probability of a hypothesis after observing evidence.
+5.  Identify the roles of the prior, likelihood, evidence, and posterior in Bayesian inference.
+6.  Explain why base rates matter when interpreting evidence such as test results or descriptions.
+7.  Use likelihood ratios to describe how strongly evidence supports one explanation over another.
+8.  Recognise common Bayesian reasoning errors, including the base-rate fallacy and the prosecutor's fallacy.
+9.  Apply Bayesian inference to an unknown proportion using a beta prior and binomial likelihood.
 10. Summarise and interpret a posterior distribution using posterior means, credible intervals, posterior probabilities, and prior sensitivity.
 :::
 
@@ -41,7 +41,6 @@ knitr::include_graphics("images/chapter8/outline.png")
 
 <br>
 
-
 ## A puzzle about Steve
 
 The Nobel Prize-winning psychologist Daniel Kahneman often used a simple puzzle to show how easily our statistical intuition can be led astray.
@@ -52,8 +51,8 @@ Consider the following description:
 
 Now suppose Steve has been chosen at random from a group of people. The question is: Which is more likely?
 
-- Steve is a librarian or;
-- Steve is a farmer.
+-   Steve is a librarian or;
+-   Steve is a farmer.
 
 Have a think about what your answer might be.
 
@@ -202,22 +201,19 @@ Within that reduced world, we then ask how often (H) is also true.
 
 This gives us the conditional probability formula:
 
-$$
-P(H \mid E)
-=
+\$\$ P(H \mid E) =
 
 \frac{P(H \cap E)}{P(E)}
-$$
+
+\$\$
 
 In words:
 
-$$
-P(H \mid E)
-=
+\$\$ P(H \mid E) =
 
 \frac{\text{probability that both }H\text{ and }E\text{ happen}}
-{\text{probability that }E\text{ happens}}
-$$
+
+{\text{probability that }E\text{ happens}} \$\$
 
 The denominator, (P(E)), is the probability of the evidence. It defines the smaller world we are now working inside. The numerator, $P(H \cap E$, is the probability that both the evidence and the thing we care about are true.
 
@@ -299,16 +295,16 @@ The formula is just a compact way of saying:
 
 > Among the cases where the evidence is true, how many also have the thing we are interested in?
 
-The formula 
+The formula
 
-$$\frac{P(H \cap E)}{P(E)}$$ 
+$$\frac{P(H \cap E)}{P(E)}$$
 
 is already enough to solve many conditional probability problems. But it has one limitation: it requires us to know $P(H \cap E)$, the probability that both $H$ and $E$ happen together.
 
 Sometimes we do know that joint probability directly. In the coffee and quiz example, the table told us that 7 out of 20 students both drank coffee and completed the quiz. But in many problems, the information is given in a different form. Instead of being told $P(H \cap E)$, we are often told:
 
-- how common $H$ is
-- how likely the evidence $E$ is if $H$ is true
+-   how common $H$ is
+-   how likely the evidence $E$ is if $H$ is true
 
 That is, we are given $P(H)$ and $P(E \mid H)$.
 
@@ -335,9 +331,9 @@ But formulas are not always the easiest place to start. Conditional probability 
 
 In this section, we will use three representations:
 
-- Venn diagrams
-- Tree diagrams
-- Continuous distributions
+-   Venn diagrams
+-   Tree diagrams
+-   Continuous distributions
 
 These methods may look different, but they are all doing the same thing: We condition on the evidence, then ask what proportion of that reduced world belongs to the event or explanation we care about.
 
@@ -345,9 +341,9 @@ These methods may look different, but they are all doing the same thing: We cond
 
 Suppose we have two soccer players, Amy and Jody. Across many matches:
 
-* 70% of the time, neither Amy nor Jody scores a goal
-* Amy scores a goal 20% of the time
-* Jody scores a goal 25% of the time
+-   70% of the time, neither Amy nor Jody scores a goal
+-   Amy scores a goal 20% of the time
+-   Jody scores a goal 25% of the time
 
 On a particular match day, Jody scored a goal. What is the probability that Amy also scored a goal?
 
@@ -482,8 +478,8 @@ The evidence is that Jody scored. So we restrict attention to the Jody circle.
 
 Inside the Jody circle, there are two possibilities:
 
-* Amy also scored
-* Amy did not score
+-   Amy also scored
+-   Amy did not score
 
 The total probability inside the Jody circle is:
 
@@ -523,10 +519,10 @@ For that kind of problem, a tree diagram is usually more useful.
 
 Suppose the Monash DataNerds football team has a star player named Minh.
 
-* In any given match, there is a 10% chance that Minh is injured
-* If Minh is injured, there is a 40% chance that the team loses
-* If Minh is not injured, there is a 5% chance that the team loses
-* In the most recent match, the team lost
+-   In any given match, there is a 10% chance that Minh is injured
+-   If Minh is injured, there is a 40% chance that the team loses
+-   If Minh is not injured, there is a 5% chance that the team loses
+-   In the most recent match, the team lost
 
 What is the probability that Minh was injured?
 
@@ -746,13 +742,11 @@ So, after observing that the team lost, the probability that Minh was injured is
 
 This is Baby Bayes in action:
 
-$$
-P(H \mid E)
-=
+\$\$ P(H \mid E) =
 
 \frac{P(H)P(E \mid H)}
-{P(H)P(E \mid H)+P(H^c)P(E \mid H^c)}
-$$
+
+{P(H)P(E \mid H)+P(H\^c)P(E \mid H\^c)} \$\$
 
 For this example:
 
@@ -815,23 +809,19 @@ $$
 P(T < 13.5 \mid T < 14)
 $$
 
-Because anyone who runs under 13.5 seconds also runs under 14 seconds, the event (T < 13.5) is inside the event (T < 14). So:
+Because anyone who runs under 13.5 seconds also runs under 14 seconds, the event (T \< 13.5) is inside the event (T \< 14). So:
 
-$$
-P(T < 13.5 \cap T < 14)
-=
+\$\$ P(T \< 13.5 \cap T \< 14) =
 
-P(T < 13.5)
-$$
+P(T \< 13.5) \$\$
 
 Therefore:
 
-$$
-P(T < 13.5 \mid T < 14)
-=
+\$\$ P(T \< 13.5 \mid T \< 14) =
 
 \frac{P(T < 13.5)}{P(T < 14)}
-$$
+
+\$\$
 
 We can calculate these probabilities using the normal distribution.
 
@@ -916,7 +906,7 @@ $$
 
 So, among students fast enough to make the running team, about 63% are fast enough to run under 13.5 seconds.
 
-The logic is the same as before. The evidence narrows the world. Instead of looking at everyone, we look only at people with (T < 14). Then we ask what proportion of that reduced group also has (T < 13.5).
+The logic is the same as before. The evidence narrows the world. Instead of looking at everyone, we look only at people with (T \< 14). Then we ask what proportion of that reduced group also has (T \< 13.5).
 
 ::: callout-note
 ### A thought experiment
@@ -1125,7 +1115,6 @@ P(H \mid E)
 $$
 
 The evidence changed our uncertainty about the hypothesis. That is the central movement in Bayes' theorem.
-
 :::
 
 ## The prior, likelihood, and posterior
@@ -1255,8 +1244,8 @@ $$
 
 That is, the evidence could have happened in two ways:
 
-1. the hypothesis was true and the evidence occurred
-2. the hypothesis was false and the evidence occurred
+1.  the hypothesis was true and the evidence occurred
+2.  the hypothesis was false and the evidence occurred
 
 So Baby Bayes becomes:
 
@@ -1301,16 +1290,17 @@ This connects directly to the previous chapter. In Chapter 7, we focused on like
 
 ### A positive test is not the same as being positive
 
-One of the most common places where Bayes' theorem matters is medical testing. Here is a simplified version of a classic Bayesian medical-testing problem: 
+One of the most common places where Bayes' theorem matters is medical testing. Here is a simplified version of a classic Bayesian medical-testing problem:
 
-::: {.callout-note}
+::: callout-note
 #### Disease X
+
 Suppose there is a disease called Disease X, and a test has been developed for the disease.
 
 The test is reasonably accurate:
 
-- If someone has Disease X, the test returns positive 80% of the time
-- If someone does not have Disease X, the test returns negative 80% of the time
+-   If someone has Disease X, the test returns positive 80% of the time
+-   If someone does not have Disease X, the test returns negative 80% of the time
 
 Equivalently, among people who do not have the disease, the test gives a false positive 20% of the time.
 
@@ -1426,10 +1416,10 @@ disease_table |>
 
 Out of 100 people:
 
-* 10 have Disease X
-* 90 do not have Disease X
-* 8 people with the disease test positive
-* 18 people without the disease also test positive
+-   10 have Disease X
+-   90 do not have Disease X
+-   8 people with the disease test positive
+-   18 people without the disease also test positive
 
 So there are:
 
@@ -1451,8 +1441,8 @@ The natural frequency version and the Baby Bayes formula give the same answer. T
 
 There are two ways to receive a positive result:
 
-1. you have the disease and the test correctly detects it
-2. you do not have the disease and the test gives a false positive
+1.  you have the disease and the test correctly detects it
+2.  you do not have the disease and the test gives a false positive
 
 Bayes' theorem forces us to consider both paths. The strength of a positive test depends on the accuracy of the test and on how common the disease was before testing. That starting probability is the prior.
 
@@ -1464,9 +1454,9 @@ Up to this point, we have called the formula **Baby Bayes** because we have been
 
 In each example, there were two possible explanations:
 
-* Minh was injured or not injured
-* Minh had Disease X or did not have Disease X
-* someone took the pill or did not take the pill
+-   Minh was injured or not injured
+-   Minh had Disease X or did not have Disease X
+-   someone took the pill or did not take the pill
 
 For these examples, the formula was:
 
@@ -1477,7 +1467,7 @@ P(H \mid E)
 {P(H)P(E \mid H)+P(H^c)P(E \mid H^c)}
 $$
 
-This version is useful because it makes the comparison explicit. The evidence can happen in two ways: either (H) is true and the evidence occurs, or (H^c) is true and the evidence occurs.
+This version is useful because it makes the comparison explicit. The evidence can happen in two ways: either (H) is true and the evidence occurs, or (H\^c) is true and the evidence occurs.
 
 But this is not a separate theorem. It is Bayes' theorem written out for the case where there are only two possibilities.
 
@@ -1513,7 +1503,7 @@ $$
 
 This is the overall probability of seeing the evidence.
 
-When there are only two possibilities, (H) and (H^c), the denominator can be expanded as:
+When there are only two possibilities, (H) and (H\^c), the denominator can be expanded as:
 
 $$
 P(E)
@@ -1584,8 +1574,8 @@ So the positive result raised the probability from 10% to about 31%. That is a m
 
 Suppose Disease Y affects only 1 in 1000 people. The test behaves the same way:
 
-* If someone has the disease, the test returns positive 80% of the time
-* If someone does not have the disease, the test gives a false positive 20% of the time
+-   If someone has the disease, the test returns positive 80% of the time
+-   If someone does not have the disease, the test gives a false positive 20% of the time
 
 Now imagine testing 1000 people.
 
@@ -1692,7 +1682,7 @@ Bayes' theorem tells us that evidence must be interpreted against a starting poi
 
 Another way to describe this shift is with a **likelihood ratio**.
 
-A likelihood ratio compares how likely the evidence is under two different explanations. For a hypothesis (H) and its alternative (H^c), the likelihood ratio is:
+A likelihood ratio compares how likely the evidence is under two different explanations. For a hypothesis (H) and its alternative (H\^c), the likelihood ratio is:
 
 $$
 \text{LR}
@@ -1708,9 +1698,9 @@ The denominator asks:
 
 > How likely is the evidence if the hypothesis is not true?
 
-If the likelihood ratio is greater than 1, the evidence is more likely under (H) than under (H^c). That means the evidence supports (H).
+If the likelihood ratio is greater than 1, the evidence is more likely under (H) than under (H\^c). That means the evidence supports (H).
 
-If the likelihood ratio is less than 1, the evidence is less likely under (H) than under (H^c). That means the evidence points away from (H).
+If the likelihood ratio is less than 1, the evidence is less likely under (H) than under (H\^c). That means the evidence points away from (H).
 
 If the likelihood ratio is close to 1, the evidence does not strongly distinguish between the two explanations.
 
@@ -1721,9 +1711,9 @@ Suppose a sporting competition uses a test for a banned substance.
 
 Assume:
 
-* 10% of athletes have used the banned substance
-* If an athlete used the substance, the test returns positive 50% of the time
-* If an athlete did not use the substance, the test returns positive 1% of the time
+-   10% of athletes have used the banned substance
+-   If an athlete used the substance, the test returns positive 50% of the time
+-   If an athlete did not use the substance, the test returns positive 1% of the time
 
 Minh is an athlete and receives a positive test.
 
@@ -1819,9 +1809,7 @@ P(\text{did not use substance} \mid \text{positive test})
 $$
 
 The first probability conditions on innocence. The second probability conditions on the evidence.
-
 :::
-
 
 ### Evidence changes odds
 
@@ -1897,7 +1885,7 @@ $$
 
 This mistake appears in many settings, but it is especially serious when probabilities are used in court.
 
-A tragic example is the case of Sally Clark in the United Kingdom. 
+A tragic example is the case of Sally Clark in the United Kingdom.
 
 IMAGE - NEWSPAPER
 
@@ -2009,11 +1997,11 @@ The examples so far have been useful because they were small enough to see clear
 
 But statistical inference often asks a different kind of question. Instead of asking whether a single hypothesis is true, we often want to learn about an unknown quantity. For example, we might want to know:
 
-* the proportion of voters who support a policy
-* the average income in a population
-* the probability that a customer clicks on an advertisement
-* the infection rate in a community
-* the difference between two treatment effects
+-   the proportion of voters who support a policy
+-   the average income in a population
+-   the probability that a customer clicks on an advertisement
+-   the infection rate in a community
+-   the difference between two treatment effects
 
 These unknown quantities are called **parameters**.
 
@@ -2237,7 +2225,6 @@ This likelihood tells us how compatible each possible value of $\theta$ is with 
 
 That is where the beta distribution becomes useful.
 
-
 ## The beta distribution
 
 In the previous chapter, we met several probability distributions. Each distribution was useful for modelling a different kind of data.
@@ -2443,7 +2430,6 @@ other_conjugate_priors |>
   tab_options(table.width = pct(100))
 ```
 
-
 ### Beta-binomial
 
 For binomial data:
@@ -2537,9 +2523,6 @@ $$
 p \mid X=26 \sim \text{Beta}(27,15)
 $$
 
-
-
-
 <centre>
 
 ```{r, echo=FALSE}
@@ -2548,9 +2531,7 @@ knitr::include_graphics("images/chapter8/beta.gif")
 
 </centre>
 
-
 The posterior distribution is more concentrated than the prior because the data have given us information. It is centred near the observed proportion, but it still shows uncertainty about the true value of $p$.
-
 
 ### Poisson-gamma
 
@@ -2838,7 +2819,7 @@ This is a useful way to understand conjugacy more generally:
 
 > A conjugate prior gives us an update rule that keeps the posterior in the same distribution family as the prior.
 
-:::: {.callout-important}
+::: callout-important
 ### Conjugacy is a shortcut, not the whole idea
 
 Conjugacy is not what makes inference Bayesian. It is a mathematical convenience. The core Bayesian idea is still:
@@ -2850,9 +2831,7 @@ $$
 Conjugate priors are useful because they make the update easy to calculate and easy to explain. But many useful Bayesian models are not conjugate. When the posterior does not have a neat formula, we can still do Bayesian inference using computation.
 
 For this chapter, we will continue with the beta-binomial model because it is simple, visual, and directly connected to proportions.
-::::
-
-
+:::
 
 ## Summarising the posterior
 
@@ -2868,9 +2847,9 @@ This posterior distribution is the full Bayesian answer. It tells us which value
 
 However, it is often useful to summarise the posterior with a few numbers. For example, we might want to know:
 
-* What is the centre of the posterior?
-* What range of values contains most of the posterior probability?
-* What is the probability that (\theta) is above some meaningful threshold?
+-   What is the centre of the posterior?
+-   What range of values contains most of the posterior probability?
+-   What is the probability that (\theta) is above some meaningful threshold?
 
 For the late-night bus example, a meaningful threshold might be:
 
@@ -3288,19 +3267,19 @@ At the beginning of the chapter, we met Steve. As a reminder:
 
 > Steve is very shy and withdrawn, invariably helpful, but with very little interest in people or in the world of reality. A meek and tidy soul, he has a need for order and structure, and a passion for detail.
 >
-> The question is: 
+> The question is:
 >
 > Which is more likely?
 >
-> - Steve is a librarian or;
-> - Steve is a farmer.
+> -   Steve is a librarian or;
+> -   Steve is a farmer.
 
 Many people are drawn toward the librarian answer. The description feels like it fits a librarian. But Bayes' theorem reminds us that fit is not the only thing that matters.
 
 We need two ingredients:
 
-1. the base rates
-2. the likelihood of the description under each possibility
+1.  the base rates
+2.  the likelihood of the description under each possibility
 
 Let
 
@@ -3407,12 +3386,12 @@ A university club surveys 80 students about whether they attended a welcome even
 
 The results are:
 
-| Student type | Number of students |
-|---|---:|
-| Attended event and joined club | 24 |
-| Attended event and did not join club | 16 |
-| Did not attend event and joined club | 12 |
-| Did not attend event and did not join club | 28 |
+| Student type                               | Number of students |
+|--------------------------------------------|-------------------:|
+| Attended event and joined club             |                 24 |
+| Attended event and did not join club       |                 16 |
+| Did not attend event and joined club       |                 12 |
+| Did not attend event and did not join club |                 28 |
 
 Let
 
@@ -3428,10 +3407,10 @@ $$
 
 Calculate:
 
-1. $P(H)$
-2. $P(E)$
-3. $P(H \cap E)$
-4. $P(H \mid E)$
+1.  $P(H)$
+2.  $P(E)$
+3.  $P(H \cap E)$
+4.  $P(H \mid E)$
 
 Interpret $P(H \mid E)$ in words.
 
@@ -3505,9 +3484,9 @@ So, among students who attended the welcome event, 60% joined the club.
 
 A streaming service recommends a new show. Suppose:
 
-- 40% of users watch the trailer
-- Among users who watch the trailer, 30% watch the full show
-- Among users who do not watch the trailer, 10% watch the full show
+-   40% of users watch the trailer
+-   Among users who watch the trailer, 30% watch the full show
+-   Among users who do not watch the trailer, 10% watch the full show
 
 A randomly selected user watched the full show.
 
@@ -3585,9 +3564,9 @@ So, given that the user watched the full show, the probability that they watched
 
 A workplace uses a screening test for a rare allergy. Suppose:
 
-- 2% of employees have the allergy
-- If an employee has the allergy, the test returns positive 90% of the time
-- If an employee does not have the allergy, the test returns positive 5% of the time
+-   2% of employees have the allergy
+-   If an employee has the allergy, the test returns positive 90% of the time
+-   If an employee does not have the allergy, the test returns positive 5% of the time
 
 Sam tests positive.
 
@@ -3700,9 +3679,9 @@ A fraud detection system flags transactions as suspicious.
 
 Suppose:
 
-- 3% of transactions are fraudulent
-- If a transaction is fraudulent, the system flags it 70% of the time
-- If a transaction is not fraudulent, the system flags it 4% of the time
+-   3% of transactions are fraudulent
+-   If a transaction is fraudulent, the system flags it 70% of the time
+-   If a transaction is not fraudulent, the system flags it 4% of the time
 
 A transaction is flagged.
 
@@ -4055,8 +4034,8 @@ $$
 \theta \sim \text{Beta}(1,1)
 $$
 
-1. Find the posterior distribution.
-2. Explain why the prior may matter more in this example than in a survey of 1200 people with 800 yes responses.
+1.  Find the posterior distribution.
+2.  Explain why the prior may matter more in this example than in a survey of 1200 people with 800 yes responses.
 
 ::: {.callout-important collapse="true"}
 ## Click for Solutions
@@ -4120,14 +4099,14 @@ A machine-learning model classifies emails as spam or not spam.
 
 Suppose:
 
-- 20% of emails are spam
-- If an email is spam, the model flags it 95% of the time
-- If an email is not spam, the model flags it 10% of the time
+-   20% of emails are spam
+-   If an email is spam, the model flags it 95% of the time
+-   If an email is not spam, the model flags it 10% of the time
 
 An email is flagged.
 
-1. Calculate the probability that the email is spam.
-2. Explain why this is not simply 95%.
+1.  Calculate the probability that the email is spam.
+2.  Explain why this is not simply 95%.
 
 ::: {.callout-important collapse="true"}
 ## Click for Solutions
@@ -4206,13 +4185,13 @@ Suppose Taylor is described as careful, quiet, organised, and very interested in
 
 Taylor has been chosen at random from a group containing:
 
-- 30 architects
-- 270 sales managers
+-   30 architects
+-   270 sales managers
 
 Suppose:
 
-- 80% of architects fit the description
-- 20% of sales managers fit the description
+-   80% of architects fit the description
+-   20% of sales managers fit the description
 
 Let
 
@@ -4313,4 +4292,3 @@ $$
 The base rates matter. Sales managers are much more common in the starting group, so some people who fit the description will still be sales managers.
 :::
 ::::
-

@@ -18,15 +18,15 @@ book:
   chapters:
     - index.qmd
     - 1_Questions.qmd
-    - Probability.qmd
-    - MeasurementError.qmd
+    - 2_Probability.qmd
+    - 3_MeasurementError.qmd
     - 4_Estimation.qmd
     - 5_HypothesisTesting.qmd
     - 6_SimulationBasedInference.qmd
     - 7_Likelihood.qmd
     - 8_Bayes.qmd
     - 9_bayes2.qmd
-
+    
 bibliography: references.bib
 
 format:
