@@ -7,6 +7,7 @@ library(tidyverse)
 library(flextable)
 library(webexercises)
 library(gt)
+library(scales)
 ```
 
 ::: callout-note
@@ -876,7 +877,7 @@ The sample standard deviation is large because the incomes themselves are spread
 For a sample mean, the standard error has a particularly important form:
 
 $$
-SE(\bar{X}) = \frac{\sigma}{\sqrt{n}}.
+SE(\bar{X}) = \frac{\sigma}{\sqrt{n}}
 $$
 
 Here, $\sigma$ is the population standard deviation and $n$ is the sample size. This formula says two important things.
@@ -889,7 +890,7 @@ But there is a catch. In real life, we usually do not know $\sigma$, the populat
 So in practice we often use:
 
 $$
-se(\bar{x}) = \frac{s}{\sqrt{n}}.
+se(\bar{x}) = \frac{s}{\sqrt{n}}
 $$
 
 For the household income sample:
@@ -908,12 +909,10 @@ So the estimated standard error of the sample mean is about \$34,386.
 
 This number is not saying that household incomes are typically about \$34,386 away from the mean. That would be a statement about the standard deviation. Instead, it says that the sample mean itself would tend to vary by roughly this amount from sample to sample, under the assumptions we are using.
 
-This is why the standard error is one of the most important quantities in statistical inference. It gives a scale for uncertainty. Without it, a point estimate is lonely. With it, we begin to see how precise, or imprecise, the estimate might be.
-
-A useful reporting style is:
+This is why the standard error is useful with estimation. It gives a scale for uncertainty. Without it, a point estimate is lonely. With it, we begin to see how precise, or imprecise, the estimate might be. A useful reporting style is:
 
 $$
-\text{estimate} \pm \text{standard error}.
+\text{estimate} \pm \text{standard error}
 $$
 
 For our sample:
@@ -923,11 +922,6 @@ $$
 $$
 
 This is already more informative than reporting $\$119{,}100$ alone. It tells the reader that the estimate is not especially precise. With only ten households and one very high-income household, the sample mean is quite wobbly.
-
-The idea is simple but powerful:
-
-> A point estimate tells us where we landed.\
-> A standard error tells us how much that landing point tends to wobble.
 
 Now let us look at why sample size matters. Suppose the household incomes in the wider population are highly variable. That variability is a fact about the population. We cannot make Australian households less economically diverse by collecting more data. But we can make our estimate of the mean more stable by collecting a larger sample.
 
@@ -968,7 +962,7 @@ The standard error falls as the sample size grows. But it does not fall in a str
 For example:
 
 $$
-\sqrt{4n} = 2\sqrt{n}.
+\sqrt{4n} = 2\sqrt{n}
 $$
 
 So:
@@ -978,7 +972,7 @@ $$
 =
 \frac{s}{2\sqrt{n}}
 =
-\frac{1}{2}\frac{s}{\sqrt{n}}.
+\frac{1}{2}\frac{s}{\sqrt{n}}
 $$
 
 This is one of the quiet realities of survey work. Precision is expensive. Asking ten households is easy but unstable. Asking one thousand households is much better, but it takes planning, money, time, and careful design.
@@ -1069,11 +1063,11 @@ A more direct way to communicate uncertainty is to report an **interval estimate
 
 Instead of saying:
 
-> Our estimate is \$119,100.
+> Our estimate is \$119,100
 
 we say something like:
 
-> Our estimate is \$119,100, with a plausible range from about \$50,330 to \$187,870.
+> Our estimate is \$119,100, with a plausible range from about \$50,330 to \$187,870
 
 The exact range depends on the method we use, but the general idea is simple:
 
@@ -1089,7 +1083,7 @@ $$
 Or, in a more familiar shorthand:
 
 $$
-\text{estimate} \pm \text{error}.
+\text{estimate} \pm \text{error}
 $$
 
 ::: callout-note
@@ -1105,13 +1099,13 @@ An **interval estimate** gives a lower value and an upper value.
 For the household income example, the point estimate is the sample mean:
 
 $$
-\bar{x} = 119{,}100.
+\bar{x} = 119{,}100
 $$
 
 A rough interval estimate can be formed by going two standard errors below and above the estimate:
 
 $$
-\bar{x} \pm 2 \times se(\bar{x}).
+\bar{x} \pm 2 \times se(\bar{x})
 $$
 
 Substituting the values from our sample:
@@ -1119,18 +1113,18 @@ Substituting the values from our sample:
 $$
 119{,}100 \pm 2(34{,}385)
 =
-119{,}100 \pm 68{,}770.
+119{,}100 \pm 68{,}770
 $$
 
 This gives:
 
 $$
-(50{,}330,\ 187{,}870).
+(50{,}330,\ 187{,}870)
 $$
 
 So instead of presenting only one number, we can say:
 
-> Based on this sample, the estimated mean annual household income is \$119,100, with a rough plausible range from about \$50,330 to \$187,870.
+> Based on this sample, the estimated mean annual household income is \$119,100, with a rough plausible range from about \$50,330 to \$187,870
 
 That is a very wide range. But that is the point. With only ten households, and with one very high-income household in the sample, we should not pretend to have a precise estimate.
 
@@ -1207,12 +1201,10 @@ The point estimates are different:
 $$
 119{,}100
 \quad \text{and} \quad
-102{,}600.
+102{,}600
 $$
 
-If we focused only on the point estimates, we might be tempted to tell a story about the difference. Perhaps income has changed. Perhaps one survey found a richer group of households. Perhaps something interesting is going on.
-
-But once we include the uncertainty, the story becomes more cautious. Both intervals are wide. The difference between the two point estimates may not be very surprising, because small samples can wobble quite a lot.
+If we focused only on the point estimates, we might be tempted to tell a story about the difference. Perhaps income has changed. Perhaps one survey found a richer group of households. Perhaps something interesting is going on. But once we include the uncertainty, the story becomes more cautious. Both intervals are wide. The difference between the two point estimates may not be very surprising, because small samples can wobble quite a lot.
 
 ```{r}
 #| echo: false
@@ -1249,10 +1241,10 @@ A point estimate is useful, but it can make a result look more precise than it r
 So far, we have used a rough rule:
 
 $$
-\text{estimate} \pm 2 \times \text{standard error}.
+\text{estimate} \pm 2 \times \text{standard error}
 $$
 
-This is a useful first approximation, and it often gives the right intuition. But it is not the full story. In formal statistical inference, the most common interval estimate is the **confidence interval**.
+This is a useful first approximation, and it often gives the right intuition. But it is not the full story. In formal Frequentist statistical inference, the most common interval estimate is the **confidence interval**.
 
 A confidence interval has the same broad shape:
 
@@ -1709,21 +1701,21 @@ set.seed(5242)
 
 sample_mean_data <- bind_rows(
   tibble(
-    `Sample size` = "n = 5",
+    `Sample size` = "n = 2",
     sample_mean = replicate(
       5000,
       mean(sample(population_income, size = 5))
     )
   ),
   tibble(
-    `Sample size` = "n = 25",
+    `Sample size` = "n = 50",
     sample_mean = replicate(
       5000,
       mean(sample(population_income, size = 25))
     )
   ),
   tibble(
-    `Sample size` = "n = 100",
+    `Sample size` = "n = 99",
     sample_mean = replicate(
       5000,
       mean(sample(population_income, size = 100))
@@ -1755,7 +1747,7 @@ The **Central Limit Theorem** says that, under broad conditions, the sampling di
 In symbols, suppose we have a random sample:
 
 $$
-X_1, X_2, \ldots, X_n.
+X_1, X_2, \ldots, X_n
 $$
 
 Suppose each observation has mean $\mu$ and variance $\sigma^2$. Then, for large enough $n$, the sample mean is approximately normally distributed:
@@ -1766,7 +1758,7 @@ $$
 N\left(
 \mu,
 \frac{\sigma^2}{n}
-\right).
+\right)
 $$
 
 This compact statement contains several important ideas.
@@ -1774,7 +1766,7 @@ This compact statement contains several important ideas.
 First, the sample mean is centred around the population mean:
 
 $$
-E(\bar{X}) = \mu.
+E(\bar{X}) = \mu
 $$
 
 So, under the usual assumptions, the sample mean is not systematically too high or too low. Across repeated samples, it is centred on the quantity we are trying to estimate.
@@ -1784,7 +1776,7 @@ Second, the variance of the sample mean is:
 $$
 \text{Var}(\bar{X})
 =
-\frac{\sigma^2}{n}.
+\frac{\sigma^2}{n}
 $$
 
 So the standard deviation of the sample mean is:
@@ -1795,29 +1787,25 @@ SD(\bar{X})
 \frac{\sigma}{\sqrt{n}}.
 $$
 
-This is exactly the quantity we called the standard error.
-
-The Central Limit Theorem therefore explains why the standard error has the form it does. Averages are less variable than individual observations, and the amount of variation shrinks with the square root of the sample size.
+This is the standard error. The Central Limit Theorem therefore explains why the standard error has the form it does. Averages are less variable than individual observations, and the amount of variation shrinks with the square root of the sample size.
 
 This is one of the most important pieces of mathematical machinery in introductory statistics. It explains why averages are useful. It explains why large samples tend to produce more stable estimates. It explains why confidence intervals for means often use bell-shaped distributions, even when the original data are not bell-shaped.
 
 But the Central Limit Theorem is not magic. It has conditions.
 
-The usual version assumes that the observations are independent and identically distributed. This is often shortened to **iid**.
+The usual version assumes that the observations are **independent and identically distributed** (this is often shortened to **iid**).
 
 ::: callout-note
 ### Terminology: iid
 
 The abbreviation **iid** means **independent and identically distributed**.
 
-**Independent** means that one observation does not directly determine another.
+- **Independent** means that one observation does not directly determine another.
 
-**Identically distributed** means that the observations are treated as coming from the same underlying distribution.
+- **Identically distributed** means that the observations are treated as coming from the same underlying distribution.
 :::
 
-In the household income example, the iid assumption would mean that each household in the sample is treated as an independent draw from the same population of households.
-
-That may be a reasonable approximation in some survey settings, but it should never be accepted without thought. Households in the same suburb may be more similar to one another than households chosen from different parts of the country. Survey non-response may mean some types of households are less likely to appear in the data. Income may be recorded differently across households. These are not algebra problems; they are design and measurement problems.
+In the household income example, the iid assumption would mean that each household in the sample is treated as an independent draw from the same population of households. That may be a reasonable approximation in some survey settings, but it should never be accepted without thought. Households in the same suburb may be more similar to one another than households chosen from different parts of the country. Survey non-response may mean some types of households are less likely to appear in the data. Income may be recorded differently across households. These are not algebra problems; they are design and measurement problems.
 
 So when we write something like:
 
@@ -1835,9 +1823,7 @@ The iid assumption is not a technical detail to skip over. It is a claim about h
 
 This is why official statistics agencies spend so much effort on survey design. The calculation of a sample mean is easy. The hard part is making sure the sample can support the inference we want to make.
 
-There is one more detail hiding in the confidence interval formula. If the sample mean is approximately normal, why did we use a $t$-multiplier rather than a normal multiplier?
-
-The reason is that we usually do not know the population standard deviation $\sigma$. We estimate it using the sample standard deviation $s$. This extra estimation adds uncertainty, especially when the sample size is small.
+There is one more detail hiding in the confidence interval formula. If the sample mean is approximately normal, why did we use a $t$-multiplier rather than a normal multiplier? The reason is that we usually do not know the population standard deviation $\sigma$. We estimate it using the sample standard deviation $s$. This extra estimation adds uncertainty, especially when the sample size is small.
 
 That extra uncertainty is handled by the **t-distribution**.
 
@@ -1846,9 +1832,9 @@ That extra uncertainty is handled by the **t-distribution**.
 
 The **t-distribution** is a bell-shaped distribution similar to the standard normal distribution, but with heavier tails.
 
-It is used when estimating a population mean and the population standard deviation is unknown.
+- It is used when estimating a population mean and the population standard deviation is unknown.
 
-The shape depends on the **degrees of freedom**, commonly $n-1$ for a one-sample mean.
+- The shape depends on the **degrees of freedom**, commonly $n-1$ for a one-sample mean.
 :::
 
 The $t$-distribution has heavier tails than the standard normal distribution. This means it allows for more extreme values. When the sample size is small, the tails are noticeably heavier. As the sample size increases, the $t$-distribution becomes almost identical to the standard normal distribution.
@@ -1881,14 +1867,83 @@ ggplot(t_dist_data, aes(x = x, y = density, color = Distribution)) +
 For our household income sample, $n = 10$, so the degrees of freedom are:
 
 $$
-n - 1 = 9.
+n - 1 = 9
 $$
 
 For a 95% confidence interval, we use the 0.975 quantile of the $t$-distribution with 9 degrees of freedom:
 
 $$
-t_{9,0.975} \approx 2.262.
+t_{9,0.975} \approx 2.262
 $$
+
+```{r, echo=FALSE}
+
+df <- 9
+alpha <- 0.05
+
+lower_crit <- qt(alpha / 2, df = df)
+upper_crit <- qt(1 - alpha / 2, df = df)
+
+x <- seq(-4, 4, length.out = 1000)
+
+t_data <- data.frame(
+  x = x,
+  y = dt(x, df = df)
+)
+
+left_tail <- subset(t_data, x <= lower_crit)
+right_tail <- subset(t_data, x >= upper_crit)
+
+ggplot(t_data, aes(x = x, y = y)) +
+  geom_line(linewidth = 1) +
+  
+  geom_area(
+    data = left_tail,
+    aes(x = x, y = y),
+    alpha = 0.4
+  ) +
+  
+  geom_area(
+    data = right_tail,
+    aes(x = x, y = y),
+    alpha = 0.4
+  ) +
+  
+  geom_vline(xintercept = lower_crit, linetype = "dashed") +
+  geom_vline(xintercept = upper_crit, linetype = "dashed") +
+  
+  annotate(
+    "text",
+    x = lower_crit,
+    y = 0.08,
+    label = round(lower_crit, 3),
+    hjust = 1.1
+  ) +
+  
+  annotate(
+    "text",
+    x = upper_crit,
+    y = 0.08,
+    label = round(upper_crit, 3),
+    hjust = -0.1
+  ) +
+  
+  labs(
+    title = "Two-Tailed t Distribution with 9 Degrees of Freedom",
+    subtitle = "Shaded area = 0.05 total, with 0.025 in each tail",
+    x = "t",
+    y = "Density"
+  ) +
+  theme_minimal()
+```
+
+
+Note: the above can be done by looking up t-tables or using software:
+
+```{r, echo=TRUE}
+qt(p = 0.975, df = 9)
+```
+
 
 This is larger than the familiar normal value of about 1.96. The interval becomes wider because the sample is small.
 
@@ -1909,9 +1964,7 @@ tibble(
   )
 ```
 
-As the sample size grows, the multiplier moves closer to 1.96. With small samples, we pay a penalty for uncertainty about the standard deviation. With large samples, that penalty becomes small.
-
-Now the confidence interval formula should feel less mysterious:
+As the sample size grows, the multiplier moves closer to 1.96. With small samples, we pay a penalty for uncertainty about the standard deviation. With large samples, that penalty becomes small. Now the confidence interval formula should feel less mysterious:
 
 $$
 \bar{x}
@@ -1946,14 +1999,6 @@ tibble(
   gt() |>
   fmt_markdown(columns = everything())
 ```
-
-The formula is not just a recipe. It is a compressed story.
-
-We start with a sample mean. We recognise that it would wobble from sample to sample. We estimate the size of that wobble using the standard error. We use the $t$-distribution to decide how much wobble to allow for. The result is an interval estimate designed to capture the true mean in a known proportion of repeated samples.
-
-The Central Limit Theorem explains why this works so often.
-
-But it also tells us what to watch out for. If the sample is tiny, if the data are extremely skewed, if there are severe outliers, or if the observations are not reasonably independent, then the usual confidence interval may be less reliable. The formula is useful, but it is not a substitute for thinking.
 
 We have now seen how to estimate a single population mean and describe the uncertainty around it. But many real questions are comparative. We do not only ask, “What is the typical household income?” We ask whether one group differs from another, or whether one option is cheaper than another.
 
@@ -2001,10 +2046,9 @@ The question is:
 
 > What is the difference in mean annual household income between capital city and regional households?
 
-The numbers below are illustrative, not official ABS estimates. They are used so we can see the statistical logic clearly.
 :::
 
-Suppose we collect the following small samples.
+Suppose we collect the following data. There are 20 household surveyed, 10 from houses in the capital city, and 10 from houses from regional:
 
 ```{r}
 #| echo: false
@@ -2039,9 +2083,7 @@ income_regions |>
   )
 ```
 
-The two groups both contain a range of incomes. Both are right-skewed, with a few high-income households. The capital city sample contains one especially high income, which will pull its mean upward.
-
-Let us summarise the two groups.
+The two groups both contain a range of incomes. Both are right-skewed, with a few high-income households. The capital city sample contains one especially high income, which will pull its mean upward. Let us summarise the two groups.
 
 ```{r}
 #| echo: false
@@ -2070,7 +2112,7 @@ region_summary |>
 The parameter of interest is the difference between two population means:
 
 $$
-\mu_1 - \mu_2.
+\mu_1 - \mu_2
 $$
 
 Here, $\mu_1$ might represent the mean annual income of capital city households, and $\mu_2$ might represent the mean annual income of regional households.
@@ -2078,7 +2120,7 @@ Here, $\mu_1$ might represent the mean annual income of capital city households,
 The point estimate is the difference between the two sample means:
 
 $$
-\bar{x}_1 - \bar{x}_2.
+\bar{x}_1 - \bar{x}_2
 $$
 
 ```{r}
@@ -2128,9 +2170,7 @@ $$
 66{,}900
 $$
 
-But the phrase “in this sample” matters. We are not only interested in these 20 households. We are using these sample means to estimate a difference in the wider population.
-
-A difference in sample means is still a statistic. It varies from sample to sample. If we had sampled a different set of capital city households and a different set of regional households, the two sample means would change. Their difference would change too.
+But the phrase “in this sample” matters. We are not only interested in these 20 households. We are using these sample means to estimate a difference in the wider population. A difference in sample means is still a statistic. It varies from sample to sample. If we had sampled a different set of capital city households and a different set of regional households, the two sample means would change. Their difference would change too.
 
 So the next question is familiar:
 
@@ -2254,18 +2294,9 @@ tibble(
 
 The point estimate suggests that capital city households have a higher mean income in this sample. But the interval is wide. With such small samples and such variable incomes, the estimate is not precise.
 
-That is not a failure. It is the lesson.
-
-> The difference between two means is itself an estimate, and it has its own uncertainty.
-
 A plot makes the same point visually.
 
-```{r}
-
-#| echo: false
-#| message: false
-#| warning: false
-
+```{r, echo=FALSE, warning=FALSE, message=FALSE}
 
 ci_diff_plot <- tibble(
   Comparison = "Capital city minus regional",
@@ -2282,7 +2313,11 @@ ggplot(ci_diff_plot, aes(y = Comparison)) +
     linewidth = 1
   ) +
   geom_point(aes(x = Estimate), size = 4) +
-  scale_x_continuous(labels = dollar_format(prefix = "$")) +
+  scale_x_continuous(
+    limits = c(-150000, 150000),
+    breaks = seq(-150000, 150000, by = 50000),
+    labels = dollar_format(prefix = "$")
+  ) +
   labs(
     x = "Difference in mean annual household income",
     y = NULL
@@ -2487,11 +2522,815 @@ tibble(
   fmt_markdown(columns = everything())
 ```
 
-The details differ, but the rhythm is the same.
+The details differ, but the rhythm is the same. 
 
-We choose a parameter. We calculate a statistic. We estimate the wobble using a standard error. We report uncertainty using an interval.
+1. We choose a parameter. 
+2. We calculate a statistic. 
+3. We estimate the wobble using a standard error. 
+4. We report uncertainty using an interval.
 
 This is estimation.
+
+## Coding the ideas in R
+
+Throughout this chapter, we have used household income to think about estimation. We started with a small sample, calculated point estimates, thought about how those estimates would change from sample to sample, and then used standard errors and confidence intervals to describe uncertainty.
+
+We can code the same ideas in R.
+
+### Creating the household income sample
+
+We begin by recreating the small household income sample used throughout the chapter.
+
+```{r}
+#| label: r-income-sample
+
+library(tidyverse)
+library(gt)
+library(scales)
+
+income_example <- tibble(
+  household = LETTERS[1:10],
+  income = c(
+    52000, 61000, 68000, 73000, 81000,
+    89000, 97000, 112000, 138000, 420000
+  )
+)
+
+```
+
+This is the sample. It is not the population. The statistical question is how we can use these ten observed incomes to estimate something about a larger group of households.
+
+### Calculating point estimates
+
+A point estimate is a single number calculated from a sample and used to estimate an unknown population parameter.
+
+In this example, we might estimate:
+
+- the population mean income;
+- the population median income;
+- the population proportion of households below a chosen threshold.
+
+In R, we can calculate these using `mean()`, `median()`, and a logical condition.
+
+```{r}
+mean_income <- mean(income_example$income)
+median_income <- median(income_example$income)
+prop_below_60000 <- mean(income_example$income < 60000)
+
+mean_income
+median_income
+prop_below_60000
+```
+
+The expression `income_example$income` means: use the `income` column from the `income_example` data frame.
+
+The line:
+
+```{r}
+#| label: r-proportion-logic
+
+income_example$income < 60000
+```
+
+checks whether each household income is below 60000. R returns `TRUE` or `FALSE` for each household. When we take the `mean()` of a logical vector, R treats `TRUE` as 1 and `FALSE` as 0. So:
+
+```{r}
+#| label: r-proportion-below-threshold
+
+mean(income_example$income < 60000)
+```
+
+calculates the proportion of households in the sample with income below 60000.
+
+We can put the estimates into one table.
+
+```{r}
+#| label: tbl-r-point-estimates
+#| tbl-cap: "Point estimates from the household income sample"
+#| echo: false
+
+income_estimates <- tibble(
+  quantity = c(
+    "Mean income",
+    "Median income",
+    "Proportion below $60,000"
+  ),
+  estimate = c(
+    mean_income,
+    median_income,
+    prop_below_60000
+  )
+)
+
+income_estimates |>
+  mutate(
+    estimate = c(
+      dollar(mean_income, prefix = "$", accuracy = 1),
+      dollar(median_income, prefix = "$", accuracy = 1),
+      percent(prop_below_60000, accuracy = 1)
+    )
+  ) |>
+  gt() |>
+  cols_label(
+    quantity = "Quantity",
+    estimate = "Sample estimate"
+  )
+```
+
+The mean and median are both calculated from the same data, but they answer different questions. The mean is pulled upward by the high-income household. The median is closer to the middle of the observed incomes.
+
+### Simulating repeated samples
+
+In the chapter, we argued that an estimate could have turned out differently if we had drawn a different sample. We can use simulation to make this visible.
+
+First, we create a large hypothetical population of household incomes. The values are simulated, not official ABS values. We use a right-skewed distribution because income data often have a long right tail.
+
+```{r}
+#| label: r-hypothetical-income-population
+
+set.seed(24205242)
+
+population_income <- tibble(
+  income = round(
+    rlnorm(
+      n = 100000,
+      meanlog = log(85000),
+      sdlog = 0.55
+    ),
+    -2
+  )
+)
+
+population_income
+```
+
+The function `rlnorm()` generates random values from a log-normal distribution. A log-normal distribution is useful here because it produces positive values and can be right-skewed.
+
+In this code:
+
+- `n = 100000` creates 100,000 household incomes;
+- `meanlog = log(85000)` helps set the centre of the distribution;
+- `sdlog = 0.55` controls the spread and skewness;
+- `round(..., -2)` rounds values to the nearest 100.
+
+We can plot this hypothetical population.
+
+```{r}
+#| label: fig-r-income-population
+#| fig-cap: "A simulated right-skewed population of household incomes"
+
+population_income |>
+  ggplot(aes(x = income)) +
+  geom_histogram(bins = 60) +
+  scale_x_continuous(
+    labels = dollar_format(prefix = "$"),
+    limits = c(0, 500000)
+  ) +
+  labs(
+    x = "Annual household income",
+    y = "Number of households"
+  ) +
+  theme_minimal()
+```
+
+Now suppose we take one sample of 10 households from this population.
+
+```{r}
+#| label: r-one-sample-income
+
+one_sample <- population_income |>
+  slice_sample(n = 10)
+
+one_sample
+```
+
+The function `slice_sample()` randomly selects rows from a data frame. Here it selects 10 households.
+
+We can calculate the sample mean for this one sample.
+
+```{r}
+#| label: r-one-sample-mean
+
+one_sample |>
+  summarise(sample_mean = mean(income))
+```
+
+This gives one estimate. But if we take another sample, we will usually get another estimate.
+
+### Building a sampling distribution
+
+A sampling distribution describes how a statistic varies over repeated samples. We can approximate a sampling distribution by repeatedly sampling from our simulated population.
+
+The code below takes 3000 samples. Each sample contains 10 households. For each sample, we calculate the sample mean.
+
+```{r}
+#| label: r-sampling-distribution
+
+set.seed(5242)
+
+sample_means <- tibble(
+  sample_id = 1:3000
+) |>
+  mutate(
+    sample_mean = map_dbl(
+      sample_id,
+      ~ population_income |>
+        slice_sample(n = 10) |>
+        summarise(mean_income = mean(income)) |>
+        pull(mean_income)
+    )
+  )
+
+sample_means
+```
+
+There are a few new pieces here.
+
+The function `map_dbl()` repeats the same calculation many times and stores the result as a numeric vector. In this example, it repeats the process of drawing a sample and calculating its mean.
+
+Inside `map_dbl()`:
+
+- `slice_sample(n = 10)` draws a random sample of 10 households;
+- `summarise(mean_income = mean(income))` calculates the sample mean;
+- `pull(mean_income)` extracts the result as a number.
+
+Now we can plot the sampling distribution.
+
+```{r}
+#| label: fig-r-sampling-distribution
+#| fig-cap: "A simulated sampling distribution of the sample mean for samples of size 10"
+
+sample_means |>
+  ggplot(aes(x = sample_mean)) +
+  geom_histogram(bins = 35) +
+  scale_x_continuous(labels = dollar_format(prefix = "$")) +
+  labs(
+    x = "Sample mean income",
+    y = "Number of simulated samples"
+  ) +
+  theme_minimal()
+```
+
+Each value in this plot is a sample mean from a sample of 10 households. This is different from a histogram of individual household incomes. It is a distribution of estimates.
+
+We can compare the distribution of individual incomes with the distribution of sample means.
+
+```{r}
+#| label: fig-r-data-vs-sampling-distribution
+#| fig-cap: "The data distribution and the sampling distribution are different objects"
+
+library(patchwork)
+
+p_data <- population_income |>
+  slice_sample(n = 5000) |>
+  ggplot(aes(x = income)) +
+  geom_histogram(bins = 50) +
+  scale_x_continuous(
+    labels = dollar_format(prefix = "$"),
+    limits = c(0, 500000)
+  ) +
+  labs(
+    x = "Household income",
+    y = "Count",
+    title = "Individual household incomes"
+  ) +
+  theme_minimal()
+
+p_means <- sample_means |>
+  ggplot(aes(x = sample_mean)) +
+  geom_histogram(bins = 35) +
+  scale_x_continuous(
+    labels = dollar_format(prefix = "$"),
+    limits = c(0, 500000)
+  ) +
+  labs(
+    x = "Sample mean income",
+    y = "Count",
+    title = "Sample means"
+  ) +
+  theme_minimal()
+
+p_data + p_means
+```
+
+The first plot is about households. The second plot is about estimates. This distinction is one of the most important ideas in the chapter.
+
+### Standard errors and sample size
+
+The standard error describes how much an estimate tends to vary from sample to sample.
+
+For a sample mean, the estimated standard error is:
+
+$$
+se(\bar{x}) = \frac{s}{\sqrt{n}}.
+$$
+
+We can calculate this for the original household income sample.
+
+```{r}
+#| label: r-standard-error
+
+income_summary <- income_example |>
+  summarise(
+    n = n(),
+    mean_income = mean(income),
+    sd_income = sd(income),
+    se_mean = sd_income / sqrt(n)
+  )
+
+income_summary
+```
+
+The function `sd()` calculates the sample standard deviation. The function `sqrt()` calculates the square root.
+
+The standard deviation describes variation among individual household incomes. The standard error describes variation among sample means.
+
+We can also see how the standard error changes as the sample size changes. To isolate the effect of sample size, we hold the standard deviation fixed at the value from the original sample.
+
+```{r}
+#| label: tbl-r-standard-error-sample-size
+#| tbl-cap: "Estimated standard error for different sample sizes"
+#| echo: false
+
+assumed_sd <- sd(income_example$income)
+
+se_by_n <- tibble(
+  sample_size = c(10, 25, 100, 400, 1600),
+  standard_error = assumed_sd / sqrt(sample_size)
+)
+
+se_by_n |>
+  gt() |>
+  fmt_currency(
+    columns = standard_error,
+    currency = "AUD",
+    decimals = 0
+  ) |>
+  cols_label(
+    sample_size = "Sample size",
+    standard_error = "Estimated standard error"
+  )
+```
+
+As the sample size increases, the standard error decreases. But it decreases with the square root of the sample size, not in a straight line.
+
+```{r}
+#| label: fig-r-standard-error-curve
+#| fig-cap: "The standard error decreases as sample size increases, but with diminishing returns"
+
+se_curve <- tibble(
+  sample_size = seq(10, 2000, by = 10),
+  standard_error = assumed_sd / sqrt(sample_size)
+)
+
+se_curve |>
+  ggplot(aes(x = sample_size, y = standard_error)) +
+  geom_line(linewidth = 1) +
+  scale_y_continuous(labels = dollar_format(prefix = "$")) +
+  labs(
+    x = "Sample size",
+    y = "Estimated standard error"
+  ) +
+  theme_minimal()
+```
+
+To halve the standard error, we usually need about four times as much data. This is why precision can be expensive.
+
+### Confidence intervals in R
+
+A confidence interval has the general form:
+
+$$
+\text{estimate} \pm \text{multiplier} \times \text{standard error}.
+$$
+
+For a population mean, using the sample standard deviation, the interval is:
+
+$$
+\bar{x}
+\pm
+ t_{n-1,0.975}
+\frac{s}{\sqrt{n}}.
+$$
+
+We can calculate this manually in R.
+
+```{r}
+#| label: r-confidence-interval-manual
+
+n_income <- nrow(income_example)
+mean_income <- mean(income_example$income)
+sd_income <- sd(income_example$income)
+se_income <- sd_income / sqrt(n_income)
+t_multiplier <- qt(0.975, df = n_income - 1)
+
+ci_lower <- mean_income - t_multiplier * se_income
+ci_upper <- mean_income + t_multiplier * se_income
+
+manual_ci <- tibble(
+  mean_income = mean_income,
+  standard_error = se_income,
+  t_multiplier = t_multiplier,
+  lower = ci_lower,
+  upper = ci_upper
+)
+
+manual_ci
+```
+
+The function `qt()` gives a quantile from the t-distribution. Here:
+
+- `0.975` is used for a two-sided 95% confidence interval;
+- `df = n_income - 1` gives the degrees of freedom.
+
+We can display the result more cleanly.
+
+```{r}
+#| label: tbl-r-confidence-interval-manual
+#| tbl-cap: "Manual 95% confidence interval for mean household income"
+#| echo: false
+
+manual_ci |>
+  gt() |>
+  fmt_currency(
+    columns = c(mean_income, standard_error, lower, upper),
+    currency = "AUD",
+    decimals = 0
+  ) |>
+  fmt_number(
+    columns = t_multiplier,
+    decimals = 3
+  ) |>
+  cols_label(
+    mean_income = "Sample mean",
+    standard_error = "Standard error",
+    t_multiplier = "t multiplier",
+    lower = "Lower bound",
+    upper = "Upper bound"
+  )
+```
+
+R can also calculate this interval using `t.test()`.
+
+```{r}
+#| label: r-confidence-interval-ttest
+
+t.test(income_example$income)
+```
+
+The function `t.test()` returns several pieces of information. For now, focus on the sample mean and the confidence interval. Later in the unit, we will return to the parts of this output related to hypothesis testing.
+
+For this chapter, the key point is that the confidence interval gives a range of plausible values for the population mean, under the assumptions of the method.
+
+### Simulating confidence intervals
+
+A 95% confidence interval does not mean there is a 95% probability that this one realised interval contains the true mean. Instead, it describes the long-run performance of the method.
+
+We can simulate this idea.
+
+First, suppose there is a known population with a true mean. In real life, we usually do not know the true mean. But in a simulation, we can calculate it.
+
+```{r}
+#| label: r-true-population-mean
+
+true_mean <- mean(population_income$income)
+true_mean
+```
+
+Now we repeatedly draw samples of size 40. For each sample, we calculate a 95% confidence interval and record whether it contains the true mean.
+
+```{r}
+#| label: r-simulate-confidence-intervals
+
+set.seed(2420)
+
+n_intervals <- 80
+sample_size <- 40
+
+ci_simulation <- tibble(
+  sample_id = 1:n_intervals
+) |>
+  mutate(
+    sample_data = map(
+      sample_id,
+      ~ population_income |>
+        slice_sample(n = sample_size)
+    ),
+    sample_mean = map_dbl(sample_data, ~ mean(.x$income)),
+    sample_sd = map_dbl(sample_data, ~ sd(.x$income)),
+    standard_error = sample_sd / sqrt(sample_size),
+    multiplier = qt(0.975, df = sample_size - 1),
+    lower = sample_mean - multiplier * standard_error,
+    upper = sample_mean + multiplier * standard_error,
+    contains_true_mean = lower <= true_mean & upper >= true_mean
+  )
+
+ci_simulation
+```
+
+The object `sample_data` is a list-column. Each row contains one sampled dataset. The functions `map_dbl()` then calculate summaries from each sampled dataset.
+
+We can check how many intervals captured the true mean.
+
+```{r}
+#| label: r-confidence-interval-capture-rate
+
+ci_simulation |>
+  summarise(
+    intervals = n(),
+    captured = sum(contains_true_mean),
+    capture_rate = mean(contains_true_mean)
+  )
+```
+
+With only 80 intervals, the capture rate will not be exactly 95%. But it should usually be close.
+
+We can plot the intervals.
+
+```{r}
+#| label: fig-r-confidence-interval-simulation
+#| fig-cap: "Repeated confidence intervals. Most contain the true mean, but some miss."
+
+ci_simulation |>
+  ggplot(aes(y = sample_id)) +
+  geom_segment(
+    aes(
+      x = lower,
+      xend = upper,
+      yend = sample_id,
+      colour = contains_true_mean
+    ),
+    linewidth = 0.8
+  ) +
+  geom_point(aes(x = sample_mean), size = 1.5) +
+  geom_vline(xintercept = true_mean, linetype = "dashed") +
+  scale_colour_discrete(labels = c("No", "Yes")) +
+  scale_x_continuous(labels = dollar_format(prefix = "$")) +
+  scale_y_reverse(NULL) +
+  labs(
+    x = "Estimated mean household income",
+    colour = "Interval contains true mean?"
+  ) +
+  theme_minimal()
+```
+
+Each horizontal line is one confidence interval. The dashed vertical line is the true mean in the simulated population. Most intervals cross the true mean, but some do not. This is the repeated-sampling meaning of confidence.
+
+### Seeing the Central Limit Theorem
+
+The Central Limit Theorem says that, under broad conditions, the sampling distribution of the sample mean becomes approximately normal as the sample size increases.
+
+This does not mean the original data become normal. The household incomes are still right-skewed. The theorem is about the sample mean.
+
+We can simulate sample means for different sample sizes.
+
+```{r}
+#| label: r-central-limit-theorem
+
+set.seed(242052)
+
+clt_simulation <- bind_rows(
+  tibble(
+    sample_size = "n = 5",
+    sample_mean = replicate(
+      5000,
+      mean(sample(population_income$income, size = 5))
+    )
+  ),
+  tibble(
+    sample_size = "n = 25",
+    sample_mean = replicate(
+      5000,
+      mean(sample(population_income$income, size = 25))
+    )
+  ),
+  tibble(
+    sample_size = "n = 100",
+    sample_mean = replicate(
+      5000,
+      mean(sample(population_income$income, size = 100))
+    )
+  )
+)
+
+clt_simulation
+```
+
+The function `replicate()` repeats the same expression many times. Here it repeatedly samples incomes and calculates a sample mean.
+
+Now we plot the sampling distributions.
+
+```{r}
+#| label: fig-r-central-limit-theorem
+#| fig-cap: "As sample size increases, the sampling distribution of the sample mean becomes more concentrated and more bell-shaped"
+
+clt_simulation |>
+  ggplot(aes(x = sample_mean)) +
+  geom_histogram(bins = 40) +
+  facet_wrap(~ sample_size, ncol = 1, scales = "free_y") +
+  scale_x_continuous(labels = dollar_format(prefix = "$")) +
+  labs(
+    x = "Sample mean income",
+    y = "Number of simulated samples"
+  ) +
+  theme_minimal()
+```
+
+The original income distribution remains right-skewed. But the distribution of sample means becomes smoother, narrower, and more bell-shaped as the sample size grows.
+
+### Comparing two means in R
+
+The chapter also compared mean income between two groups: capital city households and regional households.
+
+We can recreate that example.
+
+```{r}
+#| label: r-income-regions
+
+income_regions <- tibble(
+  household = paste("Household", 1:20),
+  region = rep(c("Capital city", "Regional"), each = 10),
+  income = c(
+    68000, 74000, 82000, 91000, 97000,
+    106000, 118000, 135000, 162000, 430000,
+    48000, 56000, 61000, 69000, 74000,
+    81000, 88000, 95000, 112000, 210000
+  )
+)
+
+income_regions
+```
+
+We first summarise each group.
+
+```{r}
+#| label: r-income-regions-summary
+
+income_regions |>
+  group_by(region) |>
+  summarise(
+    n = n(),
+    mean_income = mean(income),
+    sd_income = sd(income),
+    .groups = "drop"
+  )
+```
+
+The function `group_by(region)` tells R to calculate the summaries separately for each region.
+
+The point estimate for the difference in means is:
+
+$$
+\bar{x}_{\text{capital}} - \bar{x}_{\text{regional}}.
+$$
+
+```{r}
+#| label: r-difference-in-means
+
+region_means <- income_regions |>
+  group_by(region) |>
+  summarise(mean_income = mean(income), .groups = "drop")
+
+mean_capital <- region_means |>
+  filter(region == "Capital city") |>
+  pull(mean_income)
+
+mean_regional <- region_means |>
+  filter(region == "Regional") |>
+  pull(mean_income)
+
+diff_means <- mean_capital - mean_regional
+
+diff_means
+```
+
+We can calculate the standard error manually.
+
+```{r}
+#| label: r-difference-in-means-se
+
+region_stats <- income_regions |>
+  group_by(region) |>
+  summarise(
+    n = n(),
+    sd_income = sd(income),
+    .groups = "drop"
+  )
+
+n_capital <- region_stats |>
+  filter(region == "Capital city") |>
+  pull(n)
+
+n_regional <- region_stats |>
+  filter(region == "Regional") |>
+  pull(n)
+
+sd_capital <- region_stats |>
+  filter(region == "Capital city") |>
+  pull(sd_income)
+
+sd_regional <- region_stats |>
+  filter(region == "Regional") |>
+  pull(sd_income)
+
+se_diff <- sqrt(sd_capital^2 / n_capital + sd_regional^2 / n_regional)
+
+se_diff
+```
+
+This standard error combines uncertainty from both sample means.
+
+R can also calculate a confidence interval for the difference in means using `t.test()`.
+
+```{r}
+#| label: r-independent-two-sample-ttest
+
+t.test(income ~ region, data = income_regions)
+```
+
+The formula `income ~ region` tells R to compare income across the two values of `region`. The output includes a confidence interval for the difference in group means. Later in the unit, we will return to the hypothesis test part of this output.
+
+### Paired comparisons in R
+
+Finally, we considered a paired comparison: the same households measured in two years.
+
+```{r}
+#| label: r-paired-income-data
+
+income_paired <- tibble(
+  household = paste("Household", LETTERS[1:8]),
+  income_2025 = c(72000, 85000, 91000, 105000, 116000, 128000, 142000, 210000),
+  income_2026 = c(76000, 87000, 98000, 109000, 121000, 133000, 146000, 225000)
+)
+
+income_paired
+```
+
+These are paired data because each 2025 value is linked to a 2026 value for the same household.
+
+The main step is to calculate the within-household change.
+
+```{r}
+#| label: r-paired-income-differences
+
+income_paired <- income_paired |>
+  mutate(change = income_2026 - income_2025)
+
+income_paired
+```
+
+Now the paired problem becomes a one-sample estimation problem. We estimate the mean change.
+
+```{r}
+#| label: r-paired-income-summary
+
+income_paired |>
+  summarise(
+    n = n(),
+    mean_change = mean(change),
+    sd_change = sd(change),
+    se_change = sd_change / sqrt(n)
+  )
+```
+
+We can calculate a confidence interval for the mean change manually.
+
+```{r}
+#| label: r-paired-income-ci-manual
+
+paired_summary <- income_paired |>
+  summarise(
+    n = n(),
+    mean_change = mean(change),
+    sd_change = sd(change),
+    se_change = sd_change / sqrt(n),
+    multiplier = qt(0.975, df = n - 1),
+    lower = mean_change - multiplier * se_change,
+    upper = mean_change + multiplier * se_change
+  )
+
+paired_summary
+```
+
+Or we can use `t.test()` with `paired = TRUE`.
+
+```{r}
+#| label: r-paired-income-ttest
+
+t.test(
+  income_paired$income_2026,
+  income_paired$income_2025,
+  paired = TRUE
+)
+```
+
+The argument `paired = TRUE` tells R that the observations are linked. This matters because the method uses within-household differences rather than treating the two years as unrelated samples.
+
+The lesson is the same as in the chapter:
+
+> The formula should follow the structure of the data.
+
+For independent groups, compare group means. For paired data, first calculate differences within each pair, then estimate the mean difference.
 
 ## Exercises
 

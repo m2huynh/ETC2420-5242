@@ -15,15 +15,15 @@ library(scales)
 
 By the end of this chapter, you should be able to:
 
-1. Explain how hypothesis testing builds on sampling distributions, standard errors, confidence intervals, and the Central Limit Theorem.
-2. Distinguish between a research question, a null hypothesis, and an alternative hypothesis.
-3. Identify the population parameter being tested and the sample statistic used as evidence.
-4. Explain why the null hypothesis is treated as a default position or benchmark claim.
-5. Calculate and interpret test statistics for means and proportions.
-6. Calculate and interpret p-values without treating them as probabilities that hypotheses are true.
-7. Distinguish between one-sided and two-sided hypothesis tests.
-8. Explain Type I error, Type II error and significance level.
-9. Carry out simple hypothesis tests.
+1.  Explain how hypothesis testing builds on sampling distributions, standard errors, confidence intervals, and the Central Limit Theorem.
+2.  Distinguish between a research question, a null hypothesis, and an alternative hypothesis.
+3.  Identify the population parameter being tested and the sample statistic used as evidence.
+4.  Explain why the null hypothesis is treated as a default position or benchmark claim.
+5.  Calculate and interpret test statistics for means and proportions.
+6.  Calculate and interpret p-values without treating them as probabilities that hypotheses are true.
+7.  Distinguish between one-sided and two-sided hypothesis tests.
+8.  Explain Type I error, Type II error and significance level.
+9.  Carry out simple hypothesis tests.
 10. Describe why hypothesis testing should usually be reported alongside estimates, confidence intervals, and careful discussion of context.
 :::
 
@@ -40,7 +40,7 @@ knitr::include_graphics("images/chapter5/outline.png")
 
 ## A famous cup of tea
 
-One of the most famous stories in statistics begins with a cup of tea. The story is usually told like this. 
+One of the most famous stories in statistics begins with a cup of tea. The story is usually told like this.
 
 > At a summer afternoon tea party in Cambridge in the 1920s, a woman claimed that she could tell whether milk had been poured into a cup before the tea, or whether tea had been poured in before the milk. To many people, this might have sounded like a small matter of personal taste. Perhaps she preferred one method. Perhaps she was imagining the difference. Perhaps she was simply confident.
 
@@ -50,10 +50,19 @@ But the statistician, Ronald Fisher, saw something deeper in the claim. The ques
 
 Imagine that we prepare eight cups of tea.
 
-- Four are made by pouring the milk first, and four are made by pouring the tea first.
-- The cups are presented in random order.
-- The woman is told that there are four of each type.
-- She must identify which four had the milk poured first.
+-   Four are made by pouring the milk first, and four are made by pouring the tea first.
+-   The cups are presented in random order.
+-   The woman is told that there are four of each type.
+-   She must identify which four had the milk poured first.
+
+<center>
+```{r}
+#| echo: false
+
+knitr::include_graphics("images/chapter5/tea.png")
+
+```
+</center><br>
 
 There are many ways she could choose four cups out of eight. If she is only guessing, she might still get some correct by chance. She might even get all four correct by chance, although that would be rare.
 
@@ -89,8 +98,8 @@ $$
 
 That probability is small. It tells us that a perfect score would be unusual if she were merely guessing. Although, this does not give us certainty. It does not prove beyond all possible doubt that she can taste the difference. But it gives us a disciplined way to compare two explanations:
 
-- perhaps she is only guessing;
-- perhaps she really can tell the difference.
+-   perhaps she is only guessing;
+-   perhaps she really can tell the difference.
 
 The tea story also shows why the design of the test matters. Before seeing the result, we need to decide what kind of outcome would count as strong evidence. Would four correct identifications be enough? What about three? Should we count only a perfect score, or should a nearly perfect score also make us skeptical of the guessing explanation? These choices need to be made before the cups are tasted. Otherwise, we risk changing the rules after seeing the result.
 
@@ -130,7 +139,7 @@ These are no longer just estimation questions. They are claims about a populatio
 
 Let us return to the running example from the previous chapter.
 
-::: {.callout-note}
+::: callout-note
 ### Household income
 
 Suppose you work for the Australian Bureau of Statistics. You have been asked to report on annual income for Australian households. In the previous chapter, you used sample data to estimate population quantities such as mean income, median income, the proportion of households below a threshold, and the difference between regions.
@@ -184,7 +193,6 @@ tibble(
   gt()
 ```
 
-
 ## Research questions and hypotheses
 
 A research question is usually written in ordinary language.
@@ -207,8 +215,8 @@ A hypothesis is a statement about a population distribution or a population para
 
 The two main hypotheses are:
 
-- the **null hypothesis**, written as $H_0$;
-- the **alternative hypothesis**, written as $H_1$ or sometimes $H_A$.
+-   the **null hypothesis**, written as $H_0$;
+-   the **alternative hypothesis**, written as $H_1$ or sometimes $H_A$.
 
 The null hypothesis usually represents a default position, a benchmark, or a claim of no difference or no change. The alternative hypothesis represents the effect or difference we are looking for evidence of.
 
@@ -230,9 +238,7 @@ $$
 H_0: \bar{x} = 100{,}000.
 $$
 
-That would not make sense as a population claim. Once we have the sample, $\bar{x}$ is known. The hypothesis is about the unknown population mean $\mu$.
-
-This distinction is one of the most important parts of hypothesis testing:
+That would not make sense as a population claim. Once we have the sample, $\bar{x}$ is known. The hypothesis is about the unknown population mean $\mu$. This distinction is important.
 
 > Hypotheses are about populations. Test statistics are calculated from samples.
 
@@ -244,16 +250,16 @@ One way to understand this is to think of the null as a skeptical position. If s
 
 This is similar to a court case. The starting point is not that the defendant has proved innocence. The starting point is that guilt has not been established. The prosecution must provide strong enough evidence to move us away from the default position. In hypothesis testing, we do something similar. We do not reject the null just because the sample statistic is different from the null value. We reject the null only if the difference is large relative to the sampling variation we would expect.
 
-:::: {.callout-important}
+::: callout-important
 #### Warning: We do not accept the null
 
 A hypothesis test has two possible outcomes:
 
-1. Reject $H_0$.
-2. Fail to reject $H_0$.
+1.  Reject $H_0$.
+2.  Fail to reject $H_0$.
 
 We do not usually say that we “accept” $H_0$. Failing to reject the null means that the data did not provide strong enough evidence against it. It does not prove that the null hypothesis is true.
-::::
+:::
 
 ### One-sided and two-sided alternatives
 
@@ -270,7 +276,7 @@ H_0: \mu = 100{,}000
 $$
 
 $$
-H_1: \mu \neq 100{,}000.
+H_1: \mu \neq 100{,}000
 $$
 
 The symbol $\neq$ means “not equal to”. This alternative includes values below \$100,000 and values above \$100,000.
@@ -286,7 +292,7 @@ H_0: \mu = 100{,}000
 $$
 
 $$
-H_1: \mu > 100{,}000.
+H_1: \mu > 100{,}000
 $$
 
 Or if the question is:
@@ -300,7 +306,7 @@ H_0: \mu = 100{,}000
 $$
 
 $$
-H_1: \mu < 100{,}000.
+H_1: \mu < 100{,}000
 $$
 
 The direction matters because it changes what counts as evidence against the null.
@@ -309,18 +315,18 @@ If our alternative is $\mu > 100{,}000$, then sample means much larger than \$10
 
 If our alternative is $\mu \neq 100{,}000$, then sample means far above or far below \$100,000 count as evidence against the null.
 
-:::: {.callout-important}
+::: callout-important
 #### Warning: Choose the alternative before looking at the data
 
 The alternative hypothesis should be chosen before inspecting the sample result. Choosing a one-sided test after seeing which direction the data point is a form of changing the rules after the game has started.
-::::
+:::
 
 ## Test statistics: measuring distance from the null
 
 Suppose we collect a sample of $n = 100$ households and obtain:
 
 $$
-\bar{x} = 105{,}000.
+\bar{x} = 105{,}000
 $$
 
 If the null hypothesis is:
@@ -353,15 +359,15 @@ $$
 
 where:
 
-- $\bar{x}$ is the sample mean;
-- $\mu_0$ is the value of $\mu$ under the null hypothesis;
-- $s$ is the sample standard deviation;
-- $n$ is the sample size;
-- $s/\sqrt{n}$ is the estimated standard error of the sample mean.
+-   $\bar{x}$ is the sample mean;
+-   $\mu_0$ is the value of $\mu$ under the null hypothesis;
+-   $s$ is the sample standard deviation;
+-   $n$ is the sample size;
+-   $s/\sqrt{n}$ is the estimated standard error of the sample mean.
 
 The test statistic tells us how many standard errors the estimate is from the null value.
 
-::: {.callout-note}
+::: callout-note
 ### A test statistic in words
 
 A test statistic is a standardised measure of disagreement between the data and the null hypothesis. A value near zero means the estimate is close to the null value. A large positive or negative value means the estimate is far from the null value, measured in standard errors.
@@ -434,7 +440,7 @@ Now we ask a more specific question:
 Suppose the null hypothesis is:
 
 $$
-H_0: \mu = 100{,}000.
+H_0: \mu = 100{,}000
 $$
 
 If this null hypothesis is true, and if our sample size is large enough for the Central Limit Theorem to be useful, then repeated sample means should vary around \$100,000. Most sample means should be reasonably close to \$100,000. A few will be far away just by chance.
@@ -480,8 +486,8 @@ ggplot(null_dist, aes(x = sample_mean)) +
 
 The plot shows the idea behind the test. We are not asking whether the observed sample mean equals the null value. We are asking **where** the observed sample mean falls in the sampling distribution that would be expected if the null hypothesis were true.
 
-- If the observed statistic is near the centre of this distribution, it is compatible with the null. 
-- If it is far out in the tail, it is less compatible with the null.
+-   If the observed statistic is near the centre of this distribution, it is compatible with the null.
+-   If it is far out in the tail, it is less compatible with the null.
 
 This is the repeated-sampling logic of hypothesis testing.
 
@@ -490,7 +496,7 @@ This is the repeated-sampling logic of hypothesis testing.
 A hypothesis test can be described as a decision rule. A test statistic is a statistic used to assess the null hypothesis. A critical region is the set of values of the test statistic for which we reject the null hypothesis. For example, suppose a test statistic $T$ tends to be near zero when the null hypothesis is true. Large positive values are evidence against the null. Then a possible decision rule is:
 
 $$
-\text{Reject } H_0 \text{ if } T > c.
+\text{Reject } H_0 \text{ if } T > c
 $$
 
 The number $c$ is the critical value. The critical region is the set of values greater than $c$. How should we choose $c$?
@@ -506,21 +512,21 @@ This is also the probability of a Type I error, which we will discuss in more de
 A very common choice is:
 
 $$
-\alpha = 0.05.
+\alpha = 0.05
 $$
 
 A 5% significance level means that, if the null hypothesis were true and we repeated the testing procedure many times, we would reject the null about 5% of the time.
 
-:::: {.callout-important}
+::: callout-important
 ### Warning: The 5% level is a convention
 
 There is nothing magical about 0.05. It is a common convention, not a law of nature. In some settings, a smaller or larger significance level may be more appropriate. The choice should depend on the consequences of the possible errors.
-::::
+:::
 
 For a two-sided test using a standard normal approximation, the 5% critical region is roughly:
 
 $$
-|Z| > 1.96.
+|Z| > 1.96
 $$
 
 This means that we reject the null if the test statistic is more than 1.96 standard errors below the null value or more than 1.96 standard errors above it.
@@ -601,32 +607,32 @@ This gives a p-value of about 0.024.
 At the 5% significance level, we would reject $H_0$ because:
 
 $$
-p\text{-value} < 0.05.
+p\text{-value} < 0.05
 $$
 
 At the 1% significance level, we would not reject $H_0$ because:
 
 $$
-p\text{-value} > 0.01.
+p\text{-value} > 0.01
 $$
 
 This is why it is often more informative to report the p-value than only saying “significant” or “not significant”. The p-value gives more detail about the strength of disagreement between the data and the null model.
 
 But it must be interpreted carefully.
 
-:::: {.callout-important}
+::: callout-important
 ### Warning: What a p-value is not
 
 A p-value is not:
 
-- the probability that the null hypothesis is true;
-- the probability that the alternative hypothesis is true;
-- the probability that the result is due to chance;
-- the size of the effect;
-- proof that the null hypothesis is false.
+-   the probability that the null hypothesis is true;
+-   the probability that the alternative hypothesis is true;
+-   the probability that the result is due to chance;
+-   the size of the effect;
+-   proof that the null hypothesis is false.
 
 A small p-value means that the observed data would be unusual if the null hypothesis were true.
-::::
+:::
 
 A useful way to say it is:
 
@@ -636,7 +642,7 @@ A useful way to say it is:
 
 Let us now work through a full example.
 
-::: {.callout-note}
+::: callout-note
 ### Mean household income
 
 A report claims that the mean annual income of Australian households is \$100,000. A sample of 100 households gives a sample mean of \$108,000 and a sample standard deviation of \$35,000.
@@ -735,7 +741,6 @@ tibble(
   fmt_number(columns = c(`Test statistic`, `p-value`), decimals = 3)
 ```
 
-
 The p-value is about 0.024. At the 5% significance level, we reject the null hypothesis.
 
 A careful conclusion would be:
@@ -771,7 +776,6 @@ tibble(
   fmt_currency(columns = c(Estimate, Lower, Upper), currency = "AUD", decimals = 0)
 ```
 
-
 This interval gives a fuller picture. It shows not only that \$100,000 lies outside the interval, but also which values are reasonably compatible with the data.
 
 ## Confidence intervals and hypothesis tests
@@ -784,23 +788,22 @@ $$
 
 is closely related to checking whether $\mu_0$ lies inside or outside the 95% confidence interval.
 
-- If $\mu_0$ lies outside the 95% confidence interval, the two-sided 5% test rejects $H_0$.
-- If $\mu_0$ lies inside the 95% confidence interval, the two-sided 5% test does not reject $H_0$.
+-   If $\mu_0$ lies outside the 95% confidence interval, the two-sided 5% test rejects $H_0$.
+-   If $\mu_0$ lies inside the 95% confidence interval, the two-sided 5% test does not reject $H_0$.
 
 In the previous example, the 95% confidence interval was approximately:
 
 $$
-(101{,}056,\ 114{,}944).
+(101{,}056,\ 114{,}944)
 $$
 
 The null value \$100,000 is outside this interval. So the two-sided 5% test rejects:
 
 $$
-H_0: \mu = 100{,}000.
+H_0: \mu = 100{,}000
 $$
 
 This connection can help you interpret both tools. But the confidence interval is usually more informative. The test asks whether one value is hard to believe. The interval shows a range of values that remain plausible.
-
 
 ## Two-sample t-tests
 
@@ -808,7 +811,7 @@ Now suppose we want to compare two groups.
 
 In the previous chapter, we estimated the difference in mean household income between capital city and regional households. Here we turn that into a hypothesis test.
 
-::: {.callout-note}
+::: callout-note
 ### Household income in two regions
 
 Suppose we collect annual income data from households in capital city areas and regional areas.
@@ -833,7 +836,7 @@ H_0: \mu_{\text{capital}} - \mu_{\text{regional}} = 0
 $$
 
 $$
-H_1: \mu_{\text{capital}} - \mu_{\text{regional}} \neq 0.
+H_1: \mu_{\text{capital}} - \mu_{\text{regional}} \neq 0
 $$
 
 Equivalently, we could write:
@@ -843,7 +846,7 @@ H_0: \mu_{\text{capital}} = \mu_{\text{regional}}
 $$
 
 $$
-H_1: \mu_{\text{capital}} \neq \mu_{\text{regional}}.
+H_1: \mu_{\text{capital}} \neq \mu_{\text{regional}}
 $$
 
 Let us create a sample dataset to illustrate the calculation.
@@ -885,7 +888,7 @@ $$
 t
 =
 \frac{\bar{x}_{\text{capital}} - \bar{x}_{\text{regional}}}
-{\sqrt{s^2_{\text{capital}}/n_{\text{capital}} + s^2_{\text{regional}}/n_{\text{regional}}}}.
+{\sqrt{s^2_{\text{capital}}/n_{\text{capital}} + s^2_{\text{regional}}/n_{\text{regional}}}}
 $$
 
 This version is called Welch's two-sample t-test. It does not require us to assume that the two population variances are equal.
@@ -901,11 +904,11 @@ t.test(income ~ region, data = income_regions)
 
 The output includes:
 
-- the test statistic;
-- the degrees of freedom;
-- the p-value;
-- a confidence interval for the difference in means;
-- the two sample means.
+-   the test statistic;
+-   the degrees of freedom;
+-   the p-value;
+-   a confidence interval for the difference in means;
+-   the two sample means.
 
 This is useful because it reminds us that the test is not separate from estimation. The same output gives both a decision and an interval estimate.
 
@@ -916,7 +919,7 @@ If our research question were directional, we could use a one-sided test. For ex
 Then the alternative would be:
 
 $$
-H_1: \mu_{\text{capital}} - \mu_{\text{regional}} > 0.
+H_1: \mu_{\text{capital}} - \mu_{\text{regional}} > 0
 $$
 
 In R, the direction depends on how the groups are ordered. It is often clearer to create two objects and then use them directly.
@@ -936,12 +939,11 @@ regional_income <- income_regions |>
 t.test(capital_income, regional_income, alternative = "greater")
 ```
 
-
 ## Paired samples t-test
 
 Not all comparisons involve two independent groups. Sometimes each observation in one group is naturally paired with an observation in another group. When data are paired, the analysis should use the pairing.
 
-::: {.callout-note}
+::: callout-note
 ### Income before and after housing costs
 
 Suppose we record household income before housing costs and disposable income after housing costs for the same households.
@@ -959,9 +961,9 @@ $$
 
 where:
 
-- $X_i$ is income before housing costs for household $i$;
-- $Y_i$ is income after housing costs for household $i$;
-- $D_i$ is the difference for household $i$.
+-   $X_i$ is income before housing costs for household $i$;
+-   $Y_i$ is income after housing costs for household $i$;
+-   $D_i$ is the difference for household $i$.
 
 If we want to test whether income before housing costs is higher than income after housing costs, we test:
 
@@ -1033,8 +1035,8 @@ So far, we have described hypothesis testing as a procedure for deciding whether
 
 There are two main kinds of error.
 
-- A **Type I error** occurs when we reject the null hypothesis even though it is true.
-- A **Type II error** occurs when we fail to reject the null hypothesis even though it is false.
+-   A **Type I error** occurs when we reject the null hypothesis even though it is true.
+-   A **Type II error** occurs when we fail to reject the null hypothesis even though it is false.
 
 ```{r}
 #| echo: false
@@ -1052,7 +1054,7 @@ tibble(
 
 Let us put this in context.
 
-::: {.callout-note}
+::: callout-note
 ### A policy threshold
 
 Suppose a government agency will introduce additional financial support in a region if there is strong evidence that more than 25% of households have annual income below \$60,000.
@@ -1100,9 +1102,7 @@ Power is the probability of detecting an effect when the effect is really there.
 
 ## Statistical significance and practical importance
 
-A statistically significant result is not necessarily an important result. This is one of the most common misunderstandings in applied statistics. Suppose a very large survey finds that mean household income is \$1,200 higher in capital city areas than in regional areas, with a p-value below 0.001.
-
-The result may be statistically significant because the sample size is large. With enough data, even very small differences can become difficult to explain by sampling variation alone.
+A statistically significant result is not necessarily an important result. This is one of the most common misunderstandings in applied statistics. Suppose a very large survey finds that mean household income is \$1,200 higher in capital city areas than in regional areas, with a p-value below 0.001. The result may be statistically significant because the sample size is large. With enough data, even very small differences can become difficult to explain by sampling variation alone.
 
 But is \$1,200 per year practically important?
 
@@ -1132,15 +1132,6 @@ tibble(
 
 The word “significant” is dangerous because in ordinary language it means important. In statistics, significant means something narrower: the result crossed a threshold in a hypothesis test.
 
-:::: {.callout-important}
-### Statistical significance is not practical importance
-
-A small p-value can occur for a small effect if the sample size is large.
-
-A large p-value can occur for an important effect if the sample size is small or the data are highly variable.
-
-Always ask: How large is the estimate? How uncertain is it? Does it matter in context?
-::::
 
 ### Common misinterpretations
 
@@ -1226,58 +1217,57 @@ A report claims that the mean annual income of Australian households is \$100,00
 
 For this situation:
 
-a. Identify the population parameter.  
-b. Write the null hypothesis.  
-c. Write the alternative hypothesis for a two-sided test.  
-d. Explain, in words, what it would mean to reject the null hypothesis.
+a.  Identify the population parameter.\
+b.  Write the null hypothesis.\
+c.  Write the alternative hypothesis for a two-sided test.\
+d.  Explain, in words, what it would mean to reject the null hypothesis.
 
 ::: {.callout-important collapse="true"}
 ## Click for Solution
 
-a. The population parameter is the true mean annual income of all Australian households. We write this as:
+a.  The population parameter is the true mean annual income of all Australian households. We write this as:
 
 $$
 \mu
 $$
 
-b. The null hypothesis is:
+b.  The null hypothesis is:
 
 $$
 H_0: \mu = 100{,}000
 $$
 
-c. For a two-sided test, the alternative hypothesis is:
+c.  For a two-sided test, the alternative hypothesis is:
 
 $$
 H_1: \mu \neq 100{,}000
 $$
 
-d. Rejecting the null hypothesis would mean that the sample provides evidence that the true mean annual household income is different from \$100,000.
+d.  Rejecting the null hypothesis would mean that the sample provides evidence that the true mean annual household income is different from \$100,000.
 
 It does not prove that the true mean is not \$100,000. It means the observed sample result would be unusual if the true mean really were \$100,000.
 :::
 ::::
-
 
 :::: callout-note
 ## Question 2
 
 A policy analyst wants to test whether more than 25% of households in a region have annual income below \$60,000.
 
-a. Define the population parameter.  
-b. Write the null and alternative hypotheses.  
-c. Is this a one-sided or two-sided test? Explain.
+a.  Define the population parameter.\
+b.  Write the null and alternative hypotheses.\
+c.  Is this a one-sided or two-sided test? Explain.
 
 ::: {.callout-important collapse="true"}
 ## Click for Solution
 
-a. The population parameter is the true proportion of households in the region with annual income below \$60,000. We write this as:
+a.  The population parameter is the true proportion of households in the region with annual income below \$60,000. We write this as:
 
 $$
 p
 $$
 
-b. The hypotheses are:
+b.  The hypotheses are:
 
 $$
 H_0: p = 0.25
@@ -1287,50 +1277,48 @@ $$
 H_1: p > 0.25
 $$
 
-c. This is a one-sided test because the research question is directional. The analyst is not asking whether the proportion is simply different from 25%. They are specifically asking whether it is greater than 25%.
+c.  This is a one-sided test because the research question is directional. The analyst is not asking whether the proportion is simply different from 25%. They are specifically asking whether it is greater than 25%.
 :::
 ::::
-
 
 :::: callout-note
 ## Question 3
 
 For each situation below, decide whether the alternative hypothesis should be one-sided or two-sided.
 
-a. A researcher asks whether the mean income of households in capital cities is different from the mean income of households in regional areas.  
-b. A consumer group tests whether the mean lifetime of a brand of washing machine is less than the manufacturer's advertised claim.  
-c. A health researcher asks whether the proportion of adults meeting physical activity guidelines has changed since last year.  
-d. A policy team asks whether the proportion of households experiencing rental stress is greater than 30%.
+a.  A researcher asks whether the mean income of households in capital cities is different from the mean income of households in regional areas.\
+b.  A consumer group tests whether the mean lifetime of a brand of washing machine is less than the manufacturer's advertised claim.\
+c.  A health researcher asks whether the proportion of adults meeting physical activity guidelines has changed since last year.\
+d.  A policy team asks whether the proportion of households experiencing rental stress is greater than 30%.
 
 ::: {.callout-important collapse="true"}
 ## Click for Solution
 
-a. Two-sided. The question asks whether the means are different, without specifying a direction.
+a.  Two-sided. The question asks whether the means are different, without specifying a direction.
 
 $$
 H_1: \mu_{\text{capital}} \neq \mu_{\text{regional}}
 $$
 
-b. One-sided. The consumer group is specifically interested in whether the mean lifetime is less than the advertised claim.
+b.  One-sided. The consumer group is specifically interested in whether the mean lifetime is less than the advertised claim.
 
 $$
 H_1: \mu < \mu_0
 $$
 
-c. Two-sided. The word changed allows for an increase or a decrease.
+c.  Two-sided. The word changed allows for an increase or a decrease.
 
 $$
 H_1: p \neq p_0
 $$
 
-d. One-sided. The policy team is specifically interested in whether the proportion is greater than 30%.
+d.  One-sided. The policy team is specifically interested in whether the proportion is greater than 30%.
 
 $$
 H_1: p > 0.30
 $$
 :::
 ::::
-
 
 :::: callout-note
 ## Question 4
@@ -1353,7 +1341,6 @@ A better phrase is:
 > The sample does not provide strong evidence against the null hypothesis.
 :::
 ::::
-
 
 :::: callout-note
 ## Question 5
@@ -1387,7 +1374,6 @@ Or more simply:
 :::
 ::::
 
-
 :::: callout-note
 ## Question 6
 
@@ -1417,7 +1403,6 @@ A better interpretation is:
 > The survey provides strong statistical evidence of a difference in mean income between the two regions, but the practical importance of the estimated \$900 difference needs to be judged in context.
 :::
 ::::
-
 
 :::: callout-note
 ## Question 7
@@ -1449,7 +1434,6 @@ A better conclusion is:
 :::
 ::::
 
-
 :::: callout-note
 ## Question 8
 
@@ -1473,14 +1457,14 @@ $$
 H_1: \mu \neq 100{,}000.
 $$
 
-a. Calculate the standard error.  
-b. Calculate the test statistic.  
-c. Using the fact that the two-sided p-value is approximately 0.024, state the conclusion at the 5% level.
+a.  Calculate the standard error.\
+b.  Calculate the test statistic.\
+c.  Using the fact that the two-sided p-value is approximately 0.024, state the conclusion at the 5% level.
 
 ::: {.callout-important collapse="true"}
 ## Click for Solution
 
-a. The standard error is:
+a.  The standard error is:
 
 $$
 SE(\bar{x}) = \frac{s}{\sqrt{n}}
@@ -1498,7 +1482,7 @@ SE(\bar{x})
 3{,}500
 $$
 
-b. The test statistic is:
+b.  The test statistic is:
 
 $$
 t =
@@ -1514,7 +1498,7 @@ t =
 2.286
 $$
 
-c. The p-value is approximately 0.024. Since:
+c.  The p-value is approximately 0.024. Since:
 
 $$
 0.024 < 0.05
@@ -1525,7 +1509,6 @@ we reject $H_0$ at the 5% significance level.
 There is evidence that the true mean annual household income differs from \$100,000.
 :::
 ::::
-
 
 :::: callout-note
 ## Question 9
@@ -1544,14 +1527,14 @@ $$
 H_1: \mu < 100{,}000.
 $$
 
-a. Calculate the standard error.  
-b. Calculate the test statistic.  
-c. The one-sided p-value is approximately 0.018. What conclusion would you make at the 5% level?
+a.  Calculate the standard error.\
+b.  Calculate the test statistic.\
+c.  The one-sided p-value is approximately 0.018. What conclusion would you make at the 5% level?
 
 ::: {.callout-important collapse="true"}
 ## Click for Solution
 
-a. The standard error is:
+a.  The standard error is:
 
 $$
 SE(\bar{x})
@@ -1565,7 +1548,7 @@ SE(\bar{x})
 3{,}500
 $$
 
-b. The test statistic is:
+b.  The test statistic is:
 
 $$
 t =
@@ -1581,7 +1564,7 @@ t =
 -2.143
 $$
 
-c. The p-value is approximately 0.018. Since:
+c.  The p-value is approximately 0.018. Since:
 
 $$
 0.018 < 0.05
@@ -1592,7 +1575,6 @@ we reject $H_0$ at the 5% level.
 There is evidence that the true mean annual household income is less than \$100,000.
 :::
 ::::
-
 
 :::: callout-note
 ## Question 10
@@ -1613,21 +1595,21 @@ $$
 H_1: p > 0.25.
 $$
 
-a. Calculate the sample proportion.  
-b. Calculate the standard error under the null hypothesis.  
-c. Calculate the test statistic:
+a.  Calculate the sample proportion.\
+b.  Calculate the standard error under the null hypothesis.\
+c.  Calculate the test statistic:
 
 $$
 z =
 \frac{\hat{p} - p_0}{\sqrt{p_0(1-p_0)/n}}.
 $$
 
-d. The one-sided p-value is approximately 0.052. What conclusion would you make at the 5% level?
+d.  The one-sided p-value is approximately 0.052. What conclusion would you make at the 5% level?
 
 ::: {.callout-important collapse="true"}
 ## Click for Solution
 
-a. The sample proportion is:
+a.  The sample proportion is:
 
 $$
 \hat{p}
@@ -1637,7 +1619,7 @@ $$
 0.27
 $$
 
-b. The standard error under the null hypothesis is:
+b.  The standard error under the null hypothesis is:
 
 $$
 SE(\hat{p})
@@ -1657,7 +1639,7 @@ SE(\hat{p})
 0.0194
 $$
 
-c. The test statistic is:
+c.  The test statistic is:
 
 $$
 z =
@@ -1668,7 +1650,7 @@ z =
 1.03
 $$
 
-d. The p-value is approximately 0.052. Since:
+d.  The p-value is approximately 0.052. Since:
 
 $$
 0.052 > 0.05
@@ -1682,7 +1664,6 @@ This is a useful example because the result is close to the 5% threshold. It wou
 :::
 ::::
 
-
 :::: callout-note
 ## Question 11
 
@@ -1690,19 +1671,19 @@ A researcher compares the proportion of households below \$60,000 in capital cit
 
 The results are:
 
-| Group | Number below \$60,000 | Sample size |
-|---|---:|---:|
-| Capital city | 72 | 400 |
-| Regional | 105 | 420 |
+| Group        | Number below \$60,000 | Sample size |
+|--------------|----------------------:|------------:|
+| Capital city |                    72 |         400 |
+| Regional     |                   105 |         420 |
 
-a. Calculate the sample proportion for each group.  
-b. Calculate the difference in sample proportions, using:
+a.  Calculate the sample proportion for each group.\
+b.  Calculate the difference in sample proportions, using:
 
 $$
 \hat{p}_{\text{regional}} - \hat{p}_{\text{capital}}.
 $$
 
-c. The p-value for a two-proportion test is approximately 0.018. What conclusion would you make at the 5% level for the test:
+c.  The p-value for a two-proportion test is approximately 0.018. What conclusion would you make at the 5% level for the test:
 
 $$
 H_0: p_{\text{regional}} = p_{\text{capital}}
@@ -1717,7 +1698,7 @@ $$
 ::: {.callout-important collapse="true"}
 ## Click for Solution
 
-a. The sample proportion for capital city households is:
+a.  The sample proportion for capital city households is:
 
 $$
 \hat{p}_{\text{capital}}
@@ -1737,7 +1718,7 @@ $$
 0.25
 $$
 
-b. The difference in sample proportions is:
+b.  The difference in sample proportions is:
 
 $$
 \hat{p}_{\text{regional}} - \hat{p}_{\text{capital}}
@@ -1749,7 +1730,7 @@ $$
 
 So the sampled regional households have a proportion below \$60,000 that is 7 percentage points higher than the sampled capital city households.
 
-c. Since the p-value is approximately 0.018 and:
+c.  Since the p-value is approximately 0.018 and:
 
 $$
 0.018 < 0.05
@@ -1763,21 +1744,20 @@ The sample suggests the proportion is higher in regional areas, but the conclusi
 :::
 ::::
 
-
 :::: callout-note
 ## Question 12
 
 A study compares mean income between two independent samples.
 
-| Group | Sample size | Sample mean | Sample standard deviation |
-|---|---:|---:|---:|
-| Capital city | 80 | \$106,000 | \$52,000 |
-| Regional | 75 | \$91,000 | \$47,000 |
+| Group        | Sample size | Sample mean | Sample standard deviation |
+|--------------|------------:|------------:|--------------------------:|
+| Capital city |          80 |   \$106,000 |                  \$52,000 |
+| Regional     |          75 |    \$91,000 |                  \$47,000 |
 
 Test whether the two population means differ.
 
-a. Write the null and alternative hypotheses.  
-b. Calculate the estimated standard error of the difference:
+a.  Write the null and alternative hypotheses.\
+b.  Calculate the estimated standard error of the difference:
 
 $$
 SE(\bar{x}_{\text{capital}} - \bar{x}_{\text{regional}})
@@ -1789,19 +1769,19 @@ SE(\bar{x}_{\text{capital}} - \bar{x}_{\text{regional}})
 }.
 $$
 
-c. Calculate the test statistic:
+c.  Calculate the test statistic:
 
 $$
 t =
 \frac{\bar{x}_{\text{capital}} - \bar{x}_{\text{regional}}}{SE(\bar{x}_{\text{capital}} - \bar{x}_{\text{regional}})}.
 $$
 
-d. Suppose the two-sided p-value from Welch's two-sample t-test is 0.061. What conclusion would you make at the 5% level?
+d.  Suppose the two-sided p-value from Welch's two-sample t-test is 0.061. What conclusion would you make at the 5% level?
 
 ::: {.callout-important collapse="true"}
 ## Click for Solution
 
-a. The hypotheses are:
+a.  The hypotheses are:
 
 $$
 H_0: \mu_{\text{capital}} - \mu_{\text{regional}} = 0
@@ -1821,7 +1801,7 @@ $$
 H_1: \mu_{\text{capital}} \neq \mu_{\text{regional}}
 $$
 
-b. The estimated standard error is:
+b.  The estimated standard error is:
 
 $$
 SE
@@ -1867,7 +1847,7 @@ SE
 7{,}953.20
 $$
 
-c. The observed difference in sample means is:
+c.  The observed difference in sample means is:
 
 $$
 \bar{x}_{\text{capital}} - \bar{x}_{\text{regional}}
@@ -1886,7 +1866,7 @@ t =
 1.89
 $$
 
-d. The p-value is 0.061. Since:
+d.  The p-value is 0.061. Since:
 
 $$
 0.061 > 0.05
@@ -1899,5 +1879,3 @@ There is not enough evidence, at the 5% level, to conclude that the two populati
 However, the estimated difference is \$15,000, which may still be practically meaningful. The result should be interpreted alongside a confidence interval and the context of the study.
 :::
 ::::
-
-

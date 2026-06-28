@@ -15,15 +15,15 @@ library(scales)
 
 By the end of this chapter, you should be able to:
 
-1. Explain why simulation can be useful when a sampling distribution is difficult to derive mathematically.
-2. Describe how simulation connects to the ideas of sampling variation, confidence intervals, hypothesis testing, and p-values.
-3. Explain the logic of a permutation test.
-4. Use a permutation test to compare two groups.
-5. Interpret a simulated p-value as a tail proportion from a simulated null distribution.
-6. Explain the bootstrap idea of using the sample as a stand-in for the population.
-7. Generate bootstrap samples by sampling with replacement.
-8. Use bootstrap samples to approximate the sampling distribution of an estimator.
-9. Construct and interpret percentile bootstrap confidence intervals.
+1.  Explain why simulation can be useful when a sampling distribution is difficult to derive mathematically.
+2.  Describe how simulation connects to the ideas of sampling variation, confidence intervals, hypothesis testing, and p-values.
+3.  Explain the logic of a permutation test.
+4.  Use a permutation test to compare two groups.
+5.  Interpret a simulated p-value as a tail proportion from a simulated null distribution.
+6.  Explain the bootstrap idea of using the sample as a stand-in for the population.
+7.  Generate bootstrap samples by sampling with replacement.
+8.  Use bootstrap samples to approximate the sampling distribution of an estimator.
+9.  Construct and interpret percentile bootstrap confidence intervals.
 10. Distinguish between permutation methods for testing and bootstrap methods for estimation.
 :::
 
@@ -59,7 +59,6 @@ knitr::include_graphics("images/chapter6/chain-reaction.jpg")
 ```
 
 </centre>
-
 
 So the question was not just:
 
@@ -97,16 +96,16 @@ This approach became known as the Monte Carlo method, named after the casino dis
 
 > If we can imitate the random process often enough, we can learn what it tends to do.
 
-In this chapter, we will use the same basic idea for statistical inference. 
+In this chapter, we will use the same basic idea for statistical inference.
 
 ## From formulae to simulation
 
 In the previous chapter, we saw that many hypothesis tests follow the same structure:
 
-1. State a benchmark claim.
-2. Choose a statistic.
-3. Work out what values of that statistic would be expected under the benchmark claim.
-4. Compare the observed statistic with that reference distribution.
+1.  State a benchmark claim.
+2.  Choose a statistic.
+3.  Work out what values of that statistic would be expected under the benchmark claim.
+4.  Compare the observed statistic with that reference distribution.
 
 The hard part is usually step 3. Sometimes probability theory gives us a convenient answer. For example, when testing a mean, we may use a $t$-distribution. When comparing proportions, we may use an approximate normal distribution or a chi-squared test. These formula-based methods are powerful and efficient.
 
@@ -148,14 +147,14 @@ Simulation-based inference therefore does not replace statistical thinking. It m
 
 Before we get to permutation tests and bootstrapping, it is useful to see the basic idea of simulation in a simpler setting.
 
-::: {.callout-note}
+::: callout-note
 ### A benchmark claim about household income
 
 Suppose we have a sample of 100 Australian households from an ABS-style income survey. A benchmark claim is made:
 
-> The average annual household income in this population is $100,000.
+> The average annual household income in this population is \$100,000.
 
-In our sample, the mean household income is $112,000.
+In our sample, the mean household income is \$112,000.
 
 Is a sample mean of \$112,000 surprisingly high if the true average household income were \$100,000?
 :::
@@ -217,6 +216,7 @@ income_model_sim |>
   ) |>
   fmt_number(columns = `Simulated p-value`, decimals = 3)
 ```
+
 The simulated p-value is the proportion of simulated sample means that were at least as large as \$112,000.
 
 First, here is what the assumed lognormal model looks like at the level of individual households. The individual incomes are clearly right-skewed. Most households are clustered toward the lower and middle part of the distribution, while a smaller number have much higher incomes.
@@ -289,13 +289,13 @@ A permutation test is a simulation-based hypothesis test built around the idea o
 
 This is easier to understand with data. We will return to the household income example from Chapters 4 and 5.
 
-::: {.callout-note}
+::: callout-note
 ### Household income in capital city and regional areas
 
 Suppose we collect annual household income data from two groups:
 
-- households in capital city areas;
-- households in regional areas.
+-   households in capital city areas;
+-   households in regional areas.
 
 We want to know whether household income is associated with region.
 :::
@@ -371,13 +371,11 @@ observed_median_diff <- observed_medians$median_income[observed_medians$region =
   observed_medians$median_income[observed_medians$region == "Regional"]
 ```
 
-
 The key question is not whether the sample means are exactly equal. They almost certainly will not be exactly equal. The key question is:
 
 > Would a difference this large be surprising if region were not associated with income?
 
 This is where the permutation test begins.
-
 
 ### The shuffling idea
 
@@ -387,7 +385,7 @@ Under this benchmark claim, the incomes are still the incomes. We do not change 
 
 If region does not matter, then the label "Capital city" could have been attached to a different set of 80 households, and the label "Regional" could have been attached to the remaining 80 households.
 
-So we shuffle the region labels. Each shuffle gives one possible world where region is unrelated to income. For each shuffled world, we calculate the difference in mean incomes between the two shuffled groups. 
+So we shuffle the region labels. Each shuffle gives one possible world where region is unrelated to income. For each shuffled world, we calculate the difference in mean incomes between the two shuffled groups.
 
 ```{r}
 #| echo: false
@@ -521,7 +519,6 @@ perm_diffs <- tibble(
 )
 ```
 
-
 ```{r}
 #| echo: false
 #| message: false
@@ -578,7 +575,6 @@ perm_diffs |>
 ```
 
 The histogram is the simulated null distribution. It shows what differences in mean income would look like if region were not associated with income. The solid vertical line is the observed difference. If the observed difference is far out in the tail of the histogram, then it is difficult to explain by shuffled labels alone.
-
 
 ### The simulated p-value
 
@@ -662,7 +658,6 @@ one_sided_plot / two_sided_plot +
   )
 ```
 
-
 For a two-sided test, we count simulated differences whose absolute value is at least as large as the absolute value of the observed difference:
 
 $$
@@ -706,17 +701,16 @@ It does not say:
 
 That warning is the same as in Chapter 5. Simulation changes the calculation, not the interpretation.
 
-
 ### What a permutation test preserves
 
 A permutation test is powerful because it keeps some features of the data exactly as they were observed.
 
 In the income example, the permutation test preserves:
 
-- the full set of observed incomes;
-- the number of capital city labels;
-- the number of regional labels;
-- the skewness and outliers in the income distribution.
+-   the full set of observed incomes;
+-   the number of capital city labels;
+-   the number of regional labels;
+-   the skewness and outliers in the income distribution.
 
 But it breaks the connection between income and region.
 
@@ -747,7 +741,7 @@ preserve_table |>
 
 This makes the permutation test a natural method for testing whether two variables are associated. It creates a world where the association has been removed, while leaving the observed values themselves intact.
 
-:::: {.callout-important}
+::: callout-important
 ### The key question for a permutation test
 
 A permutation test asks:
@@ -755,8 +749,7 @@ A permutation test asks:
 > What would our statistic look like if the labels were exchangeable?
 
 In the income example, this means asking what differences in mean income would look like if the labels "Capital city" and "Regional" could be shuffled among the households without changing anything important.
-::::
-
+:::
 
 ### When is a permutation test reasonable?
 
@@ -786,7 +779,7 @@ The bootstrap uses a clever approximation:
 
 > If the sample is a reasonable miniature version of the population, then resampling from the sample can mimic repeated sampling from the population.
 
-The word bootstrap comes from the expression "to pull oneself up by one's bootstraps". 
+The word bootstrap comes from the expression "to pull oneself up by one's bootstraps".
 
 <center>
 
@@ -828,14 +821,13 @@ bootstrap_examples |>
 
 Each bootstrap sample is the same size as the original sample, but it is not the same set of values. Some values repeat. Others disappear. This repetition and disappearance is what creates variation across bootstrap samples.
 
-:::: {.callout-important}
+::: callout-important
 ### Note: Bootstrap samples are not permutations
 
 A permutation rearranges the existing observations without changing how many times each one appears.
 
 A bootstrap sample resamples with replacement, so some observations can appear more than once and others can be absent.
-::::
-
+:::
 
 ### Bootstrapping the mean income in one sample
 
@@ -853,13 +845,12 @@ observed_median_income <- median(income_regions$income)
 observed_mean_income
 ```
 
-
 To bootstrap this estimate:
 
-1. Resample 160 households from the observed 160 households, with replacement.
-2. Calculate the mean income in the bootstrap sample.
-3. Repeat many times.
-4. Examine the distribution of bootstrap means.
+1.  Resample 160 households from the observed 160 households, with replacement.
+2.  Calculate the mean income in the bootstrap sample.
+3.  Repeat many times.
+4.  Examine the distribution of bootstrap means.
 
 Suppose the table below represents 5000 bootstap samples for our data.
 
@@ -954,9 +945,8 @@ The histogram shows the bootstrap distribution of the mean. It is not a distribu
 
 This distinction is central:
 
-- The original income distribution shows variation between households.
-- The bootstrap distribution shows variation between possible estimates.
-
+-   The original income distribution shows variation between households.
+-   The bootstrap distribution shows variation between possible estimates.
 
 ### The percentile bootstrap confidence interval
 
@@ -964,10 +954,10 @@ The percentile bootstrap interval is simple to construct.
 
 For an approximate 95% confidence interval:
 
-1. Generate many bootstrap samples.
-2. Calculate the statistic of interest for each bootstrap sample.
-3. Sort the bootstrap statistics.
-4. Use the 2.5th and 97.5th percentiles as the interval endpoints.
+1.  Generate many bootstrap samples.
+2.  Calculate the statistic of interest for each bootstrap sample.
+3.  Sort the bootstrap statistics.
+4.  Use the 2.5th and 97.5th percentiles as the interval endpoints.
 
 The idea is that the middle 95% of the bootstrap estimates gives a plausible range for the population parameter.
 
@@ -987,7 +977,6 @@ $$
 $$
 
 where these represent the 2.5th and 97.5th percentiles of the bootstrap estimates. This method is popular because it is easy to explain and easy to implement. It also works for many statistics where a standard formula is awkward.
-
 
 ### Bootstrapping the median
 
@@ -1055,7 +1044,6 @@ This is a useful reminder:
 > The bootstrap is flexible, but it is still built from the data we have.
 
 If the sample is small, or if the statistic depends heavily on a few observations, the bootstrap distribution may be rough.
-
 
 ### Bootstrap confidence interval for a difference in means
 
@@ -1194,7 +1182,6 @@ centre_table |>
   tab_options(table.width = pct(100))
 ```
 
-
 ### Paired data and the bootstrap
 
 The bootstrap can also be used for paired data. Suppose we observe the same households under two measurements, such as income before and after housing costs. Since both values come from the same household, the two values are paired. In a paired problem, we should not re-sample the before values separately from the after values. That would break the pairing.
@@ -1277,16 +1264,15 @@ boot_paired_diff |>
 
 The important point is not the particular numbers. The important point is the structure. With paired data, resample the pairs or resample the differences. Do not break the pairing.
 
-
 ### When the bootstrap works well, and when it can struggle
 
 The bootstrap is a remarkably useful method, but it is not a guarantee of truth. The bootstrap treats the sample as a stand-in for the population. This is reasonable when the sample is large enough and representative enough to capture the important features of the population. But the bootstrap can struggle when:
 
-- the sample size is very small
-- the sample misses important parts of the population
-- the statistic depends on extreme values
-- the population has rare but important tail behaviour
-- the data are biased or poorly measured
+-   the sample size is very small
+-   the sample misses important parts of the population
+-   the statistic depends on extreme values
+-   the population has rare but important tail behaviour
+-   the data are biased or poorly measured
 
 For example, suppose the true population contains a small number of extremely high-income households, but none of them appear in our sample. The bootstrap cannot invent the missing high-income households. It can only resample from what was observed.
 
@@ -1296,13 +1282,12 @@ it is important to remember that:
 
 It can describe the uncertainty implied by the data we have. It cannot repair data that were collected from the wrong population, measured badly, or missing important values. A useful habit is to always plot the bootstrap distribution. If it is extremely rough, heavily skewed, or dominated by a few repeated observations, then the bootstrap interval should be interpreted cautiously.
 
-
 ## Optional extension: Can the bootstrap be used for hypothesis testing?
 
 So far, we have used permutation tests for hypothesis testing and bootstrap methods for confidence intervals. This is the cleanest distinction:
 
-- permutation tests simulate what would happen if the group labels did not matter;
-- bootstrap methods simulate how much an estimate might vary from sample to sample.
+-   permutation tests simulate what would happen if the group labels did not matter;
+-   bootstrap methods simulate how much an estimate might vary from sample to sample.
 
 However, the bootstrap can also be adapted for hypothesis testing. The main complication is that, for a test, we need to simulate from a world where the benchmark claim is true. Suppose we are comparing mean household income in capital city and regional areas. The observed difference is:
 
@@ -1316,13 +1301,13 @@ For a hypothesis test, we need to simulate a world where the population mean dif
 
 One simple method is to **recentre** the data.
 
-1. Compute the mean income in each group.
-2. Compute the overall mean income.
-3. Shift the capital city incomes so their mean becomes the overall mean.
-4. Shift the regional incomes so their mean also becomes the overall mean.
-5. Bootstrap from these shifted samples.
-6. Calculate the difference in means for each bootstrap sample.
-7. Compare the observed difference with this bootstrap null distribution.
+1.  Compute the mean income in each group.
+2.  Compute the overall mean income.
+3.  Shift the capital city incomes so their mean becomes the overall mean.
+4.  Shift the regional incomes so their mean also becomes the overall mean.
+5.  Bootstrap from these shifted samples.
+6.  Calculate the difference in means for each bootstrap sample.
+7.  Compare the observed difference with this bootstrap null distribution.
 
 ```{r}
 #| echo: true
@@ -1402,11 +1387,10 @@ The reason we do not use this as the main testing method is that it is less tran
 
 For this reason, in this unit we use:
 
-- permutation tests for simulation-based hypothesis testing;
-- bootstrap methods for simulation-based confidence intervals.
+-   permutation tests for simulation-based hypothesis testing;
+-   bootstrap methods for simulation-based confidence intervals.
 
 The bootstrap test is useful to know about, but it is not the main method we rely on here.
-
 
 ## Summary
 
@@ -1451,7 +1435,6 @@ summary_table |>
 ```
 
 The computer can repeat an analysis thousands of times. But the computer does not know what question we are asking. That remains our job.
-
 
 ## Exercises
 
@@ -1518,22 +1501,25 @@ $$
 24.17 - 18.75 = 5.42
 $$
 
-The mobile app orders are higher by about $5.42 in this sample.
+The mobile app orders are higher by about \$5.42 in this sample.
 
 (b) To conduct a permutation test:
 
-1. Keep all 24 order amounts fixed.
-2. Shuffle the labels "Mobile app" and "Counter" among the 24 orders.
-3. Calculate the difference in mean order amount for the shuffled data.
-4. Repeat many times.
-5. Compare the observed difference of 5.42 with the shuffled differences.
+<!-- -->
+
+1.  Keep all 24 order amounts fixed.
+2.  Shuffle the labels "Mobile app" and "Counter" among the 24 orders.
+3.  Calculate the difference in mean order amount for the shuffled data.
+4.  Repeat many times.
+5.  Compare the observed difference of 5.42 with the shuffled differences.
+
+<!-- -->
 
 (c) Shuffling the labels means pretending that the ordering method does not matter. The order amounts stay the same, but the labels "Mobile app" and "Counter" are randomly reassigned to the orders.
 
 (d) A p-value of 0.018 means that, if ordering method were not associated with order amount, a difference in sample means at least as extreme as the one observed would occur in about 1.8% of shuffled datasets. This gives evidence that order amount differs between the two ordering methods.
 :::
 ::::
-
 
 :::: callout-note
 ## Question 2
@@ -1570,7 +1556,6 @@ $$
 (d) The interval suggests that plausible values for the population mean reading time are roughly between 22.4 and 28.3 minutes, based on this sample and the bootstrap method.
 :::
 ::::
-
 
 :::: callout-note
 ## Question 3
@@ -1634,7 +1619,6 @@ The personalised reminder group had a return rate 16.25 percentage points higher
 :::
 ::::
 
-
 :::: callout-note
 ## Question 4
 
@@ -1671,7 +1655,6 @@ $$
 :::
 ::::
 
-
 :::: callout-note
 ## Question 5
 
@@ -1679,9 +1662,9 @@ A supermarket compares the time taken by two checkout systems. The manager is in
 
 A sample gives:
 
-- median time for the standard checkout: 7.8 minutes;
-- median time for the express checkout: 5.9 minutes;
-- observed difference: 1.9 minutes.
+-   median time for the standard checkout: 7.8 minutes;
+-   median time for the express checkout: 5.9 minutes;
+-   observed difference: 1.9 minutes.
 
 A bootstrap distribution for the difference in medians has a 95% percentile interval of $(0.6, 3.2)$ minutes.
 
@@ -1706,7 +1689,6 @@ A bootstrap distribution for the difference in medians has a 95% percentile inte
 :::
 ::::
 
-
 :::: callout-note
 ## Question 6
 
@@ -1714,8 +1696,10 @@ A researcher wants to test whether a new website design changes the time users s
 
 The researcher creates two simulated distributions:
 
-1. Distribution A is created by shuffling the labels "old design" and "new design".
-2. Distribution B is created by bootstrapping separately within the old-design sample and the new-design sample.
+1.  Distribution A is created by shuffling the labels "old design" and "new design".
+2.  Distribution B is created by bootstrapping separately within the old-design sample and the new-design sample.
+
+<!-- -->
 
 (a) Which distribution is most appropriate for a hypothesis test of no difference?
 

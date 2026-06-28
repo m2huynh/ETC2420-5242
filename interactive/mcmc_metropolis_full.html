@@ -1,0 +1,223 @@
+<!doctype html>
+<html lang="en">
+<head>
+<meta charset="utf-8" />
+<meta name="viewport" content="width=device-width, initial-scale=1" />
+<title>Metropolis-Hastings MCMC</title>
+<style>
+  :root{
+    --bg:#f7f9fc; --card:#ffffff; --border:#d9e1ea; --ink:#1f2937; --muted:#6b7280;
+    --blue:#2563eb; --green:#15803d; --red:#dc2626; --grey:#7a7a7a; --light:#edf2f7;
+  }
+  *{box-sizing:border-box}
+  body{margin:0;background:var(--bg);font-family:system-ui,-apple-system,Segoe UI,Roboto,Helvetica,Arial,sans-serif;color:var(--ink);}
+  .app{max-width:1180px;margin:0 auto;padding:12px;}
+  .head{display:flex;align-items:center;gap:12px;justify-content:space-between;margin-bottom:8px;}
+  .title h2{font-size:22px;line-height:1.1;margin:0 0 3px 0;font-weight:800;}
+  .title p{font-size:13px;margin:0;color:var(--muted)}
+  .controls{display:flex;align-items:center;gap:8px;flex-wrap:wrap;justify-content:flex-end;}
+  button{border:1px solid #b9c7d6;background:white;border-radius:10px;padding:8px 12px;font-weight:700;color:#12326b;cursor:pointer;box-shadow:0 1px 1px rgba(0,0,0,.05);}
+  button.primary{background:#164ea6;color:white;border-color:#164ea6;}
+  button.secondary{background:#66717d;color:white;border-color:#66717d;}
+  label{font-size:13px;color:var(--muted);display:flex;gap:8px;align-items:center;}
+  input[type="range"]{width:115px;accent-color:var(--blue)}
+  .grid{display:grid;grid-template-columns:290px 1fr;gap:10px;}
+  .card{background:var(--card);border:1px solid var(--border);border-radius:14px;box-shadow:0 1px 3px rgba(0,0,0,.04);padding:10px;position:relative;overflow:hidden;}
+  .card h3{margin:0 0 4px 0;font-size:15px;font-weight:800;}
+  svg{display:block;width:100%;height:auto;}
+  .calc{margin-top:10px;background:white;border:1px solid var(--border);border-radius:14px;padding:12px;display:grid;grid-template-columns:1.1fr 1fr 1fr;gap:10px;align-items:stretch;}
+  .calcbox{border:1px solid #dfe7f0;background:#fbfdff;border-radius:10px;padding:10px;min-height:98px;}
+  .calcbox h4{font-size:13px;margin:0 0 8px 0;text-transform:uppercase;letter-spacing:.03em;color:#475569;}
+  .formula{font-family:Georgia, 'Times New Roman', serif;font-size:21px;line-height:1.35;text-align:center;}
+  .small{font-size:13px;color:#475569;line-height:1.45;}
+  .num{font-weight:800;}
+  .blue{color:var(--blue)} .green{color:var(--green)} .red{color:var(--red)}
+  .decision{font-size:24px;font-weight:900;text-align:center;margin-top:6px;}
+  .axis text{font-size:11px;fill:#374151}.axis line,.axis path{stroke:#555;stroke-width:1}
+  .target{fill:#efefef;stroke:#c7c7c7;stroke-width:1.5}.hist{fill:#8d8d8d;opacity:.88}.trace{fill:none;stroke:#787878;stroke-width:2}.propCurve{fill:none;stroke:#111;stroke-width:2}.currentLine{stroke:var(--blue);stroke-width:3}.proposalLine{stroke:var(--green);stroke-width:2;stroke-dasharray:4 4}.rejectLine{stroke:var(--red);stroke-width:2;stroke-dasharray:4 4}.dotCurrent{fill:var(--blue);stroke:white;stroke-width:2}.dotProposal{fill:var(--green);stroke:white;stroke-width:2}.dotReject{fill:var(--red);stroke:white;stroke-width:2}.gridline{stroke:#eef2f7;stroke-width:1}.labelText{font-size:13px;fill:#374151}.panelTitle{font-size:14px;font-weight:700;fill:#111827}
+  @media(max-width:700px){.grid{grid-template-columns:1fr}.head{align-items:flex-start;flex-direction:column}.controls{justify-content:flex-start}.calc{grid-template-columns:1fr}.app{padding:8px}}
+</style>
+</head>
+<body>
+<div class="app">
+  <div class="head">
+    <div class="title">
+      <h2>Metropolis-Hastings step</h2>
+      <p>Proposal, posterior comparison, accept/reject, and stored chain.</p>
+    </div>
+    <div class="controls">
+      <button class="primary" id="stepBtn">Take one step</button>
+      <button id="runBtn">Run 50 steps</button>
+      <button class="secondary" id="resetBtn">Reset</button>
+      <label>proposal σ <input id="sigma" type="range" min="0.01" max="0.25" step="0.01" value="0.08"><span id="sigmaVal">0.08</span></label>
+    </div>
+  </div>
+  <div class="grid">
+    <div class="card"><h3>Density of stored samples</h3><svg id="densitySvg" viewBox="0 0 270 295" aria-label="Density of stored samples"></svg></div>
+    <div class="card"><h3>MCMC iteration</h3><svg id="traceSvg" viewBox="0 0 850 295" aria-label="MCMC iteration"></svg></div>
+  </div>
+  <div class="calc">
+    <div class="calcbox">
+      <h4>1. Compare posterior values</h4>
+      <div class="formula">r = posterior(<span class="green">θ*</span>) / posterior(<span class="blue">θ<sub>t-1</sub></span>)</div>
+      <div class="small" id="ratioText"></div>
+    </div>
+    <div class="calcbox">
+      <h4>2. Acceptance probability</h4>
+      <div class="formula">α = min(1, r)</div>
+      <div class="small" id="acceptText"></div>
+    </div>
+    <div class="calcbox">
+      <h4>3. Random decision</h4>
+      <div class="formula">accept if u &lt; α</div>
+      <div class="small" id="decisionText"></div>
+      <div class="decision" id="decisionBig"></div>
+    </div>
+  </div>
+</div>
+<script>
+(function(){
+  const alphaPost = 28, betaPost = 16; // Beta posterior from Beta(2,2) prior and x=26, n=40
+  const maxIterShown = 140;
+  let chain = [0.5];
+  let accepted = 0;
+  let last = null;
+  let running = false;
+  const sigmaEl = document.getElementById('sigma');
+  const sigmaVal = document.getElementById('sigmaVal');
+  const densitySvg = document.getElementById('densitySvg');
+  const traceSvg = document.getElementById('traceSvg');
+  const ratioText = document.getElementById('ratioText');
+  const acceptText = document.getElementById('acceptText');
+  const decisionText = document.getElementById('decisionText');
+  const decisionBig = document.getElementById('decisionBig');
+
+  function randn(){let u=0,v=0;while(u===0)u=Math.random();while(v===0)v=Math.random();return Math.sqrt(-2*Math.log(u))*Math.cos(2*Math.PI*v);}
+  function clamp(x,a,b){return Math.max(a,Math.min(b,x));}
+  function posterior(t){ if(t<=0 || t>=1) return 0; return Math.pow(t, alphaPost-1)*Math.pow(1-t, betaPost-1); }
+  function betaPdfScaled(t){ return posterior(t); }
+  const densGrid = Array.from({length:501},(_,i)=>i/500).map(t=>({t,d:betaPdfScaled(t)}));
+  const maxD = Math.max(...densGrid.map(d=>d.d));
+  function xTrace(i){return 45 + i*(680/Math.max(1,maxIterShown-1));}
+  function yTheta(t){return 262 - t*220;}
+  function yDensity(t){return 262 - t*220;}
+  function clear(svg){while(svg.firstChild) svg.removeChild(svg.firstChild);}
+  function el(name,attrs){const e=document.createElementNS('http://www.w3.org/2000/svg',name);Object.entries(attrs||{}).forEach(([k,v])=>e.setAttribute(k,v));return e;}
+  function text(svg,x,y,str,cls,anchor='start'){const e=el('text',{x,y,class:cls||'', 'text-anchor':anchor});e.textContent=str;svg.appendChild(e);return e;}
+  function pathFrom(points){return points.map((p,i)=>(i?'L':'M')+p[0].toFixed(2)+','+p[1].toFixed(2)).join(' ');}
+
+  function drawDensity(){
+    clear(densitySvg);
+    text(densitySvg,8,18,'Density of stored samples','panelTitle');
+    const xAxis=225, wMax=200;
+    densitySvg.appendChild(el('line',{x1:xAxis,y1:40,x2:xAxis,y2:262,stroke:'#555','stroke-width':1.4}));
+    densitySvg.appendChild(el('line',{x1:20,y1:262,x2:xAxis,y2:262,stroke:'#555','stroke-width':1.4}));
+    [0,.2,.4,.6,.8,1].forEach(v=>{
+      const y=yDensity(v);
+      densitySvg.appendChild(el('line',{x1:xAxis,y1:y,x2:xAxis+8,y2:y,stroke:'#555','stroke-width':1.2}));
+      text(densitySvg,xAxis+12,y+4,(v===0?'0':v===1?'1':'.'+Math.round(v*10)),'axis');
+    });
+    const targetPts = densGrid.map(o=>[xAxis - (o.d/maxD)*wMax, yDensity(o.t)]);
+    targetPts.push([xAxis,yDensity(1)],[xAxis,yDensity(0)]);
+    densitySvg.appendChild(el('path',{d:pathFrom(targetPts)+'Z',class:'target'}));
+    // histogram of stored samples
+    const bins=24, counts=Array(bins).fill(0);
+    chain.forEach(t=>{let b=Math.min(bins-1,Math.max(0,Math.floor(t*bins)));counts[b]++;});
+    const maxC=Math.max(1,...counts);
+    for(let b=0;b<bins;b++){
+      const y0=yDensity(b/bins), y1=yDensity((b+1)/bins), h=Math.max(1,y0-y1-2), ww=(counts[b]/maxC)*145;
+      densitySvg.appendChild(el('rect',{x:xAxis-ww,y:y1+1,width:ww,height:h,class:'hist'}));
+    }
+    const current=chain[chain.length-1];
+    densitySvg.appendChild(el('line',{x1:20,x2:xAxis,y1:yDensity(current),y2:yDensity(current),class:'currentLine'}));
+    densitySvg.appendChild(el('circle',{cx:xAxis,cy:yDensity(current),r:7,class:'dotCurrent'}));
+    if(last){
+      const cls=last.accept?'proposalLine':'rejectLine'; const dot=last.accept?'dotProposal':'dotReject';
+      densitySvg.appendChild(el('line',{x1:20,x2:xAxis,y1:yDensity(last.proposal),y2:yDensity(last.proposal),class:cls}));
+      densitySvg.appendChild(el('circle',{cx:xAxis,cy:yDensity(last.proposal),r:6,class:dot}));
+    }
+    text(densitySvg,110,284,'relative frequency','axis','middle');
+  }
+  function drawTrace(){
+    clear(traceSvg);
+    text(traceSvg,410,18,'MCMC iteration','panelTitle','middle');
+    // axes
+    traceSvg.appendChild(el('line',{x1:45,y1:40,x2:45,y2:262,stroke:'#555','stroke-width':1.4}));
+    traceSvg.appendChild(el('line',{x1:45,y1:262,x2:725,y2:262,stroke:'#555','stroke-width':1.4}));
+    [0,.2,.4,.6,.8,1].forEach(v=>{
+      const y=yTheta(v);
+      traceSvg.appendChild(el('line',{x1:40,y1:y,x2:45,y2:y,stroke:'#555','stroke-width':1.1}));
+      text(traceSvg,28,y+4,(v===0?'0':v===1?'1':'.'+Math.round(v*10)),'axis','end');
+      if(v>0 && v<1) traceSvg.appendChild(el('line',{x1:45,x2:725,y1:y,y2:y,class:'gridline'}));
+    });
+    text(traceSvg,16,151,'θ','labelText','middle').setAttribute('transform','rotate(-90 16 151)');
+    const shown=chain.slice(-maxIterShown);
+    if(shown.length>1){
+      const pts=shown.map((t,i)=>[xTrace(i), yTheta(t)]);
+      traceSvg.appendChild(el('path',{d:pathFrom(pts),class:'trace'}));
+    } else {
+      traceSvg.appendChild(el('circle',{cx:xTrace(0),cy:yTheta(shown[0]),r:4,class:'dotCurrent'}));
+    }
+    const current=chain[chain.length-1];
+    const xProp=760;
+    traceSvg.appendChild(el('line',{x1:xProp,y1:40,x2:xProp,y2:262,stroke:'#111','stroke-width':1.4}));
+    const s=parseFloat(sigmaEl.value);
+    let curve=[];
+    for(let yy=0;yy<=1.001;yy+=.01){
+      const d=Math.exp(-0.5*Math.pow((yy-current)/s,2));
+      curve.push([xProp + d*70, yTheta(yy)]);
+    }
+    traceSvg.appendChild(el('path',{d:pathFrom(curve),class:'propCurve'}));
+    traceSvg.appendChild(el('line',{x1:xProp,x2:xProp+70,y1:yTheta(current),y2:yTheta(current),class:'currentLine'}));
+    traceSvg.appendChild(el('circle',{cx:xProp+70,cy:yTheta(current),r:7,class:'dotCurrent'}));
+    text(traceSvg,xProp+82,yTheta(current)+5,'N(θₜ₋₁, σ)','labelText');
+    if(last){
+      const cls=last.accept?'proposalLine':'rejectLine'; const dot=last.accept?'dotProposal':'dotReject';
+      traceSvg.appendChild(el('line',{x1:xProp,x2:xProp+70,y1:yTheta(last.proposal),y2:yTheta(last.proposal),class:cls}));
+      traceSvg.appendChild(el('circle',{cx:xProp+70,cy:yTheta(last.proposal),r:6,class:dot}));
+    }
+  }
+  function updateCalc(){
+    const current=chain[chain.length-1];
+    if(!last){
+      ratioText.innerHTML='Take one step to propose θ* and calculate the ratio.';
+      acceptText.innerHTML='The algorithm will use α = min(1, r).';
+      decisionText.innerHTML='Then draw u from Uniform(0, 1).';
+      decisionBig.innerHTML='';
+      return;
+    }
+    ratioText.innerHTML = `Current θ<sub>t-1</sub> = <span class="num blue">${last.current.toFixed(3)}</span><br>Proposed θ* = <span class="num green">${last.proposal.toFixed(3)}</span><br>r = <span class="num">${last.r.toFixed(3)}</span>`;
+    acceptText.innerHTML = `α = min(1, ${last.r.toFixed(3)})<br>α = <span class="num">${last.a.toFixed(3)}</span>`;
+    decisionText.innerHTML = `u = <span class="num">${last.u.toFixed(3)}</span><br>${last.u.toFixed(3)} ${last.accept?'&lt;':'≥'} ${last.a.toFixed(3)}`;
+    decisionBig.innerHTML = last.accept ? '<span class="green">Accepted</span>' : '<span class="red">Rejected</span>';
+  }
+  function draw(){sigmaVal.textContent=parseFloat(sigmaEl.value).toFixed(2);drawDensity();drawTrace();updateCalc();}
+  function step(){
+    const current=chain[chain.length-1];
+    const s=parseFloat(sigmaEl.value);
+    let proposal=current + randn()*s;
+    // reflect at boundaries to keep theta in 0..1 for the visual proposal
+    if(proposal<0) proposal = -proposal;
+    if(proposal>1) proposal = 2-proposal;
+    proposal=clamp(proposal,0.001,0.999);
+    const r=posterior(proposal)/posterior(current);
+    const a=Math.min(1,r);
+    const u=Math.random();
+    const accept=u<a;
+    if(accept){chain.push(proposal);accepted++;} else {chain.push(current);}
+    last={current,proposal,r,a,u,accept};
+    draw();
+  }
+  function reset(){chain=[0.5];accepted=0;last=null;draw();}
+  document.getElementById('stepBtn').addEventListener('click',step);
+  document.getElementById('resetBtn').addEventListener('click',reset);
+  sigmaEl.addEventListener('input',draw);
+  document.getElementById('runBtn').addEventListener('click',()=>{
+    if(running) return; running=true; let k=0;
+    const timer=setInterval(()=>{step();k++; if(k>=50){clearInterval(timer);running=false;}},45);
+  });
+  draw();
+})();
+</script>
+</body>
+</html>

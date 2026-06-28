@@ -1,0 +1,138 @@
+Suppose the university is considering whether to run a late-night bus during exam period.
+
+Let:
+
+$$
+\begin{aligned}
+\theta
+&= \text{the proportion of students who would use the bus}.
+\end{aligned}
+$$
+
+### Prior
+
+Before surveying students, we may not have a strong view about demand. It could be low, moderate, or high. For example, in the plot below:
+
+- The $\text{Beta}(1,1)$ prior is flat. This means that before surveying students, we are treating low, moderate, and high levels of demand as equally plausible. 
+- The centred prior, $\text{Beta}(5,5)$, places more weight near $\theta = 0.5$, which would represent a prior belief that demand is likely to be moderate. 
+- The skewed prior, $\text{Beta}(5,2)$, places more weight on higher values of $\theta$, which would represent a prior belief that demand is more likely to be high than low.
+
+
+```{r, warning=FALSE, echo=FALSE, message=FALSE}
+library(tidyverse)
+
+prior_df <- crossing(
+  theta = seq(0.001, 0.999, length.out = 1000),
+  prior = c("Flat: Beta(1, 1)", "Centred: Beta(5, 5)", "Skewed high: Beta(5, 2)")
+) |>
+  mutate(
+    alpha = case_when(
+      prior == "Flat: Beta(1, 1)" ~ 1,
+      prior == "Centred: Beta(5, 5)" ~ 5,
+      prior == "Skewed high: Beta(5, 2)" ~ 5
+    ),
+    beta = case_when(
+      prior == "Flat: Beta(1, 1)" ~ 1,
+      prior == "Centred: Beta(5, 5)" ~ 5,
+      prior == "Skewed high: Beta(5, 2)" ~ 2
+    ),
+    density = dbeta(theta, shape1 = alpha, shape2 = beta),
+    line_type = if_else(prior == "Flat: Beta(1, 1)", "Flat prior", "Other examples")
+  )
+
+ggplot(prior_df, aes(x = theta, y = density, group = prior)) +
+  geom_line(
+    data = prior_df |> filter(prior != "Flat: Beta(1, 1)"),
+    aes(color = prior),
+    linewidth = 1,
+    alpha = 0.35
+  ) +
+  geom_line(
+    data = prior_df |> filter(prior == "Flat: Beta(1, 1)"),
+    aes(color = prior),
+    linewidth = 1,
+    alpha = 1
+  ) +
+  labs(
+    x = expression(theta),
+    y = "Prior density",
+    color = NULL
+  ) +
+  scale_x_continuous(
+    labels = scales::percent_format(),
+    limits = c(0, 1)
+  ) +
+  scale_color_manual(
+    values = c(
+      "Flat: Beta(1, 1)" = "black",
+      "Centred: Beta(5, 5)" = "blue",
+      "Skewed high: Beta(5, 2)" = "darkgreen"
+    )
+  ) +
+  theme_minimal()
+```
+
+
+To keep the example simple, we use a flat prior:
+
+$$
+\begin{aligned}
+\theta
+&\sim \text{Beta}(1,1)
+\end{aligned}
+$$
+
+This prior treats all possible values of $\theta$ between 0 and 1 as equally plausible before seeing the survey data. 
+
+### Sample
+
+Now suppose we survey 10 students and 6 say they would use the bus:
+
+$$
+\begin{aligned}
+x &= 6 \\
+n &= 10
+\end{aligned}
+$$
+
+This would produce a plot that looks like the following where the data peaks around $\theta=0.60$ because that is the observed sample proportion:
+
+```{r}
+likelihood_df <- tibble(
+  theta = seq(0.001, 0.999, length.out = 1000),
+  likelihood = dbinom(x = 6, size = 10, prob = theta),
+  curve = "Likelihood: x = 6, n = 10"
+)
+
+ggplot(likelihood_df, aes(x = theta, y = likelihood, color = curve)) +
+  geom_line(linewidth = 1) +
+  labs(
+    x = expression(theta),
+    y = "Likelihood",
+    color = NULL
+  ) +
+  scale_x_continuous(
+    labels = scales::percent_format(),
+    limits = c(0, 1)
+  ) +
+  scale_color_manual(
+    values = c("Likelihood: x = 6, n = 10" = "red")
+  ) +
+  theme_minimal() +
+  theme(legend.position = "none")
+```
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
