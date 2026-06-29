@@ -2,13 +2,16 @@
 <html xmlns="http://www.w3.org/1999/xhtml" lang="en" xml:lang="en"><head>
 
 <meta charset="utf-8">
-<meta name="generator" content="quarto-1.7.32">
+<meta name="generator" content="quarto-1.9.37">
 
 <meta name="viewport" content="width=device-width, initial-scale=1.0, user-scalable=yes">
 
 
 <title>6&nbsp; Simulation-Based Inference – Statistical Thinking</title>
 <style>
+/* Default styles provided by pandoc.
+** See https://pandoc.org/MANUAL.html#variables-for-html for config info.
+*/
 code{white-space: pre-wrap;}
 span.smallcaps{font-variant: small-caps;}
 div.columns{display: flex; gap: min(4vw, 1.5em);}
@@ -72,14 +75,14 @@ pre > code.sourceCode > span > a:first-child::before { text-decoration: underlin
 <script src="site_libs/quarto-html/tippy.umd.min.js"></script>
 <script src="site_libs/quarto-html/anchor.min.js"></script>
 <link href="site_libs/quarto-html/tippy.css" rel="stylesheet">
-<link href="site_libs/quarto-html/quarto-syntax-highlighting-37eea08aefeeee20ff55810ff984fec1.css" rel="stylesheet" class="quarto-color-scheme" id="quarto-text-highlighting-styles">
-<link href="site_libs/quarto-html/quarto-syntax-highlighting-dark-2fef5ea3f8957b3e4ecc936fc74692ca.css" rel="stylesheet" class="quarto-color-scheme quarto-color-alternate" id="quarto-text-highlighting-styles">
-<link href="site_libs/quarto-html/quarto-syntax-highlighting-37eea08aefeeee20ff55810ff984fec1.css" rel="stylesheet" class="quarto-color-scheme-extra" id="quarto-text-highlighting-styles">
+<link href="site_libs/quarto-html/quarto-syntax-highlighting-7f8f88aac4f3542376d5c11b86a4c14d.css" rel="stylesheet" class="quarto-color-scheme" id="quarto-text-highlighting-styles">
+<link href="site_libs/quarto-html/quarto-syntax-highlighting-dark-d0ae9245876894da5ac7e18953ecc5cc.css" rel="stylesheet" class="quarto-color-scheme quarto-color-alternate" id="quarto-text-highlighting-styles">
+<link href="site_libs/quarto-html/quarto-syntax-highlighting-7f8f88aac4f3542376d5c11b86a4c14d.css" rel="stylesheet" class="quarto-color-scheme-extra" id="quarto-text-highlighting-styles">
 <script src="site_libs/bootstrap/bootstrap.min.js"></script>
 <link href="site_libs/bootstrap/bootstrap-icons.css" rel="stylesheet">
-<link href="site_libs/bootstrap/bootstrap-c27fdc8e5b00b532d2d5a75ada188648.min.css" rel="stylesheet" append-hash="true" class="quarto-color-scheme" id="quarto-bootstrap" data-mode="light">
-<link href="site_libs/bootstrap/bootstrap-dark-b9e11ad5a37ead2aabff839d95ae3857.min.css" rel="stylesheet" append-hash="true" class="quarto-color-scheme quarto-color-alternate" id="quarto-bootstrap" data-mode="dark">
-<link href="site_libs/bootstrap/bootstrap-c27fdc8e5b00b532d2d5a75ada188648.min.css" rel="stylesheet" append-hash="true" class="quarto-color-scheme-extra" id="quarto-bootstrap" data-mode="light">
+<link href="site_libs/bootstrap/bootstrap-b9eaee60a963b5d74e9d33cc267de6a6.min.css" rel="stylesheet" append-hash="true" class="quarto-color-scheme" id="quarto-bootstrap" data-mode="light">
+<link href="site_libs/bootstrap/bootstrap-dark-aa873432a3c62897e6c2091c0d30a948.min.css" rel="stylesheet" append-hash="true" class="quarto-color-scheme quarto-color-alternate" id="quarto-bootstrap" data-mode="dark">
+<link href="site_libs/bootstrap/bootstrap-b9eaee60a963b5d74e9d33cc267de6a6.min.css" rel="stylesheet" append-hash="true" class="quarto-color-scheme-extra" id="quarto-bootstrap" data-mode="light">
 <script id="quarto-search-options" type="application/json">{
   "location": "sidebar",
   "copy-button": false,
@@ -109,7 +112,7 @@ pre > code.sourceCode > span > a:first-child::before { text-decoration: underlin
 }</script>
 
   <script src="https://cdnjs.cloudflare.com/polyfill/v3/polyfill.min.js?features=es6"></script>
-  <script src="https://cdn.jsdelivr.net/npm/mathjax@3/es5/tex-chtml-full.js" type="text/javascript"></script>
+  <script defer="" src="https://cdn.jsdelivr.net/npm/mathjax@3/es5/tex-chtml-full.js" type="text/javascript"></script>
 
 <script type="text/javascript">
 const typesetMath = (el) => {
@@ -122,7 +125,7 @@ const typesetMath = (el) => {
     var macros = [];
     for (var i = 0; i < mathElements.length; i++) {
       var texText = mathElements[i].firstChild;
-      if (mathElements[i].tagName == "SPAN") {
+      if (mathElements[i].tagName == "SPAN" && texText && texText.data) {
         window.katex.render(texText.data, mathElements[i], {
           displayMode: mathElements[i].classList.contains('display'),
           throwOnError: false,
@@ -472,7 +475,7 @@ window.Quarto = {
 <i class="callout-icon"></i>
 </div>
 <div class="callout-title-container flex-fill">
-Learning Objectives
+<span class="screen-reader-only">Note</span>Learning Objectives
 </div>
 </div>
 <div class="callout-body-container callout-body">
@@ -496,7 +499,7 @@ Learning Objectives
 <div class="cell-output-display">
 <div>
 <figure class="figure">
-<p><img src="images/chapter6/outline.png" class="img-fluid figure-img" width="2200"></p>
+<p><img src="images/chapter6/outline.png" class="img-fluid figure-img"></p>
 </figure>
 </div>
 </div>
@@ -514,7 +517,7 @@ Learning Objectives
 <div class="cell-output-display">
 <div class="quarto-figure quarto-figure-center">
 <figure class="figure">
-<p><img src="images/chapter6/chain-reaction.jpg" class="img-fluid figure-img" width="440"></p>
+<p><img src="images/chapter6/chain-reaction.jpg" class="img-fluid figure-img"></p>
 <figcaption>Fission Chain Reaction. Image Source: Energy Encyclopedia</figcaption>
 </figure>
 </div>
@@ -566,23 +569,23 @@ Learning Objectives
 <p>Then we ask where the observed statistic sits in that simulated distribution. This is the same logic as the p-value in Chapter 5. The difference is how we get the reference distribution.</p>
 <div class="cell">
 <div class="cell-output-display">
-<div id="kvcvckjbyp" style="padding-left:0px;padding-right:0px;padding-top:10px;padding-bottom:10px;overflow-x:auto;overflow-y:auto;width:auto;height:auto;">
-<style>#kvcvckjbyp table {
+<div id="svlrzoobsh" style="padding-left:0px;padding-right:0px;padding-top:10px;padding-bottom:10px;overflow-x:auto;overflow-y:auto;width:auto;height:auto;">
+<style>#svlrzoobsh table {
   font-family: system-ui, 'Segoe UI', Roboto, Helvetica, Arial, sans-serif, 'Apple Color Emoji', 'Segoe UI Emoji', 'Segoe UI Symbol', 'Noto Color Emoji';
   -webkit-font-smoothing: antialiased;
   -moz-osx-font-smoothing: grayscale;
 }
 
-#kvcvckjbyp thead, #kvcvckjbyp tbody, #kvcvckjbyp tfoot, #kvcvckjbyp tr, #kvcvckjbyp td, #kvcvckjbyp th {
+#svlrzoobsh thead, #svlrzoobsh tbody, #svlrzoobsh tfoot, #svlrzoobsh tr, #svlrzoobsh td, #svlrzoobsh th {
   border-style: none;
 }
 
-#kvcvckjbyp p {
+#svlrzoobsh p {
   margin: 0;
   padding: 0;
 }
 
-#kvcvckjbyp .gt_table {
+#svlrzoobsh .gt_table {
   display: table;
   border-collapse: collapse;
   line-height: normal;
@@ -608,12 +611,12 @@ Learning Objectives
   border-left-color: #D3D3D3;
 }
 
-#kvcvckjbyp .gt_caption {
+#svlrzoobsh .gt_caption {
   padding-top: 4px;
   padding-bottom: 4px;
 }
 
-#kvcvckjbyp .gt_title {
+#svlrzoobsh .gt_title {
   color: #333333;
   font-size: 125%;
   font-weight: initial;
@@ -625,7 +628,7 @@ Learning Objectives
   border-bottom-width: 0;
 }
 
-#kvcvckjbyp .gt_subtitle {
+#svlrzoobsh .gt_subtitle {
   color: #333333;
   font-size: 85%;
   font-weight: initial;
@@ -637,7 +640,7 @@ Learning Objectives
   border-top-width: 0;
 }
 
-#kvcvckjbyp .gt_heading {
+#svlrzoobsh .gt_heading {
   background-color: #FFFFFF;
   text-align: center;
   border-bottom-color: #FFFFFF;
@@ -649,13 +652,13 @@ Learning Objectives
   border-right-color: #D3D3D3;
 }
 
-#kvcvckjbyp .gt_bottom_border {
+#svlrzoobsh .gt_bottom_border {
   border-bottom-style: solid;
   border-bottom-width: 2px;
   border-bottom-color: #D3D3D3;
 }
 
-#kvcvckjbyp .gt_col_headings {
+#svlrzoobsh .gt_col_headings {
   border-top-style: solid;
   border-top-width: 2px;
   border-top-color: #D3D3D3;
@@ -670,7 +673,7 @@ Learning Objectives
   border-right-color: #D3D3D3;
 }
 
-#kvcvckjbyp .gt_col_heading {
+#svlrzoobsh .gt_col_heading {
   color: #333333;
   background-color: #FFFFFF;
   font-size: 100%;
@@ -690,7 +693,7 @@ Learning Objectives
   overflow-x: hidden;
 }
 
-#kvcvckjbyp .gt_column_spanner_outer {
+#svlrzoobsh .gt_column_spanner_outer {
   color: #333333;
   background-color: #FFFFFF;
   font-size: 100%;
@@ -702,15 +705,15 @@ Learning Objectives
   padding-right: 4px;
 }
 
-#kvcvckjbyp .gt_column_spanner_outer:first-child {
+#svlrzoobsh .gt_column_spanner_outer:first-child {
   padding-left: 0;
 }
 
-#kvcvckjbyp .gt_column_spanner_outer:last-child {
+#svlrzoobsh .gt_column_spanner_outer:last-child {
   padding-right: 0;
 }
 
-#kvcvckjbyp .gt_column_spanner {
+#svlrzoobsh .gt_column_spanner {
   border-bottom-style: solid;
   border-bottom-width: 2px;
   border-bottom-color: #D3D3D3;
@@ -722,11 +725,11 @@ Learning Objectives
   width: 100%;
 }
 
-#kvcvckjbyp .gt_spanner_row {
+#svlrzoobsh .gt_spanner_row {
   border-bottom-style: hidden;
 }
 
-#kvcvckjbyp .gt_group_heading {
+#svlrzoobsh .gt_group_heading {
   padding-top: 8px;
   padding-bottom: 8px;
   padding-left: 5px;
@@ -752,7 +755,7 @@ Learning Objectives
   text-align: left;
 }
 
-#kvcvckjbyp .gt_empty_group_heading {
+#svlrzoobsh .gt_empty_group_heading {
   padding: 0.5px;
   color: #333333;
   background-color: #FFFFFF;
@@ -767,15 +770,15 @@ Learning Objectives
   vertical-align: middle;
 }
 
-#kvcvckjbyp .gt_from_md > :first-child {
+#svlrzoobsh .gt_from_md > :first-child {
   margin-top: 0;
 }
 
-#kvcvckjbyp .gt_from_md > :last-child {
+#svlrzoobsh .gt_from_md > :last-child {
   margin-bottom: 0;
 }
 
-#kvcvckjbyp .gt_row {
+#svlrzoobsh .gt_row {
   padding-top: 8px;
   padding-bottom: 8px;
   padding-left: 5px;
@@ -794,7 +797,7 @@ Learning Objectives
   overflow-x: hidden;
 }
 
-#kvcvckjbyp .gt_stub {
+#svlrzoobsh .gt_stub {
   color: #333333;
   background-color: #FFFFFF;
   font-size: 100%;
@@ -807,7 +810,7 @@ Learning Objectives
   padding-right: 5px;
 }
 
-#kvcvckjbyp .gt_stub_row_group {
+#svlrzoobsh .gt_stub_row_group {
   color: #333333;
   background-color: #FFFFFF;
   font-size: 100%;
@@ -821,15 +824,15 @@ Learning Objectives
   vertical-align: top;
 }
 
-#kvcvckjbyp .gt_row_group_first td {
+#svlrzoobsh .gt_row_group_first td {
   border-top-width: 2px;
 }
 
-#kvcvckjbyp .gt_row_group_first th {
+#svlrzoobsh .gt_row_group_first th {
   border-top-width: 2px;
 }
 
-#kvcvckjbyp .gt_summary_row {
+#svlrzoobsh .gt_summary_row {
   color: #333333;
   background-color: #FFFFFF;
   text-transform: inherit;
@@ -839,16 +842,16 @@ Learning Objectives
   padding-right: 5px;
 }
 
-#kvcvckjbyp .gt_first_summary_row {
+#svlrzoobsh .gt_first_summary_row {
   border-top-style: solid;
   border-top-color: #D3D3D3;
 }
 
-#kvcvckjbyp .gt_first_summary_row.thick {
+#svlrzoobsh .gt_first_summary_row.thick {
   border-top-width: 2px;
 }
 
-#kvcvckjbyp .gt_last_summary_row {
+#svlrzoobsh .gt_last_summary_row {
   padding-top: 8px;
   padding-bottom: 8px;
   padding-left: 5px;
@@ -858,7 +861,7 @@ Learning Objectives
   border-bottom-color: #D3D3D3;
 }
 
-#kvcvckjbyp .gt_grand_summary_row {
+#svlrzoobsh .gt_grand_summary_row {
   color: #333333;
   background-color: #FFFFFF;
   text-transform: inherit;
@@ -868,7 +871,7 @@ Learning Objectives
   padding-right: 5px;
 }
 
-#kvcvckjbyp .gt_first_grand_summary_row {
+#svlrzoobsh .gt_first_grand_summary_row {
   padding-top: 8px;
   padding-bottom: 8px;
   padding-left: 5px;
@@ -878,7 +881,7 @@ Learning Objectives
   border-top-color: #D3D3D3;
 }
 
-#kvcvckjbyp .gt_last_grand_summary_row_top {
+#svlrzoobsh .gt_last_grand_summary_row_top {
   padding-top: 8px;
   padding-bottom: 8px;
   padding-left: 5px;
@@ -888,11 +891,11 @@ Learning Objectives
   border-bottom-color: #D3D3D3;
 }
 
-#kvcvckjbyp .gt_striped {
+#svlrzoobsh .gt_striped {
   background-color: rgba(128, 128, 128, 0.05);
 }
 
-#kvcvckjbyp .gt_table_body {
+#svlrzoobsh .gt_table_body {
   border-top-style: solid;
   border-top-width: 2px;
   border-top-color: #D3D3D3;
@@ -901,7 +904,7 @@ Learning Objectives
   border-bottom-color: #D3D3D3;
 }
 
-#kvcvckjbyp .gt_footnotes {
+#svlrzoobsh .gt_footnotes {
   color: #333333;
   background-color: #FFFFFF;
   border-bottom-style: none;
@@ -915,7 +918,7 @@ Learning Objectives
   border-right-color: #D3D3D3;
 }
 
-#kvcvckjbyp .gt_footnote {
+#svlrzoobsh .gt_footnote {
   margin: 0px;
   font-size: 90%;
   padding-top: 4px;
@@ -924,7 +927,7 @@ Learning Objectives
   padding-right: 5px;
 }
 
-#kvcvckjbyp .gt_sourcenotes {
+#svlrzoobsh .gt_sourcenotes {
   color: #333333;
   background-color: #FFFFFF;
   border-bottom-style: none;
@@ -938,7 +941,7 @@ Learning Objectives
   border-right-color: #D3D3D3;
 }
 
-#kvcvckjbyp .gt_sourcenote {
+#svlrzoobsh .gt_sourcenote {
   font-size: 90%;
   padding-top: 4px;
   padding-bottom: 4px;
@@ -946,77 +949,77 @@ Learning Objectives
   padding-right: 5px;
 }
 
-#kvcvckjbyp .gt_left {
+#svlrzoobsh .gt_left {
   text-align: left;
 }
 
-#kvcvckjbyp .gt_center {
+#svlrzoobsh .gt_center {
   text-align: center;
 }
 
-#kvcvckjbyp .gt_right {
+#svlrzoobsh .gt_right {
   text-align: right;
   font-variant-numeric: tabular-nums;
 }
 
-#kvcvckjbyp .gt_font_normal {
+#svlrzoobsh .gt_font_normal {
   font-weight: normal;
 }
 
-#kvcvckjbyp .gt_font_bold {
+#svlrzoobsh .gt_font_bold {
   font-weight: bold;
 }
 
-#kvcvckjbyp .gt_font_italic {
+#svlrzoobsh .gt_font_italic {
   font-style: italic;
 }
 
-#kvcvckjbyp .gt_super {
+#svlrzoobsh .gt_super {
   font-size: 65%;
 }
 
-#kvcvckjbyp .gt_footnote_marks {
+#svlrzoobsh .gt_footnote_marks {
   font-size: 75%;
   vertical-align: 0.4em;
   position: initial;
 }
 
-#kvcvckjbyp .gt_asterisk {
+#svlrzoobsh .gt_asterisk {
   font-size: 100%;
   vertical-align: 0;
 }
 
-#kvcvckjbyp .gt_indent_1 {
+#svlrzoobsh .gt_indent_1 {
   text-indent: 5px;
 }
 
-#kvcvckjbyp .gt_indent_2 {
+#svlrzoobsh .gt_indent_2 {
   text-indent: 10px;
 }
 
-#kvcvckjbyp .gt_indent_3 {
+#svlrzoobsh .gt_indent_3 {
   text-indent: 15px;
 }
 
-#kvcvckjbyp .gt_indent_4 {
+#svlrzoobsh .gt_indent_4 {
   text-indent: 20px;
 }
 
-#kvcvckjbyp .gt_indent_5 {
+#svlrzoobsh .gt_indent_5 {
   text-indent: 25px;
 }
 
-#kvcvckjbyp .katex-display {
+#svlrzoobsh .katex-display {
   display: inline-flex !important;
   margin-bottom: 0.75em !important;
 }
 
-#kvcvckjbyp div.Reactable > div.rt-table > div.rt-thead > div.rt-tr.rt-tr-group-header > div.rt-th-group:after {
+#svlrzoobsh div.Reactable > div.rt-table > div.rt-thead > div.rt-tr.rt-tr-group-header > div.rt-th-group:after {
   height: 0px !important;
 }
 </style>
 
-<table class="gt_table caption-top table table-sm table-striped small" data-quarto-postprocess="true" data-quarto-disable-processing="false" data-quarto-bootstrap="false">
+<table class="gt_table caption-top table table-sm table-striped small" data-quarto-bootstrap="false">
 <thead>
 <tr class="gt_col_headings header">
 <th id="Approach" class="gt_col_heading gt_columns_bottom_border gt_left" data-quarto-table-cell-role="th" scope="col">Approach</th>
@@ -1055,7 +1058,7 @@ Learning Objectives
 <i class="callout-icon"></i>
 </div>
 <div class="callout-title-container flex-fill">
-A benchmark claim about household income
+<span class="screen-reader-only">Note</span>A benchmark claim about household income
 </div>
 </div>
 <div class="callout-body-container callout-body">
@@ -1523,7 +1526,7 @@ A benchmark claim about household income
 }
 </style>
 
-<table class="gt_table caption-top table table-sm table-striped small" data-quarto-postprocess="true" data-quarto-disable-processing="false" data-quarto-bootstrap="false">
+<table class="gt_table caption-top table table-sm table-striped small" data-quarto-bootstrap="false">
 <thead>
 <tr class="gt_col_headings header">
 <th id="Number-of-simulations" class="gt_col_heading gt_columns_bottom_border gt_right" data-quarto-table-cell-role="th" scope="col">Number of simulations</th>
@@ -1582,7 +1585,7 @@ A benchmark claim about household income
 <i class="callout-icon"></i>
 </div>
 <div class="callout-title-container flex-fill">
-Household income in capital city and regional areas
+<span class="screen-reader-only">Note</span>Household income in capital city and regional areas
 </div>
 </div>
 <div class="callout-body-container callout-body">
@@ -2055,7 +2058,7 @@ Household income in capital city and regional areas
 }
 </style>
 
-<table class="gt_table caption-top table table-sm table-striped small" data-quarto-postprocess="true" data-quarto-disable-processing="false" data-quarto-bootstrap="false">
+<table class="gt_table caption-top table table-sm table-striped small" data-quarto-bootstrap="false">
 <thead>
 <tr class="gt_col_headings header">
 <th id="region" class="gt_col_heading gt_columns_bottom_border gt_left" data-quarto-table-cell-role="th" scope="col">region</th>
@@ -2087,9 +2090,7 @@ Household income in capital city and regional areas
 </div>
 </div>
 <p>The two groups have different sample means. Let us calculate the observed difference as:</p>
-<p><span class="math display">\[
-\bar{x}_{\text{capital}} - \bar{x}_{\text{regional}}= \text{19,960}
-\]</span></p>
+<p><span class="math display">\[\bar{x}_{\text{capital}} - \bar{x}_{\text{regional}}= \text{19,960}\]</span></p>
 <p>The key question is not whether the sample means are exactly equal. They almost certainly will not be exactly equal. The key question is:</p>
 <blockquote class="blockquote">
 <p>Would a difference this large be surprising if region were not associated with income?</p>
@@ -2553,7 +2554,7 @@ Household income in capital city and regional areas
 }
 </style>
 
-<table class="gt_table caption-top table table-sm table-striped small" data-quarto-postprocess="true" data-quarto-disable-processing="false" data-quarto-bootstrap="false">
+<table class="gt_table caption-top table table-sm table-striped small" data-quarto-bootstrap="false">
 <thead>
 <tr class="gt_col_headings header">
 <th id="id" class="gt_col_heading gt_columns_bottom_border gt_center" data-quarto-table-cell-role="th" scope="col">id</th>
@@ -3064,7 +3065,7 @@ Household income in capital city and regional areas
 }
 </style>
 
-<table class="gt_table caption-top table table-sm table-striped small" data-quarto-postprocess="true" data-quarto-disable-processing="false" data-quarto-bootstrap="false">
+<table class="gt_table caption-top table table-sm table-striped small" data-quarto-bootstrap="false">
 <thead>
 <tr class="gt_col_headings header">
 <th id="shuffle" class="gt_col_heading gt_columns_bottom_border gt_left" data-quarto-table-cell-role="th" scope="col">shuffle</th>
@@ -3590,7 +3591,7 @@ Household income in capital city and regional areas
 }
 </style>
 
-<table class="gt_table caption-top table table-sm table-striped small" data-quarto-postprocess="true" data-quarto-disable-processing="false" data-quarto-bootstrap="false">
+<table class="gt_table caption-top table table-sm table-striped small" data-quarto-bootstrap="false">
 <thead>
 <tr class="gt_col_headings header">
 <th id="Number-of-permutations" class="gt_col_heading gt_columns_bottom_border gt_right" data-quarto-table-cell-role="th" scope="col">Number of permutations</th>
@@ -3639,11 +3640,9 @@ Household income in capital city and regional areas
 </div>
 </div>
 <p>For a two-sided test, we count simulated differences whose absolute value is at least as large as the absolute value of the observed difference:</p>
-<p><span class="math display">\[
-\text{simulated p-value}
+<p><span class="math display">\[\text{simulated p-value}
 =
-\frac{\text{number of simulated } |D| \ge |D_{\text{obs}}|}{\text{number of simulations}}.
-\]</span></p>
+\frac{\text{number of simulated } |D| \ge |D_{\text{obs}}|}{\text{number of simulations}}.\]</span></p>
 <div class="cell">
 <div class="cell-output-display">
 <div id="jsbnybyteg" style="padding-left:0px;padding-right:0px;padding-top:10px;padding-bottom:10px;overflow-x:auto;overflow-y:auto;width:auto;height:auto;">
@@ -4096,7 +4095,7 @@ Household income in capital city and regional areas
 }
 </style>
 
-<table class="gt_table caption-top table table-sm table-striped small" data-quarto-postprocess="true" data-quarto-disable-processing="false" data-quarto-bootstrap="false">
+<table class="gt_table caption-top table table-sm table-striped small" data-quarto-bootstrap="false">
 <thead>
 <tr class="gt_col_headings header">
 <th id="Test" class="gt_col_heading gt_columns_bottom_border gt_left" data-quarto-table-cell-role="th" scope="col">Test</th>
@@ -4595,7 +4594,7 @@ Household income in capital city and regional areas
 }
 </style>
 
-<table class="gt_table caption-top table table-sm table-striped small" data-quarto-postprocess="true" data-quarto-disable-processing="false" data-quarto-bootstrap="false">
+<table class="gt_table caption-top table table-sm table-striped small" data-quarto-bootstrap="false">
 <thead>
 <tr class="gt_col_headings header">
 <th id="Feature-of-the-data" class="gt_col_heading gt_columns_bottom_border gt_left" data-quarto-table-cell-role="th" scope="col">Feature of the data</th>
@@ -4632,7 +4631,7 @@ Household income in capital city and regional areas
 <i class="callout-icon"></i>
 </div>
 <div class="callout-title-container flex-fill">
-The key question for a permutation test
+<span class="screen-reader-only">Important</span>The key question for a permutation test
 </div>
 </div>
 <div class="callout-body-container callout-body">
@@ -4674,7 +4673,7 @@ The key question for a permutation test
 <div class="cell-output-display">
 <div>
 <figure class="figure">
-<p><img src="images/chapter6/bootstrap.jpg" class="img-fluid figure-img" width="349"></p>
+<p><img src="images/chapter6/bootstrap.jpg" class="img-fluid figure-img"></p>
 </figure>
 </div>
 </div>
@@ -4682,9 +4681,7 @@ The key question for a permutation test
 </center>
 <p>The statistical bootstrap has the same flavour. We use the sample itself to learn about the uncertainty in a statistic calculated from that sample. The key operation is <strong>sampling with replacement</strong>.</p>
 <p>Suppose our sample contains five incomes:</p>
-<p><span class="math display">\[
-52000,\ 61000,\ 68000,\ 73000,\ 420000.
-\]</span></p>
+<p><span class="math display">\[52000,\ 61000,\ 68000,\ 73000,\ 420000.\]</span></p>
 <p>A bootstrap sample of size five is created by randomly choosing five values from this list, replacing each value after it is chosen. This means the same value can appear more than once, and some original values may not appear at all.</p>
 <div class="cell">
 <div class="cell-output-display">
@@ -5138,7 +5135,7 @@ The key question for a permutation test
 }
 </style>
 
-<table class="gt_table caption-top table table-sm table-striped small" data-quarto-postprocess="true" data-quarto-disable-processing="false" data-quarto-bootstrap="false">
+<table class="gt_table caption-top table table-sm table-striped small" data-quarto-bootstrap="false">
 <thead>
 <tr class="gt_col_headings header">
 <th id="Original-sample" class="gt_col_heading gt_columns_bottom_border gt_right" data-quarto-table-cell-role="th" scope="col">Original sample</th>
@@ -5191,7 +5188,7 @@ The key question for a permutation test
 <i class="callout-icon"></i>
 </div>
 <div class="callout-title-container flex-fill">
-Note: Bootstrap samples are not permutations
+<span class="screen-reader-only">Important</span>Note: Bootstrap samples are not permutations
 </div>
 </div>
 <div class="callout-body-container callout-body">
@@ -5668,7 +5665,7 @@ Note: Bootstrap samples are not permutations
 }
 </style>
 
-<table class="gt_table caption-top table table-sm table-striped small" data-quarto-postprocess="true" data-quarto-disable-processing="false" data-quarto-bootstrap="false">
+<table class="gt_table caption-top table table-sm table-striped small" data-quarto-bootstrap="false">
 <thead>
 <tr class="gt_col_headings header">
 <th id="simulation" class="gt_col_heading gt_columns_bottom_border gt_right" data-quarto-table-cell-role="th" scope="col">simulation</th>
@@ -5686,7 +5683,7 @@ Note: Bootstrap samples are not permutations
 </tr>
 <tr class="odd">
 <td class="gt_row gt_right" headers="simulation">3</td>
-<td class="gt_row gt_right" headers="mean_income">$90,163</td>
+<td class="gt_row gt_right" headers="mean_income">$90,162</td>
 </tr>
 <tr class="even">
 <td class="gt_row gt_right" headers="simulation">4</td>
@@ -6179,7 +6176,7 @@ Note: Bootstrap samples are not permutations
 }
 </style>
 
-<table class="gt_table caption-top table table-sm table-striped small" data-quarto-postprocess="true" data-quarto-disable-processing="false" data-quarto-bootstrap="false">
+<table class="gt_table caption-top table table-sm table-striped small" data-quarto-bootstrap="false">
 <thead>
 <tr class="gt_col_headings header">
 <th id="Observed-mean" class="gt_col_heading gt_columns_bottom_border gt_right" data-quarto-table-cell-role="th" scope="col">Observed mean</th>
@@ -6233,16 +6230,12 @@ Note: Bootstrap samples are not permutations
 </ol>
 <p>The idea is that the middle 95% of the bootstrap estimates gives a plausible range for the population parameter.</p>
 <p>In notation, if the bootstrap estimates are:</p>
-<p><span class="math display">\[
-\hat{\theta}^{[1]},\ \hat{\theta}^{[2]},\ \ldots,\ \hat{\theta}^{[B]},
-\]</span></p>
+<p><span class="math display">\[\hat{\theta}^{[1]},\ \hat{\theta}^{[2]},\ \ldots,\ \hat{\theta}^{[B]},\]</span></p>
 <p>then the percentile bootstrap interval is:</p>
-<p><span class="math display">\[
-\left(
+<p><span class="math display">\[\left(
 \hat{\theta}^{[0.025]},
 \hat{\theta}^{[0.975]}
-\right),
-\]</span></p>
+\right),\]</span></p>
 <p>where these represent the 2.5th and 97.5th percentiles of the bootstrap estimates. This method is popular because it is easy to explain and easy to implement. It also works for many statistics where a standard formula is awkward.</p>
 </section>
 <section id="bootstrapping-the-median" class="level3" data-number="6.5.3">
@@ -6701,7 +6694,7 @@ Note: Bootstrap samples are not permutations
 }
 </style>
 
-<table class="gt_table caption-top table table-sm table-striped small" data-quarto-postprocess="true" data-quarto-disable-processing="false" data-quarto-bootstrap="false">
+<table class="gt_table caption-top table table-sm table-striped small" data-quarto-bootstrap="false">
 <thead>
 <tr class="gt_col_headings header">
 <th id="Observed-median" class="gt_col_heading gt_columns_bottom_border gt_right" data-quarto-table-cell-role="th" scope="col">Observed median</th>
@@ -6742,13 +6735,9 @@ Note: Bootstrap samples are not permutations
 <section id="bootstrap-confidence-interval-for-a-difference-in-means" class="level3" data-number="6.5.4">
 <h3 data-number="6.5.4" class="anchored" data-anchor-id="bootstrap-confidence-interval-for-a-difference-in-means"><span class="header-section-number">6.5.4</span> Bootstrap confidence interval for a difference in means</h3>
 <p>Let us now return to the comparison between capital city and regional households. In Chapter 5, we tested whether the difference in mean incomes was larger than expected under a benchmark claim. Here we estimate the uncertainty in the size of that difference. The parameter of interest is:</p>
-<p><span class="math display">\[
-\mu_{\text{capital}} - \mu_{\text{regional}}
-\]</span></p>
+<p><span class="math display">\[\mu_{\text{capital}} - \mu_{\text{regional}}\]</span></p>
 <p>The estimate is:</p>
-<p><span class="math display">\[
-\bar{x}_{\text{capital}} - \bar{x}_{\text{regional}}
-\]</span></p>
+<p><span class="math display">\[\bar{x}_{\text{capital}} - \bar{x}_{\text{regional}}\]</span></p>
 <p>For independent groups, the bootstrap should re-sample within each group separately. This preserves the two-sample structure.</p>
 <div class="cell">
 <div class="cell-output-display">
@@ -7202,7 +7191,7 @@ Note: Bootstrap samples are not permutations
 }
 </style>
 
-<table class="gt_table caption-top table table-sm table-striped small" data-quarto-postprocess="true" data-quarto-disable-processing="false" data-quarto-bootstrap="false">
+<table class="gt_table caption-top table table-sm table-striped small" data-quarto-bootstrap="false">
 <thead>
 <tr class="gt_col_headings header">
 <th id="Observed-difference" class="gt_col_heading gt_columns_bottom_border gt_right" data-quarto-table-cell-role="th" scope="col">Observed difference</th>
@@ -7699,7 +7688,7 @@ Note: Bootstrap samples are not permutations
 }
 </style>
 
-<table class="gt_table caption-top table table-sm table-striped small" data-quarto-postprocess="true" data-quarto-disable-processing="false" data-quarto-bootstrap="false">
+<table class="gt_table caption-top table table-sm table-striped small" data-quarto-bootstrap="false">
 <thead>
 <tr class="gt_col_headings header">
 <th id="Distribution" class="gt_col_heading gt_columns_bottom_border gt_left" data-quarto-table-cell-role="th" scope="col">Distribution</th>
@@ -7732,9 +7721,7 @@ Note: Bootstrap samples are not permutations
 <h3 data-number="6.5.5" class="anchored" data-anchor-id="paired-data-and-the-bootstrap"><span class="header-section-number">6.5.5</span> Paired data and the bootstrap</h3>
 <p>The bootstrap can also be used for paired data. Suppose we observe the same households under two measurements, such as income before and after housing costs. Since both values come from the same household, the two values are paired. In a paired problem, we should not re-sample the before values separately from the after values. That would break the pairing.</p>
 <p>Instead, we first calculate the within-household differences:</p>
-<p><span class="math display">\[
-D_i = X_i - Y_i
-\]</span></p>
+<p><span class="math display">\[D_i = X_i - Y_i\]</span></p>
 <p>Then we bootstrap the differences.</p>
 <div class="cell">
 <div class="cell-output-display">
@@ -8188,7 +8175,7 @@ D_i = X_i - Y_i
 }
 </style>
 
-<table class="gt_table caption-top table table-sm table-striped small" data-quarto-postprocess="true" data-quarto-disable-processing="false" data-quarto-bootstrap="false">
+<table class="gt_table caption-top table table-sm table-striped small" data-quarto-bootstrap="false">
 <thead>
 <tr class="gt_col_headings header">
 <th id="n" class="gt_col_heading gt_columns_bottom_border gt_right" data-quarto-table-cell-role="th" scope="col">n</th>
@@ -8662,7 +8649,7 @@ D_i = X_i - Y_i
 }
 </style>
 
-<table class="gt_table caption-top table table-sm table-striped small" data-quarto-postprocess="true" data-quarto-disable-processing="false" data-quarto-bootstrap="false">
+<table class="gt_table caption-top table table-sm table-striped small" data-quarto-bootstrap="false">
 <thead>
 <tr class="gt_col_headings header">
 <th id="Observed-mean-difference" class="gt_col_heading gt_columns_bottom_border gt_right" data-quarto-table-cell-role="th" scope="col">Observed mean difference</th>
@@ -8712,9 +8699,7 @@ D_i = X_i - Y_i
 <li>bootstrap methods simulate how much an estimate might vary from sample to sample.</li>
 </ul>
 <p>However, the bootstrap can also be adapted for hypothesis testing. The main complication is that, for a test, we need to simulate from a world where the benchmark claim is true. Suppose we are comparing mean household income in capital city and regional areas. The observed difference is:</p>
-<p><span class="math display">\[
-\bar{x}_{\text{capital}} - \bar{x}_{\text{regional}}
-\]</span></p>
+<p><span class="math display">\[\bar{x}_{\text{capital}} - \bar{x}_{\text{regional}}\]</span></p>
 <p>If we simply bootstrap from the original capital city and regional samples, we simulate a world that looks like the data we observed. But that world may already contain a real difference between the groups. That is useful for a confidence interval, but it is not the right reference world for a hypothesis test.</p>
 <p>For a hypothesis test, we need to simulate a world where the population mean difference is zero.</p>
 <p>One simple method is to <strong>recentre</strong> the data.</p>
@@ -8728,18 +8713,18 @@ D_i = X_i - Y_i
 <li>Compare the observed difference with this bootstrap null distribution.</li>
 </ol>
 <div class="cell">
-<div class="sourceCode cell-code" id="cb2"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb2-1"><a href="#cb2-1" aria-hidden="true" tabindex="-1"></a>overall_mean <span class="ot">&lt;-</span> <span class="fu">mean</span>(income_regions<span class="sc">$</span>income)</span>
+<div class="code-copy-outer-scaffold"><div class="sourceCode cell-code" id="cb2"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb2-1"><a href="#cb2-1" aria-hidden="true" tabindex="-1"></a>overall_mean <span class="ot">&lt;-</span> <span class="fu">mean</span>(income_regions<span class="sc">$</span>income)</span>
 <span id="cb2-2"><a href="#cb2-2" aria-hidden="true" tabindex="-1"></a>capital_mean <span class="ot">&lt;-</span> <span class="fu">mean</span>(capital_income)</span>
 <span id="cb2-3"><a href="#cb2-3" aria-hidden="true" tabindex="-1"></a>regional_mean <span class="ot">&lt;-</span> <span class="fu">mean</span>(regional_income)</span>
 <span id="cb2-4"><a href="#cb2-4" aria-hidden="true" tabindex="-1"></a></span>
 <span id="cb2-5"><a href="#cb2-5" aria-hidden="true" tabindex="-1"></a>capital_shifted <span class="ot">&lt;-</span> capital_income <span class="sc">-</span> capital_mean <span class="sc">+</span> overall_mean</span>
 <span id="cb2-6"><a href="#cb2-6" aria-hidden="true" tabindex="-1"></a>regional_shifted <span class="ot">&lt;-</span> regional_income <span class="sc">-</span> regional_mean <span class="sc">+</span> overall_mean</span>
 <span id="cb2-7"><a href="#cb2-7" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb2-8"><a href="#cb2-8" aria-hidden="true" tabindex="-1"></a><span class="fu">mean</span>(capital_shifted)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<span id="cb2-8"><a href="#cb2-8" aria-hidden="true" tabindex="-1"></a><span class="fu">mean</span>(capital_shifted)</span></code></pre></div><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></div>
 <div class="cell-output cell-output-stdout">
 <pre><code>[1] 94628.75</code></pre>
 </div>
-<div class="sourceCode cell-code" id="cb4"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb4-1"><a href="#cb4-1" aria-hidden="true" tabindex="-1"></a><span class="fu">mean</span>(regional_shifted)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="code-copy-outer-scaffold"><div class="sourceCode cell-code" id="cb4"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb4-1"><a href="#cb4-1" aria-hidden="true" tabindex="-1"></a><span class="fu">mean</span>(regional_shifted)</span></code></pre></div><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></div>
 <div class="cell-output cell-output-stdout">
 <pre><code>[1] 94628.75</code></pre>
 </div>
@@ -8747,7 +8732,7 @@ D_i = X_i - Y_i
 <p>Both shifted groups now have the same mean. We have created a modified version of the data where the benchmark claim is true.</p>
 <p>Now we bootstrap from the shifted groups.</p>
 <div class="cell">
-<div class="sourceCode cell-code" id="cb6"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb6-1"><a href="#cb6-1" aria-hidden="true" tabindex="-1"></a><span class="fu">set.seed</span>(<span class="dv">2420</span>)</span>
+<div class="code-copy-outer-scaffold"><div class="sourceCode cell-code" id="cb6"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb6-1"><a href="#cb6-1" aria-hidden="true" tabindex="-1"></a><span class="fu">set.seed</span>(<span class="dv">2420</span>)</span>
 <span id="cb6-2"><a href="#cb6-2" aria-hidden="true" tabindex="-1"></a></span>
 <span id="cb6-3"><a href="#cb6-3" aria-hidden="true" tabindex="-1"></a>boot_null_diffs <span class="ot">&lt;-</span> <span class="fu">tibble</span>(</span>
 <span id="cb6-4"><a href="#cb6-4" aria-hidden="true" tabindex="-1"></a>  <span class="at">simulation =</span> <span class="dv">1</span><span class="sc">:</span>B,</span>
@@ -8758,7 +8743,7 @@ D_i = X_i - Y_i
 <span id="cb6-9"><a href="#cb6-9" aria-hidden="true" tabindex="-1"></a>  })</span>
 <span id="cb6-10"><a href="#cb6-10" aria-hidden="true" tabindex="-1"></a>)</span>
 <span id="cb6-11"><a href="#cb6-11" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb6-12"><a href="#cb6-12" aria-hidden="true" tabindex="-1"></a>boot_test_p <span class="ot">&lt;-</span> <span class="fu">mean</span>(<span class="fu">abs</span>(boot_null_diffs<span class="sc">$</span>diff) <span class="sc">&gt;=</span> <span class="fu">abs</span>(observed_diff))</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<span id="cb6-12"><a href="#cb6-12" aria-hidden="true" tabindex="-1"></a>boot_test_p <span class="ot">&lt;-</span> <span class="fu">mean</span>(<span class="fu">abs</span>(boot_null_diffs<span class="sc">$</span>diff) <span class="sc">&gt;=</span> <span class="fu">abs</span>(observed_diff))</span></code></pre></div><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></div>
 </div>
 <div class="cell">
 <div class="cell-output-display">
@@ -9221,7 +9206,7 @@ D_i = X_i - Y_i
 }
 </style>
 
-<table class="gt_table caption-top table table-sm table-striped small" data-quarto-postprocess="true" data-quarto-disable-processing="false" data-quarto-bootstrap="false">
+<table class="gt_table caption-top table table-sm table-striped small" data-quarto-bootstrap="false">
 <thead>
 <tr class="gt_col_headings header">
 <th id="Method" class="gt_col_heading gt_columns_bottom_border gt_left" data-quarto-table-cell-role="th" scope="col">Method</th>
@@ -9709,7 +9694,7 @@ D_i = X_i - Y_i
 }
 </style>
 
-<table class="gt_table caption-top table table-sm table-striped small" data-quarto-postprocess="true" data-quarto-disable-processing="false" data-quarto-bootstrap="false">
+<table class="gt_table caption-top table table-sm table-striped small" data-quarto-bootstrap="false">
 <thead>
 <tr class="gt_col_headings header">
 <th id="Feature" class="gt_col_heading gt_columns_bottom_border gt_left" data-quarto-table-cell-role="th" scope="col">Feature</th>
@@ -9759,7 +9744,7 @@ D_i = X_i - Y_i
 <i class="callout-icon"></i>
 </div>
 <div class="callout-title-container flex-fill">
-Question 1
+<span class="screen-reader-only">Note</span>Question 1
 </div>
 </div>
 <div class="callout-body-container callout-body">
@@ -10216,7 +10201,7 @@ Question 1
 }
 </style>
 
-<table class="gt_table caption-top table table-sm table-striped small" data-quarto-postprocess="true" data-quarto-disable-processing="false" data-quarto-bootstrap="false">
+<table class="gt_table caption-top table table-sm table-striped small" data-quarto-bootstrap="false">
 <thead>
 <tr class="gt_col_headings header">
 <th id="Method" class="gt_col_heading gt_columns_bottom_border gt_left" data-quarto-table-cell-role="th" scope="col">Method</th>
@@ -10247,21 +10232,19 @@ Question 1
 <ol type="a">
 <li>What is the observed difference in mean order amount, using:</li>
 </ol>
-<p><span class="math display">\[
-\bar{x}_{\text{app}} - \bar{x}_{\text{counter}}?
-\]</span></p>
+<p><span class="math display">\[\bar{x}_{\text{app}} - \bar{x}_{\text{counter}}?\]</span></p>
 <ol start="2" type="a">
 <li><p>Explain how you would conduct a permutation test for this difference.</p></li>
 <li><p>In the context of this example, what does it mean to shuffle the labels?</p></li>
 <li><p>Suppose a permutation test gives a two-sided p-value of 0.018. Interpret this p-value in context.</p></li>
 </ol>
 <div class="callout callout-style-default callout-important callout-titled">
-<div class="callout-header d-flex align-content-center" data-bs-toggle="collapse" data-bs-target=".callout-6-contents" aria-controls="callout-6" aria-expanded="false" aria-label="Toggle callout">
+<div class="callout-header d-flex align-content-center collapsed" data-bs-toggle="collapse" data-bs-target=".callout-6-contents" aria-controls="callout-6" aria-expanded="false" aria-label="Toggle callout">
 <div class="callout-icon-container">
 <i class="callout-icon"></i>
 </div>
 <div class="callout-title-container flex-fill">
-Click for Solutions
+<span class="screen-reader-only">Important</span>Click for Solutions
 </div>
 <div class="callout-btn-toggle d-inline-block border-0 py-1 ps-1 pe-0 float-end"><i class="callout-toggle"></i></div>
 </div>
@@ -10270,17 +10253,11 @@ Click for Solutions
 <ol type="a">
 <li>The mobile app mean is:</li>
 </ol>
-<p><span class="math display">\[
-\frac{18+22+\cdots+29}{12} = 24.17
-\]</span></p>
+<p><span class="math display">\[\frac{18+22+\cdots+29}{12} = 24.17\]</span></p>
 <p>The counter mean is:</p>
-<p><span class="math display">\[
-\frac{15+18+\cdots+19}{12} = 18.75
-\]</span></p>
+<p><span class="math display">\[\frac{15+18+\cdots+19}{12} = 18.75\]</span></p>
 <p>So the observed difference is:</p>
-<p><span class="math display">\[
-24.17 - 18.75 = 5.42
-\]</span></p>
+<p><span class="math display">\[24.17 - 18.75 = 5.42\]</span></p>
 <p>The mobile app orders are higher by about $5.42 in this sample.</p>
 <ol start="2" type="a">
 <li>To conduct a permutation test:</li>
@@ -10309,14 +10286,12 @@ Click for Solutions
 <i class="callout-icon"></i>
 </div>
 <div class="callout-title-container flex-fill">
-Question 2
+<span class="screen-reader-only">Note</span>Question 2
 </div>
 </div>
 <div class="callout-body-container callout-body">
 <p>A researcher records the number of minutes 15 students spend reading before a short comprehension test:</p>
-<p><span class="math display">\[
-18,\ 22,\ 25,\ 20,\ 30,\ 28,\ 24,\ 26,\ 21,\ 23,\ 35,\ 19,\ 27,\ 31,\ 29
-\]</span></p>
+<p><span class="math display">\[18,\ 22,\ 25,\ 20,\ 30,\ 28,\ 24,\ 26,\ 21,\ 23,\ 35,\ 19,\ 27,\ 31,\ 29\]</span></p>
 <p>The sample mean is 25.2 minutes.</p>
 <ol type="a">
 <li><p>Describe how to create one bootstrap sample from these data.</p></li>
@@ -10325,12 +10300,12 @@ Question 2
 <li><p>Interpret the interval in context.</p></li>
 </ol>
 <div class="callout callout-style-default callout-important callout-titled">
-<div class="callout-header d-flex align-content-center" data-bs-toggle="collapse" data-bs-target=".callout-8-contents" aria-controls="callout-8" aria-expanded="false" aria-label="Toggle callout">
+<div class="callout-header d-flex align-content-center collapsed" data-bs-toggle="collapse" data-bs-target=".callout-8-contents" aria-controls="callout-8" aria-expanded="false" aria-label="Toggle callout">
 <div class="callout-icon-container">
 <i class="callout-icon"></i>
 </div>
 <div class="callout-title-container flex-fill">
-Click for Solutions
+<span class="screen-reader-only">Important</span>Click for Solutions
 </div>
 <div class="callout-btn-toggle d-inline-block border-0 py-1 ps-1 pe-0 float-end"><i class="callout-toggle"></i></div>
 </div>
@@ -10341,9 +10316,7 @@ Click for Solutions
 <li><p>Sampling with replacement creates variation between bootstrap samples. If we sampled without replacement and kept the same sample size, we would simply rearrange the original 15 values. The mean would be unchanged every time.</p></li>
 <li><p>The approximate 95% percentile bootstrap confidence interval is:</p></li>
 </ol>
-<p><span class="math display">\[
-(22.4,\ 28.3)
-\]</span></p>
+<p><span class="math display">\[(22.4,\ 28.3)\]</span></p>
 <ol start="4" type="a">
 <li>The interval suggests that plausible values for the population mean reading time are roughly between 22.4 and 28.3 minutes, based on this sample and the bootstrap method.</li>
 </ol>
@@ -10358,7 +10331,7 @@ Click for Solutions
 <i class="callout-icon"></i>
 </div>
 <div class="callout-title-container flex-fill">
-Question 3
+<span class="screen-reader-only">Note</span>Question 3
 </div>
 </div>
 <div class="callout-body-container callout-body">
@@ -10815,7 +10788,7 @@ Question 3
 }
 </style>
 
-<table class="gt_table caption-top table table-sm table-striped small" data-quarto-postprocess="true" data-quarto-disable-processing="false" data-quarto-bootstrap="false">
+<table class="gt_table caption-top table table-sm table-striped small" data-quarto-bootstrap="false">
 <thead>
 <tr class="gt_col_headings header">
 <th id="Message" class="gt_col_heading gt_columns_bottom_border gt_left" data-quarto-table-cell-role="th" scope="col">Message</th>
@@ -10849,20 +10822,18 @@ Question 3
 <ol type="a">
 <li>Calculate the observed difference in proportions:</li>
 </ol>
-<p><span class="math display">\[
-\hat{p}_{\text{personalised}} - \hat{p}_{\text{simple}}
-\]</span></p>
+<p><span class="math display">\[\hat{p}_{\text{personalised}} - \hat{p}_{\text{simple}}\]</span></p>
 <ol start="2" type="a">
 <li><p>Explain how a permutation test could be used here.</p></li>
 <li><p>What would the null distribution represent?</p></li>
 </ol>
 <div class="callout callout-style-default callout-important callout-titled">
-<div class="callout-header d-flex align-content-center" data-bs-toggle="collapse" data-bs-target=".callout-10-contents" aria-controls="callout-10" aria-expanded="false" aria-label="Toggle callout">
+<div class="callout-header d-flex align-content-center collapsed" data-bs-toggle="collapse" data-bs-target=".callout-10-contents" aria-controls="callout-10" aria-expanded="false" aria-label="Toggle callout">
 <div class="callout-icon-container">
 <i class="callout-icon"></i>
 </div>
 <div class="callout-title-container flex-fill">
-Click for Solutions
+<span class="screen-reader-only">Important</span>Click for Solutions
 </div>
 <div class="callout-btn-toggle d-inline-block border-0 py-1 ps-1 pe-0 float-end"><i class="callout-toggle"></i></div>
 </div>
@@ -10871,17 +10842,11 @@ Click for Solutions
 <ol type="a">
 <li>The simple reminder return proportion is:</li>
 </ol>
-<p><span class="math display">\[
-\frac{42}{80} = 0.525
-\]</span></p>
+<p><span class="math display">\[\frac{42}{80} = 0.525\]</span></p>
 <p>The personalised reminder return proportion is:</p>
-<p><span class="math display">\[
-\frac{55}{80} = 0.6875
-\]</span></p>
+<p><span class="math display">\[\frac{55}{80} = 0.6875\]</span></p>
 <p>So the observed difference is:</p>
-<p><span class="math display">\[
-0.6875 - 0.525 = 0.1625
-\]</span></p>
+<p><span class="math display">\[0.6875 - 0.525 = 0.1625\]</span></p>
 <p>The personalised reminder group had a return rate 16.25 percentage points higher in the sample.</p>
 <ol start="2" type="a">
 <li><p>We could keep the 160 outcomes fixed: 97 returned and 63 not returned. Then we shuffle the message labels between the students, keeping 80 labelled “Simple reminder” and 80 labelled “Personalised reminder”. For each shuffle, calculate the difference in proportions.</p></li>
@@ -10898,18 +10863,14 @@ Click for Solutions
 <i class="callout-icon"></i>
 </div>
 <div class="callout-title-container flex-fill">
-Question 4
+<span class="screen-reader-only">Note</span>Question 4
 </div>
 </div>
 <div class="callout-body-container callout-body">
 <p>A fitness instructor records the resting heart rate of 20 participants before and after a four-week exercise program. The researcher calculates the paired differences:</p>
-<p><span class="math display">\[
-D_i = \text{before}_i - \text{after}_i
-\]</span></p>
+<p><span class="math display">\[D_i = \text{before}_i - \text{after}_i\]</span></p>
 <p>The differences, in beats per minute, are:</p>
-<p><span class="math display">\[
-4,\ 6,\ 3,\ 8,\ 5,\ 2,\ 7,\ 6,\ 5,\ 4,\ 9,\ 3,\ 5,\ 6,\ 4,\ 7,\ 5,\ 6,\ 8,\ 4
-\]</span></p>
+<p><span class="math display">\[4,\ 6,\ 3,\ 8,\ 5,\ 2,\ 7,\ 6,\ 5,\ 4,\ 9,\ 3,\ 5,\ 6,\ 4,\ 7,\ 5,\ 6,\ 8,\ 4\]</span></p>
 <ol type="a">
 <li><p>Why is this a paired-data problem?</p></li>
 <li><p>Describe how to bootstrap the mean difference.</p></li>
@@ -10917,12 +10878,12 @@ D_i = \text{before}_i - \text{after}_i
 <li><p>Why would it be wrong to independently bootstrap the before and after values separately?</p></li>
 </ol>
 <div class="callout callout-style-default callout-important callout-titled">
-<div class="callout-header d-flex align-content-center" data-bs-toggle="collapse" data-bs-target=".callout-12-contents" aria-controls="callout-12" aria-expanded="false" aria-label="Toggle callout">
+<div class="callout-header d-flex align-content-center collapsed" data-bs-toggle="collapse" data-bs-target=".callout-12-contents" aria-controls="callout-12" aria-expanded="false" aria-label="Toggle callout">
 <div class="callout-icon-container">
 <i class="callout-icon"></i>
 </div>
 <div class="callout-title-container flex-fill">
-Click for Solutions
+<span class="screen-reader-only">Important</span>Click for Solutions
 </div>
 <div class="callout-btn-toggle d-inline-block border-0 py-1 ps-1 pe-0 float-end"><i class="callout-toggle"></i></div>
 </div>
@@ -10945,7 +10906,7 @@ Click for Solutions
 <i class="callout-icon"></i>
 </div>
 <div class="callout-title-container flex-fill">
-Question 5
+<span class="screen-reader-only">Note</span>Question 5
 </div>
 </div>
 <div class="callout-body-container callout-body">
@@ -10964,12 +10925,12 @@ Question 5
 <li><p>Does the interval suggest that the express checkout is faster, on median? Explain.</p></li>
 </ol>
 <div class="callout callout-style-default callout-important callout-titled">
-<div class="callout-header d-flex align-content-center" data-bs-toggle="collapse" data-bs-target=".callout-14-contents" aria-controls="callout-14" aria-expanded="false" aria-label="Toggle callout">
+<div class="callout-header d-flex align-content-center collapsed" data-bs-toggle="collapse" data-bs-target=".callout-14-contents" aria-controls="callout-14" aria-expanded="false" aria-label="Toggle callout">
 <div class="callout-icon-container">
 <i class="callout-icon"></i>
 </div>
 <div class="callout-title-container flex-fill">
-Click for Solutions
+<span class="screen-reader-only">Important</span>Click for Solutions
 </div>
 <div class="callout-btn-toggle d-inline-block border-0 py-1 ps-1 pe-0 float-end"><i class="callout-toggle"></i></div>
 </div>
@@ -10992,7 +10953,7 @@ Click for Solutions
 <i class="callout-icon"></i>
 </div>
 <div class="callout-title-container flex-fill">
-Question 6
+<span class="screen-reader-only">Note</span>Question 6
 </div>
 </div>
 <div class="callout-body-container callout-body">
@@ -11010,12 +10971,12 @@ Question 6
 <li><p>Which distribution would usually be centred near the observed difference of 14 seconds?</p></li>
 </ol>
 <div class="callout callout-style-default callout-important callout-titled">
-<div class="callout-header d-flex align-content-center" data-bs-toggle="collapse" data-bs-target=".callout-16-contents" aria-controls="callout-16" aria-expanded="false" aria-label="Toggle callout">
+<div class="callout-header d-flex align-content-center collapsed" data-bs-toggle="collapse" data-bs-target=".callout-16-contents" aria-controls="callout-16" aria-expanded="false" aria-label="Toggle callout">
 <div class="callout-icon-container">
 <i class="callout-icon"></i>
 </div>
 <div class="callout-title-container flex-fill">
-Click for Solutions
+<span class="screen-reader-only">Important</span>Click for Solutions
 </div>
 <div class="callout-btn-toggle d-inline-block border-0 py-1 ps-1 pe-0 float-end"><i class="callout-toggle"></i></div>
 </div>
@@ -11307,13 +11268,14 @@ window.onload = function() {
       e.clearSelection();
     }
     const getTextToCopy = function(trigger) {
-        const codeEl = trigger.previousElementSibling.cloneNode(true);
-        for (const childEl of codeEl.children) {
-          if (isCodeAnnotation(childEl)) {
-            childEl.remove();
-          }
+      const outerScaffold = trigger.parentElement.cloneNode(true);
+      const codeEl = outerScaffold.querySelector('code');
+      for (const childEl of codeEl.children) {
+        if (isCodeAnnotation(childEl)) {
+          childEl.remove();
         }
-        return codeEl.innerText;
+      }
+      return codeEl.innerText;
     }
     const clipboard = new window.ClipboardJS('.code-copy-button:not([data-in-quarto-modal])', {
       text: getTextToCopy

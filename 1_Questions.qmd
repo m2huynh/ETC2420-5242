@@ -66,8 +66,8 @@ That sentence is about probability, although nobody needed a formula to understa
 
 So how did this strategy work out for my family?
 
--   Two boats made it safely to different refugee camps. From there, one side of the family was eventually sent to America, and the other to Australia.
--   To this day, we have no information about those on the third boat. No one knows what happened: whether they sank at sea, were attacked by pirates, or met some other fate that was never recorded and never returned to us as an answer.
+- Two boats made it safely to different refugee camps. From there, one side of the family was eventually sent to America, and the other to Australia.
+- To this day, we have no information about those on the third boat. No one knows what happened: whether they sank at sea, were attacked by pirates, or met some other fate that was never recorded and never returned to us as an answer.
 
 My grandmother once told me that:
 
@@ -103,11 +103,11 @@ Statistics often begins in the space between what could happen and what did happ
 
 This is true in ordinary situations as well as extraordinary ones.
 
--   Before a doctor recommends a treatment, they do not know exactly how a particular patient will respond.
--   Before a student sits an exam, they do not know exactly which questions will appear.
--   Before a business launches a product, it does not know how customers will react.
--   Before a government introduces a policy, it does not know exactly what effects the policy will have.
--   Before we collect data, we do not know exactly what pattern the data will show.
+- Before a doctor recommends a treatment, they do not know exactly how a particular patient will respond.
+- Before a student sits an exam, they do not know exactly which questions will appear.
+- Before a business launches a product, it does not know how customers will react.
+- Before a government introduces a policy, it does not know exactly what effects the policy will have.
+- Before we collect data, we do not know exactly what pattern the data will show.
 
 In each case, there is a difference between asking the question before the outcome and asking it afterwards.
 
@@ -319,11 +319,11 @@ But in real life, that modest kind of reasoning is often exactly what we need.
 
 When we ask
 
--   whether it will rain,
--   whether a treatment will help,
--   whether a witness is reliable,
--   whether a pattern in data is surprising, or
--   whether a decision is worth the risk,
+- whether it will rain,
+- whether a treatment will help,
+- whether a witness is reliable,
+- whether a pattern in data is surprising, or
+- whether a decision is worth the risk,
 
 we are usually not in the world of geometric certainty. We are in the world of uncertain evidence and possible outcomes. This is the world probability was built for.
 
@@ -380,45 +380,39 @@ Cicero’s insight was that chance does not mean chaos. An event can be unpredic
 
 For example, suppose a fair die is rolled. The probability of rolling a six is:
 
-$$
-P(\text{six}) = \frac{1}{6}
-$$
+$$P(\text{six}) = \frac{1}{6}$$
 
 Rolling a six is uncertain. Before the die is rolled, we do not know whether it will happen. But if the die is rolled many times, it would not be surprising to see sixes appear again and again. A six is not mysterious simply because it was uncertain beforehand.
 
 Even two sixes in a row do not require a supernatural explanation. If the rolls are independent, then:
 
-$$
-P(\text{six and then six}) = \frac{1}{6} \times \frac{1}{6} = \frac{1}{36}
-$$
+$$P(\text{six and then six}) = \frac{1}{6} \times \frac{1}{6} = \frac{1}{36}$$
 
 A probability of (1/36) is small, but it is not impossible. If many people roll dice many times, outcomes with probability (1/36) will occur regularly somewhere. Probability helps us see that a rare event is not the same as an impossible event, and that a surprising outcome is not automatically evidence of a hidden cause.
 
 The Roman contribution becomes even more interesting when we turn to law.
 
--   Legal decision-making is full of uncertainty.
--   Witnesses may disagree.
--   Evidence may be incomplete.
--   A person may seem suspicious but not certainly guilty.
--   A document may be partly reliable.
--   A testimony may be plausible but not decisive.
--   Courts must often make decisions in the space between ignorance and certainty.
+- Legal decision-making is full of uncertainty.
+- Witnesses may disagree.
+- Evidence may be incomplete.
+- A person may seem suspicious but not certainly guilty.
+- A document may be partly reliable.
+- A testimony may be plausible but not decisive.
+- Courts must often make decisions in the space between ignorance and certainty.
 
 In this setting, the Romans developed the idea of partial proof. A piece of evidence might not establish a claim completely, but it might still count for something. It might be, in effect, a *half proof*.
 
 At first, this seems like a sensible idea. Not all evidence has the same strength.
 
--   One witness might be uncertain. Two witnesses might be more convincing.
--   A confession might be stronger than a rumour.
--   Physical evidence might be stronger than hearsay.
+- One witness might be uncertain. Two witnesses might be more convincing.
+- A confession might be stronger than a rumour.
+- Physical evidence might be stronger than hearsay.
 
 Even today, we often speak this way. We say that evidence is weak, strong, suggestive, compelling, or inconclusive. The Romans were trying to do something recognisably statistical: they were trying to reason with degrees of uncertainty.
 
 The problem was how to combine those degrees. In some versions of Roman legal reasoning, two half proofs could be treated as one complete proof. Symbolically, this sounds like:
 
-$$
-\frac{1}{2} + \frac{1}{2} = 1
-$$
+$$\frac{1}{2} + \frac{1}{2} = 1$$
 
 As arithmetic, that is true. But as a way of combining uncertain evidence, it is not generally correct.
 
@@ -426,23 +420,15 @@ The mistake is subtle. A half proof is not the same kind of object as half a loa
 
 To see why, suppose each piece of evidence has a 50 percent chance of being correct. That is, each has a 50 percent chance of being wrong. If the two pieces of evidence are independent, then the probability that both are wrong is:
 
-$$
-P(\text{both wrong}) = \frac{1}{2} \times \frac{1}{2} = \frac{1}{4}
-$$
+$$P(\text{both wrong}) = \frac{1}{2} \times \frac{1}{2} = \frac{1}{4}$$
 
 So the probability that at least one of them is right is:
 
-$$
-P(\text{at least one right}) = 1 - P(\text{both wrong})
-$$
+$$P(\text{at least one right}) = 1 - P(\text{both wrong})$$
 
-$$
-= 1 - \frac{1}{4}
-$$
+$$= 1 - \frac{1}{4}$$
 
-$$
-= \frac{3}{4}
-$$
+$$= \frac{3}{4}$$
 
 Two independent half proofs therefore do not produce certainty. They produce something closer to three-quarters proof, under these assumptions. This is an important distinction.
 
@@ -450,23 +436,17 @@ The Roman rule treated partial evidence as if it could simply be added until cer
 
 For example, suppose three independent pieces of evidence each have a 50 percent chance of being wrong. The probability that all three are wrong is:
 
-$$
-\left(\frac{1}{2}\right)^3 = \frac{1}{8}
-$$
+$$\left(\frac{1}{2}\right)^3 = \frac{1}{8}$$
 
 So the probability that at least one is right is:
 
-$$
-1 - \frac{1}{8} = \frac{7}{8}
-$$
+$$1 - \frac{1}{8} = \frac{7}{8}$$
 
 That is stronger than $\frac{3}{4}$, but still not certainty.
 
 With four such pieces of evidence:
 
-$$
-1 - \left(\frac{1}{2}\right)^4 = 1 - \frac{1}{16} = \frac{15}{16}
-$$
+$$1 - \left(\frac{1}{2}\right)^4 = 1 - \frac{1}{16} = \frac{15}{16}$$
 
 Again, the evidence becomes stronger, but it does not become perfect. No finite number of uncertain pieces of evidence becomes absolute certainty in this simple model. Each additional piece can reduce uncertainty, but it does not remove it entirely.
 
@@ -500,9 +480,7 @@ This is why independence is an important idea in probability.
 
 If two events (A) and (B) are independent, then knowing that one occurred does not change the probability of the other. In that case, we can multiply probabilities:
 
-$$
-P(A \text{ and } B) = P(A)P(B)
-$$
+$$P(A \text{ and } B) = P(A)P(B)$$
 
 But if the events are not independent, this formula does not apply in that simple form. We must think more carefully.
 
@@ -591,41 +569,31 @@ This is an addition-rule problem.
 
 Let:
 
-$$
-A = \text{random DNA match}
-$$
+$$A = \text{random DNA match}$$
 
 and:
 
-$$
-B = \text{laboratory error}
-$$
+$$B = \text{laboratory error}$$
 
 The general addition rule is:
 
-$$
-P(A) + P(B) - P(A \text{ and } B)
-$$
+$$P(A) + P(B) - P(A \text{ and } B)$$
 
 In this simplified example, both errors are rare, and the probability that both happen together is very small. So we can approximate:
 
-$$
-P(\text{false match})
+$$P(\text{false match})
 \approx
-P(\text{random match}) + P(\text{lab error})
-$$
+P(\text{random match}) + P(\text{lab error})$$
 
 Substituting the values:
 
-$$
-P(\text{false match})
+$$P(\text{false match})
 \approx
 \frac{1}{1{,}000{,}000{,}000}
 +
 \frac{1}{100}
 \approx
-\frac{1}{100}
-$$
+\frac{1}{100}$$
 
 The recalculation changes how we read the evidence. The “1 in 1 billion” figure sounds overwhelming, but it only answers one question: how unlikely a random DNA match would be. It does not tell us how likely it is that the test was mishandled, misinterpreted, or incorrectly reported.
 
@@ -651,17 +619,16 @@ The prosecution presented a probability argument. The couple, they claimed, matc
 
 The prosecution assigned probabilities to these features and multiplied them together:
 
--   Partly yellow car (1/10)
--   Man with moustache (1/4)
--   Man with beard (1/10)
--   Woman with ponytail (1/10)
--   Woman with blond hair (1/3)
--   Interracial couple in car (1/1000)
+- Partly yellow car (1/10)
+- Man with moustache (1/4)
+- Man with beard (1/10)
+- Woman with ponytail (1/10)
+- Woman with blond hair (1/3)
+- Interracial couple in car (1/1000)
 
 The prosecution treated these characteristics as independent and multiplied the probabilities:
 
-$$
-\frac{1}{10}
+$$\frac{1}{10}
 \times
 \frac{1}{4}
 \times
@@ -671,8 +638,7 @@ $$
 \times
 \frac{1}{3}
 \times
-\frac{1}{1000} = \frac{1}{12000000}
-$$
+\frac{1}{1000} = \frac{1}{12000000}$$
 
 That is, the prosecution suggested that only about 1 couple in 12 million would match the description.
 
@@ -682,9 +648,7 @@ But there are two major problems.
 
 The first problem is independence. The multiplication rule:
 
-$$
-P(A \text{ and } B) = P(A)P(B)
-$$
+$$P(A \text{ and } B) = P(A)P(B)$$
 
 only works in this simple form when (A) and (B) are independent.
 
@@ -708,15 +672,11 @@ To see why, suppose the relevant area has several million people. Even if only 1
 
 In that case, the probability that a matching couple is the guilty couple might be closer to:
 
-$$
-\frac{1}{3},
-$$
+$$\frac{1}{3},$$
 
 and not:
 
-$$
-\frac{1}{1{,}000{,}000}
-$$
+$$\frac{1}{1{,}000{,}000}$$
 
 The better question is therefore not:
 
@@ -909,8 +869,8 @@ r_functions |>
 
 You do not need to memorise all of these immediately. The aim is to see how the functions are used in context. If you would like a more detailed refresher of R/RStudio see:
 
--   Source 1
--   Source 2
+- Source 1
+- Source 2
 
 ### Example 1: Three boats and possible futures
 
@@ -967,15 +927,15 @@ The previous calculation used probability rules. Another way to explore the same
 
 In the code below, TRUE means a boat arrives safely and FALSE means it does not. The function `sample()` randomly selects values. In the code there are four main parts:
 
--   `c(TRUE, FALSE)` gives the possible values that can be selected;
--   `size = n_sim` says how many values to select;
--   `replace = TRUE` means the same value can be selected again and again;
--   `prob = c(p_survive, p_lost)` gives the probabilities of selecting TRUE and FALSE.
+- `c(TRUE, FALSE)` gives the possible values that can be selected;
+- `size = n_sim` says how many values to select;
+- `replace = TRUE` means the same value can be selected again and again;
+- `prob = c(p_survive, p_lost)` gives the probabilities of selecting TRUE and FALSE.
 
 Because p_survive = 0.60 and p_lost = 0.40, this means:
 
--   `TRUE` is selected with probability 0.60;
--   `FALSE`is selected with probability 0.40.
+- `TRUE` is selected with probability 0.60;
+- `FALSE`is selected with probability 0.40.
 
 ```{r}
 set.seed(2420)
@@ -1032,9 +992,7 @@ The simulation will not usually match exactly, because it is based on random sam
 
 Earlier in the chapter, we discussed *astragali*: small animal bones used in ancient games of chance. They were somewhat like dice, but they were not symmetrical cubes. Because of their shape, the different sides were not equally likely to land face up. That makes astragali a useful probability example. With a fair six-sided die, each side has the same probability:
 
-$$
-\frac{1}{6}
-$$
+$$\frac{1}{6}$$
 
 But with an astragalus, the possible outcomes may have different probabilities. For this example, suppose an astragalus has four possible sides, with probabilities:
 
@@ -1056,16 +1014,14 @@ astragali_probabilities |>
 
 This means:
 
--   Side 1 appears 10% of the time;
--   Side 2 appears 40% of the time;
--   Side 3 appears 40% of the time;
--   Side 4 appears 10% of the time.
+- Side 1 appears 10% of the time;
+- Side 2 appears 40% of the time;
+- Side 3 appears 40% of the time;
+- Side 4 appears 10% of the time.
 
 The probabilities still add to 1:
 
-$$
-0.10 + 0.40 + 0.40 + 0.10 = 1
-$$
+$$0.10 + 0.40 + 0.40 + 0.10 = 1$$
 
 But the outcomes are not equally likely.
 
@@ -1150,8 +1106,8 @@ ggplot(astragali_comparison, aes(x = side, y = observed_proportion)) +
 
 In the chapter, we compared two possible sources of error in DNA evidence:
 
--   a random DNA match;
--   a laboratory error.
+- a random DNA match;
+- a laboratory error.
 
 Here is how we can code that comparison in R.
 
@@ -1174,11 +1130,9 @@ dna_errors |>
 
 If either a random match or a lab error could produce a false match, then we can approximate:
 
-$$
-P(\text{false match})
+$$P(\text{false match})
 \approx
-P(\text{random match}) + P(\text{lab error})
-$$
+P(\text{random match}) + P(\text{lab error})$$
 
 In R:
 
@@ -1303,9 +1257,7 @@ collins_result |>
 
 The arithmetic is simple. The statistical issue is the assumption behind the arithmetic. The multiplication rule:
 
-$$
-P(A \text{ and } B) = P(A)P(B)
-$$
+$$P(A \text{ and } B) = P(A)P(B)$$
 
 only works in this simple form when the events are independent.
 
@@ -1464,10 +1416,10 @@ Before the applications were assessed, however, the outcome was unknown.
 
 **b.** Possible outcomes include:
 
--   receiving no offers;
--   receiving two or three offers;
--   receiving an offer from a different internship;
--   receiving three rejections.
+- receiving no offers;
+- receiving two or three offers;
+- receiving an offer from a different internship;
+- receiving three rejections.
 
 **c.** It can be misleading because good outcomes do not always come from good decisions, and bad outcomes do not always come from bad decisions. The application strategy should be judged using the information available at the time, not only by the result that happened afterward.
 :::
@@ -1584,9 +1536,9 @@ rain |>
 
 **c.** Possible answers:
 
--   "A fair chance" might be interpreted as around 40% or 50%.
--   "Unlikely" might be interpreted as around 10% or 20%.
--   "Almost certain" might be interpreted as around 90% or 95%.
+- "A fair chance" might be interpreted as around 40% or 50%.
+- "Unlikely" might be interpreted as around 10% or 20%.
+- "Almost certain" might be interpreted as around 90% or 95%.
 
 The exact numbers are less important than recognising that verbal descriptions can be interpreted differently by different people.
 :::
@@ -1605,15 +1557,11 @@ A cafe is deciding whether to open on a public holiday. The owner thinks there a
 
 **b.** Suppose the owner assigns:
 
-$$
-P(\text{high demand}) = 0.25
-$$
+$$P(\text{high demand}) = 0.25$$
 
 and:
 
-$$
-P(\text{moderate demand}) = 0.50.
-$$
+$$P(\text{moderate demand}) = 0.50.$$
 
 If these are the only three possible outcomes, what must be the probability of low demand?
 
@@ -1626,21 +1574,15 @@ If these are the only three possible outcomes, what must be the probability of l
 
 **b.** Since the three outcomes are assumed to cover all possibilities:
 
-$$
-P(\text{high}) + P(\text{moderate}) + P(\text{low}) = 1.
-$$
+$$P(\text{high}) + P(\text{moderate}) + P(\text{low}) = 1.$$
 
 So:
 
-$$
-0.25 + 0.50 + P(\text{low}) = 1.
-$$
+$$0.25 + 0.50 + P(\text{low}) = 1.$$
 
 Therefore:
 
-$$
-P(\text{low}) = 1 - 0.75 = 0.25.
-$$
+$$P(\text{low}) = 1 - 0.75 = 0.25.$$
 
 **c.** We are assuming that the three outcomes are mutually exclusive and exhaustive. That means only one can occur, and together they cover all possible outcomes.
 :::
@@ -1655,9 +1597,7 @@ A social media account posts a video that receives 1 million views. The creator 
 
 Suppose that on a given day, each uploaded video has a probability of:
 
-$$
-\frac{1}{100{,}000}
-$$
+$$\frac{1}{100{,}000}$$
 
 of receiving 1 million views.
 
@@ -1674,9 +1614,7 @@ of receiving 1 million views.
 
 **b.** The expected number is:
 
-$$
-2{,}000{,}000 \times \frac{1}{100{,}000} = 20.
-$$
+$$2{,}000{,}000 \times \frac{1}{100{,}000} = 20.$$
 
 So we would expect about 20 videos to receive 1 million views.
 
@@ -1702,17 +1640,13 @@ A security camera captures a person wearing a red jacket, black shoes, and a gre
 
 **a.**
 
-$$
-50{,}000 \times \frac{1}{50{,}000} = 1.
-$$
+$$50{,}000 \times \frac{1}{50{,}000} = 1.$$
 
 We would expect about 1 person to match the description.
 
 **b.**
 
-$$
-2{,}000{,}000 \times \frac{1}{50{,}000} = 40.
-$$
+$$2{,}000{,}000 \times \frac{1}{50{,}000} = 40.$$
 
 We would expect about 40 people to match the description.
 
@@ -1727,20 +1661,16 @@ We would expect about 40 people to match the description.
 
 A computer file can fail to open for two reasons:
 
--   the file is corrupted;
--   the software is out of date.
+- the file is corrupted;
+- the software is out of date.
 
 Suppose:
 
-$$
-P(\text{file corrupted}) = 0.03
-$$
+$$P(\text{file corrupted}) = 0.03$$
 
 and:
 
-$$
-P(\text{software out of date}) = 0.08.
-$$
+$$P(\text{software out of date}) = 0.08.$$
 
 Assume, for this question, that the two events cannot both happen at the same time.
 
@@ -1755,17 +1685,13 @@ Assume, for this question, that the two events cannot both happen at the same ti
 
 **a.** Since the two events cannot both happen, we add the probabilities:
 
-$$
-P(\text{corrupted or out of date}) = 0.03 + 0.08 = 0.11.
-$$
+$$P(\text{corrupted or out of date}) = 0.03 + 0.08 = 0.11.$$
 
 So the probability is 0.11, or 11%.
 
 **b.** We are using the addition rule for mutually exclusive events:
 
-$$
-P(A \text{ or } B) = P(A) + P(B).
-$$
+$$P(A \text{ or } B) = P(A) + P(B).$$
 
 **c.** The assumption matters because if the events could overlap, then adding the probabilities would double-count the cases where both occur.
 :::
@@ -1778,31 +1704,21 @@ Now suppose the file problem is slightly different. A file can be corrupted, the
 
 Suppose:
 
-$$
-P(\text{file corrupted}) = 0.03
-$$
+$$P(\text{file corrupted}) = 0.03$$
 
-$$
-P(\text{software out of date}) = 0.08
-$$
+$$P(\text{software out of date}) = 0.08$$
 
 and:
 
-$$
-P(\text{file corrupted and software out of date}) = 0.01.
-$$
+$$P(\text{file corrupted and software out of date}) = 0.01.$$
 
 **a.** Calculate:
 
-$$
-P(\text{file corrupted or software out of date}).
-$$
+$$P(\text{file corrupted or software out of date}).$$
 
 **b.** Why would it be wrong to simply calculate:
 
-$$
-0.03 + 0.08 = 0.11?
-$$
+$$0.03 + 0.08 = 0.11?$$
 
 **c.** In words, what does the subtraction term do in the addition rule?
 
@@ -1811,15 +1727,11 @@ $$
 
 **a.** Use the general addition rule:
 
-$$
-P(A \text{ or } B) = P(A) + P(B) - P(A \text{ and } B).
-$$
+$$P(A \text{ or } B) = P(A) + P(B) - P(A \text{ and } B).$$
 
 So:
 
-$$
-P(\text{corrupted or out of date}) = 0.03 + 0.08 - 0.01 = 0.10.
-$$
+$$P(\text{corrupted or out of date}) = 0.03 + 0.08 - 0.01 = 0.10.$$
 
 The probability is 0.10, or 10%.
 
@@ -1834,21 +1746,15 @@ The probability is 0.10, or 10%.
 
 A university sends two reminder emails about an assignment deadline. Let:
 
-$$
-A = \text{a student reads the first reminder}
-$$
+$$A = \text{a student reads the first reminder}$$
 
 and:
 
-$$
-B = \text{a student reads the second reminder}.
-$$
+$$B = \text{a student reads the second reminder}.$$
 
 A staff member assumes:
 
-$$
-P(A \text{ and } B) = P(A)P(B).
-$$
+$$P(A \text{ and } B) = P(A)P(B).$$
 
 **a.** What assumption is the staff member making?
 
@@ -1883,15 +1789,11 @@ A fair coin is tossed three times.
 
 **a.** For a fair coin:
 
-$$
-P(\text{heads}) = \frac{1}{2}.
-$$
+$$P(\text{heads}) = \frac{1}{2}.$$
 
 If the tosses are independent:
 
-$$
-P(\text{three heads}) = \frac{1}{2} \times \frac{1}{2} \times \frac{1}{2} = \frac{1}{8}.
-$$
+$$P(\text{three heads}) = \frac{1}{2} \times \frac{1}{2} \times \frac{1}{2} = \frac{1}{8}.$$
 
 **b.** The assumption is that the coin tosses are independent. The result of one toss does not change the probability of heads on the next toss.
 
@@ -1915,21 +1817,15 @@ Suppose a journalist receives two independent tips about the same story. Each ti
 
 **a.** If each tip has a 70% chance of being accurate, then each has a 30% chance of being wrong. If the tips are independent:
 
-$$
-P(\text{both wrong}) = 0.30 \times 0.30 = 0.09.
-$$
+$$P(\text{both wrong}) = 0.30 \times 0.30 = 0.09.$$
 
 **b.**
 
-$$
-P(\text{at least one accurate}) = 1 - P(\text{both wrong}).
-$$
+$$P(\text{at least one accurate}) = 1 - P(\text{both wrong}).$$
 
 So:
 
-$$
-P(\text{at least one accurate}) = 1 - 0.09 = 0.91.
-$$
+$$P(\text{at least one accurate}) = 1 - 0.09 = 0.91.$$
 
 The probability is 0.91, or 91%.
 
@@ -2005,9 +1901,7 @@ A student is late to class. Consider these two explanations:
 
 **d.** Write this idea using probability language. Your answer should refer to the idea that:
 
-$$
-P(A \text{ and } B) \leq P(A).
-$$
+$$P(A \text{ and } B) \leq P(A).$$
 
 ::: {.callout-important collapse="true"}
 ### Click for Solutions
@@ -2020,9 +1914,7 @@ $$
 
 **d.** Let (A) be the event that the student missed the bus. Let (B) be the event that the alarm did not go off. Then:
 
-$$
-P(A \text{ and } B) \leq P(A).
-$$
+$$P(A \text{ and } B) \leq P(A).$$
 
 The probability that the student missed the bus and their alarm did not go off cannot be greater than the probability that the student simply missed the bus.
 :::
@@ -2033,10 +1925,10 @@ The probability that the student missed the bus and their alarm did not go off c
 
 A workplace investigation finds that an employee matches several characteristics of the person who accessed a restricted file:
 
--   works in the relevant department;
--   was in the building that day;
--   has access to the database;
--   uses the same type of laptop seen in security footage.
+- works in the relevant department;
+- was in the building that day;
+- has access to the database;
+- uses the same type of laptop seen in security footage.
 
 A manager says:
 
@@ -2093,12 +1985,12 @@ q16 |>
 
 Choose from the following ideas:
 
--   vague uncertainty;
--   hindsight;
--   overlap;
--   independence;
--   rare does not mean unique;
--   vividness is not probability.
+- vague uncertainty;
+- hindsight;
+- overlap;
+- independence;
+- rare does not mean unique;
+- vividness is not probability.
 
 ::: {.callout-important collapse="true"}
 ### Click for Solutions
@@ -2138,23 +2030,23 @@ q16_solution |>
 
 Choose one of the following situations:
 
--   a sports team has a surprising winning streak;
--   a university survey finds that most respondents are unhappy;
--   an online advertisement receives many clicks;
--   a friend wins a small prize twice in one week;
--   a weather forecast turns out to be wrong.
+- a sports team has a surprising winning streak;
+- a university survey finds that most respondents are unhappy;
+- an online advertisement receives many clicks;
+- a friend wins a small prize twice in one week;
+- a weather forecast turns out to be wrong.
 
 Write a short paragraph explaining how a statistician might think about the situation. Your paragraph should include at least three of the following phrases:
 
--   possible outcomes;
--   what could have happened;
--   what did happen;
--   compared with what;
--   by chance;
--   assumptions;
--   process;
--   evidence;
--   better question.
+- possible outcomes;
+- what could have happened;
+- what did happen;
+- compared with what;
+- by chance;
+- assumptions;
+- process;
+- evidence;
+- better question.
 
 ::: {.callout-important collapse="true"}
 ### Click for Solutions
@@ -2187,13 +2079,13 @@ A strong answer for **a** should explain that statistical methods are tools for 
 
 For **b** and **c**, the rewritten question should usually include at least one of the following ideas:
 
--   comparison;
--   possible outcomes;
--   uncertainty;
--   assumptions;
--   evidence;
--   process;
--   what would have happened otherwise.
+- comparison;
+- possible outcomes;
+- uncertainty;
+- assumptions;
+- evidence;
+- process;
+- what would have happened otherwise.
 
 For example:
 

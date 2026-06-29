@@ -2,13 +2,16 @@
 <html xmlns="http://www.w3.org/1999/xhtml" lang="en" xml:lang="en"><head>
 
 <meta charset="utf-8">
-<meta name="generator" content="quarto-1.7.32">
+<meta name="generator" content="quarto-1.9.37">
 
 <meta name="viewport" content="width=device-width, initial-scale=1.0, user-scalable=yes">
 
 
 <title>5&nbsp; Hypothesis Testing – Statistical Thinking</title>
 <style>
+/* Default styles provided by pandoc.
+** See https://pandoc.org/MANUAL.html#variables-for-html for config info.
+*/
 code{white-space: pre-wrap;}
 span.smallcaps{font-variant: small-caps;}
 div.columns{display: flex; gap: min(4vw, 1.5em);}
@@ -72,14 +75,14 @@ pre > code.sourceCode > span > a:first-child::before { text-decoration: underlin
 <script src="site_libs/quarto-html/tippy.umd.min.js"></script>
 <script src="site_libs/quarto-html/anchor.min.js"></script>
 <link href="site_libs/quarto-html/tippy.css" rel="stylesheet">
-<link href="site_libs/quarto-html/quarto-syntax-highlighting-37eea08aefeeee20ff55810ff984fec1.css" rel="stylesheet" class="quarto-color-scheme" id="quarto-text-highlighting-styles">
-<link href="site_libs/quarto-html/quarto-syntax-highlighting-dark-2fef5ea3f8957b3e4ecc936fc74692ca.css" rel="stylesheet" class="quarto-color-scheme quarto-color-alternate" id="quarto-text-highlighting-styles">
-<link href="site_libs/quarto-html/quarto-syntax-highlighting-37eea08aefeeee20ff55810ff984fec1.css" rel="stylesheet" class="quarto-color-scheme-extra" id="quarto-text-highlighting-styles">
+<link href="site_libs/quarto-html/quarto-syntax-highlighting-7f8f88aac4f3542376d5c11b86a4c14d.css" rel="stylesheet" class="quarto-color-scheme" id="quarto-text-highlighting-styles">
+<link href="site_libs/quarto-html/quarto-syntax-highlighting-dark-d0ae9245876894da5ac7e18953ecc5cc.css" rel="stylesheet" class="quarto-color-scheme quarto-color-alternate" id="quarto-text-highlighting-styles">
+<link href="site_libs/quarto-html/quarto-syntax-highlighting-7f8f88aac4f3542376d5c11b86a4c14d.css" rel="stylesheet" class="quarto-color-scheme-extra" id="quarto-text-highlighting-styles">
 <script src="site_libs/bootstrap/bootstrap.min.js"></script>
 <link href="site_libs/bootstrap/bootstrap-icons.css" rel="stylesheet">
-<link href="site_libs/bootstrap/bootstrap-c27fdc8e5b00b532d2d5a75ada188648.min.css" rel="stylesheet" append-hash="true" class="quarto-color-scheme" id="quarto-bootstrap" data-mode="light">
-<link href="site_libs/bootstrap/bootstrap-dark-b9e11ad5a37ead2aabff839d95ae3857.min.css" rel="stylesheet" append-hash="true" class="quarto-color-scheme quarto-color-alternate" id="quarto-bootstrap" data-mode="dark">
-<link href="site_libs/bootstrap/bootstrap-c27fdc8e5b00b532d2d5a75ada188648.min.css" rel="stylesheet" append-hash="true" class="quarto-color-scheme-extra" id="quarto-bootstrap" data-mode="light">
+<link href="site_libs/bootstrap/bootstrap-b9eaee60a963b5d74e9d33cc267de6a6.min.css" rel="stylesheet" append-hash="true" class="quarto-color-scheme" id="quarto-bootstrap" data-mode="light">
+<link href="site_libs/bootstrap/bootstrap-dark-aa873432a3c62897e6c2091c0d30a948.min.css" rel="stylesheet" append-hash="true" class="quarto-color-scheme quarto-color-alternate" id="quarto-bootstrap" data-mode="dark">
+<link href="site_libs/bootstrap/bootstrap-b9eaee60a963b5d74e9d33cc267de6a6.min.css" rel="stylesheet" append-hash="true" class="quarto-color-scheme-extra" id="quarto-bootstrap" data-mode="light">
 <script id="quarto-search-options" type="application/json">{
   "location": "sidebar",
   "copy-button": false,
@@ -109,7 +112,7 @@ pre > code.sourceCode > span > a:first-child::before { text-decoration: underlin
 }</script>
 
   <script src="https://cdnjs.cloudflare.com/polyfill/v3/polyfill.min.js?features=es6"></script>
-  <script src="https://cdn.jsdelivr.net/npm/mathjax@3/es5/tex-chtml-full.js" type="text/javascript"></script>
+  <script defer="" src="https://cdn.jsdelivr.net/npm/mathjax@3/es5/tex-chtml-full.js" type="text/javascript"></script>
 
 <script type="text/javascript">
 const typesetMath = (el) => {
@@ -122,7 +125,7 @@ const typesetMath = (el) => {
     var macros = [];
     for (var i = 0; i < mathElements.length; i++) {
       var texText = mathElements[i].firstChild;
-      if (mathElements[i].tagName == "SPAN") {
+      if (mathElements[i].tagName == "SPAN" && texText && texText.data) {
         window.katex.render(texText.data, mathElements[i], {
           displayMode: mathElements[i].classList.contains('display'),
           throwOnError: false,
@@ -471,7 +474,7 @@ window.Quarto = {
 <i class="callout-icon"></i>
 </div>
 <div class="callout-title-container flex-fill">
-Learning Objectives
+<span class="screen-reader-only">Note</span>Learning Objectives
 </div>
 </div>
 <div class="callout-body-container callout-body">
@@ -495,7 +498,7 @@ Learning Objectives
 <div class="cell-output-display">
 <div>
 <figure class="figure">
-<p><img src="images/chapter5/outline.png" class="img-fluid figure-img" width="2200"></p>
+<p><img src="images/chapter5/outline.png" class="img-fluid figure-img"></p>
 </figure>
 </div>
 </div>
@@ -524,7 +527,7 @@ Learning Objectives
 <div class="cell-output-display">
 <div>
 <figure class="figure">
-<p><img src="images/chapter5/tea.png" class="img-fluid figure-img" width="830"></p>
+<p><img src="images/chapter5/tea.png" class="img-fluid figure-img"></p>
 </figure>
 </div>
 </div>
@@ -597,7 +600,7 @@ Learning Objectives
 <i class="callout-icon"></i>
 </div>
 <div class="callout-title-container flex-fill">
-Household income
+<span class="screen-reader-only">Note</span>Household income
 </div>
 </div>
 <div class="callout-body-container callout-body">
@@ -621,23 +624,23 @@ Household income
 <p>This is where the ideas from estimation return.</p>
 <div class="cell">
 <div class="cell-output-display">
-<div id="sklecaqlpg" style="padding-left:0px;padding-right:0px;padding-top:10px;padding-bottom:10px;overflow-x:auto;overflow-y:auto;width:auto;height:auto;">
-<style>#sklecaqlpg table {
+<div id="xqelnpigbr" style="padding-left:0px;padding-right:0px;padding-top:10px;padding-bottom:10px;overflow-x:auto;overflow-y:auto;width:auto;height:auto;">
+<style>#xqelnpigbr table {
   font-family: system-ui, 'Segoe UI', Roboto, Helvetica, Arial, sans-serif, 'Apple Color Emoji', 'Segoe UI Emoji', 'Segoe UI Symbol', 'Noto Color Emoji';
   -webkit-font-smoothing: antialiased;
   -moz-osx-font-smoothing: grayscale;
 }
 
-#sklecaqlpg thead, #sklecaqlpg tbody, #sklecaqlpg tfoot, #sklecaqlpg tr, #sklecaqlpg td, #sklecaqlpg th {
+#xqelnpigbr thead, #xqelnpigbr tbody, #xqelnpigbr tfoot, #xqelnpigbr tr, #xqelnpigbr td, #xqelnpigbr th {
   border-style: none;
 }
 
-#sklecaqlpg p {
+#xqelnpigbr p {
   margin: 0;
   padding: 0;
 }
 
-#sklecaqlpg .gt_table {
+#xqelnpigbr .gt_table {
   display: table;
   border-collapse: collapse;
   line-height: normal;
@@ -663,12 +666,12 @@ Household income
   border-left-color: #D3D3D3;
 }
 
-#sklecaqlpg .gt_caption {
+#xqelnpigbr .gt_caption {
   padding-top: 4px;
   padding-bottom: 4px;
 }
 
-#sklecaqlpg .gt_title {
+#xqelnpigbr .gt_title {
   color: #333333;
   font-size: 125%;
   font-weight: initial;
@@ -680,7 +683,7 @@ Household income
   border-bottom-width: 0;
 }
 
-#sklecaqlpg .gt_subtitle {
+#xqelnpigbr .gt_subtitle {
   color: #333333;
   font-size: 85%;
   font-weight: initial;
@@ -692,7 +695,7 @@ Household income
   border-top-width: 0;
 }
 
-#sklecaqlpg .gt_heading {
+#xqelnpigbr .gt_heading {
   background-color: #FFFFFF;
   text-align: center;
   border-bottom-color: #FFFFFF;
@@ -704,13 +707,13 @@ Household income
   border-right-color: #D3D3D3;
 }
 
-#sklecaqlpg .gt_bottom_border {
+#xqelnpigbr .gt_bottom_border {
   border-bottom-style: solid;
   border-bottom-width: 2px;
   border-bottom-color: #D3D3D3;
 }
 
-#sklecaqlpg .gt_col_headings {
+#xqelnpigbr .gt_col_headings {
   border-top-style: solid;
   border-top-width: 2px;
   border-top-color: #D3D3D3;
@@ -725,7 +728,7 @@ Household income
   border-right-color: #D3D3D3;
 }
 
-#sklecaqlpg .gt_col_heading {
+#xqelnpigbr .gt_col_heading {
   color: #333333;
   background-color: #FFFFFF;
   font-size: 100%;
@@ -745,7 +748,7 @@ Household income
   overflow-x: hidden;
 }
 
-#sklecaqlpg .gt_column_spanner_outer {
+#xqelnpigbr .gt_column_spanner_outer {
   color: #333333;
   background-color: #FFFFFF;
   font-size: 100%;
@@ -757,15 +760,15 @@ Household income
   padding-right: 4px;
 }
 
-#sklecaqlpg .gt_column_spanner_outer:first-child {
+#xqelnpigbr .gt_column_spanner_outer:first-child {
   padding-left: 0;
 }
 
-#sklecaqlpg .gt_column_spanner_outer:last-child {
+#xqelnpigbr .gt_column_spanner_outer:last-child {
   padding-right: 0;
 }
 
-#sklecaqlpg .gt_column_spanner {
+#xqelnpigbr .gt_column_spanner {
   border-bottom-style: solid;
   border-bottom-width: 2px;
   border-bottom-color: #D3D3D3;
@@ -777,11 +780,11 @@ Household income
   width: 100%;
 }
 
-#sklecaqlpg .gt_spanner_row {
+#xqelnpigbr .gt_spanner_row {
   border-bottom-style: hidden;
 }
 
-#sklecaqlpg .gt_group_heading {
+#xqelnpigbr .gt_group_heading {
   padding-top: 8px;
   padding-bottom: 8px;
   padding-left: 5px;
@@ -807,7 +810,7 @@ Household income
   text-align: left;
 }
 
-#sklecaqlpg .gt_empty_group_heading {
+#xqelnpigbr .gt_empty_group_heading {
   padding: 0.5px;
   color: #333333;
   background-color: #FFFFFF;
@@ -822,15 +825,15 @@ Household income
   vertical-align: middle;
 }
 
-#sklecaqlpg .gt_from_md > :first-child {
+#xqelnpigbr .gt_from_md > :first-child {
   margin-top: 0;
 }
 
-#sklecaqlpg .gt_from_md > :last-child {
+#xqelnpigbr .gt_from_md > :last-child {
   margin-bottom: 0;
 }
 
-#sklecaqlpg .gt_row {
+#xqelnpigbr .gt_row {
   padding-top: 8px;
   padding-bottom: 8px;
   padding-left: 5px;
@@ -849,7 +852,7 @@ Household income
   overflow-x: hidden;
 }
 
-#sklecaqlpg .gt_stub {
+#xqelnpigbr .gt_stub {
   color: #333333;
   background-color: #FFFFFF;
   font-size: 100%;
@@ -862,7 +865,7 @@ Household income
   padding-right: 5px;
 }
 
-#sklecaqlpg .gt_stub_row_group {
+#xqelnpigbr .gt_stub_row_group {
   color: #333333;
   background-color: #FFFFFF;
   font-size: 100%;
@@ -876,15 +879,15 @@ Household income
   vertical-align: top;
 }
 
-#sklecaqlpg .gt_row_group_first td {
+#xqelnpigbr .gt_row_group_first td {
   border-top-width: 2px;
 }
 
-#sklecaqlpg .gt_row_group_first th {
+#xqelnpigbr .gt_row_group_first th {
   border-top-width: 2px;
 }
 
-#sklecaqlpg .gt_summary_row {
+#xqelnpigbr .gt_summary_row {
   color: #333333;
   background-color: #FFFFFF;
   text-transform: inherit;
@@ -894,16 +897,16 @@ Household income
   padding-right: 5px;
 }
 
-#sklecaqlpg .gt_first_summary_row {
+#xqelnpigbr .gt_first_summary_row {
   border-top-style: solid;
   border-top-color: #D3D3D3;
 }
 
-#sklecaqlpg .gt_first_summary_row.thick {
+#xqelnpigbr .gt_first_summary_row.thick {
   border-top-width: 2px;
 }
 
-#sklecaqlpg .gt_last_summary_row {
+#xqelnpigbr .gt_last_summary_row {
   padding-top: 8px;
   padding-bottom: 8px;
   padding-left: 5px;
@@ -913,7 +916,7 @@ Household income
   border-bottom-color: #D3D3D3;
 }
 
-#sklecaqlpg .gt_grand_summary_row {
+#xqelnpigbr .gt_grand_summary_row {
   color: #333333;
   background-color: #FFFFFF;
   text-transform: inherit;
@@ -923,7 +926,7 @@ Household income
   padding-right: 5px;
 }
 
-#sklecaqlpg .gt_first_grand_summary_row {
+#xqelnpigbr .gt_first_grand_summary_row {
   padding-top: 8px;
   padding-bottom: 8px;
   padding-left: 5px;
@@ -933,7 +936,7 @@ Household income
   border-top-color: #D3D3D3;
 }
 
-#sklecaqlpg .gt_last_grand_summary_row_top {
+#xqelnpigbr .gt_last_grand_summary_row_top {
   padding-top: 8px;
   padding-bottom: 8px;
   padding-left: 5px;
@@ -943,11 +946,11 @@ Household income
   border-bottom-color: #D3D3D3;
 }
 
-#sklecaqlpg .gt_striped {
+#xqelnpigbr .gt_striped {
   background-color: rgba(128, 128, 128, 0.05);
 }
 
-#sklecaqlpg .gt_table_body {
+#xqelnpigbr .gt_table_body {
   border-top-style: solid;
   border-top-width: 2px;
   border-top-color: #D3D3D3;
@@ -956,7 +959,7 @@ Household income
   border-bottom-color: #D3D3D3;
 }
 
-#sklecaqlpg .gt_footnotes {
+#xqelnpigbr .gt_footnotes {
   color: #333333;
   background-color: #FFFFFF;
   border-bottom-style: none;
@@ -970,7 +973,7 @@ Household income
   border-right-color: #D3D3D3;
 }
 
-#sklecaqlpg .gt_footnote {
+#xqelnpigbr .gt_footnote {
   margin: 0px;
   font-size: 90%;
   padding-top: 4px;
@@ -979,7 +982,7 @@ Household income
   padding-right: 5px;
 }
 
-#sklecaqlpg .gt_sourcenotes {
+#xqelnpigbr .gt_sourcenotes {
   color: #333333;
   background-color: #FFFFFF;
   border-bottom-style: none;
@@ -993,7 +996,7 @@ Household income
   border-right-color: #D3D3D3;
 }
 
-#sklecaqlpg .gt_sourcenote {
+#xqelnpigbr .gt_sourcenote {
   font-size: 90%;
   padding-top: 4px;
   padding-bottom: 4px;
@@ -1001,77 +1004,77 @@ Household income
   padding-right: 5px;
 }
 
-#sklecaqlpg .gt_left {
+#xqelnpigbr .gt_left {
   text-align: left;
 }
 
-#sklecaqlpg .gt_center {
+#xqelnpigbr .gt_center {
   text-align: center;
 }
 
-#sklecaqlpg .gt_right {
+#xqelnpigbr .gt_right {
   text-align: right;
   font-variant-numeric: tabular-nums;
 }
 
-#sklecaqlpg .gt_font_normal {
+#xqelnpigbr .gt_font_normal {
   font-weight: normal;
 }
 
-#sklecaqlpg .gt_font_bold {
+#xqelnpigbr .gt_font_bold {
   font-weight: bold;
 }
 
-#sklecaqlpg .gt_font_italic {
+#xqelnpigbr .gt_font_italic {
   font-style: italic;
 }
 
-#sklecaqlpg .gt_super {
+#xqelnpigbr .gt_super {
   font-size: 65%;
 }
 
-#sklecaqlpg .gt_footnote_marks {
+#xqelnpigbr .gt_footnote_marks {
   font-size: 75%;
   vertical-align: 0.4em;
   position: initial;
 }
 
-#sklecaqlpg .gt_asterisk {
+#xqelnpigbr .gt_asterisk {
   font-size: 100%;
   vertical-align: 0;
 }
 
-#sklecaqlpg .gt_indent_1 {
+#xqelnpigbr .gt_indent_1 {
   text-indent: 5px;
 }
 
-#sklecaqlpg .gt_indent_2 {
+#xqelnpigbr .gt_indent_2 {
   text-indent: 10px;
 }
 
-#sklecaqlpg .gt_indent_3 {
+#xqelnpigbr .gt_indent_3 {
   text-indent: 15px;
 }
 
-#sklecaqlpg .gt_indent_4 {
+#xqelnpigbr .gt_indent_4 {
   text-indent: 20px;
 }
 
-#sklecaqlpg .gt_indent_5 {
+#xqelnpigbr .gt_indent_5 {
   text-indent: 25px;
 }
 
-#sklecaqlpg .katex-display {
+#xqelnpigbr .katex-display {
   display: inline-flex !important;
   margin-bottom: 0.75em !important;
 }
 
-#sklecaqlpg div.Reactable > div.rt-table > div.rt-thead > div.rt-tr.rt-tr-group-header > div.rt-th-group:after {
+#xqelnpigbr div.Reactable > div.rt-table > div.rt-thead > div.rt-tr.rt-tr-group-header > div.rt-th-group:after {
   height: 0px !important;
 }
 </style>
 
-<table class="gt_table caption-top table table-sm table-striped small" data-quarto-postprocess="true" data-quarto-disable-processing="false" data-quarto-bootstrap="false">
+<table class="gt_table caption-top table table-sm table-striped small" data-quarto-bootstrap="false">
 <thead>
 <tr class="gt_col_headings header">
 <th id="Idea-from-estimation" class="gt_col_heading gt_columns_bottom_border gt_left" data-quarto-table-cell-role="th" scope="col">Idea from estimation</th>
@@ -1160,7 +1163,7 @@ H_0: \bar{x} = 100{,}000.
 <i class="callout-icon"></i>
 </div>
 <div class="callout-title-container flex-fill">
-Warning: We do not accept the null
+<span class="screen-reader-only">Important</span>Warning: We do not accept the null
 </div>
 </div>
 <div class="callout-body-container callout-body">
@@ -1219,7 +1222,7 @@ H_1: \mu &lt; 100{,}000
 <i class="callout-icon"></i>
 </div>
 <div class="callout-title-container flex-fill">
-Warning: Choose the alternative before looking at the data
+<span class="screen-reader-only">Important</span>Warning: Choose the alternative before looking at the data
 </div>
 </div>
 <div class="callout-body-container callout-body">
@@ -1268,7 +1271,7 @@ t
 <i class="callout-icon"></i>
 </div>
 <div class="callout-title-container flex-fill">
-A test statistic in words
+<span class="screen-reader-only">Note</span>A test statistic in words
 </div>
 </div>
 <div class="callout-body-container callout-body">
@@ -1301,23 +1304,23 @@ t
 <p>The sample mean is 1.25 standard errors above the null value.</p>
 <div class="cell">
 <div class="cell-output-display">
-<div id="tmkousdpzx" style="padding-left:0px;padding-right:0px;padding-top:10px;padding-bottom:10px;overflow-x:auto;overflow-y:auto;width:auto;height:auto;">
-<style>#tmkousdpzx table {
+<div id="nzqqolgxrx" style="padding-left:0px;padding-right:0px;padding-top:10px;padding-bottom:10px;overflow-x:auto;overflow-y:auto;width:auto;height:auto;">
+<style>#nzqqolgxrx table {
   font-family: system-ui, 'Segoe UI', Roboto, Helvetica, Arial, sans-serif, 'Apple Color Emoji', 'Segoe UI Emoji', 'Segoe UI Symbol', 'Noto Color Emoji';
   -webkit-font-smoothing: antialiased;
   -moz-osx-font-smoothing: grayscale;
 }
 
-#tmkousdpzx thead, #tmkousdpzx tbody, #tmkousdpzx tfoot, #tmkousdpzx tr, #tmkousdpzx td, #tmkousdpzx th {
+#nzqqolgxrx thead, #nzqqolgxrx tbody, #nzqqolgxrx tfoot, #nzqqolgxrx tr, #nzqqolgxrx td, #nzqqolgxrx th {
   border-style: none;
 }
 
-#tmkousdpzx p {
+#nzqqolgxrx p {
   margin: 0;
   padding: 0;
 }
 
-#tmkousdpzx .gt_table {
+#nzqqolgxrx .gt_table {
   display: table;
   border-collapse: collapse;
   line-height: normal;
@@ -1343,12 +1346,12 @@ t
   border-left-color: #D3D3D3;
 }
 
-#tmkousdpzx .gt_caption {
+#nzqqolgxrx .gt_caption {
   padding-top: 4px;
   padding-bottom: 4px;
 }
 
-#tmkousdpzx .gt_title {
+#nzqqolgxrx .gt_title {
   color: #333333;
   font-size: 125%;
   font-weight: initial;
@@ -1360,7 +1363,7 @@ t
   border-bottom-width: 0;
 }
 
-#tmkousdpzx .gt_subtitle {
+#nzqqolgxrx .gt_subtitle {
   color: #333333;
   font-size: 85%;
   font-weight: initial;
@@ -1372,7 +1375,7 @@ t
   border-top-width: 0;
 }
 
-#tmkousdpzx .gt_heading {
+#nzqqolgxrx .gt_heading {
   background-color: #FFFFFF;
   text-align: center;
   border-bottom-color: #FFFFFF;
@@ -1384,13 +1387,13 @@ t
   border-right-color: #D3D3D3;
 }
 
-#tmkousdpzx .gt_bottom_border {
+#nzqqolgxrx .gt_bottom_border {
   border-bottom-style: solid;
   border-bottom-width: 2px;
   border-bottom-color: #D3D3D3;
 }
 
-#tmkousdpzx .gt_col_headings {
+#nzqqolgxrx .gt_col_headings {
   border-top-style: solid;
   border-top-width: 2px;
   border-top-color: #D3D3D3;
@@ -1405,7 +1408,7 @@ t
   border-right-color: #D3D3D3;
 }
 
-#tmkousdpzx .gt_col_heading {
+#nzqqolgxrx .gt_col_heading {
   color: #333333;
   background-color: #FFFFFF;
   font-size: 100%;
@@ -1425,7 +1428,7 @@ t
   overflow-x: hidden;
 }
 
-#tmkousdpzx .gt_column_spanner_outer {
+#nzqqolgxrx .gt_column_spanner_outer {
   color: #333333;
   background-color: #FFFFFF;
   font-size: 100%;
@@ -1437,15 +1440,15 @@ t
   padding-right: 4px;
 }
 
-#tmkousdpzx .gt_column_spanner_outer:first-child {
+#nzqqolgxrx .gt_column_spanner_outer:first-child {
   padding-left: 0;
 }
 
-#tmkousdpzx .gt_column_spanner_outer:last-child {
+#nzqqolgxrx .gt_column_spanner_outer:last-child {
   padding-right: 0;
 }
 
-#tmkousdpzx .gt_column_spanner {
+#nzqqolgxrx .gt_column_spanner {
   border-bottom-style: solid;
   border-bottom-width: 2px;
   border-bottom-color: #D3D3D3;
@@ -1457,11 +1460,11 @@ t
   width: 100%;
 }
 
-#tmkousdpzx .gt_spanner_row {
+#nzqqolgxrx .gt_spanner_row {
   border-bottom-style: hidden;
 }
 
-#tmkousdpzx .gt_group_heading {
+#nzqqolgxrx .gt_group_heading {
   padding-top: 8px;
   padding-bottom: 8px;
   padding-left: 5px;
@@ -1487,7 +1490,7 @@ t
   text-align: left;
 }
 
-#tmkousdpzx .gt_empty_group_heading {
+#nzqqolgxrx .gt_empty_group_heading {
   padding: 0.5px;
   color: #333333;
   background-color: #FFFFFF;
@@ -1502,15 +1505,15 @@ t
   vertical-align: middle;
 }
 
-#tmkousdpzx .gt_from_md > :first-child {
+#nzqqolgxrx .gt_from_md > :first-child {
   margin-top: 0;
 }
 
-#tmkousdpzx .gt_from_md > :last-child {
+#nzqqolgxrx .gt_from_md > :last-child {
   margin-bottom: 0;
 }
 
-#tmkousdpzx .gt_row {
+#nzqqolgxrx .gt_row {
   padding-top: 8px;
   padding-bottom: 8px;
   padding-left: 5px;
@@ -1529,7 +1532,7 @@ t
   overflow-x: hidden;
 }
 
-#tmkousdpzx .gt_stub {
+#nzqqolgxrx .gt_stub {
   color: #333333;
   background-color: #FFFFFF;
   font-size: 100%;
@@ -1542,7 +1545,7 @@ t
   padding-right: 5px;
 }
 
-#tmkousdpzx .gt_stub_row_group {
+#nzqqolgxrx .gt_stub_row_group {
   color: #333333;
   background-color: #FFFFFF;
   font-size: 100%;
@@ -1556,15 +1559,15 @@ t
   vertical-align: top;
 }
 
-#tmkousdpzx .gt_row_group_first td {
+#nzqqolgxrx .gt_row_group_first td {
   border-top-width: 2px;
 }
 
-#tmkousdpzx .gt_row_group_first th {
+#nzqqolgxrx .gt_row_group_first th {
   border-top-width: 2px;
 }
 
-#tmkousdpzx .gt_summary_row {
+#nzqqolgxrx .gt_summary_row {
   color: #333333;
   background-color: #FFFFFF;
   text-transform: inherit;
@@ -1574,16 +1577,16 @@ t
   padding-right: 5px;
 }
 
-#tmkousdpzx .gt_first_summary_row {
+#nzqqolgxrx .gt_first_summary_row {
   border-top-style: solid;
   border-top-color: #D3D3D3;
 }
 
-#tmkousdpzx .gt_first_summary_row.thick {
+#nzqqolgxrx .gt_first_summary_row.thick {
   border-top-width: 2px;
 }
 
-#tmkousdpzx .gt_last_summary_row {
+#nzqqolgxrx .gt_last_summary_row {
   padding-top: 8px;
   padding-bottom: 8px;
   padding-left: 5px;
@@ -1593,7 +1596,7 @@ t
   border-bottom-color: #D3D3D3;
 }
 
-#tmkousdpzx .gt_grand_summary_row {
+#nzqqolgxrx .gt_grand_summary_row {
   color: #333333;
   background-color: #FFFFFF;
   text-transform: inherit;
@@ -1603,7 +1606,7 @@ t
   padding-right: 5px;
 }
 
-#tmkousdpzx .gt_first_grand_summary_row {
+#nzqqolgxrx .gt_first_grand_summary_row {
   padding-top: 8px;
   padding-bottom: 8px;
   padding-left: 5px;
@@ -1613,7 +1616,7 @@ t
   border-top-color: #D3D3D3;
 }
 
-#tmkousdpzx .gt_last_grand_summary_row_top {
+#nzqqolgxrx .gt_last_grand_summary_row_top {
   padding-top: 8px;
   padding-bottom: 8px;
   padding-left: 5px;
@@ -1623,11 +1626,11 @@ t
   border-bottom-color: #D3D3D3;
 }
 
-#tmkousdpzx .gt_striped {
+#nzqqolgxrx .gt_striped {
   background-color: rgba(128, 128, 128, 0.05);
 }
 
-#tmkousdpzx .gt_table_body {
+#nzqqolgxrx .gt_table_body {
   border-top-style: solid;
   border-top-width: 2px;
   border-top-color: #D3D3D3;
@@ -1636,7 +1639,7 @@ t
   border-bottom-color: #D3D3D3;
 }
 
-#tmkousdpzx .gt_footnotes {
+#nzqqolgxrx .gt_footnotes {
   color: #333333;
   background-color: #FFFFFF;
   border-bottom-style: none;
@@ -1650,7 +1653,7 @@ t
   border-right-color: #D3D3D3;
 }
 
-#tmkousdpzx .gt_footnote {
+#nzqqolgxrx .gt_footnote {
   margin: 0px;
   font-size: 90%;
   padding-top: 4px;
@@ -1659,7 +1662,7 @@ t
   padding-right: 5px;
 }
 
-#tmkousdpzx .gt_sourcenotes {
+#nzqqolgxrx .gt_sourcenotes {
   color: #333333;
   background-color: #FFFFFF;
   border-bottom-style: none;
@@ -1673,7 +1676,7 @@ t
   border-right-color: #D3D3D3;
 }
 
-#tmkousdpzx .gt_sourcenote {
+#nzqqolgxrx .gt_sourcenote {
   font-size: 90%;
   padding-top: 4px;
   padding-bottom: 4px;
@@ -1681,77 +1684,77 @@ t
   padding-right: 5px;
 }
 
-#tmkousdpzx .gt_left {
+#nzqqolgxrx .gt_left {
   text-align: left;
 }
 
-#tmkousdpzx .gt_center {
+#nzqqolgxrx .gt_center {
   text-align: center;
 }
 
-#tmkousdpzx .gt_right {
+#nzqqolgxrx .gt_right {
   text-align: right;
   font-variant-numeric: tabular-nums;
 }
 
-#tmkousdpzx .gt_font_normal {
+#nzqqolgxrx .gt_font_normal {
   font-weight: normal;
 }
 
-#tmkousdpzx .gt_font_bold {
+#nzqqolgxrx .gt_font_bold {
   font-weight: bold;
 }
 
-#tmkousdpzx .gt_font_italic {
+#nzqqolgxrx .gt_font_italic {
   font-style: italic;
 }
 
-#tmkousdpzx .gt_super {
+#nzqqolgxrx .gt_super {
   font-size: 65%;
 }
 
-#tmkousdpzx .gt_footnote_marks {
+#nzqqolgxrx .gt_footnote_marks {
   font-size: 75%;
   vertical-align: 0.4em;
   position: initial;
 }
 
-#tmkousdpzx .gt_asterisk {
+#nzqqolgxrx .gt_asterisk {
   font-size: 100%;
   vertical-align: 0;
 }
 
-#tmkousdpzx .gt_indent_1 {
+#nzqqolgxrx .gt_indent_1 {
   text-indent: 5px;
 }
 
-#tmkousdpzx .gt_indent_2 {
+#nzqqolgxrx .gt_indent_2 {
   text-indent: 10px;
 }
 
-#tmkousdpzx .gt_indent_3 {
+#nzqqolgxrx .gt_indent_3 {
   text-indent: 15px;
 }
 
-#tmkousdpzx .gt_indent_4 {
+#nzqqolgxrx .gt_indent_4 {
   text-indent: 20px;
 }
 
-#tmkousdpzx .gt_indent_5 {
+#nzqqolgxrx .gt_indent_5 {
   text-indent: 25px;
 }
 
-#tmkousdpzx .katex-display {
+#nzqqolgxrx .katex-display {
   display: inline-flex !important;
   margin-bottom: 0.75em !important;
 }
 
-#tmkousdpzx div.Reactable > div.rt-table > div.rt-thead > div.rt-tr.rt-tr-group-header > div.rt-th-group:after {
+#nzqqolgxrx div.Reactable > div.rt-table > div.rt-thead > div.rt-tr.rt-tr-group-header > div.rt-th-group:after {
   height: 0px !important;
 }
 </style>
 
-<table class="gt_table caption-top table table-sm table-striped small" data-quarto-postprocess="true" data-quarto-disable-processing="false" data-quarto-bootstrap="false">
+<table class="gt_table caption-top table table-sm table-striped small" data-quarto-bootstrap="false">
 <thead>
 <tr class="gt_col_headings header">
 <th id="Quantity" class="gt_col_heading gt_columns_bottom_border gt_left" data-quarto-table-cell-role="th" scope="col">Quantity</th>
@@ -1846,7 +1849,7 @@ H_0: \mu = 100{,}000
 <i class="callout-icon"></i>
 </div>
 <div class="callout-title-container flex-fill">
-Warning: The 5% level is a convention
+<span class="screen-reader-only">Important</span>Warning: The 5% level is a convention
 </div>
 </div>
 <div class="callout-body-container callout-body">
@@ -1893,7 +1896,7 @@ t = 2.29.
 <p>For a two-sided test, values at least as extreme as <span class="math inline">\(2.29\)</span> include values greater than <span class="math inline">\(2.29\)</span> and values less than <span class="math inline">\(-2.29\)</span>. The p-value is the probability, under the null distribution, of landing in either tail.</p>
 <p>In R, using a <span class="math inline">\(t\)</span> distribution with 99 degrees of freedom:</p>
 <div class="cell">
-<div class="sourceCode cell-code" id="cb1"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb1-1"><a href="#cb1-1" aria-hidden="true" tabindex="-1"></a><span class="dv">2</span> <span class="sc">*</span> <span class="fu">pt</span>(<span class="sc">-</span><span class="fu">abs</span>(<span class="fl">2.29</span>), <span class="at">df =</span> <span class="dv">99</span>)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="code-copy-outer-scaffold"><div class="sourceCode cell-code" id="cb1"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb1-1"><a href="#cb1-1" aria-hidden="true" tabindex="-1"></a><span class="dv">2</span> <span class="sc">*</span> <span class="fu">pt</span>(<span class="sc">-</span><span class="fu">abs</span>(<span class="fl">2.29</span>), <span class="at">df =</span> <span class="dv">99</span>)</span></code></pre></div><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></div>
 <div class="cell-output cell-output-stdout">
 <pre><code>[1] 0.02414349</code></pre>
 </div>
@@ -1915,7 +1918,7 @@ p\text{-value} &gt; 0.01
 <i class="callout-icon"></i>
 </div>
 <div class="callout-title-container flex-fill">
-Warning: What a p-value is not
+<span class="screen-reader-only">Important</span>Warning: What a p-value is not
 </div>
 </div>
 <div class="callout-body-container callout-body">
@@ -1944,7 +1947,7 @@ Warning: What a p-value is not
 <i class="callout-icon"></i>
 </div>
 <div class="callout-title-container flex-fill">
-Mean household income
+<span class="screen-reader-only">Note</span>Mean household income
 </div>
 </div>
 <div class="callout-body-container callout-body">
@@ -1997,13 +2000,13 @@ n - 1 = 99
 \]</span></p>
 <p>The two-sided p-value is:</p>
 <div class="cell">
-<div class="sourceCode cell-code" id="cb3"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb3-1"><a href="#cb3-1" aria-hidden="true" tabindex="-1"></a>xbar <span class="ot">&lt;-</span> <span class="dv">108000</span></span>
+<div class="code-copy-outer-scaffold"><div class="sourceCode cell-code" id="cb3"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb3-1"><a href="#cb3-1" aria-hidden="true" tabindex="-1"></a>xbar <span class="ot">&lt;-</span> <span class="dv">108000</span></span>
 <span id="cb3-2"><a href="#cb3-2" aria-hidden="true" tabindex="-1"></a>mu0 <span class="ot">&lt;-</span> <span class="dv">100000</span></span>
 <span id="cb3-3"><a href="#cb3-3" aria-hidden="true" tabindex="-1"></a>s <span class="ot">&lt;-</span> <span class="dv">35000</span></span>
 <span id="cb3-4"><a href="#cb3-4" aria-hidden="true" tabindex="-1"></a>n <span class="ot">&lt;-</span> <span class="dv">100</span></span>
 <span id="cb3-5"><a href="#cb3-5" aria-hidden="true" tabindex="-1"></a>se <span class="ot">&lt;-</span> s <span class="sc">/</span> <span class="fu">sqrt</span>(n)</span>
 <span id="cb3-6"><a href="#cb3-6" aria-hidden="true" tabindex="-1"></a>t_obs <span class="ot">&lt;-</span> (xbar <span class="sc">-</span> mu0) <span class="sc">/</span> se</span>
-<span id="cb3-7"><a href="#cb3-7" aria-hidden="true" tabindex="-1"></a>p_value <span class="ot">&lt;-</span> <span class="dv">2</span> <span class="sc">*</span> <span class="fu">pt</span>(<span class="sc">-</span><span class="fu">abs</span>(t_obs), <span class="at">df =</span> n <span class="sc">-</span> <span class="dv">1</span>)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<span id="cb3-7"><a href="#cb3-7" aria-hidden="true" tabindex="-1"></a>p_value <span class="ot">&lt;-</span> <span class="dv">2</span> <span class="sc">*</span> <span class="fu">pt</span>(<span class="sc">-</span><span class="fu">abs</span>(t_obs), <span class="at">df =</span> n <span class="sc">-</span> <span class="dv">1</span>)</span></code></pre></div><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></div>
 </div>
 <div class="cell">
 <div class="cell-output-display">
@@ -2457,7 +2460,7 @@ n - 1 = 99
 }
 </style>
 
-<table class="gt_table caption-top table table-sm table-striped small" data-quarto-postprocess="true" data-quarto-disable-processing="false" data-quarto-bootstrap="false">
+<table class="gt_table caption-top table table-sm table-striped small" data-quarto-bootstrap="false">
 <thead>
 <tr class="gt_col_headings header">
 <th id="Sample-mean" class="gt_col_heading gt_columns_bottom_border gt_right" data-quarto-table-cell-role="th" scope="col">Sample mean</th>
@@ -2491,9 +2494,9 @@ n - 1 = 99
 <p>It is also incomplete to report only the p-value. We should report the estimate and uncertainty as well.</p>
 <p>The corresponding 95% confidence interval is:</p>
 <div class="cell">
-<div class="sourceCode cell-code" id="cb4"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb4-1"><a href="#cb4-1" aria-hidden="true" tabindex="-1"></a>multiplier <span class="ot">&lt;-</span> <span class="fu">qt</span>(<span class="fl">0.975</span>, <span class="at">df =</span> n <span class="sc">-</span> <span class="dv">1</span>)</span>
+<div class="code-copy-outer-scaffold"><div class="sourceCode cell-code" id="cb4"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb4-1"><a href="#cb4-1" aria-hidden="true" tabindex="-1"></a>multiplier <span class="ot">&lt;-</span> <span class="fu">qt</span>(<span class="fl">0.975</span>, <span class="at">df =</span> n <span class="sc">-</span> <span class="dv">1</span>)</span>
 <span id="cb4-2"><a href="#cb4-2" aria-hidden="true" tabindex="-1"></a>lower <span class="ot">&lt;-</span> xbar <span class="sc">-</span> multiplier <span class="sc">*</span> se</span>
-<span id="cb4-3"><a href="#cb4-3" aria-hidden="true" tabindex="-1"></a>upper <span class="ot">&lt;-</span> xbar <span class="sc">+</span> multiplier <span class="sc">*</span> se</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<span id="cb4-3"><a href="#cb4-3" aria-hidden="true" tabindex="-1"></a>upper <span class="ot">&lt;-</span> xbar <span class="sc">+</span> multiplier <span class="sc">*</span> se</span></code></pre></div><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></div>
 </div>
 <div class="cell">
 <div class="cell-output-display">
@@ -2947,7 +2950,7 @@ n - 1 = 99
 }
 </style>
 
-<table class="gt_table caption-top table table-sm table-striped small" data-quarto-postprocess="true" data-quarto-disable-processing="false" data-quarto-bootstrap="false">
+<table class="gt_table caption-top table table-sm table-striped small" data-quarto-bootstrap="false">
 <thead>
 <tr class="gt_col_headings header">
 <th id="Estimate" class="gt_col_heading gt_columns_bottom_border gt_right" data-quarto-table-cell-role="th" scope="col">Estimate</th>
@@ -3000,7 +3003,7 @@ H_0: \mu = 100{,}000
 <i class="callout-icon"></i>
 </div>
 <div class="callout-title-container flex-fill">
-Household income in two regions
+<span class="screen-reader-only">Note</span>Household income in two regions
 </div>
 </div>
 <div class="callout-body-container callout-body">
@@ -3484,7 +3487,7 @@ H_1: \mu_{\text{capital}} \neq \mu_{\text{regional}}
 }
 </style>
 
-<table class="gt_table caption-top table table-sm table-striped small" data-quarto-postprocess="true" data-quarto-disable-processing="false" data-quarto-bootstrap="false">
+<table class="gt_table caption-top table table-sm table-striped small" data-quarto-bootstrap="false">
 <thead>
 <tr class="gt_col_headings header">
 <th id="region" class="gt_col_heading gt_columns_bottom_border gt_left" data-quarto-table-cell-role="th" scope="col">region</th>
@@ -3523,7 +3526,7 @@ t
 <p>This version is called Welch’s two-sample t-test. It does not require us to assume that the two population variances are equal.</p>
 <p>We usually let R calculate the details, including the degrees of freedom.</p>
 <div class="cell">
-<div class="sourceCode cell-code" id="cb5"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb5-1"><a href="#cb5-1" aria-hidden="true" tabindex="-1"></a><span class="fu">t.test</span>(income <span class="sc">~</span> region, <span class="at">data =</span> income_regions)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="code-copy-outer-scaffold"><div class="sourceCode cell-code" id="cb5"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb5-1"><a href="#cb5-1" aria-hidden="true" tabindex="-1"></a><span class="fu">t.test</span>(income <span class="sc">~</span> region, <span class="at">data =</span> income_regions)</span></code></pre></div><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></div>
 <div class="cell-output cell-output-stdout">
 <pre><code>
     Welch Two Sample t-test
@@ -3557,7 +3560,7 @@ H_1: \mu_{\text{capital}} - \mu_{\text{regional}} &gt; 0
 \]</span></p>
 <p>In R, the direction depends on how the groups are ordered. It is often clearer to create two objects and then use them directly.</p>
 <div class="cell">
-<div class="sourceCode cell-code" id="cb7"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb7-1"><a href="#cb7-1" aria-hidden="true" tabindex="-1"></a>capital_income <span class="ot">&lt;-</span> income_regions <span class="sc">|&gt;</span></span>
+<div class="code-copy-outer-scaffold"><div class="sourceCode cell-code" id="cb7"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb7-1"><a href="#cb7-1" aria-hidden="true" tabindex="-1"></a>capital_income <span class="ot">&lt;-</span> income_regions <span class="sc">|&gt;</span></span>
 <span id="cb7-2"><a href="#cb7-2" aria-hidden="true" tabindex="-1"></a>  <span class="fu">filter</span>(region <span class="sc">==</span> <span class="st">"Capital city"</span>) <span class="sc">|&gt;</span></span>
 <span id="cb7-3"><a href="#cb7-3" aria-hidden="true" tabindex="-1"></a>  <span class="fu">pull</span>(income)</span>
 <span id="cb7-4"><a href="#cb7-4" aria-hidden="true" tabindex="-1"></a></span>
@@ -3565,7 +3568,7 @@ H_1: \mu_{\text{capital}} - \mu_{\text{regional}} &gt; 0
 <span id="cb7-6"><a href="#cb7-6" aria-hidden="true" tabindex="-1"></a>  <span class="fu">filter</span>(region <span class="sc">==</span> <span class="st">"Regional"</span>) <span class="sc">|&gt;</span></span>
 <span id="cb7-7"><a href="#cb7-7" aria-hidden="true" tabindex="-1"></a>  <span class="fu">pull</span>(income)</span>
 <span id="cb7-8"><a href="#cb7-8" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb7-9"><a href="#cb7-9" aria-hidden="true" tabindex="-1"></a><span class="fu">t.test</span>(capital_income, regional_income, <span class="at">alternative =</span> <span class="st">"greater"</span>)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<span id="cb7-9"><a href="#cb7-9" aria-hidden="true" tabindex="-1"></a><span class="fu">t.test</span>(capital_income, regional_income, <span class="at">alternative =</span> <span class="st">"greater"</span>)</span></code></pre></div><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></div>
 <div class="cell-output cell-output-stdout">
 <pre><code>
     Welch Two Sample t-test
@@ -3590,7 +3593,7 @@ mean of x mean of y
 <i class="callout-icon"></i>
 </div>
 <div class="callout-title-container flex-fill">
-Income before and after housing costs
+<span class="screen-reader-only">Note</span>Income before and after housing costs
 </div>
 </div>
 <div class="callout-body-container callout-body">
@@ -4069,7 +4072,7 @@ H_1: \mu_D &gt; 0
 }
 </style>
 
-<table class="gt_table caption-top table table-sm table-striped small" data-quarto-postprocess="true" data-quarto-disable-processing="false" data-quarto-bootstrap="false">
+<table class="gt_table caption-top table table-sm table-striped small" data-quarto-bootstrap="false">
 <thead>
 <tr class="gt_col_headings header">
 <th id="n" class="gt_col_heading gt_columns_bottom_border gt_right" data-quarto-table-cell-role="th" scope="col">n</th>
@@ -4082,7 +4085,7 @@ H_1: \mu_D &gt; 0
 <tr class="odd">
 <td class="gt_row gt_right" headers="n">40</td>
 <td class="gt_row gt_right" headers="Mean before housing costs">$88,230</td>
-<td class="gt_row gt_right" headers="Mean after housing costs">$65,123</td>
+<td class="gt_row gt_right" headers="Mean after housing costs">$65,122</td>
 <td class="gt_row gt_right" headers="Mean difference">$23,108</td>
 </tr>
 </tbody>
@@ -4093,10 +4096,10 @@ H_1: \mu_D &gt; 0
 </div>
 <p>We can run the paired test in R:</p>
 <div class="cell">
-<div class="sourceCode cell-code" id="cb9"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb9-1"><a href="#cb9-1" aria-hidden="true" tabindex="-1"></a><span class="fu">t.test</span>(housing_data<span class="sc">$</span>before_housing, </span>
+<div class="code-copy-outer-scaffold"><div class="sourceCode cell-code" id="cb9"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb9-1"><a href="#cb9-1" aria-hidden="true" tabindex="-1"></a><span class="fu">t.test</span>(housing_data<span class="sc">$</span>before_housing, </span>
 <span id="cb9-2"><a href="#cb9-2" aria-hidden="true" tabindex="-1"></a>       housing_data<span class="sc">$</span>after_housing, </span>
 <span id="cb9-3"><a href="#cb9-3" aria-hidden="true" tabindex="-1"></a>       <span class="at">paired =</span> <span class="cn">TRUE</span>, </span>
-<span id="cb9-4"><a href="#cb9-4" aria-hidden="true" tabindex="-1"></a>       <span class="at">alternative =</span> <span class="st">"greater"</span>)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<span id="cb9-4"><a href="#cb9-4" aria-hidden="true" tabindex="-1"></a>       <span class="at">alternative =</span> <span class="st">"greater"</span>)</span></code></pre></div><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></div>
 <div class="cell-output cell-output-stdout">
 <pre><code>
     Paired t-test
@@ -4113,9 +4116,9 @@ mean difference
 </div>
 <p>Or we can calculate the differences ourselves and run a one-sample t-test:</p>
 <div class="cell">
-<div class="sourceCode cell-code" id="cb11"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb11-1"><a href="#cb11-1" aria-hidden="true" tabindex="-1"></a><span class="fu">t.test</span>(housing_data<span class="sc">$</span>difference, </span>
+<div class="code-copy-outer-scaffold"><div class="sourceCode cell-code" id="cb11"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb11-1"><a href="#cb11-1" aria-hidden="true" tabindex="-1"></a><span class="fu">t.test</span>(housing_data<span class="sc">$</span>difference, </span>
 <span id="cb11-2"><a href="#cb11-2" aria-hidden="true" tabindex="-1"></a>       <span class="at">mu =</span> <span class="dv">0</span>, </span>
-<span id="cb11-3"><a href="#cb11-3" aria-hidden="true" tabindex="-1"></a>       <span class="at">alternative =</span> <span class="st">"greater"</span>)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<span id="cb11-3"><a href="#cb11-3" aria-hidden="true" tabindex="-1"></a>       <span class="at">alternative =</span> <span class="st">"greater"</span>)</span></code></pre></div><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></div>
 <div class="cell-output cell-output-stdout">
 <pre><code>
     One Sample t-test
@@ -4592,7 +4595,7 @@ mean of x
 }
 </style>
 
-<table class="gt_table caption-top table table-sm table-striped small" data-quarto-postprocess="true" data-quarto-disable-processing="false" data-quarto-bootstrap="false">
+<table class="gt_table caption-top table table-sm table-striped small" data-quarto-bootstrap="false">
 <thead>
 <tr class="gt_col_headings header">
 <th id="Reality" class="gt_col_heading gt_columns_bottom_border gt_left" data-quarto-table-cell-role="th" scope="col">Reality</th>
@@ -4634,7 +4637,7 @@ mean of x
 <i class="callout-icon"></i>
 </div>
 <div class="callout-title-container flex-fill">
-A policy threshold
+<span class="screen-reader-only">Note</span>A policy threshold
 </div>
 </div>
 <div class="callout-body-container callout-body">
@@ -5125,7 +5128,7 @@ H_1: p &gt; 0.25
 }
 </style>
 
-<table class="gt_table caption-top table table-sm table-striped small" data-quarto-postprocess="true" data-quarto-disable-processing="false" data-quarto-bootstrap="false">
+<table class="gt_table caption-top table table-sm table-striped small" data-quarto-bootstrap="false">
 <thead>
 <tr class="gt_col_headings header">
 <th id="Scenario" class="gt_col_heading gt_columns_bottom_border gt_left" data-quarto-table-cell-role="th" scope="col">Scenario</th>
@@ -5609,7 +5612,7 @@ H_1: p &gt; 0.25
 }
 </style>
 
-<table class="gt_table caption-top table table-sm table-striped small" data-quarto-postprocess="true" data-quarto-disable-processing="false" data-quarto-bootstrap="false">
+<table class="gt_table caption-top table table-sm table-striped small" data-quarto-bootstrap="false">
 <thead>
 <tr class="gt_col_headings header">
 <th id="Misinterpretation" class="gt_col_heading gt_columns_bottom_border gt_left" data-quarto-table-cell-role="th" scope="col">Misinterpretation</th>
@@ -5692,7 +5695,7 @@ p = 0.003
 <i class="callout-icon"></i>
 </div>
 <div class="callout-title-container flex-fill">
-Question 1
+<span class="screen-reader-only">Note</span>Question 1
 </div>
 </div>
 <div class="callout-body-container callout-body">
@@ -5708,12 +5711,12 @@ Question 1
 <li>Explain, in words, what it would mean to reject the null hypothesis.</li>
 </ol>
 <div class="callout callout-style-default callout-important callout-titled">
-<div class="callout-header d-flex align-content-center" data-bs-toggle="collapse" data-bs-target=".callout-12-contents" aria-controls="callout-12" aria-expanded="false" aria-label="Toggle callout">
+<div class="callout-header d-flex align-content-center collapsed" data-bs-toggle="collapse" data-bs-target=".callout-12-contents" aria-controls="callout-12" aria-expanded="false" aria-label="Toggle callout">
 <div class="callout-icon-container">
 <i class="callout-icon"></i>
 </div>
 <div class="callout-title-container flex-fill">
-Click for Solution
+<span class="screen-reader-only">Important</span>Click for Solution
 </div>
 <div class="callout-btn-toggle d-inline-block border-0 py-1 ps-1 pe-0 float-end"><i class="callout-toggle"></i></div>
 </div>
@@ -5752,7 +5755,7 @@ H_1: \mu \neq 100{,}000
 <i class="callout-icon"></i>
 </div>
 <div class="callout-title-container flex-fill">
-Question 2
+<span class="screen-reader-only">Note</span>Question 2
 </div>
 </div>
 <div class="callout-body-container callout-body">
@@ -5765,12 +5768,12 @@ Question 2
 <li>Is this a one-sided or two-sided test? Explain.</li>
 </ol>
 <div class="callout callout-style-default callout-important callout-titled">
-<div class="callout-header d-flex align-content-center" data-bs-toggle="collapse" data-bs-target=".callout-14-contents" aria-controls="callout-14" aria-expanded="false" aria-label="Toggle callout">
+<div class="callout-header d-flex align-content-center collapsed" data-bs-toggle="collapse" data-bs-target=".callout-14-contents" aria-controls="callout-14" aria-expanded="false" aria-label="Toggle callout">
 <div class="callout-icon-container">
 <i class="callout-icon"></i>
 </div>
 <div class="callout-title-container flex-fill">
-Click for Solution
+<span class="screen-reader-only">Important</span>Click for Solution
 </div>
 <div class="callout-btn-toggle d-inline-block border-0 py-1 ps-1 pe-0 float-end"><i class="callout-toggle"></i></div>
 </div>
@@ -5805,7 +5808,7 @@ H_1: p &gt; 0.25
 <i class="callout-icon"></i>
 </div>
 <div class="callout-title-container flex-fill">
-Question 3
+<span class="screen-reader-only">Note</span>Question 3
 </div>
 </div>
 <div class="callout-body-container callout-body">
@@ -5820,12 +5823,12 @@ Question 3
 <li>A policy team asks whether the proportion of households experiencing rental stress is greater than 30%.</li>
 </ol>
 <div class="callout callout-style-default callout-important callout-titled">
-<div class="callout-header d-flex align-content-center" data-bs-toggle="collapse" data-bs-target=".callout-16-contents" aria-controls="callout-16" aria-expanded="false" aria-label="Toggle callout">
+<div class="callout-header d-flex align-content-center collapsed" data-bs-toggle="collapse" data-bs-target=".callout-16-contents" aria-controls="callout-16" aria-expanded="false" aria-label="Toggle callout">
 <div class="callout-icon-container">
 <i class="callout-icon"></i>
 </div>
 <div class="callout-title-container flex-fill">
-Click for Solution
+<span class="screen-reader-only">Important</span>Click for Solution
 </div>
 <div class="callout-btn-toggle d-inline-block border-0 py-1 ps-1 pe-0 float-end"><i class="callout-toggle"></i></div>
 </div>
@@ -5866,19 +5869,19 @@ H_1: p &gt; 0.30
 <i class="callout-icon"></i>
 </div>
 <div class="callout-title-container flex-fill">
-Question 4
+<span class="screen-reader-only">Note</span>Question 4
 </div>
 </div>
 <div class="callout-body-container callout-body">
 <p>Explain the difference between rejecting the null hypothesis and failing to reject the null hypothesis.</p>
 <p>Why do we usually avoid saying that we “accept” the null hypothesis?</p>
 <div class="callout callout-style-default callout-important callout-titled">
-<div class="callout-header d-flex align-content-center" data-bs-toggle="collapse" data-bs-target=".callout-18-contents" aria-controls="callout-18" aria-expanded="false" aria-label="Toggle callout">
+<div class="callout-header d-flex align-content-center collapsed" data-bs-toggle="collapse" data-bs-target=".callout-18-contents" aria-controls="callout-18" aria-expanded="false" aria-label="Toggle callout">
 <div class="callout-icon-container">
 <i class="callout-icon"></i>
 </div>
 <div class="callout-title-container flex-fill">
-Click for Solution
+<span class="screen-reader-only">Important</span>Click for Solution
 </div>
 <div class="callout-btn-toggle d-inline-block border-0 py-1 ps-1 pe-0 float-end"><i class="callout-toggle"></i></div>
 </div>
@@ -5902,7 +5905,7 @@ Click for Solution
 <i class="callout-icon"></i>
 </div>
 <div class="callout-title-container flex-fill">
-Question 5
+<span class="screen-reader-only">Note</span>Question 5
 </div>
 </div>
 <div class="callout-body-container callout-body">
@@ -5916,12 +5919,12 @@ p = 0.18
 </blockquote>
 <p>Explain why this interpretation is incorrect. Then write a better interpretation.</p>
 <div class="callout callout-style-default callout-important callout-titled">
-<div class="callout-header d-flex align-content-center" data-bs-toggle="collapse" data-bs-target=".callout-20-contents" aria-controls="callout-20" aria-expanded="false" aria-label="Toggle callout">
+<div class="callout-header d-flex align-content-center collapsed" data-bs-toggle="collapse" data-bs-target=".callout-20-contents" aria-controls="callout-20" aria-expanded="false" aria-label="Toggle callout">
 <div class="callout-icon-container">
 <i class="callout-icon"></i>
 </div>
 <div class="callout-title-container flex-fill">
-Click for Solution
+<span class="screen-reader-only">Important</span>Click for Solution
 </div>
 <div class="callout-btn-toggle d-inline-block border-0 py-1 ps-1 pe-0 float-end"><i class="callout-toggle"></i></div>
 </div>
@@ -5948,7 +5951,7 @@ Click for Solution
 <i class="callout-icon"></i>
 </div>
 <div class="callout-title-container flex-fill">
-Question 6
+<span class="screen-reader-only">Note</span>Question 6
 </div>
 </div>
 <div class="callout-body-container callout-body">
@@ -5962,12 +5965,12 @@ p &lt; 0.001
 </blockquote>
 <p>Explain what is wrong with this statement.</p>
 <div class="callout callout-style-default callout-important callout-titled">
-<div class="callout-header d-flex align-content-center" data-bs-toggle="collapse" data-bs-target=".callout-22-contents" aria-controls="callout-22" aria-expanded="false" aria-label="Toggle callout">
+<div class="callout-header d-flex align-content-center collapsed" data-bs-toggle="collapse" data-bs-target=".callout-22-contents" aria-controls="callout-22" aria-expanded="false" aria-label="Toggle callout">
 <div class="callout-icon-container">
 <i class="callout-icon"></i>
 </div>
 <div class="callout-title-container flex-fill">
-Click for Solution
+<span class="screen-reader-only">Important</span>Click for Solution
 </div>
 <div class="callout-btn-toggle d-inline-block border-0 py-1 ps-1 pe-0 float-end"><i class="callout-toggle"></i></div>
 </div>
@@ -5991,7 +5994,7 @@ Click for Solution
 <i class="callout-icon"></i>
 </div>
 <div class="callout-title-container flex-fill">
-Question 7
+<span class="screen-reader-only">Note</span>Question 7
 </div>
 </div>
 <div class="callout-body-container callout-body">
@@ -6005,12 +6008,12 @@ p = 0.12
 </blockquote>
 <p>Explain why this conclusion is too strong.</p>
 <div class="callout callout-style-default callout-important callout-titled">
-<div class="callout-header d-flex align-content-center" data-bs-toggle="collapse" data-bs-target=".callout-24-contents" aria-controls="callout-24" aria-expanded="false" aria-label="Toggle callout">
+<div class="callout-header d-flex align-content-center collapsed" data-bs-toggle="collapse" data-bs-target=".callout-24-contents" aria-controls="callout-24" aria-expanded="false" aria-label="Toggle callout">
 <div class="callout-icon-container">
 <i class="callout-icon"></i>
 </div>
 <div class="callout-title-container flex-fill">
-Click for Solution
+<span class="screen-reader-only">Important</span>Click for Solution
 </div>
 <div class="callout-btn-toggle d-inline-block border-0 py-1 ps-1 pe-0 float-end"><i class="callout-toggle"></i></div>
 </div>
@@ -6034,7 +6037,7 @@ Click for Solution
 <i class="callout-icon"></i>
 </div>
 <div class="callout-title-container flex-fill">
-Question 8
+<span class="screen-reader-only">Note</span>Question 8
 </div>
 </div>
 <div class="callout-body-container callout-body">
@@ -6060,12 +6063,12 @@ H_1: \mu \neq 100{,}000.
 <li>Using the fact that the two-sided p-value is approximately 0.024, state the conclusion at the 5% level.</li>
 </ol>
 <div class="callout callout-style-default callout-important callout-titled">
-<div class="callout-header d-flex align-content-center" data-bs-toggle="collapse" data-bs-target=".callout-26-contents" aria-controls="callout-26" aria-expanded="false" aria-label="Toggle callout">
+<div class="callout-header d-flex align-content-center collapsed" data-bs-toggle="collapse" data-bs-target=".callout-26-contents" aria-controls="callout-26" aria-expanded="false" aria-label="Toggle callout">
 <div class="callout-icon-container">
 <i class="callout-icon"></i>
 </div>
 <div class="callout-title-container flex-fill">
-Click for Solution
+<span class="screen-reader-only">Important</span>Click for Solution
 </div>
 <div class="callout-btn-toggle d-inline-block border-0 py-1 ps-1 pe-0 float-end"><i class="callout-toggle"></i></div>
 </div>
@@ -6121,7 +6124,7 @@ t =
 <i class="callout-icon"></i>
 </div>
 <div class="callout-title-container flex-fill">
-Question 9
+<span class="screen-reader-only">Note</span>Question 9
 </div>
 </div>
 <div class="callout-body-container callout-body">
@@ -6142,12 +6145,12 @@ H_1: \mu &lt; 100{,}000.
 <li>The one-sided p-value is approximately 0.018. What conclusion would you make at the 5% level?</li>
 </ol>
 <div class="callout callout-style-default callout-important callout-titled">
-<div class="callout-header d-flex align-content-center" data-bs-toggle="collapse" data-bs-target=".callout-28-contents" aria-controls="callout-28" aria-expanded="false" aria-label="Toggle callout">
+<div class="callout-header d-flex align-content-center collapsed" data-bs-toggle="collapse" data-bs-target=".callout-28-contents" aria-controls="callout-28" aria-expanded="false" aria-label="Toggle callout">
 <div class="callout-icon-container">
 <i class="callout-icon"></i>
 </div>
 <div class="callout-title-container flex-fill">
-Click for Solution
+<span class="screen-reader-only">Important</span>Click for Solution
 </div>
 <div class="callout-btn-toggle d-inline-block border-0 py-1 ps-1 pe-0 float-end"><i class="callout-toggle"></i></div>
 </div>
@@ -6201,7 +6204,7 @@ t =
 <i class="callout-icon"></i>
 </div>
 <div class="callout-title-container flex-fill">
-Question 10
+<span class="screen-reader-only">Note</span>Question 10
 </div>
 </div>
 <div class="callout-body-container callout-body">
@@ -6230,12 +6233,12 @@ z =
 <li>The one-sided p-value is approximately 0.052. What conclusion would you make at the 5% level?</li>
 </ol>
 <div class="callout callout-style-default callout-important callout-titled">
-<div class="callout-header d-flex align-content-center" data-bs-toggle="collapse" data-bs-target=".callout-30-contents" aria-controls="callout-30" aria-expanded="false" aria-label="Toggle callout">
+<div class="callout-header d-flex align-content-center collapsed" data-bs-toggle="collapse" data-bs-target=".callout-30-contents" aria-controls="callout-30" aria-expanded="false" aria-label="Toggle callout">
 <div class="callout-icon-container">
 <i class="callout-icon"></i>
 </div>
 <div class="callout-title-container flex-fill">
-Click for Solution
+<span class="screen-reader-only">Important</span>Click for Solution
 </div>
 <div class="callout-btn-toggle d-inline-block border-0 py-1 ps-1 pe-0 float-end"><i class="callout-toggle"></i></div>
 </div>
@@ -6301,7 +6304,7 @@ z =
 <i class="callout-icon"></i>
 </div>
 <div class="callout-title-container flex-fill">
-Question 11
+<span class="screen-reader-only">Note</span>Question 11
 </div>
 </div>
 <div class="callout-body-container callout-body">
@@ -6347,12 +6350,12 @@ H_0: p_{\text{regional}} = p_{\text{capital}}
 H_1: p_{\text{regional}} \neq p_{\text{capital}}?
 \]</span></p>
 <div class="callout callout-style-default callout-important callout-titled">
-<div class="callout-header d-flex align-content-center" data-bs-toggle="collapse" data-bs-target=".callout-32-contents" aria-controls="callout-32" aria-expanded="false" aria-label="Toggle callout">
+<div class="callout-header d-flex align-content-center collapsed" data-bs-toggle="collapse" data-bs-target=".callout-32-contents" aria-controls="callout-32" aria-expanded="false" aria-label="Toggle callout">
 <div class="callout-icon-container">
 <i class="callout-icon"></i>
 </div>
 <div class="callout-title-container flex-fill">
-Click for Solution
+<span class="screen-reader-only">Important</span>Click for Solution
 </div>
 <div class="callout-btn-toggle d-inline-block border-0 py-1 ps-1 pe-0 float-end"><i class="callout-toggle"></i></div>
 </div>
@@ -6407,7 +6410,7 @@ Click for Solution
 <i class="callout-icon"></i>
 </div>
 <div class="callout-title-container flex-fill">
-Question 12
+<span class="screen-reader-only">Note</span>Question 12
 </div>
 </div>
 <div class="callout-body-container callout-body">
@@ -6462,12 +6465,12 @@ t =
 <li>Suppose the two-sided p-value from Welch’s two-sample t-test is 0.061. What conclusion would you make at the 5% level?</li>
 </ol>
 <div class="callout callout-style-default callout-important callout-titled">
-<div class="callout-header d-flex align-content-center" data-bs-toggle="collapse" data-bs-target=".callout-34-contents" aria-controls="callout-34" aria-expanded="false" aria-label="Toggle callout">
+<div class="callout-header d-flex align-content-center collapsed" data-bs-toggle="collapse" data-bs-target=".callout-34-contents" aria-controls="callout-34" aria-expanded="false" aria-label="Toggle callout">
 <div class="callout-icon-container">
 <i class="callout-icon"></i>
 </div>
 <div class="callout-title-container flex-fill">
-Click for Solution
+<span class="screen-reader-only">Important</span>Click for Solution
 </div>
 <div class="callout-btn-toggle d-inline-block border-0 py-1 ps-1 pe-0 float-end"><i class="callout-toggle"></i></div>
 </div>
@@ -6835,13 +6838,14 @@ window.onload = function() {
       e.clearSelection();
     }
     const getTextToCopy = function(trigger) {
-        const codeEl = trigger.previousElementSibling.cloneNode(true);
-        for (const childEl of codeEl.children) {
-          if (isCodeAnnotation(childEl)) {
-            childEl.remove();
-          }
+      const outerScaffold = trigger.parentElement.cloneNode(true);
+      const codeEl = outerScaffold.querySelector('code');
+      for (const childEl of codeEl.children) {
+        if (isCodeAnnotation(childEl)) {
+          childEl.remove();
         }
-        return codeEl.innerText;
+      }
+      return codeEl.innerText;
     }
     const clipboard = new window.ClipboardJS('.code-copy-button:not([data-in-quarto-modal])', {
       text: getTextToCopy

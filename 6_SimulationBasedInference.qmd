@@ -294,8 +294,8 @@ This is easier to understand with data. We will return to the household income e
 
 Suppose we collect annual household income data from two groups:
 
--   households in capital city areas;
--   households in regional areas.
+- households in capital city areas;
+- households in regional areas.
 
 We want to know whether household income is associated with region.
 :::
@@ -346,9 +346,7 @@ income_regions |>
 
 The two groups have different sample means. Let us calculate the observed difference as:
 
-$$
-\bar{x}_{\text{capital}} - \bar{x}_{\text{regional}}= \text{19,960}
-$$
+$$\bar{x}_{\text{capital}} - \bar{x}_{\text{regional}}= \text{19,960}$$
 
 ```{r}
 #| echo: false
@@ -660,11 +658,9 @@ one_sided_plot / two_sided_plot +
 
 For a two-sided test, we count simulated differences whose absolute value is at least as large as the absolute value of the observed difference:
 
-$$
-\text{simulated p-value}
+$$\text{simulated p-value}
 =
-\frac{\text{number of simulated } |D| \ge |D_{\text{obs}}|}{\text{number of simulations}}.
-$$
+\frac{\text{number of simulated } |D| \ge |D_{\text{obs}}|}{\text{number of simulations}}.$$
 
 ```{r}
 #| echo: false
@@ -707,10 +703,10 @@ A permutation test is powerful because it keeps some features of the data exactl
 
 In the income example, the permutation test preserves:
 
--   the full set of observed incomes;
--   the number of capital city labels;
--   the number of regional labels;
--   the skewness and outliers in the income distribution.
+- the full set of observed incomes;
+- the number of capital city labels;
+- the number of regional labels;
+- the skewness and outliers in the income distribution.
 
 But it breaks the connection between income and region.
 
@@ -793,9 +789,7 @@ The statistical bootstrap has the same flavour. We use the sample itself to lear
 
 Suppose our sample contains five incomes:
 
-$$
-52000,\ 61000,\ 68000,\ 73000,\ 420000.
-$$
+$$52000,\ 61000,\ 68000,\ 73000,\ 420000.$$
 
 A bootstrap sample of size five is created by randomly choosing five values from this list, replacing each value after it is chosen. This means the same value can appear more than once, and some original values may not appear at all.
 
@@ -945,8 +939,8 @@ The histogram shows the bootstrap distribution of the mean. It is not a distribu
 
 This distinction is central:
 
--   The original income distribution shows variation between households.
--   The bootstrap distribution shows variation between possible estimates.
+- The original income distribution shows variation between households.
+- The bootstrap distribution shows variation between possible estimates.
 
 ### The percentile bootstrap confidence interval
 
@@ -963,18 +957,14 @@ The idea is that the middle 95% of the bootstrap estimates gives a plausible ran
 
 In notation, if the bootstrap estimates are:
 
-$$
-\hat{\theta}^{[1]},\ \hat{\theta}^{[2]},\ \ldots,\ \hat{\theta}^{[B]},
-$$
+$$\hat{\theta}^{[1]},\ \hat{\theta}^{[2]},\ \ldots,\ \hat{\theta}^{[B]},$$
 
 then the percentile bootstrap interval is:
 
-$$
-\left(
+$$\left(
 \hat{\theta}^{[0.025]},
 \hat{\theta}^{[0.975]}
-\right),
-$$
+\right),$$
 
 where these represent the 2.5th and 97.5th percentiles of the bootstrap estimates. This method is popular because it is easy to explain and easy to implement. It also works for many statistics where a standard formula is awkward.
 
@@ -1049,15 +1039,11 @@ If the sample is small, or if the statistic depends heavily on a few observation
 
 Let us now return to the comparison between capital city and regional households. In Chapter 5, we tested whether the difference in mean incomes was larger than expected under a benchmark claim. Here we estimate the uncertainty in the size of that difference. The parameter of interest is:
 
-$$
-\mu_{\text{capital}} - \mu_{\text{regional}}
-$$
+$$\mu_{\text{capital}} - \mu_{\text{regional}}$$
 
 The estimate is:
 
-$$
-\bar{x}_{\text{capital}} - \bar{x}_{\text{regional}}
-$$
+$$\bar{x}_{\text{capital}} - \bar{x}_{\text{regional}}$$
 
 For independent groups, the bootstrap should re-sample within each group separately. This preserves the two-sample structure.
 
@@ -1188,9 +1174,7 @@ The bootstrap can also be used for paired data. Suppose we observe the same hous
 
 Instead, we first calculate the within-household differences:
 
-$$
-D_i = X_i - Y_i
-$$
+$$D_i = X_i - Y_i$$
 
 Then we bootstrap the differences.
 
@@ -1268,11 +1252,11 @@ The important point is not the particular numbers. The important point is the st
 
 The bootstrap is a remarkably useful method, but it is not a guarantee of truth. The bootstrap treats the sample as a stand-in for the population. This is reasonable when the sample is large enough and representative enough to capture the important features of the population. But the bootstrap can struggle when:
 
--   the sample size is very small
--   the sample misses important parts of the population
--   the statistic depends on extreme values
--   the population has rare but important tail behaviour
--   the data are biased or poorly measured
+- the sample size is very small
+- the sample misses important parts of the population
+- the statistic depends on extreme values
+- the population has rare but important tail behaviour
+- the data are biased or poorly measured
 
 For example, suppose the true population contains a small number of extremely high-income households, but none of them appear in our sample. The bootstrap cannot invent the missing high-income households. It can only resample from what was observed.
 
@@ -1286,14 +1270,12 @@ It can describe the uncertainty implied by the data we have. It cannot repair da
 
 So far, we have used permutation tests for hypothesis testing and bootstrap methods for confidence intervals. This is the cleanest distinction:
 
--   permutation tests simulate what would happen if the group labels did not matter;
--   bootstrap methods simulate how much an estimate might vary from sample to sample.
+- permutation tests simulate what would happen if the group labels did not matter;
+- bootstrap methods simulate how much an estimate might vary from sample to sample.
 
 However, the bootstrap can also be adapted for hypothesis testing. The main complication is that, for a test, we need to simulate from a world where the benchmark claim is true. Suppose we are comparing mean household income in capital city and regional areas. The observed difference is:
 
-$$
-\bar{x}_{\text{capital}} - \bar{x}_{\text{regional}}
-$$
+$$\bar{x}_{\text{capital}} - \bar{x}_{\text{regional}}$$
 
 If we simply bootstrap from the original capital city and regional samples, we simulate a world that looks like the data we observed. But that world may already contain a real difference between the groups. That is useful for a confidence interval, but it is not the right reference world for a hypothesis test.
 
@@ -1387,8 +1369,8 @@ The reason we do not use this as the main testing method is that it is less tran
 
 For this reason, in this unit we use:
 
--   permutation tests for simulation-based hypothesis testing;
--   bootstrap methods for simulation-based confidence intervals.
+- permutation tests for simulation-based hypothesis testing;
+- bootstrap methods for simulation-based confidence intervals.
 
 The bootstrap test is useful to know about, but it is not the main method we rely on here.
 
@@ -1470,9 +1452,7 @@ q1_orders |>
 
 (a) What is the observed difference in mean order amount, using:
 
-$$
-\bar{x}_{\text{app}} - \bar{x}_{\text{counter}}?
-$$
+$$\bar{x}_{\text{app}} - \bar{x}_{\text{counter}}?$$
 
 (b) Explain how you would conduct a permutation test for this difference.
 
@@ -1485,21 +1465,15 @@ $$
 
 (a) The mobile app mean is:
 
-$$
-\frac{18+22+\cdots+29}{12} = 24.17
-$$
+$$\frac{18+22+\cdots+29}{12} = 24.17$$
 
 The counter mean is:
 
-$$
-\frac{15+18+\cdots+19}{12} = 18.75
-$$
+$$\frac{15+18+\cdots+19}{12} = 18.75$$
 
 So the observed difference is:
 
-$$
-24.17 - 18.75 = 5.42
-$$
+$$24.17 - 18.75 = 5.42$$
 
 The mobile app orders are higher by about \$5.42 in this sample.
 
@@ -1526,9 +1500,7 @@ The mobile app orders are higher by about \$5.42 in this sample.
 
 A researcher records the number of minutes 15 students spend reading before a short comprehension test:
 
-$$
-18,\ 22,\ 25,\ 20,\ 30,\ 28,\ 24,\ 26,\ 21,\ 23,\ 35,\ 19,\ 27,\ 31,\ 29
-$$
+$$18,\ 22,\ 25,\ 20,\ 30,\ 28,\ 24,\ 26,\ 21,\ 23,\ 35,\ 19,\ 27,\ 31,\ 29$$
 
 The sample mean is 25.2 minutes.
 
@@ -1549,9 +1521,7 @@ The sample mean is 25.2 minutes.
 
 (c) The approximate 95% percentile bootstrap confidence interval is:
 
-$$
-(22.4,\ 28.3)
-$$
+$$(22.4,\ 28.3)$$
 
 (d) The interval suggests that plausible values for the population mean reading time are roughly between 22.4 and 28.3 minutes, based on this sample and the bootstrap method.
 :::
@@ -1582,9 +1552,7 @@ q3_forms |>
 
 (a) Calculate the observed difference in proportions:
 
-$$
-\hat{p}_{\text{personalised}} - \hat{p}_{\text{simple}}
-$$
+$$\hat{p}_{\text{personalised}} - \hat{p}_{\text{simple}}$$
 
 (b) Explain how a permutation test could be used here.
 
@@ -1595,21 +1563,15 @@ $$
 
 (a) The simple reminder return proportion is:
 
-$$
-\frac{42}{80} = 0.525
-$$
+$$\frac{42}{80} = 0.525$$
 
 The personalised reminder return proportion is:
 
-$$
-\frac{55}{80} = 0.6875
-$$
+$$\frac{55}{80} = 0.6875$$
 
 So the observed difference is:
 
-$$
-0.6875 - 0.525 = 0.1625
-$$
+$$0.6875 - 0.525 = 0.1625$$
 
 The personalised reminder group had a return rate 16.25 percentage points higher in the sample.
 
@@ -1624,15 +1586,11 @@ The personalised reminder group had a return rate 16.25 percentage points higher
 
 A fitness instructor records the resting heart rate of 20 participants before and after a four-week exercise program. The researcher calculates the paired differences:
 
-$$
-D_i = \text{before}_i - \text{after}_i
-$$
+$$D_i = \text{before}_i - \text{after}_i$$
 
 The differences, in beats per minute, are:
 
-$$
-4,\ 6,\ 3,\ 8,\ 5,\ 2,\ 7,\ 6,\ 5,\ 4,\ 9,\ 3,\ 5,\ 6,\ 4,\ 7,\ 5,\ 6,\ 8,\ 4
-$$
+$$4,\ 6,\ 3,\ 8,\ 5,\ 2,\ 7,\ 6,\ 5,\ 4,\ 9,\ 3,\ 5,\ 6,\ 4,\ 7,\ 5,\ 6,\ 8,\ 4$$
 
 (a) Why is this a paired-data problem?
 
@@ -1662,9 +1620,9 @@ A supermarket compares the time taken by two checkout systems. The manager is in
 
 A sample gives:
 
--   median time for the standard checkout: 7.8 minutes;
--   median time for the express checkout: 5.9 minutes;
--   observed difference: 1.9 minutes.
+- median time for the standard checkout: 7.8 minutes;
+- median time for the express checkout: 5.9 minutes;
+- observed difference: 1.9 minutes.
 
 A bootstrap distribution for the difference in medians has a 95% percentile interval of $(0.6, 3.2)$ minutes.
 
