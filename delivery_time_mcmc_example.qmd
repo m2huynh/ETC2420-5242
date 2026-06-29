@@ -832,6 +832,6 @@ p(\mu \mid \bar{x})
 \end{aligned}
 $$
 
-The triangular prior is intuitive, but it does not lead to a neat conjugate posterior. MCMC gives us a practical way to sample from the posterior anyway.
+The triangular prior is intuitive, but it does not lead to a neat conjugate posterior. MCMC gives us a practical way to sample from the posterior anyway. aaa
 
 
