@@ -1,0 +1,775 @@
+## A simple example where MCMC is useful: estimating delivery time
+
+```{r, echo=FALSE, warning=FALSE, message=FALSE}
+library(tidyverse)
+library(gt)
+```
+
+## Recap
+
+So far, we have seen Bayesian examples where the posterior could be written down exactly. For example, when we combined a beta prior with binomial data, the posterior was also beta. This is called a **conjugate** model. However, not every Bayesian model works this neatly. Sometimes the prior is easy to describe in words but does not combine with the likelihood to produce a simple named posterior distribution. 
+
+INSERT SIMPLE CONJUGATE EXAMPLE HERE
+
+## The scenario
+
+Suppose a student food delivery service claims that its average delivery time is about 25 minutes. In this example, we will estimate the average delivery time for this service.
+
+$$
+\begin{aligned}
+\text{Let } \mu
+&= \text{the average delivery time in minutes}.
+\end{aligned}
+$$
+
+Our goal is to learn about $\mu$ using a small amount of data and some prior information. Suppose we collect delivery times for 12 recent orders:
+
+```{r, echo=FALSE}
+delivery_times <- c(18, 22, 25, 27, 29, 31, 24, 26, 30, 28, 35, 21)
+
+delivery_df <- tibble(
+  order = 1:length(delivery_times),
+  delivery_time = delivery_times
+)
+
+delivery_df |> 
+  gt() |> 
+  cols_label(
+    order = "Order",
+    delivery_time = "Delivery time (mins)"
+  )
+```
+
+Here, the sample mean is:
+
+$$
+\begin{aligned}
+\bar{x}
+&= \text{the average delivery time in our sample} \\
+&= 26.33
+\end{aligned}
+$$
+
+
+```{r, echo=FALSE}
+x_bar <- mean(delivery_times)
+n <- length(delivery_times)
+sigma <- 6
+
+```
+
+For this example, we will assume that the population standard deviation is known: $\sigma = 6$. This keeps the example simple because we only need to estimate one unknown parameter: $\mu$. In real applications, we might also estimate $\sigma$. However, that would give us two unknown parameters instead of one. 
+
+
+### Plotting the raw data
+
+Before building the model, it is useful to look at the observed delivery times.
+
+```{r, warning=FALSE, message=FALSE, echo=FALSE}
+mean_delivery <- mean(delivery_df$delivery_time)
+ggplot(delivery_df, aes(x = order, y = delivery_time)) +
+  geom_segment(
+    aes(
+      x = order,
+      xend = order,
+      y = mean_delivery,
+      yend = delivery_time
+    ),
+    linetype = "dashed",
+    alpha = 0.5
+  ) +
+  geom_point(size = 2) +
+  geom_hline(
+    yintercept = mean_delivery,
+    linetype = "dashed"
+  ) +
+  labs(
+    x = "Order number",
+    y = "Delivery time in minutes"
+  ) +
+  theme_minimal()
+```
+
+The horizontal dashed line shows the sample mean. This is the average delivery time in the sample (26.33), but it is not necessarily the true average delivery time for all deliveries. Because we only observed 12 orders, there is still uncertainty about $\mu$. The vertical dashed lines represent the deviations from each observation to the sample mean.
+
+### The likelihood
+
+We now need to decide what statistical model to use for the data. The individual delivery times may not be perfectly normally distributed. Some deliveries may be unusually fast, and some may be unusually slow. However, when we take an average over several deliveries, the sample mean tends to behave more regularly. By the Central Limit Theorem, the sampling distribution of the sample mean is often approximately normal, especially when the sample size is not extremely small and the data are not wildly irregular.
+
+For that reason, we will use a normal model for the sample mean.
+
+$$
+\begin{aligned}
+\bar{x} \mid \mu
+&\sim N\left(\mu, \frac{\sigma^2}{n}\right)
+\end{aligned}
+$$
+
+This says that the sample mean $\bar{x}$ is likely to be close to the true mean $\mu$, but not exactly equal to it. As we have seen in previous chapters, the standard deviation of the sample mean is called the standard error:
+
+$$
+\begin{aligned}
+\text{standard error}
+&= \frac{\sigma}{\sqrt{n}}
+\end{aligned}
+$$
+
+```{r, echo=FALSE, include=FALSE}
+standard_error <- sigma / sqrt(n)
+```
+
+So our likelihood is:
+
+$$
+\begin{aligned}
+\bar{x} \mid \mu
+&\sim N\left(\mu, \frac{6}{\sqrt{12}}\right)
+\end{aligned}
+$$
+
+Equivalently, we can write:
+
+$$
+\begin{aligned}
+\bar{x} \mid \mu
+&\sim N\left(\mu, 1.73^2\right)
+\end{aligned}
+$$
+
+The likelihood asks:
+
+> If a particular value of $\mu$ were true, how likely would it be to observe the sample mean we observed?
+
+We can plot the likelihood over a range of possible values for $\mu$:
+
+```{r, warning=FALSE, message=FALSE, echo=FALSE}
+mu_grid <- seq(10, 60, length.out = 1000)
+
+likelihood_df <- tibble(
+  mu = mu_grid,
+  likelihood = dnorm(x_bar, mean = mu, sd = standard_error)
+)
+
+ggplot(likelihood_df, aes(x = mu, y = likelihood)) +
+  geom_line(linewidth = 1) +
+  geom_vline(
+    xintercept = x_bar,
+    linetype = "dashed"
+  ) +
+  labs(
+    x = expression(mu),
+    y = "Likelihood"
+  ) +
+  theme_minimal()
+```
+
+The likelihood is highest near the sample mean. This makes sense: values of $\mu$ close to the observed sample mean make the data more likely.
+
+### The prior
+
+Now we need a prior for $\mu$. A normal prior would be mathematically convenient. However, suppose we want a prior that is easy to describe in plain language.
+
+Suppose we **know** the following: (1) the earliest the food can be delivered is 10mins (factoring packing and driving time) and (2) cannot be more than 60 minutes, or else the customer doesn't have to pay. Therefore, before we see the data, we might have the following beliefs:
+
+| Quantity | Value | Meaning |
+|---|---:|---|
+| Minimum plausible average | 10 minutes | It would be surprising if the true average were below this |
+| Most plausible average | 25 minutes | This is the delivery service's claim |
+| Maximum plausible average | 60 minutes | It would be surprising if the true average were above this |
+
+This suggests a **triangular prior**. A triangular prior is defined using three values:
+
+$$
+\begin{aligned}
+a &= \text{minimum plausible value} \\
+m &= \text{most plausible value} \\
+b &= \text{maximum plausible value}.
+\end{aligned}
+$$
+
+For this example:
+
+$$
+\begin{aligned}
+a &= 10 \\
+m &= 25 \\
+b &= 60
+\end{aligned}
+$$
+
+The prior density increases from 10 to 25, then decreases from 25 to 60. Visually:
+
+```{r, echo=FALSE}
+triangular_density <- function(mu, a = 10, m = 25, b = 60) {
+  case_when(
+    mu < a ~ 0,
+    mu >= a & mu <= m ~ 2 * (mu - a) / ((b - a) * (m - a)),
+    mu > m & mu <= b ~ 2 * (b - mu) / ((b - a) * (b - m)),
+    mu > b ~ 0
+  )
+}
+```
+
+```{r, warning=FALSE, message=FALSE, echo=FALSE}
+prior_df <- tibble(
+  mu = mu_grid,
+  prior = triangular_density(mu)
+)
+
+ggplot(prior_df, aes(x = mu, y = prior)) +
+  geom_line(linewidth = 1) +
+  geom_vline(
+    xintercept = 25,
+    linetype = "dashed"
+  ) +
+  scale_x_continuous(
+    limits = c(0,60),
+    breaks = seq(0,60, 10)) +
+  labs(
+    x = expression(mu),
+    y = "Prior density"
+  ) +
+  theme_minimal()
+```
+
+The prior peaks at 25 minutes. This means that before seeing the data, we thought values near 25 minutes were most plausible. Values near 10 or 60 minutes were possible, but less plausible.
+
+::: {.callout-caution}
+
+### Why this is not a conjugate model
+
+In the beta-binomial example, the prior and posterior were from the same family:
+
+$$
+\begin{aligned}
+\text{Beta prior} + \text{Binomial likelihood}
+&\rightarrow \text{Beta posterior}
+\end{aligned}
+$$
+
+That made the posterior easy to write down.
+
+Now, we have:
+
+$$
+\begin{aligned}
+\text{Triangular prior} + \text{Normal likelihood}
+&\rightarrow \text{posterior}
+\end{aligned}
+$$
+
+The posterior exists, but it is not a standard distribution with a simple name. That means we cannot simply write something like:
+
+$$
+\begin{aligned}
+\mu \mid \bar{x}
+&\sim \text{some known distribution}
+\end{aligned}
+$$
+
+Instead, we use the general Bayesian rule:
+
+$$
+\begin{aligned}
+p(\mu \mid \bar{x})
+&\propto p(\bar{x} \mid \mu)p(\mu)
+\end{aligned}
+$$
+
+Or in words:
+
+$$
+\begin{aligned}
+\text{posterior}
+&\propto \text{likelihood} \times \text{prior}
+\end{aligned}
+$$
+
+This is the target distribution we want to approximate.
+
+### Calculating the posterior on a grid
+
+We now have two ingredients:
+
+1. a **prior**, which describes what values of $\mu$ seemed plausible before seeing the data
+2. a **likelihood**, which describes which values of $\mu$ are supported by the observed sample mean
+
+The next step is to combine them to form a **posterior**.
+
+Before using MCMC, we will do this in a more direct way using a **grid**. A grid is just a list of possible values. In this example, we make a long list of possible values for the true mean delivery time $\mu$. For each value of $\mu$ in the grid, we calculate:
+
+- the prior density at that value
+- the likelihood at that value
+- the product of the prior and likelihood
+
+This gives us an approximate posterior distribution. This is a simple method that works well here because we only have one unknown parameter, $\mu$. It is useful because it lets us see clearly what the posterior should look like before we move to a more general computational method.
+
+First, we will create the grid of possible values for $\mu$. In this example, $\mu$ represents the true average delivery time. Since the delivery times are measured in minutes, we need to choose a reasonable range of possible values. Here, we will consider values of $\mu$ from 10 minutes to 60 minutes. The argument `length.out = 1000` means that R will create 1000 evenly spaced values between 10 and 60.
+
+```{r}
+mu_grid <- seq(10, 60, length.out = 1000)
+```
+
+
+
+
+
+
+```{r}
+
+
+grid_width <- mu_grid[2] - mu_grid[1]
+
+posterior_grid <- tibble(
+  mu = mu_grid,
+  prior = triangular_density(mu),
+  likelihood = dnorm(x_bar, mean = mu, sd = standard_error),
+  unnormalised_posterior = prior * likelihood
+) |>
+  mutate(
+    posterior_density = unnormalised_posterior /
+      sum(unnormalised_posterior * grid_width),
+    posterior_probability = posterior_density * grid_width
+  )
+```
+
+Let us break down what the code above is doing:
+
+The object mu_grid contains the possible values of $\mu$ that we want to consider. For example, it might contain values such as 0, 0.01, 0.02, and so on, depending on how it was created.
+
+The line below calculates the spacing between neighbouring grid values:
+
+grid_width <- mu_grid[2] - mu_grid[1]
+
+We need this spacing because the posterior is a density. To turn densities into probabilities over small intervals, we multiply by the width of the interval.
+
+Inside posterior_grid, each row corresponds to one possible value of $\mu$.
+
+The column prior stores the prior density at that value of $\mu$.
+
+prior = triangular_density(mu)
+
+The column likelihood stores how compatible the observed sample mean is with that value of $\mu$.
+
+likelihood = dnorm(x_bar, mean = mu, sd = standard_error)
+
+Here, dnorm() calculates the height of a normal density. We are asking:
+
+If the true mean were this particular value of $\mu$, how plausible would our observed sample mean $\bar{x}$ be?
+
+The column unnormalised_posterior multiplies the prior by the likelihood.
+
+unnormalised_posterior = prior * likelihood
+
+This gives us the shape of the posterior, but not yet the correctly scaled posterior density.
+
+<!-- ### Plotting prior, likelihood, and posterior -->
+
+<!-- For teaching, it is useful to place all three curves on one graph. -->
+
+<!-- ```{r, warning=FALSE, message=FALSE} -->
+<!-- combined_df <- posterior_grid |> -->
+<!--   mutate( -->
+<!--     prior_scaled = prior / max(prior), -->
+<!--     likelihood_scaled = likelihood / max(likelihood), -->
+<!--     posterior_scaled = posterior_density / max(posterior_density) -->
+<!--   ) |> -->
+<!--   select(mu, prior_scaled, likelihood_scaled, posterior_scaled) |> -->
+<!--   pivot_longer( -->
+<!--     cols = c(prior_scaled, likelihood_scaled, posterior_scaled), -->
+<!--     names_to = "curve", -->
+<!--     values_to = "value" -->
+<!--   ) |> -->
+<!--   mutate( -->
+<!--     curve = recode( -->
+<!--       curve, -->
+<!--       prior_scaled = "Prior, scaled", -->
+<!--       likelihood_scaled = "Likelihood, scaled", -->
+<!--       posterior_scaled = "Posterior, scaled" -->
+<!--     ) -->
+<!--   ) -->
+
+<!-- ggplot(combined_df, aes(x = mu, y = value, color = curve)) + -->
+<!--   geom_line(linewidth = 1) + -->
+<!--   labs( -->
+<!--     x = expression(mu), -->
+<!--     y = "Relative height", -->
+<!--     color = NULL -->
+<!--   ) + -->
+<!--   scale_color_manual( -->
+<!--     values = c( -->
+<!--       "Prior, scaled" = "black", -->
+<!--       "Likelihood, scaled" = "red", -->
+<!--       "Posterior, scaled" = "purple" -->
+<!--     ) -->
+<!--   ) + -->
+<!--   theme_minimal() -->
+<!-- ``` -->
+
+<!-- The posterior is not simply the prior, and it is not simply the likelihood. It is the result of combining both. -->
+
+<!-- ::: {.callout-important} -->
+<!-- ## Key idea -->
+
+<!-- The prior tells us what values of $\mu$ were plausible before seeing the data. -->
+
+<!-- The likelihood tells us what values of $\mu$ are supported by the data. -->
+
+<!-- The posterior combines both. -->
+<!-- ::: -->
+
+<!-- ### Why use MCMC? -->
+
+<!-- In this one-dimensional example, the grid approximation is easy because there is only one unknown parameter, $\mu$. -->
+
+<!-- However, grid methods become difficult very quickly. If we had two, three, or many unknown parameters, we would need a grid over all combinations of them. This becomes inefficient. -->
+
+<!-- MCMC gives us another approach. -->
+
+<!-- Instead of evaluating the posterior everywhere, MCMC creates a sequence of draws that spends more time in places where the posterior density is high and less time in places where the posterior density is low. -->
+
+<!-- In this example, each MCMC draw is a possible value of $\mu$. -->
+
+<!-- ### Important MCMC terms -->
+
+<!-- | Term | Meaning in this example | -->
+<!-- |---|---| -->
+<!-- | Parameter | The unknown quantity we want to estimate, $\mu$ | -->
+<!-- | Current value | The value of $\mu$ where the algorithm currently is | -->
+<!-- | Proposed value | A new possible value of $\mu$ suggested by the algorithm | -->
+<!-- | Target distribution | The posterior distribution $p(\mu \mid \bar{x})$ | -->
+<!-- | Acceptance probability | The probability that we move to the proposed value | -->
+<!-- | Chain | The sequence of values produced by the algorithm | -->
+<!-- | Iteration | One step of the algorithm | -->
+<!-- | Burn-in | Early draws we may discard because the chain has not settled yet | -->
+
+<!-- ### The Metropolis algorithm -->
+
+<!-- We will use a simple version of MCMC called the **random-walk Metropolis algorithm**. -->
+
+<!-- The algorithm works like this. -->
+
+<!-- Suppose the current value is $\mu_{t-1}$. We propose a new value: -->
+
+<!-- $$ -->
+<!-- \begin{aligned} -->
+<!-- \mu^\star -->
+<!-- &\sim N(\mu_{t-1}, s^2), -->
+<!-- \end{aligned} -->
+<!-- $$ -->
+
+<!-- where $s$ controls the size of the proposed moves. -->
+
+<!-- Then we compare the posterior density at the proposed value with the posterior density at the current value: -->
+
+<!-- $$ -->
+<!-- \begin{aligned} -->
+<!-- r -->
+<!-- &= \frac{p(\mu^\star \mid \bar{x})}{p(\mu_{t-1} \mid \bar{x})}. -->
+<!-- \end{aligned} -->
+<!-- $$ -->
+
+<!-- Because the posterior is proportional to likelihood times prior, we can calculate this as: -->
+
+<!-- $$ -->
+<!-- \begin{aligned} -->
+<!-- r -->
+<!-- &= \frac{p(\bar{x} \mid \mu^\star)p(\mu^\star)} -->
+<!--         {p(\bar{x} \mid \mu_{t-1})p(\mu_{t-1})}. -->
+<!-- \end{aligned} -->
+<!-- $$ -->
+
+<!-- The acceptance probability is: -->
+
+<!-- $$ -->
+<!-- \begin{aligned} -->
+<!-- \alpha -->
+<!-- &= \min(1,r). -->
+<!-- \end{aligned} -->
+<!-- $$ -->
+
+<!-- This means: -->
+
+<!-- | Situation | What happens | -->
+<!-- |---|---| -->
+<!-- | $r > 1$ | The proposed value has higher posterior density, so we accept it | -->
+<!-- | $r < 1$ | The proposed value has lower posterior density, so we accept it with probability $r$ | -->
+<!-- | Proposal rejected | We stay at the current value and record it again | -->
+
+<!-- ::: {.callout-tip} -->
+<!-- ## Why accept worse values sometimes? -->
+
+<!-- If MCMC only accepted better values, it would climb to the top of the posterior and get stuck there. -->
+
+<!-- Accepting worse values sometimes allows the chain to explore the full posterior distribution. -->
+<!-- ::: -->
+
+<!-- ### Writing the posterior target in R -->
+
+<!-- First, we write a function that gives the unnormalised posterior density for any value of $\mu$. -->
+
+<!-- ```{r} -->
+<!-- posterior_target <- function(mu) { -->
+<!--   prior <- triangular_density(mu) -->
+<!--   likelihood <- dnorm(x_bar, mean = mu, sd = standard_error) -->
+<!--   prior * likelihood -->
+<!-- } -->
+<!-- ``` -->
+
+<!-- This function returns: -->
+
+<!-- $$ -->
+<!-- \begin{aligned} -->
+<!-- p(\bar{x} \mid \mu)p(\mu). -->
+<!-- \end{aligned} -->
+<!-- $$ -->
+
+<!-- It does not calculate the normalising constant. That is okay because the normalising constant cancels out in the Metropolis ratio. -->
+
+<!-- ### Running the MCMC algorithm -->
+
+<!-- Now we can write the MCMC algorithm. -->
+
+<!-- ```{r} -->
+<!-- set.seed(123) -->
+
+<!-- n_iter <- 10000 -->
+<!-- proposal_sd <- 2 -->
+
+<!-- mu_chain <- numeric(n_iter) -->
+<!-- mu_chain[1] <- 25 -->
+
+<!-- accepted <- logical(n_iter) -->
+
+<!-- for (t in 2:n_iter) { -->
+<!--   current_mu <- mu_chain[t - 1] -->
+
+<!--   proposed_mu <- rnorm( -->
+<!--     n = 1, -->
+<!--     mean = current_mu, -->
+<!--     sd = proposal_sd -->
+<!--   ) -->
+
+<!--   current_density <- posterior_target(current_mu) -->
+<!--   proposed_density <- posterior_target(proposed_mu) -->
+
+<!--   r <- proposed_density / current_density -->
+
+<!--   alpha <- min(1, r) -->
+
+<!--   u <- runif(1) -->
+
+<!--   if (u < alpha) { -->
+<!--     mu_chain[t] <- proposed_mu -->
+<!--     accepted[t] <- TRUE -->
+<!--   } else { -->
+<!--     mu_chain[t] <- current_mu -->
+<!--     accepted[t] <- FALSE -->
+<!--   } -->
+<!-- } -->
+
+<!-- mcmc_df <- tibble( -->
+<!--   iteration = 1:n_iter, -->
+<!--   mu = mu_chain, -->
+<!--   accepted = accepted -->
+<!-- ) -->
+<!-- ``` -->
+
+<!-- The object `mu_chain` contains the sequence of values produced by the MCMC algorithm. -->
+
+<!-- ### Acceptance rate -->
+
+<!-- The acceptance rate tells us what proportion of proposed moves were accepted. -->
+
+<!-- ```{r} -->
+<!-- mean(accepted[-1]) -->
+<!-- ``` -->
+
+<!-- An acceptance rate that is too low can mean the proposed jumps are too large. An acceptance rate that is too high can mean the proposed jumps are too small. -->
+
+<!-- For this example, we are mainly using the algorithm for teaching, so we do not need to tune it perfectly. -->
+
+<!-- ### Plotting the MCMC chain -->
+
+<!-- A trace plot shows the sampled value of $\mu$ at each iteration. -->
+
+<!-- ```{r, warning=FALSE, message=FALSE} -->
+<!-- ggplot(mcmc_df, aes(x = iteration, y = mu)) + -->
+<!--   geom_line(linewidth = 0.4, alpha = 0.8) + -->
+<!--   labs( -->
+<!--     x = "Iteration", -->
+<!--     y = expression(mu) -->
+<!--   ) + -->
+<!--   theme_minimal() -->
+<!-- ``` -->
+
+<!-- The trace plot should move around the high-posterior region. It should not drift endlessly upward or downward, and it should not get stuck at one value for too long. -->
+
+<!-- ### Removing burn-in -->
+
+<!-- The early part of the chain can be influenced by the starting value. It is common to discard some early draws. This is called **burn-in**. -->
+
+<!-- ```{r} -->
+<!-- burn_in <- 1000 -->
+
+<!-- mcmc_post_burn <- mcmc_df |> -->
+<!--   filter(iteration > burn_in) -->
+<!-- ``` -->
+
+<!-- ::: {.callout-note} -->
+<!-- ## What is burn-in? -->
+
+<!-- Burn-in refers to the early part of the MCMC chain that we discard. -->
+
+<!-- The idea is that the chain may need some time to move from its starting value into the main region of the posterior distribution. -->
+<!-- ::: -->
+
+<!-- ### Plotting the posterior draws from MCMC -->
+
+<!-- After removing burn-in, we can plot the MCMC draws. -->
+
+<!-- ```{r, warning=FALSE, message=FALSE} -->
+<!-- ggplot(mcmc_post_burn, aes(x = mu)) + -->
+<!--   geom_histogram( -->
+<!--     aes(y = after_stat(density)), -->
+<!--     bins = 40, -->
+<!--     fill = "grey80", -->
+<!--     color = "white" -->
+<!--   ) + -->
+<!--   labs( -->
+<!--     x = expression(mu), -->
+<!--     y = "Density" -->
+<!--   ) + -->
+<!--   theme_minimal() -->
+<!-- ``` -->
+
+<!-- This histogram approximates the posterior distribution of $\mu$. -->
+
+<!-- The tallest part of the histogram shows the most plausible values of the average delivery time after combining the prior and the data. -->
+
+<!-- ### Comparing MCMC with the grid approximation -->
+
+<!-- Because this is a one-parameter example, we can compare the MCMC approximation with the grid approximation. -->
+
+<!-- ```{r, warning=FALSE, message=FALSE} -->
+<!-- ggplot() + -->
+<!--   geom_histogram( -->
+<!--     data = mcmc_post_burn, -->
+<!--     aes(x = mu, y = after_stat(density)), -->
+<!--     bins = 40, -->
+<!--     fill = "grey80", -->
+<!--     color = "white" -->
+<!--   ) + -->
+<!--   geom_line( -->
+<!--     data = posterior_grid, -->
+<!--     aes(x = mu, y = posterior_density), -->
+<!--     linewidth = 1, -->
+<!--     color = "purple" -->
+<!--   ) + -->
+<!--   labs( -->
+<!--     x = expression(mu), -->
+<!--     y = "Posterior density" -->
+<!--   ) + -->
+<!--   theme_minimal() -->
+<!-- ``` -->
+
+<!-- The histogram comes from MCMC. The purple curve comes from the grid approximation. If the MCMC algorithm is working well, the histogram should roughly follow the purple curve. -->
+
+<!-- This is a useful teaching example because we can check the MCMC result against the grid result. -->
+
+<!-- ### Summarising the posterior -->
+
+<!-- Once we have posterior draws, we can summarise them just like any other simulated distribution. -->
+
+<!-- ```{r} -->
+<!-- mcmc_post_burn |> -->
+<!--   summarise( -->
+<!--     posterior_mean = mean(mu), -->
+<!--     posterior_median = median(mu), -->
+<!--     lower_95 = quantile(mu, 0.025), -->
+<!--     upper_95 = quantile(mu, 0.975) -->
+<!--   ) -->
+<!-- ``` -->
+
+<!-- The posterior mean is our average estimate of $\mu$ after combining the prior and the data. -->
+
+<!-- The interval from `lower_95` to `upper_95` is a 95% credible interval. -->
+
+<!-- A 95% credible interval can be interpreted as: -->
+
+<!-- > Given the model, the prior, and the observed data, there is a 95% posterior probability that the true average delivery time lies inside this interval. -->
+
+<!-- ### Making a posterior probability statement -->
+
+<!-- One advantage of Bayesian inference is that we can answer probability questions directly. -->
+
+<!-- For example, suppose the delivery service wants to know whether the average delivery time is likely to be under 30 minutes. -->
+
+<!-- We can estimate: -->
+
+<!-- $$ -->
+<!-- \begin{aligned} -->
+<!-- P(\mu < 30 \mid \bar{x}). -->
+<!-- \end{aligned} -->
+<!-- $$ -->
+
+<!-- Using MCMC, this is just the proportion of posterior draws below 30. -->
+
+<!-- ```{r} -->
+<!-- mcmc_post_burn |> -->
+<!--   summarise( -->
+<!--     probability_under_30 = mean(mu < 30) -->
+<!--   ) -->
+<!-- ``` -->
+
+<!-- We can also plot this probability. -->
+
+<!-- ```{r, warning=FALSE, message=FALSE} -->
+<!-- ggplot(mcmc_post_burn, aes(x = mu)) + -->
+<!--   geom_histogram( -->
+<!--     aes(y = after_stat(density)), -->
+<!--     bins = 40, -->
+<!--     fill = "grey80", -->
+<!--     color = "white" -->
+<!--   ) + -->
+<!--   geom_vline( -->
+<!--     xintercept = 30, -->
+<!--     linetype = "dashed" -->
+<!--   ) + -->
+<!--   labs( -->
+<!--     x = expression(mu), -->
+<!--     y = "Density" -->
+<!--   ) + -->
+<!--   theme_minimal() -->
+<!-- ``` -->
+
+<!-- The area to the left of 30 represents the posterior probability that the true average delivery time is below 30 minutes. -->
+
+<!-- ### What we learned -->
+
+<!-- In this example, we estimated the average delivery time $\mu$. -->
+
+<!-- The key pieces were: -->
+
+<!-- | Component | In this example | -->
+<!-- |---|---| -->
+<!-- | Unknown parameter | $\mu$, the true average delivery time | -->
+<!-- | Data | 12 observed delivery times | -->
+<!-- | Likelihood | Normal model for the sample mean | -->
+<!-- | Prior | Triangular prior from 10 to 60, peaking at 25 | -->
+<!-- | Posterior | Proportional to likelihood times prior | -->
+<!-- | MCMC method | Random-walk Metropolis | -->
+<!-- | Posterior draws | Simulated values of $\mu$ from the posterior | -->
+
+<!-- The important idea is that MCMC lets us approximate a posterior distribution even when the posterior does not have a simple closed-form solution. -->
+
+<!-- In this example, the posterior is: -->
+
+<!-- $$ -->
+<!-- \begin{aligned} -->
+<!-- p(\mu \mid \bar{x}) -->
+<!-- &\propto p(\bar{x} \mid \mu)p(\mu). -->
+<!-- \end{aligned} -->
+<!-- $$ -->
+
+<!-- The triangular prior is intuitive, but it does not lead to a neat conjugate posterior. MCMC gives us a practical way to sample from the posterior anyway. -->
