@@ -158,7 +158,7 @@ Now we need a prior for $\mu$. A normal prior would be mathematically convenient
 Suppose we **know** the following: (1) the earliest the food can be delivered is 10mins (factoring packing and driving time) and (2) cannot be more than 60 minutes, or else the customer doesn't have to pay. Therefore, before we see the data, we might have the following beliefs:
 
 | Quantity | Value | Meaning |
-|----------------------|----------------------------:|----------------------|
+|----------------------|---------------------------:|----------------------|
 | Minimum plausible average | 10 minutes | It would be surprising if the true average were below this |
 | Most plausible average | 25 minutes | This is the delivery service's claim |
 | Maximum plausible average | 60 minutes | It would be surprising if the true average were above this |
@@ -257,7 +257,6 @@ $$\begin{aligned}
 \end{aligned}$$
 
 This is the target distribution we want to approximate.
-
 :::
 
 ### Calculating the posterior on a grid
@@ -271,9 +270,9 @@ The next step is to combine them to form a **posterior**.
 
 Before using MCMC, we will do this in a more direct way using a **grid**. A grid is just a list of possible values. In this example, we make a long list of possible values for the true mean delivery time $\mu$. For each value of $\mu$ in the grid, we calculate:
 
-- the prior density at that value
-- the likelihood at that value
-- the product of the prior and likelihood
+-   the prior density at that value
+-   the likelihood at that value
+-   the product of the prior and likelihood
 
 This gives us an approximate posterior distribution. This is a simple method that works well here because we only have one unknown parameter, $\mu$. It is useful because it lets us see clearly what the posterior should look like before we move to a more general computational method.
 
@@ -327,8 +326,8 @@ ggplot(posterior_grid, aes(x = mu, y = posterior_density)) +
 
 The posterior plot gives us the full shape of the posterior distribution. However, we often also want to summarise the posterior using a few numbers. Two useful summaries are:
 
-- the **posterior mean**
-- a **95% credible interval**
+-   the **posterior mean**
+-   a **95% credible interval**
 
 The posterior mean gives a single summary value for $\mu$. The 95% credible interval gives a range of plausible values for $\mu$ after combining the prior with the data. Because we calculated the posterior on a grid, we can calculate these summaries by adding up the posterior probabilities across the grid.
 
@@ -380,11 +379,11 @@ The grid method is useful because it makes the posterior calculation very explic
 
 However, grid methods become difficult when models become more complicated. For example, suppose we had several unknown parameters instead of one. We might want to estimate:
 
-- the true mean delivery time
-- the standard deviation of delivery times
-- the effect of day of the week
-- the effect of distance
-- the effect of order size
+-   the true mean delivery time
+-   the standard deviation of delivery times
+-   the effect of day of the week
+-   the effect of distance
+-   the effect of order size
 
 If we tried to create a grid for all of these unknown quantities at once, the number of combinations would grow very quickly.
 
@@ -401,7 +400,6 @@ $$
 1000 \times 1000 = 1{,}000{,}000 \text{ grid combinations}
 $$
 
-
 With five unknown parameters, we need:
 
 $$
@@ -416,7 +414,7 @@ So the problem grows very quickly. This is sometimes called the **curse of dimen
 The phrase **Markov Chain Monte Carlo** can sound intimidating, but the name contains the three ideas we need:
 
 | Part | Meaning | In this example |
-|---|---|---|
+|------------------------|------------------------|------------------------|
 | Monte Carlo | Use random simulation | Draw possible values of $\mu$ |
 | Markov chain | Each step depends on the current value | Propose the next $\mu$ near the current $\mu$ |
 | Metropolis-Hastings | Decide whether to accept or reject a proposal | Move toward values with more posterior support, while sometimes accepting worse values |
@@ -472,8 +470,8 @@ We do not want to wander randomly forever. We want the chain to spend more time 
 
 So at each step we compare:
 
-- the posterior target at the proposed value, $\mu^\star$
-- the posterior target at the current value, $\mu_{t-1}$
+-   the posterior target at the proposed value, $\mu^\star$
+-   the posterior target at the current value, $\mu_{t-1}$
 
 The ratio is:
 
@@ -497,7 +495,7 @@ $$
 This gives the following rule:
 
 | Situation | Meaning | Decision |
-|---|---|---|
+|------------------------|------------------------|------------------------|
 | $r > 1$ | The proposed value has higher posterior support | Accept it |
 | $r < 1$ | The proposed value has lower posterior support | Accept it with probability $r$ |
 | Proposal rejected | The proposed value is not stored | Store the current value again |
@@ -807,31 +805,638 @@ ggplot(mcmc_post_burn, aes(x = mu)) +
 
 The area to the left of 30 represents the posterior probability that the true average delivery time is below 30 minutes.
 
-### What we learned
+## Using the posterior to make decisions
 
-In this example, we estimated the true average delivery time $\mu$.
+So far, we have used MCMC to approximate the posterior distribution for the true average delivery time, $\mu$. The posterior tells us which values of $\mu$ are plausible after combining the prior with the data.
 
-| Component | In this example |
+However, in many real problems, estimating the posterior is not the final step. We often want to use the posterior to make a decision.
+
+For example, suppose the delivery company wants to decide whether it should advertise the following claim:
+
+> Average delivery time is under 30 minutes.
+
+This is now a decision problem. The posterior distribution can tell us how likely the claim is to be true, but the final decision also depends on the consequences of being wrong.
+
+### The decision problem
+
+There are two possible actions:
+
+| Action | Meaning |
 |---|---|
-| Unknown parameter | $\mu$, the true average delivery time |
-| Data | 12 observed delivery times |
-| Likelihood | Normal model for the sample mean |
-| Prior | Triangular prior from 10 to 60, peaking at 25 |
-| Posterior | Proportional to likelihood times prior |
-| MCMC method | Random-walk Metropolis-Hastings |
-| Posterior draws | Simulated values of $\mu$ from the posterior |
+| Advertise | The company advertises that the average delivery time is under 30 minutes |
+| Do not advertise | The company does not make this advertising claim |
 
-The important idea is that MCMC lets us approximate a posterior distribution even when the posterior does not have a simple closed-form solution.
+There are also two possible true situations:
 
-In this example, the posterior is:
+| True situation | Meaning |
+|---|---|
+| $\mu < 30$ | The true average delivery time is under 30 minutes |
+| $\mu \geq 30$ | The true average delivery time is 30 minutes or higher |
+
+
+### Loss functions
+
+A **loss function** assigns a cost to each combination of an action and a true situation. The loss does not come from the statistical model. It represents the consequences of different decisions. In this example, we will use simple unitless loss points.
+
+Suppose the company uses the following loss function:
+
+| Action | If $\mu < 30$ | If $\mu \geq 30$ |
+|---|---:|---:|
+| Advertise | 0 | 10 |
+| Do not advertise | 2 | 0 |
+
+This table says:
+
+- if the company advertises and the claim is true, there is no loss;
+- if the company advertises and the claim is false, the loss is 10;
+- if the company does not advertise and the claim is true, the loss is 2;
+- if the company does not advertise and the claim is false, there is no loss.
+
+The numbers are not minutes, dollars, or probabilities. They are **unitless loss points**. They encode the relative seriousness of the possible mistakes. In this loss function, advertising a false claim has loss 10, while missing a true advertising opportunity has loss 2. So the false advertising mistake is treated as five times worse than the missed opportunity.
 
 $$
 \begin{aligned}
-p(\mu \mid \bar{x})
-&\propto p(\bar{x} \mid \mu)p(\mu)
+\frac{10}{2}
+&= 5 \text{ times worse}
 \end{aligned}
 $$
 
-The triangular prior is intuitive, but it does not lead to a neat conjugate posterior. MCMC gives us a practical way to sample from the posterior anyway. aaa
+::: {.callout-tip}
+## Where do the loss numbers come from?
 
+The loss numbers are chosen by the decision maker. They reflect judgement about the consequences of each outcome. In a real business setting, these losses could be based on dollars. For example, false advertising might lead to refunds, complaints, reputational damage, or legal risk. Missing an advertising opportunity might lead to lower sales.
+:::
+
+### Expected loss
+
+A decision should account for both:
+
+1. how likely each situation is; and
+2. how costly each outcome would be.
+
+This is done using **expected loss**. The expected loss of an action is the average loss we would expect if we repeated the decision many times under the posterior probabilities.
+
+Suppose we used MCMC and found:
+
+
+```{r, warning=FALSE, message=FALSE, echo=FALSE}
+# Calculate posterior probabilities from the MCMC draws
+p_under_30 <- mean(mcmc_post_burn$mu < 30)
+p_30_or_higher <- mean(mcmc_post_burn$mu >= 30)
+
+# Create a smoother density estimate from the MCMC draws
+density_estimate <- density(
+  mcmc_post_burn$mu,
+  adjust = 1.8,
+  n = 2048
+)
+
+density_df <- tibble(
+  mu = density_estimate$x,
+  density = density_estimate$y,
+  situation = if_else(
+    mu < 30,
+    "Average under 30 minutes",
+    "Average 30 minutes or higher"
+  )
+)
+
+max_density <- max(density_df$density)
+
+ggplot(density_df, aes(x = mu, y = density)) +
+  geom_area(
+    aes(fill = situation),
+    alpha = 0.6
+  ) +
+  geom_line(linewidth = 1) +
+  geom_vline(
+    xintercept = 30,
+    linetype = "dashed",
+    linewidth = 1
+  ) +
+  annotate(
+    "text",
+    x = 22,
+    y = max_density * 0.90,
+    label = "P(mu < 30 ~ '|' ~ data)",
+    parse = TRUE,
+    hjust = 0,
+    size = 4
+  ) +
+  annotate(
+    "segment",
+    x = 23.5,
+    xend = 26,
+    y = max_density * 0.84,
+    yend = max_density * 0.55,
+    arrow = arrow(length = unit(0.18, "cm"))
+  ) +
+  annotate(
+  "text",
+  x = 30.6,
+  y = max_density * 0.42,
+  label = "P(mu >= 30 ~ '|' ~ data)",
+  parse = TRUE,
+  hjust = 0,
+  size = 4
+) +
+  annotate(
+    "segment",
+    x = 31.2,
+    xend = 30.7,
+    y = max_density * 0.36,
+    yend = max_density * 0.08,
+    arrow = arrow(length = unit(0.18, "cm"))
+  ) +
+  scale_fill_manual(
+    values = c(
+      "Average under 30 minutes" = "turquoise3",
+      "Average 30 minutes or higher" = "salmon"
+    )
+  ) +
+  labs(
+    x = expression(mu),
+    y = "Posterior density",
+    fill = NULL
+  ) +
+  theme_minimal() +
+  theme(legend.position = "none")
+```
+
+
+```{r, warning=FALSE, message=FALSE, echo=FALSE, include=FALSE}
+mcmc_decision_df <- mcmc_post_burn |>
+  mutate(
+    situation = if_else(
+      mu < 30,
+      "Average under 30 minutes",
+      "Average 30 minutes or higher"
+    )
+  )
+
+posterior_decision_probs <- mcmc_decision_df |>
+  summarise(
+    p_under_30 = mean(mu < 30),
+    p_30_or_higher = mean(mu >= 30)
+  )
+
+posterior_decision_probs
+```
+
+
+$$
+\begin{aligned}
+P(\mu < 30 \mid \text{data})
+&\approx \frac{\text{number of posterior draws below 30}}{\text{total number of posterior draws}} \approx 0.93
+\end{aligned}
+$$
+
+$$
+\begin{aligned}
+P(\mu \geq 30 \mid \text{data})
+&\approx \frac{\text{number of posterior draws at or above 30}}{\text{total number of posterior draws}} \approx 0.07
+\end{aligned}
+$$
+
+
+#### Expected loss of advertising
+
+If the company advertises, there is no loss if the claim is true, but there is loss 10 if the claim is false.
+
+$$
+\begin{aligned}
+E[\text{loss from advertising}]
+&= 0 \times P(\mu < 30 \mid \text{data})
+   + 10 \times P(\mu \geq 30 \mid \text{data}) \\
+&= 0 \times 0.93 + 10 \times 0.07 \\
+&= 0 + 0.70 \\
+&= 0.70
+\end{aligned}
+$$
+
+#### Expected loss of not advertising
+
+If the company does not advertise, there is loss 2 if the claim would have been true, because the company missed an advertising opportunity. There is no loss if the claim would have been false.
+
+$$
+\begin{aligned}
+E[\text{loss from not advertising}]
+&= 2 \times P(\mu < 30 \mid \text{data})
+   + 0 \times P(\mu \geq 30 \mid \text{data}) \\
+&= 2 \times 0.93 + 0 \times 0.07 \\
+&= 1.86 + 0 \\
+&= 1.86
+\end{aligned}
+$$
+
+Since advertising has the lower expected loss (0.70 < 1.86), the decision with the lower expected loss is to advertise.
+
+### Different losses can lead to different decisions
+
+The same posterior can lead to different decisions if the loss function changes. For example, suppose the company becomes more cautious. It now treats false advertising as much more serious. Instead of assigning loss 10 to false advertising, it assigns loss 30.
+
+The new loss function is:
+
+| Action | If $\mu < 30$ | If $\mu \geq 30$ |
+|---|---:|---:|
+| Advertise | 0 | 30 |
+| Do not advertise | 2 | 0 |
+
+Now the expected loss of advertising becomes:
+
+$$
+\begin{aligned}
+E[\text{loss from advertising}]
+&= 0 \times P(\mu < 30 \mid \text{data})
+   + 30 \times P(\mu \geq 30 \mid \text{data}) \\
+&= 0 \times 0.93 + 30 \times 0.07 \\
+&= 2.10
+\end{aligned}
+$$
+
+The expected loss of not advertising remains:
+
+$$
+\begin{aligned}
+E[\text{loss from not advertising}]
+&= 2 \times P(\mu < 30 \mid \text{data})
+   + 0 \times P(\mu \geq 30 \mid \text{data}) \\
+&= 2 \times 0.93 + 0 \times 0.07 \\
+&= 1.86
+\end{aligned}
+$$
+
+Now the expected loss of not advertising is lower. So a more cautious company may decide not to advertise, even with the same posterior distribution.
+
+```{r}
+expected_loss_sensitivity_df <- tibble(
+  false_advertising_loss = c(10, 30),
+  expected_loss_advertise = false_advertising_loss * p_30_or_higher,
+  expected_loss_not_advertise = 2 * p_under_30
+) |>
+  pivot_longer(
+    cols = c(expected_loss_advertise, expected_loss_not_advertise),
+    names_to = "action",
+    values_to = "expected_loss"
+  ) |>
+  mutate(
+    action = recode(
+      action,
+      expected_loss_advertise = "Advertise",
+      expected_loss_not_advertise = "Do not advertise"
+    )
+  )
+
+expected_loss_sensitivity_df
+```
+
+```{r, warning=FALSE, message=FALSE}
+ggplot(
+  expected_loss_sensitivity_df,
+  aes(x = factor(false_advertising_loss), y = expected_loss, fill = action)
+) +
+  geom_col(position = "dodge", width = 0.65, alpha = 0.8) +
+  labs(
+    x = "Loss from false advertising",
+    y = "Expected loss",
+    fill = NULL
+  ) +
+  theme_minimal()
+```
+
+This shows an important lesson: the posterior distribution does not make the decision by itself. The posterior tells us what is uncertain. The loss function tells us what matters.
+
+### A threshold view of the decision
+
+In this example, the decision depends on whether the posterior probability of being under 30 minutes is large enough.
+
+Let:
+
+$$
+\begin{aligned}
+p &= P(\mu < 30 \mid \text{data}).
+\end{aligned}
+$$
+
+Then:
+
+$$
+\begin{aligned}
+P(\mu \geq 30 \mid \text{data}) &= 1 - p.
+\end{aligned}
+$$
+
+Using the original loss function, the expected loss of advertising is:
+
+$$
+\begin{aligned}
+E[\text{loss from advertising}]
+&= 10(1-p).
+\end{aligned}
+$$
+
+The expected loss of not advertising is:
+
+$$
+\begin{aligned}
+E[\text{loss from not advertising}]
+&= 2p.
+\end{aligned}
+$$
+
+We should advertise when:
+
+$$
+\begin{aligned}
+10(1-p) &< 2p \\
+10 - 10p &< 2p \\
+10 &< 12p \\
+\frac{10}{12} &< p \\
+p &> 0.833.
+\end{aligned}
+$$
+
+So under this loss function, the company should advertise only if the posterior probability that $\mu < 30$ is greater than about 83.3%.
+
+::: {.callout-note}
+## Why this threshold matters
+
+The threshold is not always 50%.
+
+If the cost of a false claim is much larger than the cost of a missed opportunity, then we need stronger posterior evidence before advertising.
+:::
+
+We can plot the two expected-loss curves as a function of $p$.
+
+```{r, warning=FALSE, message=FALSE}
+threshold_df <- tibble(
+  p = seq(0, 1, length.out = 1000),
+  expected_loss_advertise = 10 * (1 - p),
+  expected_loss_not_advertise = 2 * p
+) |>
+  pivot_longer(
+    cols = c(expected_loss_advertise, expected_loss_not_advertise),
+    names_to = "action",
+    values_to = "expected_loss"
+  ) |>
+  mutate(
+    action = recode(
+      action,
+      expected_loss_advertise = "Advertise",
+      expected_loss_not_advertise = "Do not advertise"
+    )
+  )
+
+threshold_value <- 10 / 12
+
+ggplot(threshold_df, aes(x = p, y = expected_loss, color = action)) +
+  geom_line(linewidth = 1) +
+  geom_vline(
+    xintercept = threshold_value,
+    linetype = "dashed"
+  ) +
+  scale_x_continuous(labels = scales::percent_format()) +
+  labs(
+    x = expression(P(mu < 30 ~ "|" ~ data)),
+    y = "Expected loss",
+    color = NULL
+  ) +
+  theme_minimal()
+```
+
+To the left of the dashed line, not advertising has lower expected loss. To the right of the dashed line, advertising has lower expected loss.
+
+### What decision theory adds
+
+Bayesian inference gives us a posterior distribution. From that posterior, we can calculate probabilities such as:
+
+$$
+\begin{aligned}
+P(\mu < 30 \mid \text{data}).
+\end{aligned}
+$$
+
+Decision theory adds a second layer. It asks:
+
+> Given these posterior probabilities, and given the consequences of each action, what should we do?
+
+The key pieces are:
+
+| Component | Meaning in this example |
+|---|---|
+| Posterior distribution | Our uncertainty about the true average delivery time $\mu$ |
+| Action | Advertise or do not advertise |
+| True situation | Whether $\mu$ is below 30 or at least 30 |
+| Loss function | A table assigning costs to each action and true situation |
+| Expected loss | The posterior-average loss for an action |
+| Decision rule | Choose the action with the lowest expected loss |
+
+::: {.callout-important}
+## Big picture
+
+MCMC gives us posterior draws.
+
+Posterior draws let us calculate posterior probabilities.
+
+Posterior probabilities can be combined with losses to make decisions.
+:::
+
+## Exercises
+
+### Exercise 1: Calculate posterior probabilities
+
+Using the MCMC draws in `mcmc_post_burn`, estimate the posterior probability that the true average delivery time is below 28 minutes.
+
+Complete the code below.
+
+```{r, eval=FALSE}
+mcmc_post_burn |>
+  summarise(
+    p_under_28 = mean(____ < ____)
+  )
+```
+
+::: {.callout-important collapse="true"}
+## Solution
+
+```{r, eval=FALSE}
+mcmc_post_burn |>
+  summarise(
+    p_under_28 = mean(mu < 28)
+  )
+```
+:::
+
+### Exercise 2: Change the decision threshold
+
+Suppose the company wants to advertise the claim:
+
+> Average delivery time is under 28 minutes.
+
+Create a plot of the posterior draws and mark the threshold at 28 minutes.
+
+Complete the code below.
+
+```{r, eval=FALSE}
+mcmc_post_burn |>
+  mutate(
+    situation = if_else(
+      mu < ____,
+      "Average under 28 minutes",
+      "Average 28 minutes or higher"
+    )
+  ) |>
+  ggplot(aes(x = mu, fill = situation)) +
+  geom_histogram(
+    aes(y = after_stat(density)),
+    bins = 40,
+    color = "white",
+    alpha = 0.75
+  ) +
+  geom_vline(
+    xintercept = ____,
+    linetype = "dashed",
+    linewidth = 1
+  ) +
+  labs(
+    x = expression(mu),
+    y = "Posterior density",
+    fill = NULL
+  ) +
+  theme_minimal()
+```
+
+::: {.callout-important collapse="true"}
+## Solution
+
+```{r, eval=FALSE}
+mcmc_post_burn |>
+  mutate(
+    situation = if_else(
+      mu < 28,
+      "Average under 28 minutes",
+      "Average 28 minutes or higher"
+    )
+  ) |>
+  ggplot(aes(x = mu, fill = situation)) +
+  geom_histogram(
+    aes(y = after_stat(density)),
+    bins = 40,
+    color = "white",
+    alpha = 0.75
+  ) +
+  geom_vline(
+    xintercept = 28,
+    linetype = "dashed",
+    linewidth = 1
+  ) +
+  labs(
+    x = expression(mu),
+    y = "Posterior density",
+    fill = NULL
+  ) +
+  theme_minimal()
+```
+:::
+
+### Exercise 3: Calculate expected loss
+
+Suppose the company is deciding whether to advertise the claim:
+
+> Average delivery time is under 30 minutes.
+
+Use the following loss function:
+
+| Action | If $\mu < 30$ | If $\mu \geq 30$ |
+|---|---:|---:|
+| Advertise | 0 | 15 |
+| Do not advertise | 3 | 0 |
+
+Complete the code below to calculate the expected loss of each action.
+
+```{r, eval=FALSE}
+p_under_30 <- mean(mcmc_post_burn$mu < 30)
+p_30_or_higher <- mean(mcmc_post_burn$mu >= 30)
+
+expected_loss_advertise <- ____ * p_under_30 + ____ * p_30_or_higher
+expected_loss_not_advertise <- ____ * p_under_30 + ____ * p_30_or_higher
+
+tibble(
+  action = c("Advertise", "Do not advertise"),
+  expected_loss = c(expected_loss_advertise, expected_loss_not_advertise)
+)
+```
+
+::: {.callout-important collapse="true"}
+## Solution
+
+```{r, eval=FALSE}
+p_under_30 <- mean(mcmc_post_burn$mu < 30)
+p_30_or_higher <- mean(mcmc_post_burn$mu >= 30)
+
+expected_loss_advertise <- 0 * p_under_30 + 15 * p_30_or_higher
+expected_loss_not_advertise <- 3 * p_under_30 + 0 * p_30_or_higher
+
+tibble(
+  action = c("Advertise", "Do not advertise"),
+  expected_loss = c(expected_loss_advertise, expected_loss_not_advertise)
+)
+```
+:::
+
+### Exercise 4: Find the probability threshold
+
+Using the loss function from Exercise 3, find the posterior probability threshold above which the company should advertise.
+
+That is, find the value of $p = P(\mu < 30 \mid \text{data})$ where the expected loss of advertising equals the expected loss of not advertising.
+
+The expected loss of advertising is:
+
+$$
+\begin{aligned}
+15(1-p).
+\end{aligned}
+$$
+
+The expected loss of not advertising is:
+
+$$
+\begin{aligned}
+3p.
+\end{aligned}
+$$
+
+Complete the working:
+
+$$
+\begin{aligned}
+15(1-p) &= 3p \\
+15 - 15p &= 3p \\
+15 &= ____p \\
+p &= \frac{15}{____} \\
+p &= ____.
+\end{aligned}
+$$
+
+::: {.callout-important collapse="true"}
+## Solution
+
+$$
+\begin{aligned}
+15(1-p) &= 3p \\
+15 - 15p &= 3p \\
+15 &= 18p \\
+p &= \frac{15}{18} \\
+p &= 0.833.
+\end{aligned}
+$$
+
+The company should advertise only if:
+
+$$
+\begin{aligned}
+P(\mu < 30 \mid \text{data}) &> 0.833.
+\end{aligned}
+$$
+:::
 
