@@ -574,13 +574,6 @@ This last point is important. If a proposal is rejected, the chain does not disa
 <iframe src="interactive/mcmc3.html" width="100%" height="700px" style="border: none;"></iframe>
 ```
 
-::: callout-note
-### Why accept worse values sometimes?
-
-If the algorithm only accepted better values, it would climb to the top of the posterior and get stuck there.
-
-Accepting worse values sometimes allows the chain to move around and represent the whole posterior distribution, not just the single most likely value.
-:::
 
 ### Writing the posterior target in R
 

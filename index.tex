@@ -5235,7 +5235,7 @@ We can write a function that plays one game.
 # A tibble: 1 x 6
     car first_choice host_opens switch_choice stay_win switch_win
   <int>        <int>      <int>         <int> <lgl>    <lgl>     
-1     1            3          2             1 FALSE    TRUE      
+1     3            3          2             1 TRUE     FALSE     
 \end{verbatim}
 
 Because one game is not very informative, we repeat the game many times.
@@ -25759,6 +25759,416 @@ answer different questions.
 \end{quote}
 
 \end{tcolorbox}
+
+\bookmarksetup{startatroot}
+
+\chapter{Thinking with Frequentist
+Models}\label{thinking-with-frequentist-models}
+
+\begin{tcolorbox}[enhanced jigsaw, arc=.35mm, bottomrule=.15mm, bottomtitle=1mm, breakable, colback=white, colbacktitle=quarto-callout-note-color!10!white, colframe=quarto-callout-note-color-frame, coltitle=black, left=2mm, leftrule=.75mm, opacityback=0, opacitybacktitle=0.6, rightrule=.15mm, title=\textcolor{quarto-callout-note-color}{\faInfo}\hspace{0.5em}{Learning Objectives}, titlerule=0mm, toprule=.15mm, toptitle=1mm]
+
+By the end of this chapter, you should be able to:
+
+\begin{enumerate}
+\def\labelenumi{\arabic{enumi}.}
+\tightlist
+\item
+\end{enumerate}
+
+\end{tcolorbox}
+
+\section{Introduction}\label{introduction-2}
+
+So far, much of this book has been about \textbf{thinking about
+uncertainty}.
+
+\begin{itemize}
+\tightlist
+\item
+  We used probability to describe random processes.
+\item
+  We used sampling distributions to understand why estimates change from
+  sample to sample.
+\item
+  We used hypothesis tests to ask whether an observed result would be
+  surprising under a particular assumption.
+\item
+  We used simulation-based inference to generate artificial worlds and
+  compare them with the data we actually observed.
+\item
+  We used likelihood to ask which parameter values make the observed
+  data more plausible.
+\end{itemize}
+
+This chapter brings those ideas together through \textbf{statistical
+models}. A statistical model is a simplified probability story about how
+data might have been generated. The model is a structured approximation
+of the real world. It helps us describe patterns, make predictions, and
+express uncertainty.
+
+In this chapter, we focus on one especially common family of statistical
+models: regression models. Regression models are useful when we want to
+understand how an outcome changes with one or more explanatory
+variables. Instead of estimating just one mean, one probability, or one
+rate, a regression model allows that quantity to depend on other
+information.
+
+For example, we might ask:
+
+\begin{itemize}
+\tightlist
+\item
+  How does exam score change with hours studied?
+\item
+  How does the expected number of tutorial questions attempted change
+  with study time?
+\item
+  How does the probability of submitting an assignment change with
+  preparation?
+\end{itemize}
+
+These are all regression questions because they are about relationships.
+The key idea is that regression models still use the same ingredients we
+have already seen: probability, distributions, likelihood, uncertainty,
+and simulation. The new step is that we allow the parameters of a
+distribution to change with predictors.
+
+So rather than asking only:
+
+\[
+\text{What is the average outcome?}
+\]
+
+we begin asking:
+
+\[
+\text{How does the expected outcome change as } x \text{ changes?}
+\]
+
+That shift takes us from estimating isolated quantities to modelling
+relationships.
+
+\begin{tcolorbox}[enhanced jigsaw, arc=.35mm, bottomrule=.15mm, bottomtitle=1mm, breakable, colback=white, colbacktitle=quarto-callout-note-color!10!white, colframe=quarto-callout-note-color-frame, coltitle=black, left=2mm, leftrule=.75mm, opacityback=0, opacitybacktitle=0.6, rightrule=.15mm, title=\textcolor{quarto-callout-note-color}{\faInfo}\hspace{0.5em}{Frequentist \& Bayesian Models}, titlerule=0mm, toprule=.15mm, toptitle=1mm]
+
+In this chapter, we use frequentist models. The fitted coefficients are
+treated as estimates of fixed but unknown quantities. The model is
+fitted by choosing parameter values that make the observed data fit
+well, often through least squares or maximum likelihood. In the next
+chapter, we will revisit the same modelling ideas from a Bayesian
+perspective. There, the unknown parameters will be treated as uncertain
+quantities with prior and posterior distributions.
+
+\end{tcolorbox}
+
+\subsection{From distributions to
+models}\label{from-distributions-to-models}
+
+In the likelihood chapter, we saw that the first step in
+likelihood-based thinking is to choose a probability model that respects
+the structure of the data. As a reminder:
+
+\begin{itemize}
+\tightlist
+\item
+  A normal distribution may be reasonable for some continuous
+  measurements.
+\item
+  A Poisson distribution may be reasonable for some counts.
+\item
+  A Bernoulli or binomial distribution may be reasonable for yes/no
+  outcomes or successes out of a fixed number of attempts.
+\end{itemize}
+
+Regression models build on that same idea.
+
+\begin{table}
+\fontsize{12.0pt}{14.0pt}\selectfont
+\begin{tabular*}{1\linewidth}{@{\extracolsep{\fill}}llll}
+\toprule
+Outcome type & Possible values & Distributional story & Regression model \\ 
+\midrule\addlinespace[2.5pt]
+Continuous measurement & Approximately any real value & Normal variation around a mean & Linear regression \\ 
+Count & 0, 1, 2, ... & Poisson variation around a rate or expected count & Poisson regression \\ 
+Yes/no outcome & 0 or 1 & Bernoulli variation around a probability & Logistic regression \\ 
+\bottomrule
+\end{tabular*}
+\end{table}
+
+This chapter introduces three common frequentist regression models:
+
+\begin{enumerate}
+\def\labelenumi{\arabic{enumi}.}
+\tightlist
+\item
+  \textbf{linear regression}, for continuous outcomes;
+\item
+  \textbf{Poisson regression}, for count outcomes;
+\item
+  \textbf{logistic regression}, for yes/no outcomes.
+\end{enumerate}
+
+\subsection{The modelling recipe}\label{the-modelling-recipe}
+
+Most models in this chapter have the same basic ingredients.
+
+\begin{table}
+\fontsize{12.0pt}{14.0pt}\selectfont
+\begin{tabular*}{1\linewidth}{@{\extracolsep{\fill}}ll}
+\toprule
+Ingredient & Question to ask \\ 
+\midrule\addlinespace[2.5pt]
+Outcome & What are we trying to explain or predict? \\ 
+Predictors & What variables might describe the pattern? \\ 
+Distribution & What kind of random variable is the outcome? \\ 
+Link between predictors and distribution parameter & How does the expected value, rate, or probability change with predictors? \\ 
+Assumptions & What must be reasonable for the model to be useful? \\ 
+Performance checks & What does the model miss, and how well does it predict? \\ 
+\bottomrule
+\end{tabular*}
+\end{table}
+
+This should feel familiar. In the simulation chapter, we had to decide
+what process to simulate. In the likelihood chapter, we had to decide
+what probability model could have produced the data. In hypothesis
+testing, we had to decide what would be true under the null hypothesis.
+
+\section{Linear Regression}\label{linear-regression}
+
+Suppose we collect information from students in a statistics unit. For
+each student, we record: (1) how many hours they studied in a typical
+week; (2) their attendance rate; (3) how many tutorial questions they
+attempted in one week; (4) whether they submitted the major assignment,
+and (5) their final exam score.
+
+Suppose the table below represents a small snapshot of our data. Each
+row is one student. For each student, we have recorded how many hours
+they studied, their final exam score, how many tutorial questions they
+attempted, and whether they submitted the assignment.
+
+\begin{Shaded}
+\begin{Highlighting}[]
+\NormalTok{student\_snapshot }\OtherTok{\textless{}{-}} \FunctionTok{tibble}\NormalTok{(}
+  \AttributeTok{student =} \DecValTok{1}\SpecialCharTok{:}\DecValTok{8}\NormalTok{,}
+  \AttributeTok{study\_hours =} \FunctionTok{c}\NormalTok{(}\DecValTok{2}\NormalTok{, }\DecValTok{3}\NormalTok{, }\DecValTok{4}\NormalTok{, }\DecValTok{5}\NormalTok{, }\DecValTok{6}\NormalTok{, }\DecValTok{7}\NormalTok{, }\DecValTok{8}\NormalTok{, }\DecValTok{9}\NormalTok{),}
+  \AttributeTok{questions\_attempted =} \FunctionTok{c}\NormalTok{(}\DecValTok{1}\NormalTok{, }\DecValTok{2}\NormalTok{, }\DecValTok{2}\NormalTok{, }\DecValTok{3}\NormalTok{, }\DecValTok{4}\NormalTok{, }\DecValTok{5}\NormalTok{, }\DecValTok{6}\NormalTok{, }\DecValTok{7}\NormalTok{),}
+  \AttributeTok{submitted =} \FunctionTok{c}\NormalTok{(}\StringTok{"No"}\NormalTok{, }\StringTok{"No"}\NormalTok{, }\StringTok{"Yes"}\NormalTok{, }\StringTok{"Yes"}\NormalTok{, }\StringTok{"Yes"}\NormalTok{, }\StringTok{"Yes"}\NormalTok{, }\StringTok{"Yes"}\NormalTok{, }\StringTok{"Yes"}\NormalTok{),}
+  \AttributeTok{exam\_score =} \FunctionTok{c}\NormalTok{(}\DecValTok{48}\NormalTok{, }\DecValTok{52}\NormalTok{, }\DecValTok{57}\NormalTok{, }\DecValTok{61}\NormalTok{, }\DecValTok{66}\NormalTok{, }\DecValTok{72}\NormalTok{, }\DecValTok{76}\NormalTok{, }\DecValTok{81}\NormalTok{)}
+\NormalTok{)}
+
+\NormalTok{student\_snapshot }\SpecialCharTok{|\textgreater{}}
+  \FunctionTok{gt}\NormalTok{() }\SpecialCharTok{|\textgreater{}} 
+  \FunctionTok{cols\_align}\NormalTok{(}\AttributeTok{align =} \StringTok{"center"}\NormalTok{)}
+\end{Highlighting}
+\end{Shaded}
+
+\begin{table}
+\fontsize{12.0pt}{14.0pt}\selectfont
+\begin{tabular*}{\linewidth}{@{\extracolsep{\fill}}ccccc}
+\toprule
+student & study\_hours & questions\_attempted & submitted & exam\_score \\ 
+\midrule\addlinespace[2.5pt]
+1 & 2 & 1 & No & 48 \\ 
+2 & 3 & 2 & No & 52 \\ 
+3 & 4 & 2 & Yes & 57 \\ 
+4 & 5 & 3 & Yes & 61 \\ 
+5 & 6 & 4 & Yes & 66 \\ 
+6 & 7 & 5 & Yes & 72 \\ 
+7 & 8 & 6 & Yes & 76 \\ 
+8 & 9 & 7 & Yes & 81 \\ 
+\bottomrule
+\end{tabular*}
+\end{table}
+
+Linear regression is used when the outcome is a continuous measurement
+and a straight-line relationship is a reasonable first approximation.
+
+Suppose the outcome is final exam score and the predictor is study
+hours. Therefore, we might have a question as:
+
+\begin{quote}
+How is exam score associated with study hours?
+\end{quote}
+
+\subsection{The model}\label{the-model}
+
+A simple linear regression model can be written as:
+
+\[
+Y_i = \beta_0 + \beta_1 x_i + \epsilon_i
+\]
+
+In this equation:
+
+\begin{itemize}
+\tightlist
+\item
+  \(Y_i\) is the exam score for student \(i\);
+\item
+  \(x_i\) is the number of study hours for student \(i\);
+\item
+  \(\beta_0\) is the intercept;
+\item
+  \(\beta_1\) is the slope;
+\item
+  \(\epsilon_i\) is the error term, or the part of the outcome not
+  explained by the model.
+\end{itemize}
+
+Another way to write the same model is:
+
+\[
+Y_i \sim \text{Normal}(\mu_i, \sigma)
+\]
+
+with:
+
+\[
+\mu_i = \beta_0 + \beta_1 x_i
+\]
+
+This version makes the distributional story clearer. For each value of
+study hours, exam scores vary around a mean \(\mu_i\), with spread
+\(\sigma\).
+
+\subsection{Estimating the intercept and
+slope}\label{estimating-the-intercept-and-slope}
+
+The linear regression model contains two unknown regression
+coefficients: \(\beta_0\) and \(\beta_1\). In practice, we estimate
+these from the data. The estimated values are usually written as:
+\(\hat{\beta}_0\) and \(\hat{\beta}_1\). The fitted regression line is
+then:
+
+\[
+\hat{Y}_i = \hat{\beta}_0 + \hat{\beta}_1 x_i
+\]
+
+For simple linear regression, the slope is calculated as:
+
+\[
+\hat{\beta}_1 =
+\frac{
+\sum_{i=1}^{n}(x_i - \bar{x})(Y_i - \bar{Y})
+}{
+\sum_{i=1}^{n}(x_i - \bar{x})^2
+}
+\]
+
+The intercept is then calculated as:
+
+\[
+\hat{\beta}_0 =
+\bar{Y} - \hat{\beta}_1 \bar{x}
+\]
+
+Fortunately, we do not have to calculate these by hand. Modern software,
+such as R is able to compute these relatively quickly. There are many
+ways to construct a linear model in R. For this unit, we will use the
+\texttt{glm()} function, which has the following form:
+
+\begin{Shaded}
+\begin{Highlighting}[]
+\FunctionTok{glm}\NormalTok{(}
+  \AttributeTok{formula =} 
+  \AttributeTok{data =} 
+  \AttributeTok{family =}  
+\NormalTok{)}
+\end{Highlighting}
+\end{Shaded}
+
+The first part is the formula. The formula tells R which variable we
+want to model and which variable we want to use as the predictor. For
+example:
+
+\begin{quote}
+exam\_score \textasciitilde{} study\_hours
+\end{quote}
+
+The variable on the left-hand side of \texttt{\textasciitilde{}} is the
+outcome. This is the variable we are trying to explain or predict. In
+this case, the outcome is exam\_score. The variable on the right-hand
+side of \texttt{\textasciitilde{}} is the predictor. This is the
+variable we use to help explain the outcome. In this case, it is
+study\_hours.
+
+The second part is data. This tells R where to find the variables named
+in the formula. For example if our data was called
+\texttt{student\_snapshot}, then we would pass this into the data
+argument.
+
+The third part is family. This tells R what kind of model to fit. More
+specifically, it tells R what distributional story we want to use for
+the outcome. For linear regression, the outcome is continuous, so we
+use: \texttt{family\ =\ gaussian()} The word gaussian is another name
+for the Normal distribution. This matches the model we wrote earlier:
+
+\[
+Y_i \sim \text{Normal}(\mu_i, \sigma)
+\]
+
+with
+
+\[
+\mu_i = \beta_0 + \beta_1 x_i
+\]
+
+Putting these pieces together, we can fit the model using:
+
+\begin{Shaded}
+\begin{Highlighting}[]
+\FunctionTok{glm}\NormalTok{(}
+  \AttributeTok{formula =}\NormalTok{ exam\_score }\SpecialCharTok{\textasciitilde{}}\NormalTok{ study\_hours,}
+  \AttributeTok{data =}\NormalTok{ student\_snapshot,}
+  \AttributeTok{family =} \FunctionTok{gaussian}\NormalTok{()}
+\NormalTok{)}
+\end{Highlighting}
+\end{Shaded}
+
+\begin{verbatim}
+
+Call:  glm(formula = exam_score ~ study_hours, family = gaussian(), 
+    data = student_snapshot)
+
+Coefficients:
+(Intercept)  study_hours  
+     37.869        4.774  
+
+Degrees of Freedom: 7 Total (i.e. Null);  6 Residual
+Null Deviance:      958.9 
+Residual Deviance: 1.726    AIC: 16.43
+\end{verbatim}
+
+From the output above, we can see that \(\hat{\beta}_0=37.87\) and
+\(\hat{\beta}_1=4.77\). The linear regression equation is therefore:
+
+\[
+\hat{Y}_i = 37.87 + 4.77x_i
+\]
+
+In words, the model estimates that a student who studied for 0 hours
+would have an expected exam score of about 37.87, and each additional
+hour of study is associated with an increase of about 4.77 marks. The
+intercept should be interpreted carefully. In this dataset, we only
+observed students who studied between 2 and 9 hours. A prediction at 0
+hours is outside the observed range, so the intercept mainly helps
+position the fitted line rather than giving a meaningful real-world
+prediction.
+
+We can visualise this with a scatterplot:
+
+\begin{Shaded}
+\begin{Highlighting}[]
+\FunctionTok{ggplot}\NormalTok{(student\_snapshot, }\FunctionTok{aes}\NormalTok{(}\AttributeTok{x =}\NormalTok{ study\_hours, }\AttributeTok{y =}\NormalTok{ exam\_score)) }\SpecialCharTok{+}
+  \FunctionTok{geom\_point}\NormalTok{() }\SpecialCharTok{+}
+  \FunctionTok{geom\_smooth}\NormalTok{(}\AttributeTok{method =} \StringTok{\textquotesingle{}lm\textquotesingle{}}\NormalTok{, }\AttributeTok{se =}\NormalTok{ F, }\AttributeTok{linewidth =} \FloatTok{0.5}\NormalTok{)}
+\end{Highlighting}
+\end{Shaded}
+
+\begin{verbatim}
+`geom_smooth()` using formula = 'y ~ x'
+\end{verbatim}
+
+\pandocbounded{\includegraphics[keepaspectratio]{10_Models1_files/figure-pdf/unnamed-chunk-7-1.pdf}}
 
 
 

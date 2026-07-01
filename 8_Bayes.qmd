@@ -2199,13 +2199,13 @@ So:
 
 $$p \mid X=26 \sim \text{Beta}(27,15)$$
 
-<centre>
+<center>
 
 ```{r, echo=FALSE}
 knitr::include_graphics("images/chapter8/beta.gif")
 ```
 
-</centre>
+</center>
 
 The posterior distribution is more concentrated than the prior because the data have given us information. It is centred near the observed proportion, but it still shows uncertainty about the true value of $p$.
 
@@ -2273,13 +2273,13 @@ $$\frac{17}{5}=3.4$$
 
 The data have shifted the estimated arrival rate from 3 arrivals per hour to about 3.4 arrivals per hour.
 
-<centre>
+<center>
 
 ```{r, echo=FALSE}
 knitr::include_graphics("images/chapter8/gamma.gif")
 ```
 
-</centre>
+</center>
 
 The posterior is narrower than the prior because the four hours of data have reduced our uncertainty about the arrival rate.
 
@@ -2347,13 +2347,13 @@ This corresponds to an average waiting time of about:
 
 $$\frac{1}{0.143}=7.0 \text{ minutes}$$
 
-<centre>
+<center>
 
 ```{r, echo=FALSE}
 knitr::include_graphics("images/chapter8/gamma2.gif")
 ```
 
-</centre>
+</center>
 
 The observed waiting times were longer than the prior expectation. As a result, the posterior shifts toward a lower arrival rate.
 
@@ -2415,13 +2415,13 @@ Using these values, the posterior distribution is approximately:
 
 $$\mu \mid \text{data} \sim N(66.0,4.72^2)$$
 
-<centre>
+<center>
 
 ```{r, echo=FALSE}
 knitr::include_graphics("images/chapter8/normal.gif")
 ```
 
-</centre>
+</center>
 
 The posterior is centred close to the sample mean, but it is still influenced by the prior. It is also narrower than the prior because the data have reduced our uncertainty about $\mu$.
 

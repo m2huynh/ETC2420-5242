@@ -410,6 +410,12 @@ window.Quarto = {
  <span class="menu-text"><span class="chapter-number">9</span>&nbsp; <span class="chapter-title">Bayesian Simulation and Decisions</span></span></a>
   </div>
 </li>
+        <li class="sidebar-item">
+  <div class="sidebar-item-container"> 
+  <a href="./10_Models1.html" class="sidebar-item-text sidebar-link">
+ <span class="menu-text"><span class="chapter-number">10</span>&nbsp; <span class="chapter-title">Thinking with Frequentist Models</span></span></a>
+  </div>
+</li>
     </ul>
     </div>
 </nav>
@@ -8423,7 +8429,7 @@ E(\theta)
 <p><span class="math display">\[p \mid X=26 \sim \text{Beta}(1+26,1+40-26)\]</span></p>
 <p>So:</p>
 <p><span class="math display">\[p \mid X=26 \sim \text{Beta}(27,15)\]</span></p>
-<p><centre></centre></p>
+<center>
 <div class="cell">
 <div class="cell-output-display">
 <div>
@@ -8433,7 +8439,7 @@ E(\theta)
 </div>
 </div>
 </div>
-<p></p>
+</center>
 <p>The posterior distribution is more concentrated than the prior because the data have given us information. It is centred near the observed proportion, but it still shows uncertainty about the true value of <span class="math inline">\(p\)</span>.</p>
 </section>
 <section id="poisson-gamma" class="level3" data-number="8.9.2">
@@ -8473,7 +8479,7 @@ E(\theta)
 <p>The posterior mean is:</p>
 <p><span class="math display">\[\frac{17}{5}=3.4\]</span></p>
 <p>The data have shifted the estimated arrival rate from 3 arrivals per hour to about 3.4 arrivals per hour.</p>
-<p><centre></centre></p>
+<center>
 <div class="cell">
 <div class="cell-output-display">
 <div>
@@ -8483,7 +8489,7 @@ E(\theta)
 </div>
 </div>
 </div>
-<p></p>
+</center>
 <p>The posterior is narrower than the prior because the four hours of data have reduced our uncertainty about the arrival rate.</p>
 </section>
 <section id="exponential-gamma" class="level3" data-number="8.9.3">
@@ -8523,7 +8529,7 @@ E(\theta)
 <p><span class="math display">\[\frac{5}{35}=0.143\]</span></p>
 <p>This corresponds to an average waiting time of about:</p>
 <p><span class="math display">\[\frac{1}{0.143}=7.0 \text{ minutes}\]</span></p>
-<p><centre></centre></p>
+<center>
 <div class="cell">
 <div class="cell-output-display">
 <div>
@@ -8533,7 +8539,7 @@ E(\theta)
 </div>
 </div>
 </div>
-<p></p>
+</center>
 <p>The observed waiting times were longer than the prior expectation. As a result, the posterior shifts toward a lower arrival rate.</p>
 </section>
 <section id="normal-normal" class="level3" data-number="8.9.4">
@@ -8571,7 +8577,7 @@ E(\theta)
 \right)\]</span></p>
 <p>Using these values, the posterior distribution is approximately:</p>
 <p><span class="math display">\[\mu \mid \text{data} \sim N(66.0,4.72^2)\]</span></p>
-<p><centre></centre></p>
+<center>
 <div class="cell">
 <div class="cell-output-display">
 <div>
@@ -8581,7 +8587,7 @@ E(\theta)
 </div>
 </div>
 </div>
-<p></p>
+</center>
 <p>The posterior is centred close to the sample mean, but it is still influenced by the prior. It is also narrower than the prior because the data have reduced our uncertainty about <span class="math inline">\(\mu\)</span>.</p>
 <p>This is a useful way to understand conjugacy more generally:</p>
 <blockquote class="blockquote">

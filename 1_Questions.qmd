@@ -66,8 +66,8 @@ That sentence is about probability, although nobody needed a formula to understa
 
 So how did this strategy work out for my family?
 
--   Two boats made it safely to different refugee camps. From there, one side of the family was eventually sent to America, and the other to Australia.
--   To this day, we have no information about those on the third boat. No one knows what happened: whether they sank at sea, were attacked by pirates, or met some other fate that was never recorded and never returned to us as an answer.
+- Two boats made it safely to different refugee camps. From there, one side of the family was eventually sent to America, and the other to Australia.
+- To this day, we have no information about those on the third boat. No one knows what happened: whether they sank at sea, were attacked by pirates, or met some other fate that was never recorded and never returned to us as an answer.
 
 My grandmother once told me that:
 
@@ -103,11 +103,11 @@ Statistics often begins in the space between what could happen and what did happ
 
 This is true in ordinary situations as well as extraordinary ones.
 
--   Before a doctor recommends a treatment, they do not know exactly how a particular patient will respond.
--   Before a student sits an exam, they do not know exactly which questions will appear.
--   Before a business launches a product, it does not know how customers will react.
--   Before a government introduces a policy, it does not know exactly what effects the policy will have.
--   Before we collect data, we do not know exactly what pattern the data will show.
+- Before a doctor recommends a treatment, they do not know exactly how a particular patient will respond.
+- Before a student sits an exam, they do not know exactly which questions will appear.
+- Before a business launches a product, it does not know how customers will react.
+- Before a government introduces a policy, it does not know exactly what effects the policy will have.
+- Before we collect data, we do not know exactly what pattern the data will show.
 
 In each case, there is a difference between asking the question before the outcome and asking it afterwards.
 
@@ -319,11 +319,11 @@ But in real life, that modest kind of reasoning is often exactly what we need.
 
 When we ask
 
--   whether it will rain,
--   whether a treatment will help,
--   whether a witness is reliable,
--   whether a pattern in data is surprising, or
--   whether a decision is worth the risk,
+- whether it will rain,
+- whether a treatment will help,
+- whether a witness is reliable,
+- whether a pattern in data is surprising, or
+- whether a decision is worth the risk,
 
 we are usually not in the world of geometric certainty. We are in the world of uncertain evidence and possible outcomes. This is the world probability was built for.
 
@@ -392,21 +392,21 @@ A probability of (1/36) is small, but it is not impossible. If many people roll 
 
 The Roman contribution becomes even more interesting when we turn to law.
 
--   Legal decision-making is full of uncertainty.
--   Witnesses may disagree.
--   Evidence may be incomplete.
--   A person may seem suspicious but not certainly guilty.
--   A document may be partly reliable.
--   A testimony may be plausible but not decisive.
--   Courts must often make decisions in the space between ignorance and certainty.
+- Legal decision-making is full of uncertainty.
+- Witnesses may disagree.
+- Evidence may be incomplete.
+- A person may seem suspicious but not certainly guilty.
+- A document may be partly reliable.
+- A testimony may be plausible but not decisive.
+- Courts must often make decisions in the space between ignorance and certainty.
 
 In this setting, the Romans developed the idea of partial proof. A piece of evidence might not establish a claim completely, but it might still count for something. It might be, in effect, a *half proof*.
 
 At first, this seems like a sensible idea. Not all evidence has the same strength.
 
--   One witness might be uncertain. Two witnesses might be more convincing.
--   A confession might be stronger than a rumour.
--   Physical evidence might be stronger than hearsay.
+- One witness might be uncertain. Two witnesses might be more convincing.
+- A confession might be stronger than a rumour.
+- Physical evidence might be stronger than hearsay.
 
 Even today, we often speak this way. We say that evidence is weak, strong, suggestive, compelling, or inconclusive. The Romans were trying to do something recognisably statistical: they were trying to reason with degrees of uncertainty.
 
@@ -619,12 +619,12 @@ The prosecution presented a probability argument. The couple, they claimed, matc
 
 The prosecution assigned probabilities to these features and multiplied them together:
 
--   Partly yellow car (1/10)
--   Man with moustache (1/4)
--   Man with beard (1/10)
--   Woman with ponytail (1/10)
--   Woman with blond hair (1/3)
--   Interracial couple in car (1/1000)
+- Partly yellow car (1/10)
+- Man with moustache (1/4)
+- Man with beard (1/10)
+- Woman with ponytail (1/10)
+- Woman with blond hair (1/3)
+- Interracial couple in car (1/1000)
 
 The prosecution treated these characteristics as independent and multiplied the probabilities:
 
@@ -869,8 +869,8 @@ r_functions |>
 
 You do not need to memorise all of these immediately. The aim is to see how the functions are used in context. If you would like a more detailed refresher of R/RStudio see:
 
--   Source 1
--   Source 2
+- Source 1
+- Source 2
 
 ### Example 1: Three boats and possible futures
 
@@ -927,15 +927,15 @@ The previous calculation used probability rules. Another way to explore the same
 
 In the code below, TRUE means a boat arrives safely and FALSE means it does not. The function `sample()` randomly selects values. In the code there are four main parts:
 
--   `c(TRUE, FALSE)` gives the possible values that can be selected;
--   `size = n_sim` says how many values to select;
--   `replace = TRUE` means the same value can be selected again and again;
--   `prob = c(p_survive, p_lost)` gives the probabilities of selecting TRUE and FALSE.
+- `c(TRUE, FALSE)` gives the possible values that can be selected;
+- `size = n_sim` says how many values to select;
+- `replace = TRUE` means the same value can be selected again and again;
+- `prob = c(p_survive, p_lost)` gives the probabilities of selecting TRUE and FALSE.
 
 Because p_survive = 0.60 and p_lost = 0.40, this means:
 
--   `TRUE` is selected with probability 0.60;
--   `FALSE`is selected with probability 0.40.
+- `TRUE` is selected with probability 0.60;
+- `FALSE`is selected with probability 0.40.
 
 ```{r}
 set.seed(2420)
@@ -1014,10 +1014,10 @@ astragali_probabilities |>
 
 This means:
 
--   Side 1 appears 10% of the time;
--   Side 2 appears 40% of the time;
--   Side 3 appears 40% of the time;
--   Side 4 appears 10% of the time.
+- Side 1 appears 10% of the time;
+- Side 2 appears 40% of the time;
+- Side 3 appears 40% of the time;
+- Side 4 appears 10% of the time.
 
 The probabilities still add to 1:
 
@@ -1106,8 +1106,8 @@ ggplot(astragali_comparison, aes(x = side, y = observed_proportion)) +
 
 In the chapter, we compared two possible sources of error in DNA evidence:
 
--   a random DNA match;
--   a laboratory error.
+- a random DNA match;
+- a laboratory error.
 
 Here is how we can code that comparison in R.
 
@@ -1416,10 +1416,10 @@ Before the applications were assessed, however, the outcome was unknown.
 
 **b.** Possible outcomes include:
 
--   receiving no offers;
--   receiving two or three offers;
--   receiving an offer from a different internship;
--   receiving three rejections.
+- receiving no offers;
+- receiving two or three offers;
+- receiving an offer from a different internship;
+- receiving three rejections.
 
 **c.** It can be misleading because good outcomes do not always come from good decisions, and bad outcomes do not always come from bad decisions. The application strategy should be judged using the information available at the time, not only by the result that happened afterward.
 :::
@@ -1536,9 +1536,9 @@ rain |>
 
 **c.** Possible answers:
 
--   "A fair chance" might be interpreted as around 40% or 50%.
--   "Unlikely" might be interpreted as around 10% or 20%.
--   "Almost certain" might be interpreted as around 90% or 95%.
+- "A fair chance" might be interpreted as around 40% or 50%.
+- "Unlikely" might be interpreted as around 10% or 20%.
+- "Almost certain" might be interpreted as around 90% or 95%.
 
 The exact numbers are less important than recognising that verbal descriptions can be interpreted differently by different people.
 :::
@@ -1661,8 +1661,8 @@ We would expect about 40 people to match the description.
 
 A computer file can fail to open for two reasons:
 
--   the file is corrupted;
--   the software is out of date.
+- the file is corrupted;
+- the software is out of date.
 
 Suppose:
 
@@ -1925,10 +1925,10 @@ The probability that the student missed the bus and their alarm did not go off c
 
 A workplace investigation finds that an employee matches several characteristics of the person who accessed a restricted file:
 
--   works in the relevant department;
--   was in the building that day;
--   has access to the database;
--   uses the same type of laptop seen in security footage.
+- works in the relevant department;
+- was in the building that day;
+- has access to the database;
+- uses the same type of laptop seen in security footage.
 
 A manager says:
 
@@ -1985,12 +1985,12 @@ q16 |>
 
 Choose from the following ideas:
 
--   vague uncertainty;
--   hindsight;
--   overlap;
--   independence;
--   rare does not mean unique;
--   vividness is not probability.
+- vague uncertainty;
+- hindsight;
+- overlap;
+- independence;
+- rare does not mean unique;
+- vividness is not probability.
 
 ::: {.callout-important collapse="true"}
 ### Click for Solutions
@@ -2030,23 +2030,23 @@ q16_solution |>
 
 Choose one of the following situations:
 
--   a sports team has a surprising winning streak;
--   a university survey finds that most respondents are unhappy;
--   an online advertisement receives many clicks;
--   a friend wins a small prize twice in one week;
--   a weather forecast turns out to be wrong.
+- a sports team has a surprising winning streak;
+- a university survey finds that most respondents are unhappy;
+- an online advertisement receives many clicks;
+- a friend wins a small prize twice in one week;
+- a weather forecast turns out to be wrong.
 
 Write a short paragraph explaining how a statistician might think about the situation. Your paragraph should include at least three of the following phrases:
 
--   possible outcomes;
--   what could have happened;
--   what did happen;
--   compared with what;
--   by chance;
--   assumptions;
--   process;
--   evidence;
--   better question.
+- possible outcomes;
+- what could have happened;
+- what did happen;
+- compared with what;
+- by chance;
+- assumptions;
+- process;
+- evidence;
+- better question.
 
 ::: {.callout-important collapse="true"}
 ### Click for Solutions
@@ -2079,13 +2079,13 @@ A strong answer for **a** should explain that statistical methods are tools for 
 
 For **b** and **c**, the rewritten question should usually include at least one of the following ideas:
 
--   comparison;
--   possible outcomes;
--   uncertainty;
--   assumptions;
--   evidence;
--   process;
--   what would have happened otherwise.
+- comparison;
+- possible outcomes;
+- uncertainty;
+- assumptions;
+- evidence;
+- process;
+- what would have happened otherwise.
 
 For example:
 
