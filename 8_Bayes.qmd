@@ -30,14 +30,14 @@ By the end of this chapter, you should be able to:
 10. Summarise and interpret a posterior distribution using posterior means, credible intervals, posterior probabilities, and prior sensitivity.
 :::
 
-<centre>
+<center>
 
 ```{r, echo=FALSE}
 #| classes: .enlarge-image
 knitr::include_graphics("images/chapter8/outline.png")
 ```
 
-</centre>
+</center>
 
 <br>
 
@@ -51,8 +51,16 @@ Consider the following description:
 
 Now suppose Steve has been chosen at random from a group of people. The question is: Which is more likely?
 
--   Steve is a librarian or;
--   Steve is a farmer.
+> Is Steve a librarian; or is Steve a farmer?
+
+<center>
+```{r, echo=FALSE}
+#| fig-cap: "Image Source: https://alexlyman.org/blog/bayes.html"
+knitr::include_graphics("images/chapter8/farmer_librarian.png")
+```
+</center>
+
+<br>
 
 Have a think about what your answer might be.
 
@@ -143,17 +151,13 @@ In the previous chapter, we introduced likelihood. We used likelihood to compare
 
 The likelihood question was:
 
-$$
-P(\text{data} \mid \theta)
-$$
+$$P(\text{data} \mid \theta)$$
 
 That is, if this parameter value were true, how likely would the observed data be?
 
 Bayesian inference asks a related but different question:
 
-$$
-P(\theta \mid \text{data})
-$$
+$$P(\theta \mid \text{data})$$
 
 That is, after seeing the data, how plausible is this parameter value?
 
@@ -161,9 +165,7 @@ Those two expressions look similar, but they are not the same. The vertical bar 
 
 The basic structure of Bayesian inference is:
 
-$$
-\text{posterior} \propto \text{prior} \times \text{likelihood}
-$$
+$$\text{posterior} \propto \text{prior} \times \text{likelihood}$$
 
 The likelihood is the part we already met in Chapter 7. The new ingredient is the **prior**, which represents uncertainty before seeing the current data. The result is the **posterior**, which represents uncertainty after seeing the data.
 
@@ -187,9 +189,7 @@ The second question gives us extra information. Once we know that at least one c
 
 When we write
 
-$$
-P(H \mid E)
-$$
+$$P(H \mid E)$$
 
 we are asking for the probability of (H), given that (E) has happened. The vertical line means “given”, or “conditional on”.
 
@@ -197,25 +197,22 @@ The key idea is simple:
 
 > Once we know that the evidence (E) happened, we restrict attention to the part of the sample space where (E) is true.
 
-Within that reduced world, we then ask how often (H) is also true.
+Within that reduced world, we then ask how often (H) is also true. This gives us the conditional probability formula:
 
-This gives us the conditional probability formula:
-
-\$\$ P(H \mid E) =
-
+$$ 
+P(H \mid E) =
 \frac{P(H \cap E)}{P(E)}
-
-\$\$
+$$
 
 In words:
 
-\$\$ P(H \mid E) =
-
+$$ 
+P(H \mid E) =
 \frac{\text{probability that both }H\text{ and }E\text{ happen}}
+{\text{probability that }E\text{ happens}} 
+$$
 
-{\text{probability that }E\text{ happens}} \$\$
-
-The denominator, (P(E)), is the probability of the evidence. It defines the smaller world we are now working inside. The numerator, $P(H \cap E$, is the probability that both the evidence and the thing we care about are true.
+The denominator, $P(E)$, is the probability of the evidence. It defines the smaller world we are now working inside. The numerator, $P(H \cap E$, is the probability that both the evidence and the thing we care about are true.
 
 ### An example of conditional probability
 
@@ -242,38 +239,28 @@ student_table |>
 
 Let
 
-$$
-H = \text{completed the quiz}
-$$
+$$H = \text{completed the quiz}$$
 
 and let
 
-$$
-E = \text{drinks coffee}
-$$
+$$E = \text{drinks coffee}$$
 
 We want:
 
-$$
-P(H \mid E)
-$$
+$$P(H \mid E)$$
 
 That is, among students who drink coffee, what proportion completed the quiz?
 
 From the table, 10 students drink coffee:
 
-$$
-7 + 3 = 10
-$$
+$$7 + 3 = 10$$
 
 Of those 10 students, 7 completed the quiz. So:
 
-$$
-P(\text{completed quiz} \mid \text{drinks coffee})
+$$P(\text{completed quiz} \mid \text{drinks coffee})
 =\frac{7}{10}
 =
-0.70
-$$
+0.70$$
 
 We can also calculate the same probability using the formal rule. In the full class of 20 students:
 
@@ -303,12 +290,10 @@ is already enough to solve many conditional probability problems. But it has one
 
 Sometimes we do know that joint probability directly. In the coffee and quiz example, the table told us that 7 out of 20 students both drank coffee and completed the quiz. But in many problems, the information is given in a different form. Instead of being told $P(H \cap E)$, we are often told:
 
--   how common $H$ is
--   how likely the evidence $E$ is if $H$ is true
+- how common $H$ is
+- how likely the evidence $E$ is if $H$ is true
 
-That is, we are given $P(H)$ and $P(E \mid H)$.
-
-This is where the next version of the formula becomes useful. Since
+That is, we are given $P(H)$ and $P(E \mid H)$. This is where the next version of the formula becomes useful. Since
 
 $$P(H \cap E)=P(H)P(E \mid H)$$
 
@@ -316,10 +301,33 @@ we can rewrite conditional probability as:
 
 $$\frac{P(H)P(E \mid H)}{P(E)}$$
 
-This is the beginning of Bayes' theorem. For now, we will call it **Baby Bayes**. It says:
+This is the beginning of Bayes’ theorem. For now, we will call it Baby Bayes because it is the smaller, simpler idea that Bayes’ theorem grows out of.
 
-$$\frac{\text{starting probability} \times \text{probability of the evidence}}
-{\text{overall probability of the evidence}}$$
+Baby Bayes is really just conditional probability. It asks:
+
+> Out of all the times the evidence happens, how often does the hypothesis happen too?
+
+In symbols, this is:
+
+$$
+P(H \mid E) = \frac{P(H \cap E)}{P(E)}
+$$
+
+The top part, $P(H \cap E)$, means the probability that the hypothesis and the evidence are both true. The bottom part, $P(E)$, means the overall probability of seeing the evidence.
+
+So Baby Bayes says: once we know the evidence happened, we narrow our attention to only the cases where the evidence is present, and then ask what fraction of those cases also include the hypothesis. We call it Baby Bayes because it has the same basic structure as Bayes’ theorem: we are updating what we believe about a hypothesis after seeing some evidence. Later, we will rewrite the top part, $P(H \cap E)$, in a more useful way. That gives us the full version of Bayes’ theorem.
+
+As a side note, there is a real book called **Bayesian Probability for babies**, although this is not where the term baby bayes come from:
+
+<center>
+```{r, echo=FALSE}
+#| fig-cap: "Image Source: https://x.com/beth_fossen/status/1227244290763563008"
+knitr::include_graphics("images/chapter8/EQgMLHAXYAENQck.jpg")
+```
+</center>
+
+<br>
+
 
 ## Baby Bayes
 
@@ -331,9 +339,9 @@ But formulas are not always the easiest place to start. Conditional probability 
 
 In this section, we will use three representations:
 
--   Venn diagrams
--   Tree diagrams
--   Continuous distributions
+- Venn diagrams
+- Tree diagrams
+- Continuous distributions
 
 These methods may look different, but they are all doing the same thing: We condition on the evidence, then ask what proportion of that reduced world belongs to the event or explanation we care about.
 
@@ -341,51 +349,39 @@ These methods may look different, but they are all doing the same thing: We cond
 
 Suppose we have two soccer players, Amy and Jody. Across many matches:
 
--   70% of the time, neither Amy nor Jody scores a goal
--   Amy scores a goal 20% of the time
--   Jody scores a goal 25% of the time
+- 70% of the time, neither Amy nor Jody scores a goal
+- Amy scores a goal 20% of the time
+- Jody scores a goal 25% of the time
 
 On a particular match day, Jody scored a goal. What is the probability that Amy also scored a goal?
 
 Let
 
-$$
-H = \text{Amy scored}
-$$
+$$H = \text{Amy scored}$$
 
 and let
 
-$$
-E = \text{Jody scored}
-$$
+$$E = \text{Jody scored}$$
 
 We want to calculate
 
-$$
-P(H \mid E)
-$$
+$$P(H \mid E)$$
 
 That is, given that Jody scored, what is the probability that Amy also scored?
 
 We are told that neither player scores 70% of the time. This means at least one of them scores 30% of the time:
 
-$$
-1 - 0.70 = 0.30
-$$
+$$1 - 0.70 = 0.30$$
 
 We also know that Amy scores 20% of the time and Jody scores 25% of the time. To make these numbers fit together, Amy and Jody must both score in some matches.
 
 Let (x) be the probability that both Amy and Jody score. Then:
 
-$$
-0.20 + 0.25 - x = 0.30
-$$
+$$0.20 + 0.25 - x = 0.30$$
 
 Solving for (x):
 
-$$
-x = 0.15
-$$
+$$x = 0.15$$
 
 So Amy and Jody both score in 15% of matches.
 
@@ -478,25 +474,20 @@ The evidence is that Jody scored. So we restrict attention to the Jody circle.
 
 Inside the Jody circle, there are two possibilities:
 
--   Amy also scored
--   Amy did not score
+- Amy also scored
+- Amy did not score
 
 The total probability inside the Jody circle is:
 
-$$
-P(E) = 0.15 + 0.10 = 0.25
-$$
+$$P(E) = 0.15 + 0.10 = 0.25$$
 
 The part of the Jody circle where Amy also scored is:
 
-$$
-P(H \cap E) = 0.15
-$$
+$$P(H \cap E) = 0.15$$
 
 Therefore:
 
-$$
-\begin{aligned}
+$$\begin{aligned}
 P(H \mid E)
 &=
 \frac{P(H \cap E)}{P(E)} \
@@ -504,8 +495,7 @@ P(H \mid E)
 \frac{0.15}{0.25} \
 &=
 0.60
-\end{aligned}
-$$
+\end{aligned}$$
 
 So, given that Jody scored, the probability that Amy also scored is 0.60.
 
@@ -519,30 +509,24 @@ For that kind of problem, a tree diagram is usually more useful.
 
 Suppose the Monash DataNerds football team has a star player named Minh.
 
--   In any given match, there is a 10% chance that Minh is injured
--   If Minh is injured, there is a 40% chance that the team loses
--   If Minh is not injured, there is a 5% chance that the team loses
--   In the most recent match, the team lost
+- In any given match, there is a 10% chance that Minh is injured
+- If Minh is injured, there is a 40% chance that the team loses
+- If Minh is not injured, there is a 5% chance that the team loses
+- In the most recent match, the team lost
 
 What is the probability that Minh was injured?
 
 Let
 
-$$
-H = \text{Minh was injured}
-$$
+$$H = \text{Minh was injured}$$
 
 and let
 
-$$
-E = \text{the team lost}
-$$
+$$E = \text{the team lost}$$
 
 We want to calculate
 
-$$
-P(H \mid E)
-$$
+$$P(H \mid E)$$
 
 That is, given that the team lost, what is the probability that Minh was injured?
 
@@ -682,8 +666,7 @@ Each complete path through the tree represents a joint event. To find the probab
 
 For the injured-and-lost path:
 
-$$
-\begin{aligned}
+$$\begin{aligned}
 P(H \cap E)
 &=
 P(H)P(E \mid H) \
@@ -691,13 +674,11 @@ P(H)P(E \mid H) \
 0.10 \times 0.40 \
 &=
 0.04
-\end{aligned}
-$$
+\end{aligned}$$
 
 For the not-injured-and-lost path:
 
-$$
-\begin{aligned}
+$$\begin{aligned}
 P(H^c \cap E)
 &=
 P(H^c)P(E \mid H^c) \
@@ -705,15 +686,13 @@ P(H^c)P(E \mid H^c) \
 0.90 \times 0.05 \
 &=
 0.045
-\end{aligned}
-$$
+\end{aligned}$$
 
 The team lost in two possible ways: Minh was injured and the team lost, or Minh was not injured and the team lost.
 
 So the overall probability that the team loses is:
 
-$$
-\begin{aligned}
+$$\begin{aligned}
 P(E)
 &=
 P(H \cap E) + P(H^c \cap E) \
@@ -721,13 +700,11 @@ P(H \cap E) + P(H^c \cap E) \
 0.04 + 0.045 \
 &=
 0.085
-\end{aligned}
-$$
+\end{aligned}$$
 
 Now we can calculate the probability that Minh was injured, given that the team lost:
 
-$$
-\begin{aligned}
+$$\begin{aligned}
 P(H \mid E)
 &=
 \frac{P(H \cap E)}{P(E)} \
@@ -735,33 +712,27 @@ P(H \mid E)
 \frac{0.04}{0.085} \
 &=
 0.471
-\end{aligned}
-$$
+\end{aligned}$$
 
 So, after observing that the team lost, the probability that Minh was injured is about 0.47.
 
 This is Baby Bayes in action:
 
-\$\$ P(H \mid E) =
-
+$$
+P(H \mid E) =
 \frac{P(H)P(E \mid H)}
-
-{P(H)P(E \mid H)+P(H\^c)P(E \mid H\^c)} \$\$
+{P(H)P(E \mid H)+P(H^{c})P(E \mid H^{c})}
+$$
 
 For this example:
 
-$$
-\begin{aligned}
+$$\begin{aligned}
 P(H \mid E)
 &=
 \frac{0.10 \times 0.40}
-{0.10 \times 0.40 + 0.90 \times 0.05} \
-&=
-\frac{0.04}{0.085} \
-&=
-0.471
-\end{aligned}
-$$
+{0.10 \times 0.40 + 0.90 \times 0.05} =
+\frac{0.04}{0.085} = 0.471
+\end{aligned}$$
 
 The tree diagram shows why the formula works. We multiply along the branches to get the probabilities of each path. Then we focus only on the paths that produced the evidence.
 
@@ -779,49 +750,39 @@ What is the probability that Minh can run 100 metres in less than 13.5 seconds?
 
 Let
 
-$$
-T = \text{Minh's 100 metre time}
-$$
+$$T = \text{Minh's 100 metre time}$$
 
 Suppose 100 metre times follow a normal distribution:
 
-$$
-T \sim N(15, 1.5^2)
-$$
+$$T \sim N(15, 1.5^2)$$
 
 The evidence is that Minh is in the running team. That means Minh can run 100 metres in less than 14 seconds.
 
 Let
 
-$$
-E = {T < 14}
-$$
+$$E = {T < 14}$$
 
 The event we care about is that Minh can run 100 metres in less than 13.5 seconds:
 
-$$
-H = {T < 13.5}
-$$
+$$H = {T < 13.5}$$
 
 We want:
 
-$$
-P(T < 13.5 \mid T < 14)
-$$
+$$P(T < 13.5 \mid T < 14)$$
 
 Because anyone who runs under 13.5 seconds also runs under 14 seconds, the event (T \< 13.5) is inside the event (T \< 14). So:
 
-\$\$ P(T \< 13.5 \cap T \< 14) =
-
-P(T \< 13.5) \$\$
+$$
+P(T < 13.5 \cap T < 14) =
+P(T < 13.5)
+$$
 
 Therefore:
 
-\$\$ P(T \< 13.5 \mid T \< 14) =
-
+$$
+P(T < 13.5 \mid T < 14) =
 \frac{P(T < 13.5)}{P(T < 14)}
-
-\$\$
+$$
 
 We can calculate these probabilities using the normal distribution.
 
@@ -892,17 +853,12 @@ ggplot(running_density, aes(x = time, y = density)) +
 
 Numerically:
 
-$$
-\begin{aligned}
-P(T < 13.5 \mid T < 14)
-&=
-\frac{P(T < 13.5)}{P(T < 14)} \
-&=
-\frac{0.159}{0.252} \
-&=
+$$\begin{aligned}
+P(T < 13.5 \mid T < 14)=
+\frac{P(T < 13.5)}{P(T < 14)}=
+\frac{0.159}{0.252}=
 0.631
-\end{aligned}
-$$
+\end{aligned}$$
 
 So, among students fast enough to make the running team, about 63% are fast enough to run under 13.5 seconds.
 
@@ -915,9 +871,7 @@ Now let us use the same conditional probability logic in a more Bayesian directi
 
 Suppose there is a fitness test that gives each person a score. Higher scores mean greater fitness. In the general population, suppose scores are normally distributed with mean 100 and standard deviation 15:
 
-$$
-\text{Fitness score} \sim N(100, 15^2)
-$$
+$$\text{Fitness score} \sim N(100, 15^2)$$
 
 Now suppose that to become a professional athlete, a person needs an extremely high fitness score. Let us say the threshold is 171 or above.
 
@@ -933,11 +887,9 @@ That is a very high threshold. Under the general population distribution, the pr
 
 Now imagine there is a pill that children can take. The pill shifts the average fitness score upward by 2 points. So children who take the pill later have fitness scores distributed as:
 
-$$
-\text{Fitness score} \mid \text{pill}
+$$\text{Fitness score} \mid \text{pill}
 \sim
-N(102, 15^2)
-$$
+N(102, 15^2)$$
 
 At first, a two-point shift might not seem very important. Moving the average from 100 to 102 sounds small. It feels as though it should not make a large difference to whether someone becomes a professional athlete.
 
@@ -947,42 +899,30 @@ Imagine the following thought experiment. We recruit many thousands of children 
 
 Let
 
-$$
-H = \text{took the pill as a child}
-$$
+$$H = \text{took the pill as a child}$$
 
 and let
 
-$$
-E = \text{became a professional athlete}
-$$
+$$E = \text{became a professional athlete}$$
 
 Because half the children were given the pill:
 
-$$
-P(H) = 0.50
-$$
+$$P(H) = 0.50$$
 
 and
 
-$$
-P(H^c) = 0.50
-$$
+$$P(H^c) = 0.50$$
 
 For children who took the pill, the probability of reaching the professional-athlete threshold is:
 
-$$
-P(E \mid H)=
-P(\text{Fitness score} \ge 171 \mid \text{pill})
-$$
+$$P(E \mid H)=
+P(\text{Fitness score} \ge 171 \mid \text{pill})$$
 
 For children who did not take the pill, the probability is:
 
-$$
-P(E \mid H^c)
+$$P(E \mid H^c)
 =
-P(\text{Fitness score} \ge 171 \mid \text{no pill})
-$$
+P(\text{Fitness score} \ge 171 \mid \text{no pill})$$
 
 We can calculate both probabilities using `pnorm()`:
 
@@ -1017,17 +957,13 @@ Now we ask a Bayesian question:
 
 In notation, we want:
 
-$$
-P(H \mid E)
-$$
+$$P(H \mid E)$$
 
 Using Baby Bayes:
 
-$$
-P(H \mid E)=
+$$P(H \mid E)=
 \frac{P(H)P(E \mid H)}
-{P(H)P(E \mid H)+P(H^c)P(E \mid H^c)}
-$$
+{P(H)P(E \mid H)+P(H^c)P(E \mid H^c)}$$
 
 Substituting the numbers:
 
@@ -1046,11 +982,9 @@ So, even though the pill only shifted the mean by 2 points, about 66% of the pro
 
 Now consider a different version of the thought experiment. Suppose the pill does not increase the average score. Instead, it increases variation. The average remains 100, but the standard deviation increases from 15 to 20:
 
-$$
-\text{Fitness score} \mid \text{pill}
+$$\text{Fitness score} \mid \text{pill}
 \sim
-N(100, 20^2)
-$$
+N(100, 20^2)$$
 
 This means the pill does not make the average child fitter. But it does create more extreme outcomes in both directions.
 
@@ -1079,14 +1013,12 @@ fitness_sd_table |>
 
 Using Baby Bayes again:
 
-$$
-P(H \mid E)
+$$P(H \mid E)
 =
 \frac{0.50P(E \mid H)}
 {0.50P(E \mid H)+0.50P(E \mid H^c)}
 =
-.9943
-$$
+.9943$$
 
 In this version, among the professional athletes, about 99.4% would have taken the pill. This is a striking result. The pill did not raise the average score at all. But by increasing variation, it created many more people in the extreme right tail.
 
@@ -1098,21 +1030,15 @@ This example also moves us closer to Bayesian inference.
 
 We began with a hypothesis:
 
-$$
-H = \text{took the pill}
-$$
+$$H = \text{took the pill}$$
 
 and evidence:
 
-$$
-E = \text{became a professional athlete}
-$$
+$$E = \text{became a professional athlete}$$
 
 Then we asked:
 
-$$
-P(H \mid E)
-$$
+$$P(H \mid E)$$
 
 The evidence changed our uncertainty about the hypothesis. That is the central movement in Bayes' theorem.
 :::
@@ -1123,27 +1049,19 @@ So far, we have used Baby Bayes to solve several conditional probability problem
 
 For the football example, the explanation was:
 
-$$
-H = \text{Minh was injured}
-$$
+$$H = \text{Minh was injured}$$
 
 and the evidence was:
 
-$$
-E = \text{the team lost}
-$$
+$$E = \text{the team lost}$$
 
 Before we knew the result of the match, the probability that Minh was injured was:
 
-$$
-P(H) = 0.10
-$$
+$$P(H) = 0.10$$
 
 After learning that the team lost, the probability that Minh was injured became:
 
-$$
-P(H \mid E) = 0.471
-$$
+$$P(H \mid E) = 0.471$$
 
 This is the central movement in Bayesian reasoning. We begin with uncertainty, observe evidence, and update our uncertainty.
 
@@ -1185,9 +1103,7 @@ The **prior** is the probability of the hypothesis before seeing the evidence.
 
 In the football example:
 
-$$
-P(H) = 0.10
-$$
+$$P(H) = 0.10$$
 
 This means that, before knowing the result of the match, there was a 10% chance that Minh was injured.
 
@@ -1195,9 +1111,7 @@ The **likelihood** is the probability of the evidence under a particular hypothe
 
 In the same example:
 
-$$
-P(E \mid H) = 0.40
-$$
+$$P(E \mid H) = 0.40$$
 
 This means that if Minh was injured, the probability that the team loses is 40%.
 
@@ -1205,9 +1119,7 @@ The **posterior** is the probability of the hypothesis after seeing the evidence
 
 In the example:
 
-$$
-P(H \mid E) = 0.471
-$$
+$$P(H \mid E) = 0.471$$
 
 This means that after learning that the team lost, the probability that Minh was injured is about 47%.
 
@@ -1215,32 +1127,26 @@ The word **posterior** may sound technical, but the idea is simple. It is the up
 
 Bayes' theorem puts these pieces together:
 
-$$
-P(H \mid E)
+$$P(H \mid E)
 =
-\frac{P(H)P(E \mid H)}{P(E)}
-$$
+\frac{P(H)P(E \mid H)}{P(E)}$$
 
 In words:
 
-$$
-\text{posterior}
+$$\text{posterior}
 =
 \frac{\text{prior} \times \text{likelihood}}
-{\text{evidence}}
-$$
+{\text{evidence}}$$
 
 The denominator, $P(E)$, is sometimes called the **evidence**, the **marginal likelihood**, or the **normalising constant**. For now, the most important thing is what it does. It makes sure the updated probabilities are properly scaled.
 
 In the two-hypothesis case, where the hypothesis is either true or not true, the denominator can be written as:
 
-$$
-P(E)
+$$P(E)
 =
 P(H)P(E \mid H)
 +
-P(H^c)P(E \mid H^c)
-$$
+P(H^c)P(E \mid H^c)$$
 
 That is, the evidence could have happened in two ways:
 
@@ -1249,12 +1155,10 @@ That is, the evidence could have happened in two ways:
 
 So Baby Bayes becomes:
 
-$$
-P(H \mid E)
+$$P(H \mid E)
 =
 \frac{P(H)P(E \mid H)}
-{P(H)P(E \mid H)+P(H^c)P(E \mid H^c)}
-$$
+{P(H)P(E \mid H)+P(H^c)P(E \mid H^c)}$$
 
 This version is useful because it shows the comparison directly. We do not only ask whether the evidence is likely if (H) is true. We also ask whether the evidence is likely if (H) is not true.
 
@@ -1262,25 +1166,19 @@ This version is useful because it shows the comparison directly. We do not only 
 
 For the football example, the team losing was more likely if Minh was injured:
 
-$$
-P(E \mid H) = 0.40
-$$
+$$P(E \mid H) = 0.40$$
 
 than if Minh was not injured:
 
-$$
-P(E \mid H^c) = 0.05
-$$
+$$P(E \mid H^c) = 0.05$$
 
 So the loss increased the probability that Minh was injured. But it did not make injury certain, because injury was not very common to begin with. This is why the prior matters. The evidence pushed us from 10% to about 47%, but not to 100%.
 
 A compact way to remember Bayes' theorem is:
 
-$$
-\text{posterior}
+$$\text{posterior}
 \propto
-\text{prior} \times \text{likelihood}
-$$
+\text{prior} \times \text{likelihood}$$
 
 The symbol $\propto$ means “is proportional to”. It reminds us that the posterior is built by multiplying the prior by the likelihood, and then re-scaling so that the probabilities add up to 1.
 
@@ -1299,8 +1197,8 @@ Suppose there is a disease called Disease X, and a test has been developed for t
 
 The test is reasonably accurate:
 
--   If someone has Disease X, the test returns positive 80% of the time
--   If someone does not have Disease X, the test returns negative 80% of the time
+- If someone has Disease X, the test returns positive 80% of the time
+- If someone does not have Disease X, the test returns negative 80% of the time
 
 Equivalently, among people who do not have the disease, the test gives a false positive 20% of the time.
 
@@ -1313,67 +1211,46 @@ At first, it is tempting to say 80%. After all, the test is correct 80% of the t
 
 The test accuracy tells us something like:
 
-$$
-P(\text{positive test} \mid \text{has disease})
-$$
+$$P(\text{positive test} \mid \text{has disease})$$
 
 But the question asks for:
 
-$$
-P(\text{has disease} \mid \text{positive test})
-$$
+$$P(\text{has disease} \mid \text{positive test})$$
 
 These are not the same.
 
 Let
 
-$$
-H = \text{person has Disease X}
-$$
+$$H = \text{person has Disease X}$$
 
 and let
 
-$$
-E = \text{person tests positive}
-$$
+$$E = \text{person tests positive}$$
 
 We want:
 
-$$
-P(H \mid E)
-$$
+$$P(H \mid E)$$
 
 Using Baby Bayes:
 
-$$
-P(H \mid E)
+$$P(H \mid E)
 =
 \frac{P(H)P(E \mid H)}
-{P(H)P(E \mid H)+P(H^c)P(E \mid H^c)}
-$$
+{P(H)P(E \mid H)+P(H^c)P(E \mid H^c)}$$
 
 In this example:
 
-$$
-P(H) = 0.10
-$$
+$$P(H) = 0.10$$
 
-$$
-P(H^c) = 0.90
-$$
+$$P(H^c) = 0.90$$
 
-$$
-P(E \mid H) = 0.80
-$$
+$$P(E \mid H) = 0.80$$
 
-$$
-P(E \mid H^c) = 0.20
-$$
+$$P(E \mid H^c) = 0.20$$
 
 Substituting these into the formula gives:
 
-$$
-\begin{aligned}
+$$\begin{aligned}
 P(H \mid E)
 &=
 \frac{0.10 \times 0.80}
@@ -1385,8 +1262,7 @@ P(H \mid E)
 \frac{0.08}{0.26} \\
 &=
 0.308
-\end{aligned}
-$$
+\end{aligned}$$
 
 So, after a positive test, the probability that the person has Disease X is about 31%.
 
@@ -1416,26 +1292,22 @@ disease_table |>
 
 Out of 100 people:
 
--   10 have Disease X
--   90 do not have Disease X
--   8 people with the disease test positive
--   18 people without the disease also test positive
+- 10 have Disease X
+- 90 do not have Disease X
+- 8 people with the disease test positive
+- 18 people without the disease also test positive
 
 So there are:
 
-$$
-8 + 18 = 26
-$$
+$$8 + 18 = 26$$
 
 positive tests in total.
 
 Of these 26 positive tests, only 8 are true positives. Therefore:
 
-$$
-P(\text{has disease} \mid \text{positive test})
+$$P(\text{has disease} \mid \text{positive test})
 =\frac{8}{26}
-=0.308
-$$
+=0.308$$
 
 The natural frequency version and the Baby Bayes formula give the same answer. The table often feels more intuitive because it shows where the positive tests come from.
 
@@ -1454,18 +1326,16 @@ Up to this point, we have called the formula **Baby Bayes** because we have been
 
 In each example, there were two possible explanations:
 
--   Minh was injured or not injured
--   Minh had Disease X or did not have Disease X
--   someone took the pill or did not take the pill
+- Minh was injured or not injured
+- Minh had Disease X or did not have Disease X
+- someone took the pill or did not take the pill
 
 For these examples, the formula was:
 
-$$
-P(H \mid E)
+$$P(H \mid E)
 =
 \frac{P(H)P(E \mid H)}
-{P(H)P(E \mid H)+P(H^c)P(E \mid H^c)}
-$$
+{P(H)P(E \mid H)+P(H^c)P(E \mid H^c)}$$
 
 This version is useful because it makes the comparison explicit. The evidence can happen in two ways: either (H) is true and the evidence occurs, or (H\^c) is true and the evidence occurs.
 
@@ -1473,45 +1343,35 @@ But this is not a separate theorem. It is Bayes' theorem written out for the cas
 
 The general version of Bayes' theorem is:
 
-$$
-P(H \mid E)
+$$P(H \mid E)
 =
-\frac{P(E \mid H)P(H)}{P(E)}
-$$
+\frac{P(E \mid H)P(H)}{P(E)}$$
 
 This is the same idea, written more compactly.
 
 The numerator has two parts:
 
-$$
-P(E \mid H)P(H)
-$$
+$$P(E \mid H)P(H)$$
 
 This is the probability that (H) is true and the evidence (E) occurs. In other words:
 
-$$
-P(E \mid H)P(H)
+$$P(E \mid H)P(H)
 =
-P(H \cap E)
-$$
+P(H \cap E)$$
 
 The denominator is:
 
-$$
-P(E)
-$$
+$$P(E)$$
 
 This is the overall probability of seeing the evidence.
 
 When there are only two possibilities, (H) and (H\^c), the denominator can be expanded as:
 
-$$
-P(E)
+$$P(E)
 =
 P(E \mid H)P(H)
 +
-P(E \mid H^c)P(H^c)
-$$
+P(E \mid H^c)P(H^c)$$
 
 That is exactly what we were using in Baby Bayes.
 
@@ -1519,20 +1379,16 @@ So the move from Baby Bayes to Bayes' theorem is not a change in logic. It is a 
 
 Bayes' theorem says:
 
-$$
-\text{posterior}
+$$\text{posterior}
 =
 \frac{\text{likelihood} \times \text{prior}}
-{\text{evidence}}
-$$
+{\text{evidence}}$$
 
 Or, more compactly:
 
-$$
-\text{posterior}
+$$\text{posterior}
 \propto
-\text{prior} \times \text{likelihood}
-$$
+\text{prior} \times \text{likelihood}$$
 
 The proportional version is often the most useful way to remember the idea. It says that the posterior is built by taking the prior and reweighting it by the likelihood.
 
@@ -1558,24 +1414,20 @@ The **base rate** is the background rate of something in the population. In Baye
 
 In the Disease X example:
 
-$$
-P(H) = 0.10
-$$
+$$P(H) = 0.10$$
 
 This means that before Minh took the test, the probability that Minh had Disease X was 10%.
 
 The test result then updated this probability:
 
-$$
-P(H \mid E) = 0.308
-$$
+$$P(H \mid E) = 0.308$$
 
 So the positive result raised the probability from 10% to about 31%. That is a meaningful increase. But it is not certainty. To see how much base rates matter, imagine the same test is used for a much rarer disease.
 
 Suppose Disease Y affects only 1 in 1000 people. The test behaves the same way:
 
--   If someone has the disease, the test returns positive 80% of the time
--   If someone does not have the disease, the test gives a false positive 20% of the time
+- If someone has the disease, the test returns positive 80% of the time
+- If someone does not have the disease, the test gives a false positive 20% of the time
 
 Now imagine testing 1000 people.
 
@@ -1602,20 +1454,16 @@ rare_disease_table |>
 
 Among 1000 people, we expect:
 
-$$
-0.8 + 199.8 = 200.6 \text{ positive tests}
-$$
+$$0.8 + 199.8 = 200.6 \text{ positive tests}$$
 
 But only 0.8 of these are expected to come from people who actually have the disease. So:
 
-$$
-\begin{aligned}
+$$\begin{aligned}
 P(\text{has Disease Y} \mid \text{positive test})
 &=
 \frac{0.8}{200.6}=
 0.004
-\end{aligned}
-$$
+\end{aligned}$$
 
 That is less than 1%.
 
@@ -1646,21 +1494,17 @@ common_disease_table |>
 
 Among 1000 people, we expect:
 
-$$
-400 + 100 = 500 \text{ positive tests}
-$$
+$$400 + 100 = 500 \text{ positive tests}$$
 
 Of these, 400 are expected to come from people who actually have the disease. So:
 
-$$
-\begin{aligned}
+$$\begin{aligned}
 P(\text{has Disease Z} \mid \text{positive test})
 &=
 \frac{400}{500}
 =
 0.800
-\end{aligned}
-$$
+\end{aligned}$$
 
 The test is identical in both examples. The evidence is the same kind of evidence: a positive result. But the meaning of the evidence changes because the base rate changes.
 
@@ -1668,11 +1512,9 @@ When the disease is rare, a positive test may still leave a low probability of d
 
 Bayes' theorem protects us from this mistake by forcing both pieces into the calculation:
 
-$$
-\text{posterior}
+$$\text{posterior}
 \propto
-\text{prior} \times \text{likelihood}
-$$
+\text{prior} \times \text{likelihood}$$
 
 The likelihood tells us how strongly the evidence points toward the hypothesis. The prior tells us how plausible the hypothesis was before seeing the evidence. We need both.
 
@@ -1684,11 +1526,9 @@ Another way to describe this shift is with a **likelihood ratio**.
 
 A likelihood ratio compares how likely the evidence is under two different explanations. For a hypothesis (H) and its alternative (H\^c), the likelihood ratio is:
 
-$$
-\text{LR}
+$$\text{LR}
 =
-\frac{P(E \mid H)}{P(E \mid H^c)}
-$$
+\frac{P(E \mid H)}{P(E \mid H^c)}$$
 
 The numerator asks:
 
@@ -1711,9 +1551,9 @@ Suppose a sporting competition uses a test for a banned substance.
 
 Assume:
 
--   10% of athletes have used the banned substance
--   If an athlete used the substance, the test returns positive 50% of the time
--   If an athlete did not use the substance, the test returns positive 1% of the time
+- 10% of athletes have used the banned substance
+- If an athlete used the substance, the test returns positive 50% of the time
+- If an athlete did not use the substance, the test returns positive 1% of the time
 
 Minh is an athlete and receives a positive test.
 
@@ -1721,38 +1561,27 @@ What is the probability that Minh used the banned substance?
 
 Let
 
-$$
-H = \text{Minh used the banned substance}
-$$
+$$H = \text{Minh used the banned substance}$$
 
 and let
 
-$$
-E = \text{Minh tests positive}
-$$
+$$E = \text{Minh tests positive}$$
 
 The prior probability is:
 
-$$
-P(H) = 0.10
-$$
+$$P(H) = 0.10$$
 
 The likelihood of the evidence if Minh used the substance is:
 
-$$
-P(E \mid H) = 0.50
-$$
+$$P(E \mid H) = 0.50$$
 
 The likelihood of the evidence if Minh did not use the substance is:
 
-$$
-P(E \mid H^c) = 0.01
-$$
+$$P(E \mid H^c) = 0.01$$
 
 So the likelihood ratio is:
 
-$$
-\begin{aligned}
+$$\begin{aligned}
 \text{LR}
 &=
 \frac{P(E \mid H)}{P(E \mid H^c)} \\
@@ -1760,8 +1589,7 @@ $$
 \frac{0.50}{0.01} \\
 &=
 50
-\end{aligned}
-$$
+\end{aligned}$$
 
 The positive test is 50 times more likely if Minh used the substance than if Minh did not use the substance. That is strong evidence.
 
@@ -1769,17 +1597,14 @@ But strong evidence is not the same as certainty. We still need to combine the e
 
 Using Bayes' theorem:
 
-$$
-P(H \mid E)
+$$P(H \mid E)
 =
 \frac{P(H)P(E \mid H)}
-{P(H)P(E \mid H)+P(H^c)P(E \mid H^c)}
-$$
+{P(H)P(E \mid H)+P(H^c)P(E \mid H^c)}$$
 
 Substituting the numbers:
 
-$$
-\begin{aligned}
+$$\begin{aligned}
 P(H \mid E)
 &=
 \frac{0.10 \times 0.50}
@@ -1791,22 +1616,17 @@ P(H \mid E)
 \frac{0.05}{0.059} \\
 &=
 0.847
-\end{aligned}
-$$
+\end{aligned}$$
 
 So after the positive test, the probability that Minh used the banned substance is about 85%. That is much higher than the prior probability of 10%. The evidence has shifted our uncertainty a lot. But it is not 99%.
 
 This is the important point. A 1% false positive rate does not mean there is a 99% chance that Minh is guilty. It means:
 
-$$
-P(\text{positive test} \mid \text{did not use substance}) = 0.01
-$$
+$$P(\text{positive test} \mid \text{did not use substance}) = 0.01$$
 
 That is not the same as:
 
-$$
-P(\text{did not use substance} \mid \text{positive test})
-$$
+$$P(\text{did not use substance} \mid \text{positive test})$$
 
 The first probability conditions on innocence. The second probability conditions on the evidence.
 :::
@@ -1817,42 +1637,35 @@ Likelihood ratios are especially useful when we think in terms of odds.
 
 Bayes' theorem can be written as:
 
-$$
-\text{posterior odds}
+$$\text{posterior odds}
 =
 \text{prior odds}
 \times
-\text{likelihood ratio}
-$$
+\text{likelihood ratio}$$
 
 For the doping example, the prior probability of using the substance is 0.10. So the prior odds are:
 
-$$
-\begin{aligned}
+$$\begin{aligned}
 \text{prior odds}
 &=
 \frac{0.10}{0.90} \\
 &=
 \frac{1}{9}
-\end{aligned}
-$$
+\end{aligned}$$
 
 The likelihood ratio is 50. Therefore:
 
-$$
-\begin{aligned}
+$$\begin{aligned}
 \text{posterior odds}
 &=
 \frac{1}{9} \times 50 \\
 &=
 \frac{50}{9}
-\end{aligned}
-$$
+\end{aligned}$$
 
 These odds correspond to the same posterior probability:
 
-$$
-\begin{aligned}
+$$\begin{aligned}
 P(H \mid E)
 &=
 \frac{50}{50 + 9} \\
@@ -1860,8 +1673,7 @@ P(H \mid E)
 \frac{50}{59} \\
 &=
 0.847
-\end{aligned}
-$$
+\end{aligned}$$
 
 The odds form makes the role of evidence especially clear.
 
@@ -1877,24 +1689,29 @@ This is why likelihood ratios are useful. They separate the strength of the evid
 
 The examples in this chapter have all pointed to the same warning:
 
-$$
-P(A \mid B)
+$$P(A \mid B)
 \ne
-P(B \mid A)
-$$
+P(B \mid A)$$
 
 This mistake appears in many settings, but it is especially serious when probabilities are used in court.
 
 A tragic example is the case of Sally Clark in the United Kingdom.
 
-IMAGE - NEWSPAPER
+<center>
+```{r, echo=FALSE}
+#| classes: .enlarge-image
+knitr::include_graphics("images/chapter8/sally.jpg")
+```
+</center>
+
+<br>
+
 
 Clark’s first baby died suddenly at 11 weeks. The death was recorded as sudden infant death syndrome, usually abbreviated as SIDS. SIDS is a diagnosis used when a baby dies unexpectedly and no clear cause is found after investigation. Clark later had a second baby, who also died suddenly, this time at 8 weeks. After the second death, Clark was accused of murdering both children.
 
 At the trial, the prosecution called an expert witness who gave evidence about how rare SIDS was. He estimated that the probability of one SIDS death in a family like Clark’s was about 1 in 8,543. He then multiplied this probability by itself to estimate the probability of two SIDS deaths:
 
-$$
-\begin{aligned}
+$$\begin{aligned}
 P(\text{two SIDS deaths})
 &\approx
 \frac{1}{8543}
@@ -1902,8 +1719,7 @@ P(\text{two SIDS deaths})
 \frac{1}{8543} \\
 &\approx
 \frac{1}{73000000}
-\end{aligned}
-$$
+\end{aligned}$$
 
 This produced the famous figure of about 1 in 73 million. The number sounded overwhelming. If two SIDS deaths were that unlikely, it might seem natural to conclude that murder was the more likely explanation. But that reasoning contains two statistical problems.
 
@@ -1911,29 +1727,21 @@ The first problem is about independence. Multiplying the two probabilities assum
 
 The second problem is the prosecutor’s fallacy. The calculation focused on something like:
 
-$$
-P(\text{two deaths} \mid \text{SIDS explanation})
-$$
+$$P(\text{two deaths} \mid \text{SIDS explanation})$$
 
 But the court needed to reason about something closer to:
 
-$$
-P(\text{SIDS explanation} \mid \text{two deaths})
-$$
+$$P(\text{SIDS explanation} \mid \text{two deaths})$$
 
 These are not the same.
 
 The rarity of two SIDS deaths does not, by itself, tell us the probability that the deaths were not due to SIDS. To make that judgement, we also need to compare the evidence under the competing explanation. In this case, the competing explanations were roughly:
 
-$$
-H_1 = \text{the deaths were due to SIDS or natural causes}
-$$
+$$H_1 = \text{the deaths were due to SIDS or natural causes}$$
 
 and
 
-$$
-H_2 = \text{the deaths were due to murder}
-$$
+$$H_2 = \text{the deaths were due to murder}$$
 
 Both explanations are rare. Two babies dying of SIDS in the same family is rare. But a mother murdering two of her babies is also rare.
 
@@ -1947,61 +1755,46 @@ A better question is:
 
 That is a likelihood-ratio question:
 
-$$
-\text{LR}
+$$\text{LR}
 =
 \frac{
 P(\text{two deaths} \mid H_2)
 }{
 P(\text{two deaths} \mid H_1)
-}
-$$
+}$$
 
 The Royal Statistical Society later criticised the reasoning in the case, saying that the jury needed to compare the competing explanations rather than focus only on how unlikely the SIDS explanation was. Clark’s conviction was eventually quashed after further medical evidence came to light, and she was released after nearly three and a half years in prison.
 
 The lesson is not that rare events should be ignored. Rare events matter. But rarity alone is not enough.
 
-$$
-P(\text{evidence} \mid \text{innocence})
-\text{ is very small}
-$$
+$$P(\text{evidence} \mid \text{innocence})
+\text{ is very small}$$
 
 therefore
 
-$$
-P(\text{innocence} \mid \text{evidence})
-\text{ is very small}
-$$
+$$P(\text{innocence} \mid \text{evidence})
+\text{ is very small}$$
 
 That conclusion does not follow.
 
-Bayesian reasoning asks us to keep the direction of the conditional probability clear:
+Bayesian reasoning asks us to keep the direction of the conditional probability clear: 
 
-$$
-P(\text{evidence} \mid \text{hypothesis})
-$$
-
-is a likelihood.
-
-$$
-P(\text{hypothesis} \mid \text{evidence})
-$$
-
-is a posterior probability.
+- $P(\text{evidence} \mid \text{hypothesis})$ is a likelihood.
+- $P(\text{hypothesis} \mid \text{evidence})$ is a posterior probability.
 
 They are connected by Bayes' theorem, but they are not interchangeable.
 
 ## From hypotheses to parameters
 
-The examples so far have been useful because they were small enough to see clearly. There was a hypothesis (H), some evidence (E), and we used Bayes' theorem to update (P(H)) into $P(H \mid E)$.
+The examples so far have been useful because they were small enough to see clearly. There was a hypothesis (H), some evidence (E), and we used Bayes' theorem to update $P(H)$ into $P(H \mid E)$.
 
 But statistical inference often asks a different kind of question. Instead of asking whether a single hypothesis is true, we often want to learn about an unknown quantity. For example, we might want to know:
 
--   the proportion of voters who support a policy
--   the average income in a population
--   the probability that a customer clicks on an advertisement
--   the infection rate in a community
--   the difference between two treatment effects
+- the proportion of voters who support a policy
+- the average income in a population
+- the probability that a customer clicks on an advertisement
+- the infection rate in a community
+- the difference between two treatment effects
 
 These unknown quantities are called **parameters**.
 
@@ -2011,47 +1804,35 @@ Suppose we are interested in the proportion of residents who support a new local
 
 Let
 
-$$
-\theta = \text{proportion of residents who support the policy}
-$$
+$$\theta = \text{proportion of residents who support the policy}$$
 
 Because $\theta$ is a proportion, it must lie between 0 and 1:
 
-$$
-0 \leq \theta \leq 1
-$$
+$$0 \leq \theta \leq 1$$
 
 Now suppose we survey (n) residents and count how many support the policy. Let
 
-$$
-X = \text{number of surveyed residents who support the policy}
-$$
+$$X = \text{number of surveyed residents who support the policy}$$
 
 If each person independently supports the policy with probability $\theta$, then a simple model is:
 
-$$
-X \mid \theta \sim \text{Binomial}(n, \theta)
-$$
+$$X \mid \theta \sim \text{Binomial}(n, \theta)$$
 
 This notation says:
 
-> If the true support rate were (\theta), then the number of supporters in a sample of size (n) would follow a binomial distribution.
+> If the true support rate were $\theta$, then the number of supporters in a sample of size $n$ would follow a binomial distribution.
 
-In Chapter 7, this gave us a likelihood. If we observed (X = x), then the likelihood was:
+In Chapter 7, this gave us a likelihood. If we observed $X = x$, then the likelihood was:
 
-$$
-P(X = x \mid \theta)
-$$
+$$P(X = x \mid \theta)$$
 
 The likelihood asks:
 
-> For each possible value of (\theta), how well would that value predict the data we observed?
+> For each possible value of $\theta$, how well would that value predict the data we observed?
 
 Bayesian inference asks the inverse question:
 
-$$
-p(\theta \mid X = x)
-$$
+$$p(\theta \mid X = x)$$
 
 This asks:
 
@@ -2059,31 +1840,15 @@ This asks:
 
 The move is the same as before. Earlier, Bayes' theorem helped us move from the likelihood of evidence under a hypothesis,
 
-$$
-P(E \mid H)
-$$
+$$P(E \mid H)$$
 
 to the posterior probability of the hypothesis after evidence,
 
-$$
-P(H \mid E)
-$$
+$$P(H \mid E)$$
 
-Now the hypothesis is no longer just true or false. It is a parameter that can take many possible values. We move from the likelihood of the data under a parameter value,
+Now the hypothesis is no longer just true or false. It is a parameter that can take many possible values. We move from the likelihood of the data under a parameter value, $P(\text{data} \mid \theta)$ to a posterior distribution over the parameter, $P(\theta \mid \text{data})$.
 
-$$
-P(\text{data} \mid \theta)
-$$
-
-to a posterior distribution over the parameter,
-
-$$
-p(\theta \mid \text{data})
-$$
-
-The notation changes slightly because $\theta$ may be continuous. If $\theta$ can take any value between 0 and 1, then we use a density, written with a lowercase (p), rather than a probability mass.
-
-But the idea is the same. The prior describes our uncertainty about the parameter before seeing the data. The likelihood describes how well each parameter value predicts the data. The posterior describes our uncertainty about the parameter after seeing the data.
+The notation changes slightly because $\theta$ may be continuous. If $\theta$ can take any value between 0 and 1, then we use a density, written with a lowercase (p), rather than a probability mass. But the idea is the same. The prior describes our uncertainty about the parameter before seeing the data. The likelihood describes how well each parameter value predicts the data. The posterior describes our uncertainty about the parameter after seeing the data.
 
 ### Bayes' theorem for parameters
 
@@ -2091,19 +1856,15 @@ Once the unknown quantity is a parameter, Bayes' theorem has the same structure 
 
 For a hypothesis (H) and evidence (E), we wrote:
 
-$$
-P(H \mid E)
+$$P(H \mid E)
 =
-\frac{P(E \mid H)P(H)}{P(E)}
-$$
+\frac{P(E \mid H)P(H)}{P(E)}$$
 
 For a parameter $\theta$ and observed data (D), we write:
 
-$$
-p(\theta \mid D)
+$$p(\theta \mid D)
 =
-\frac{p(D \mid \theta)p(\theta)}{p(D)}
-$$
+\frac{p(D \mid \theta)p(\theta)}{p(D)}$$
 
 The symbols look a little different, but the roles are the same.
 
@@ -2149,31 +1910,25 @@ The prior distribution, $p(\theta)$, describes what we think about the parameter
 
 The posterior distribution, $p(\theta \mid D)$, describes what we think about the parameter after seeing the data. The denominator, $p(D)$, makes sure that the posterior distribution is a proper probability distribution. When $\theta$ is continuous, this denominator is found by adding up, or integrating, the prior times the likelihood across all possible values of $\theta$:
 
-$$
-p(D)
+$$p(D)
 =
-\int p(D \mid \theta)p(\theta),d\theta
-$$
+\int p(D \mid \theta)p(\theta),d\theta$$
 
 This expression can look intimidating, but its job is simple. It re-scales the posterior so that the total area under the posterior curve is 1.
 
 For many Bayesian analyses, the most important part to remember is the proportional form:
 
-$$
-p(\theta \mid D)
+$$p(\theta \mid D)
 \propto
-p(\theta)p(D \mid \theta)
-$$
+p(\theta)p(D \mid \theta)$$
 
 In words:
 
-$$
-\text{posterior}
+$$\text{posterior}
 \propto
 \text{prior}
 \times
-\text{likelihood}
-$$
+\text{likelihood}$$
 
 This is the same idea we have been using throughout the chapter. Values of $\theta$ that had higher prior probability and predicted the data well receive more posterior weight. Values of $\theta$ that had low prior probability or predicted the data poorly receive less posterior weight.
 
@@ -2183,43 +1938,31 @@ Suppose a local council is considering a new late-night bus service. The council
 
 Let
 
-$$
-\theta = \text{proportion of residents who would use the late-night bus}
-$$
+$$\theta = \text{proportion of residents who would use the late-night bus}$$
 
 The council surveys 40 residents and finds that 26 say they would use the service.
 
 Let
 
-$$
-X = \text{number of surveyed residents who say yes}
-$$
+$$X = \text{number of surveyed residents who say yes}$$
 
 The observed data are:
 
-$$
-X = 26
-$$
+$$X = 26$$
 
 out of:
 
-$$
-n = 40
-$$
+$$n = 40$$
 
 A simple model is:
 
-$$
-X \mid \theta \sim \text{Binomial}(40, \theta)
-$$
+$$X \mid \theta \sim \text{Binomial}(40, \theta)$$
 
 The likelihood is:
 
-$$
-P(X = 26 \mid \theta)
+$$P(X = 26 \mid \theta)
 =
-\binom{40}{26}\theta^{26}(1-\theta)^{14}
-$$
+\binom{40}{26}\theta^{26}(1-\theta)^{14}$$
 
 This likelihood tells us how compatible each possible value of $\theta$ is with the observed result: 26 yes responses out of 40. But likelihood alone is not yet a posterior distribution. To do Bayesian inference, we also need a prior distribution for $\theta$.
 
@@ -2235,15 +1978,11 @@ That same idea applies in Bayesian inference.
 
 In the late-night bus example, the unknown parameter is:
 
-$$
-\theta = \text{proportion of residents who would use the late-night bus}
-$$
+$$\theta = \text{proportion of residents who would use the late-night bus}$$
 
 Because $\theta$ is a proportion, it must lie between 0 and 1:
 
-$$
-0 \leq \theta \leq 1
-$$
+$$0 \leq \theta \leq 1$$
 
 So if we want to describe our prior uncertainty about $\theta$, we need a distribution that also lives between 0 and 1.
 
@@ -2253,44 +1992,13 @@ A more natural choice is the **beta distribution**.
 
 We write:
 
-$$
-\theta \sim \text{Beta}(\alpha, \beta)
-$$
+$$\theta \sim \text{Beta}(\alpha, \beta)$$
 
-The beta distribution is a family of distributions on the interval from 0 to 1. By changing the values of $\alpha$ and $\beta$, we can create many different shapes.
+The beta distribution is a family of distributions on the interval from 0 to 1. By changing the values of $\alpha$ and $\beta$, we can create many different shapes. Play with the app below to see what the beta distribution looks like when you change the parameters:
 
-```{r}
-#| echo: false
-#| message: false
-#| warning: false
-#| fig-width: 7
-#| fig-height: 4.8
+<iframe src="interactive/beta_distribution_slider_app.html" width="100%" height="650" style="border: none;"></iframe>
 
-beta_priors <- tibble(
-  theta = seq(0.001, 0.999, length.out = 1000)
-) |>
-  mutate(
-    `Beta(1, 1)` = dbeta(theta, shape1 = 1, shape2 = 1),
-    `Beta(2, 2)` = dbeta(theta, shape1 = 2, shape2 = 2),
-    `Beta(8, 2)` = dbeta(theta, shape1 = 8, shape2 = 2),
-    `Beta(2, 8)` = dbeta(theta, shape1 = 2, shape2 = 8)
-  ) |>
-  pivot_longer(
-    cols = starts_with("Beta"),
-    names_to = "Prior",
-    values_to = "density"
-  )
-
-ggplot(beta_priors, aes(x = theta, y = density, linetype = Prior, color = Prior)) +
-  geom_line(linewidth = 0.8) +
-  labs(
-    x = expression(theta),
-    y = "Density"
-  ) +
-  theme_minimal()
-```
-
-Each curve describes a different kind of prior belief about $\theta$.
+Each curve describes a different kind of prior belief about $\theta$. For example:
 
 ```{r}
 #| echo: false
@@ -2320,49 +2028,39 @@ beta_prior_table |>
 
 The beta distribution has two shape parameters, $\alpha$ and $\beta$. These parameters control where the distribution places its mass. One useful summary is the mean:
 
-$$
-E(\theta)
+$$E(\theta)
 =
-\frac{\alpha}{\alpha + \beta}
-$$
+\frac{\alpha}{\alpha + \beta}$$
 
 For example, if:
 
-$$
-\theta \sim \text{Beta}(8,2)
-$$
+$$\theta \sim \text{Beta}(8,2)$$
 
 then:
 
-$$
-\begin{aligned}
+$$\begin{aligned}
 E(\theta)
 &=
 \frac{8}{8 + 2} \\
 &=
 0.80
-\end{aligned}
-$$
+\end{aligned}$$
 
 This prior is centred around larger values of $\theta$. It would be appropriate if, before seeing the survey data, we expected a high proportion of residents to support the late-night bus.
 
 If instead:
 
-$$
-\theta \sim \text{Beta}(2,8)
-$$
+$$\theta \sim \text{Beta}(2,8)$$
 
 then:
 
-$$
-\begin{aligned}
+$$\begin{aligned}
 E(\theta)
 &=
 \frac{2}{2 + 8} \\
 &=
 0.20
-\end{aligned}
-$$
+\end{aligned}$$
 
 This prior is centred around smaller values of $\theta$. It would be appropriate if we were sceptical that many residents would use the service.
 
@@ -2370,9 +2068,7 @@ The beta distribution is especially useful for unknown proportions because it ha
 
 A common starting point is:
 
-$$
-\theta \sim \text{Beta}(1,1)
-$$
+$$\theta \sim \text{Beta}(1,1)$$
 
 This distribution is flat between 0 and 1. It gives the same density to all possible values of $\theta$, from 0 to 1.
 
@@ -2434,21 +2130,15 @@ other_conjugate_priors |>
 
 For binomial data:
 
-$$
-X \mid p \sim \text{Binomial}(n,p)
-$$
+$$X \mid p \sim \text{Binomial}(n,p)$$
 
 If the prior is:
 
-$$
-p \sim \text{Beta}(\alpha,\beta)
-$$
+$$p \sim \text{Beta}(\alpha,\beta)$$
 
 then after observing $x$ successes out of $n$ trials, the posterior is:
 
-$$
-p \mid X=x \sim \text{Beta}(\alpha + x,\beta + n - x)
-$$
+$$p \mid X=x \sim \text{Beta}(\alpha + x,\beta + n - x)$$
 
 The data add $x$ successes and $n-x$ failures to the prior.
 
@@ -2481,47 +2171,33 @@ Suppose a local council is considering whether to introduce a late-night bus ser
 
 Let:
 
-$$
-p = \text{the proportion of residents who would use the service}
-$$
+$$p = \text{the proportion of residents who would use the service}$$
 
 The data are:
 
-$$
-x = 26, \qquad n = 40
-$$
+$$x = 26, \qquad n = 40$$
 
 The likelihood comes from the binomial model:
 
-$$
-X \mid p \sim \text{Binomial}(40,p)
-$$
+$$X \mid p \sim \text{Binomial}(40,p)$$
 
 If we used maximum likelihood, the estimate would be:
 
-$$
-\hat{p} = \frac{26}{40} = 0.65
-$$
+$$\hat{p} = \frac{26}{40} = 0.65$$
 
 A Bayesian analysis asks for a posterior distribution for $p$.
 
 Start with a uniform prior:
 
-$$
-p \sim \text{Beta}(1,1)
-$$
+$$p \sim \text{Beta}(1,1)$$
 
 Using beta-binomial conjugacy:
 
-$$
-p \mid X=26 \sim \text{Beta}(1+26,1+40-26)
-$$
+$$p \mid X=26 \sim \text{Beta}(1+26,1+40-26)$$
 
 So:
 
-$$
-p \mid X=26 \sim \text{Beta}(27,15)
-$$
+$$p \mid X=26 \sim \text{Beta}(27,15)$$
 
 <centre>
 
@@ -2539,83 +2215,61 @@ Suppose a library wants to estimate the average number of people arriving at the
 
 Let
 
-$$
-\lambda = \text{average number of arrivals per hour}
-$$
+$$\lambda = \text{average number of arrivals per hour}$$
 
 A natural model for hourly counts is the Poisson distribution:
 
-$$
-Y_i \mid \lambda \sim \text{Poisson}(\lambda)
-$$
+$$Y_i \mid \lambda \sim \text{Poisson}(\lambda)$$
 
 A common conjugate prior for the Poisson rate is the gamma distribution:
 
-$$
-\lambda \sim \text{Gamma}(\alpha,\beta)
-$$
+$$\lambda \sim \text{Gamma}(\alpha,\beta)$$
 
 Here we are using the shape-rate version of the gamma distribution. The first parameter, $\alpha$, is the shape. The second parameter, $\beta$, is the rate.
 
 If we observe counts from $n$ hours:
 
-$$
-y_1, y_2, \ldots, y_n
-$$
+$$y_1, y_2, \ldots, y_n$$
 
 then the posterior is:
 
-$$
-\lambda \mid y_1,\ldots,y_n
+$$\lambda \mid y_1,\ldots,y_n
 \sim
-\text{Gamma}\left(\alpha + \sum_{i=1}^n y_i,\ \beta + n\right)
-$$
+\text{Gamma}\left(\alpha + \sum_{i=1}^n y_i,\ \beta + n\right)$$
 
 This update has the same flavour as the beta-binomial update. The data add information to the prior. For the Poisson-gamma model, the total count, $\sum_{i=1}^n y_i$, updates the shape parameter, and the number of observed time periods, $n$, updates the rate parameter.
 
 For example, suppose the prior is:
 
-$$
-\lambda \sim \text{Gamma}(3,1)
-$$
+$$\lambda \sim \text{Gamma}(3,1)$$
 
 This prior has mean:
 
-$$
-\frac{3}{1}=3
-$$
+$$\frac{3}{1}=3$$
 
 So before collecting new data, the library expects about 3 arrivals per hour.
 
 Now suppose the library observes arrivals over 4 hours:
 
-$$
-2,\ 5,\ 4,\ 3
-$$
+$$2,\ 5,\ 4,\ 3$$
 
 The total number of arrivals is:
 
-$$
-2 + 5 + 4 + 3 = 14
-$$
+$$2 + 5 + 4 + 3 = 14$$
 
 So the posterior is:
 
-$$
-\begin{aligned}
+$$\begin{aligned}
 \lambda \mid \text{data}
 &\sim
 \text{Gamma}(3 + 14,\ 1 + 4) \\
 &\sim
 \text{Gamma}(17,5)
-\end{aligned}
-$$
+\end{aligned}$$
 
 The posterior mean is:
 
-$$
-\frac{17}{5}=3.4
-$$
+$$\frac{17}{5}=3.4$$
 
 The data have shifted the estimated arrival rate from 3 arrivals per hour to about 3.4 arrivals per hour.
 
@@ -2635,87 +2289,63 @@ The gamma distribution is also conjugate for the rate of an exponential distribu
 
 Suppose we are studying the time between bus arrivals at a stop. Let
 
-$$
-\lambda = \text{arrival rate of buses per minute}
-$$
+$$\lambda = \text{arrival rate of buses per minute}$$
 
 If buses arrive according to a constant rate, then waiting times can be modelled using an exponential distribution:
 
-$$
-Y_i \mid \lambda \sim \text{Exponential}(\lambda)
-$$
+$$Y_i \mid \lambda \sim \text{Exponential}(\lambda)$$
 
 Again, a conjugate prior is:
 
-$$
-\lambda \sim \text{Gamma}(\alpha,\beta)
-$$
+$$\lambda \sim \text{Gamma}(\alpha,\beta)$$
 
 If we observe waiting times:
 
-$$
-y_1, y_2, \ldots, y_n
-$$
+$$y_1, y_2, \ldots, y_n$$
 
 then the posterior is:
 
-$$
-\lambda \mid y_1,\ldots,y_n
+$$\lambda \mid y_1,\ldots,y_n
 \sim
-\text{Gamma}\left(\alpha + n,\ \beta + \sum_{i=1}^n y_i\right)
-$$
+\text{Gamma}\left(\alpha + n,\ \beta + \sum_{i=1}^n y_i\right)$$
 
 Here the number of waiting times, $n$, updates the shape parameter, while the total waiting time, $\sum_{i=1}^n y_i$, updates the rate parameter.
 
 For example, suppose:
 
-$$
-\lambda \sim \text{Gamma}(2,10)
-$$
+$$\lambda \sim \text{Gamma}(2,10)$$
 
 This prior has mean:
 
-$$
-\frac{2}{10}=0.20
-$$
+$$\frac{2}{10}=0.20$$
 
 So before seeing the new data, the expected arrival rate is 0.20 buses per minute, or about one bus every 5 minutes.
 
 Now suppose we observe three waiting times, in minutes:
 
-$$
-6,\ 8,\ 11
-$$
+$$6,\ 8,\ 11$$
 
 The total waiting time is:
 
-$$
-6 + 8 + 11 = 25
-$$
+$$6 + 8 + 11 = 25$$
 
 So the posterior is:
 
-$$
-\begin{aligned}
+$$\begin{aligned}
 \lambda \mid \text{data}
 &\sim
 \text{Gamma}(2 + 3,\ 10 + 25) \\
 &\sim
 \text{Gamma}(5,35)
-\end{aligned}
-$$
+\end{aligned}$$
 
 The posterior mean is:
 
-$$
-\frac{5}{35}=0.143
-$$
+$$\frac{5}{35}=0.143$$
 
 This corresponds to an average waiting time of about:
 
-$$
-\frac{1}{0.143}=7.0 \text{ minutes}
-$$
+$$\frac{1}{0.143}=7.0 \text{ minutes}$$
 
 <centre>
 
@@ -2733,77 +2363,57 @@ For measurements, the normal distribution often appears again.
 
 Suppose a researcher wants to estimate the average mark on a difficult exam. Let
 
-$$
-\mu = \text{average mark in the population}
-$$
+$$\mu = \text{average mark in the population}$$
 
 Assume individual marks follow a normal distribution with known standard deviation $\sigma$:
 
-$$
-Y_i \mid \mu \sim N(\mu,\sigma^2)
-$$
+$$Y_i \mid \mu \sim N(\mu,\sigma^2)$$
 
 A conjugate prior for $\mu$ is also normal:
 
-$$
-\mu \sim N(\mu_0,\tau_0^2)
-$$
+$$\mu \sim N(\mu_0,\tau_0^2)$$
 
 After observing data, the posterior distribution for $\mu$ is still normal. The formula is a little more complicated than the beta-binomial case, but the idea is the same. The posterior mean is a weighted average of the prior mean and the sample mean.
 
 For example, suppose the prior is:
 
-$$
-\mu \sim N(65,10^2)
-$$
+$$\mu \sim N(65,10^2)$$
 
 This prior says that, before seeing the new exam results, the average mark is expected to be around 65, but there is still uncertainty.
 
 Suppose the known standard deviation of individual marks is:
 
-$$
-\sigma = 12
-$$
+$$\sigma = 12$$
 
 Now suppose we observe five marks:
 
-$$
-58,\ 62,\ 71,\ 67,\ 74
-$$
+$$58,\ 62,\ 71,\ 67,\ 74$$
 
 The sample mean is:
 
-$$
-\bar{y}=66.4
-$$
+$$\bar{y}=66.4$$
 
 For the normal-normal model, the posterior variance is:
 
-$$
-\tau_n^2
+$$\tau_n^2
 =
 \frac{1}
-{\frac{1}{\tau_0^2}+\frac{n}{\sigma^2}}
-$$
+{\frac{1}{\tau_0^2}+\frac{n}{\sigma^2}}$$
 
 and the posterior mean is:
 
-$$
-\mu_n
+$$\mu_n
 =
 \tau_n^2
 \left(
 \frac{\mu_0}{\tau_0^2}
 +
 \frac{n\bar{y}}{\sigma^2}
-\right)
-$$
+\right)$$
 
 Using these values, the posterior distribution is approximately:
 
-$$
-\mu \mid \text{data} \sim N(66.0,4.72^2)
-$$
+$$\mu \mid \text{data} \sim N(66.0,4.72^2)$$
 
 <centre>
 
@@ -2824,9 +2434,7 @@ This is a useful way to understand conjugacy more generally:
 
 Conjugacy is not what makes inference Bayesian. It is a mathematical convenience. The core Bayesian idea is still:
 
-$$
-\text{posterior} \propto \text{prior} \times \text{likelihood}
-$$
+$$\text{posterior} \propto \text{prior} \times \text{likelihood}$$
 
 Conjugate priors are useful because they make the update easy to calculate and easy to explain. But many useful Bayesian models are not conjugate. When the posterior does not have a neat formula, we can still do Bayesian inference using computation.
 
@@ -2837,25 +2445,21 @@ For this chapter, we will continue with the beta-binomial model because it is si
 
 The posterior distribution contains our updated uncertainty about $\theta$. In the late-night bus example, after observing 26 yes responses out of 40, we found:
 
-$$
-\theta \mid X = 26
+$$\theta \mid X = 26
 \sim
-\text{Beta}(27,15)
-$$
+\text{Beta}(27,15)$$
 
 This posterior distribution is the full Bayesian answer. It tells us which values of $\theta$ are more plausible and which values are less plausible after seeing the data.
 
 However, it is often useful to summarise the posterior with a few numbers. For example, we might want to know:
 
--   What is the centre of the posterior?
--   What range of values contains most of the posterior probability?
--   What is the probability that (\theta) is above some meaningful threshold?
+- What is the centre of the posterior?
+- What range of values contains most of the posterior probability?
+- What is the probability that (\theta) is above some meaningful threshold?
 
 For the late-night bus example, a meaningful threshold might be:
 
-$$
-\theta > 0.50
-$$
+$$\theta > 0.50$$
 
 That is, more than half of residents would use the service.
 
@@ -2900,29 +2504,23 @@ posterior_summary |>
 
 The posterior mean is the average value of $\theta$ under the posterior distribution. For a beta distribution, the mean is:
 
-$$
-E(\theta \mid X = 26)
+$$E(\theta \mid X = 26)
 =
-\frac{27}{27 + 15}
-$$
+\frac{27}{27 + 15}$$
 
 So:
 
-$$
-\begin{aligned}
+$$\begin{aligned}
 E(\theta \mid X = 26)
 &=
 \frac{27}{42} \\
 &=
 0.643
-\end{aligned}
-$$
+\end{aligned}$$
 
 This is close to the observed sample proportion:
 
-$$
-\frac{26}{40} = 0.65
-$$
+$$\frac{26}{40} = 0.65$$
 
 The small difference comes from the prior. A $\text{Beta}(1,1)$ prior acts as though we began with one prior yes and one prior no, then added the observed data.
 
@@ -2930,17 +2528,13 @@ The 95% credible interval gives a range of values containing 95% of the posterio
 
 In this example, the interval is approximately:
 
-$$
-0.489 \text{ to } 0.782
-$$
+$$0.489 \text{ to } 0.782$$
 
 This means that, under the model and prior, there is 95% posterior probability that the true proportion of residents who would use the late-night bus lies between about 0.49 and 0.78. This interpretation is direct. We are making a probability statement about the parameter, conditional on the model, prior, and observed data.
 
 Finally, we can calculate the posterior probability that a majority of residents would use the service:
 
-$$
-P(\theta > 0.50 \mid X = 26)=0.970
-$$
+$$P(\theta > 0.50 \mid X = 26)=0.970$$
 
 In this example, this probability is high. The data provide evidence that support may be above 50%, although there is still uncertainty.
 
@@ -2948,73 +2542,55 @@ In this example, this probability is high. The data provide evidence that suppor
 
 The late-night bus example used a flat prior:
 
-$$
-\theta \sim \text{Beta}(1,1)
-$$
+$$\theta \sim \text{Beta}(1,1)$$
 
 After observing 26 yes responses out of 40, the posterior was:
 
-$$
-\theta \mid X=26
+$$\theta \mid X=26
 \sim
-\text{Beta}(27,15)
-$$
+\text{Beta}(27,15)$$
 
 But this was not the only possible prior. Another analyst might begin with a different starting point. For example, suppose the council has tried similar services before and is sceptical that many residents will use the late-night bus. A sceptical prior might place more weight on smaller values of $\theta$:
 
-$$
-\theta \sim \text{Beta}(4,8)
-$$
+$$\theta \sim \text{Beta}(4,8)$$
 
 This prior has mean:
 
-$$
-\begin{aligned}
+$$\begin{aligned}
 E(\theta)
 &=
 \frac{4}{4 + 8} \\
 &=
 0.333
-\end{aligned}
-$$
+\end{aligned}$$
 
 Another analyst might be more optimistic. Perhaps previous community meetings suggested strong demand for the service. An optimistic prior might place more weight on larger values of $\theta$:
 
-$$
-\theta \sim \text{Beta}(8,4)
-$$
+$$\theta \sim \text{Beta}(8,4)$$
 
 This prior has mean:
 
-$$
-\begin{aligned}
+$$\begin{aligned}
 E(\theta)
 &=
 \frac{8}{8 + 4} \\
 &=
 0.667
-\end{aligned}
-$$
+\end{aligned}$$
 
 The data are the same in all three analyses:
 
-$$
-x = 26
-$$
+$$x = 26$$
 
 yes responses out of
 
-$$
-n = 40
-$$
+$$n = 40$$
 
 Using the beta-binomial update rule:
 
-$$
-\theta \mid X=x
+$$\theta \mid X=x
 \sim
-\text{Beta}(\alpha + x,\ \beta + n - x)
-$$
+\text{Beta}(\alpha + x,\ \beta + n - x)$$
 
 we get the following posteriors.
 
@@ -3067,16 +2643,16 @@ prior_sensitivity |>
       round(posterior_upper, 3),
       "]"
     ),
-    `$P(\\theta > 0.50 \\mid X=26)$` = posterior_prob_majority
+    prob_majority = posterior_prob_majority
   ) |>
   gt() |>
-  fmt_markdown(columns = everything()) |>
+  fmt_markdown(columns = c(`Prior`, `Posterior`)) |>
   fmt_number(
-    columns = c(
-      `Posterior mean`,
-      `$P(\\theta > 0.50 \\mid X=26)$`
-    ),
+    columns = c(`Posterior mean`, prob_majority),
     decimals = 3
+  ) |>
+  cols_label(
+    prob_majority = md("$P(\\theta > 0.50 \\mid X = 26)$")
   ) |>
   tab_options(table.width = pct(100))
 ```
@@ -3140,21 +2716,15 @@ Priors matter most when the data are limited. To see this, suppose the council r
 
 Suppose the observed proportion is the same as before:
 
-$$
-\frac{260}{400} = 0.65
-$$
+$$\frac{260}{400} = 0.65$$
 
 So the data are now:
 
-$$
-x = 260
-$$
+$$x = 260$$
 
 yes responses out of
 
-$$
-n = 400
-$$
+$$n = 400$$
 
 We can repeat the same prior sensitivity analysis using the three priors from the previous section.
 
@@ -3207,16 +2777,25 @@ large_prior_sensitivity |>
       round(posterior_upper, 3),
       "]"
     ),
-    `$P(\\theta > 0.50 \\mid X=260)$` = posterior_prob_majority
+    prob_majority = if_else(
+      posterior_prob_majority > 0.999,
+      "> 0.999",
+      as.character(round(posterior_prob_majority, 3))
+    )
   ) |>
   gt() |>
-  fmt_markdown(columns = everything()) |>
+  fmt_markdown(columns = c(`Prior`, `Posterior`)) |>
   fmt_number(
-    columns = c(
-      `Posterior mean`,
-      `$P(\\theta > 0.50 \\mid X=260)$`
-    ),
+    columns = `Posterior mean`,
     decimals = 3
+  ) |>
+  cols_label(
+    prob_majority = md("$P(\\theta > 0.50 \\mid X = 260)$")
+  ) |>
+  tab_options(table.width = pct(100)) |> 
+  cols_align(
+    align = "right",
+    columns = prob_majority
   ) |>
   tab_options(table.width = pct(100))
 ```
@@ -3271,8 +2850,8 @@ At the beginning of the chapter, we met Steve. As a reminder:
 >
 > Which is more likely?
 >
-> -   Steve is a librarian or;
-> -   Steve is a farmer.
+> - Steve is a librarian or;
+> - Steve is a farmer.
 
 Many people are drawn toward the librarian answer. The description feels like it fits a librarian. But Bayes' theorem reminds us that fit is not the only thing that matters.
 
@@ -3283,44 +2862,31 @@ We need two ingredients:
 
 Let
 
-$$
-H = \text{Steve is a librarian}
-$$
+$$H = \text{Steve is a librarian}$$
 
 and let
 
-$$
-E = \text{Steve fits the description}
-$$
+$$E = \text{Steve fits the description}$$
 
 Suppose, for illustration, that Steve was chosen from a group where 10% of people are librarians and 90% are farmers:
 
-$$
-P(H) = 0.10
-$$
+$$P(H) = 0.10$$
 
 and
 
-$$
-P(H^c) = 0.90
-$$
+$$P(H^c) = 0.90$$
 
 Now suppose the description is much more common among librarians than farmers:
 
-$$
-P(E \mid H) = 0.90
-$$
+$$P(E \mid H) = 0.90$$
 
 and
 
-$$
-P(E \mid H^c) = 0.30
-$$
+$$P(E \mid H^c) = 0.30$$
 
 So the description is evidence for Steve being a librarian. It is three times more likely under the librarian hypothesis than under the farmer hypothesis:
 
-$$
-\begin{aligned}
+$$\begin{aligned}
 \text{LR}
 &=
 \frac{P(E \mid H)}{P(E \mid H^c)} \\
@@ -3328,22 +2894,18 @@ $$
 \frac{0.90}{0.30} \\
 &=
 3
-\end{aligned}
-$$
+\end{aligned}$$
 
 But the base rates point in the other direction. Farmers are much more common in the starting population. Using Bayes' theorem:
 
-$$
-P(H \mid E)
+$$P(H \mid E)
 =
 \frac{P(H)P(E \mid H)}
-{P(H)P(E \mid H)+P(H^c)P(E \mid H^c)}
-$$
+{P(H)P(E \mid H)+P(H^c)P(E \mid H^c)}$$
 
 Substituting the numbers:
 
-$$
-\begin{aligned}
+$$\begin{aligned}
 P(H \mid E)
 &=
 \frac{0.10 \times 0.90}
@@ -3354,8 +2916,7 @@ P(H \mid E)
 \frac{0.09}{0.36} \\
 &=
 0.25
-\end{aligned}
-$$
+\end{aligned}$$
 
 So, under these assumptions, the probability that Steve is a librarian is 25%.
 
@@ -3395,15 +2956,11 @@ The results are:
 
 Let
 
-$$
-H = \text{student joined the club}
-$$
+$$H = \text{student joined the club}$$
 
 and let
 
-$$
-E = \text{student attended the welcome event}
-$$
+$$E = \text{student attended the welcome event}$$
 
 Calculate:
 
@@ -3421,50 +2978,39 @@ There are 80 students in total.
 
 The number who joined the club is:
 
-$$
-24 + 12 = 36
-$$
+$$24 + 12 = 36$$
 
 So:
 
-$$
-P(H)
+$$P(H)
 =
 \frac{36}{80}
 =
-0.45
-$$
+0.45$$
 
 The number who attended the welcome event is:
 
-$$
-24 + 16 = 40
-$$
+$$24 + 16 = 40$$
 
 So:
 
-$$
-P(E)
+$$P(E)
 =
 \frac{40}{80}
 =
-0.50
-$$
+0.50$$
 
 The number who both attended the event and joined the club is 24. So:
 
-$$
-P(H \cap E)
+$$P(H \cap E)
 =
 \frac{24}{80}
 =
-0.30
-$$
+0.30$$
 
 The conditional probability is:
 
-$$
-\begin{aligned}
+$$\begin{aligned}
 P(H \mid E)
 &=
 \frac{P(H \cap E)}{P(E)} \\
@@ -3472,8 +3018,7 @@ P(H \mid E)
 \frac{0.30}{0.50} \\
 &=
 0.60
-\end{aligned}
-$$
+\end{aligned}$$
 
 So, among students who attended the welcome event, 60% joined the club.
 :::
@@ -3484,64 +3029,47 @@ So, among students who attended the welcome event, 60% joined the club.
 
 A streaming service recommends a new show. Suppose:
 
--   40% of users watch the trailer
--   Among users who watch the trailer, 30% watch the full show
--   Among users who do not watch the trailer, 10% watch the full show
+- 40% of users watch the trailer
+- Among users who watch the trailer, 30% watch the full show
+- Among users who do not watch the trailer, 10% watch the full show
 
 A randomly selected user watched the full show.
 
 Let
 
-$$
-H = \text{user watched the trailer}
-$$
+$$H = \text{user watched the trailer}$$
 
 and let
 
-$$
-E = \text{user watched the full show}
-$$
+$$E = \text{user watched the full show}$$
 
 Calculate:
 
-$$
-P(H \mid E)
-$$
+$$P(H \mid E)$$
 
 ::: {.callout-important collapse="true"}
 ## Click for Solutions
 
 We are given:
 
-$$
-P(H) = 0.40
-$$
+$$P(H) = 0.40$$
 
-$$
-P(H^c) = 0.60
-$$
+$$P(H^c) = 0.60$$
 
-$$
-P(E \mid H) = 0.30
-$$
+$$P(E \mid H) = 0.30$$
 
-$$
-P(E \mid H^c) = 0.10
-$$
+$$P(E \mid H^c) = 0.10$$
 
 Using Bayes' theorem:
 
-$$
-P(H \mid E)
+$$P(H \mid E)
 =
 \frac{P(H)P(E \mid H)}
-{P(H)P(E \mid H)+P(H^c)P(E \mid H^c)}
-$$
+{P(H)P(E \mid H)+P(H^c)P(E \mid H^c)}$$
 
 Substitute the values:
 
-$$
-\begin{aligned}
+$$\begin{aligned}
 P(H \mid E)
 &=
 \frac{0.40 \times 0.30}
@@ -3552,8 +3080,7 @@ P(H \mid E)
 \frac{0.12}{0.18} \\
 &=
 0.667
-\end{aligned}
-$$
+\end{aligned}$$
 
 So, given that the user watched the full show, the probability that they watched the trailer is about 0.67.
 :::
@@ -3564,23 +3091,19 @@ So, given that the user watched the full show, the probability that they watched
 
 A workplace uses a screening test for a rare allergy. Suppose:
 
--   2% of employees have the allergy
--   If an employee has the allergy, the test returns positive 90% of the time
--   If an employee does not have the allergy, the test returns positive 5% of the time
+- 2% of employees have the allergy
+- If an employee has the allergy, the test returns positive 90% of the time
+- If an employee does not have the allergy, the test returns positive 5% of the time
 
 Sam tests positive.
 
 Let
 
-$$
-H = \text{Sam has the allergy}
-$$
+$$H = \text{Sam has the allergy}$$
 
 and let
 
-$$
-E = \text{Sam tests positive}
-$$
+$$E = \text{Sam tests positive}$$
 
 Calculate the probability that Sam has the allergy given the positive test.
 
@@ -3589,26 +3112,17 @@ Calculate the probability that Sam has the allergy given the positive test.
 
 We are given:
 
-$$
-P(H) = 0.02
-$$
+$$P(H) = 0.02$$
 
-$$
-P(H^c) = 0.98
-$$
+$$P(H^c) = 0.98$$
 
-$$
-P(E \mid H) = 0.90
-$$
+$$P(E \mid H) = 0.90$$
 
-$$
-P(E \mid H^c) = 0.05
-$$
+$$P(E \mid H^c) = 0.05$$
 
 Using Bayes' theorem:
 
-$$
-\begin{aligned}
+$$\begin{aligned}
 P(H \mid E)
 &=
 \frac{0.02 \times 0.90}
@@ -3619,8 +3133,7 @@ P(H \mid E)
 \frac{0.018}{0.067} \\
 &=
 0.269
-\end{aligned}
-$$
+\end{aligned}$$
 
 So, after a positive test, the probability that Sam has the allergy is about 27%.
 
@@ -3644,29 +3157,23 @@ The statement confuses two different conditional probabilities.
 
 A false positive rate of 5% means:
 
-$$
-P(\text{positive test} \mid \text{no allergy})
+$$P(\text{positive test} \mid \text{no allergy})
 =
-0.05
-$$
+0.05$$
 
 It does not mean:
 
-$$
-P(\text{no allergy} \mid \text{positive test})
+$$P(\text{no allergy} \mid \text{positive test})
 =
-0.05
-$$
+0.05$$
 
 The first probability conditions on Sam not having the allergy. The second conditions on Sam having received a positive test result.
 
 These probabilities are not the same:
 
-$$
-P(A \mid B)
+$$P(A \mid B)
 \ne
-P(B \mid A)
-$$
+P(B \mid A)$$
 
 To find the probability that Sam has the allergy after a positive test, we need Bayes' theorem. We need both the test accuracy and the base rate of the allergy.
 :::
@@ -3679,31 +3186,25 @@ A fraud detection system flags transactions as suspicious.
 
 Suppose:
 
--   3% of transactions are fraudulent
--   If a transaction is fraudulent, the system flags it 70% of the time
--   If a transaction is not fraudulent, the system flags it 4% of the time
+- 3% of transactions are fraudulent
+- If a transaction is fraudulent, the system flags it 70% of the time
+- If a transaction is not fraudulent, the system flags it 4% of the time
 
 A transaction is flagged.
 
 Calculate the likelihood ratio:
 
-$$
-\text{LR}
+$$\text{LR}
 =
-\frac{P(E \mid H)}{P(E \mid H^c)}
-$$
+\frac{P(E \mid H)}{P(E \mid H^c)}$$
 
 where:
 
-$$
-H = \text{transaction is fraudulent}
-$$
+$$H = \text{transaction is fraudulent}$$
 
 and
 
-$$
-E = \text{transaction is flagged}
-$$
+$$E = \text{transaction is flagged}$$
 
 Then calculate $P(H \mid E)$.
 
@@ -3712,8 +3213,7 @@ Then calculate $P(H \mid E)$.
 
 The likelihood ratio is:
 
-$$
-\begin{aligned}
+$$\begin{aligned}
 \text{LR}
 &=
 \frac{P(E \mid H)}{P(E \mid H^c)} \\
@@ -3721,8 +3221,7 @@ $$
 \frac{0.70}{0.04} \\
 &=
 17.5
-\end{aligned}
-$$
+\end{aligned}$$
 
 The evidence is 17.5 times more likely if the transaction is fraudulent than if it is not fraudulent.
 
@@ -3730,26 +3229,17 @@ Now use Bayes' theorem.
 
 We are given:
 
-$$
-P(H) = 0.03
-$$
+$$P(H) = 0.03$$
 
-$$
-P(H^c) = 0.97
-$$
+$$P(H^c) = 0.97$$
 
-$$
-P(E \mid H) = 0.70
-$$
+$$P(E \mid H) = 0.70$$
 
-$$
-P(E \mid H^c) = 0.04
-$$
+$$P(E \mid H^c) = 0.04$$
 
 Therefore:
 
-$$
-\begin{aligned}
+$$\begin{aligned}
 P(H \mid E)
 &=
 \frac{0.03 \times 0.70}
@@ -3760,8 +3250,7 @@ P(H \mid E)
 \frac{0.021}{0.0598} \\
 &=
 0.351
-\end{aligned}
-$$
+\end{aligned}$$
 
 So, given that the transaction was flagged, the probability that it is fraudulent is about 35%.
 :::
@@ -3778,15 +3267,11 @@ What statistical mistake is being made?
 
 Explain using the distinction between:
 
-$$
-P(\text{evidence} \mid \text{honest})
-$$
+$$P(\text{evidence} \mid \text{honest})$$
 
 and
 
-$$
-P(\text{honest} \mid \text{evidence})
-$$
+$$P(\text{honest} \mid \text{evidence})$$
 
 ::: {.callout-important collapse="true"}
 ## Click for Solutions
@@ -3795,15 +3280,11 @@ The report is making a version of the prosecutor's fallacy.
 
 The statement “only 1 in 500 honest applicants would produce this document pattern” is about:
 
-$$
-P(\text{evidence} \mid \text{honest})
-$$
+$$P(\text{evidence} \mid \text{honest})$$
 
 But the conclusion “there is only a 1 in 500 chance that the applicant is honest” is about:
 
-$$
-P(\text{honest} \mid \text{evidence})
-$$
+$$P(\text{honest} \mid \text{evidence})$$
 
 These are not the same.
 
@@ -3820,17 +3301,13 @@ A council is studying whether residents support building a new community garden.
 
 Let
 
-$$
-\theta = \text{proportion of residents who support the community garden}
-$$
+$$\theta = \text{proportion of residents who support the community garden}$$
 
 The council surveys 30 residents, and 21 say they support the proposal.
 
 Suppose the prior is:
 
-$$
-\theta \sim \text{Beta}(2,2)
-$$
+$$\theta \sim \text{Beta}(2,2)$$
 
 Use the beta-binomial update rule to find the posterior distribution.
 
@@ -3839,49 +3316,37 @@ Use the beta-binomial update rule to find the posterior distribution.
 
 We are given:
 
-$$
-\theta \sim \text{Beta}(2,2)
-$$
+$$\theta \sim \text{Beta}(2,2)$$
 
 The data are:
 
-$$
-x = 21
-$$
+$$x = 21$$
 
 and:
 
-$$
-n = 30
-$$
+$$n = 30$$
 
 For a beta prior and binomial likelihood:
 
-$$
-\theta \mid X=x
+$$\theta \mid X=x
 \sim
-\text{Beta}(\alpha + x,\ \beta + n - x)
-$$
+\text{Beta}(\alpha + x,\ \beta + n - x)$$
 
 Substitute the values:
 
-$$
-\begin{aligned}
+$$\begin{aligned}
 \theta \mid X=21
 &\sim
 \text{Beta}(2 + 21,\ 2 + 30 - 21) \\
 &\sim
 \text{Beta}(23,\ 11)
-\end{aligned}
-$$
+\end{aligned}$$
 
 So the posterior distribution is:
 
-$$
-\theta \mid X=21
+$$\theta \mid X=21
 \sim
-\text{Beta}(23,11)
-$$
+\text{Beta}(23,11)$$
 :::
 ::::
 
@@ -3890,11 +3355,9 @@ $$
 
 Using the posterior from Question 7:
 
-$$
-\theta \mid X=21
+$$\theta \mid X=21
 \sim
-\text{Beta}(23,11)
-$$
+\text{Beta}(23,11)$$
 
 Calculate the posterior mean.
 
@@ -3905,28 +3368,21 @@ Then interpret it in words.
 
 For a beta distribution:
 
-$$
-E(\theta)
+$$E(\theta)
 =
-\frac{\alpha}{\alpha + \beta}
-$$
+\frac{\alpha}{\alpha + \beta}$$
 
 Here:
 
-$$
-\alpha = 23
-$$
+$$\alpha = 23$$
 
 and:
 
-$$
-\beta = 11
-$$
+$$\beta = 11$$
 
 So:
 
-$$
-\begin{aligned}
+$$\begin{aligned}
 E(\theta \mid X=21)
 &=
 \frac{23}{23 + 11} \\
@@ -3934,8 +3390,7 @@ E(\theta \mid X=21)
 \frac{23}{34} \\
 &=
 0.676
-\end{aligned}
-$$
+\end{aligned}$$
 
 The posterior mean is about 0.676.
 
@@ -3948,21 +3403,15 @@ This means that, after combining the prior with the survey data, the average val
 
 Suppose a researcher uses a different prior for the community garden example:
 
-$$
-\theta \sim \text{Beta}(8,4)
-$$
+$$\theta \sim \text{Beta}(8,4)$$
 
 The data are still:
 
-$$
-x = 21
-$$
+$$x = 21$$
 
 supporters out of:
 
-$$
-n = 30
-$$
+$$n = 30$$
 
 Find the posterior distribution and posterior mean.
 
@@ -3973,38 +3422,29 @@ How does this compare with the posterior mean from Question 8?
 
 The prior is:
 
-$$
-\theta \sim \text{Beta}(8,4)
-$$
+$$\theta \sim \text{Beta}(8,4)$$
 
 The data are:
 
-$$
-x = 21
-$$
+$$x = 21$$
 
 and:
 
-$$
-n = 30
-$$
+$$n = 30$$
 
 Using the beta-binomial update rule:
 
-$$
-\begin{aligned}
+$$\begin{aligned}
 \theta \mid X=21
 &\sim
 \text{Beta}(8 + 21,\ 4 + 30 - 21) \\
 &\sim
 \text{Beta}(29,\ 13)
-\end{aligned}
-$$
+\end{aligned}$$
 
 The posterior mean is:
 
-$$
-\begin{aligned}
+$$\begin{aligned}
 E(\theta \mid X=21)
 &=
 \frac{29}{29 + 13} \\
@@ -4012,8 +3452,7 @@ E(\theta \mid X=21)
 \frac{29}{42} \\
 &=
 0.690
-\end{aligned}
-$$
+\end{aligned}$$
 
 In Question 8, the posterior mean using a $\text{Beta}(2,2)$ prior was about 0.676.
 
@@ -4030,9 +3469,7 @@ A survey asks 12 people whether they support a new recycling program. Eight say 
 
 A researcher uses the prior:
 
-$$
-\theta \sim \text{Beta}(1,1)
-$$
+$$\theta \sim \text{Beta}(1,1)$$
 
 1.  Find the posterior distribution.
 2.  Explain why the prior may matter more in this example than in a survey of 1200 people with 800 yes responses.
@@ -4042,51 +3479,39 @@ $$
 
 The prior is:
 
-$$
-\theta \sim \text{Beta}(1,1)
-$$
+$$\theta \sim \text{Beta}(1,1)$$
 
 The data are:
 
-$$
-x = 8
-$$
+$$x = 8$$
 
 and:
 
-$$
-n = 12
-$$
+$$n = 12$$
 
 Using the beta-binomial update rule:
 
-$$
-\begin{aligned}
+$$\begin{aligned}
 \theta \mid X=8
 &\sim
 \text{Beta}(1 + 8,\ 1 + 12 - 8) \\
 &\sim
 \text{Beta}(9,\ 5)
-\end{aligned}
-$$
+\end{aligned}$$
 
 So the posterior is:
 
-$$
-\theta \mid X=8
+$$\theta \mid X=8
 \sim
-\text{Beta}(9,5)
-$$
+\text{Beta}(9,5)$$
 
 The prior may matter more here because the sample size is small. With only 12 observations, the likelihood contains limited information.
 
 If the survey had 1200 people with 800 yes responses, the observed proportion would still be:
 
-$$
-\frac{800}{1200}
+$$\frac{800}{1200}
 =
-0.667
-$$
+0.667$$
 
 But the data would contain much more information. In that case, the likelihood would usually dominate the prior more strongly, and different reasonable priors would lead to more similar posteriors.
 :::
@@ -4099,9 +3524,9 @@ A machine-learning model classifies emails as spam or not spam.
 
 Suppose:
 
--   20% of emails are spam
--   If an email is spam, the model flags it 95% of the time
--   If an email is not spam, the model flags it 10% of the time
+- 20% of emails are spam
+- If an email is spam, the model flags it 95% of the time
+- If an email is not spam, the model flags it 10% of the time
 
 An email is flagged.
 
@@ -4113,38 +3538,25 @@ An email is flagged.
 
 Let:
 
-$$
-H = \text{email is spam}
-$$
+$$H = \text{email is spam}$$
 
 and:
 
-$$
-E = \text{email is flagged}
-$$
+$$E = \text{email is flagged}$$
 
 We are given:
 
-$$
-P(H) = 0.20
-$$
+$$P(H) = 0.20$$
 
-$$
-P(H^c) = 0.80
-$$
+$$P(H^c) = 0.80$$
 
-$$
-P(E \mid H) = 0.95
-$$
+$$P(E \mid H) = 0.95$$
 
-$$
-P(E \mid H^c) = 0.10
-$$
+$$P(E \mid H^c) = 0.10$$
 
 Using Bayes' theorem:
 
-$$
-\begin{aligned}
+$$\begin{aligned}
 P(H \mid E)
 &=
 \frac{0.20 \times 0.95}
@@ -4155,22 +3567,17 @@ P(H \mid E)
 \frac{0.19}{0.27} \\
 &=
 0.704
-\end{aligned}
-$$
+\end{aligned}$$
 
 So, given that the email was flagged, the probability that it is spam is about 70%.
 
 This is not simply 95% because 95% is:
 
-$$
-P(\text{flagged} \mid \text{spam})
-$$
+$$P(\text{flagged} \mid \text{spam})$$
 
 The question asks for:
 
-$$
-P(\text{spam} \mid \text{flagged})
-$$
+$$P(\text{spam} \mid \text{flagged})$$
 
 These are different conditional probabilities. We also need the base rate of spam and the false positive rate.
 :::
@@ -4185,31 +3592,25 @@ Suppose Taylor is described as careful, quiet, organised, and very interested in
 
 Taylor has been chosen at random from a group containing:
 
--   30 architects
--   270 sales managers
+- 30 architects
+- 270 sales managers
 
 Suppose:
 
--   80% of architects fit the description
--   20% of sales managers fit the description
+- 80% of architects fit the description
+- 20% of sales managers fit the description
 
 Let
 
-$$
-H = \text{Taylor is an architect}
-$$
+$$H = \text{Taylor is an architect}$$
 
 and let
 
-$$
-E = \text{Taylor fits the description}
-$$
+$$E = \text{Taylor fits the description}$$
 
 Calculate:
 
-$$
-P(H \mid E)
-$$
+$$P(H \mid E)$$
 
 Then explain why the answer is not simply 80%.
 
@@ -4220,48 +3621,37 @@ First calculate the base rates.
 
 There are:
 
-$$
-30 + 270 = 300
-$$
+$$30 + 270 = 300$$
 
 people in total.
 
 So:
 
-$$
-P(H)
+$$P(H)
 =
 \frac{30}{300}
 =
-0.10
-$$
+0.10$$
 
 and:
 
-$$
-P(H^c)
+$$P(H^c)
 =
 \frac{270}{300}
 =
-0.90
-$$
+0.90$$
 
 The likelihoods are:
 
-$$
-P(E \mid H) = 0.80
-$$
+$$P(E \mid H) = 0.80$$
 
 and:
 
-$$
-P(E \mid H^c) = 0.20
-$$
+$$P(E \mid H^c) = 0.20$$
 
 Using Bayes' theorem:
 
-$$
-\begin{aligned}
+$$\begin{aligned}
 P(H \mid E)
 &=
 \frac{0.10 \times 0.80}
@@ -4272,22 +3662,17 @@ P(H \mid E)
 \frac{0.08}{0.26} \\
 &=
 0.308
-\end{aligned}
-$$
+\end{aligned}$$
 
 So, given the description, the probability that Taylor is an architect is about 31%.
 
 The answer is not 80% because 80% is:
 
-$$
-P(\text{fits description} \mid \text{architect})
-$$
+$$P(\text{fits description} \mid \text{architect})$$
 
 But the question asks for:
 
-$$
-P(\text{architect} \mid \text{fits description})
-$$
+$$P(\text{architect} \mid \text{fits description})$$
 
 The base rates matter. Sales managers are much more common in the starting group, so some people who fit the description will still be sales managers.
 :::

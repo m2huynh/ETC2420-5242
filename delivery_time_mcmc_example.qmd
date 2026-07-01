@@ -7,9 +7,86 @@ library(gt)
 
 ## Recap
 
-So far, we have seen Bayesian examples where the posterior could be written down exactly. For example, when we combined a beta prior with binomial data, the posterior was also beta. This is called a **conjugate** model. However, not every Bayesian model works this neatly. Sometimes the prior is easy to describe in words but does not combine with the likelihood to produce a simple named posterior distribution.
+So far, we have seen Bayesian examples where the posterior could be written down exactly. For example, when we combined a beta prior with binomial data, the posterior was also beta. This is called a **conjugate** model. As a reminder, this is one of the examples from the previous chapter:
 
-INSERT SIMPLE CONJUGATE EXAMPLE HERE
+::: callout-note
+
+### Late night bus service
+
+A simple example from the previous chapter was the late-night bus problem.
+
+Suppose a local council is considering whether to introduce a late-night bus service. A survey of 40 residents asks whether they would use the service. In the survey, 26 people say yes.
+
+Let:
+
+$$
+\begin{aligned}
+p
+&= \text{the proportion of residents who would use the service}
+\end{aligned}
+$$
+
+The data are:
+
+$$
+\begin{aligned}
+x &= 26 \\
+n &= 40
+\end{aligned}
+$$
+
+The likelihood comes from the binomial model:
+
+$$
+\begin{aligned}
+X \mid p
+&\sim \text{Binomial}(40,p)
+\end{aligned}
+$$
+
+If we used maximum likelihood, the estimate would be the observed sample proportion:
+
+$$
+\begin{aligned}
+\hat{p}
+&= \frac{26}{40} \\
+&= 0.65
+\end{aligned}
+$$
+
+A Bayesian analysis asks for a posterior distribution for $p$. If we start with a uniform prior,
+
+$$
+\begin{aligned}
+p
+&\sim \text{Beta}(1,1),
+\end{aligned}
+$$
+
+then beta-binomial conjugacy gives:
+
+$$
+\begin{aligned}
+p \mid X = 26
+&\sim \text{Beta}(1 + 26,\ 1 + 40 - 26) \\
+&\sim \text{Beta}(27,15).
+\end{aligned}
+$$
+
+```{r, echo=FALSE}
+knitr::include_graphics("images/chapter8/beta.gif")
+```
+
+:::
+
+In the above example, the prior and posterior were from the sample family, which makes the posterior easy to write down:
+
+$$\begin{aligned}
+\text{Beta prior} + \text{Binomial likelihood}
+&\rightarrow \text{Beta posterior}
+\end{aligned}$$
+
+However, not every Bayesian model works this neatly. Sometimes the prior is easy to describe in words but does not combine with the likelihood to produce a simple named posterior distribution. This chapter will explore methods for dealing with such situations.
 
 ## The scenario
 
@@ -270,9 +347,9 @@ The next step is to combine them to form a **posterior**.
 
 Before using MCMC, we will do this in a more direct way using a **grid**. A grid is just a list of possible values. In this example, we make a long list of possible values for the true mean delivery time $\mu$. For each value of $\mu$ in the grid, we calculate:
 
--   the prior density at that value
--   the likelihood at that value
--   the product of the prior and likelihood
+- the prior density at that value
+- the likelihood at that value
+- the product of the prior and likelihood
 
 This gives us an approximate posterior distribution. This is a simple method that works well here because we only have one unknown parameter, $\mu$. It is useful because it lets us see clearly what the posterior should look like before we move to a more general computational method.
 
@@ -291,6 +368,15 @@ grid_width <- mu_grid[2] - mu_grid[1]
 Next, we can create the table that stores the prior, likelihood, and posterior calculations for each grid value. The column `mu` contains the grid values. The column `prior` gives the prior density at each value of $\mu$. The column `likelihood` gives the likelihood at each value of $\mu$. This tells us how plausible the observed sample mean would be if that grid value were the true mean. The column `unnormalised_posterior` multiplies the prior and likelihood together. This gives us the shape of the posterior distribution, but it is not yet scaled so that the total area under the curve equals 1.
 
 ```{r}
+triangular_density <- function(mu, a = 10, m = 25, b = 60) {
+  case_when(
+    mu < a ~ 0,
+    mu >= a & mu <= m ~ 2 * (mu - a) / ((b - a) * (m - a)),
+    mu > m & mu <= b ~ 2 * (b - mu) / ((b - a) * (b - m)),
+    mu > b ~ 0
+  )
+}
+
 posterior_grid <- tibble(
   mu = mu_grid,
   prior = triangular_density(mu),
@@ -326,8 +412,8 @@ ggplot(posterior_grid, aes(x = mu, y = posterior_density)) +
 
 The posterior plot gives us the full shape of the posterior distribution. However, we often also want to summarise the posterior using a few numbers. Two useful summaries are:
 
--   the **posterior mean**
--   a **95% credible interval**
+- the **posterior mean**
+- a **95% credible interval**
 
 The posterior mean gives a single summary value for $\mu$. The 95% credible interval gives a range of plausible values for $\mu$ after combining the prior with the data. Because we calculated the posterior on a grid, we can calculate these summaries by adding up the posterior probabilities across the grid.
 
@@ -379,59 +465,47 @@ The grid method is useful because it makes the posterior calculation very explic
 
 However, grid methods become difficult when models become more complicated. For example, suppose we had several unknown parameters instead of one. We might want to estimate:
 
--   the true mean delivery time
--   the standard deviation of delivery times
--   the effect of day of the week
--   the effect of distance
--   the effect of order size
+- the true mean delivery time
+- the standard deviation of delivery times
+- the effect of day of the week
+- the effect of distance
+- the effect of order size
 
 If we tried to create a grid for all of these unknown quantities at once, the number of combinations would grow very quickly.
 
 ::: callout-note
 For example, suppose we used 1000 grid points for each unknown quantity. With one unknown parameter, we need:
 
-$$
-1000 \text{ grid points}
-$$
+$$1000 \text{ grid points}$$
 
 With two unknown parameters, we need:
 
-$$
-1000 \times 1000 = 1{,}000{,}000 \text{ grid combinations}
-$$
+$$1000 \times 1000 = 1{,}000{,}000 \text{ grid combinations}$$
 
 With five unknown parameters, we need:
 
-$$
-1000^5 = 1{,}000{,}000{,}000{,}000{,}000 \text{ grid combinations}
-$$
+$$1000^5 = 1{,}000{,}000{,}000{,}000{,}000 \text{ grid combinations}$$
 
 So the problem grows very quickly. This is sometimes called the **curse of dimensionality**. Even though a grid is easy to understand, it becomes impractical once we have several unknown parameters.
 :::
 
 ### Understanding MCMC in three parts
 
-The phrase **Markov Chain Monte Carlo** can sound intimidating, but the name contains the three ideas we need:
+The phrase **Markov Chain Monte Carlo** can sound intimidating, but the name contains the three ideas we need. Note: the **Metropolis-Hasting** part is popular method
 
 | Part | Meaning | In this example |
 |------------------------|------------------------|------------------------|
 | Monte Carlo | Use random simulation | Draw possible values of $\mu$ |
 | Markov chain | Each step depends on the current value | Propose the next $\mu$ near the current $\mu$ |
-| Metropolis-Hastings | Decide whether to accept or reject a proposal | Move toward values with more posterior support, while sometimes accepting worse values |
-
-A useful way to remember the pieces is:
-
-> Monte Carlo proposes. The Markov chain remembers where it is. Metropolis-Hastings decides whether to move.
+| MCMC Algorithm | Decide whether to accept or reject a proposal | Use an algorithm such as Metropolis–Hastings, Gibbs sampling, or Hamiltonian Monte Carlo to decide how the chain moves |
 
 #### Part 1: Monte Carlo
 
 The **Monte Carlo** part simply means that we use random simulation. Instead of calculating everything exactly, we generate random values and use them to approximate a distribution. In this example, a simulated value such as:
 
-$$
-\begin{aligned}
+$$\begin{aligned}
 \mu &= 28.4
-\end{aligned}
-$$
+\end{aligned}$$
 
 means that one possible value of the true average delivery time is 28.4 minutes.
 
@@ -445,12 +519,10 @@ The app above is not doing Bayesian inference yet. It is only showing the simula
 
 The **Markov chain** part means that the next value depends on the current value. Suppose the current value is $\mu_{t-1}$. A simple way to propose the next value is:
 
-$$
-\begin{aligned}
+$$\begin{aligned}
 \mu^\star
 &\sim N(\mu_{t-1}, s^2)
-\end{aligned}
-$$
+\end{aligned}$$
 
 where $s$ controls how large the proposed jumps tend to be.
 
@@ -462,35 +534,31 @@ For example, if the current value is 26 minutes, the next proposal might be 27.1
 
 Notice in the app above that the chain can wander randomly, moving quite far away from the proposed distribution. This is sometimes refered to as a random walk.
 
-#### Part 3: Metropolis-Hastings
-
-The **Metropolis-Hastings** part adds the accept/reject rule.
+#### Part 3: Movement Algorithm
 
 We do not want to wander randomly forever. We want the chain to spend more time in values of $\mu$ with high posterior density and less time in values with low posterior density.
 
-So at each step we compare:
+There are many different MCMC algorithms that we can use to decide how the chain moves. In this example we will learn about the **Metropolis-Hastings** method.
 
--   the posterior target at the proposed value, $\mu^\star$
--   the posterior target at the current value, $\mu_{t-1}$
+At each step we compare:
+
+- the posterior target at the proposed value, $\mu^\star$
+- the posterior target at the current value, $\mu_{t-1}$
 
 The ratio is:
 
-$$
-\begin{aligned}
+$$\begin{aligned}
 r
 &= \frac{p(\bar{x} \mid \mu^\star)p(\mu^\star)}
         {p(\bar{x} \mid \mu_{t-1})p(\mu_{t-1})}
-\end{aligned}
-$$
+\end{aligned}$$
 
 Then the acceptance probability is:
 
-$$
-\begin{aligned}
+$$\begin{aligned}
 \alpha
 &= \min(1,r)
-\end{aligned}
-$$
+\end{aligned}$$
 
 This gives the following rule:
 
@@ -518,12 +586,10 @@ Accepting worse values sometimes allows the chain to move around and represent t
 
 To run the algorithm, we first need a function for the unnormalised posterior. This is the target distribution for MCMC.
 
-$$
-\begin{aligned}
+$$\begin{aligned}
 p(\mu \mid \bar{x})
 &\propto p(\bar{x} \mid \mu)p(\mu)
-\end{aligned}
-$$
+\end{aligned}$$
 
 In R, this is:
 
@@ -755,11 +821,9 @@ For example, suppose the delivery service wants to know whether the true average
 
 We want:
 
-$$
-\begin{aligned}
+$$\begin{aligned}
 P(\mu < 30 \mid \bar{x})
-\end{aligned}
-$$
+\end{aligned}$$
 
 Using MCMC, this is just the proportion of posterior draws below 30.
 
@@ -822,17 +886,16 @@ This is now a decision problem. The posterior distribution can tell us how likel
 There are two possible actions:
 
 | Action | Meaning |
-|---|---|
+|------------------------------------|------------------------------------|
 | Advertise | The company advertises that the average delivery time is under 30 minutes |
 | Do not advertise | The company does not make this advertising claim |
 
 There are also two possible true situations:
 
-| True situation | Meaning |
-|---|---|
-| $\mu < 30$ | The true average delivery time is under 30 minutes |
-| $\mu \geq 30$ | The true average delivery time is 30 minutes or higher |
-
+| True situation | Meaning                                                |
+|----------------|--------------------------------------------------------|
+| $\mu < 30$     | The true average delivery time is under 30 minutes     |
+| $\mu \geq 30$  | The true average delivery time is 30 minutes or higher |
 
 ### Loss functions
 
@@ -840,10 +903,10 @@ A **loss function** assigns a cost to each combination of an action and a true s
 
 Suppose the company uses the following loss function:
 
-| Action | If $\mu < 30$ | If $\mu \geq 30$ |
-|---|---:|---:|
-| Advertise | 0 | 10 |
-| Do not advertise | 2 | 0 |
+| Action           | If $\mu < 30$ | If $\mu \geq 30$ |
+|------------------|--------------:|-----------------:|
+| Advertise        |             0 |               10 |
+| Do not advertise |             2 |                0 |
 
 This table says:
 
@@ -854,14 +917,12 @@ This table says:
 
 The numbers are not minutes, dollars, or probabilities. They are **unitless loss points**. They encode the relative seriousness of the possible mistakes. In this loss function, advertising a false claim has loss 10, while missing a true advertising opportunity has loss 2. So the false advertising mistake is treated as five times worse than the missed opportunity.
 
-$$
-\begin{aligned}
+$$\begin{aligned}
 \frac{10}{2}
 &= 5 \text{ times worse}
-\end{aligned}
-$$
+\end{aligned}$$
 
-::: {.callout-tip}
+::: callout-tip
 ## Where do the loss numbers come from?
 
 The loss numbers are chosen by the decision maker. They reflect judgement about the consequences of each outcome. In a real business setting, these losses could be based on dollars. For example, false advertising might lead to refunds, complaints, reputational damage, or legal risk. Missing an advertising opportunity might lead to lower sales.
@@ -871,13 +932,12 @@ The loss numbers are chosen by the decision maker. They reflect judgement about 
 
 A decision should account for both:
 
-1. how likely each situation is; and
-2. how costly each outcome would be.
+1.  how likely each situation is; and
+2.  how costly each outcome would be.
 
 This is done using **expected loss**. The expected loss of an action is the average loss we would expect if we repeated the decision many times under the posterior probabilities.
 
 Suppose we used MCMC and found:
-
 
 ```{r, warning=FALSE, message=FALSE, echo=FALSE}
 # Calculate posterior probabilities from the MCMC draws
@@ -963,7 +1023,6 @@ ggplot(density_df, aes(x = mu, y = density)) +
   theme(legend.position = "none")
 ```
 
-
 ```{r, warning=FALSE, message=FALSE, echo=FALSE, include=FALSE}
 mcmc_decision_df <- mcmc_post_burn |>
   mutate(
@@ -983,53 +1042,43 @@ posterior_decision_probs <- mcmc_decision_df |>
 posterior_decision_probs
 ```
 
-
-$$
-\begin{aligned}
+$$\begin{aligned}
 P(\mu < 30 \mid \text{data})
 &\approx \frac{\text{number of posterior draws below 30}}{\text{total number of posterior draws}} \approx 0.93
-\end{aligned}
-$$
+\end{aligned}$$
 
-$$
-\begin{aligned}
+$$\begin{aligned}
 P(\mu \geq 30 \mid \text{data})
 &\approx \frac{\text{number of posterior draws at or above 30}}{\text{total number of posterior draws}} \approx 0.07
-\end{aligned}
-$$
-
+\end{aligned}$$
 
 #### Expected loss of advertising
 
 If the company advertises, there is no loss if the claim is true, but there is loss 10 if the claim is false.
 
-$$
-\begin{aligned}
+$$\begin{aligned}
 E[\text{loss from advertising}]
 &= 0 \times P(\mu < 30 \mid \text{data})
    + 10 \times P(\mu \geq 30 \mid \text{data}) \\
 &= 0 \times 0.93 + 10 \times 0.07 \\
 &= 0 + 0.70 \\
 &= 0.70
-\end{aligned}
-$$
+\end{aligned}$$
 
 #### Expected loss of not advertising
 
 If the company does not advertise, there is loss 2 if the claim would have been true, because the company missed an advertising opportunity. There is no loss if the claim would have been false.
 
-$$
-\begin{aligned}
+$$\begin{aligned}
 E[\text{loss from not advertising}]
 &= 2 \times P(\mu < 30 \mid \text{data})
    + 0 \times P(\mu \geq 30 \mid \text{data}) \\
 &= 2 \times 0.93 + 0 \times 0.07 \\
 &= 1.86 + 0 \\
 &= 1.86
-\end{aligned}
-$$
+\end{aligned}$$
 
-Since advertising has the lower expected loss (0.70 < 1.86), the decision with the lower expected loss is to advertise.
+Since advertising has the lower expected loss (0.70 \< 1.86), the decision with the lower expected loss is to advertise.
 
 ### Different losses can lead to different decisions
 
@@ -1037,34 +1086,30 @@ The same posterior can lead to different decisions if the loss function changes.
 
 The new loss function is:
 
-| Action | If $\mu < 30$ | If $\mu \geq 30$ |
-|---|---:|---:|
-| Advertise | 0 | 30 |
-| Do not advertise | 2 | 0 |
+| Action           | If $\mu < 30$ | If $\mu \geq 30$ |
+|------------------|--------------:|-----------------:|
+| Advertise        |             0 |               30 |
+| Do not advertise |             2 |                0 |
 
 Now the expected loss of advertising becomes:
 
-$$
-\begin{aligned}
+$$\begin{aligned}
 E[\text{loss from advertising}]
 &= 0 \times P(\mu < 30 \mid \text{data})
    + 30 \times P(\mu \geq 30 \mid \text{data}) \\
 &= 0 \times 0.93 + 30 \times 0.07 \\
 &= 2.10
-\end{aligned}
-$$
+\end{aligned}$$
 
 The expected loss of not advertising remains:
 
-$$
-\begin{aligned}
+$$\begin{aligned}
 E[\text{loss from not advertising}]
 &= 2 \times P(\mu < 30 \mid \text{data})
    + 0 \times P(\mu \geq 30 \mid \text{data}) \\
 &= 2 \times 0.93 + 0 \times 0.07 \\
 &= 1.86
-\end{aligned}
-$$
+\end{aligned}$$
 
 Now the expected loss of not advertising is lower. So a more cautious company may decide not to advertise, even with the same posterior distribution.
 
@@ -1112,53 +1157,43 @@ In this example, the decision depends on whether the posterior probability of be
 
 Let:
 
-$$
-\begin{aligned}
+$$\begin{aligned}
 p &= P(\mu < 30 \mid \text{data}).
-\end{aligned}
-$$
+\end{aligned}$$
 
 Then:
 
-$$
-\begin{aligned}
+$$\begin{aligned}
 P(\mu \geq 30 \mid \text{data}) &= 1 - p.
-\end{aligned}
-$$
+\end{aligned}$$
 
 Using the original loss function, the expected loss of advertising is:
 
-$$
-\begin{aligned}
+$$\begin{aligned}
 E[\text{loss from advertising}]
 &= 10(1-p).
-\end{aligned}
-$$
+\end{aligned}$$
 
 The expected loss of not advertising is:
 
-$$
-\begin{aligned}
+$$\begin{aligned}
 E[\text{loss from not advertising}]
 &= 2p.
-\end{aligned}
-$$
+\end{aligned}$$
 
 We should advertise when:
 
-$$
-\begin{aligned}
+$$\begin{aligned}
 10(1-p) &< 2p \\
 10 - 10p &< 2p \\
 10 &< 12p \\
 \frac{10}{12} &< p \\
 p &> 0.833.
-\end{aligned}
-$$
+\end{aligned}$$
 
 So under this loss function, the company should advertise only if the posterior probability that $\mu < 30$ is greater than about 83.3%.
 
-::: {.callout-note}
+::: callout-note
 ## Why this threshold matters
 
 The threshold is not always 50%.
@@ -1210,11 +1245,9 @@ To the left of the dashed line, not advertising has lower expected loss. To the 
 
 Bayesian inference gives us a posterior distribution. From that posterior, we can calculate probabilities such as:
 
-$$
-\begin{aligned}
+$$\begin{aligned}
 P(\mu < 30 \mid \text{data}).
-\end{aligned}
-$$
+\end{aligned}$$
 
 Decision theory adds a second layer. It asks:
 
@@ -1223,7 +1256,7 @@ Decision theory adds a second layer. It asks:
 The key pieces are:
 
 | Component | Meaning in this example |
-|---|---|
+|------------------------------------|------------------------------------|
 | Posterior distribution | Our uncertainty about the true average delivery time $\mu$ |
 | Action | Advertise or do not advertise |
 | True situation | Whether $\mu$ is below 30 or at least 30 |
@@ -1231,7 +1264,7 @@ The key pieces are:
 | Expected loss | The posterior-average loss for an action |
 | Decision rule | Choose the action with the lowest expected loss |
 
-::: {.callout-important}
+::: callout-important
 ## Big picture
 
 MCMC gives us posterior draws.
@@ -1347,10 +1380,10 @@ Suppose the company is deciding whether to advertise the claim:
 
 Use the following loss function:
 
-| Action | If $\mu < 30$ | If $\mu \geq 30$ |
-|---|---:|---:|
-| Advertise | 0 | 15 |
-| Do not advertise | 3 | 0 |
+| Action           | If $\mu < 30$ | If $\mu \geq 30$ |
+|------------------|--------------:|-----------------:|
+| Advertise        |             0 |               15 |
+| Do not advertise |             3 |                0 |
 
 Complete the code below to calculate the expected loss of each action.
 
@@ -1392,51 +1425,40 @@ That is, find the value of $p = P(\mu < 30 \mid \text{data})$ where the expected
 
 The expected loss of advertising is:
 
-$$
-\begin{aligned}
+$$\begin{aligned}
 15(1-p).
-\end{aligned}
-$$
+\end{aligned}$$
 
 The expected loss of not advertising is:
 
-$$
-\begin{aligned}
+$$\begin{aligned}
 3p.
-\end{aligned}
-$$
+\end{aligned}$$
 
 Complete the working:
 
-$$
-\begin{aligned}
+$$\begin{aligned}
 15(1-p) &= 3p \\
 15 - 15p &= 3p \\
 15 &= ____p \\
 p &= \frac{15}{____} \\
 p &= ____.
-\end{aligned}
-$$
+\end{aligned}$$
 
 ::: {.callout-important collapse="true"}
 ## Solution
 
-$$
-\begin{aligned}
+$$\begin{aligned}
 15(1-p) &= 3p \\
 15 - 15p &= 3p \\
 15 &= 18p \\
 p &= \frac{15}{18} \\
 p &= 0.833.
-\end{aligned}
-$$
+\end{aligned}$$
 
 The company should advertise only if:
 
-$$
-\begin{aligned}
+$$\begin{aligned}
 P(\mu < 30 \mid \text{data}) &> 0.833.
-\end{aligned}
-$$
+\end{aligned}$$
 :::
-

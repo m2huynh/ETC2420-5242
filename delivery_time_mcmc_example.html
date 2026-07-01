@@ -2,13 +2,16 @@
 <html xmlns="http://www.w3.org/1999/xhtml" lang="en" xml:lang="en"><head>
 
 <meta charset="utf-8">
-<meta name="generator" content="quarto-1.7.32">
+<meta name="generator" content="quarto-1.9.37">
 
 <meta name="viewport" content="width=device-width, initial-scale=1.0, user-scalable=yes">
 
 
 <title>delivery_time_mcmc_example</title>
 <style>
+/* Default styles provided by pandoc.
+** See https://pandoc.org/MANUAL.html#variables-for-html for config info.
+*/
 code{white-space: pre-wrap;}
 span.smallcaps{font-variant: small-caps;}
 div.columns{display: flex; gap: min(4vw, 1.5em);}
@@ -65,13 +68,13 @@ pre > code.sourceCode > span > a:first-child::before { text-decoration: underlin
 <script src="delivery_time_mcmc_example_files/libs/quarto-html/tippy.umd.min.js"></script>
 <script src="delivery_time_mcmc_example_files/libs/quarto-html/anchor.min.js"></script>
 <link href="delivery_time_mcmc_example_files/libs/quarto-html/tippy.css" rel="stylesheet">
-<link href="delivery_time_mcmc_example_files/libs/quarto-html/quarto-syntax-highlighting-37eea08aefeeee20ff55810ff984fec1.css" rel="stylesheet" id="quarto-text-highlighting-styles">
+<link href="delivery_time_mcmc_example_files/libs/quarto-html/quarto-syntax-highlighting-7f8f88aac4f3542376d5c11b86a4c14d.css" rel="stylesheet" id="quarto-text-highlighting-styles">
 <script src="delivery_time_mcmc_example_files/libs/bootstrap/bootstrap.min.js"></script>
 <link href="delivery_time_mcmc_example_files/libs/bootstrap/bootstrap-icons.css" rel="stylesheet">
-<link href="delivery_time_mcmc_example_files/libs/bootstrap/bootstrap-bb462d781dde1847d9e3ccf7736099dd.min.css" rel="stylesheet" append-hash="true" id="quarto-bootstrap" data-mode="light">
+<link href="delivery_time_mcmc_example_files/libs/bootstrap/bootstrap-138a6193a3bd40baf1e627da441a4734.min.css" rel="stylesheet" append-hash="true" id="quarto-bootstrap" data-mode="light">
 
   <script src="https://cdnjs.cloudflare.com/polyfill/v3/polyfill.min.js?features=es6"></script>
-  <script src="https://cdn.jsdelivr.net/npm/mathjax@3/es5/tex-chtml-full.js" type="text/javascript"></script>
+  <script defer="" src="https://cdn.jsdelivr.net/npm/mathjax@3/es5/tex-chtml-full.js" type="text/javascript"></script>
 
 <script type="text/javascript">
 const typesetMath = (el) => {
@@ -84,7 +87,7 @@ const typesetMath = (el) => {
     var macros = [];
     for (var i = 0; i < mathElements.length; i++) {
       var texText = mathElements[i].firstChild;
-      if (mathElements[i].tagName == "SPAN") {
+      if (mathElements[i].tagName == "SPAN" && texText && texText.data) {
         window.katex.render(texText.data, mathElements[i], {
           displayMode: mathElements[i].classList.contains('display'),
           throwOnError: false,
@@ -116,8 +119,80 @@ window.Quarto = {
 </section>
 <section id="recap" class="level2">
 <h2 class="anchored" data-anchor-id="recap">Recap</h2>
-<p>So far, we have seen Bayesian examples where the posterior could be written down exactly. For example, when we combined a beta prior with binomial data, the posterior was also beta. This is called a <strong>conjugate</strong> model. However, not every Bayesian model works this neatly. Sometimes the prior is easy to describe in words but does not combine with the likelihood to produce a simple named posterior distribution.</p>
-<p>INSERT SIMPLE CONJUGATE EXAMPLE HERE</p>
+<p>So far, we have seen Bayesian examples where the posterior could be written down exactly. For example, when we combined a beta prior with binomial data, the posterior was also beta. This is called a <strong>conjugate</strong> model. As a reminder, this is one of the examples from the previous chapter:</p>
+<div class="callout callout-style-default callout-note callout-titled">
+<div class="callout-header d-flex align-content-center">
+<div class="callout-icon-container">
+<i class="callout-icon"></i>
+</div>
+<div class="callout-title-container flex-fill">
+<span class="screen-reader-only">Note</span>Late night bus service
+</div>
+</div>
+<div class="callout-body-container callout-body">
+<p>A simple example from the previous chapter was the late-night bus problem.</p>
+<p>Suppose a local council is considering whether to introduce a late-night bus service. A survey of 40 residents asks whether they would use the service. In the survey, 26 people say yes.</p>
+<p>Let:</p>
+<p><span class="math display">\[
+\begin{aligned}
+p
+&amp;= \text{the proportion of residents who would use the service}
+\end{aligned}
+\]</span></p>
+<p>The data are:</p>
+<p><span class="math display">\[
+\begin{aligned}
+x &amp;= 26 \\
+n &amp;= 40
+\end{aligned}
+\]</span></p>
+<p>The likelihood comes from the binomial model:</p>
+<p><span class="math display">\[
+\begin{aligned}
+X \mid p
+&amp;\sim \text{Binomial}(40,p)
+\end{aligned}
+\]</span></p>
+<p>If we used maximum likelihood, the estimate would be the observed sample proportion:</p>
+<p><span class="math display">\[
+\begin{aligned}
+\hat{p}
+&amp;= \frac{26}{40} \\
+&amp;= 0.65
+\end{aligned}
+\]</span></p>
+<p>A Bayesian analysis asks for a posterior distribution for <span class="math inline">\(p\)</span>. If we start with a uniform prior,</p>
+<p><span class="math display">\[
+\begin{aligned}
+p
+&amp;\sim \text{Beta}(1,1),
+\end{aligned}
+\]</span></p>
+<p>then beta-binomial conjugacy gives:</p>
+<p><span class="math display">\[
+\begin{aligned}
+p \mid X = 26
+&amp;\sim \text{Beta}(1 + 26,\ 1 + 40 - 26) \\
+&amp;\sim \text{Beta}(27,15).
+\end{aligned}
+\]</span></p>
+<div class="cell">
+<div class="cell-output-display">
+<div>
+<figure class="figure">
+<p><img src="images/chapter8/beta.gif" class="img-fluid figure-img"></p>
+</figure>
+</div>
+</div>
+</div>
+</div>
+</div>
+<p>In the above example, the prior and posterior were from the sample family, which makes the posterior easy to write down:</p>
+<p><span class="math display">\[\begin{aligned}
+\text{Beta prior} + \text{Binomial likelihood}
+&amp;\rightarrow \text{Beta posterior}
+\end{aligned}\]</span></p>
+<p>However, not every Bayesian model works this neatly. Sometimes the prior is easy to describe in words but does not combine with the likelihood to produce a simple named posterior distribution. This chapter will explore methods for dealing with such situations.</p>
 </section>
 <section id="the-scenario" class="level2">
 <h2 class="anchored" data-anchor-id="the-scenario">The scenario</h2>
@@ -129,23 +204,23 @@ window.Quarto = {
 <p>Our goal is to learn about <span class="math inline">\(\mu\)</span> using a small amount of data and some prior information. Suppose we collect delivery times for 12 recent orders:</p>
 <div class="cell">
 <div class="cell-output-display">
-<div id="bspihefwbw" style="padding-left:0px;padding-right:0px;padding-top:10px;padding-bottom:10px;overflow-x:auto;overflow-y:auto;width:auto;height:auto;">
-<style>#bspihefwbw table {
+<div id="yqqurxndon" style="padding-left:0px;padding-right:0px;padding-top:10px;padding-bottom:10px;overflow-x:auto;overflow-y:auto;width:auto;height:auto;">
+<style>#yqqurxndon table {
   font-family: system-ui, 'Segoe UI', Roboto, Helvetica, Arial, sans-serif, 'Apple Color Emoji', 'Segoe UI Emoji', 'Segoe UI Symbol', 'Noto Color Emoji';
   -webkit-font-smoothing: antialiased;
   -moz-osx-font-smoothing: grayscale;
 }
 
-#bspihefwbw thead, #bspihefwbw tbody, #bspihefwbw tfoot, #bspihefwbw tr, #bspihefwbw td, #bspihefwbw th {
+#yqqurxndon thead, #yqqurxndon tbody, #yqqurxndon tfoot, #yqqurxndon tr, #yqqurxndon td, #yqqurxndon th {
   border-style: none;
 }
 
-#bspihefwbw p {
+#yqqurxndon p {
   margin: 0;
   padding: 0;
 }
 
-#bspihefwbw .gt_table {
+#yqqurxndon .gt_table {
   display: table;
   border-collapse: collapse;
   line-height: normal;
@@ -171,12 +246,12 @@ window.Quarto = {
   border-left-color: #D3D3D3;
 }
 
-#bspihefwbw .gt_caption {
+#yqqurxndon .gt_caption {
   padding-top: 4px;
   padding-bottom: 4px;
 }
 
-#bspihefwbw .gt_title {
+#yqqurxndon .gt_title {
   color: #333333;
   font-size: 125%;
   font-weight: initial;
@@ -188,7 +263,7 @@ window.Quarto = {
   border-bottom-width: 0;
 }
 
-#bspihefwbw .gt_subtitle {
+#yqqurxndon .gt_subtitle {
   color: #333333;
   font-size: 85%;
   font-weight: initial;
@@ -200,7 +275,7 @@ window.Quarto = {
   border-top-width: 0;
 }
 
-#bspihefwbw .gt_heading {
+#yqqurxndon .gt_heading {
   background-color: #FFFFFF;
   text-align: center;
   border-bottom-color: #FFFFFF;
@@ -212,13 +287,13 @@ window.Quarto = {
   border-right-color: #D3D3D3;
 }
 
-#bspihefwbw .gt_bottom_border {
+#yqqurxndon .gt_bottom_border {
   border-bottom-style: solid;
   border-bottom-width: 2px;
   border-bottom-color: #D3D3D3;
 }
 
-#bspihefwbw .gt_col_headings {
+#yqqurxndon .gt_col_headings {
   border-top-style: solid;
   border-top-width: 2px;
   border-top-color: #D3D3D3;
@@ -233,7 +308,7 @@ window.Quarto = {
   border-right-color: #D3D3D3;
 }
 
-#bspihefwbw .gt_col_heading {
+#yqqurxndon .gt_col_heading {
   color: #333333;
   background-color: #FFFFFF;
   font-size: 100%;
@@ -253,7 +328,7 @@ window.Quarto = {
   overflow-x: hidden;
 }
 
-#bspihefwbw .gt_column_spanner_outer {
+#yqqurxndon .gt_column_spanner_outer {
   color: #333333;
   background-color: #FFFFFF;
   font-size: 100%;
@@ -265,15 +340,15 @@ window.Quarto = {
   padding-right: 4px;
 }
 
-#bspihefwbw .gt_column_spanner_outer:first-child {
+#yqqurxndon .gt_column_spanner_outer:first-child {
   padding-left: 0;
 }
 
-#bspihefwbw .gt_column_spanner_outer:last-child {
+#yqqurxndon .gt_column_spanner_outer:last-child {
   padding-right: 0;
 }
 
-#bspihefwbw .gt_column_spanner {
+#yqqurxndon .gt_column_spanner {
   border-bottom-style: solid;
   border-bottom-width: 2px;
   border-bottom-color: #D3D3D3;
@@ -285,11 +360,11 @@ window.Quarto = {
   width: 100%;
 }
 
-#bspihefwbw .gt_spanner_row {
+#yqqurxndon .gt_spanner_row {
   border-bottom-style: hidden;
 }
 
-#bspihefwbw .gt_group_heading {
+#yqqurxndon .gt_group_heading {
   padding-top: 8px;
   padding-bottom: 8px;
   padding-left: 5px;
@@ -315,7 +390,7 @@ window.Quarto = {
   text-align: left;
 }
 
-#bspihefwbw .gt_empty_group_heading {
+#yqqurxndon .gt_empty_group_heading {
   padding: 0.5px;
   color: #333333;
   background-color: #FFFFFF;
@@ -330,15 +405,15 @@ window.Quarto = {
   vertical-align: middle;
 }
 
-#bspihefwbw .gt_from_md > :first-child {
+#yqqurxndon .gt_from_md > :first-child {
   margin-top: 0;
 }
 
-#bspihefwbw .gt_from_md > :last-child {
+#yqqurxndon .gt_from_md > :last-child {
   margin-bottom: 0;
 }
 
-#bspihefwbw .gt_row {
+#yqqurxndon .gt_row {
   padding-top: 8px;
   padding-bottom: 8px;
   padding-left: 5px;
@@ -357,7 +432,7 @@ window.Quarto = {
   overflow-x: hidden;
 }
 
-#bspihefwbw .gt_stub {
+#yqqurxndon .gt_stub {
   color: #333333;
   background-color: #FFFFFF;
   font-size: 100%;
@@ -370,7 +445,7 @@ window.Quarto = {
   padding-right: 5px;
 }
 
-#bspihefwbw .gt_stub_row_group {
+#yqqurxndon .gt_stub_row_group {
   color: #333333;
   background-color: #FFFFFF;
   font-size: 100%;
@@ -384,15 +459,15 @@ window.Quarto = {
   vertical-align: top;
 }
 
-#bspihefwbw .gt_row_group_first td {
+#yqqurxndon .gt_row_group_first td {
   border-top-width: 2px;
 }
 
-#bspihefwbw .gt_row_group_first th {
+#yqqurxndon .gt_row_group_first th {
   border-top-width: 2px;
 }
 
-#bspihefwbw .gt_summary_row {
+#yqqurxndon .gt_summary_row {
   color: #333333;
   background-color: #FFFFFF;
   text-transform: inherit;
@@ -402,16 +477,16 @@ window.Quarto = {
   padding-right: 5px;
 }
 
-#bspihefwbw .gt_first_summary_row {
+#yqqurxndon .gt_first_summary_row {
   border-top-style: solid;
   border-top-color: #D3D3D3;
 }
 
-#bspihefwbw .gt_first_summary_row.thick {
+#yqqurxndon .gt_first_summary_row.thick {
   border-top-width: 2px;
 }
 
-#bspihefwbw .gt_last_summary_row {
+#yqqurxndon .gt_last_summary_row {
   padding-top: 8px;
   padding-bottom: 8px;
   padding-left: 5px;
@@ -421,7 +496,7 @@ window.Quarto = {
   border-bottom-color: #D3D3D3;
 }
 
-#bspihefwbw .gt_grand_summary_row {
+#yqqurxndon .gt_grand_summary_row {
   color: #333333;
   background-color: #FFFFFF;
   text-transform: inherit;
@@ -431,7 +506,7 @@ window.Quarto = {
   padding-right: 5px;
 }
 
-#bspihefwbw .gt_first_grand_summary_row {
+#yqqurxndon .gt_first_grand_summary_row {
   padding-top: 8px;
   padding-bottom: 8px;
   padding-left: 5px;
@@ -441,7 +516,7 @@ window.Quarto = {
   border-top-color: #D3D3D3;
 }
 
-#bspihefwbw .gt_last_grand_summary_row_top {
+#yqqurxndon .gt_last_grand_summary_row_top {
   padding-top: 8px;
   padding-bottom: 8px;
   padding-left: 5px;
@@ -451,11 +526,11 @@ window.Quarto = {
   border-bottom-color: #D3D3D3;
 }
 
-#bspihefwbw .gt_striped {
+#yqqurxndon .gt_striped {
   background-color: rgba(128, 128, 128, 0.05);
 }
 
-#bspihefwbw .gt_table_body {
+#yqqurxndon .gt_table_body {
   border-top-style: solid;
   border-top-width: 2px;
   border-top-color: #D3D3D3;
@@ -464,7 +539,7 @@ window.Quarto = {
   border-bottom-color: #D3D3D3;
 }
 
-#bspihefwbw .gt_footnotes {
+#yqqurxndon .gt_footnotes {
   color: #333333;
   background-color: #FFFFFF;
   border-bottom-style: none;
@@ -478,7 +553,7 @@ window.Quarto = {
   border-right-color: #D3D3D3;
 }
 
-#bspihefwbw .gt_footnote {
+#yqqurxndon .gt_footnote {
   margin: 0px;
   font-size: 90%;
   padding-top: 4px;
@@ -487,7 +562,7 @@ window.Quarto = {
   padding-right: 5px;
 }
 
-#bspihefwbw .gt_sourcenotes {
+#yqqurxndon .gt_sourcenotes {
   color: #333333;
   background-color: #FFFFFF;
   border-bottom-style: none;
@@ -501,7 +576,7 @@ window.Quarto = {
   border-right-color: #D3D3D3;
 }
 
-#bspihefwbw .gt_sourcenote {
+#yqqurxndon .gt_sourcenote {
   font-size: 90%;
   padding-top: 4px;
   padding-bottom: 4px;
@@ -509,77 +584,77 @@ window.Quarto = {
   padding-right: 5px;
 }
 
-#bspihefwbw .gt_left {
+#yqqurxndon .gt_left {
   text-align: left;
 }
 
-#bspihefwbw .gt_center {
+#yqqurxndon .gt_center {
   text-align: center;
 }
 
-#bspihefwbw .gt_right {
+#yqqurxndon .gt_right {
   text-align: right;
   font-variant-numeric: tabular-nums;
 }
 
-#bspihefwbw .gt_font_normal {
+#yqqurxndon .gt_font_normal {
   font-weight: normal;
 }
 
-#bspihefwbw .gt_font_bold {
+#yqqurxndon .gt_font_bold {
   font-weight: bold;
 }
 
-#bspihefwbw .gt_font_italic {
+#yqqurxndon .gt_font_italic {
   font-style: italic;
 }
 
-#bspihefwbw .gt_super {
+#yqqurxndon .gt_super {
   font-size: 65%;
 }
 
-#bspihefwbw .gt_footnote_marks {
+#yqqurxndon .gt_footnote_marks {
   font-size: 75%;
   vertical-align: 0.4em;
   position: initial;
 }
 
-#bspihefwbw .gt_asterisk {
+#yqqurxndon .gt_asterisk {
   font-size: 100%;
   vertical-align: 0;
 }
 
-#bspihefwbw .gt_indent_1 {
+#yqqurxndon .gt_indent_1 {
   text-indent: 5px;
 }
 
-#bspihefwbw .gt_indent_2 {
+#yqqurxndon .gt_indent_2 {
   text-indent: 10px;
 }
 
-#bspihefwbw .gt_indent_3 {
+#yqqurxndon .gt_indent_3 {
   text-indent: 15px;
 }
 
-#bspihefwbw .gt_indent_4 {
+#yqqurxndon .gt_indent_4 {
   text-indent: 20px;
 }
 
-#bspihefwbw .gt_indent_5 {
+#yqqurxndon .gt_indent_5 {
   text-indent: 25px;
 }
 
-#bspihefwbw .katex-display {
+#yqqurxndon .katex-display {
   display: inline-flex !important;
   margin-bottom: 0.75em !important;
 }
 
-#bspihefwbw div.Reactable > div.rt-table > div.rt-thead > div.rt-tr.rt-tr-group-header > div.rt-th-group:after {
+#yqqurxndon div.Reactable > div.rt-table > div.rt-thead > div.rt-tr.rt-tr-group-header > div.rt-th-group:after {
   height: 0px !important;
 }
 </style>
 
-<table class="gt_table caption-top table table-sm table-striped small" data-quarto-postprocess="true" data-quarto-disable-processing="false" data-quarto-bootstrap="false">
+<table class="gt_table caption-top table table-sm table-striped small" data-quarto-bootstrap="false">
 <thead>
 <tr class="gt_col_headings header">
 <th id="order" class="gt_col_heading gt_columns_bottom_border gt_right" data-quarto-table-cell-role="th" scope="col">Order</th>
@@ -655,7 +730,7 @@ window.Quarto = {
 <div class="cell-output-display">
 <div>
 <figure class="figure">
-<p><img src="delivery_time_mcmc_example_files/figure-html/unnamed-chunk-4-1.png" class="img-fluid figure-img" width="672"></p>
+<p><img src="delivery_time_mcmc_example_files/figure-html/unnamed-chunk-5-1.png" class="img-fluid figure-img" width="672"></p>
 </figure>
 </div>
 </div>
@@ -694,7 +769,7 @@ window.Quarto = {
 <div class="cell-output-display">
 <div>
 <figure class="figure">
-<p><img src="delivery_time_mcmc_example_files/figure-html/unnamed-chunk-6-1.png" class="img-fluid figure-img" width="672"></p>
+<p><img src="delivery_time_mcmc_example_files/figure-html/unnamed-chunk-7-1.png" class="img-fluid figure-img" width="672"></p>
 </figure>
 </div>
 </div>
@@ -753,7 +828,7 @@ b &amp;= 60
 <div class="cell-output-display">
 <div>
 <figure class="figure">
-<p><img src="delivery_time_mcmc_example_files/figure-html/unnamed-chunk-8-1.png" class="img-fluid figure-img" width="672"></p>
+<p><img src="delivery_time_mcmc_example_files/figure-html/unnamed-chunk-9-1.png" class="img-fluid figure-img" width="672"></p>
 </figure>
 </div>
 </div>
@@ -765,7 +840,7 @@ b &amp;= 60
 <i class="callout-icon"></i>
 </div>
 <div class="callout-title-container flex-fill">
-Why this is not a conjugate model
+<span class="screen-reader-only">Caution</span>Why this is not a conjugate model
 </div>
 </div>
 <div class="callout-body-container callout-body">
@@ -816,43 +891,52 @@ p(\mu \mid \bar{x})
 <p>This gives us an approximate posterior distribution. This is a simple method that works well here because we only have one unknown parameter, <span class="math inline">\(\mu\)</span>. It is useful because it lets us see clearly what the posterior should look like before we move to a more general computational method.</p>
 <p>First, we will create the grid of possible values for <span class="math inline">\(\mu\)</span>. In this example, <span class="math inline">\(\mu\)</span> represents the true average delivery time. Since the delivery times are measured in minutes, we need to choose a reasonable range of possible values. Here, we will consider values of <span class="math inline">\(\mu\)</span> from 10 minutes to 60 minutes. The argument <code>length.out = 1000</code> means that R will create 1000 evenly spaced values between 10 and 60.</p>
 <div class="cell">
-<div class="sourceCode cell-code" id="cb1"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb1-1"><a href="#cb1-1" aria-hidden="true" tabindex="-1"></a>mu_grid <span class="ot">&lt;-</span> <span class="fu">seq</span>(<span class="dv">10</span>, <span class="dv">60</span>, <span class="at">length.out =</span> <span class="dv">1000</span>)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="code-copy-outer-scaffold"><div class="sourceCode cell-code" id="cb1"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb1-1"><a href="#cb1-1" aria-hidden="true" tabindex="-1"></a>mu_grid <span class="ot">&lt;-</span> <span class="fu">seq</span>(<span class="dv">10</span>, <span class="dv">60</span>, <span class="at">length.out =</span> <span class="dv">1000</span>)</span></code></pre></div><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></div>
 </div>
 <p>Next, we calculate the width of each small interval in the grid. Because <code>mu_grid</code> is made up of evenly spaced values, the distance between the first value and the second value tells us the spacing for the whole grid. This value is small because we used 1000 grid points. We will use grid_width later when we convert densities into approximate probabilities. The idea is that each grid point represents a small interval of possible values for <span class="math inline">\(\mu\)</span>. The width of that interval is approximately grid_width.</p>
 <div class="cell">
-<div class="sourceCode cell-code" id="cb2"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb2-1"><a href="#cb2-1" aria-hidden="true" tabindex="-1"></a>grid_width <span class="ot">&lt;-</span> mu_grid[<span class="dv">2</span>] <span class="sc">-</span> mu_grid[<span class="dv">1</span>]</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="code-copy-outer-scaffold"><div class="sourceCode cell-code" id="cb2"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb2-1"><a href="#cb2-1" aria-hidden="true" tabindex="-1"></a>grid_width <span class="ot">&lt;-</span> mu_grid[<span class="dv">2</span>] <span class="sc">-</span> mu_grid[<span class="dv">1</span>]</span></code></pre></div><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></div>
 </div>
 <p>Next, we can create the table that stores the prior, likelihood, and posterior calculations for each grid value. The column <code>mu</code> contains the grid values. The column <code>prior</code> gives the prior density at each value of <span class="math inline">\(\mu\)</span>. The column <code>likelihood</code> gives the likelihood at each value of <span class="math inline">\(\mu\)</span>. This tells us how plausible the observed sample mean would be if that grid value were the true mean. The column <code>unnormalised_posterior</code> multiplies the prior and likelihood together. This gives us the shape of the posterior distribution, but it is not yet scaled so that the total area under the curve equals 1.</p>
 <div class="cell">
-<div class="sourceCode cell-code" id="cb3"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb3-1"><a href="#cb3-1" aria-hidden="true" tabindex="-1"></a>posterior_grid <span class="ot">&lt;-</span> <span class="fu">tibble</span>(</span>
-<span id="cb3-2"><a href="#cb3-2" aria-hidden="true" tabindex="-1"></a>  <span class="at">mu =</span> mu_grid,</span>
-<span id="cb3-3"><a href="#cb3-3" aria-hidden="true" tabindex="-1"></a>  <span class="at">prior =</span> <span class="fu">triangular_density</span>(mu),</span>
-<span id="cb3-4"><a href="#cb3-4" aria-hidden="true" tabindex="-1"></a>  <span class="at">likelihood =</span> <span class="fu">dnorm</span>(x_bar, <span class="at">mean =</span> mu, <span class="at">sd =</span> standard_error),</span>
-<span id="cb3-5"><a href="#cb3-5" aria-hidden="true" tabindex="-1"></a>  <span class="at">unnormalised_posterior =</span> prior <span class="sc">*</span> likelihood</span>
-<span id="cb3-6"><a href="#cb3-6" aria-hidden="true" tabindex="-1"></a>)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="code-copy-outer-scaffold"><div class="sourceCode cell-code" id="cb3"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb3-1"><a href="#cb3-1" aria-hidden="true" tabindex="-1"></a>triangular_density <span class="ot">&lt;-</span> <span class="cf">function</span>(mu, <span class="at">a =</span> <span class="dv">10</span>, <span class="at">m =</span> <span class="dv">25</span>, <span class="at">b =</span> <span class="dv">60</span>) {</span>
+<span id="cb3-2"><a href="#cb3-2" aria-hidden="true" tabindex="-1"></a>  <span class="fu">case_when</span>(</span>
+<span id="cb3-3"><a href="#cb3-3" aria-hidden="true" tabindex="-1"></a>    mu <span class="sc">&lt;</span> a <span class="sc">~</span> <span class="dv">0</span>,</span>
+<span id="cb3-4"><a href="#cb3-4" aria-hidden="true" tabindex="-1"></a>    mu <span class="sc">&gt;=</span> a <span class="sc">&amp;</span> mu <span class="sc">&lt;=</span> m <span class="sc">~</span> <span class="dv">2</span> <span class="sc">*</span> (mu <span class="sc">-</span> a) <span class="sc">/</span> ((b <span class="sc">-</span> a) <span class="sc">*</span> (m <span class="sc">-</span> a)),</span>
+<span id="cb3-5"><a href="#cb3-5" aria-hidden="true" tabindex="-1"></a>    mu <span class="sc">&gt;</span> m <span class="sc">&amp;</span> mu <span class="sc">&lt;=</span> b <span class="sc">~</span> <span class="dv">2</span> <span class="sc">*</span> (b <span class="sc">-</span> mu) <span class="sc">/</span> ((b <span class="sc">-</span> a) <span class="sc">*</span> (b <span class="sc">-</span> m)),</span>
+<span id="cb3-6"><a href="#cb3-6" aria-hidden="true" tabindex="-1"></a>    mu <span class="sc">&gt;</span> b <span class="sc">~</span> <span class="dv">0</span></span>
+<span id="cb3-7"><a href="#cb3-7" aria-hidden="true" tabindex="-1"></a>  )</span>
+<span id="cb3-8"><a href="#cb3-8" aria-hidden="true" tabindex="-1"></a>}</span>
+<span id="cb3-9"><a href="#cb3-9" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb3-10"><a href="#cb3-10" aria-hidden="true" tabindex="-1"></a>posterior_grid <span class="ot">&lt;-</span> <span class="fu">tibble</span>(</span>
+<span id="cb3-11"><a href="#cb3-11" aria-hidden="true" tabindex="-1"></a>  <span class="at">mu =</span> mu_grid,</span>
+<span id="cb3-12"><a href="#cb3-12" aria-hidden="true" tabindex="-1"></a>  <span class="at">prior =</span> <span class="fu">triangular_density</span>(mu),</span>
+<span id="cb3-13"><a href="#cb3-13" aria-hidden="true" tabindex="-1"></a>  <span class="at">likelihood =</span> <span class="fu">dnorm</span>(x_bar, <span class="at">mean =</span> mu, <span class="at">sd =</span> standard_error),</span>
+<span id="cb3-14"><a href="#cb3-14" aria-hidden="true" tabindex="-1"></a>  <span class="at">unnormalised_posterior =</span> prior <span class="sc">*</span> likelihood</span>
+<span id="cb3-15"><a href="#cb3-15" aria-hidden="true" tabindex="-1"></a>)</span></code></pre></div><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></div>
 </div>
 <p>Next, we rescale the unnormalised posterior so that it becomes a proper posterior density. At the moment, <code>unnormalised_posterior</code> has the right shape, but the total area under it is not necessarily equal to 1. A probability density needs to have total area 1, so we need to rescale it. The final column, <code>posterior_probability,</code> gives the approximate posterior probability attached to each small interval in the grid. This is found by multiplying the posterior density by the grid width.</p>
 <div class="cell">
-<div class="sourceCode cell-code" id="cb4"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb4-1"><a href="#cb4-1" aria-hidden="true" tabindex="-1"></a>posterior_grid <span class="ot">&lt;-</span> posterior_grid <span class="sc">|&gt;</span></span>
+<div class="code-copy-outer-scaffold"><div class="sourceCode cell-code" id="cb4"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb4-1"><a href="#cb4-1" aria-hidden="true" tabindex="-1"></a>posterior_grid <span class="ot">&lt;-</span> posterior_grid <span class="sc">|&gt;</span></span>
 <span id="cb4-2"><a href="#cb4-2" aria-hidden="true" tabindex="-1"></a>  <span class="fu">mutate</span>(</span>
 <span id="cb4-3"><a href="#cb4-3" aria-hidden="true" tabindex="-1"></a>    <span class="at">posterior_density =</span> unnormalised_posterior <span class="sc">/</span></span>
 <span id="cb4-4"><a href="#cb4-4" aria-hidden="true" tabindex="-1"></a>      <span class="fu">sum</span>(unnormalised_posterior <span class="sc">*</span> grid_width),</span>
 <span id="cb4-5"><a href="#cb4-5" aria-hidden="true" tabindex="-1"></a>    <span class="at">posterior_probability =</span> posterior_density <span class="sc">*</span> grid_width</span>
-<span id="cb4-6"><a href="#cb4-6" aria-hidden="true" tabindex="-1"></a>  )</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<span id="cb4-6"><a href="#cb4-6" aria-hidden="true" tabindex="-1"></a>  )</span></code></pre></div><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></div>
 </div>
 <p>Let’s now plot the posterior density:</p>
 <div class="cell">
-<div class="sourceCode cell-code" id="cb5"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb5-1"><a href="#cb5-1" aria-hidden="true" tabindex="-1"></a><span class="fu">ggplot</span>(posterior_grid, <span class="fu">aes</span>(<span class="at">x =</span> mu, <span class="at">y =</span> posterior_density)) <span class="sc">+</span></span>
+<div class="code-copy-outer-scaffold"><div class="sourceCode cell-code" id="cb5"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb5-1"><a href="#cb5-1" aria-hidden="true" tabindex="-1"></a><span class="fu">ggplot</span>(posterior_grid, <span class="fu">aes</span>(<span class="at">x =</span> mu, <span class="at">y =</span> posterior_density)) <span class="sc">+</span></span>
 <span id="cb5-2"><a href="#cb5-2" aria-hidden="true" tabindex="-1"></a>  <span class="fu">geom_line</span>(<span class="at">linewidth =</span> <span class="dv">1</span>) <span class="sc">+</span></span>
 <span id="cb5-3"><a href="#cb5-3" aria-hidden="true" tabindex="-1"></a>  <span class="fu">labs</span>(</span>
 <span id="cb5-4"><a href="#cb5-4" aria-hidden="true" tabindex="-1"></a>    <span class="at">x =</span> <span class="fu">expression</span>(mu),</span>
 <span id="cb5-5"><a href="#cb5-5" aria-hidden="true" tabindex="-1"></a>    <span class="at">y =</span> <span class="st">"Posterior density"</span></span>
 <span id="cb5-6"><a href="#cb5-6" aria-hidden="true" tabindex="-1"></a>  ) <span class="sc">+</span></span>
-<span id="cb5-7"><a href="#cb5-7" aria-hidden="true" tabindex="-1"></a>  <span class="fu">theme_minimal</span>()</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<span id="cb5-7"><a href="#cb5-7" aria-hidden="true" tabindex="-1"></a>  <span class="fu">theme_minimal</span>()</span></code></pre></div><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></div>
 <div class="cell-output-display">
 <div>
 <figure class="figure">
-<p><img src="delivery_time_mcmc_example_files/figure-html/unnamed-chunk-13-1.png" class="img-fluid figure-img" width="672"></p>
+<p><img src="delivery_time_mcmc_example_files/figure-html/unnamed-chunk-14-1.png" class="img-fluid figure-img" width="672"></p>
 </figure>
 </div>
 </div>
@@ -869,12 +953,12 @@ p(\mu \mid \bar{x})
 <h5 class="anchored" data-anchor-id="posterior-mean">Posterior mean</h5>
 <p>The posterior mean is a weighted average of the possible values of <span class="math inline">\(\mu\)</span>. Each grid value is weighted by its posterior probability. Values of <span class="math inline">\(\mu\)</span> with higher posterior probability contribute more to the posterior mean.</p>
 <div class="cell">
-<div class="sourceCode cell-code" id="cb6"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb6-1"><a href="#cb6-1" aria-hidden="true" tabindex="-1"></a>posterior_mean <span class="ot">&lt;-</span> posterior_grid <span class="sc">|&gt;</span></span>
+<div class="code-copy-outer-scaffold"><div class="sourceCode cell-code" id="cb6"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb6-1"><a href="#cb6-1" aria-hidden="true" tabindex="-1"></a>posterior_mean <span class="ot">&lt;-</span> posterior_grid <span class="sc">|&gt;</span></span>
 <span id="cb6-2"><a href="#cb6-2" aria-hidden="true" tabindex="-1"></a>  <span class="fu">summarise</span>(</span>
 <span id="cb6-3"><a href="#cb6-3" aria-hidden="true" tabindex="-1"></a>    <span class="at">posterior_mean =</span> <span class="fu">sum</span>(mu <span class="sc">*</span> posterior_probability)</span>
 <span id="cb6-4"><a href="#cb6-4" aria-hidden="true" tabindex="-1"></a>  )</span>
 <span id="cb6-5"><a href="#cb6-5" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb6-6"><a href="#cb6-6" aria-hidden="true" tabindex="-1"></a>posterior_mean</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<span id="cb6-6"><a href="#cb6-6" aria-hidden="true" tabindex="-1"></a>posterior_mean</span></code></pre></div><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></div>
 <div class="cell-output cell-output-stdout">
 <pre><code># A tibble: 1 × 1
   posterior_mean
@@ -888,20 +972,20 @@ p(\mu \mid \bar{x})
 <h4 class="anchored" data-anchor-id="credible-interval">95% credible interval</h4>
 <p>Next, we calculate a 95% credible interval. A 95% credible interval is an interval that contains 95% of the posterior probability. To calculate this from the grid, we first calculate the cumulative posterior probability. This tells us how much posterior probability has accumulated as we move from smaller to larger values of <span class="math inline">\(\mu\)</span>.</p>
 <div class="cell">
-<div class="sourceCode cell-code" id="cb8"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb8-1"><a href="#cb8-1" aria-hidden="true" tabindex="-1"></a>posterior_grid <span class="ot">&lt;-</span> posterior_grid <span class="sc">|&gt;</span></span>
+<div class="code-copy-outer-scaffold"><div class="sourceCode cell-code" id="cb8"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb8-1"><a href="#cb8-1" aria-hidden="true" tabindex="-1"></a>posterior_grid <span class="ot">&lt;-</span> posterior_grid <span class="sc">|&gt;</span></span>
 <span id="cb8-2"><a href="#cb8-2" aria-hidden="true" tabindex="-1"></a>  <span class="fu">mutate</span>(</span>
 <span id="cb8-3"><a href="#cb8-3" aria-hidden="true" tabindex="-1"></a>    <span class="at">cumulative_probability =</span> <span class="fu">cumsum</span>(posterior_probability)</span>
-<span id="cb8-4"><a href="#cb8-4" aria-hidden="true" tabindex="-1"></a>  )</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<span id="cb8-4"><a href="#cb8-4" aria-hidden="true" tabindex="-1"></a>  )</span></code></pre></div><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></div>
 </div>
 <p>The lower endpoint of the interval is the value of <span class="math inline">\(\mu\)</span> where the cumulative probability first reaches 2.5%. The upper endpoint is the value of <span class="math inline">\(\mu\)</span> where the cumulative probability first reaches 97.5%.</p>
 <div class="cell">
-<div class="sourceCode cell-code" id="cb9"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb9-1"><a href="#cb9-1" aria-hidden="true" tabindex="-1"></a>credible_interval <span class="ot">&lt;-</span> posterior_grid <span class="sc">|&gt;</span></span>
+<div class="code-copy-outer-scaffold"><div class="sourceCode cell-code" id="cb9"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb9-1"><a href="#cb9-1" aria-hidden="true" tabindex="-1"></a>credible_interval <span class="ot">&lt;-</span> posterior_grid <span class="sc">|&gt;</span></span>
 <span id="cb9-2"><a href="#cb9-2" aria-hidden="true" tabindex="-1"></a>  <span class="fu">summarise</span>(</span>
 <span id="cb9-3"><a href="#cb9-3" aria-hidden="true" tabindex="-1"></a>    <span class="at">lower =</span> <span class="fu">min</span>(mu[cumulative_probability <span class="sc">&gt;=</span> <span class="fl">0.025</span>]),</span>
 <span id="cb9-4"><a href="#cb9-4" aria-hidden="true" tabindex="-1"></a>    <span class="at">upper =</span> <span class="fu">min</span>(mu[cumulative_probability <span class="sc">&gt;=</span> <span class="fl">0.975</span>])</span>
 <span id="cb9-5"><a href="#cb9-5" aria-hidden="true" tabindex="-1"></a>  )</span>
 <span id="cb9-6"><a href="#cb9-6" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb9-7"><a href="#cb9-7" aria-hidden="true" tabindex="-1"></a>credible_interval</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<span id="cb9-7"><a href="#cb9-7" aria-hidden="true" tabindex="-1"></a>credible_interval</span></code></pre></div><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></div>
 <div class="cell-output cell-output-stdout">
 <pre><code># A tibble: 1 × 2
   lower upper
@@ -939,24 +1023,18 @@ Note
 </div>
 <div class="callout-body-container callout-body">
 <p>For example, suppose we used 1000 grid points for each unknown quantity. With one unknown parameter, we need:</p>
-<p><span class="math display">\[
-1000 \text{ grid points}
-\]</span></p>
+<p><span class="math display">\[1000 \text{ grid points}\]</span></p>
 <p>With two unknown parameters, we need:</p>
-<p><span class="math display">\[
-1000 \times 1000 = 1{,}000{,}000 \text{ grid combinations}
-\]</span></p>
+<p><span class="math display">\[1000 \times 1000 = 1{,}000{,}000 \text{ grid combinations}\]</span></p>
 <p>With five unknown parameters, we need:</p>
-<p><span class="math display">\[
-1000^5 = 1{,}000{,}000{,}000{,}000{,}000 \text{ grid combinations}
-\]</span></p>
+<p><span class="math display">\[1000^5 = 1{,}000{,}000{,}000{,}000{,}000 \text{ grid combinations}\]</span></p>
 <p>So the problem grows very quickly. This is sometimes called the <strong>curse of dimensionality</strong>. Even though a grid is easy to understand, it becomes impractical once we have several unknown parameters.</p>
 </div>
 </div>
 </section>
 <section id="understanding-mcmc-in-three-parts" class="level3">
 <h3 class="anchored" data-anchor-id="understanding-mcmc-in-three-parts">Understanding MCMC in three parts</h3>
-<p>The phrase <strong>Markov Chain Monte Carlo</strong> can sound intimidating, but the name contains the three ideas we need:</p>
+<p>The phrase <strong>Markov Chain Monte Carlo</strong> can sound intimidating, but the name contains the three ideas we need. Note: the <strong>Metropolis-Hasting</strong> part is popular method</p>
 <table class="caption-top table">
 <colgroup>
 <col style="width: 33%">
@@ -982,24 +1060,18 @@ Note
 <td>Propose the next <span class="math inline">\(\mu\)</span> near the current <span class="math inline">\(\mu\)</span></td>
 </tr>
 <tr class="odd">
-<td>Metropolis-Hastings</td>
+<td>MCMC Algorithm</td>
 <td>Decide whether to accept or reject a proposal</td>
-<td>Move toward values with more posterior support, while sometimes accepting worse values</td>
+<td>Use an algorithm such as Metropolis–Hastings, Gibbs sampling, or Hamiltonian Monte Carlo to decide how the chain moves</td>
 </tr>
 </tbody>
 </table>
-<p>A useful way to remember the pieces is:</p>
-<blockquote class="blockquote">
-<p>Monte Carlo proposes. The Markov chain remembers where it is. Metropolis-Hastings decides whether to move.</p>
-</blockquote>
 <section id="part-1-monte-carlo" class="level4">
 <h4 class="anchored" data-anchor-id="part-1-monte-carlo">Part 1: Monte Carlo</h4>
 <p>The <strong>Monte Carlo</strong> part simply means that we use random simulation. Instead of calculating everything exactly, we generate random values and use them to approximate a distribution. In this example, a simulated value such as:</p>
-<p><span class="math display">\[
-\begin{aligned}
+<p><span class="math display">\[\begin{aligned}
 \mu &amp;= 28.4
-\end{aligned}
-\]</span></p>
+\end{aligned}\]</span></p>
 <p>means that one possible value of the true average delivery time is 28.4 minutes.</p>
 <iframe src="interactive/mcmc1.html" width="100%" height="470px" style="border: none;"></iframe>
 <p>The app above is not doing Bayesian inference yet. It is only showing the simulation idea. We generate possible values, then use those simulated values to learn about a distribution.</p>
@@ -1007,41 +1079,35 @@ Note
 <section id="part-2-markov-chain" class="level4">
 <h4 class="anchored" data-anchor-id="part-2-markov-chain">Part 2: Markov chain</h4>
 <p>The <strong>Markov chain</strong> part means that the next value depends on the current value. Suppose the current value is <span class="math inline">\(\mu_{t-1}\)</span>. A simple way to propose the next value is:</p>
-<p><span class="math display">\[
-\begin{aligned}
+<p><span class="math display">\[\begin{aligned}
 \mu^\star
 &amp;\sim N(\mu_{t-1}, s^2)
-\end{aligned}
-\]</span></p>
+\end{aligned}\]</span></p>
 <p>where <span class="math inline">\(s\)</span> controls how large the proposed jumps tend to be.</p>
 <p>For example, if the current value is 26 minutes, the next proposal might be 27.1 minutes or 24.8 minutes. It is usually nearby, because the proposal distribution is centred on the current value.</p>
 <iframe src="interactive/mcmc2.html" width="100%" height="490px" style="border: none;"></iframe>
 <p>Notice in the app above that the chain can wander randomly, moving quite far away from the proposed distribution. This is sometimes refered to as a random walk.</p>
 </section>
-<section id="part-3-metropolis-hastings" class="level4">
-<h4 class="anchored" data-anchor-id="part-3-metropolis-hastings">Part 3: Metropolis-Hastings</h4>
-<p>The <strong>Metropolis-Hastings</strong> part adds the accept/reject rule.</p>
+<section id="part-3-movement-algorithm" class="level4">
+<h4 class="anchored" data-anchor-id="part-3-movement-algorithm">Part 3: Movement Algorithm</h4>
 <p>We do not want to wander randomly forever. We want the chain to spend more time in values of <span class="math inline">\(\mu\)</span> with high posterior density and less time in values with low posterior density.</p>
-<p>So at each step we compare:</p>
+<p>There are many different MCMC algorithms that we can use to decide how the chain moves. In this example we will learn about the <strong>Metropolis-Hastings</strong> method.</p>
+<p>At each step we compare:</p>
 <ul>
 <li>the posterior target at the proposed value, <span class="math inline">\(\mu^\star\)</span></li>
 <li>the posterior target at the current value, <span class="math inline">\(\mu_{t-1}\)</span></li>
 </ul>
 <p>The ratio is:</p>
-<p><span class="math display">\[
-\begin{aligned}
+<p><span class="math display">\[\begin{aligned}
 r
 &amp;= \frac{p(\bar{x} \mid \mu^\star)p(\mu^\star)}
         {p(\bar{x} \mid \mu_{t-1})p(\mu_{t-1})}
-\end{aligned}
-\]</span></p>
+\end{aligned}\]</span></p>
 <p>Then the acceptance probability is:</p>
-<p><span class="math display">\[
-\begin{aligned}
+<p><span class="math display">\[\begin{aligned}
 \alpha
 &amp;= \min(1,r)
-\end{aligned}
-\]</span></p>
+\end{aligned}\]</span></p>
 <p>This gives the following rule:</p>
 <table class="caption-top table">
 <colgroup>
@@ -1082,7 +1148,7 @@ r
 <i class="callout-icon"></i>
 </div>
 <div class="callout-title-container flex-fill">
-Why accept worse values sometimes?
+<span class="screen-reader-only">Note</span>Why accept worse values sometimes?
 </div>
 </div>
 <div class="callout-body-container callout-body">
@@ -1095,19 +1161,17 @@ Why accept worse values sometimes?
 <section id="writing-the-posterior-target-in-r" class="level3">
 <h3 class="anchored" data-anchor-id="writing-the-posterior-target-in-r">Writing the posterior target in R</h3>
 <p>To run the algorithm, we first need a function for the unnormalised posterior. This is the target distribution for MCMC.</p>
-<p><span class="math display">\[
-\begin{aligned}
+<p><span class="math display">\[\begin{aligned}
 p(\mu \mid \bar{x})
 &amp;\propto p(\bar{x} \mid \mu)p(\mu)
-\end{aligned}
-\]</span></p>
+\end{aligned}\]</span></p>
 <p>In R, this is:</p>
 <div class="cell">
-<div class="sourceCode cell-code" id="cb11"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb11-1"><a href="#cb11-1" aria-hidden="true" tabindex="-1"></a>posterior_target <span class="ot">&lt;-</span> <span class="cf">function</span>(mu) {</span>
+<div class="code-copy-outer-scaffold"><div class="sourceCode cell-code" id="cb11"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb11-1"><a href="#cb11-1" aria-hidden="true" tabindex="-1"></a>posterior_target <span class="ot">&lt;-</span> <span class="cf">function</span>(mu) {</span>
 <span id="cb11-2"><a href="#cb11-2" aria-hidden="true" tabindex="-1"></a>  prior <span class="ot">&lt;-</span> <span class="fu">triangular_density</span>(mu)</span>
 <span id="cb11-3"><a href="#cb11-3" aria-hidden="true" tabindex="-1"></a>  likelihood <span class="ot">&lt;-</span> <span class="fu">dnorm</span>(x_bar, <span class="at">mean =</span> mu, <span class="at">sd =</span> standard_error)</span>
 <span id="cb11-4"><a href="#cb11-4" aria-hidden="true" tabindex="-1"></a>  prior <span class="sc">*</span> likelihood</span>
-<span id="cb11-5"><a href="#cb11-5" aria-hidden="true" tabindex="-1"></a>}</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<span id="cb11-5"><a href="#cb11-5" aria-hidden="true" tabindex="-1"></a>}</span></code></pre></div><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></div>
 </div>
 <p>This function gives the prior times the likelihood. It does not calculate the normalising constant. That is okay because the normalising constant cancels out in the Metropolis-Hastings ratio.</p>
 </section>
@@ -1115,7 +1179,7 @@ p(\mu \mid \bar{x})
 <h3 class="anchored" data-anchor-id="running-the-metropolis-hastings-algorithm">Running the Metropolis-Hastings algorithm</h3>
 <p>Now we can write the algorithm.</p>
 <div class="cell">
-<div class="sourceCode cell-code" id="cb12"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb12-1"><a href="#cb12-1" aria-hidden="true" tabindex="-1"></a><span class="fu">set.seed</span>(<span class="dv">123</span>)</span>
+<div class="code-copy-outer-scaffold"><div class="sourceCode cell-code" id="cb12"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb12-1"><a href="#cb12-1" aria-hidden="true" tabindex="-1"></a><span class="fu">set.seed</span>(<span class="dv">123</span>)</span>
 <span id="cb12-2"><a href="#cb12-2" aria-hidden="true" tabindex="-1"></a></span>
 <span id="cb12-3"><a href="#cb12-3" aria-hidden="true" tabindex="-1"></a>n_iter <span class="ot">&lt;-</span> <span class="dv">10000</span></span>
 <span id="cb12-4"><a href="#cb12-4" aria-hidden="true" tabindex="-1"></a>proposal_sd <span class="ot">&lt;-</span> <span class="dv">2</span></span>
@@ -1156,7 +1220,7 @@ p(\mu \mid \bar{x})
 <span id="cb12-39"><a href="#cb12-39" aria-hidden="true" tabindex="-1"></a>  <span class="at">iteration =</span> <span class="dv">1</span><span class="sc">:</span>n_iter,</span>
 <span id="cb12-40"><a href="#cb12-40" aria-hidden="true" tabindex="-1"></a>  <span class="at">mu =</span> mu_chain,</span>
 <span id="cb12-41"><a href="#cb12-41" aria-hidden="true" tabindex="-1"></a>  <span class="at">accepted =</span> accepted</span>
-<span id="cb12-42"><a href="#cb12-42" aria-hidden="true" tabindex="-1"></a>)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<span id="cb12-42"><a href="#cb12-42" aria-hidden="true" tabindex="-1"></a>)</span></code></pre></div><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></div>
 </div>
 <p>The object <code>mu_chain</code> contains the MCMC sample. Each value is one possible value of <span class="math inline">\(\mu\)</span>.</p>
 </section>
@@ -1164,7 +1228,7 @@ p(\mu \mid \bar{x})
 <h3 class="anchored" data-anchor-id="looking-at-the-first-few-iterations">Looking at the first few iterations</h3>
 <p>It is useful to inspect the first few values in the chain.</p>
 <div class="cell">
-<div class="sourceCode cell-code" id="cb13"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb13-1"><a href="#cb13-1" aria-hidden="true" tabindex="-1"></a>mcmc_df <span class="sc">|&gt;</span></span>
+<div class="code-copy-outer-scaffold"><div class="sourceCode cell-code" id="cb13"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb13-1"><a href="#cb13-1" aria-hidden="true" tabindex="-1"></a>mcmc_df <span class="sc">|&gt;</span></span>
 <span id="cb13-2"><a href="#cb13-2" aria-hidden="true" tabindex="-1"></a>  <span class="fu">slice</span>(<span class="dv">1</span><span class="sc">:</span><span class="dv">10</span>) <span class="sc">|&gt;</span></span>
 <span id="cb13-3"><a href="#cb13-3" aria-hidden="true" tabindex="-1"></a>  <span class="fu">gt</span>() <span class="sc">|&gt;</span></span>
 <span id="cb13-4"><a href="#cb13-4" aria-hidden="true" tabindex="-1"></a>  <span class="fu">cols_label</span>(</span>
@@ -1179,7 +1243,7 @@ p(\mu \mid \bar{x})
 <span id="cb13-13"><a href="#cb13-13" aria-hidden="true" tabindex="-1"></a>  <span class="fu">cols_align</span>(</span>
 <span id="cb13-14"><a href="#cb13-14" aria-hidden="true" tabindex="-1"></a>    <span class="at">align =</span> <span class="st">"center"</span>,</span>
 <span id="cb13-15"><a href="#cb13-15" aria-hidden="true" tabindex="-1"></a>    <span class="at">columns =</span> <span class="fu">everything</span>()</span>
-<span id="cb13-16"><a href="#cb13-16" aria-hidden="true" tabindex="-1"></a>  )</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<span id="cb13-16"><a href="#cb13-16" aria-hidden="true" tabindex="-1"></a>  )</span></code></pre></div><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></div>
 <div class="cell-output-display">
 <div id="zpauzrfllk" style="padding-left:0px;padding-right:0px;padding-top:10px;padding-bottom:10px;overflow-x:auto;overflow-y:auto;width:auto;height:auto;">
 <style>#zpauzrfllk table {
@@ -1631,7 +1695,7 @@ p(\mu \mid \bar{x})
 }
 </style>
 
-<table class="gt_table caption-top table table-sm table-striped small" data-quarto-postprocess="true" data-quarto-disable-processing="false" data-quarto-bootstrap="false">
+<table class="gt_table caption-top table table-sm table-striped small" data-quarto-bootstrap="false">
 <thead>
 <tr class="gt_col_headings header">
 <th id="iteration" class="gt_col_heading gt_columns_bottom_border gt_center" data-quarto-table-cell-role="th" scope="col">Iteration</th>
@@ -1702,8 +1766,8 @@ p(\mu \mid \bar{x})
 <h3 class="anchored" data-anchor-id="acceptance-rate">Acceptance rate</h3>
 <p>The <strong>acceptance rate</strong> is the proportion of proposed moves that were accepted.</p>
 <div class="cell">
-<div class="sourceCode cell-code" id="cb14"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb14-1"><a href="#cb14-1" aria-hidden="true" tabindex="-1"></a>acceptance_rate <span class="ot">&lt;-</span> <span class="fu">mean</span>(accepted[<span class="sc">-</span><span class="dv">1</span>])</span>
-<span id="cb14-2"><a href="#cb14-2" aria-hidden="true" tabindex="-1"></a>acceptance_rate</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="code-copy-outer-scaffold"><div class="sourceCode cell-code" id="cb14"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb14-1"><a href="#cb14-1" aria-hidden="true" tabindex="-1"></a>acceptance_rate <span class="ot">&lt;-</span> <span class="fu">mean</span>(accepted[<span class="sc">-</span><span class="dv">1</span>])</span>
+<span id="cb14-2"><a href="#cb14-2" aria-hidden="true" tabindex="-1"></a>acceptance_rate</span></code></pre></div><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></div>
 <div class="cell-output cell-output-stdout">
 <pre><code>[1] 0.6613661</code></pre>
 </div>
@@ -1716,17 +1780,17 @@ p(\mu \mid \bar{x})
 <h3 class="anchored" data-anchor-id="trace-plot">Trace plot</h3>
 <p>A <strong>trace plot</strong> shows the value of <span class="math inline">\(\mu\)</span> at each iteration.</p>
 <div class="cell">
-<div class="sourceCode cell-code" id="cb16"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb16-1"><a href="#cb16-1" aria-hidden="true" tabindex="-1"></a><span class="fu">ggplot</span>(mcmc_df, <span class="fu">aes</span>(<span class="at">x =</span> iteration, <span class="at">y =</span> mu)) <span class="sc">+</span></span>
+<div class="code-copy-outer-scaffold"><div class="sourceCode cell-code" id="cb16"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb16-1"><a href="#cb16-1" aria-hidden="true" tabindex="-1"></a><span class="fu">ggplot</span>(mcmc_df, <span class="fu">aes</span>(<span class="at">x =</span> iteration, <span class="at">y =</span> mu)) <span class="sc">+</span></span>
 <span id="cb16-2"><a href="#cb16-2" aria-hidden="true" tabindex="-1"></a>  <span class="fu">geom_line</span>(<span class="at">linewidth =</span> <span class="fl">0.35</span>, <span class="at">alpha =</span> <span class="fl">0.8</span>) <span class="sc">+</span></span>
 <span id="cb16-3"><a href="#cb16-3" aria-hidden="true" tabindex="-1"></a>  <span class="fu">labs</span>(</span>
 <span id="cb16-4"><a href="#cb16-4" aria-hidden="true" tabindex="-1"></a>    <span class="at">x =</span> <span class="st">"Iteration"</span>,</span>
 <span id="cb16-5"><a href="#cb16-5" aria-hidden="true" tabindex="-1"></a>    <span class="at">y =</span> <span class="fu">expression</span>(mu)</span>
 <span id="cb16-6"><a href="#cb16-6" aria-hidden="true" tabindex="-1"></a>  ) <span class="sc">+</span></span>
-<span id="cb16-7"><a href="#cb16-7" aria-hidden="true" tabindex="-1"></a>  <span class="fu">theme_minimal</span>()</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<span id="cb16-7"><a href="#cb16-7" aria-hidden="true" tabindex="-1"></a>  <span class="fu">theme_minimal</span>()</span></code></pre></div><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></div>
 <div class="cell-output-display">
 <div>
 <figure class="figure">
-<p><img src="delivery_time_mcmc_example_files/figure-html/unnamed-chunk-21-1.png" class="img-fluid figure-img" width="672"></p>
+<p><img src="delivery_time_mcmc_example_files/figure-html/unnamed-chunk-22-1.png" class="img-fluid figure-img" width="672"></p>
 </figure>
 </div>
 </div>
@@ -1737,10 +1801,10 @@ p(\mu \mid \bar{x})
 <h3 class="anchored" data-anchor-id="burn-in">Burn-in</h3>
 <p>The beginning of the chain can be influenced by the starting value. It is common to discard some early draws. This is called <strong>burn-in</strong>.</p>
 <div class="cell">
-<div class="sourceCode cell-code" id="cb17"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb17-1"><a href="#cb17-1" aria-hidden="true" tabindex="-1"></a>burn_in <span class="ot">&lt;-</span> <span class="dv">1000</span></span>
+<div class="code-copy-outer-scaffold"><div class="sourceCode cell-code" id="cb17"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb17-1"><a href="#cb17-1" aria-hidden="true" tabindex="-1"></a>burn_in <span class="ot">&lt;-</span> <span class="dv">1000</span></span>
 <span id="cb17-2"><a href="#cb17-2" aria-hidden="true" tabindex="-1"></a></span>
 <span id="cb17-3"><a href="#cb17-3" aria-hidden="true" tabindex="-1"></a>mcmc_post_burn <span class="ot">&lt;-</span> mcmc_df <span class="sc">|&gt;</span></span>
-<span id="cb17-4"><a href="#cb17-4" aria-hidden="true" tabindex="-1"></a>  <span class="fu">filter</span>(iteration <span class="sc">&gt;</span> burn_in)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<span id="cb17-4"><a href="#cb17-4" aria-hidden="true" tabindex="-1"></a>  <span class="fu">filter</span>(iteration <span class="sc">&gt;</span> burn_in)</span></code></pre></div><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></div>
 </div>
 <div class="callout callout-style-default callout-note callout-titled">
 <div class="callout-header d-flex align-content-center">
@@ -1748,7 +1812,7 @@ p(\mu \mid \bar{x})
 <i class="callout-icon"></i>
 </div>
 <div class="callout-title-container flex-fill">
-What is burn-in?
+<span class="screen-reader-only">Note</span>What is burn-in?
 </div>
 </div>
 <div class="callout-body-container callout-body">
@@ -1761,7 +1825,7 @@ What is burn-in?
 <h3 class="anchored" data-anchor-id="mcmc-posterior-draws">MCMC posterior draws</h3>
 <p>After removing burn-in, we can plot the remaining MCMC draws.</p>
 <div class="cell">
-<div class="sourceCode cell-code" id="cb18"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb18-1"><a href="#cb18-1" aria-hidden="true" tabindex="-1"></a><span class="fu">ggplot</span>(mcmc_post_burn, <span class="fu">aes</span>(<span class="at">x =</span> mu)) <span class="sc">+</span></span>
+<div class="code-copy-outer-scaffold"><div class="sourceCode cell-code" id="cb18"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb18-1"><a href="#cb18-1" aria-hidden="true" tabindex="-1"></a><span class="fu">ggplot</span>(mcmc_post_burn, <span class="fu">aes</span>(<span class="at">x =</span> mu)) <span class="sc">+</span></span>
 <span id="cb18-2"><a href="#cb18-2" aria-hidden="true" tabindex="-1"></a>  <span class="fu">geom_histogram</span>(</span>
 <span id="cb18-3"><a href="#cb18-3" aria-hidden="true" tabindex="-1"></a>    <span class="fu">aes</span>(<span class="at">y =</span> <span class="fu">after_stat</span>(density)),</span>
 <span id="cb18-4"><a href="#cb18-4" aria-hidden="true" tabindex="-1"></a>    <span class="at">bins =</span> <span class="dv">40</span>,</span>
@@ -1772,11 +1836,11 @@ What is burn-in?
 <span id="cb18-9"><a href="#cb18-9" aria-hidden="true" tabindex="-1"></a>    <span class="at">x =</span> <span class="fu">expression</span>(mu),</span>
 <span id="cb18-10"><a href="#cb18-10" aria-hidden="true" tabindex="-1"></a>    <span class="at">y =</span> <span class="st">"Density"</span></span>
 <span id="cb18-11"><a href="#cb18-11" aria-hidden="true" tabindex="-1"></a>  ) <span class="sc">+</span></span>
-<span id="cb18-12"><a href="#cb18-12" aria-hidden="true" tabindex="-1"></a>  <span class="fu">theme_minimal</span>()</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<span id="cb18-12"><a href="#cb18-12" aria-hidden="true" tabindex="-1"></a>  <span class="fu">theme_minimal</span>()</span></code></pre></div><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></div>
 <div class="cell-output-display">
 <div>
 <figure class="figure">
-<p><img src="delivery_time_mcmc_example_files/figure-html/unnamed-chunk-23-1.png" class="img-fluid figure-img" width="672"></p>
+<p><img src="delivery_time_mcmc_example_files/figure-html/unnamed-chunk-24-1.png" class="img-fluid figure-img" width="672"></p>
 </figure>
 </div>
 </div>
@@ -1787,7 +1851,7 @@ What is burn-in?
 <h3 class="anchored" data-anchor-id="comparing-mcmc-with-the-grid-posterior">Comparing MCMC with the grid posterior</h3>
 <p>Because this example has only one unknown parameter, we can compare the MCMC result to the grid approximation from earlier.</p>
 <div class="cell">
-<div class="sourceCode cell-code" id="cb19"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb19-1"><a href="#cb19-1" aria-hidden="true" tabindex="-1"></a><span class="fu">ggplot</span>() <span class="sc">+</span></span>
+<div class="code-copy-outer-scaffold"><div class="sourceCode cell-code" id="cb19"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb19-1"><a href="#cb19-1" aria-hidden="true" tabindex="-1"></a><span class="fu">ggplot</span>() <span class="sc">+</span></span>
 <span id="cb19-2"><a href="#cb19-2" aria-hidden="true" tabindex="-1"></a>  <span class="fu">geom_histogram</span>(</span>
 <span id="cb19-3"><a href="#cb19-3" aria-hidden="true" tabindex="-1"></a>    <span class="at">data =</span> mcmc_post_burn,</span>
 <span id="cb19-4"><a href="#cb19-4" aria-hidden="true" tabindex="-1"></a>    <span class="fu">aes</span>(<span class="at">x =</span> mu, <span class="at">y =</span> <span class="fu">after_stat</span>(density)),</span>
@@ -1805,11 +1869,11 @@ What is burn-in?
 <span id="cb19-16"><a href="#cb19-16" aria-hidden="true" tabindex="-1"></a>    <span class="at">x =</span> <span class="fu">expression</span>(mu),</span>
 <span id="cb19-17"><a href="#cb19-17" aria-hidden="true" tabindex="-1"></a>    <span class="at">y =</span> <span class="st">"Posterior density"</span></span>
 <span id="cb19-18"><a href="#cb19-18" aria-hidden="true" tabindex="-1"></a>  ) <span class="sc">+</span></span>
-<span id="cb19-19"><a href="#cb19-19" aria-hidden="true" tabindex="-1"></a>  <span class="fu">theme_minimal</span>()</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<span id="cb19-19"><a href="#cb19-19" aria-hidden="true" tabindex="-1"></a>  <span class="fu">theme_minimal</span>()</span></code></pre></div><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></div>
 <div class="cell-output-display">
 <div>
 <figure class="figure">
-<p><img src="delivery_time_mcmc_example_files/figure-html/unnamed-chunk-24-1.png" class="img-fluid figure-img" width="672"></p>
+<p><img src="delivery_time_mcmc_example_files/figure-html/unnamed-chunk-25-1.png" class="img-fluid figure-img" width="672"></p>
 </figure>
 </div>
 </div>
@@ -1821,7 +1885,7 @@ What is burn-in?
 <h3 class="anchored" data-anchor-id="summarising-the-mcmc-posterior">Summarising the MCMC posterior</h3>
 <p>Once we have posterior draws, we can summarise them just like any other simulated distribution.</p>
 <div class="cell">
-<div class="sourceCode cell-code" id="cb20"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb20-1"><a href="#cb20-1" aria-hidden="true" tabindex="-1"></a>mcmc_summary <span class="ot">&lt;-</span> mcmc_post_burn <span class="sc">|&gt;</span></span>
+<div class="code-copy-outer-scaffold"><div class="sourceCode cell-code" id="cb20"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb20-1"><a href="#cb20-1" aria-hidden="true" tabindex="-1"></a>mcmc_summary <span class="ot">&lt;-</span> mcmc_post_burn <span class="sc">|&gt;</span></span>
 <span id="cb20-2"><a href="#cb20-2" aria-hidden="true" tabindex="-1"></a>  <span class="fu">summarise</span>(</span>
 <span id="cb20-3"><a href="#cb20-3" aria-hidden="true" tabindex="-1"></a>    <span class="at">posterior_mean =</span> <span class="fu">mean</span>(mu),</span>
 <span id="cb20-4"><a href="#cb20-4" aria-hidden="true" tabindex="-1"></a>    <span class="at">posterior_median =</span> <span class="fu">median</span>(mu),</span>
@@ -1844,7 +1908,7 @@ What is burn-in?
 <span id="cb20-21"><a href="#cb20-21" aria-hidden="true" tabindex="-1"></a>  <span class="fu">cols_align</span>(</span>
 <span id="cb20-22"><a href="#cb20-22" aria-hidden="true" tabindex="-1"></a>    <span class="at">align =</span> <span class="st">"center"</span>,</span>
 <span id="cb20-23"><a href="#cb20-23" aria-hidden="true" tabindex="-1"></a>    <span class="at">columns =</span> <span class="fu">everything</span>()</span>
-<span id="cb20-24"><a href="#cb20-24" aria-hidden="true" tabindex="-1"></a>  )</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<span id="cb20-24"><a href="#cb20-24" aria-hidden="true" tabindex="-1"></a>  )</span></code></pre></div><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></div>
 <div class="cell-output-display">
 <div id="jdhfygeewu" style="padding-left:0px;padding-right:0px;padding-top:10px;padding-bottom:10px;overflow-x:auto;overflow-y:auto;width:auto;height:auto;">
 <style>#jdhfygeewu table {
@@ -2296,7 +2360,7 @@ What is burn-in?
 }
 </style>
 
-<table class="gt_table caption-top table table-sm table-striped small" data-quarto-postprocess="true" data-quarto-disable-processing="false" data-quarto-bootstrap="false">
+<table class="gt_table caption-top table table-sm table-striped small" data-quarto-bootstrap="false">
 <thead>
 <tr class="gt_col_headings header">
 <th id="posterior_mean" class="gt_col_heading gt_columns_bottom_border gt_center" data-quarto-table-cell-role="th" scope="col">Posterior mean</th>
@@ -2325,14 +2389,12 @@ What is burn-in?
 <p>One advantage of Bayesian inference is that we can answer probability questions directly.</p>
 <p>For example, suppose the delivery service wants to know whether the true average delivery time is likely to be under 30 minutes.</p>
 <p>We want:</p>
-<p><span class="math display">\[
-\begin{aligned}
+<p><span class="math display">\[\begin{aligned}
 P(\mu &lt; 30 \mid \bar{x})
-\end{aligned}
-\]</span></p>
+\end{aligned}\]</span></p>
 <p>Using MCMC, this is just the proportion of posterior draws below 30.</p>
 <div class="cell">
-<div class="sourceCode cell-code" id="cb21"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb21-1"><a href="#cb21-1" aria-hidden="true" tabindex="-1"></a>mcmc_post_burn <span class="sc">|&gt;</span></span>
+<div class="code-copy-outer-scaffold"><div class="sourceCode cell-code" id="cb21"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb21-1"><a href="#cb21-1" aria-hidden="true" tabindex="-1"></a>mcmc_post_burn <span class="sc">|&gt;</span></span>
 <span id="cb21-2"><a href="#cb21-2" aria-hidden="true" tabindex="-1"></a>  <span class="fu">summarise</span>(</span>
 <span id="cb21-3"><a href="#cb21-3" aria-hidden="true" tabindex="-1"></a>    <span class="at">probability_under_30 =</span> <span class="fu">mean</span>(mu <span class="sc">&lt;</span> <span class="dv">30</span>)</span>
 <span id="cb21-4"><a href="#cb21-4" aria-hidden="true" tabindex="-1"></a>  ) <span class="sc">|&gt;</span></span>
@@ -2347,7 +2409,7 @@ P(\mu &lt; 30 \mid \bar{x})
 <span id="cb21-13"><a href="#cb21-13" aria-hidden="true" tabindex="-1"></a>  <span class="fu">cols_align</span>(</span>
 <span id="cb21-14"><a href="#cb21-14" aria-hidden="true" tabindex="-1"></a>    <span class="at">align =</span> <span class="st">"center"</span>,</span>
 <span id="cb21-15"><a href="#cb21-15" aria-hidden="true" tabindex="-1"></a>    <span class="at">columns =</span> <span class="fu">everything</span>()</span>
-<span id="cb21-16"><a href="#cb21-16" aria-hidden="true" tabindex="-1"></a>  )</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<span id="cb21-16"><a href="#cb21-16" aria-hidden="true" tabindex="-1"></a>  )</span></code></pre></div><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></div>
 <div class="cell-output-display">
 <div id="zambtwpozb" style="padding-left:0px;padding-right:0px;padding-top:10px;padding-bottom:10px;overflow-x:auto;overflow-y:auto;width:auto;height:auto;">
 <style>#zambtwpozb table {
@@ -2799,7 +2861,7 @@ P(\mu &lt; 30 \mid \bar{x})
 }
 </style>
 
-<table class="gt_table caption-top table table-sm table-striped small" data-quarto-postprocess="true" data-quarto-disable-processing="false" data-quarto-bootstrap="false">
+<table class="gt_table caption-top table table-sm table-striped small" data-quarto-bootstrap="false">
 <thead>
 <tr class="gt_col_headings header">
 <th id="probability_under_30" class="gt_col_heading gt_columns_bottom_border gt_center" data-quarto-table-cell-role="th" scope="col">Posterior probability that mu is below 30</th>
@@ -2817,7 +2879,7 @@ P(\mu &lt; 30 \mid \bar{x})
 </div>
 <p>We can show this visually by adding a vertical line at 30 minutes.</p>
 <div class="cell">
-<div class="sourceCode cell-code" id="cb22"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb22-1"><a href="#cb22-1" aria-hidden="true" tabindex="-1"></a><span class="fu">ggplot</span>(mcmc_post_burn, <span class="fu">aes</span>(<span class="at">x =</span> mu)) <span class="sc">+</span></span>
+<div class="code-copy-outer-scaffold"><div class="sourceCode cell-code" id="cb22"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb22-1"><a href="#cb22-1" aria-hidden="true" tabindex="-1"></a><span class="fu">ggplot</span>(mcmc_post_burn, <span class="fu">aes</span>(<span class="at">x =</span> mu)) <span class="sc">+</span></span>
 <span id="cb22-2"><a href="#cb22-2" aria-hidden="true" tabindex="-1"></a>  <span class="fu">geom_histogram</span>(</span>
 <span id="cb22-3"><a href="#cb22-3" aria-hidden="true" tabindex="-1"></a>    <span class="fu">aes</span>(<span class="at">y =</span> <span class="fu">after_stat</span>(density)),</span>
 <span id="cb22-4"><a href="#cb22-4" aria-hidden="true" tabindex="-1"></a>    <span class="at">bins =</span> <span class="dv">40</span>,</span>
@@ -2832,11 +2894,11 @@ P(\mu &lt; 30 \mid \bar{x})
 <span id="cb22-13"><a href="#cb22-13" aria-hidden="true" tabindex="-1"></a>    <span class="at">x =</span> <span class="fu">expression</span>(mu),</span>
 <span id="cb22-14"><a href="#cb22-14" aria-hidden="true" tabindex="-1"></a>    <span class="at">y =</span> <span class="st">"Density"</span></span>
 <span id="cb22-15"><a href="#cb22-15" aria-hidden="true" tabindex="-1"></a>  ) <span class="sc">+</span></span>
-<span id="cb22-16"><a href="#cb22-16" aria-hidden="true" tabindex="-1"></a>  <span class="fu">theme_minimal</span>()</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<span id="cb22-16"><a href="#cb22-16" aria-hidden="true" tabindex="-1"></a>  <span class="fu">theme_minimal</span>()</span></code></pre></div><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></div>
 <div class="cell-output-display">
 <div>
 <figure class="figure">
-<p><img src="delivery_time_mcmc_example_files/figure-html/unnamed-chunk-27-1.png" class="img-fluid figure-img" width="672"></p>
+<p><img src="delivery_time_mcmc_example_files/figure-html/unnamed-chunk-28-1.png" class="img-fluid figure-img" width="672"></p>
 </figure>
 </div>
 </div>
@@ -2881,8 +2943,8 @@ P(\mu &lt; 30 \mid \bar{x})
 <p>There are also two possible true situations:</p>
 <table class="caption-top table">
 <colgroup>
-<col style="width: 50%">
-<col style="width: 50%">
+<col style="width: 22%">
+<col style="width: 77%">
 </colgroup>
 <thead>
 <tr class="header">
@@ -2935,19 +2997,17 @@ P(\mu &lt; 30 \mid \bar{x})
 <li>if the company does not advertise and the claim is false, there is no loss.</li>
 </ul>
 <p>The numbers are not minutes, dollars, or probabilities. They are <strong>unitless loss points</strong>. They encode the relative seriousness of the possible mistakes. In this loss function, advertising a false claim has loss 10, while missing a true advertising opportunity has loss 2. So the false advertising mistake is treated as five times worse than the missed opportunity.</p>
-<p><span class="math display">\[
-\begin{aligned}
+<p><span class="math display">\[\begin{aligned}
 \frac{10}{2}
 &amp;= 5 \text{ times worse}
-\end{aligned}
-\]</span></p>
+\end{aligned}\]</span></p>
 <div class="callout callout-style-default callout-tip callout-titled">
 <div class="callout-header d-flex align-content-center">
 <div class="callout-icon-container">
 <i class="callout-icon"></i>
 </div>
 <div class="callout-title-container flex-fill">
-Where do the loss numbers come from?
+<span class="screen-reader-only">Tip</span>Where do the loss numbers come from?
 </div>
 </div>
 <div class="callout-body-container callout-body">
@@ -2968,50 +3028,42 @@ Where do the loss numbers come from?
 <div class="cell-output-display">
 <div>
 <figure class="figure">
-<p><img src="delivery_time_mcmc_example_files/figure-html/unnamed-chunk-28-1.png" class="img-fluid figure-img" width="672"></p>
+<p><img src="delivery_time_mcmc_example_files/figure-html/unnamed-chunk-29-1.png" class="img-fluid figure-img" width="672"></p>
 </figure>
 </div>
 </div>
 </div>
-<p><span class="math display">\[
-\begin{aligned}
+<p><span class="math display">\[\begin{aligned}
 P(\mu &lt; 30 \mid \text{data})
 &amp;\approx \frac{\text{number of posterior draws below 30}}{\text{total number of posterior draws}} \approx 0.93
-\end{aligned}
-\]</span></p>
-<p><span class="math display">\[
-\begin{aligned}
+\end{aligned}\]</span></p>
+<p><span class="math display">\[\begin{aligned}
 P(\mu \geq 30 \mid \text{data})
 &amp;\approx \frac{\text{number of posterior draws at or above 30}}{\text{total number of posterior draws}} \approx 0.07
-\end{aligned}
-\]</span></p>
+\end{aligned}\]</span></p>
 <section id="expected-loss-of-advertising" class="level4">
 <h4 class="anchored" data-anchor-id="expected-loss-of-advertising">Expected loss of advertising</h4>
 <p>If the company advertises, there is no loss if the claim is true, but there is loss 10 if the claim is false.</p>
-<p><span class="math display">\[
-\begin{aligned}
+<p><span class="math display">\[\begin{aligned}
 E[\text{loss from advertising}]
 &amp;= 0 \times P(\mu &lt; 30 \mid \text{data})
    + 10 \times P(\mu \geq 30 \mid \text{data}) \\
 &amp;= 0 \times 0.93 + 10 \times 0.07 \\
 &amp;= 0 + 0.70 \\
 &amp;= 0.70
-\end{aligned}
-\]</span></p>
+\end{aligned}\]</span></p>
 </section>
 <section id="expected-loss-of-not-advertising" class="level4">
 <h4 class="anchored" data-anchor-id="expected-loss-of-not-advertising">Expected loss of not advertising</h4>
 <p>If the company does not advertise, there is loss 2 if the claim would have been true, because the company missed an advertising opportunity. There is no loss if the claim would have been false.</p>
-<p><span class="math display">\[
-\begin{aligned}
+<p><span class="math display">\[\begin{aligned}
 E[\text{loss from not advertising}]
 &amp;= 2 \times P(\mu &lt; 30 \mid \text{data})
    + 0 \times P(\mu \geq 30 \mid \text{data}) \\
 &amp;= 2 \times 0.93 + 0 \times 0.07 \\
 &amp;= 1.86 + 0 \\
 &amp;= 1.86
-\end{aligned}
-\]</span></p>
+\end{aligned}\]</span></p>
 <p>Since advertising has the lower expected loss (0.70 &lt; 1.86), the decision with the lower expected loss is to advertise.</p>
 </section>
 </section>
@@ -3041,28 +3093,24 @@ E[\text{loss from not advertising}]
 </tbody>
 </table>
 <p>Now the expected loss of advertising becomes:</p>
-<p><span class="math display">\[
-\begin{aligned}
+<p><span class="math display">\[\begin{aligned}
 E[\text{loss from advertising}]
 &amp;= 0 \times P(\mu &lt; 30 \mid \text{data})
    + 30 \times P(\mu \geq 30 \mid \text{data}) \\
 &amp;= 0 \times 0.93 + 30 \times 0.07 \\
 &amp;= 2.10
-\end{aligned}
-\]</span></p>
+\end{aligned}\]</span></p>
 <p>The expected loss of not advertising remains:</p>
-<p><span class="math display">\[
-\begin{aligned}
+<p><span class="math display">\[\begin{aligned}
 E[\text{loss from not advertising}]
 &amp;= 2 \times P(\mu &lt; 30 \mid \text{data})
    + 0 \times P(\mu \geq 30 \mid \text{data}) \\
 &amp;= 2 \times 0.93 + 0 \times 0.07 \\
 &amp;= 1.86
-\end{aligned}
-\]</span></p>
+\end{aligned}\]</span></p>
 <p>Now the expected loss of not advertising is lower. So a more cautious company may decide not to advertise, even with the same posterior distribution.</p>
 <div class="cell">
-<div class="sourceCode cell-code" id="cb23"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb23-1"><a href="#cb23-1" aria-hidden="true" tabindex="-1"></a>expected_loss_sensitivity_df <span class="ot">&lt;-</span> <span class="fu">tibble</span>(</span>
+<div class="code-copy-outer-scaffold"><div class="sourceCode cell-code" id="cb23"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb23-1"><a href="#cb23-1" aria-hidden="true" tabindex="-1"></a>expected_loss_sensitivity_df <span class="ot">&lt;-</span> <span class="fu">tibble</span>(</span>
 <span id="cb23-2"><a href="#cb23-2" aria-hidden="true" tabindex="-1"></a>  <span class="at">false_advertising_loss =</span> <span class="fu">c</span>(<span class="dv">10</span>, <span class="dv">30</span>),</span>
 <span id="cb23-3"><a href="#cb23-3" aria-hidden="true" tabindex="-1"></a>  <span class="at">expected_loss_advertise =</span> false_advertising_loss <span class="sc">*</span> p_30_or_higher,</span>
 <span id="cb23-4"><a href="#cb23-4" aria-hidden="true" tabindex="-1"></a>  <span class="at">expected_loss_not_advertise =</span> <span class="dv">2</span> <span class="sc">*</span> p_under_30</span>
@@ -3080,7 +3128,7 @@ E[\text{loss from not advertising}]
 <span id="cb23-16"><a href="#cb23-16" aria-hidden="true" tabindex="-1"></a>    )</span>
 <span id="cb23-17"><a href="#cb23-17" aria-hidden="true" tabindex="-1"></a>  )</span>
 <span id="cb23-18"><a href="#cb23-18" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb23-19"><a href="#cb23-19" aria-hidden="true" tabindex="-1"></a>expected_loss_sensitivity_df</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<span id="cb23-19"><a href="#cb23-19" aria-hidden="true" tabindex="-1"></a>expected_loss_sensitivity_df</span></code></pre></div><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></div>
 <div class="cell-output cell-output-stdout">
 <pre><code># A tibble: 4 × 3
   false_advertising_loss action           expected_loss
@@ -3092,7 +3140,7 @@ E[\text{loss from not advertising}]
 </div>
 </div>
 <div class="cell">
-<div class="sourceCode cell-code" id="cb25"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb25-1"><a href="#cb25-1" aria-hidden="true" tabindex="-1"></a><span class="fu">ggplot</span>(</span>
+<div class="code-copy-outer-scaffold"><div class="sourceCode cell-code" id="cb25"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb25-1"><a href="#cb25-1" aria-hidden="true" tabindex="-1"></a><span class="fu">ggplot</span>(</span>
 <span id="cb25-2"><a href="#cb25-2" aria-hidden="true" tabindex="-1"></a>  expected_loss_sensitivity_df,</span>
 <span id="cb25-3"><a href="#cb25-3" aria-hidden="true" tabindex="-1"></a>  <span class="fu">aes</span>(<span class="at">x =</span> <span class="fu">factor</span>(false_advertising_loss), <span class="at">y =</span> expected_loss, <span class="at">fill =</span> action)</span>
 <span id="cb25-4"><a href="#cb25-4" aria-hidden="true" tabindex="-1"></a>) <span class="sc">+</span></span>
@@ -3102,11 +3150,11 @@ E[\text{loss from not advertising}]
 <span id="cb25-8"><a href="#cb25-8" aria-hidden="true" tabindex="-1"></a>    <span class="at">y =</span> <span class="st">"Expected loss"</span>,</span>
 <span id="cb25-9"><a href="#cb25-9" aria-hidden="true" tabindex="-1"></a>    <span class="at">fill =</span> <span class="cn">NULL</span></span>
 <span id="cb25-10"><a href="#cb25-10" aria-hidden="true" tabindex="-1"></a>  ) <span class="sc">+</span></span>
-<span id="cb25-11"><a href="#cb25-11" aria-hidden="true" tabindex="-1"></a>  <span class="fu">theme_minimal</span>()</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<span id="cb25-11"><a href="#cb25-11" aria-hidden="true" tabindex="-1"></a>  <span class="fu">theme_minimal</span>()</span></code></pre></div><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></div>
 <div class="cell-output-display">
 <div>
 <figure class="figure">
-<p><img src="delivery_time_mcmc_example_files/figure-html/unnamed-chunk-31-1.png" class="img-fluid figure-img" width="672"></p>
+<p><img src="delivery_time_mcmc_example_files/figure-html/unnamed-chunk-32-1.png" class="img-fluid figure-img" width="672"></p>
 </figure>
 </div>
 </div>
@@ -3117,41 +3165,31 @@ E[\text{loss from not advertising}]
 <h3 class="anchored" data-anchor-id="a-threshold-view-of-the-decision">A threshold view of the decision</h3>
 <p>In this example, the decision depends on whether the posterior probability of being under 30 minutes is large enough.</p>
 <p>Let:</p>
-<p><span class="math display">\[
-\begin{aligned}
+<p><span class="math display">\[\begin{aligned}
 p &amp;= P(\mu &lt; 30 \mid \text{data}).
-\end{aligned}
-\]</span></p>
+\end{aligned}\]</span></p>
 <p>Then:</p>
-<p><span class="math display">\[
-\begin{aligned}
+<p><span class="math display">\[\begin{aligned}
 P(\mu \geq 30 \mid \text{data}) &amp;= 1 - p.
-\end{aligned}
-\]</span></p>
+\end{aligned}\]</span></p>
 <p>Using the original loss function, the expected loss of advertising is:</p>
-<p><span class="math display">\[
-\begin{aligned}
+<p><span class="math display">\[\begin{aligned}
 E[\text{loss from advertising}]
 &amp;= 10(1-p).
-\end{aligned}
-\]</span></p>
+\end{aligned}\]</span></p>
 <p>The expected loss of not advertising is:</p>
-<p><span class="math display">\[
-\begin{aligned}
+<p><span class="math display">\[\begin{aligned}
 E[\text{loss from not advertising}]
 &amp;= 2p.
-\end{aligned}
-\]</span></p>
+\end{aligned}\]</span></p>
 <p>We should advertise when:</p>
-<p><span class="math display">\[
-\begin{aligned}
+<p><span class="math display">\[\begin{aligned}
 10(1-p) &amp;&lt; 2p \\
 10 - 10p &amp;&lt; 2p \\
 10 &amp;&lt; 12p \\
 \frac{10}{12} &amp;&lt; p \\
 p &amp;&gt; 0.833.
-\end{aligned}
-\]</span></p>
+\end{aligned}\]</span></p>
 <p>So under this loss function, the company should advertise only if the posterior probability that <span class="math inline">\(\mu &lt; 30\)</span> is greater than about 83.3%.</p>
 <div class="callout callout-style-default callout-note callout-titled">
 <div class="callout-header d-flex align-content-center">
@@ -3159,7 +3197,7 @@ p &amp;&gt; 0.833.
 <i class="callout-icon"></i>
 </div>
 <div class="callout-title-container flex-fill">
-Why this threshold matters
+<span class="screen-reader-only">Note</span>Why this threshold matters
 </div>
 </div>
 <div class="callout-body-container callout-body">
@@ -3169,7 +3207,7 @@ Why this threshold matters
 </div>
 <p>We can plot the two expected-loss curves as a function of <span class="math inline">\(p\)</span>.</p>
 <div class="cell">
-<div class="sourceCode cell-code" id="cb26"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb26-1"><a href="#cb26-1" aria-hidden="true" tabindex="-1"></a>threshold_df <span class="ot">&lt;-</span> <span class="fu">tibble</span>(</span>
+<div class="code-copy-outer-scaffold"><div class="sourceCode cell-code" id="cb26"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb26-1"><a href="#cb26-1" aria-hidden="true" tabindex="-1"></a>threshold_df <span class="ot">&lt;-</span> <span class="fu">tibble</span>(</span>
 <span id="cb26-2"><a href="#cb26-2" aria-hidden="true" tabindex="-1"></a>  <span class="at">p =</span> <span class="fu">seq</span>(<span class="dv">0</span>, <span class="dv">1</span>, <span class="at">length.out =</span> <span class="dv">1000</span>),</span>
 <span id="cb26-3"><a href="#cb26-3" aria-hidden="true" tabindex="-1"></a>  <span class="at">expected_loss_advertise =</span> <span class="dv">10</span> <span class="sc">*</span> (<span class="dv">1</span> <span class="sc">-</span> p),</span>
 <span id="cb26-4"><a href="#cb26-4" aria-hidden="true" tabindex="-1"></a>  <span class="at">expected_loss_not_advertise =</span> <span class="dv">2</span> <span class="sc">*</span> p</span>
@@ -3201,11 +3239,11 @@ Why this threshold matters
 <span id="cb26-30"><a href="#cb26-30" aria-hidden="true" tabindex="-1"></a>    <span class="at">y =</span> <span class="st">"Expected loss"</span>,</span>
 <span id="cb26-31"><a href="#cb26-31" aria-hidden="true" tabindex="-1"></a>    <span class="at">color =</span> <span class="cn">NULL</span></span>
 <span id="cb26-32"><a href="#cb26-32" aria-hidden="true" tabindex="-1"></a>  ) <span class="sc">+</span></span>
-<span id="cb26-33"><a href="#cb26-33" aria-hidden="true" tabindex="-1"></a>  <span class="fu">theme_minimal</span>()</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<span id="cb26-33"><a href="#cb26-33" aria-hidden="true" tabindex="-1"></a>  <span class="fu">theme_minimal</span>()</span></code></pre></div><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></div>
 <div class="cell-output-display">
 <div>
 <figure class="figure">
-<p><img src="delivery_time_mcmc_example_files/figure-html/unnamed-chunk-32-1.png" class="img-fluid figure-img" width="672"></p>
+<p><img src="delivery_time_mcmc_example_files/figure-html/unnamed-chunk-33-1.png" class="img-fluid figure-img" width="672"></p>
 </figure>
 </div>
 </div>
@@ -3215,11 +3253,9 @@ Why this threshold matters
 <section id="what-decision-theory-adds" class="level3">
 <h3 class="anchored" data-anchor-id="what-decision-theory-adds">What decision theory adds</h3>
 <p>Bayesian inference gives us a posterior distribution. From that posterior, we can calculate probabilities such as:</p>
-<p><span class="math display">\[
-\begin{aligned}
+<p><span class="math display">\[\begin{aligned}
 P(\mu &lt; 30 \mid \text{data}).
-\end{aligned}
-\]</span></p>
+\end{aligned}\]</span></p>
 <p>Decision theory adds a second layer. It asks:</p>
 <blockquote class="blockquote">
 <p>Given these posterior probabilities, and given the consequences of each action, what should we do?</p>
@@ -3269,7 +3305,7 @@ P(\mu &lt; 30 \mid \text{data}).
 <i class="callout-icon"></i>
 </div>
 <div class="callout-title-container flex-fill">
-Big picture
+<span class="screen-reader-only">Important</span>Big picture
 </div>
 </div>
 <div class="callout-body-container callout-body">
@@ -3287,28 +3323,28 @@ Big picture
 <p>Using the MCMC draws in <code>mcmc_post_burn</code>, estimate the posterior probability that the true average delivery time is below 28 minutes.</p>
 <p>Complete the code below.</p>
 <div class="cell">
-<div class="sourceCode cell-code" id="cb27"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb27-1"><a href="#cb27-1" aria-hidden="true" tabindex="-1"></a>mcmc_post_burn <span class="sc">|&gt;</span></span>
+<div class="code-copy-outer-scaffold"><div class="sourceCode cell-code" id="cb27"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb27-1"><a href="#cb27-1" aria-hidden="true" tabindex="-1"></a>mcmc_post_burn <span class="sc">|&gt;</span></span>
 <span id="cb27-2"><a href="#cb27-2" aria-hidden="true" tabindex="-1"></a>  <span class="fu">summarise</span>(</span>
 <span id="cb27-3"><a href="#cb27-3" aria-hidden="true" tabindex="-1"></a>    <span class="at">p_under_28 =</span> <span class="fu">mean</span>(____ <span class="sc">&lt;</span> ____)</span>
-<span id="cb27-4"><a href="#cb27-4" aria-hidden="true" tabindex="-1"></a>  )</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<span id="cb27-4"><a href="#cb27-4" aria-hidden="true" tabindex="-1"></a>  )</span></code></pre></div><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></div>
 </div>
 <div class="callout callout-style-default callout-important callout-titled">
-<div class="callout-header d-flex align-content-center" data-bs-toggle="collapse" data-bs-target=".callout-8-contents" aria-controls="callout-8" aria-expanded="false" aria-label="Toggle callout">
+<div class="callout-header d-flex align-content-center collapsed" data-bs-toggle="collapse" data-bs-target=".callout-9-contents" aria-controls="callout-9" aria-expanded="false" aria-label="Toggle callout">
 <div class="callout-icon-container">
 <i class="callout-icon"></i>
 </div>
 <div class="callout-title-container flex-fill">
-Solution
+<span class="screen-reader-only">Important</span>Solution
 </div>
 <div class="callout-btn-toggle d-inline-block border-0 py-1 ps-1 pe-0 float-end"><i class="callout-toggle"></i></div>
 </div>
-<div id="callout-8" class="callout-8-contents callout-collapse collapse">
+<div id="callout-9" class="callout-9-contents callout-collapse collapse">
 <div class="callout-body-container callout-body">
 <div class="cell">
-<div class="sourceCode cell-code" id="cb28"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb28-1"><a href="#cb28-1" aria-hidden="true" tabindex="-1"></a>mcmc_post_burn <span class="sc">|&gt;</span></span>
+<div class="code-copy-outer-scaffold"><div class="sourceCode cell-code" id="cb28"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb28-1"><a href="#cb28-1" aria-hidden="true" tabindex="-1"></a>mcmc_post_burn <span class="sc">|&gt;</span></span>
 <span id="cb28-2"><a href="#cb28-2" aria-hidden="true" tabindex="-1"></a>  <span class="fu">summarise</span>(</span>
 <span id="cb28-3"><a href="#cb28-3" aria-hidden="true" tabindex="-1"></a>    <span class="at">p_under_28 =</span> <span class="fu">mean</span>(mu <span class="sc">&lt;</span> <span class="dv">28</span>)</span>
-<span id="cb28-4"><a href="#cb28-4" aria-hidden="true" tabindex="-1"></a>  )</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<span id="cb28-4"><a href="#cb28-4" aria-hidden="true" tabindex="-1"></a>  )</span></code></pre></div><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></div>
 </div>
 </div>
 </div>
@@ -3323,7 +3359,7 @@ Solution
 <p>Create a plot of the posterior draws and mark the threshold at 28 minutes.</p>
 <p>Complete the code below.</p>
 <div class="cell">
-<div class="sourceCode cell-code" id="cb29"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb29-1"><a href="#cb29-1" aria-hidden="true" tabindex="-1"></a>mcmc_post_burn <span class="sc">|&gt;</span></span>
+<div class="code-copy-outer-scaffold"><div class="sourceCode cell-code" id="cb29"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb29-1"><a href="#cb29-1" aria-hidden="true" tabindex="-1"></a>mcmc_post_burn <span class="sc">|&gt;</span></span>
 <span id="cb29-2"><a href="#cb29-2" aria-hidden="true" tabindex="-1"></a>  <span class="fu">mutate</span>(</span>
 <span id="cb29-3"><a href="#cb29-3" aria-hidden="true" tabindex="-1"></a>    <span class="at">situation =</span> <span class="fu">if_else</span>(</span>
 <span id="cb29-4"><a href="#cb29-4" aria-hidden="true" tabindex="-1"></a>      mu <span class="sc">&lt;</span> ____,</span>
@@ -3348,22 +3384,22 @@ Solution
 <span id="cb29-23"><a href="#cb29-23" aria-hidden="true" tabindex="-1"></a>    <span class="at">y =</span> <span class="st">"Posterior density"</span>,</span>
 <span id="cb29-24"><a href="#cb29-24" aria-hidden="true" tabindex="-1"></a>    <span class="at">fill =</span> <span class="cn">NULL</span></span>
 <span id="cb29-25"><a href="#cb29-25" aria-hidden="true" tabindex="-1"></a>  ) <span class="sc">+</span></span>
-<span id="cb29-26"><a href="#cb29-26" aria-hidden="true" tabindex="-1"></a>  <span class="fu">theme_minimal</span>()</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<span id="cb29-26"><a href="#cb29-26" aria-hidden="true" tabindex="-1"></a>  <span class="fu">theme_minimal</span>()</span></code></pre></div><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></div>
 </div>
 <div class="callout callout-style-default callout-important callout-titled">
-<div class="callout-header d-flex align-content-center" data-bs-toggle="collapse" data-bs-target=".callout-9-contents" aria-controls="callout-9" aria-expanded="false" aria-label="Toggle callout">
+<div class="callout-header d-flex align-content-center collapsed" data-bs-toggle="collapse" data-bs-target=".callout-10-contents" aria-controls="callout-10" aria-expanded="false" aria-label="Toggle callout">
 <div class="callout-icon-container">
 <i class="callout-icon"></i>
 </div>
 <div class="callout-title-container flex-fill">
-Solution
+<span class="screen-reader-only">Important</span>Solution
 </div>
 <div class="callout-btn-toggle d-inline-block border-0 py-1 ps-1 pe-0 float-end"><i class="callout-toggle"></i></div>
 </div>
-<div id="callout-9" class="callout-9-contents callout-collapse collapse">
+<div id="callout-10" class="callout-10-contents callout-collapse collapse">
 <div class="callout-body-container callout-body">
 <div class="cell">
-<div class="sourceCode cell-code" id="cb30"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb30-1"><a href="#cb30-1" aria-hidden="true" tabindex="-1"></a>mcmc_post_burn <span class="sc">|&gt;</span></span>
+<div class="code-copy-outer-scaffold"><div class="sourceCode cell-code" id="cb30"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb30-1"><a href="#cb30-1" aria-hidden="true" tabindex="-1"></a>mcmc_post_burn <span class="sc">|&gt;</span></span>
 <span id="cb30-2"><a href="#cb30-2" aria-hidden="true" tabindex="-1"></a>  <span class="fu">mutate</span>(</span>
 <span id="cb30-3"><a href="#cb30-3" aria-hidden="true" tabindex="-1"></a>    <span class="at">situation =</span> <span class="fu">if_else</span>(</span>
 <span id="cb30-4"><a href="#cb30-4" aria-hidden="true" tabindex="-1"></a>      mu <span class="sc">&lt;</span> <span class="dv">28</span>,</span>
@@ -3388,7 +3424,7 @@ Solution
 <span id="cb30-23"><a href="#cb30-23" aria-hidden="true" tabindex="-1"></a>    <span class="at">y =</span> <span class="st">"Posterior density"</span>,</span>
 <span id="cb30-24"><a href="#cb30-24" aria-hidden="true" tabindex="-1"></a>    <span class="at">fill =</span> <span class="cn">NULL</span></span>
 <span id="cb30-25"><a href="#cb30-25" aria-hidden="true" tabindex="-1"></a>  ) <span class="sc">+</span></span>
-<span id="cb30-26"><a href="#cb30-26" aria-hidden="true" tabindex="-1"></a>  <span class="fu">theme_minimal</span>()</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<span id="cb30-26"><a href="#cb30-26" aria-hidden="true" tabindex="-1"></a>  <span class="fu">theme_minimal</span>()</span></code></pre></div><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></div>
 </div>
 </div>
 </div>
@@ -3424,7 +3460,7 @@ Solution
 </table>
 <p>Complete the code below to calculate the expected loss of each action.</p>
 <div class="cell">
-<div class="sourceCode cell-code" id="cb31"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb31-1"><a href="#cb31-1" aria-hidden="true" tabindex="-1"></a>p_under_30 <span class="ot">&lt;-</span> <span class="fu">mean</span>(mcmc_post_burn<span class="sc">$</span>mu <span class="sc">&lt;</span> <span class="dv">30</span>)</span>
+<div class="code-copy-outer-scaffold"><div class="sourceCode cell-code" id="cb31"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb31-1"><a href="#cb31-1" aria-hidden="true" tabindex="-1"></a>p_under_30 <span class="ot">&lt;-</span> <span class="fu">mean</span>(mcmc_post_burn<span class="sc">$</span>mu <span class="sc">&lt;</span> <span class="dv">30</span>)</span>
 <span id="cb31-2"><a href="#cb31-2" aria-hidden="true" tabindex="-1"></a>p_30_or_higher <span class="ot">&lt;-</span> <span class="fu">mean</span>(mcmc_post_burn<span class="sc">$</span>mu <span class="sc">&gt;=</span> <span class="dv">30</span>)</span>
 <span id="cb31-3"><a href="#cb31-3" aria-hidden="true" tabindex="-1"></a></span>
 <span id="cb31-4"><a href="#cb31-4" aria-hidden="true" tabindex="-1"></a>expected_loss_advertise <span class="ot">&lt;-</span> ____ <span class="sc">*</span> p_under_30 <span class="sc">+</span> ____ <span class="sc">*</span> p_30_or_higher</span>
@@ -3433,22 +3469,22 @@ Solution
 <span id="cb31-7"><a href="#cb31-7" aria-hidden="true" tabindex="-1"></a><span class="fu">tibble</span>(</span>
 <span id="cb31-8"><a href="#cb31-8" aria-hidden="true" tabindex="-1"></a>  <span class="at">action =</span> <span class="fu">c</span>(<span class="st">"Advertise"</span>, <span class="st">"Do not advertise"</span>),</span>
 <span id="cb31-9"><a href="#cb31-9" aria-hidden="true" tabindex="-1"></a>  <span class="at">expected_loss =</span> <span class="fu">c</span>(expected_loss_advertise, expected_loss_not_advertise)</span>
-<span id="cb31-10"><a href="#cb31-10" aria-hidden="true" tabindex="-1"></a>)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<span id="cb31-10"><a href="#cb31-10" aria-hidden="true" tabindex="-1"></a>)</span></code></pre></div><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></div>
 </div>
 <div class="callout callout-style-default callout-important callout-titled">
-<div class="callout-header d-flex align-content-center" data-bs-toggle="collapse" data-bs-target=".callout-10-contents" aria-controls="callout-10" aria-expanded="false" aria-label="Toggle callout">
+<div class="callout-header d-flex align-content-center collapsed" data-bs-toggle="collapse" data-bs-target=".callout-11-contents" aria-controls="callout-11" aria-expanded="false" aria-label="Toggle callout">
 <div class="callout-icon-container">
 <i class="callout-icon"></i>
 </div>
 <div class="callout-title-container flex-fill">
-Solution
+<span class="screen-reader-only">Important</span>Solution
 </div>
 <div class="callout-btn-toggle d-inline-block border-0 py-1 ps-1 pe-0 float-end"><i class="callout-toggle"></i></div>
 </div>
-<div id="callout-10" class="callout-10-contents callout-collapse collapse">
+<div id="callout-11" class="callout-11-contents callout-collapse collapse">
 <div class="callout-body-container callout-body">
 <div class="cell">
-<div class="sourceCode cell-code" id="cb32"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb32-1"><a href="#cb32-1" aria-hidden="true" tabindex="-1"></a>p_under_30 <span class="ot">&lt;-</span> <span class="fu">mean</span>(mcmc_post_burn<span class="sc">$</span>mu <span class="sc">&lt;</span> <span class="dv">30</span>)</span>
+<div class="code-copy-outer-scaffold"><div class="sourceCode cell-code" id="cb32"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb32-1"><a href="#cb32-1" aria-hidden="true" tabindex="-1"></a>p_under_30 <span class="ot">&lt;-</span> <span class="fu">mean</span>(mcmc_post_burn<span class="sc">$</span>mu <span class="sc">&lt;</span> <span class="dv">30</span>)</span>
 <span id="cb32-2"><a href="#cb32-2" aria-hidden="true" tabindex="-1"></a>p_30_or_higher <span class="ot">&lt;-</span> <span class="fu">mean</span>(mcmc_post_burn<span class="sc">$</span>mu <span class="sc">&gt;=</span> <span class="dv">30</span>)</span>
 <span id="cb32-3"><a href="#cb32-3" aria-hidden="true" tabindex="-1"></a></span>
 <span id="cb32-4"><a href="#cb32-4" aria-hidden="true" tabindex="-1"></a>expected_loss_advertise <span class="ot">&lt;-</span> <span class="dv">0</span> <span class="sc">*</span> p_under_30 <span class="sc">+</span> <span class="dv">15</span> <span class="sc">*</span> p_30_or_higher</span>
@@ -3457,7 +3493,7 @@ Solution
 <span id="cb32-7"><a href="#cb32-7" aria-hidden="true" tabindex="-1"></a><span class="fu">tibble</span>(</span>
 <span id="cb32-8"><a href="#cb32-8" aria-hidden="true" tabindex="-1"></a>  <span class="at">action =</span> <span class="fu">c</span>(<span class="st">"Advertise"</span>, <span class="st">"Do not advertise"</span>),</span>
 <span id="cb32-9"><a href="#cb32-9" aria-hidden="true" tabindex="-1"></a>  <span class="at">expected_loss =</span> <span class="fu">c</span>(expected_loss_advertise, expected_loss_not_advertise)</span>
-<span id="cb32-10"><a href="#cb32-10" aria-hidden="true" tabindex="-1"></a>)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<span id="cb32-10"><a href="#cb32-10" aria-hidden="true" tabindex="-1"></a>)</span></code></pre></div><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></div>
 </div>
 </div>
 </div>
@@ -3468,54 +3504,44 @@ Solution
 <p>Using the loss function from Exercise 3, find the posterior probability threshold above which the company should advertise.</p>
 <p>That is, find the value of <span class="math inline">\(p = P(\mu &lt; 30 \mid \text{data})\)</span> where the expected loss of advertising equals the expected loss of not advertising.</p>
 <p>The expected loss of advertising is:</p>
-<p><span class="math display">\[
-\begin{aligned}
+<p><span class="math display">\[\begin{aligned}
 15(1-p).
-\end{aligned}
-\]</span></p>
+\end{aligned}\]</span></p>
 <p>The expected loss of not advertising is:</p>
-<p><span class="math display">\[
-\begin{aligned}
+<p><span class="math display">\[\begin{aligned}
 3p.
-\end{aligned}
-\]</span></p>
+\end{aligned}\]</span></p>
 <p>Complete the working:</p>
-<p><span class="math display">\[
-\begin{aligned}
+<p><span class="math display">\[\begin{aligned}
 15(1-p) &amp;= 3p \\
 15 - 15p &amp;= 3p \\
 15 &amp;= ____p \\
 p &amp;= \frac{15}{____} \\
 p &amp;= ____.
-\end{aligned}
-\]</span></p>
+\end{aligned}\]</span></p>
 <div class="callout callout-style-default callout-important callout-titled">
-<div class="callout-header d-flex align-content-center" data-bs-toggle="collapse" data-bs-target=".callout-11-contents" aria-controls="callout-11" aria-expanded="false" aria-label="Toggle callout">
+<div class="callout-header d-flex align-content-center collapsed" data-bs-toggle="collapse" data-bs-target=".callout-12-contents" aria-controls="callout-12" aria-expanded="false" aria-label="Toggle callout">
 <div class="callout-icon-container">
 <i class="callout-icon"></i>
 </div>
 <div class="callout-title-container flex-fill">
-Solution
+<span class="screen-reader-only">Important</span>Solution
 </div>
 <div class="callout-btn-toggle d-inline-block border-0 py-1 ps-1 pe-0 float-end"><i class="callout-toggle"></i></div>
 </div>
-<div id="callout-11" class="callout-11-contents callout-collapse collapse">
+<div id="callout-12" class="callout-12-contents callout-collapse collapse">
 <div class="callout-body-container callout-body">
-<p><span class="math display">\[
-\begin{aligned}
+<p><span class="math display">\[\begin{aligned}
 15(1-p) &amp;= 3p \\
 15 - 15p &amp;= 3p \\
 15 &amp;= 18p \\
 p &amp;= \frac{15}{18} \\
 p &amp;= 0.833.
-\end{aligned}
-\]</span></p>
+\end{aligned}\]</span></p>
 <p>The company should advertise only if:</p>
-<p><span class="math display">\[
-\begin{aligned}
+<p><span class="math display">\[\begin{aligned}
 P(\mu &lt; 30 \mid \text{data}) &amp;&gt; 0.833.
-\end{aligned}
-\]</span></p>
+\end{aligned}\]</span></p>
 </div>
 </div>
 </div>
@@ -3575,13 +3601,14 @@ P(\mu &lt; 30 \mid \text{data}) &amp;&gt; 0.833.
       e.clearSelection();
     }
     const getTextToCopy = function(trigger) {
-        const codeEl = trigger.previousElementSibling.cloneNode(true);
-        for (const childEl of codeEl.children) {
-          if (isCodeAnnotation(childEl)) {
-            childEl.remove();
-          }
+      const outerScaffold = trigger.parentElement.cloneNode(true);
+      const codeEl = outerScaffold.querySelector('code');
+      for (const childEl of codeEl.children) {
+        if (isCodeAnnotation(childEl)) {
+          childEl.remove();
         }
-        return codeEl.innerText;
+      }
+      return codeEl.innerText;
     }
     const clipboard = new window.ClipboardJS('.code-copy-button:not([data-in-quarto-modal])', {
       text: getTextToCopy

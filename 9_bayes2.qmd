@@ -17,27 +17,49 @@ set.seed(2420)
 
 By the end of this chapter, you should be able to:
 
-1. Explain why simulation is useful in Bayesian inference.
-2. Describe posterior draws as simulated plausible values of an unknown parameter.
-3. Use posterior draws to calculate posterior means, medians, credible intervals, and posterior probabilities.
-4. Explain the difference between simulating repeated datasets and simulating from a posterior distribution.
-5. Use grid approximation to approximate a posterior distribution.
-6. Explain why grid approximation becomes difficult in larger models.
-7. Describe the basic idea of Markov chain Monte Carlo, especially the Metropolis algorithm.
-8. Use trace plots and posterior density plots to diagnose whether a simulated chain is behaving sensibly.
-9. Explain how different loss functions lead to different Bayesian point estimates.
+1.  Explain why simulation is useful in Bayesian inference.
+2.  Describe posterior draws as simulated plausible values of an unknown parameter.
+3.  Use posterior draws to calculate posterior means, medians, credible intervals, and posterior probabilities.
+4.  Explain the difference between simulating repeated datasets and simulating from a posterior distribution.
+5.  Use grid approximation to approximate a posterior distribution.
+6.  Explain why grid approximation becomes difficult in larger models.
+7.  Describe the basic idea of Markov chain Monte Carlo, especially the Metropolis algorithm.
+8.  Use trace plots and posterior density plots to diagnose whether a simulated chain is behaving sensibly.
+9.  Explain how different loss functions lead to different Bayesian point estimates.
 10. Use posterior simulation to compare possible decisions under uncertainty.
 :::
 
-## The late-night bus problem
+<center>
+```{r, echo=FALSE}
+#| classes: .enlarge-image
+knitr::include_graphics("images/chapter9/outline.png")
+```
+</center>
 
-Imagine a university is considering a late-night bus service from campus to nearby train stations during the exam period.
+<br>
 
-The service would be useful if enough students would actually use it. If only a small number of students used the bus, the university would spend money running an almost empty service. If many students wanted it, not running the service could leave students with fewer safe transport options late at night.
+## Recap
 
-So the university runs a small survey.
+So far, we have seen Bayesian examples where the posterior could be written down exactly. For example, when we combined a beta prior with binomial data, the posterior was also beta. This is called a **conjugate** model. As a reminder, this is one of the examples from the previous chapter:
 
-Out of $40$ students asked:
+::: callout-note
+
+### Late night bus service
+
+A simple example from the previous chapter was the late-night bus problem.
+
+Suppose a local council is considering whether to introduce a late-night bus service. A survey of 40 residents asks whether they would use the service. In the survey, 26 people say yes.
+
+Let:
+
+$$
+\begin{aligned}
+p
+&= \text{the proportion of residents who would use the service}
+\end{aligned}
+$$
+
+The data are:
 
 $$
 \begin{aligned}
@@ -46,1561 +68,1204 @@ n &= 40
 \end{aligned}
 $$
 
-where $x$ is the number of students who said they would use the late-night bus.
+The likelihood comes from the binomial model:
 
-At first glance, the sample proportion is:
+$$
+\begin{aligned}
+X \mid p
+&\sim \text{Binomial}(40,p)
+\end{aligned}
+$$
+
+If we used maximum likelihood, the estimate would be the observed sample proportion:
 
 $$
 \begin{aligned}
 \hat{p}
-&= \frac{x}{n} \\
 &= \frac{26}{40} \\
-&= 0.65.
+&= 0.65
 \end{aligned}
 $$
 
-That seems promising. But the university should not act as if the true proportion is exactly $0.65$. The survey was small. Another sample of $40$ students might have produced a different answer.
-
-This is where the ideas from earlier chapters return.
-
-In Chapter 4, we saw that sample estimates vary from sample to sample. In Chapter 6, we used the bootstrap to simulate how a statistic might vary if we repeatedly sampled from the data we had. In Chapter 7, we introduced likelihood as a way of asking which parameter values make the observed data more or less plausible. In Chapter 8, we introduced Bayesian inference, where prior information and data combine to form a posterior distribution.
-
-This chapter brings those threads together.
-
-> Once we have a posterior distribution, simulation gives us a practical way to work with it.
-
-The aim is not just to find one number. The aim is to describe uncertainty and then use that uncertainty to make better decisions.
-
-```{r}
-#| echo: false
-#| message: false
-#| warning: false
-
-chapter_links <- tibble(
-  `Earlier idea` = c(
-    "Sampling variation",
-    "Bootstrap simulation",
-    "Likelihood",
-    "Bayesian posterior",
-    "Decision-making"
-  ),
-  `Question it helped us answer` = c(
-    "How much can sample estimates move around?",
-    "What uncertainty is implied by the data we observed?",
-    "Which parameter values make the data more plausible?",
-    "What should we believe about the parameter after seeing the data?",
-    "What should we do, given uncertainty?"
-  ),
-  `How it connects to this chapter` = c(
-    "Posterior distributions also describe uncertainty.",
-    "We can simulate from posterior distributions too.",
-    "The likelihood is one ingredient in the posterior.",
-    "Posterior draws are simulated plausible parameter values.",
-    "Actions can be compared using posterior simulation."
-  )
-)
-
-chapter_links |>
-  gt() |>
-  tab_options(table.width = pct(100))
-```
-
-## From posterior distributions to posterior draws
-
-In Chapter 8, we used the beta-binomial model for an unknown proportion.
-
-Suppose $\theta$ is the true proportion of students who would use the late-night bus.
-
-A simple model is:
+A Bayesian analysis asks for a posterior distribution for $p$. If we start with a uniform prior,
 
 $$
 \begin{aligned}
-X \mid \theta
-&\sim \text{Binomial}(n, \theta).
+p
+&\sim \text{Beta}(1,1),
 \end{aligned}
 $$
 
-Here, $X$ is the number of students in the survey who say yes.
-
-We also need a prior distribution for $\theta$. Suppose we start with a mild prior:
+then beta-binomial conjugacy gives:
 
 $$
 \begin{aligned}
-\theta
-&\sim \text{Beta}(2, 2).
+p \mid X = 26
+&\sim \text{Beta}(1 + 26,\ 1 + 40 - 26) \\
+&\sim \text{Beta}(27,15).
 \end{aligned}
 $$
 
-This prior is centred around $0.5$, but it is not very strong. It says that before collecting the survey data, proportions near $0.5$ seem slightly more plausible than values near $0$ or $1$, but we are still open to a wide range of possibilities.
-
-Because the beta distribution is conjugate to the binomial likelihood, the posterior is also beta:
-
-$$
-\begin{aligned}
-\theta \mid X = 26
-&\sim \text{Beta}(2 + 26,\ 2 + 40 - 26) \\
-&\sim \text{Beta}(28,\ 16).
-\end{aligned}
-$$
-
-This is an analytic result. We know the exact form of the posterior distribution.
-
-But there is another way to work with this posterior. We can simulate from it.
-
-```{r}
-#| message: false
-#| warning: false
-
-alpha_prior <- 2
-beta_prior <- 2
-x <- 26
-n <- 40
-
-alpha_post <- alpha_prior + x
-beta_post <- beta_prior + n - x
-
-posterior_draws <- tibble(
-  draw = 1:10000,
-  theta = rbeta(10000, alpha_post, beta_post)
-)
-
-posterior_draws |>
-  ggplot(aes(x = theta, y = after_stat(density), color = "Posterior draws")) +
-  geom_histogram(bins = 40, fill = "white") +
-  geom_density(linewidth = 1) +
-  labs(
-    x = expression(theta),
-    y = "Density",
-    color = NULL,
-    title = "Posterior draws from Beta(28, 16)",
-    subtitle = "Each draw is one plausible value of the true proportion"
-  ) +
-  guides(color = guide_legend(override.aes = list(fill = NA)))
+```{r, echo=FALSE}
+knitr::include_graphics("images/chapter8/beta.gif")
 ```
 
-Each simulated value is one plausible value of $\theta$ after combining the prior and the survey data.
-
-This is different from the bootstrap.
-
-In the bootstrap, we resampled the observed data to simulate possible samples. In Bayesian posterior simulation, we simulate possible parameter values.
-
-```{r}
-#| echo: false
-#| message: false
-#| warning: false
-
-simulation_comparison <- tibble(
-  `Simulation type` = c(
-    "Bootstrap simulation",
-    "Bayesian posterior simulation"
-  ),
-  `What is simulated?` = c(
-    "New samples or statistics based on resampling the observed data",
-    "Parameter values from the posterior distribution"
-  ),
-  `What varies?` = c(
-    "The data or statistic",
-    "The unknown parameter"
-  ),
-  `Typical output` = c(
-    "Bootstrap distribution of a statistic",
-    "Posterior distribution of a parameter"
-  ),
-  `Typical interval` = c(
-    "Bootstrap confidence interval",
-    "Bayesian credible interval"
-  )
-)
-
-simulation_comparison |>
-  gt() |>
-  tab_options(table.width = pct(100))
-```
-
-::: callout-important
-## Posterior draws are not new data
-
-A posterior draw is not a new student survey. It is not a possible future dataset.
-
-A posterior draw is a simulated plausible value of the unknown parameter, given the prior and the data we observed.
 :::
 
-## Summarising posterior draws
+In the above example, the prior and posterior were from the sample family, which makes the posterior easy to write down:
 
-Once we have posterior draws, many Bayesian summaries become straightforward.
+$$\begin{aligned}
+\text{Beta prior} + \text{Binomial likelihood}
+&\rightarrow \text{Beta posterior}
+\end{aligned}$$
 
-We can estimate the posterior mean:
+However, not every Bayesian model works this neatly. Sometimes the prior is easy to describe in words but does not combine with the likelihood to produce a simple named posterior distribution. This chapter will explore methods for dealing with such situations.
 
-$$
-\begin{aligned}
-E(\theta \mid X)
-&\approx \text{mean of posterior draws}.
-\end{aligned}
-$$
+## A non-conjugate example
 
-We can estimate a $95\%$ credible interval:
+Suppose a student food delivery service claims that its average delivery time is about 25 minutes. In this example, we will estimate the average delivery time for this service.
 
-$$
-\begin{aligned}
-\text{95\% credible interval}
-&\approx \text{middle 95\% of posterior draws}.
-\end{aligned}
-$$
+$$\begin{aligned}
+\text{Let } \mu
+&= \text{the average delivery time in minutes}.
+\end{aligned}$$
 
-We can estimate posterior probabilities:
+Our goal is to learn about $\mu$ using a small amount of data and some prior information. Suppose we collect delivery times for 12 recent orders:
 
-$$
-\begin{aligned}
-P(\theta > 0.60 \mid X)
-&\approx \text{proportion of posterior draws greater than }0.60.
-\end{aligned}
-$$
+```{r, echo=FALSE}
+delivery_times <- c(18, 22, 25, 27, 29, 31, 24, 26, 30, 28, 35, 21)
 
-```{r}
-#| message: false
-#| warning: false
-
-posterior_summary <- posterior_draws |>
-  summarise(
-    `Posterior mean` = mean(theta),
-    `Posterior median` = median(theta),
-    `2.5% quantile` = quantile(theta, 0.025),
-    `97.5% quantile` = quantile(theta, 0.975),
-    `P(theta > 0.60)` = mean(theta > 0.60),
-    `P(theta > 0.70)` = mean(theta > 0.70)
-  ) |>
-  pivot_longer(
-    cols = everything(),
-    names_to = "Summary",
-    values_to = "Value"
-  )
-
-posterior_summary |>
-  mutate(Value = round(Value, 3)) |>
-  gt() |>
-  tab_options(table.width = pct(80))
-```
-
-The interpretation is direct. If $P(\theta > 0.60 \mid X)$ is large, then after seeing the survey data, there is strong posterior evidence that more than $60\%$ of students would use the bus.
-
-A useful visual habit is to shade posterior probabilities. For example, suppose the university thinks the service is worth serious consideration if more than $60\%$ of students would use it.
-
-```{r}
-#| message: false
-#| warning: false
-
-posterior_density <- tibble(
-  theta = seq(0.001, 0.999, length.out = 1000),
-  density = dbeta(theta, alpha_post, beta_post),
-  region = if_else(theta > 0.60, "theta > 0.60", "theta <= 0.60")
+delivery_df <- tibble(
+  order = 1:length(delivery_times),
+  delivery_time = delivery_times
 )
 
-posterior_density |>
-  ggplot(aes(x = theta, y = density, color = region, fill = region)) +
-  geom_area(alpha = 0.25) +
+delivery_df |> 
+  gt() |> 
+  cols_label(
+    order = "Order",
+    delivery_time = "Delivery time (mins)"
+  )
+```
+
+Here, the sample mean is:
+
+$$\begin{aligned}
+\bar{x}
+&= \text{the average delivery time in our sample} \\
+&= 26.33
+\end{aligned}$$
+
+```{r, echo=FALSE}
+x_bar <- mean(delivery_times)
+n <- length(delivery_times)
+sigma <- 6
+
+```
+
+For this example, we will assume that the population standard deviation is known: $\sigma = 6$. This keeps the example simple because we only need to estimate one unknown parameter: $\mu$. In real applications, we might also estimate $\sigma$. However, that would give us two unknown parameters instead of one.
+
+### Plotting the raw data
+
+Before building the model, it is useful to look at the observed delivery times.
+
+```{r, warning=FALSE, message=FALSE, echo=FALSE}
+mean_delivery <- mean(delivery_df$delivery_time)
+ggplot(delivery_df, aes(x = order, y = delivery_time)) +
+  geom_segment(
+    aes(
+      x = order,
+      xend = order,
+      y = mean_delivery,
+      yend = delivery_time
+    ),
+    linetype = "dashed",
+    alpha = 0.5
+  ) +
+  geom_point(size = 2) +
+  geom_hline(
+    yintercept = mean_delivery,
+    linetype = "dashed"
+  ) +
+  labs(
+    x = "Order number",
+    y = "Delivery time in minutes"
+  ) +
+  theme_minimal()
+```
+
+The horizontal dashed line shows the sample mean. This is the average delivery time in the sample (26.33), but it is not necessarily the true average delivery time for all deliveries. Because we only observed 12 orders, there is still uncertainty about $\mu$. The vertical dashed lines represent the deviations from each observation to the sample mean.
+
+### The likelihood
+
+We now need to decide what statistical model to use for the data. The individual delivery times may not be perfectly normally distributed. Some deliveries may be unusually fast, and some may be unusually slow. However, when we take an average over several deliveries, the sample mean tends to behave more regularly. By the Central Limit Theorem, the sampling distribution of the sample mean is often approximately normal, especially when the sample size is not extremely small and the data are not wildly irregular.
+
+For that reason, we will use a normal model for the sample mean.
+
+$$\begin{aligned}
+\bar{x} \mid \mu
+&\sim N\left(\mu, \frac{\sigma^2}{n}\right)
+\end{aligned}$$
+
+This says that the sample mean $\bar{x}$ is likely to be close to the true mean $\mu$, but not exactly equal to it. As we have seen in previous chapters, the standard deviation of the sample mean is called the standard error:
+
+$$\begin{aligned}
+\text{standard error}
+&= \frac{\sigma}{\sqrt{n}}
+\end{aligned}$$
+
+```{r, echo=FALSE, include=FALSE}
+standard_error <- sigma / sqrt(n)
+```
+
+So our likelihood is:
+
+$$\begin{aligned}
+\bar{x} \mid \mu
+&\sim N\left(\mu, \frac{6}{\sqrt{12}}\right)
+\end{aligned}$$
+
+Equivalently, we can write:
+
+$$\begin{aligned}
+\bar{x} \mid \mu
+&\sim N\left(\mu, 1.73^2\right)
+\end{aligned}$$
+
+The likelihood asks:
+
+> If a particular value of $\mu$ were true, how likely would it be to observe the sample mean we observed?
+
+We can plot the likelihood over a range of possible values for $\mu$:
+
+```{r, warning=FALSE, message=FALSE, echo=FALSE}
+mu_grid <- seq(10, 60, length.out = 1000)
+
+likelihood_df <- tibble(
+  mu = mu_grid,
+  likelihood = dnorm(x_bar, mean = mu, sd = standard_error)
+)
+
+ggplot(likelihood_df, aes(x = mu, y = likelihood)) +
   geom_line(linewidth = 1) +
-  geom_vline(xintercept = 0.60, linetype = "dashed") +
-  labs(
-    x = expression(theta),
-    y = "Posterior density",
-    color = NULL,
-    fill = NULL,
-    title = "Posterior probability that the true proportion is above 0.60"
-  )
-```
-
-This is one of the most useful features of Bayesian inference. We can ask questions about the unknown parameter directly.
-
-> What is the probability that the true proportion is above $0.60$, given the data?
-
-In a Bayesian analysis, that question is natural.
-
-## Simulation error
-
-Posterior simulation is powerful, but it is still simulation.
-
-If we simulate $100$ posterior draws, our summaries will be a little rough. If we simulate $10{,}000$ draws, they will usually be more stable. The exact posterior has not changed. Only our simulation-based approximation has improved.
-
-```{r}
-#| message: false
-#| warning: false
-
-set.seed(2420)
-
-simulation_sizes <- c(100, 500, 2000, 10000)
-
-simulation_error <- map_dfr(
-  simulation_sizes,
-  function(m) {
-    draws <- rbeta(m, alpha_post, beta_post)
-    tibble(
-      `Number of posterior draws` = m,
-      `Posterior mean estimate` = mean(draws),
-      `P(theta > 0.60) estimate` = mean(draws > 0.60),
-      `Lower credible limit` = quantile(draws, 0.025),
-      `Upper credible limit` = quantile(draws, 0.975)
-    )
-  }
-)
-
-simulation_error |>
-  mutate(across(where(is.numeric), ~ round(.x, 3))) |>
-  gt() |>
-  tab_options(table.width = pct(100))
-```
-
-The estimates should become more stable as the number of draws increases. This is called **Monte Carlo error**. It is the small amount of numerical error caused by using a finite number of simulation draws.
-
-::: callout-note
-## Monte Carlo error
-
-Monte Carlo error is not statistical uncertainty about $\theta$.
-
-It is uncertainty caused by approximating a posterior summary using a finite number of simulated draws.
-
-We can reduce Monte Carlo error by using more posterior draws.
-:::
-
-## Why conjugacy is not enough
-
-The beta-binomial example is convenient because the posterior has a known form.
-
-$$
-\begin{aligned}
-\text{Beta prior} \times \text{Binomial likelihood}
-&\rightarrow \text{Beta posterior}.
-\end{aligned}
-$$
-
-This is called conjugacy.
-
-Conjugate models are useful for learning because they let us see the logic clearly. But many real statistical models are not conjugate, or become inconvenient once we add more realistic details.
-
-Suppose we want to model late-night bus demand, but we believe demand depends on:
-
-- whether students live on campus or commute;
-- whether they have an exam the next morning;
-- whether it is raining;
-- whether they usually study late;
-- whether they live near a train station;
-- whether the survey was taken during SWOTVAC or during semester.
-
-Now the model may have many parameters. The posterior may not have a tidy formula.
-
-```{r}
-#| echo: false
-#| message: false
-#| warning: false
-
-conjugacy_table <- tibble(
-  `Situation` = c(
-    "Simple conjugate model",
-    "More realistic model"
-  ),
-  `Example` = c(
-    "One unknown proportion with a beta prior",
-    "Demand depends on several student characteristics"
-  ),
-  `Posterior form` = c(
-    "Known distribution",
-    "Often not available in a simple formula"
-  ),
-  `What we can do` = c(
-    "Use algebra or direct simulation from the known posterior",
-    "Approximate the posterior using computational methods"
-  )
-)
-
-conjugacy_table |>
-  gt() |>
-  tab_options(table.width = pct(100))
-```
-
-This is where simulation becomes more than a convenience. It becomes a way of doing Bayesian inference when algebra is not enough.
-
-Before we get to Markov chain Monte Carlo, we will start with the simplest computational idea: grid approximation.
-
-## Grid approximation
-
-A grid approximation is a brute-force way to approximate a posterior distribution.
-
-The idea is simple.
-
-1. Choose many possible values of the parameter.
-2. Calculate the prior density at each value.
-3. Calculate the likelihood at each value.
-4. Multiply prior by likelihood.
-5. Normalise the result so the weights add to $1$.
-
-This gives a discrete approximation to the posterior.
-
-Let us return to the bus survey.
-
-We use the same model:
-
-$$
-\begin{aligned}
-X \mid \theta
-&\sim \text{Binomial}(40, \theta), \\
-\theta
-&\sim \text{Beta}(2, 2).
-\end{aligned}
-$$
-
-Instead of using the conjugate formula, we create a grid of possible $\theta$ values.
-
-```{r}
-#| message: false
-#| warning: false
-
-grid_posterior <- tibble(
-  theta = seq(0.001, 0.999, length.out = 1000)
-) |>
-  mutate(
-    prior = dbeta(theta, alpha_prior, beta_prior),
-    likelihood = dbinom(x, size = n, prob = theta),
-    unnormalised_posterior = prior * likelihood,
-    posterior_weight = unnormalised_posterior / sum(unnormalised_posterior)
-  )
-
-grid_posterior |>
-  select(theta, prior, likelihood, unnormalised_posterior, posterior_weight) |>
-  slice(seq(1, 1000, by = 150)) |>
-  mutate(across(where(is.numeric), ~ round(.x, 6))) |>
-  gt() |>
-  tab_options(table.width = pct(100))
-```
-
-The posterior weights are tiny because there are many grid points. What matters is their relative size. Values of $\theta$ that make the prior and likelihood product large receive more posterior weight.
-
-```{r}
-#| message: false
-#| warning: false
-
-grid_long <- grid_posterior |>
-  transmute(
-    theta,
-    Prior = prior / max(prior),
-    Likelihood = likelihood / max(likelihood),
-    Posterior = posterior_weight / max(posterior_weight)
-  ) |>
-  pivot_longer(
-    cols = c(Prior, Likelihood, Posterior),
-    names_to = "quantity",
-    values_to = "scaled_value"
-  )
-
-grid_long |>
-  ggplot(aes(x = theta, y = scaled_value, color = quantity)) +
-  geom_line(linewidth = 1) +
-  labs(
-    x = expression(theta),
-    y = "Scaled value",
-    color = NULL,
-    title = "Grid approximation: prior, likelihood, and posterior",
-    subtitle = "Each curve is scaled to have maximum value 1 so the shapes can be compared"
-  )
-```
-
-The posterior sits between the prior and the likelihood. It is not simply an average of the two curves, but it reflects both. The prior says what was plausible before the data. The likelihood says what the survey data support. The posterior combines them.
-
-### Sampling from the grid
-
-Once we have grid weights, we can sample from them.
-
-```{r}
-#| message: false
-#| warning: false
-
-set.seed(2420)
-
-grid_draws <- tibble(
-  draw = 1:10000,
-  theta = sample(
-    grid_posterior$theta,
-    size = 10000,
-    replace = TRUE,
-    prob = grid_posterior$posterior_weight
-  )
-)
-
-grid_draws |>
-  ggplot(aes(x = theta, y = after_stat(density), color = "Grid posterior draws")) +
-  geom_histogram(bins = 40, fill = "white") +
-  geom_density(linewidth = 1) +
-  labs(
-    x = expression(theta),
-    y = "Density",
-    color = NULL,
-    title = "Posterior draws from the grid approximation"
-  ) +
-  guides(color = guide_legend(override.aes = list(fill = NA)))
-```
-
-We can compare the grid approximation with the exact beta posterior.
-
-```{r}
-#| message: false
-#| warning: false
-
-comparison_density <- tibble(
-  theta = seq(0.001, 0.999, length.out = 1000),
-  `Exact Beta posterior` = dbeta(theta, alpha_post, beta_post),
-  `Grid approximation` = grid_posterior$posterior_weight /
-    diff(range(grid_posterior$theta)) * length(grid_posterior$theta)
-) |>
-  pivot_longer(
-    cols = c(`Exact Beta posterior`, `Grid approximation`),
-    names_to = "method",
-    values_to = "density"
-  )
-
-comparison_density |>
-  ggplot(aes(x = theta, y = density, color = method)) +
-  geom_line(linewidth = 1) +
-  labs(
-    x = expression(theta),
-    y = "Density",
-    color = NULL,
-    title = "The grid approximation closely matches the exact posterior"
-  )
-```
-
-The grid method is deliberately simple. It is also important because it makes Bayesian computation visible.
-
-We did not need a magic formula. We used the central Bayesian relationship:
-
-$$
-\begin{aligned}
-\text{posterior}
-&\propto \text{prior} \times \text{likelihood}.
-\end{aligned}
-$$
-
-Then we normalised the result.
-
-::: callout-tip
-## Grid approximation is Bayes by calculation
-
-Grid approximation is not a different kind of Bayesian inference.
-
-It is the same Bayesian idea implemented by direct calculation over many possible parameter values.
-:::
-
-## Why grids do not scale well
-
-For one unknown parameter, a grid is easy.
-
-For two unknown parameters, we need a two-dimensional grid. For three, a three-dimensional grid. The number of grid points grows quickly.
-
-Suppose we use $100$ possible values for each unknown parameter.
-
-```{r}
-#| echo: false
-#| message: false
-#| warning: false
-
-grid_growth <- tibble(
-  `Number of parameters` = 1:6,
-  `Grid points per parameter` = 100,
-  `Total grid points` = 100^(1:6)
-)
-
-grid_growth |>
-  mutate(`Total grid points` = comma(`Total grid points`)) |>
-  gt() |>
-  tab_options(table.width = pct(70))
-```
-
-With six parameters, a $100$-point grid in each dimension would require one trillion grid points. That is not a convenient calculation.
-
-This is sometimes called the **curse of dimensionality**. It is one reason Bayesian computation needs smarter simulation methods.
-
-## The idea of MCMC
-
-Markov chain Monte Carlo, usually shortened to **MCMC**, is a family of methods for drawing samples from complicated posterior distributions.
-
-The name sounds intimidating, but the intuition is approachable.
-
-Imagine a walker exploring a landscape. The height of the landscape represents the posterior density. High places are parameter values that are more plausible after seeing the data. Low places are parameter values that are less plausible.
-
-A good Bayesian simulation should spend more time in the high-posterior regions and less time in the low-posterior regions.
-
-MCMC does this by creating a sequence of draws:
-
-$$
-\begin{aligned}
-\theta_1,\ \theta_2,\ \theta_3,\ \ldots,\ \theta_m.
-\end{aligned}
-$$
-
-Each draw depends on the previous draw. That is why it is called a chain.
-
-The goal is for the long-run behaviour of the chain to match the posterior distribution.
-
-```{r}
-#| echo: false
-#| message: false
-#| warning: false
-
-mcmc_table <- tibble(
-  `Term` = c("Monte Carlo", "Markov chain", "MCMC"),
-  `Meaning in this chapter` = c(
-    "Using simulation to approximate a quantity",
-    "A sequence where the next value depends on the current value",
-    "A simulation method that constructs a chain whose long-run distribution is the posterior"
-  )
-)
-
-mcmc_table |>
-  gt() |>
-  tab_options(table.width = pct(100))
-```
-
-We will not try to cover all of MCMC. Modern Bayesian software often uses advanced algorithms such as Hamiltonian Monte Carlo. Here, we focus on one simple algorithm: the random-walk Metropolis algorithm.
-
-The aim is to understand the idea, not to become an expert in computational Bayesian statistics.
-
-## A gentle Metropolis algorithm
-
-The Metropolis algorithm works by proposing small moves and deciding whether to accept them.
-
-For the bus survey, the posterior density is proportional to:
-
-$$
-\begin{aligned}
-f(\theta \mid x)
-&\propto f(x \mid \theta)f(\theta) \\
-&\propto \theta^x(1 - \theta)^{n - x}\theta^{\alpha - 1}(1 - \theta)^{\beta - 1}.
-\end{aligned}
-$$
-
-For our example:
-
-$$
-\begin{aligned}
-f(\theta \mid x)
-&\propto \theta^{26}(1 - \theta)^{14}\theta^{1}(1 - \theta)^{1} \\
-&\propto \theta^{27}(1 - \theta)^{15}.
-\end{aligned}
-$$
-
-We do not actually need the normalising constant. This is one of the useful features of Metropolis. We only need to compare posterior heights.
-
-The algorithm is:
-
-1. Start at a possible value of $\theta$.
-2. Propose a nearby value $\theta^*$.
-3. Compare the posterior height at $\theta^*$ with the posterior height at the current value.
-4. If the proposal is better, accept it.
-5. If the proposal is worse, sometimes accept it anyway.
-6. Repeat many times.
-
-Accepting worse moves may sound strange. But it helps the chain explore the full posterior rather than getting stuck at the highest point.
-
-::: callout-important
-## Why accept worse moves?
-
-If the chain only accepted moves to higher posterior density, it would climb to the mode and stay there.
-
-A posterior distribution is not only about the best value. It is about the whole range of plausible values.
-:::
-
-```{r}
-#| message: false
-#| warning: false
-
-log_posterior <- function(theta, x, n, alpha, beta) {
-  ifelse(
-    theta <= 0 | theta >= 1,
-    -Inf,
-    dbinom(x, size = n, prob = theta, log = TRUE) +
-      dbeta(theta, alpha, beta, log = TRUE)
-  )
-}
-
-run_metropolis <- function(n_iter, start, proposal_sd, x, n, alpha, beta) {
-  theta <- numeric(n_iter)
-  accepted <- logical(n_iter)
-  theta[1] <- start
-
-  for (i in 2:n_iter) {
-    proposal <- rnorm(1, mean = theta[i - 1], sd = proposal_sd)
-
-    log_ratio <- log_posterior(proposal, x, n, alpha, beta) -
-      log_posterior(theta[i - 1], x, n, alpha, beta)
-
-    if (log(runif(1)) < log_ratio) {
-      theta[i] <- proposal
-      accepted[i] <- TRUE
-    } else {
-      theta[i] <- theta[i - 1]
-    }
-  }
-
-  tibble(
-    iteration = 1:n_iter,
-    theta = theta,
-    accepted = accepted
-  )
-}
-
-set.seed(2420)
-
-metropolis_draws <- run_metropolis(
-  n_iter = 12000,
-  start = 0.30,
-  proposal_sd = 0.06,
-  x = x,
-  n = n,
-  alpha = alpha_prior,
-  beta = beta_prior
-) |>
-  mutate(
-    stage = if_else(iteration <= 2000, "Warm-up", "Kept draws")
-  )
-
-metropolis_draws |>
-  ggplot(aes(x = iteration, y = theta, color = stage)) +
-  geom_line(alpha = 0.8) +
-  labs(
-    x = "Iteration",
-    y = expression(theta),
-    color = NULL,
-    title = "A Metropolis chain for the bus survey posterior",
-    subtitle = "Early warm-up draws are often discarded"
-  )
-```
-
-The trace plot shows the chain wandering around the high-posterior region. Early in the chain, the values may still reflect the starting point. These early values are often called **warm-up** or **burn-in** draws.
-
-For this simple example, the chain quickly reaches the main posterior region. In more complicated models, warm-up and convergence are more serious issues.
-
-Let us discard the first $2000$ iterations and compare the remaining draws with the exact posterior.
-
-```{r}
-#| message: false
-#| warning: false
-
-metropolis_kept <- metropolis_draws |>
-  filter(iteration > 2000)
-
-exact_density <- tibble(
-  theta = seq(0.001, 0.999, length.out = 1000),
-  density = dbeta(theta, alpha_post, beta_post)
-)
-
-metropolis_kept |>
-  ggplot(aes(x = theta, y = after_stat(density), color = "Metropolis draws")) +
-  geom_histogram(bins = 40, fill = "white") +
-  geom_density(linewidth = 1) +
-  geom_line(
-    data = exact_density,
-    aes(x = theta, y = density, color = "Exact posterior"),
-    linewidth = 1
-  ) +
-  labs(
-    x = expression(theta),
-    y = "Density",
-    color = NULL,
-    title = "Metropolis draws approximate the posterior distribution"
-  ) +
-  guides(color = guide_legend(override.aes = list(fill = NA)))
-```
-
-The Metropolis draws are not independent in the same way as the direct `rbeta()` draws were. Each draw depends on the previous draw. But if the chain is working well, the collection of kept draws still approximates the posterior distribution.
-
-```{r}
-#| message: false
-#| warning: false
-
-metropolis_summary <- metropolis_kept |>
-  summarise(
-    `Acceptance rate` = mean(accepted),
-    `Posterior mean` = mean(theta),
-    `Posterior median` = median(theta),
-    `2.5% quantile` = quantile(theta, 0.025),
-    `97.5% quantile` = quantile(theta, 0.975),
-    `P(theta > 0.60)` = mean(theta > 0.60)
-  ) |>
-  pivot_longer(
-    cols = everything(),
-    names_to = "Summary",
-    values_to = "Value"
-  )
-
-metropolis_summary |>
-  mutate(Value = round(Value, 3)) |>
-  gt() |>
-  tab_options(table.width = pct(80))
-```
-
-The exact numbers will not be identical to the analytic posterior summaries, because this is a simulation. But they should be close.
-
-## What can go wrong with MCMC?
-
-MCMC is powerful, but it is not magic. A chain can behave badly.
-
-One common problem is that the proposed steps are too small. The chain moves, but very slowly. It may take a long time to explore the posterior.
-
-Another problem is that the proposed steps are too large. The chain proposes values that are often unreasonable, so many proposals are rejected. The chain may stay in the same place for long stretches.
-
-```{r}
-#| message: false
-#| warning: false
-
-set.seed(2420)
-
-chain_small_steps <- run_metropolis(
-  n_iter = 3000,
-  start = 0.30,
-  proposal_sd = 0.005,
-  x = x,
-  n = n,
-  alpha = alpha_prior,
-  beta = beta_prior
-) |>
-  mutate(chain = "Proposal steps too small")
-
-chain_large_steps <- run_metropolis(
-  n_iter = 3000,
-  start = 0.30,
-  proposal_sd = 0.50,
-  x = x,
-  n = n,
-  alpha = alpha_prior,
-  beta = beta_prior
-) |>
-  mutate(chain = "Proposal steps too large")
-
-chain_good_steps <- run_metropolis(
-  n_iter = 3000,
-  start = 0.30,
-  proposal_sd = 0.06,
-  x = x,
-  n = n,
-  alpha = alpha_prior,
-  beta = beta_prior
-) |>
-  mutate(chain = "Reasonable proposal steps")
-
-bind_rows(chain_small_steps, chain_good_steps, chain_large_steps) |>
-  ggplot(aes(x = iteration, y = theta, color = chain)) +
-  geom_line(alpha = 0.8) +
-  facet_wrap(~ chain, ncol = 1) +
-  labs(
-    x = "Iteration",
-    y = expression(theta),
-    color = NULL,
-    title = "Different proposal sizes can produce very different chains"
-  ) +
-  theme(legend.position = "none")
-```
-
-The trace plot is one of the first things to inspect in an MCMC analysis.
-
-A healthy trace plot usually looks like a fuzzy caterpillar: it moves around a stable region without obvious trends, long flat sections, or permanent drifting.
-
-::: callout-tip
-## A useful MCMC habit
-
-Do not only look at the final posterior summary table.
-
-Always ask:
-
-- Did the chain explore the posterior?
-- Did it get stuck?
-- Did it depend too much on the starting value?
-- Would another chain started somewhere else give a similar answer?
-:::
-
-In professional Bayesian modelling, convergence diagnostics are essential. In this chapter, the main point is simpler:
-
-> MCMC gives approximate posterior draws, but we should check whether the simulation behaved sensibly.
-
-## Posterior prediction
-
-So far, we have focused on $\theta$, the unknown proportion of students who would use the late-night bus. But the university might also ask a more concrete question:
-
-> If $1200$ students are on campus late during the exam period, how many might use the bus?
-
-This is a prediction question.
-
-A simple way to answer it is to use posterior simulation.
-
-For each posterior draw of $\theta$, we simulate a possible number of bus users among $1200$ students:
-
-$$
-\begin{aligned}
-Y \mid \theta
-&\sim \text{Binomial}(1200, \theta).
-\end{aligned}
-$$
-
-This includes two sources of uncertainty:
-
-1. uncertainty about $\theta$;
-2. randomness in how many students actually use the service even if $\theta$ were known.
-
-```{r}
-#| message: false
-#| warning: false
-
-set.seed(2420)
-
-posterior_prediction <- posterior_draws |>
-  mutate(
-    predicted_users = rbinom(n(), size = 1200, prob = theta)
-  )
-
-posterior_prediction |>
-  ggplot(aes(x = predicted_users, y = after_stat(density), color = "Posterior predictive distribution")) +
-  geom_histogram(bins = 40, fill = "white") +
-  geom_density(linewidth = 1) +
-  labs(
-    x = "Predicted number of bus users out of 1200 students",
-    y = "Density",
-    color = NULL,
-    title = "Posterior predictive distribution for bus usage"
-  ) +
-  guides(color = guide_legend(override.aes = list(fill = NA)))
-```
-
-```{r}
-#| message: false
-#| warning: false
-
-posterior_prediction |>
-  summarise(
-    `Predictive mean` = mean(predicted_users),
-    `Predictive median` = median(predicted_users),
-    `2.5% predictive quantile` = quantile(predicted_users, 0.025),
-    `97.5% predictive quantile` = quantile(predicted_users, 0.975),
-    `P(more than 700 users)` = mean(predicted_users > 700)
-  ) |>
-  pivot_longer(
-    cols = everything(),
-    names_to = "Summary",
-    values_to = "Value"
-  ) |>
-  mutate(Value = round(Value, 1)) |>
-  gt() |>
-  tab_options(table.width = pct(80))
-```
-
-Posterior prediction is often more useful than parameter estimation alone. Decision-makers usually care about observable consequences: number of bus users, number of hospital beds needed, number of claims next month, number of support calls, or number of customers who will respond to an offer.
-
-::: callout-note
-## Parameter uncertainty and predictive uncertainty
-
-A posterior distribution describes uncertainty about an unknown parameter.
-
-A posterior predictive distribution describes uncertainty about future or unobserved data.
-:::
-
-## From posterior summaries to decisions
-
-A posterior distribution is not the end of an analysis. It is often the beginning of a decision.
-
-The university has to decide whether to run the late-night bus.
-
-Suppose there are two possible actions:
-
-$$
-\begin{aligned}
-a_1 &= \text{run the bus}, \\
-a_0 &= \text{do not run the bus}.
-\end{aligned}
-$$
-
-The best action depends on the consequences.
-
-Suppose running the service costs $\$18{,}000$ during the exam period. Suppose each student trip is valued at $\$20$ in safety, convenience, and avoided transport costs.
-
-If $Y$ students use the bus, the net value of running it is:
-
-$$
-\begin{aligned}
-\text{net value}
-&= 20Y - 18000.
-\end{aligned}
-$$
-
-If the university does not run the bus, we will define the net value as $0$ for comparison.
-
-Using the posterior predictive draws, we can simulate the net value of running the service.
-
-```{r}
-#| message: false
-#| warning: false
-
-bus_decision <- posterior_prediction |>
-  mutate(
-    net_value_run = 20 * predicted_users - 18000,
-    better_to_run = net_value_run > 0
-  )
-
-bus_decision |>
-  ggplot(aes(x = net_value_run, y = after_stat(density), color = "Net value if bus runs")) +
-  geom_histogram(bins = 40, fill = "white") +
-  geom_density(linewidth = 1) +
-  geom_vline(xintercept = 0, linetype = "dashed") +
-  labs(
-    x = "Net value of running the service",
-    y = "Density",
-    color = NULL,
-    title = "Posterior distribution of the net value of running the bus",
-    subtitle = "Values above zero favour running the service"
-  ) +
-  scale_x_continuous(labels = dollar) +
-  guides(color = guide_legend(override.aes = list(fill = NA)))
-```
-
-```{r}
-#| message: false
-#| warning: false
-
-bus_decision |>
-  summarise(
-    `Expected net value if bus runs` = mean(net_value_run),
-    `Median net value if bus runs` = median(net_value_run),
-    `P(net value > 0)` = mean(net_value_run > 0),
-    `P(net value < -5000)` = mean(net_value_run < -5000)
-  ) |>
-  pivot_longer(
-    cols = everything(),
-    names_to = "Summary",
-    values_to = "Value"
-  ) |>
-  mutate(
-    Value = if_else(
-      str_detect(Summary, "P\\("),
-      as.character(round(Value, 3)),
-      dollar(round(Value, 0))
-    )
-  ) |>
-  gt() |>
-  tab_options(table.width = pct(90))
-```
-
-This is a different kind of output from a confidence interval or a hypothesis test. We are using the posterior distribution to simulate consequences under each possible action.
-
-The decision still requires judgement. The value of a safe trip is not an objective fact. The cost estimate may be uncertain. There may be equity concerns, reputational concerns, or legal obligations that are not captured by the simple calculation.
-
-But the posterior simulation helps make the trade-off visible.
-
-::: callout-important
-## Bayesian analysis does not remove judgement
-
-Bayesian inference can clarify uncertainty.
-
-Decision analysis can clarify trade-offs.
-
-But the final decision still depends on values, costs, consequences, and context.
-:::
-
-## Loss functions
-
-Decision theory gives a formal language for decisions under uncertainty.
-
-A **loss function** describes how bad it is to take action $a$ when the true state of the world is $\theta$.
-
-We write this as:
-
-$$
-\begin{aligned}
-L(\theta, a).
-\end{aligned}
-$$
-
-In estimation problems, the action is usually a point estimate $\hat{\theta}$. Different loss functions lead to different best estimates.
-
-Two common loss functions are squared-error loss and absolute-error loss.
-
-```{r}
-#| echo: false
-#| message: false
-#| warning: false
-
-loss_table <- tibble(
-  `Loss function` = c("Squared-error loss", "Absolute-error loss"),
-  `Formula` = c("L(theta, theta_hat) = (theta - theta_hat)^2", "L(theta, theta_hat) = |theta - theta_hat|"),
-  `Bayes estimate` = c("Posterior mean", "Posterior median"),
-  `Penalises large errors?` = c("Strongly", "Less strongly")
-)
-
-loss_table |>
-  gt() |>
-  tab_options(table.width = pct(100))
-```
-
-Under squared-error loss:
-
-$$
-\begin{aligned}
-L(\theta, \hat{\theta})
-&= (\theta - \hat{\theta})^2.
-\end{aligned}
-$$
-
-The Bayes estimator is the posterior mean:
-
-$$
-\begin{aligned}
-\hat{\theta}_{\text{Bayes}}
-&= E(\theta \mid X).
-\end{aligned}
-$$
-
-Under absolute-error loss:
-
-$$
-\begin{aligned}
-L(\theta, \hat{\theta})
-&= |\theta - \hat{\theta}|.
-\end{aligned}
-$$
-
-The Bayes estimator is the posterior median.
-
-For symmetric posterior distributions, the mean and median may be similar. For skewed posterior distributions, they can differ.
-
-```{r}
-#| message: false
-#| warning: false
-
-skewed_draws <- tibble(
-  theta = rbeta(10000, 3, 12)
-)
-
-skewed_summaries <- skewed_draws |>
-  summarise(
-    mean = mean(theta),
-    median = median(theta)
-  )
-
-skewed_draws |>
-  ggplot(aes(x = theta, y = after_stat(density), color = "Posterior distribution")) +
-  geom_histogram(bins = 40, fill = "white") +
-  geom_density(linewidth = 1) +
   geom_vline(
-    data = skewed_summaries,
-    aes(xintercept = mean, color = "Posterior mean"),
+    xintercept = x_bar,
+    linetype = "dashed"
+  ) +
+  labs(
+    x = expression(mu),
+    y = "Likelihood"
+  ) +
+  theme_minimal()
+```
+
+The likelihood is highest near the sample mean. This makes sense: values of $\mu$ close to the observed sample mean make the data more likely.
+
+### The prior
+
+Now we need a prior for $\mu$. A normal prior would be mathematically convenient. However, suppose we want a prior that is easy to describe in plain language.
+
+Suppose we **know** the following: (1) the earliest the food can be delivered is 10mins (factoring packing and driving time) and (2) cannot be more than 60 minutes, or else the customer doesn't have to pay. Therefore, before we see the data, we might have the following beliefs:
+
+| Quantity | Value | Meaning |
+|----------------------|---------------------------:|----------------------|
+| Minimum plausible average | 10 minutes | It would be surprising if the true average were below this |
+| Most plausible average | 25 minutes | This is the delivery service's claim |
+| Maximum plausible average | 60 minutes | It would be surprising if the true average were above this |
+
+This suggests a **triangular prior**. A triangular prior is defined using three values:
+
+$$\begin{aligned}
+a &= \text{minimum plausible value} \\
+m &= \text{most plausible value} \\
+b &= \text{maximum plausible value}.
+\end{aligned}$$
+
+For this example:
+
+$$\begin{aligned}
+a &= 10 \\
+m &= 25 \\
+b &= 60
+\end{aligned}$$
+
+The prior density increases from 10 to 25, then decreases from 25 to 60. Visually:
+
+```{r, echo=FALSE}
+triangular_density <- function(mu, a = 10, m = 25, b = 60) {
+  case_when(
+    mu < a ~ 0,
+    mu >= a & mu <= m ~ 2 * (mu - a) / ((b - a) * (m - a)),
+    mu > m & mu <= b ~ 2 * (b - mu) / ((b - a) * (b - m)),
+    mu > b ~ 0
+  )
+}
+```
+
+```{r, warning=FALSE, message=FALSE, echo=FALSE}
+prior_df <- tibble(
+  mu = mu_grid,
+  prior = triangular_density(mu)
+)
+
+ggplot(prior_df, aes(x = mu, y = prior)) +
+  geom_line(linewidth = 1) +
+  geom_vline(
+    xintercept = 25,
+    linetype = "dashed"
+  ) +
+  scale_x_continuous(
+    limits = c(0,60),
+    breaks = seq(0,60, 10)) +
+  labs(
+    x = expression(mu),
+    y = "Prior density"
+  ) +
+  theme_minimal()
+```
+
+The prior peaks at 25 minutes. This means that before seeing the data, we thought values near 25 minutes were most plausible. Values near 10 or 60 minutes were possible, but less plausible.
+
+::: callout-caution
+### Why this is not a conjugate model
+
+In the beta-binomial example, the prior and posterior were from the same family:
+
+$$\begin{aligned}
+\text{Beta prior} + \text{Binomial likelihood}
+&\rightarrow \text{Beta posterior}
+\end{aligned}$$
+
+That made the posterior easy to write down.
+
+Now, we have:
+
+$$\begin{aligned}
+\text{Triangular prior} + \text{Normal likelihood}
+&\rightarrow \text{posterior}
+\end{aligned}$$
+
+The posterior exists, but it is not a standard distribution with a simple name. That means we cannot simply write something like:
+
+$$\begin{aligned}
+\mu \mid \bar{x}
+&\sim \text{some known distribution}
+\end{aligned}$$
+
+Instead, we use the general Bayesian rule:
+
+$$\begin{aligned}
+p(\mu \mid \bar{x})
+&\propto p(\bar{x} \mid \mu)p(\mu)
+\end{aligned}$$
+
+Or in words:
+
+$$\begin{aligned}
+\text{posterior}
+&\propto \text{likelihood} \times \text{prior}
+\end{aligned}$$
+
+This is the target distribution we want to approximate.
+:::
+
+## Calculating the posterior on a grid
+
+We now have two ingredients:
+
+1.  a **prior**, which describes what values of $\mu$ seemed plausible before seeing the data
+2.  a **likelihood**, which describes which values of $\mu$ are supported by the observed sample mean
+
+The next step is to combine them to form a **posterior**.
+
+Before using MCMC, we will do this in a more direct way using a **grid**. A grid is just a list of possible values. In this example, we make a long list of possible values for the true mean delivery time $\mu$. For each value of $\mu$ in the grid, we calculate:
+
+- the prior density at that value
+- the likelihood at that value
+- the product of the prior and likelihood
+
+This gives us an approximate posterior distribution. This is a simple method that works well here because we only have one unknown parameter, $\mu$. It is useful because it lets us see clearly what the posterior should look like before we move to a more general computational method.
+
+First, we will create the grid of possible values for $\mu$. In this example, $\mu$ represents the true average delivery time. Since the delivery times are measured in minutes, we need to choose a reasonable range of possible values. Here, we will consider values of $\mu$ from 10 minutes to 60 minutes. The argument `length.out = 1000` means that R will create 1000 evenly spaced values between 10 and 60.
+
+```{r}
+mu_grid <- seq(10, 60, length.out = 1000)
+```
+
+Next, we calculate the width of each small interval in the grid. Because `mu_grid` is made up of evenly spaced values, the distance between the first value and the second value tells us the spacing for the whole grid. This value is small because we used 1000 grid points. We will use grid_width later when we convert densities into approximate probabilities. The idea is that each grid point represents a small interval of possible values for $\mu$. The width of that interval is approximately grid_width.
+
+```{r}
+grid_width <- mu_grid[2] - mu_grid[1]
+```
+
+Next, we can create the table that stores the prior, likelihood, and posterior calculations for each grid value. The column `mu` contains the grid values. The column `prior` gives the prior density at each value of $\mu$. The column `likelihood` gives the likelihood at each value of $\mu$. This tells us how plausible the observed sample mean would be if that grid value were the true mean. The column `unnormalised_posterior` multiplies the prior and likelihood together. This gives us the shape of the posterior distribution, but it is not yet scaled so that the total area under the curve equals 1.
+
+```{r}
+triangular_density <- function(mu, a = 10, m = 25, b = 60) {
+  case_when(
+    mu < a ~ 0,
+    mu >= a & mu <= m ~ 2 * (mu - a) / ((b - a) * (m - a)),
+    mu > m & mu <= b ~ 2 * (b - mu) / ((b - a) * (b - m)),
+    mu > b ~ 0
+  )
+}
+
+posterior_grid <- tibble(
+  mu = mu_grid,
+  prior = triangular_density(mu),
+  likelihood = dnorm(x_bar, mean = mu, sd = standard_error),
+  unnormalised_posterior = prior * likelihood
+)
+```
+
+Next, we rescale the unnormalised posterior so that it becomes a proper posterior density. At the moment, `unnormalised_posterior` has the right shape, but the total area under it is not necessarily equal to 1. A probability density needs to have total area 1, so we need to rescale it. The final column, `posterior_probability,` gives the approximate posterior probability attached to each small interval in the grid. This is found by multiplying the posterior density by the grid width.
+
+```{r}
+posterior_grid <- posterior_grid |>
+  mutate(
+    posterior_density = unnormalised_posterior /
+      sum(unnormalised_posterior * grid_width),
+    posterior_probability = posterior_density * grid_width
+  )
+```
+
+Let's now plot the posterior density:
+
+```{r}
+ggplot(posterior_grid, aes(x = mu, y = posterior_density)) +
+  geom_line(linewidth = 1) +
+  labs(
+    x = expression(mu),
+    y = "Posterior density"
+  ) +
+  theme_minimal()
+```
+
+#### Summarising the posterior
+
+The posterior plot gives us the full shape of the posterior distribution. However, we often also want to summarise the posterior using a few numbers. Two useful summaries are:
+
+- the **posterior mean**
+- a **95% credible interval**
+
+The posterior mean gives a single summary value for $\mu$. The 95% credible interval gives a range of plausible values for $\mu$ after combining the prior with the data. Because we calculated the posterior on a grid, we can calculate these summaries by adding up the posterior probabilities across the grid.
+
+##### Posterior mean
+
+The posterior mean is a weighted average of the possible values of $\mu$. Each grid value is weighted by its posterior probability. Values of $\mu$ with higher posterior probability contribute more to the posterior mean.
+
+```{r}
+posterior_mean <- posterior_grid |>
+  summarise(
+    posterior_mean = sum(mu * posterior_probability)
+  )
+
+posterior_mean
+```
+
+#### 95% credible interval
+
+Next, we calculate a 95% credible interval. A 95% credible interval is an interval that contains 95% of the posterior probability. To calculate this from the grid, we first calculate the cumulative posterior probability. This tells us how much posterior probability has accumulated as we move from smaller to larger values of $\mu$.
+
+```{r}
+posterior_grid <- posterior_grid |>
+  mutate(
+    cumulative_probability = cumsum(posterior_probability)
+  )
+```
+
+The lower endpoint of the interval is the value of $\mu$ where the cumulative probability first reaches 2.5%. The upper endpoint is the value of $\mu$ where the cumulative probability first reaches 97.5%.
+
+```{r}
+credible_interval <- posterior_grid |>
+  summarise(
+    lower = min(mu[cumulative_probability >= 0.025]),
+    upper = min(mu[cumulative_probability >= 0.975])
+  )
+
+credible_interval
+```
+
+This interval is called an **equal-tailed credible interval** because it leaves 2.5% of the posterior probability in the lower tail and 2.5% in the upper tail.
+
+In words, we can say:
+
+> Based on the prior and the observed data, there is a 95% posterior probability that the true average delivery time $\mu$ lies between 23.0 minutes and 29.7 minutes.
+
+## Markov Chain Monte Carlo (MCMC)
+
+The grid method is useful because it makes the posterior calculation very explicit. We created many possible values of $\mu$, calculated the prior and likelihood at each value, multiplied them together, and then rescaled the result to get a posterior distribution. This works well in this example because we only have one unknown parameter: the true average delivery time $\mu$.
+
+However, grid methods become difficult when models become more complicated. For example, suppose we had several unknown parameters instead of one. We might want to estimate:
+
+- the true mean delivery time
+- the standard deviation of delivery times
+- the effect of day of the week
+- the effect of distance
+- the effect of order size
+
+If we tried to create a grid for all of these unknown quantities at once, the number of combinations would grow very quickly.
+
+::: callout-note
+For example, suppose we used 1000 grid points for each unknown quantity. With one unknown parameter, we need:
+
+$$1000 \text{ grid points}$$
+
+With two unknown parameters, we need:
+
+$$1000 \times 1000 = 1{,}000{,}000 \text{ grid combinations}$$
+
+With five unknown parameters, we need:
+
+$$1000^5 = 1{,}000{,}000{,}000{,}000{,}000 \text{ grid combinations}$$
+
+So the problem grows very quickly. This is sometimes called the **curse of dimensionality**. Even though a grid is easy to understand, it becomes impractical once we have several unknown parameters.
+:::
+
+### Understanding MCMC in three parts
+
+The phrase **Markov Chain Monte Carlo** can sound intimidating, but the name contains the three ideas we need. Note: the **Metropolis-Hasting** part is popular method
+
+| Part | Meaning | In this example |
+|------------------------|------------------------|------------------------|
+| Monte Carlo | Use random simulation | Draw possible values of $\mu$ |
+| Markov chain | Each step depends on the current value | Propose the next $\mu$ near the current $\mu$ |
+| MCMC Algorithm | Decide whether to accept or reject a proposal | Use an algorithm such as Metropolis–Hastings, Gibbs sampling, or Hamiltonian Monte Carlo to decide how the chain moves |
+
+#### Part 1: Monte Carlo
+
+The **Monte Carlo** part simply means that we use random simulation. Instead of calculating everything exactly, we generate random values and use them to approximate a distribution. In this example, a simulated value such as:
+
+$$\begin{aligned}
+\mu &= 28.4
+\end{aligned}$$
+
+means that one possible value of the true average delivery time is 28.4 minutes.
+
+```{=html}
+<iframe src="interactive/mcmc1.html" width="100%" height="470px" style="border: none;"></iframe>
+```
+
+The app above is not doing Bayesian inference yet. It is only showing the simulation idea. We generate possible values, then use those simulated values to learn about a distribution.
+
+#### Part 2: Markov chain
+
+The **Markov chain** part means that the next value depends on the current value. Suppose the current value is $\mu_{t-1}$. A simple way to propose the next value is:
+
+$$\begin{aligned}
+\mu^\star
+&\sim N(\mu_{t-1}, s^2)
+\end{aligned}$$
+
+where $s$ controls how large the proposed jumps tend to be.
+
+For example, if the current value is 26 minutes, the next proposal might be 27.1 minutes or 24.8 minutes. It is usually nearby, because the proposal distribution is centred on the current value.
+
+```{=html}
+<iframe src="interactive/mcmc2.html" width="100%" height="490px" style="border: none;"></iframe>
+```
+
+Notice in the app above that the chain can wander randomly, moving quite far away from the proposed distribution. This is sometimes refered to as a random walk.
+
+#### Part 3: Movement Algorithm
+
+We do not want to wander randomly forever. We want the chain to spend more time in values of $\mu$ with high posterior density and less time in values with low posterior density.
+
+There are many different MCMC algorithms that we can use to decide how the chain moves. In this example we will learn about the **Metropolis-Hastings** method.
+
+At each step we compare:
+
+- the posterior target at the proposed value, $\mu^\star$
+- the posterior target at the current value, $\mu_{t-1}$
+
+The ratio is:
+
+$$\begin{aligned}
+r
+&= \frac{p(\bar{x} \mid \mu^\star)p(\mu^\star)}
+        {p(\bar{x} \mid \mu_{t-1})p(\mu_{t-1})}
+\end{aligned}$$
+
+Then the acceptance probability is:
+
+$$\begin{aligned}
+\alpha
+&= \min(1,r)
+\end{aligned}$$
+
+This gives the following rule:
+
+| Situation | Meaning | Decision |
+|------------------------|------------------------|------------------------|
+| $r > 1$ | The proposed value has higher posterior support | Accept it |
+| $r < 1$ | The proposed value has lower posterior support | Accept it with probability $r$ |
+| Proposal rejected | The proposed value is not stored | Store the current value again |
+
+This last point is important. If a proposal is rejected, the chain does not disappear. It records the previous value again.
+
+```{=html}
+<iframe src="interactive/mcmc3.html" width="100%" height="700px" style="border: none;"></iframe>
+```
+
+
+### Writing the posterior target in R
+
+To run the algorithm, we first need a function for the unnormalised posterior. This is the target distribution for MCMC.
+
+$$\begin{aligned}
+p(\mu \mid \bar{x})
+&\propto p(\bar{x} \mid \mu)p(\mu)
+\end{aligned}$$
+
+In R, this is:
+
+```{r}
+posterior_target <- function(mu) {
+  prior <- triangular_density(mu)
+  likelihood <- dnorm(x_bar, mean = mu, sd = standard_error)
+  prior * likelihood
+}
+```
+
+This function gives the prior times the likelihood. It does not calculate the normalising constant. That is okay because the normalising constant cancels out in the Metropolis-Hastings ratio.
+
+### Running the Metropolis-Hastings algorithm
+
+Now we can write the algorithm.
+
+```{r}
+set.seed(123)
+
+n_iter <- 10000
+proposal_sd <- 2
+
+mu_chain <- numeric(n_iter)
+mu_chain[1] <- 25
+
+accepted <- logical(n_iter)
+
+for (t in 2:n_iter) {
+  
+  current_mu <- mu_chain[t - 1]
+  
+  proposed_mu <- rnorm(
+    n = 1,
+    mean = current_mu,
+    sd = proposal_sd
+  )
+  
+  current_density <- posterior_target(current_mu)
+  proposed_density <- posterior_target(proposed_mu)
+  
+  r <- proposed_density / current_density
+  alpha <- min(1, r)
+  
+  u <- runif(1)
+  
+  if (u < alpha) {
+    mu_chain[t] <- proposed_mu
+    accepted[t] <- TRUE
+  } else {
+    mu_chain[t] <- current_mu
+    accepted[t] <- FALSE
+  }
+}
+
+mcmc_df <- tibble(
+  iteration = 1:n_iter,
+  mu = mu_chain,
+  accepted = accepted
+)
+```
+
+The object `mu_chain` contains the MCMC sample. Each value is one possible value of $\mu$.
+
+### Looking at the first few iterations
+
+It is useful to inspect the first few values in the chain.
+
+```{r}
+mcmc_df |>
+  slice(1:10) |>
+  gt() |>
+  cols_label(
+    iteration = "Iteration",
+    mu = "Value of mu",
+    accepted = "Accepted?"
+  ) |>
+  fmt_number(
+    columns = mu,
+    decimals = 2
+  ) |>
+  cols_align(
+    align = "center",
+    columns = everything()
+  )
+```
+
+Some values may repeat. This happens when a proposal is rejected and the previous value is stored again.
+
+### Acceptance rate
+
+The **acceptance rate** is the proportion of proposed moves that were accepted.
+
+```{r}
+acceptance_rate <- mean(accepted[-1])
+acceptance_rate
+```
+
+If the acceptance rate is very low, the proposal jumps may be too large. The chain proposes values far away from the current value, and many of them are rejected.
+
+If the acceptance rate is very high, the proposal jumps may be too small. The chain accepts most proposals, but it may move around the posterior very slowly.
+
+For this example, we are using MCMC for teaching, so we do not need to tune the proposal perfectly.
+
+### Trace plot
+
+A **trace plot** shows the value of $\mu$ at each iteration.
+
+```{r, warning=FALSE, message=FALSE}
+ggplot(mcmc_df, aes(x = iteration, y = mu)) +
+  geom_line(linewidth = 0.35, alpha = 0.8) +
+  labs(
+    x = "Iteration",
+    y = expression(mu)
+  ) +
+  theme_minimal()
+```
+
+The trace should move around the high posterior region. It should not drift endlessly upward or downward, and it should not get stuck at one value for a long time.
+
+### Burn-in
+
+The beginning of the chain can be influenced by the starting value. It is common to discard some early draws. This is called **burn-in**.
+
+```{r}
+burn_in <- 1000
+
+mcmc_post_burn <- mcmc_df |>
+  filter(iteration > burn_in)
+```
+
+::: callout-note
+### What is burn-in?
+
+Burn-in is the early part of the chain that we remove before summarising the posterior.
+
+The idea is that the chain may need some time to move from its starting value into the main region of the posterior distribution.
+:::
+
+### MCMC posterior draws
+
+After removing burn-in, we can plot the remaining MCMC draws.
+
+```{r, warning=FALSE, message=FALSE}
+ggplot(mcmc_post_burn, aes(x = mu)) +
+  geom_histogram(
+    aes(y = after_stat(density)),
+    bins = 40,
+    fill = "grey80",
+    color = "white"
+  ) +
+  labs(
+    x = expression(mu),
+    y = "Density"
+  ) +
+  theme_minimal()
+```
+
+This histogram is an approximation to the posterior distribution. The tallest part of the histogram shows the most plausible values of the average delivery time after combining the prior and the data.
+
+### Comparing MCMC with the grid posterior
+
+Because this example has only one unknown parameter, we can compare the MCMC result to the grid approximation from earlier.
+
+```{r, warning=FALSE, message=FALSE}
+ggplot() +
+  geom_histogram(
+    data = mcmc_post_burn,
+    aes(x = mu, y = after_stat(density)),
+    bins = 40,
+    fill = "grey80",
+    color = "white"
+  ) +
+  geom_line(
+    data = posterior_grid,
+    aes(x = mu, y = posterior_density),
+    linewidth = 1,
+    color = "purple"
+  ) +
+  labs(
+    x = expression(mu),
+    y = "Posterior density"
+  ) +
+  theme_minimal()
+```
+
+The grey histogram comes from MCMC. The purple curve comes from the grid approximation. If the algorithm is working well, the histogram should roughly follow the purple curve.
+
+This comparison is useful because the grid result acts like an answer key. In more complicated models, we may not have such a simple grid approximation available.
+
+### Summarising the MCMC posterior
+
+Once we have posterior draws, we can summarise them just like any other simulated distribution.
+
+```{r}
+mcmc_summary <- mcmc_post_burn |>
+  summarise(
+    posterior_mean = mean(mu),
+    posterior_median = median(mu),
+    lower_95 = quantile(mu, 0.025),
+    upper_95 = quantile(mu, 0.975)
+  )
+
+mcmc_summary |>
+  gt() |>
+  cols_label(
+    posterior_mean = "Posterior mean",
+    posterior_median = "Posterior median",
+    lower_95 = "Lower 95%",
+    upper_95 = "Upper 95%"
+  ) |>
+  fmt_number(
+    columns = everything(),
+    decimals = 2
+  ) |>
+  cols_align(
+    align = "center",
+    columns = everything()
+  )
+```
+
+The posterior mean gives a single-number estimate of the average delivery time. The 95% credible interval gives a range of plausible values for $\mu$ after combining the prior with the data.
+
+### A posterior probability statement
+
+One advantage of Bayesian inference is that we can answer probability questions directly.
+
+For example, suppose the delivery service wants to know whether the true average delivery time is likely to be under 30 minutes.
+
+We want:
+
+$$\begin{aligned}
+P(\mu < 30 \mid \bar{x})
+\end{aligned}$$
+
+Using MCMC, this is just the proportion of posterior draws below 30.
+
+```{r}
+mcmc_post_burn |>
+  summarise(
+    probability_under_30 = mean(mu < 30)
+  ) |>
+  gt() |>
+  cols_label(
+    probability_under_30 = "Posterior probability that mu is below 30"
+  ) |>
+  fmt_number(
+    columns = probability_under_30,
+    decimals = 3
+  ) |>
+  cols_align(
+    align = "center",
+    columns = everything()
+  )
+```
+
+We can show this visually by adding a vertical line at 30 minutes.
+
+```{r, warning=FALSE, message=FALSE}
+ggplot(mcmc_post_burn, aes(x = mu)) +
+  geom_histogram(
+    aes(y = after_stat(density)),
+    bins = 40,
+    fill = "grey80",
+    color = "white"
+  ) +
+  geom_vline(
+    xintercept = 30,
+    linetype = "dashed"
+  ) +
+  labs(
+    x = expression(mu),
+    y = "Density"
+  ) +
+  theme_minimal()
+```
+
+The area to the left of 30 represents the posterior probability that the true average delivery time is below 30 minutes.
+
+## Using the posterior to make decisions
+
+So far, we have used MCMC to approximate the posterior distribution for the true average delivery time, $\mu$. The posterior tells us which values of $\mu$ are plausible after combining the prior with the data.
+
+However, in many real problems, estimating the posterior is not the final step. We often want to use the posterior to make a decision.
+
+For example, suppose the delivery company wants to decide whether it should advertise the following claim:
+
+> Average delivery time is under 30 minutes.
+
+This is now a decision problem. The posterior distribution can tell us how likely the claim is to be true, but the final decision also depends on the consequences of being wrong.
+
+### The decision problem
+
+There are two possible actions:
+
+| Action | Meaning |
+|------------------------------------|------------------------------------|
+| Advertise | The company advertises that the average delivery time is under 30 minutes |
+| Do not advertise | The company does not make this advertising claim |
+
+There are also two possible true situations:
+
+| True situation | Meaning                                                |
+|----------------|--------------------------------------------------------|
+| $\mu < 30$     | The true average delivery time is under 30 minutes     |
+| $\mu \geq 30$  | The true average delivery time is 30 minutes or higher |
+
+### Loss functions
+
+A **loss function** assigns a cost to each combination of an action and a true situation. The loss does not come from the statistical model. It represents the consequences of different decisions. In this example, we will use simple unitless loss points.
+
+Suppose the company uses the following loss function:
+
+| Action           | If $\mu < 30$ | If $\mu \geq 30$ |
+|------------------|--------------:|-----------------:|
+| Advertise        |             0 |               10 |
+| Do not advertise |             2 |                0 |
+
+This table says:
+
+- if the company advertises and the claim is true, there is no loss;
+- if the company advertises and the claim is false, the loss is 10;
+- if the company does not advertise and the claim is true, the loss is 2;
+- if the company does not advertise and the claim is false, there is no loss.
+
+The numbers are not minutes, dollars, or probabilities. They are **unitless loss points**. They encode the relative seriousness of the possible mistakes. In this loss function, advertising a false claim has loss 10, while missing a true advertising opportunity has loss 2. So the false advertising mistake is treated as five times worse than the missed opportunity.
+
+$$\begin{aligned}
+\frac{10}{2}
+&= 5 \text{ times worse}
+\end{aligned}$$
+
+::: callout-tip
+## Where do the loss numbers come from?
+
+The loss numbers are chosen by the decision maker. They reflect judgement about the consequences of each outcome. In a real business setting, these losses could be based on dollars. For example, false advertising might lead to refunds, complaints, reputational damage, or legal risk. Missing an advertising opportunity might lead to lower sales.
+:::
+
+### Expected loss
+
+A decision should account for both:
+
+1.  how likely each situation is; and
+2.  how costly each outcome would be.
+
+This is done using **expected loss**. The expected loss of an action is the average loss we would expect if we repeated the decision many times under the posterior probabilities.
+
+Suppose we used MCMC and found:
+
+```{r, warning=FALSE, message=FALSE, echo=FALSE}
+# Calculate posterior probabilities from the MCMC draws
+p_under_30 <- mean(mcmc_post_burn$mu < 30)
+p_30_or_higher <- mean(mcmc_post_burn$mu >= 30)
+
+# Create a smoother density estimate from the MCMC draws
+density_estimate <- density(
+  mcmc_post_burn$mu,
+  adjust = 1.8,
+  n = 2048
+)
+
+density_df <- tibble(
+  mu = density_estimate$x,
+  density = density_estimate$y,
+  situation = if_else(
+    mu < 30,
+    "Average under 30 minutes",
+    "Average 30 minutes or higher"
+  )
+)
+
+max_density <- max(density_df$density)
+
+ggplot(density_df, aes(x = mu, y = density)) +
+  geom_area(
+    aes(fill = situation),
+    alpha = 0.6
+  ) +
+  geom_line(linewidth = 1) +
+  geom_vline(
+    xintercept = 30,
     linetype = "dashed",
     linewidth = 1
   ) +
-  geom_vline(
-    data = skewed_summaries,
-    aes(xintercept = median, color = "Posterior median"),
-    linetype = "dotted",
-    linewidth = 1
+  annotate(
+    "text",
+    x = 22,
+    y = max_density * 0.90,
+    label = "P(mu < 30 ~ '|' ~ data)",
+    parse = TRUE,
+    hjust = 0,
+    size = 4
+  ) +
+  annotate(
+    "segment",
+    x = 23.5,
+    xend = 26,
+    y = max_density * 0.84,
+    yend = max_density * 0.55,
+    arrow = arrow(length = unit(0.18, "cm"))
+  ) +
+  annotate(
+  "text",
+  x = 30.6,
+  y = max_density * 0.42,
+  label = "P(mu >= 30 ~ '|' ~ data)",
+  parse = TRUE,
+  hjust = 0,
+  size = 4
+) +
+  annotate(
+    "segment",
+    x = 31.2,
+    xend = 30.7,
+    y = max_density * 0.36,
+    yend = max_density * 0.08,
+    arrow = arrow(length = unit(0.18, "cm"))
+  ) +
+  scale_fill_manual(
+    values = c(
+      "Average under 30 minutes" = "turquoise3",
+      "Average 30 minutes or higher" = "salmon"
+    )
   ) +
   labs(
-    x = expression(theta),
-    y = "Density",
-    color = NULL,
-    title = "Different loss functions can lead to different point estimates"
-  ) +
-  guides(color = guide_legend(override.aes = list(fill = NA)))
-```
-
-The important lesson is not that one summary is always better. The lesson is that a summary should match the purpose of the analysis.
-
-If very large errors are especially bad, squared-error loss may be natural. If errors are judged more linearly, absolute-error loss may be more natural. If overestimation is more serious than underestimation, an asymmetric loss function may be more appropriate.
-
-## Asymmetric losses
-
-Some mistakes are not equally bad in both directions.
-
-Suppose a hospital is estimating the number of beds needed during a severe flu season. Overestimating demand may waste money. Underestimating demand may leave patients without beds. These errors are not equivalent.
-
-A similar issue appears in the bus example. Underestimating demand may leave students waiting at night. Overestimating demand may waste money on an underused service.
-
-One simple way to represent asymmetric loss is:
-
-$$
-\begin{aligned}
-L(\theta, \hat{\theta})
-&=
-\begin{cases}
-4(\theta - \hat{\theta}), & \text{if } \hat{\theta} < \theta, \\
-\hat{\theta} - \theta, & \text{if } \hat{\theta} \geq \theta.
-\end{cases}
-\end{aligned}
-$$
-
-This loss says that underestimating $\theta$ is four times as costly as overestimating it.
-
-In this case, a higher posterior quantile may be a better estimate than the posterior mean or median.
-
-```{r}
-#| message: false
-#| warning: false
-
-asymmetric_summary <- posterior_draws |>
-  summarise(
-    `Posterior mean` = mean(theta),
-    `Posterior median` = median(theta),
-    `Posterior 80% quantile` = quantile(theta, 0.80),
-    `Posterior 90% quantile` = quantile(theta, 0.90)
-  ) |>
-  pivot_longer(
-    cols = everything(),
-    names_to = "Summary",
-    values_to = "Value"
-  )
-
-asymmetric_summary |>
-  mutate(Value = round(Value, 3)) |>
-  gt() |>
-  tab_options(table.width = pct(80))
-```
-
-The purpose of this section is not to memorise particular loss functions. It is to recognise that estimation and decision-making are connected.
-
-> A point estimate is not just a number. It is an action taken under uncertainty.
-
-## Prior information as pseudo-data
-
-In Chapter 8, we used beta priors for proportions. One helpful interpretation of a beta prior is that it acts like pseudo-data.
-
-For a beta-binomial model:
-
-$$
-\begin{aligned}
-\theta
-&\sim \text{Beta}(\alpha, \beta), \\
-X \mid \theta
-&\sim \text{Binomial}(n, \theta), \\
-\theta \mid X = x
-&\sim \text{Beta}(\alpha + x,\ \beta + n - x).
-\end{aligned}
-$$
-
-The prior hyperparameters $\alpha$ and $\beta$ behave a little like prior counts:
-
-- $\alpha$ behaves like prior yes-counts;
-- $\beta$ behaves like prior no-counts;
-- $\alpha + \beta$ behaves like a prior sample size.
-
-This interpretation is not perfect in every setting, but it is useful.
-
-```{r}
-#| message: false
-#| warning: false
-
-prior_strength <- tibble(
-  prior = c("Beta(1, 1)", "Beta(2, 2)", "Beta(10, 10)", "Beta(40, 40)"),
-  alpha = c(1, 2, 10, 40),
-  beta = c(1, 2, 10, 40),
-  prior_mean = alpha / (alpha + beta),
-  prior_sample_size = alpha + beta,
-  posterior_alpha = alpha + x,
-  posterior_beta = beta + n - x,
-  posterior_mean = posterior_alpha / (posterior_alpha + posterior_beta)
-)
-
-prior_strength |>
-  mutate(
-    prior_mean = round(prior_mean, 3),
-    posterior_mean = round(posterior_mean, 3)
-  ) |>
-  select(
-    Prior = prior,
-    `Prior mean` = prior_mean,
-    `Prior pseudo-sample size` = prior_sample_size,
-    `Posterior mean` = posterior_mean
-  ) |>
-  gt() |>
-  tab_options(table.width = pct(100))
-```
-
-All four priors have the same prior mean of $0.5$. But they do not have the same strength. The stronger priors pull the posterior mean more strongly toward $0.5$.
-
-```{r}
-#| message: false
-#| warning: false
-
-prior_strength_density <- prior_strength |>
-  select(prior, posterior_alpha, posterior_beta) |>
-  crossing(theta = seq(0.001, 0.999, length.out = 1000)) |>
-  mutate(
-    density = dbeta(theta, posterior_alpha, posterior_beta)
-  )
-
-prior_strength_density |>
-  ggplot(aes(x = theta, y = density, color = prior)) +
-  geom_line(linewidth = 1) +
-  labs(
-    x = expression(theta),
+    x = expression(mu),
     y = "Posterior density",
-    color = "Prior",
-    title = "Priors with the same centre can have different strengths",
-    subtitle = "Stronger priors pull the posterior more strongly toward the prior mean"
-  )
+    fill = NULL
+  ) +
+  theme_minimal() +
+  theme(legend.position = "none")
 ```
 
-This connects back to sensitivity analysis. If different reasonable priors lead to very different posterior conclusions, the data may not be strong enough to settle the question.
+```{r, warning=FALSE, message=FALSE, echo=FALSE, include=FALSE}
+mcmc_decision_df <- mcmc_post_burn |>
+  mutate(
+    situation = if_else(
+      mu < 30,
+      "Average under 30 minutes",
+      "Average 30 minutes or higher"
+    )
+  )
 
-## A second story: estimating a rate
+posterior_decision_probs <- mcmc_decision_df |>
+  summarise(
+    p_under_30 = mean(mu < 30),
+    p_30_or_higher = mean(mu >= 30)
+  )
 
-Not every Bayesian problem is about a proportion.
+posterior_decision_probs
+```
 
-Suppose a regional clinic wants to estimate the average number of after-hours calls it receives each night during winter. This matters because staffing too few people can leave patients waiting, but staffing too many people is costly.
+$$\begin{aligned}
+P(\mu < 30 \mid \text{data})
+&\approx \frac{\text{number of posterior draws below 30}}{\text{total number of posterior draws}} \approx 0.93
+\end{aligned}$$
 
-Let $X_i$ be the number of after-hours calls on night $i$.
+$$\begin{aligned}
+P(\mu \geq 30 \mid \text{data})
+&\approx \frac{\text{number of posterior draws at or above 30}}{\text{total number of posterior draws}} \approx 0.07
+\end{aligned}$$
 
-A simple model is:
+#### Expected loss of advertising
 
-$$
-\begin{aligned}
-X_i \mid \lambda
-&\sim \text{Poisson}(\lambda),
-\end{aligned}
-$$
+If the company advertises, there is no loss if the claim is true, but there is loss 10 if the claim is false.
 
-where $\lambda$ is the average number of calls per night.
+$$\begin{aligned}
+E[\text{loss from advertising}]
+&= 0 \times P(\mu < 30 \mid \text{data})
+   + 10 \times P(\mu \geq 30 \mid \text{data}) \\
+&= 0 \times 0.93 + 10 \times 0.07 \\
+&= 0 + 0.70 \\
+&= 0.70
+\end{aligned}$$
 
-Suppose the clinic records calls over $14$ nights:
+#### Expected loss of not advertising
+
+If the company does not advertise, there is loss 2 if the claim would have been true, because the company missed an advertising opportunity. There is no loss if the claim would have been false.
+
+$$\begin{aligned}
+E[\text{loss from not advertising}]
+&= 2 \times P(\mu < 30 \mid \text{data})
+   + 0 \times P(\mu \geq 30 \mid \text{data}) \\
+&= 2 \times 0.93 + 0 \times 0.07 \\
+&= 1.86 + 0 \\
+&= 1.86
+\end{aligned}$$
+
+Since advertising has the lower expected loss (0.70 \< 1.86), the decision with the lower expected loss is to advertise.
+
+### Different losses can lead to different decisions
+
+The same posterior can lead to different decisions if the loss function changes. For example, suppose the company becomes more cautious. It now treats false advertising as much more serious. Instead of assigning loss 10 to false advertising, it assigns loss 30.
+
+The new loss function is:
+
+| Action           | If $\mu < 30$ | If $\mu \geq 30$ |
+|------------------|--------------:|-----------------:|
+| Advertise        |             0 |               30 |
+| Do not advertise |             2 |                0 |
+
+Now the expected loss of advertising becomes:
+
+$$\begin{aligned}
+E[\text{loss from advertising}]
+&= 0 \times P(\mu < 30 \mid \text{data})
+   + 30 \times P(\mu \geq 30 \mid \text{data}) \\
+&= 0 \times 0.93 + 30 \times 0.07 \\
+&= 2.10
+\end{aligned}$$
+
+The expected loss of not advertising remains:
+
+$$\begin{aligned}
+E[\text{loss from not advertising}]
+&= 2 \times P(\mu < 30 \mid \text{data})
+   + 0 \times P(\mu \geq 30 \mid \text{data}) \\
+&= 2 \times 0.93 + 0 \times 0.07 \\
+&= 1.86
+\end{aligned}$$
+
+Now the expected loss of not advertising is lower. So a more cautious company may decide not to advertise, even with the same posterior distribution.
 
 ```{r}
-#| message: false
-#| warning: false
+expected_loss_sensitivity_df <- tibble(
+  false_advertising_loss = c(10, 30),
+  expected_loss_advertise = false_advertising_loss * p_30_or_higher,
+  expected_loss_not_advertise = 2 * p_under_30
+) |>
+  pivot_longer(
+    cols = c(expected_loss_advertise, expected_loss_not_advertise),
+    names_to = "action",
+    values_to = "expected_loss"
+  ) |>
+  mutate(
+    action = recode(
+      action,
+      expected_loss_advertise = "Advertise",
+      expected_loss_not_advertise = "Do not advertise"
+    )
+  )
 
-calls <- c(18, 22, 19, 26, 24, 21, 17, 25, 20, 23, 27, 19, 22, 24)
+expected_loss_sensitivity_df
+```
 
-call_data <- tibble(
-  night = 1:length(calls),
-  calls = calls
-)
-
-call_data |>
-  ggplot(aes(x = night, y = calls, color = "Observed calls")) +
-  geom_line() +
-  geom_point(size = 2) +
+```{r, warning=FALSE, message=FALSE}
+ggplot(
+  expected_loss_sensitivity_df,
+  aes(x = factor(false_advertising_loss), y = expected_loss, fill = action)
+) +
+  geom_col(position = "dodge", width = 0.65, alpha = 0.8) +
   labs(
-    x = "Night",
-    y = "Number of calls",
-    color = NULL,
-    title = "After-hours calls over 14 winter nights"
-  )
+    x = "Loss from false advertising",
+    y = "Expected loss",
+    fill = NULL
+  ) +
+  theme_minimal()
 ```
 
-The sample mean is:
+This shows an important lesson: the posterior distribution does not make the decision by itself. The posterior tells us what is uncertain. The loss function tells us what matters.
 
-```{r}
-#| message: false
-#| warning: false
+### A threshold view of the decision
 
-mean(calls)
-```
-
-Suppose previous winters suggest around $20$ calls per night, but with some uncertainty. A gamma prior is conjugate for the Poisson rate.
-
-We write:
-
-$$
-\begin{aligned}
-\lambda
-&\sim \text{Gamma}(\alpha, \beta),
-\end{aligned}
-$$
-
-where we use the shape-rate parameterisation. Under this parameterisation:
-
-$$
-\begin{aligned}
-E(\lambda)
-&= \frac{\alpha}{\beta}.
-\end{aligned}
-$$
+In this example, the decision depends on whether the posterior probability of being under 30 minutes is large enough.
 
 Let:
 
-$$
-\begin{aligned}
-\lambda
-&\sim \text{Gamma}(20, 1).
-\end{aligned}
-$$
+$$\begin{aligned}
+p &= P(\mu < 30 \mid \text{data}).
+\end{aligned}$$
 
-This prior has mean $20$. It acts roughly like prior information equivalent to one night with $20$ calls.
+Then:
 
-For Poisson data with a gamma prior, the posterior is:
+$$\begin{aligned}
+P(\mu \geq 30 \mid \text{data}) &= 1 - p.
+\end{aligned}$$
 
-$$
-\begin{aligned}
-\lambda \mid x_1, \ldots, x_n
-&\sim \text{Gamma}\left(\alpha + \sum_{i = 1}^{n}x_i,\ \beta + n\right).
-\end{aligned}
-$$
+Using the original loss function, the expected loss of advertising is:
 
-```{r}
-#| message: false
-#| warning: false
+$$\begin{aligned}
+E[\text{loss from advertising}]
+&= 10(1-p).
+\end{aligned}$$
 
-alpha_lambda_prior <- 20
-beta_lambda_prior <- 1
+The expected loss of not advertising is:
 
-alpha_lambda_post <- alpha_lambda_prior + sum(calls)
-beta_lambda_post <- beta_lambda_prior + length(calls)
+$$\begin{aligned}
+E[\text{loss from not advertising}]
+&= 2p.
+\end{aligned}$$
 
-lambda_draws <- tibble(
-  draw = 1:10000,
-  lambda = rgamma(10000, shape = alpha_lambda_post, rate = beta_lambda_post)
-)
+We should advertise when:
 
-lambda_draws |>
-  ggplot(aes(x = lambda, y = after_stat(density), color = "Posterior draws")) +
-  geom_histogram(bins = 40, fill = "white") +
-  geom_density(linewidth = 1) +
-  labs(
-    x = expression(lambda),
-    y = "Density",
-    color = NULL,
-    title = "Posterior distribution for the average number of calls per night"
-  ) +
-  guides(color = guide_legend(override.aes = list(fill = NA)))
-```
+$$\begin{aligned}
+10(1-p) &< 2p \\
+10 - 10p &< 2p \\
+10 &< 12p \\
+\frac{10}{12} &< p \\
+p &> 0.833.
+\end{aligned}$$
 
-```{r}
-#| message: false
-#| warning: false
-
-lambda_draws |>
-  summarise(
-    `Posterior mean` = mean(lambda),
-    `Posterior median` = median(lambda),
-    `2.5% quantile` = quantile(lambda, 0.025),
-    `97.5% quantile` = quantile(lambda, 0.975),
-    `P(lambda > 23)` = mean(lambda > 23)
-  ) |>
-  pivot_longer(
-    cols = everything(),
-    names_to = "Summary",
-    values_to = "Value"
-  ) |>
-  mutate(Value = round(Value, 2)) |>
-  gt() |>
-  tab_options(table.width = pct(80))
-```
-
-Again, posterior simulation makes it easy to calculate the summaries we care about.
-
-If the clinic needs to decide how many staff to roster, the posterior distribution of $\lambda$ is useful. But an even more direct object is the posterior predictive distribution for tomorrow night.
-
-```{r}
-#| message: false
-#| warning: false
-
-set.seed(2420)
-
-call_prediction <- lambda_draws |>
-  mutate(
-    tomorrow_calls = rpois(n(), lambda = lambda)
-  )
-
-call_prediction |>
-  ggplot(aes(x = tomorrow_calls, color = "Posterior predictive distribution")) +
-  geom_bar(fill = "white") +
-  labs(
-    x = "Predicted calls tomorrow night",
-    y = "Frequency",
-    color = NULL,
-    title = "Posterior predictive distribution for tomorrow night's calls"
-  ) +
-  guides(color = guide_legend(override.aes = list(fill = NA)))
-```
-
-```{r}
-#| message: false
-#| warning: false
-
-call_prediction |>
-  summarise(
-    `Predictive mean` = mean(tomorrow_calls),
-    `Predictive median` = median(tomorrow_calls),
-    `P(more than 25 calls)` = mean(tomorrow_calls > 25),
-    `P(more than 30 calls)` = mean(tomorrow_calls > 30)
-  ) |>
-  pivot_longer(
-    cols = everything(),
-    names_to = "Summary",
-    values_to = "Value"
-  ) |>
-  mutate(Value = round(Value, 2)) |>
-  gt() |>
-  tab_options(table.width = pct(80))
-```
-
-This example shows how Bayesian simulation can move naturally from estimation to prediction to decisions.
-
-## Credibility as a weighted average
-
-In conjugate Bayesian models, the posterior mean often looks like a compromise between the data and the prior.
-
-For the beta-binomial model, the posterior mean is:
-
-$$
-\begin{aligned}
-E(\theta \mid X = x)
-&= \frac{\alpha + x}{\alpha + \beta + n}.
-\end{aligned}
-$$
-
-This can be written as a weighted average of the sample proportion and the prior mean:
-
-$$
-\begin{aligned}
-E(\theta \mid X = x)
-&= Z\left(\frac{x}{n}\right) + (1 - Z)\left(\frac{\alpha}{\alpha + \beta}\right),
-\end{aligned}
-$$
-
-where:
-
-$$
-\begin{aligned}
-Z
-&= \frac{n}{\alpha + \beta + n}.
-\end{aligned}
-$$
-
-The value $Z$ is sometimes called a **credibility factor**. It measures how much weight the posterior mean gives to the data-based estimate.
-
-For the bus example:
-
-```{r}
-#| message: false
-#| warning: false
-
-credibility <- tibble(
-  `Sample proportion` = x / n,
-  `Prior mean` = alpha_prior / (alpha_prior + beta_prior),
-  `Credibility factor Z` = n / (alpha_prior + beta_prior + n),
-  `Posterior mean` = alpha_post / (alpha_post + beta_post)
-)
-
-credibility |>
-  pivot_longer(
-    cols = everything(),
-    names_to = "Quantity",
-    values_to = "Value"
-  ) |>
-  mutate(Value = round(Value, 3)) |>
-  gt() |>
-  tab_options(table.width = pct(80))
-```
-
-The posterior mean is pulled toward the sample proportion because the data contain more information than the weak prior.
+So under this loss function, the company should advertise only if the posterior probability that $\mu < 30$ is greater than about 83.3%.
 
 ::: callout-note
-## Credibility factor
+## Why this threshold matters
 
-A credibility factor is the weight given to the data-based estimate in a posterior mean that can be written as a weighted average.
+The threshold is not always 50%.
 
-More data usually means a larger credibility factor.
+If the cost of a false claim is much larger than the cost of a missed opportunity, then we need stronger posterior evidence before advertising.
 :::
+
+We can plot the two expected-loss curves as a function of $p$.
+
+```{r, warning=FALSE, message=FALSE}
+threshold_df <- tibble(
+  p = seq(0, 1, length.out = 1000),
+  expected_loss_advertise = 10 * (1 - p),
+  expected_loss_not_advertise = 2 * p
+) |>
+  pivot_longer(
+    cols = c(expected_loss_advertise, expected_loss_not_advertise),
+    names_to = "action",
+    values_to = "expected_loss"
+  ) |>
+  mutate(
+    action = recode(
+      action,
+      expected_loss_advertise = "Advertise",
+      expected_loss_not_advertise = "Do not advertise"
+    )
+  )
+
+threshold_value <- 10 / 12
+
+ggplot(threshold_df, aes(x = p, y = expected_loss, color = action)) +
+  geom_line(linewidth = 1) +
+  geom_vline(
+    xintercept = threshold_value,
+    linetype = "dashed"
+  ) +
+  scale_x_continuous(labels = scales::percent_format()) +
+  labs(
+    x = expression(P(mu < 30 ~ "|" ~ data)),
+    y = "Expected loss",
+    color = NULL
+  ) +
+  theme_minimal()
+```
+
+To the left of the dashed line, not advertising has lower expected loss. To the right of the dashed line, advertising has lower expected loss.
 
 ## Bayesian simulation as a workflow
 
@@ -1644,44 +1309,6 @@ The main conceptual shift is this:
 
 A posterior distribution can be carried through the analysis. We can transform posterior draws, use them to predict future observations, and compare decisions.
 
-## Recap
-
-In Chapter 8, we learned the logic of Bayesian updating:
-
-$$
-\begin{aligned}
-\text{posterior}
-&\propto \text{prior} \times \text{likelihood}.
-\end{aligned}
-$$
-
-In this chapter, we learned how to work with the posterior once we have it.
-
-The key ideas were:
-
-- Posterior draws are simulated plausible parameter values.
-- Posterior summaries can be calculated directly from posterior draws.
-- Grid approximation uses prior times likelihood over many possible parameter values.
-- MCMC is useful when grid approximation is too inefficient.
-- Trace plots help us check whether an MCMC chain is exploring sensibly.
-- Posterior predictive distributions describe uncertainty about future or unobserved data.
-- Decisions can be compared by simulating consequences under the posterior.
-- Different loss functions can lead to different Bayesian estimates.
-
-Bayesian inference is sometimes introduced as a formula. But in practice, it is more like a workflow:
-
-$$
-\begin{aligned}
-\text{prior information}
-&\rightarrow \text{data} \\
-&\rightarrow \text{posterior uncertainty} \\
-&\rightarrow \text{prediction} \\
-&\rightarrow \text{decision}.
-\end{aligned}
-$$
-
-That final arrow matters. Statistical thinking is not only about calculating uncertainty. It is also about using uncertainty carefully.
-
 ## Exercises
 
 Short questions and longer applied questions are included below. Some questions ask for calculations; others ask you to explain concepts in words.
@@ -1693,42 +1320,36 @@ A small survey asks $30$ students whether they would use a new weekend study shu
 
 Assume:
 
-$$
-\begin{aligned}
+$$\begin{aligned}
 X \mid \theta
 &\sim \text{Binomial}(30, \theta), \\
 \theta
 &\sim \text{Beta}(3, 3).
-\end{aligned}
-$$
+\end{aligned}$$
 
-1. Find the posterior distribution for $\theta$.
-2. Calculate the posterior mean.
-3. Interpret the posterior mean in context.
+1.  Find the posterior distribution for $\theta$.
+2.  Calculate the posterior mean.
+3.  Interpret the posterior mean in context.
 
 ::: {.callout-important collapse="true"}
 ## Click for Solutions
 
 The posterior is:
 
-$$
-\begin{aligned}
+$$\begin{aligned}
 \theta \mid X = 18
 &\sim \text{Beta}(3 + 18,\ 3 + 30 - 18) \\
 &\sim \text{Beta}(21,\ 15).
-\end{aligned}
-$$
+\end{aligned}$$
 
 The posterior mean is:
 
-$$
-\begin{aligned}
+$$\begin{aligned}
 E(\theta \mid X = 18)
 &= \frac{21}{21 + 15} \\
 &= \frac{21}{36} \\
 &= 0.583.
-\end{aligned}
-$$
+\end{aligned}$$
 
 After combining the prior and the survey data, the estimated proportion of students who would use the weekend shuttle is about $0.583$, or $58.3\%$.
 :::
@@ -1759,9 +1380,7 @@ Suppose you have $5000$ posterior draws for a parameter $\theta$. Of these draws
 
 Estimate:
 
-$$
-P(\theta > 0.7 \mid \text{data}).
-$$
+$$P(\theta > 0.7 \mid \text{data}).$$
 
 Interpret the result.
 
@@ -1770,13 +1389,11 @@ Interpret the result.
 
 The simulation estimate is:
 
-$$
-\begin{aligned}
+$$\begin{aligned}
 P(\theta > 0.7 \mid \text{data})
 &\approx \frac{3920}{5000} \\
 &= 0.784.
-\end{aligned}
-$$
+\end{aligned}$$
 
 The interpretation is that, given the prior and the observed data, the posterior probability that $\theta$ is greater than $0.7$ is approximately $0.784$.
 :::
@@ -1802,21 +1419,19 @@ q4_grid |>
   tab_options(table.width = pct(60))
 ```
 
-1. Normalise the weights.
-2. Which value of $\theta$ has the highest posterior weight?
-3. Estimate the posterior mean using this grid.
+1.  Normalise the weights.
+2.  Which value of $\theta$ has the highest posterior weight?
+3.  Estimate the posterior mean using this grid.
 
 ::: {.callout-important collapse="true"}
 ## Click for Solutions
 
 The sum of the unnormalised weights is:
 
-$$
-\begin{aligned}
+$$\begin{aligned}
 0.02 + 0.10 + 0.24 + 0.12 + 0.02
 &= 0.50.
-\end{aligned}
-$$
+\end{aligned}$$
 
 The normalised weights are:
 
@@ -1835,14 +1450,12 @@ The highest posterior weight is at $\theta = 0.3$.
 
 The posterior mean estimate is:
 
-$$
-\begin{aligned}
+$$\begin{aligned}
 E(\theta \mid \text{data})
 &\approx 0.1(0.04) + 0.2(0.20) + 0.3(0.48) + 0.4(0.24) + 0.5(0.04) \\
 &= 0.004 + 0.040 + 0.144 + 0.096 + 0.020 \\
 &= 0.304.
-\end{aligned}
-$$
+\end{aligned}$$
 :::
 ::::
 
@@ -1869,69 +1482,57 @@ However, proposal steps that are too small can also be a problem because the cha
 
 A clinic records the number of urgent phone calls received over $10$ evenings:
 
-$$
-14,\ 17,\ 15,\ 19,\ 18,\ 16,\ 20,\ 13,\ 17,\ 18.
-$$
+$$14,\ 17,\ 15,\ 19,\ 18,\ 16,\ 20,\ 13,\ 17,\ 18.$$
 
 Assume:
 
-$$
-\begin{aligned}
+$$\begin{aligned}
 X_i \mid \lambda
 &\sim \text{Poisson}(\lambda), \\
 \lambda
 &\sim \text{Gamma}(12, 1),
-\end{aligned}
-$$
+\end{aligned}$$
 
 using the shape-rate parameterisation.
 
-1. Find the posterior distribution for $\lambda$.
-2. Calculate the posterior mean.
-3. Interpret the result.
+1.  Find the posterior distribution for $\lambda$.
+2.  Calculate the posterior mean.
+3.  Interpret the result.
 
 ::: {.callout-important collapse="true"}
 ## Click for Solutions
 
 The total number of calls is:
 
-$$
-\begin{aligned}
+$$\begin{aligned}
 14 + 17 + 15 + 19 + 18 + 16 + 20 + 13 + 17 + 18
 &= 167.
-\end{aligned}
-$$
+\end{aligned}$$
 
 There are $n = 10$ evenings.
 
 For a gamma prior and Poisson likelihood:
 
-$$
-\begin{aligned}
+$$\begin{aligned}
 \lambda \mid x_1, \ldots, x_n
 &\sim \text{Gamma}\left(\alpha + \sum_{i = 1}^{n}x_i,\ \beta + n\right).
-\end{aligned}
-$$
+\end{aligned}$$
 
 Therefore:
 
-$$
-\begin{aligned}
+$$\begin{aligned}
 \lambda \mid \text{data}
 &\sim \text{Gamma}(12 + 167,\ 1 + 10) \\
 &\sim \text{Gamma}(179,\ 11).
-\end{aligned}
-$$
+\end{aligned}$$
 
 The posterior mean is:
 
-$$
-\begin{aligned}
+$$\begin{aligned}
 E(\lambda \mid \text{data})
 &= \frac{179}{11} \\
 &= 16.27.
-\end{aligned}
-$$
+\end{aligned}$$
 
 After combining the prior with the observed call counts, the estimated average number of urgent calls per evening is about $16.27$.
 :::

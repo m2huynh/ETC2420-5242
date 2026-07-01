@@ -518,7 +518,7 @@ window.Quarto = {
 </ol>
 </div>
 </div>
-<p><centre></centre></p>
+<center>
 <div class="cell enlarge-image">
 <div class="cell-output-display">
 <div>
@@ -528,7 +528,7 @@ window.Quarto = {
 </div>
 </div>
 </div>
-<p></p>
+</center>
 <p><br></p>
 <section id="a-puzzle-about-steve" class="level2" data-number="8.1">
 <h2 data-number="8.1" class="anchored" data-anchor-id="a-puzzle-about-steve"><span class="header-section-number">8.1</span> A puzzle about Steve</h2>
@@ -538,10 +538,22 @@ window.Quarto = {
 <p>Steve is very shy and withdrawn, invariably helpful, but with very little interest in people or in the world of reality. A meek and tidy soul, he has a need for order and structure, and a passion for detail.</p>
 </blockquote>
 <p>Now suppose Steve has been chosen at random from a group of people. The question is: Which is more likely?</p>
-<ul>
-<li>Steve is a librarian or;</li>
-<li>Steve is a farmer.</li>
-</ul>
+<blockquote class="blockquote">
+<p>Is Steve a librarian; or is Steve a farmer?</p>
+</blockquote>
+<center>
+<div class="cell">
+<div class="cell-output-display">
+<div class="quarto-figure quarto-figure-center">
+<figure class="figure">
+<p><img src="images/chapter8/farmer_librarian.png" class="img-fluid figure-img"></p>
+<figcaption>Image Source: https://alexlyman.org/blog/bayes.html</figcaption>
+</figure>
+</div>
+</div>
+</div>
+</center>
+<p><br></p>
 <p>Have a think about what your answer might be.</p>
 <p>For now, we will leave Steve’s story unresolved. We will come back to it at the end of the chapter, once we have developed the tools needed to think about this question more carefully.</p>
 </section>
@@ -553,7 +565,7 @@ window.Quarto = {
 <div class="cell-output-display">
 <div>
 <figure class="figure">
-<p><img src="8_Bayes_files/figure-html/unnamed-chunk-3-1.png" class="img-fluid figure-img" width="672"></p>
+<p><img src="8_Bayes_files/figure-html/unnamed-chunk-4-1.png" class="img-fluid figure-img" width="672"></p>
 </figure>
 </div>
 </div>
@@ -1058,20 +1070,14 @@ window.Quarto = {
 <h3 data-number="8.2.1" class="anchored" data-anchor-id="from-likelihood-to-bayesian-inference"><span class="header-section-number">8.2.1</span> From likelihood to Bayesian inference</h3>
 <p>In the previous chapter, we introduced likelihood. We used likelihood to compare different parameter values or explanations by asking how well each one predicted the data we observed.</p>
 <p>The likelihood question was:</p>
-<p><span class="math display">\[
-P(\text{data} \mid \theta)
-\]</span></p>
+<p><span class="math display">\[P(\text{data} \mid \theta)\]</span></p>
 <p>That is, if this parameter value were true, how likely would the observed data be?</p>
 <p>Bayesian inference asks a related but different question:</p>
-<p><span class="math display">\[
-P(\theta \mid \text{data})
-\]</span></p>
+<p><span class="math display">\[P(\theta \mid \text{data})\]</span></p>
 <p>That is, after seeing the data, how plausible is this parameter value?</p>
 <p>Those two expressions look similar, but they are not the same. The vertical bar points in a different direction. In Chapter 7, the parameter value was treated as the input to the probability model. In this chapter, the parameter value becomes the thing we are uncertain about.</p>
 <p>The basic structure of Bayesian inference is:</p>
-<p><span class="math display">\[
-\text{posterior} \propto \text{prior} \times \text{likelihood}
-\]</span></p>
+<p><span class="math display">\[\text{posterior} \propto \text{prior} \times \text{likelihood}\]</span></p>
 <p>The likelihood is the part we already met in Chapter 7. The new ingredient is the <strong>prior</strong>, which represents uncertainty before seeing the current data. The result is the <strong>posterior</strong>, which represents uncertainty after seeing the data.</p>
 <p>Before we use this formula, we will build it slowly from conditional probability.</p>
 </section>
@@ -1091,22 +1097,24 @@ P(\theta \mid \text{data})
 </blockquote>
 <p>The second question gives us extra information. Once we know that at least one child is a girl, some outcomes from the original sample space are no longer possible. Conditional probability gives us a formal way to handle this kind of situation.</p>
 <p>When we write</p>
-<p><span class="math display">\[
-P(H \mid E)
-\]</span></p>
+<p><span class="math display">\[P(H \mid E)\]</span></p>
 <p>we are asking for the probability of (H), given that (E) has happened. The vertical line means “given”, or “conditional on”.</p>
 <p>The key idea is simple:</p>
 <blockquote class="blockquote">
 <p>Once we know that the evidence (E) happened, we restrict attention to the part of the sample space where (E) is true.</p>
 </blockquote>
-<p>Within that reduced world, we then ask how often (H) is also true.</p>
-<p>This gives us the conditional probability formula:</p>
-<p>$$ P(H E) =</p>
-<p>$$</p>
+<p>Within that reduced world, we then ask how often (H) is also true. This gives us the conditional probability formula:</p>
+<p><span class="math display">\[
+P(H \mid E) =
+\frac{P(H \cap E)}{P(E)}
+\]</span></p>
 <p>In words:</p>
-<p>$$ P(H E) =</p>
-<p>{E} $$</p>
-<p>The denominator, (P(E)), is the probability of the evidence. It defines the smaller world we are now working inside. The numerator, <span class="math inline">\(P(H \cap E\)</span>, is the probability that both the evidence and the thing we care about are true.</p>
+<p><span class="math display">\[
+P(H \mid E) =
+\frac{\text{probability that both }H\text{ and }E\text{ happen}}
+{\text{probability that }E\text{ happens}}
+\]</span></p>
+<p>The denominator, <span class="math inline">\(P(E)\)</span>, is the probability of the evidence. It defines the smaller world we are now working inside. The numerator, <span class="math inline">\(P(H \cap E\)</span>, is the probability that both the evidence and the thing we care about are true.</p>
 </section>
 <section id="an-example-of-conditional-probability" class="level3" data-number="8.3.2">
 <h3 data-number="8.3.2" class="anchored" data-anchor-id="an-example-of-conditional-probability"><span class="header-section-number">8.3.2</span> An example of conditional probability</h3>
@@ -1594,29 +1602,19 @@ P(H \mid E)
 </div>
 </div>
 <p>Let</p>
-<p><span class="math display">\[
-H = \text{completed the quiz}
-\]</span></p>
+<p><span class="math display">\[H = \text{completed the quiz}\]</span></p>
 <p>and let</p>
-<p><span class="math display">\[
-E = \text{drinks coffee}
-\]</span></p>
+<p><span class="math display">\[E = \text{drinks coffee}\]</span></p>
 <p>We want:</p>
-<p><span class="math display">\[
-P(H \mid E)
-\]</span></p>
+<p><span class="math display">\[P(H \mid E)\]</span></p>
 <p>That is, among students who drink coffee, what proportion completed the quiz?</p>
 <p>From the table, 10 students drink coffee:</p>
-<p><span class="math display">\[
-7 + 3 = 10
-\]</span></p>
+<p><span class="math display">\[7 + 3 = 10\]</span></p>
 <p>Of those 10 students, 7 completed the quiz. So:</p>
-<p><span class="math display">\[
-P(\text{completed quiz} \mid \text{drinks coffee})
+<p><span class="math display">\[P(\text{completed quiz} \mid \text{drinks coffee})
 =\frac{7}{10}
 =
-0.70
-\]</span></p>
+0.70\]</span></p>
 <p>We can also calculate the same probability using the formal rule. In the full class of 20 students:</p>
 <p><span class="math display">\[P(H \cap E) =\frac{7}{20}\]</span></p>
 <p>and:</p>
@@ -1639,14 +1637,35 @@ P(\text{completed quiz} \mid \text{drinks coffee})
 <li>how common <span class="math inline">\(H\)</span> is</li>
 <li>how likely the evidence <span class="math inline">\(E\)</span> is if <span class="math inline">\(H\)</span> is true</li>
 </ul>
-<p>That is, we are given <span class="math inline">\(P(H)\)</span> and <span class="math inline">\(P(E \mid H)\)</span>.</p>
-<p>This is where the next version of the formula becomes useful. Since</p>
+<p>That is, we are given <span class="math inline">\(P(H)\)</span> and <span class="math inline">\(P(E \mid H)\)</span>. This is where the next version of the formula becomes useful. Since</p>
 <p><span class="math display">\[P(H \cap E)=P(H)P(E \mid H)\]</span></p>
 <p>we can rewrite conditional probability as:</p>
 <p><span class="math display">\[\frac{P(H)P(E \mid H)}{P(E)}\]</span></p>
-<p>This is the beginning of Bayes’ theorem. For now, we will call it <strong>Baby Bayes</strong>. It says:</p>
-<p><span class="math display">\[\frac{\text{starting probability} \times \text{probability of the evidence}}
-{\text{overall probability of the evidence}}\]</span></p>
+<p>This is the beginning of Bayes’ theorem. For now, we will call it Baby Bayes because it is the smaller, simpler idea that Bayes’ theorem grows out of.</p>
+<p>Baby Bayes is really just conditional probability. It asks:</p>
+<blockquote class="blockquote">
+<p>Out of all the times the evidence happens, how often does the hypothesis happen too?</p>
+</blockquote>
+<p>In symbols, this is:</p>
+<p><span class="math display">\[
+P(H \mid E) = \frac{P(H \cap E)}{P(E)}
+\]</span></p>
+<p>The top part, <span class="math inline">\(P(H \cap E)\)</span>, means the probability that the hypothesis and the evidence are both true. The bottom part, <span class="math inline">\(P(E)\)</span>, means the overall probability of seeing the evidence.</p>
+<p>So Baby Bayes says: once we know the evidence happened, we narrow our attention to only the cases where the evidence is present, and then ask what fraction of those cases also include the hypothesis. We call it Baby Bayes because it has the same basic structure as Bayes’ theorem: we are updating what we believe about a hypothesis after seeing some evidence. Later, we will rewrite the top part, <span class="math inline">\(P(H \cap E)\)</span>, in a more useful way. That gives us the full version of Bayes’ theorem.</p>
+<p>As a side note, there is a real book called <strong>Bayesian Probability for babies</strong>, although this is not where the term baby bayes come from:</p>
+<center>
+<div class="cell">
+<div class="cell-output-display">
+<div class="quarto-figure quarto-figure-center">
+<figure class="figure">
+<p><img src="images/chapter8/EQgMLHAXYAENQck.jpg" class="img-fluid figure-img"></p>
+<figcaption>Image Source: https://x.com/beth_fossen/status/1227244290763563008</figcaption>
+</figure>
+</div>
+</div>
+</div>
+</center>
+<p><br></p>
 </section>
 </section>
 <section id="baby-bayes" class="level2" data-number="8.4">
@@ -1671,31 +1690,19 @@ P(\text{completed quiz} \mid \text{drinks coffee})
 </ul>
 <p>On a particular match day, Jody scored a goal. What is the probability that Amy also scored a goal?</p>
 <p>Let</p>
-<p><span class="math display">\[
-H = \text{Amy scored}
-\]</span></p>
+<p><span class="math display">\[H = \text{Amy scored}\]</span></p>
 <p>and let</p>
-<p><span class="math display">\[
-E = \text{Jody scored}
-\]</span></p>
+<p><span class="math display">\[E = \text{Jody scored}\]</span></p>
 <p>We want to calculate</p>
-<p><span class="math display">\[
-P(H \mid E)
-\]</span></p>
+<p><span class="math display">\[P(H \mid E)\]</span></p>
 <p>That is, given that Jody scored, what is the probability that Amy also scored?</p>
 <p>We are told that neither player scores 70% of the time. This means at least one of them scores 30% of the time:</p>
-<p><span class="math display">\[
-1 - 0.70 = 0.30
-\]</span></p>
+<p><span class="math display">\[1 - 0.70 = 0.30\]</span></p>
 <p>We also know that Amy scores 20% of the time and Jody scores 25% of the time. To make these numbers fit together, Amy and Jody must both score in some matches.</p>
 <p>Let (x) be the probability that both Amy and Jody score. Then:</p>
-<p><span class="math display">\[
-0.20 + 0.25 - x = 0.30
-\]</span></p>
+<p><span class="math display">\[0.20 + 0.25 - x = 0.30\]</span></p>
 <p>Solving for (x):</p>
-<p><span class="math display">\[
-x = 0.15
-\]</span></p>
+<p><span class="math display">\[x = 0.15\]</span></p>
 <p>So Amy and Jody both score in 15% of matches.</p>
 <p>This gives us the following probabilities:</p>
 <div class="cell">
@@ -2185,7 +2192,7 @@ x = 0.15
 <div class="cell-output-display">
 <div>
 <figure class="figure">
-<p><img src="8_Bayes_files/figure-html/unnamed-chunk-7-1.png" class="img-fluid figure-img" width="672"></p>
+<p><img src="8_Bayes_files/figure-html/unnamed-chunk-9-1.png" class="img-fluid figure-img" width="672"></p>
 </figure>
 </div>
 </div>
@@ -2197,16 +2204,11 @@ x = 0.15
 <li>Amy did not score</li>
 </ul>
 <p>The total probability inside the Jody circle is:</p>
-<p><span class="math display">\[
-P(E) = 0.15 + 0.10 = 0.25
-\]</span></p>
+<p><span class="math display">\[P(E) = 0.15 + 0.10 = 0.25\]</span></p>
 <p>The part of the Jody circle where Amy also scored is:</p>
-<p><span class="math display">\[
-P(H \cap E) = 0.15
-\]</span></p>
+<p><span class="math display">\[P(H \cap E) = 0.15\]</span></p>
 <p>Therefore:</p>
-<p><span class="math display">\[
-\begin{aligned}
+<p><span class="math display">\[\begin{aligned}
 P(H \mid E)
 &amp;=
 \frac{P(H \cap E)}{P(E)} \
@@ -2214,8 +2216,7 @@ P(H \mid E)
 \frac{0.15}{0.25} \
 &amp;=
 0.60
-\end{aligned}
-\]</span></p>
+\end{aligned}\]</span></p>
 <p>So, given that Jody scored, the probability that Amy also scored is 0.60.</p>
 <p>The Venn diagram shows conditional probability as narrowing the world. We begin with all matches, but once we know that Jody scored, we only look inside the Jody circle. Then we ask what proportion of that circle is also inside the Amy circle.</p>
 <p>Venn diagrams are useful when we know the overlap directly. But many Bayesian problems are not given to us in this form. Instead, we are often told how likely the evidence is under different possible explanations.</p>
@@ -2232,24 +2233,18 @@ P(H \mid E)
 </ul>
 <p>What is the probability that Minh was injured?</p>
 <p>Let</p>
-<p><span class="math display">\[
-H = \text{Minh was injured}
-\]</span></p>
+<p><span class="math display">\[H = \text{Minh was injured}\]</span></p>
 <p>and let</p>
-<p><span class="math display">\[
-E = \text{the team lost}
-\]</span></p>
+<p><span class="math display">\[E = \text{the team lost}\]</span></p>
 <p>We want to calculate</p>
-<p><span class="math display">\[
-P(H \mid E)
-\]</span></p>
+<p><span class="math display">\[P(H \mid E)\]</span></p>
 <p>That is, given that the team lost, what is the probability that Minh was injured?</p>
 <p>The tree begins with the two possible injury states.</p>
 <div class="cell">
 <div class="cell-output-display">
 <div>
 <figure class="figure">
-<p><img src="8_Bayes_files/figure-html/unnamed-chunk-8-1.png" class="img-fluid figure-img" width="672"></p>
+<p><img src="8_Bayes_files/figure-html/unnamed-chunk-10-1.png" class="img-fluid figure-img" width="672"></p>
 </figure>
 </div>
 </div>
@@ -2260,15 +2255,14 @@ P(H \mid E)
 <div class="cell-output-display">
 <div>
 <figure class="figure">
-<p><img src="8_Bayes_files/figure-html/unnamed-chunk-9-1.png" class="img-fluid figure-img" width="768"></p>
+<p><img src="8_Bayes_files/figure-html/unnamed-chunk-11-1.png" class="img-fluid figure-img" width="768"></p>
 </figure>
 </div>
 </div>
 </div>
 <p>Each complete path through the tree represents a joint event. To find the probability of a path, we multiply along the branches.</p>
 <p>For the injured-and-lost path:</p>
-<p><span class="math display">\[
-\begin{aligned}
+<p><span class="math display">\[\begin{aligned}
 P(H \cap E)
 &amp;=
 P(H)P(E \mid H) \
@@ -2276,11 +2270,9 @@ P(H)P(E \mid H) \
 0.10 \times 0.40 \
 &amp;=
 0.04
-\end{aligned}
-\]</span></p>
+\end{aligned}\]</span></p>
 <p>For the not-injured-and-lost path:</p>
-<p><span class="math display">\[
-\begin{aligned}
+<p><span class="math display">\[\begin{aligned}
 P(H^c \cap E)
 &amp;=
 P(H^c)P(E \mid H^c) \
@@ -2288,12 +2280,10 @@ P(H^c)P(E \mid H^c) \
 0.90 \times 0.05 \
 &amp;=
 0.045
-\end{aligned}
-\]</span></p>
+\end{aligned}\]</span></p>
 <p>The team lost in two possible ways: Minh was injured and the team lost, or Minh was not injured and the team lost.</p>
 <p>So the overall probability that the team loses is:</p>
-<p><span class="math display">\[
-\begin{aligned}
+<p><span class="math display">\[\begin{aligned}
 P(E)
 &amp;=
 P(H \cap E) + P(H^c \cap E) \
@@ -2301,11 +2291,9 @@ P(H \cap E) + P(H^c \cap E) \
 0.04 + 0.045 \
 &amp;=
 0.085
-\end{aligned}
-\]</span></p>
+\end{aligned}\]</span></p>
 <p>Now we can calculate the probability that Minh was injured, given that the team lost:</p>
-<p><span class="math display">\[
-\begin{aligned}
+<p><span class="math display">\[\begin{aligned}
 P(H \mid E)
 &amp;=
 \frac{P(H \cap E)}{P(E)} \
@@ -2313,25 +2301,22 @@ P(H \mid E)
 \frac{0.04}{0.085} \
 &amp;=
 0.471
-\end{aligned}
-\]</span></p>
+\end{aligned}\]</span></p>
 <p>So, after observing that the team lost, the probability that Minh was injured is about 0.47.</p>
 <p>This is Baby Bayes in action:</p>
-<p>$$ P(H E) =</p>
-<p>{P(H)P(E H)+P(H^c)P(E H^c)} $$</p>
-<p>For this example:</p>
 <p><span class="math display">\[
-\begin{aligned}
+P(H \mid E) =
+\frac{P(H)P(E \mid H)}
+{P(H)P(E \mid H)+P(H^{c})P(E \mid H^{c})}
+\]</span></p>
+<p>For this example:</p>
+<p><span class="math display">\[\begin{aligned}
 P(H \mid E)
 &amp;=
 \frac{0.10 \times 0.40}
-{0.10 \times 0.40 + 0.90 \times 0.05} \
-&amp;=
-\frac{0.04}{0.085} \
-&amp;=
-0.471
-\end{aligned}
-\]</span></p>
+{0.10 \times 0.40 + 0.90 \times 0.05} =
+\frac{0.04}{0.085} = 0.471
+\end{aligned}\]</span></p>
 <p>The tree diagram shows why the formula works. We multiply along the branches to get the probabilities of each path. Then we focus only on the paths that produced the evidence.</p>
 <p>In words:</p>
 <blockquote class="blockquote">
@@ -2344,32 +2329,26 @@ P(H \mid E)
 <p>Suppose a school running team requires students to run 100 metres in less than 14 seconds. Minh is in the school running team.</p>
 <p>What is the probability that Minh can run 100 metres in less than 13.5 seconds?</p>
 <p>Let</p>
-<p><span class="math display">\[
-T = \text{Minh's 100 metre time}
-\]</span></p>
+<p><span class="math display">\[T = \text{Minh's 100 metre time}\]</span></p>
 <p>Suppose 100 metre times follow a normal distribution:</p>
-<p><span class="math display">\[
-T \sim N(15, 1.5^2)
-\]</span></p>
+<p><span class="math display">\[T \sim N(15, 1.5^2)\]</span></p>
 <p>The evidence is that Minh is in the running team. That means Minh can run 100 metres in less than 14 seconds.</p>
 <p>Let</p>
-<p><span class="math display">\[
-E = {T &lt; 14}
-\]</span></p>
+<p><span class="math display">\[E = {T &lt; 14}\]</span></p>
 <p>The event we care about is that Minh can run 100 metres in less than 13.5 seconds:</p>
-<p><span class="math display">\[
-H = {T &lt; 13.5}
-\]</span></p>
+<p><span class="math display">\[H = {T &lt; 13.5}\]</span></p>
 <p>We want:</p>
-<p><span class="math display">\[
-P(T &lt; 13.5 \mid T &lt; 14)
-\]</span></p>
+<p><span class="math display">\[P(T &lt; 13.5 \mid T &lt; 14)\]</span></p>
 <p>Because anyone who runs under 13.5 seconds also runs under 14 seconds, the event (T &lt; 13.5) is inside the event (T &lt; 14). So:</p>
-<p>$$ P(T &lt; 13.5 T &lt; 14) =</p>
-<p>P(T &lt; 13.5) $$</p>
+<p><span class="math display">\[
+P(T &lt; 13.5 \cap T &lt; 14) =
+P(T &lt; 13.5)
+\]</span></p>
 <p>Therefore:</p>
-<p>$$ P(T &lt; 13.5 T &lt; 14) =</p>
-<p>$$</p>
+<p><span class="math display">\[
+P(T &lt; 13.5 \mid T &lt; 14) =
+\frac{P(T &lt; 13.5)}{P(T &lt; 14)}
+\]</span></p>
 <p>We can calculate these probabilities using the normal distribution.</p>
 <div class="cell">
 <div class="cell-output-display">
@@ -2853,24 +2832,19 @@ P(T &lt; 13.5 \mid T &lt; 14)
 <div class="cell-output-display">
 <div class="quarto-figure quarto-figure-center">
 <figure class="figure">
-<p><img src="8_Bayes_files/figure-html/unnamed-chunk-11-1.png" class="img-fluid figure-img" width="672"></p>
+<p><img src="8_Bayes_files/figure-html/unnamed-chunk-13-1.png" class="img-fluid figure-img" width="672"></p>
 <figcaption>The evidence T &lt; 14 narrows attention to the left tail of the distribution. Within that region, we ask what proportion is below 13.5.</figcaption>
 </figure>
 </div>
 </div>
 </div>
 <p>Numerically:</p>
-<p><span class="math display">\[
-\begin{aligned}
-P(T &lt; 13.5 \mid T &lt; 14)
-&amp;=
-\frac{P(T &lt; 13.5)}{P(T &lt; 14)} \
-&amp;=
-\frac{0.159}{0.252} \
-&amp;=
+<p><span class="math display">\[\begin{aligned}
+P(T &lt; 13.5 \mid T &lt; 14)=
+\frac{P(T &lt; 13.5)}{P(T &lt; 14)}=
+\frac{0.159}{0.252}=
 0.631
-\end{aligned}
-\]</span></p>
+\end{aligned}\]</span></p>
 <p>So, among students fast enough to make the running team, about 63% are fast enough to run under 13.5 seconds.</p>
 <p>The logic is the same as before. The evidence narrows the world. Instead of looking at everyone, we look only at people with (T &lt; 14). Then we ask what proportion of that reduced group also has (T &lt; 13.5).</p>
 <div class="callout callout-style-default callout-note callout-titled">
@@ -2885,9 +2859,7 @@ P(T &lt; 13.5 \mid T &lt; 14)
 <div class="callout-body-container callout-body">
 <p>Now let us use the same conditional probability logic in a more Bayesian direction.</p>
 <p>Suppose there is a fitness test that gives each person a score. Higher scores mean greater fitness. In the general population, suppose scores are normally distributed with mean 100 and standard deviation 15:</p>
-<p><span class="math display">\[
-\text{Fitness score} \sim N(100, 15^2)
-\]</span></p>
+<p><span class="math display">\[\text{Fitness score} \sim N(100, 15^2)\]</span></p>
 <p>Now suppose that to become a professional athlete, a person needs an extremely high fitness score. Let us say the threshold is 171 or above.</p>
 <p>That is a very high threshold. Under the general population distribution, the probability of scoring 171 or above is tiny.</p>
 <div class="cell">
@@ -2897,41 +2869,27 @@ P(T &lt; 13.5 \mid T &lt; 14)
 </div>
 </div>
 <p>Now imagine there is a pill that children can take. The pill shifts the average fitness score upward by 2 points. So children who take the pill later have fitness scores distributed as:</p>
-<p><span class="math display">\[
-\text{Fitness score} \mid \text{pill}
+<p><span class="math display">\[\text{Fitness score} \mid \text{pill}
 \sim
-N(102, 15^2)
-\]</span></p>
+N(102, 15^2)\]</span></p>
 <p>At first, a two-point shift might not seem very important. Moving the average from 100 to 102 sounds small. It feels as though it should not make a large difference to whether someone becomes a professional athlete.</p>
 <p>But this intuition can be misleading, especially when we are looking at the extreme tail of a distribution.</p>
 <p>Imagine the following thought experiment. We recruit many thousands of children at age five. Half are randomly given the pill and half are not. We then wait until they grow up and record who becomes a professional athlete.</p>
 <p>Let</p>
-<p><span class="math display">\[
-H = \text{took the pill as a child}
-\]</span></p>
+<p><span class="math display">\[H = \text{took the pill as a child}\]</span></p>
 <p>and let</p>
-<p><span class="math display">\[
-E = \text{became a professional athlete}
-\]</span></p>
+<p><span class="math display">\[E = \text{became a professional athlete}\]</span></p>
 <p>Because half the children were given the pill:</p>
-<p><span class="math display">\[
-P(H) = 0.50
-\]</span></p>
+<p><span class="math display">\[P(H) = 0.50\]</span></p>
 <p>and</p>
-<p><span class="math display">\[
-P(H^c) = 0.50
-\]</span></p>
+<p><span class="math display">\[P(H^c) = 0.50\]</span></p>
 <p>For children who took the pill, the probability of reaching the professional-athlete threshold is:</p>
-<p><span class="math display">\[
-P(E \mid H)=
-P(\text{Fitness score} \ge 171 \mid \text{pill})
-\]</span></p>
+<p><span class="math display">\[P(E \mid H)=
+P(\text{Fitness score} \ge 171 \mid \text{pill})\]</span></p>
 <p>For children who did not take the pill, the probability is:</p>
-<p><span class="math display">\[
-P(E \mid H^c)
+<p><span class="math display">\[P(E \mid H^c)
 =
-P(\text{Fitness score} \ge 171 \mid \text{no pill})
-\]</span></p>
+P(\text{Fitness score} \ge 171 \mid \text{no pill})\]</span></p>
 <p>We can calculate both probabilities using <code>pnorm()</code>:</p>
 <div class="cell">
 <div class="code-copy-outer-scaffold"><div class="sourceCode cell-code" id="cb3"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb3-1"><a href="#cb3-1" aria-hidden="true" tabindex="-1"></a>p_pro_pill <span class="ot">&lt;-</span> <span class="dv">1</span> <span class="sc">-</span> <span class="fu">pnorm</span>(<span class="dv">171</span>, <span class="at">mean =</span> <span class="dv">102</span>, <span class="at">sd =</span> <span class="dv">15</span>)</span>
@@ -3419,15 +3377,11 @@ P(\text{Fitness score} \ge 171 \mid \text{no pill})
 <p>Among the people who became professional athletes, what proportion took the pill?</p>
 </blockquote>
 <p>In notation, we want:</p>
-<p><span class="math display">\[
-P(H \mid E)
-\]</span></p>
+<p><span class="math display">\[P(H \mid E)\]</span></p>
 <p>Using Baby Bayes:</p>
-<p><span class="math display">\[
-P(H \mid E)=
+<p><span class="math display">\[P(H \mid E)=
 \frac{P(H)P(E \mid H)}
-{P(H)P(E \mid H)+P(H^c)P(E \mid H^c)}
-\]</span></p>
+{P(H)P(E \mid H)+P(H^c)P(E \mid H^c)}\]</span></p>
 <p>Substituting the numbers:</p>
 <div class="cell">
 <div class="cell-output cell-output-stdout">
@@ -3436,11 +3390,9 @@ P(H \mid E)=
 </div>
 <p>So, even though the pill only shifted the mean by 2 points, about 66% of the professional athletes in this thought experiment would come from the pill group. At extreme thresholds, small shifts in a distribution can have a much larger effect than our intuition expects.</p>
 <p>Now consider a different version of the thought experiment. Suppose the pill does not increase the average score. Instead, it increases variation. The average remains 100, but the standard deviation increases from 15 to 20:</p>
-<p><span class="math display">\[
-\text{Fitness score} \mid \text{pill}
+<p><span class="math display">\[\text{Fitness score} \mid \text{pill}
 \sim
-N(100, 20^2)
-\]</span></p>
+N(100, 20^2)\]</span></p>
 <p>This means the pill does not make the average child fitter. But it does create more extreme outcomes in both directions.</p>
 <p>For the professional-athlete threshold, the right tail becomes much larger.</p>
 <div class="cell">
@@ -3921,30 +3873,22 @@ N(100, 20^2)
 </div>
 </div>
 <p>Using Baby Bayes again:</p>
-<p><span class="math display">\[
-P(H \mid E)
+<p><span class="math display">\[P(H \mid E)
 =
 \frac{0.50P(E \mid H)}
 {0.50P(E \mid H)+0.50P(E \mid H^c)}
 =
-.9943
-\]</span></p>
+.9943\]</span></p>
 <p>In this version, among the professional athletes, about 99.4% would have taken the pill. This is a striking result. The pill did not raise the average score at all. But by increasing variation, it created many more people in the extreme right tail.</p>
 <p>The key lesson is that conditional probability depends on the group we condition on. Professional athletes are not a random sample of all children. They are selected from the far right tail of the fitness distribution.</p>
 <p>Once we condition on being in that extreme group, small differences in the underlying distribution can become very large.</p>
 <p>This example also moves us closer to Bayesian inference.</p>
 <p>We began with a hypothesis:</p>
-<p><span class="math display">\[
-H = \text{took the pill}
-\]</span></p>
+<p><span class="math display">\[H = \text{took the pill}\]</span></p>
 <p>and evidence:</p>
-<p><span class="math display">\[
-E = \text{became a professional athlete}
-\]</span></p>
+<p><span class="math display">\[E = \text{became a professional athlete}\]</span></p>
 <p>Then we asked:</p>
-<p><span class="math display">\[
-P(H \mid E)
-\]</span></p>
+<p><span class="math display">\[P(H \mid E)\]</span></p>
 <p>The evidence changed our uncertainty about the hypothesis. That is the central movement in Bayes’ theorem.</p>
 </div>
 </div>
@@ -3954,21 +3898,13 @@ P(H \mid E)
 <h2 data-number="8.5" class="anchored" data-anchor-id="the-prior-likelihood-and-posterior"><span class="header-section-number">8.5</span> The prior, likelihood, and posterior</h2>
 <p>So far, we have used Baby Bayes to solve several conditional probability problems. In each case, the structure was the same. We began with a possible explanation, observed some evidence, and then asked how the evidence should change our view of the explanation.</p>
 <p>For the football example, the explanation was:</p>
-<p><span class="math display">\[
-H = \text{Minh was injured}
-\]</span></p>
+<p><span class="math display">\[H = \text{Minh was injured}\]</span></p>
 <p>and the evidence was:</p>
-<p><span class="math display">\[
-E = \text{the team lost}
-\]</span></p>
+<p><span class="math display">\[E = \text{the team lost}\]</span></p>
 <p>Before we knew the result of the match, the probability that Minh was injured was:</p>
-<p><span class="math display">\[
-P(H) = 0.10
-\]</span></p>
+<p><span class="math display">\[P(H) = 0.10\]</span></p>
 <p>After learning that the team lost, the probability that Minh was injured became:</p>
-<p><span class="math display">\[
-P(H \mid E) = 0.471
-\]</span></p>
+<p><span class="math display">\[P(H \mid E) = 0.471\]</span></p>
 <p>This is the central movement in Bayesian reasoning. We begin with uncertainty, observe evidence, and update our uncertainty.</p>
 <p>Bayesian statistics gives names to the pieces in this update.</p>
 <div class="cell">
@@ -4460,76 +4396,56 @@ P(H \mid E) = 0.471
 </div>
 <p>The <strong>prior</strong> is the probability of the hypothesis before seeing the evidence.</p>
 <p>In the football example:</p>
-<p><span class="math display">\[
-P(H) = 0.10
-\]</span></p>
+<p><span class="math display">\[P(H) = 0.10\]</span></p>
 <p>This means that, before knowing the result of the match, there was a 10% chance that Minh was injured.</p>
 <p>The <strong>likelihood</strong> is the probability of the evidence under a particular hypothesis.</p>
 <p>In the same example:</p>
-<p><span class="math display">\[
-P(E \mid H) = 0.40
-\]</span></p>
+<p><span class="math display">\[P(E \mid H) = 0.40\]</span></p>
 <p>This means that if Minh was injured, the probability that the team loses is 40%.</p>
 <p>The <strong>posterior</strong> is the probability of the hypothesis after seeing the evidence.</p>
 <p>In the example:</p>
-<p><span class="math display">\[
-P(H \mid E) = 0.471
-\]</span></p>
+<p><span class="math display">\[P(H \mid E) = 0.471\]</span></p>
 <p>This means that after learning that the team lost, the probability that Minh was injured is about 47%.</p>
 <p>The word <strong>posterior</strong> may sound technical, but the idea is simple. It is the updated probability. It is what we believe after the evidence has been taken into account.</p>
 <p>Bayes’ theorem puts these pieces together:</p>
-<p><span class="math display">\[
-P(H \mid E)
+<p><span class="math display">\[P(H \mid E)
 =
-\frac{P(H)P(E \mid H)}{P(E)}
-\]</span></p>
+\frac{P(H)P(E \mid H)}{P(E)}\]</span></p>
 <p>In words:</p>
-<p><span class="math display">\[
-\text{posterior}
+<p><span class="math display">\[\text{posterior}
 =
 \frac{\text{prior} \times \text{likelihood}}
-{\text{evidence}}
-\]</span></p>
+{\text{evidence}}\]</span></p>
 <p>The denominator, <span class="math inline">\(P(E)\)</span>, is sometimes called the <strong>evidence</strong>, the <strong>marginal likelihood</strong>, or the <strong>normalising constant</strong>. For now, the most important thing is what it does. It makes sure the updated probabilities are properly scaled.</p>
 <p>In the two-hypothesis case, where the hypothesis is either true or not true, the denominator can be written as:</p>
-<p><span class="math display">\[
-P(E)
+<p><span class="math display">\[P(E)
 =
 P(H)P(E \mid H)
 +
-P(H^c)P(E \mid H^c)
-\]</span></p>
+P(H^c)P(E \mid H^c)\]</span></p>
 <p>That is, the evidence could have happened in two ways:</p>
 <ol type="1">
 <li>the hypothesis was true and the evidence occurred</li>
 <li>the hypothesis was false and the evidence occurred</li>
 </ol>
 <p>So Baby Bayes becomes:</p>
-<p><span class="math display">\[
-P(H \mid E)
+<p><span class="math display">\[P(H \mid E)
 =
 \frac{P(H)P(E \mid H)}
-{P(H)P(E \mid H)+P(H^c)P(E \mid H^c)}
-\]</span></p>
+{P(H)P(E \mid H)+P(H^c)P(E \mid H^c)}\]</span></p>
 <p>This version is useful because it shows the comparison directly. We do not only ask whether the evidence is likely if (H) is true. We also ask whether the evidence is likely if (H) is not true.</p>
 <blockquote class="blockquote">
 <p>Evidence supports a hypothesis when it is more likely under that hypothesis than under its alternatives.</p>
 </blockquote>
 <p>For the football example, the team losing was more likely if Minh was injured:</p>
-<p><span class="math display">\[
-P(E \mid H) = 0.40
-\]</span></p>
+<p><span class="math display">\[P(E \mid H) = 0.40\]</span></p>
 <p>than if Minh was not injured:</p>
-<p><span class="math display">\[
-P(E \mid H^c) = 0.05
-\]</span></p>
+<p><span class="math display">\[P(E \mid H^c) = 0.05\]</span></p>
 <p>So the loss increased the probability that Minh was injured. But it did not make injury certain, because injury was not very common to begin with. This is why the prior matters. The evidence pushed us from 10% to about 47%, but not to 100%.</p>
 <p>A compact way to remember Bayes’ theorem is:</p>
-<p><span class="math display">\[
-\text{posterior}
+<p><span class="math display">\[\text{posterior}
 \propto
-\text{prior} \times \text{likelihood}
-\]</span></p>
+\text{prior} \times \text{likelihood}\]</span></p>
 <p>The symbol <span class="math inline">\(\propto\)</span> means “is proportional to”. It reminds us that the posterior is built by multiplying the prior by the likelihood, and then re-scaling so that the probabilities add up to 1.</p>
 <p>This connects directly to the previous chapter. In Chapter 7, we focused on likelihood: how well different explanations predict the data. Bayesian inference adds one more ingredient. It combines the likelihood with a prior, then turns the result into a posterior. In short:</p>
 <blockquote class="blockquote">
@@ -4561,49 +4477,28 @@ P(E \mid H^c) = 0.05
 </div>
 <p>At first, it is tempting to say 80%. After all, the test is correct 80% of the time. But that is not the right conditional probability.</p>
 <p>The test accuracy tells us something like:</p>
-<p><span class="math display">\[
-P(\text{positive test} \mid \text{has disease})
-\]</span></p>
+<p><span class="math display">\[P(\text{positive test} \mid \text{has disease})\]</span></p>
 <p>But the question asks for:</p>
-<p><span class="math display">\[
-P(\text{has disease} \mid \text{positive test})
-\]</span></p>
+<p><span class="math display">\[P(\text{has disease} \mid \text{positive test})\]</span></p>
 <p>These are not the same.</p>
 <p>Let</p>
-<p><span class="math display">\[
-H = \text{person has Disease X}
-\]</span></p>
+<p><span class="math display">\[H = \text{person has Disease X}\]</span></p>
 <p>and let</p>
-<p><span class="math display">\[
-E = \text{person tests positive}
-\]</span></p>
+<p><span class="math display">\[E = \text{person tests positive}\]</span></p>
 <p>We want:</p>
-<p><span class="math display">\[
-P(H \mid E)
-\]</span></p>
+<p><span class="math display">\[P(H \mid E)\]</span></p>
 <p>Using Baby Bayes:</p>
-<p><span class="math display">\[
-P(H \mid E)
+<p><span class="math display">\[P(H \mid E)
 =
 \frac{P(H)P(E \mid H)}
-{P(H)P(E \mid H)+P(H^c)P(E \mid H^c)}
-\]</span></p>
+{P(H)P(E \mid H)+P(H^c)P(E \mid H^c)}\]</span></p>
 <p>In this example:</p>
-<p><span class="math display">\[
-P(H) = 0.10
-\]</span></p>
-<p><span class="math display">\[
-P(H^c) = 0.90
-\]</span></p>
-<p><span class="math display">\[
-P(E \mid H) = 0.80
-\]</span></p>
-<p><span class="math display">\[
-P(E \mid H^c) = 0.20
-\]</span></p>
+<p><span class="math display">\[P(H) = 0.10\]</span></p>
+<p><span class="math display">\[P(H^c) = 0.90\]</span></p>
+<p><span class="math display">\[P(E \mid H) = 0.80\]</span></p>
+<p><span class="math display">\[P(E \mid H^c) = 0.20\]</span></p>
 <p>Substituting these into the formula gives:</p>
-<p><span class="math display">\[
-\begin{aligned}
+<p><span class="math display">\[\begin{aligned}
 P(H \mid E)
 &amp;=
 \frac{0.10 \times 0.80}
@@ -4615,8 +4510,7 @@ P(H \mid E)
 \frac{0.08}{0.26} \\
 &amp;=
 0.308
-\end{aligned}
-\]</span></p>
+\end{aligned}\]</span></p>
 <p>So, after a positive test, the probability that the person has Disease X is about 31%.</p>
 <p>This can feel surprising. The test is correct 80% of the time, but a positive result does not mean there is an 80% chance of having the disease.</p>
 <p>A natural frequency table makes the calculation easier to see. Imagine 100 people from this population.</p>
@@ -5108,16 +5002,12 @@ P(H \mid E)
 <li>18 people without the disease also test positive</li>
 </ul>
 <p>So there are:</p>
-<p><span class="math display">\[
-8 + 18 = 26
-\]</span></p>
+<p><span class="math display">\[8 + 18 = 26\]</span></p>
 <p>positive tests in total.</p>
 <p>Of these 26 positive tests, only 8 are true positives. Therefore:</p>
-<p><span class="math display">\[
-P(\text{has disease} \mid \text{positive test})
+<p><span class="math display">\[P(\text{has disease} \mid \text{positive test})
 =\frac{8}{26}
-=0.308
-\]</span></p>
+=0.308\]</span></p>
 <p>The natural frequency version and the Baby Bayes formula give the same answer. The table often feels more intuitive because it shows where the positive tests come from.</p>
 <p>There are two ways to receive a positive result:</p>
 <ol type="1">
@@ -5138,59 +5028,43 @@ P(\text{has disease} \mid \text{positive test})
 <li>someone took the pill or did not take the pill</li>
 </ul>
 <p>For these examples, the formula was:</p>
-<p><span class="math display">\[
-P(H \mid E)
+<p><span class="math display">\[P(H \mid E)
 =
 \frac{P(H)P(E \mid H)}
-{P(H)P(E \mid H)+P(H^c)P(E \mid H^c)}
-\]</span></p>
+{P(H)P(E \mid H)+P(H^c)P(E \mid H^c)}\]</span></p>
 <p>This version is useful because it makes the comparison explicit. The evidence can happen in two ways: either (H) is true and the evidence occurs, or (H^c) is true and the evidence occurs.</p>
 <p>But this is not a separate theorem. It is Bayes’ theorem written out for the case where there are only two possibilities.</p>
 <p>The general version of Bayes’ theorem is:</p>
-<p><span class="math display">\[
-P(H \mid E)
+<p><span class="math display">\[P(H \mid E)
 =
-\frac{P(E \mid H)P(H)}{P(E)}
-\]</span></p>
+\frac{P(E \mid H)P(H)}{P(E)}\]</span></p>
 <p>This is the same idea, written more compactly.</p>
 <p>The numerator has two parts:</p>
-<p><span class="math display">\[
-P(E \mid H)P(H)
-\]</span></p>
+<p><span class="math display">\[P(E \mid H)P(H)\]</span></p>
 <p>This is the probability that (H) is true and the evidence (E) occurs. In other words:</p>
-<p><span class="math display">\[
-P(E \mid H)P(H)
+<p><span class="math display">\[P(E \mid H)P(H)
 =
-P(H \cap E)
-\]</span></p>
+P(H \cap E)\]</span></p>
 <p>The denominator is:</p>
-<p><span class="math display">\[
-P(E)
-\]</span></p>
+<p><span class="math display">\[P(E)\]</span></p>
 <p>This is the overall probability of seeing the evidence.</p>
 <p>When there are only two possibilities, (H) and (H^c), the denominator can be expanded as:</p>
-<p><span class="math display">\[
-P(E)
+<p><span class="math display">\[P(E)
 =
 P(E \mid H)P(H)
 +
-P(E \mid H^c)P(H^c)
-\]</span></p>
+P(E \mid H^c)P(H^c)\]</span></p>
 <p>That is exactly what we were using in Baby Bayes.</p>
 <p>So the move from Baby Bayes to Bayes’ theorem is not a change in logic. It is a change in notation.</p>
 <p>Bayes’ theorem says:</p>
-<p><span class="math display">\[
-\text{posterior}
+<p><span class="math display">\[\text{posterior}
 =
 \frac{\text{likelihood} \times \text{prior}}
-{\text{evidence}}
-\]</span></p>
+{\text{evidence}}\]</span></p>
 <p>Or, more compactly:</p>
-<p><span class="math display">\[
-\text{posterior}
+<p><span class="math display">\[\text{posterior}
 \propto
-\text{prior} \times \text{likelihood}
-\]</span></p>
+\text{prior} \times \text{likelihood}\]</span></p>
 <p>The proportional version is often the most useful way to remember the idea. It says that the posterior is built by taking the prior and reweighting it by the likelihood.</p>
 <p>Values of (H) that made the evidence more likely receive more weight. Values of (H) that made the evidence less likely receive less weight.</p>
 <p>This connects directly to the previous chapter. In Chapter 7, likelihood measured how well each possible explanation predicted the observed data. Bayes’ theorem uses that likelihood to update our uncertainty.</p>
@@ -5208,14 +5082,10 @@ P(E \mid H^c)P(H^c)
 <p>Minh tested positive. That positive result was evidence for Disease X. It increased the probability that Minh had the disease. But it did not make the probability 80%, because we also had to account for the base rate: only 10% of people had the disease before testing.</p>
 <p>The <strong>base rate</strong> is the background rate of something in the population. In Bayesian language, it plays the role of the prior.</p>
 <p>In the Disease X example:</p>
-<p><span class="math display">\[
-P(H) = 0.10
-\]</span></p>
+<p><span class="math display">\[P(H) = 0.10\]</span></p>
 <p>This means that before Minh took the test, the probability that Minh had Disease X was 10%.</p>
 <p>The test result then updated this probability:</p>
-<p><span class="math display">\[
-P(H \mid E) = 0.308
-\]</span></p>
+<p><span class="math display">\[P(H \mid E) = 0.308\]</span></p>
 <p>So the positive result raised the probability from 10% to about 31%. That is a meaningful increase. But it is not certainty. To see how much base rates matter, imagine the same test is used for a much rarer disease.</p>
 <p>Suppose Disease Y affects only 1 in 1000 people. The test behaves the same way:</p>
 <ul>
@@ -5704,18 +5574,14 @@ P(H \mid E) = 0.308
 </div>
 </div>
 <p>Among 1000 people, we expect:</p>
-<p><span class="math display">\[
-0.8 + 199.8 = 200.6 \text{ positive tests}
-\]</span></p>
+<p><span class="math display">\[0.8 + 199.8 = 200.6 \text{ positive tests}\]</span></p>
 <p>But only 0.8 of these are expected to come from people who actually have the disease. So:</p>
-<p><span class="math display">\[
-\begin{aligned}
+<p><span class="math display">\[\begin{aligned}
 P(\text{has Disease Y} \mid \text{positive test})
 &amp;=
 \frac{0.8}{200.6}=
 0.004
-\end{aligned}
-\]</span></p>
+\end{aligned}\]</span></p>
 <p>That is less than 1%.</p>
 <p>This example is deliberately extreme because the false positive rate is high. But it makes the lesson clear. When a condition is rare, false positives can easily outnumber true positives, even when the test has some ability to detect the disease.</p>
 <p>Now compare this with a more common disease. Suppose Disease Z affects 50% of the population, and the test behaves in the same way.</p>
@@ -6200,27 +6066,21 @@ P(\text{has Disease Y} \mid \text{positive test})
 </div>
 </div>
 <p>Among 1000 people, we expect:</p>
-<p><span class="math display">\[
-400 + 100 = 500 \text{ positive tests}
-\]</span></p>
+<p><span class="math display">\[400 + 100 = 500 \text{ positive tests}\]</span></p>
 <p>Of these, 400 are expected to come from people who actually have the disease. So:</p>
-<p><span class="math display">\[
-\begin{aligned}
+<p><span class="math display">\[\begin{aligned}
 P(\text{has Disease Z} \mid \text{positive test})
 &amp;=
 \frac{400}{500}
 =
 0.800
-\end{aligned}
-\]</span></p>
+\end{aligned}\]</span></p>
 <p>The test is identical in both examples. The evidence is the same kind of evidence: a positive result. But the meaning of the evidence changes because the base rate changes.</p>
 <p>When the disease is rare, a positive test may still leave a low probability of disease. When the disease is common, the same positive test may imply a much higher probability of disease. Ignoring the base rate is called the <strong>base-rate fallacy</strong>. It happens when we focus on the evidence but forget how common the explanation was before the evidence appeared.</p>
 <p>Bayes’ theorem protects us from this mistake by forcing both pieces into the calculation:</p>
-<p><span class="math display">\[
-\text{posterior}
+<p><span class="math display">\[\text{posterior}
 \propto
-\text{prior} \times \text{likelihood}
-\]</span></p>
+\text{prior} \times \text{likelihood}\]</span></p>
 <p>The likelihood tells us how strongly the evidence points toward the hypothesis. The prior tells us how plausible the hypothesis was before seeing the evidence. We need both.</p>
 </section>
 <section id="likelihood-ratios-evidence-as-a-multiplier" class="level3" data-number="8.6.2">
@@ -6228,11 +6088,9 @@ P(\text{has Disease Z} \mid \text{positive test})
 <p>Bayes’ theorem tells us that evidence must be interpreted against a starting point. The starting point is the prior. The evidence then shifts us from the prior to the posterior.</p>
 <p>Another way to describe this shift is with a <strong>likelihood ratio</strong>.</p>
 <p>A likelihood ratio compares how likely the evidence is under two different explanations. For a hypothesis (H) and its alternative (H^c), the likelihood ratio is:</p>
-<p><span class="math display">\[
-\text{LR}
+<p><span class="math display">\[\text{LR}
 =
-\frac{P(E \mid H)}{P(E \mid H^c)}
-\]</span></p>
+\frac{P(E \mid H)}{P(E \mid H^c)}\]</span></p>
 <p>The numerator asks:</p>
 <blockquote class="blockquote">
 <p>How likely is the evidence if the hypothesis is true?</p>
@@ -6264,28 +6122,17 @@ P(\text{has Disease Z} \mid \text{positive test})
 <p>Minh is an athlete and receives a positive test.</p>
 <p>What is the probability that Minh used the banned substance?</p>
 <p>Let</p>
-<p><span class="math display">\[
-H = \text{Minh used the banned substance}
-\]</span></p>
+<p><span class="math display">\[H = \text{Minh used the banned substance}\]</span></p>
 <p>and let</p>
-<p><span class="math display">\[
-E = \text{Minh tests positive}
-\]</span></p>
+<p><span class="math display">\[E = \text{Minh tests positive}\]</span></p>
 <p>The prior probability is:</p>
-<p><span class="math display">\[
-P(H) = 0.10
-\]</span></p>
+<p><span class="math display">\[P(H) = 0.10\]</span></p>
 <p>The likelihood of the evidence if Minh used the substance is:</p>
-<p><span class="math display">\[
-P(E \mid H) = 0.50
-\]</span></p>
+<p><span class="math display">\[P(E \mid H) = 0.50\]</span></p>
 <p>The likelihood of the evidence if Minh did not use the substance is:</p>
-<p><span class="math display">\[
-P(E \mid H^c) = 0.01
-\]</span></p>
+<p><span class="math display">\[P(E \mid H^c) = 0.01\]</span></p>
 <p>So the likelihood ratio is:</p>
-<p><span class="math display">\[
-\begin{aligned}
+<p><span class="math display">\[\begin{aligned}
 \text{LR}
 &amp;=
 \frac{P(E \mid H)}{P(E \mid H^c)} \\
@@ -6293,20 +6140,16 @@ P(E \mid H^c) = 0.01
 \frac{0.50}{0.01} \\
 &amp;=
 50
-\end{aligned}
-\]</span></p>
+\end{aligned}\]</span></p>
 <p>The positive test is 50 times more likely if Minh used the substance than if Minh did not use the substance. That is strong evidence.</p>
 <p>But strong evidence is not the same as certainty. We still need to combine the evidence with the prior.</p>
 <p>Using Bayes’ theorem:</p>
-<p><span class="math display">\[
-P(H \mid E)
+<p><span class="math display">\[P(H \mid E)
 =
 \frac{P(H)P(E \mid H)}
-{P(H)P(E \mid H)+P(H^c)P(E \mid H^c)}
-\]</span></p>
+{P(H)P(E \mid H)+P(H^c)P(E \mid H^c)}\]</span></p>
 <p>Substituting the numbers:</p>
-<p><span class="math display">\[
-\begin{aligned}
+<p><span class="math display">\[\begin{aligned}
 P(H \mid E)
 &amp;=
 \frac{0.10 \times 0.50}
@@ -6318,17 +6161,12 @@ P(H \mid E)
 \frac{0.05}{0.059} \\
 &amp;=
 0.847
-\end{aligned}
-\]</span></p>
+\end{aligned}\]</span></p>
 <p>So after the positive test, the probability that Minh used the banned substance is about 85%. That is much higher than the prior probability of 10%. The evidence has shifted our uncertainty a lot. But it is not 99%.</p>
 <p>This is the important point. A 1% false positive rate does not mean there is a 99% chance that Minh is guilty. It means:</p>
-<p><span class="math display">\[
-P(\text{positive test} \mid \text{did not use substance}) = 0.01
-\]</span></p>
+<p><span class="math display">\[P(\text{positive test} \mid \text{did not use substance}) = 0.01\]</span></p>
 <p>That is not the same as:</p>
-<p><span class="math display">\[
-P(\text{did not use substance} \mid \text{positive test})
-\]</span></p>
+<p><span class="math display">\[P(\text{did not use substance} \mid \text{positive test})\]</span></p>
 <p>The first probability conditions on innocence. The second probability conditions on the evidence.</p>
 </div>
 </div>
@@ -6337,36 +6175,29 @@ P(\text{did not use substance} \mid \text{positive test})
 <h3 data-number="8.6.3" class="anchored" data-anchor-id="evidence-changes-odds"><span class="header-section-number">8.6.3</span> Evidence changes odds</h3>
 <p>Likelihood ratios are especially useful when we think in terms of odds.</p>
 <p>Bayes’ theorem can be written as:</p>
-<p><span class="math display">\[
-\text{posterior odds}
+<p><span class="math display">\[\text{posterior odds}
 =
 \text{prior odds}
 \times
-\text{likelihood ratio}
-\]</span></p>
+\text{likelihood ratio}\]</span></p>
 <p>For the doping example, the prior probability of using the substance is 0.10. So the prior odds are:</p>
-<p><span class="math display">\[
-\begin{aligned}
+<p><span class="math display">\[\begin{aligned}
 \text{prior odds}
 &amp;=
 \frac{0.10}{0.90} \\
 &amp;=
 \frac{1}{9}
-\end{aligned}
-\]</span></p>
+\end{aligned}\]</span></p>
 <p>The likelihood ratio is 50. Therefore:</p>
-<p><span class="math display">\[
-\begin{aligned}
+<p><span class="math display">\[\begin{aligned}
 \text{posterior odds}
 &amp;=
 \frac{1}{9} \times 50 \\
 &amp;=
 \frac{50}{9}
-\end{aligned}
-\]</span></p>
+\end{aligned}\]</span></p>
 <p>These odds correspond to the same posterior probability:</p>
-<p><span class="math display">\[
-\begin{aligned}
+<p><span class="math display">\[\begin{aligned}
 P(H \mid E)
 &amp;=
 \frac{50}{50 + 9} \\
@@ -6374,8 +6205,7 @@ P(H \mid E)
 \frac{50}{59} \\
 &amp;=
 0.847
-\end{aligned}
-\]</span></p>
+\end{aligned}\]</span></p>
 <p>The odds form makes the role of evidence especially clear.</p>
 <p>The prior odds tell us where we started. The likelihood ratio tells us how strongly the evidence shifts us. The posterior odds tell us where we end up.</p>
 <p>So another way to remember Bayes’ theorem is:</p>
@@ -6387,18 +6217,26 @@ P(H \mid E)
 <section id="the-prosecutors-fallacy" class="level3" data-number="8.6.4">
 <h3 data-number="8.6.4" class="anchored" data-anchor-id="the-prosecutors-fallacy"><span class="header-section-number">8.6.4</span> The prosecutor’s fallacy</h3>
 <p>The examples in this chapter have all pointed to the same warning:</p>
-<p><span class="math display">\[
-P(A \mid B)
+<p><span class="math display">\[P(A \mid B)
 \ne
-P(B \mid A)
-\]</span></p>
+P(B \mid A)\]</span></p>
 <p>This mistake appears in many settings, but it is especially serious when probabilities are used in court.</p>
 <p>A tragic example is the case of Sally Clark in the United Kingdom.</p>
-<p>IMAGE - NEWSPAPER</p>
+<center>
+<div class="cell enlarge-image">
+<div class="cell-output-display">
+<div>
+<figure class="figure">
+<p><img src="images/chapter8/sally.jpg" class="img-fluid figure-img"></p>
+</figure>
+</div>
+</div>
+</div>
+</center>
+<p><br></p>
 <p>Clark’s first baby died suddenly at 11 weeks. The death was recorded as sudden infant death syndrome, usually abbreviated as SIDS. SIDS is a diagnosis used when a baby dies unexpectedly and no clear cause is found after investigation. Clark later had a second baby, who also died suddenly, this time at 8 weeks. After the second death, Clark was accused of murdering both children.</p>
 <p>At the trial, the prosecution called an expert witness who gave evidence about how rare SIDS was. He estimated that the probability of one SIDS death in a family like Clark’s was about 1 in 8,543. He then multiplied this probability by itself to estimate the probability of two SIDS deaths:</p>
-<p><span class="math display">\[
-\begin{aligned}
+<p><span class="math display">\[\begin{aligned}
 P(\text{two SIDS deaths})
 &amp;\approx
 \frac{1}{8543}
@@ -6406,27 +6244,18 @@ P(\text{two SIDS deaths})
 \frac{1}{8543} \\
 &amp;\approx
 \frac{1}{73000000}
-\end{aligned}
-\]</span></p>
+\end{aligned}\]</span></p>
 <p>This produced the famous figure of about 1 in 73 million. The number sounded overwhelming. If two SIDS deaths were that unlikely, it might seem natural to conclude that murder was the more likely explanation. But that reasoning contains two statistical problems.</p>
 <p>The first problem is about independence. Multiplying the two probabilities assumes that the two deaths were independent. But this assumption is doubtful. If one baby in a family has died of SIDS, genetic, environmental, or other family-level factors may affect the risk for another baby in the same family. So the multiplication itself is questionable.</p>
 <p>The second problem is the prosecutor’s fallacy. The calculation focused on something like:</p>
-<p><span class="math display">\[
-P(\text{two deaths} \mid \text{SIDS explanation})
-\]</span></p>
+<p><span class="math display">\[P(\text{two deaths} \mid \text{SIDS explanation})\]</span></p>
 <p>But the court needed to reason about something closer to:</p>
-<p><span class="math display">\[
-P(\text{SIDS explanation} \mid \text{two deaths})
-\]</span></p>
+<p><span class="math display">\[P(\text{SIDS explanation} \mid \text{two deaths})\]</span></p>
 <p>These are not the same.</p>
 <p>The rarity of two SIDS deaths does not, by itself, tell us the probability that the deaths were not due to SIDS. To make that judgement, we also need to compare the evidence under the competing explanation. In this case, the competing explanations were roughly:</p>
-<p><span class="math display">\[
-H_1 = \text{the deaths were due to SIDS or natural causes}
-\]</span></p>
+<p><span class="math display">\[H_1 = \text{the deaths were due to SIDS or natural causes}\]</span></p>
 <p>and</p>
-<p><span class="math display">\[
-H_2 = \text{the deaths were due to murder}
-\]</span></p>
+<p><span class="math display">\[H_2 = \text{the deaths were due to murder}\]</span></p>
 <p>Both explanations are rare. Two babies dying of SIDS in the same family is rare. But a mother murdering two of her babies is also rare.</p>
 <p>So the relevant question is not simply:</p>
 <blockquote class="blockquote">
@@ -6437,42 +6266,32 @@ H_2 = \text{the deaths were due to murder}
 <p>Are the two deaths more likely under the SIDS explanation, or under the murder explanation?</p>
 </blockquote>
 <p>That is a likelihood-ratio question:</p>
-<p><span class="math display">\[
-\text{LR}
+<p><span class="math display">\[\text{LR}
 =
 \frac{
 P(\text{two deaths} \mid H_2)
 }{
 P(\text{two deaths} \mid H_1)
-}
-\]</span></p>
+}\]</span></p>
 <p>The Royal Statistical Society later criticised the reasoning in the case, saying that the jury needed to compare the competing explanations rather than focus only on how unlikely the SIDS explanation was. Clark’s conviction was eventually quashed after further medical evidence came to light, and she was released after nearly three and a half years in prison.</p>
 <p>The lesson is not that rare events should be ignored. Rare events matter. But rarity alone is not enough.</p>
-<p><span class="math display">\[
-P(\text{evidence} \mid \text{innocence})
-\text{ is very small}
-\]</span></p>
+<p><span class="math display">\[P(\text{evidence} \mid \text{innocence})
+\text{ is very small}\]</span></p>
 <p>therefore</p>
-<p><span class="math display">\[
-P(\text{innocence} \mid \text{evidence})
-\text{ is very small}
-\]</span></p>
+<p><span class="math display">\[P(\text{innocence} \mid \text{evidence})
+\text{ is very small}\]</span></p>
 <p>That conclusion does not follow.</p>
 <p>Bayesian reasoning asks us to keep the direction of the conditional probability clear:</p>
-<p><span class="math display">\[
-P(\text{evidence} \mid \text{hypothesis})
-\]</span></p>
-<p>is a likelihood.</p>
-<p><span class="math display">\[
-P(\text{hypothesis} \mid \text{evidence})
-\]</span></p>
-<p>is a posterior probability.</p>
+<ul>
+<li><span class="math inline">\(P(\text{evidence} \mid \text{hypothesis})\)</span> is a likelihood.</li>
+<li><span class="math inline">\(P(\text{hypothesis} \mid \text{evidence})\)</span> is a posterior probability.</li>
+</ul>
 <p>They are connected by Bayes’ theorem, but they are not interchangeable.</p>
 </section>
 </section>
 <section id="from-hypotheses-to-parameters" class="level2" data-number="8.7">
 <h2 data-number="8.7" class="anchored" data-anchor-id="from-hypotheses-to-parameters"><span class="header-section-number">8.7</span> From hypotheses to parameters</h2>
-<p>The examples so far have been useful because they were small enough to see clearly. There was a hypothesis (H), some evidence (E), and we used Bayes’ theorem to update (P(H)) into <span class="math inline">\(P(H \mid E)\)</span>.</p>
+<p>The examples so far have been useful because they were small enough to see clearly. There was a hypothesis (H), some evidence (E), and we used Bayes’ theorem to update <span class="math inline">\(P(H)\)</span> into <span class="math inline">\(P(H \mid E)\)</span>.</p>
 <p>But statistical inference often asks a different kind of question. Instead of asking whether a single hypothesis is true, we often want to learn about an unknown quantity. For example, we might want to know:</p>
 <ul>
 <li>the proportion of voters who support a policy</li>
@@ -6485,74 +6304,46 @@ P(\text{hypothesis} \mid \text{evidence})
 <p>In Chapter 7, we used the symbol <span class="math inline">\(\theta\)</span> for a general unknown parameter. The parameter might be a mean, a standard deviation, a rate, or a probability. The exact meaning depends on the statistical model.</p>
 <p>Suppose we are interested in the proportion of residents who support a new local policy.</p>
 <p>Let</p>
-<p><span class="math display">\[
-\theta = \text{proportion of residents who support the policy}
-\]</span></p>
+<p><span class="math display">\[\theta = \text{proportion of residents who support the policy}\]</span></p>
 <p>Because <span class="math inline">\(\theta\)</span> is a proportion, it must lie between 0 and 1:</p>
-<p><span class="math display">\[
-0 \leq \theta \leq 1
-\]</span></p>
+<p><span class="math display">\[0 \leq \theta \leq 1\]</span></p>
 <p>Now suppose we survey (n) residents and count how many support the policy. Let</p>
-<p><span class="math display">\[
-X = \text{number of surveyed residents who support the policy}
-\]</span></p>
+<p><span class="math display">\[X = \text{number of surveyed residents who support the policy}\]</span></p>
 <p>If each person independently supports the policy with probability <span class="math inline">\(\theta\)</span>, then a simple model is:</p>
-<p><span class="math display">\[
-X \mid \theta \sim \text{Binomial}(n, \theta)
-\]</span></p>
+<p><span class="math display">\[X \mid \theta \sim \text{Binomial}(n, \theta)\]</span></p>
 <p>This notation says:</p>
 <blockquote class="blockquote">
-<p>If the true support rate were (), then the number of supporters in a sample of size (n) would follow a binomial distribution.</p>
+<p>If the true support rate were <span class="math inline">\(\theta\)</span>, then the number of supporters in a sample of size <span class="math inline">\(n\)</span> would follow a binomial distribution.</p>
 </blockquote>
-<p>In Chapter 7, this gave us a likelihood. If we observed (X = x), then the likelihood was:</p>
-<p><span class="math display">\[
-P(X = x \mid \theta)
-\]</span></p>
+<p>In Chapter 7, this gave us a likelihood. If we observed <span class="math inline">\(X = x\)</span>, then the likelihood was:</p>
+<p><span class="math display">\[P(X = x \mid \theta)\]</span></p>
 <p>The likelihood asks:</p>
 <blockquote class="blockquote">
-<p>For each possible value of (), how well would that value predict the data we observed?</p>
+<p>For each possible value of <span class="math inline">\(\theta\)</span>, how well would that value predict the data we observed?</p>
 </blockquote>
 <p>Bayesian inference asks the inverse question:</p>
-<p><span class="math display">\[
-p(\theta \mid X = x)
-\]</span></p>
+<p><span class="math display">\[p(\theta \mid X = x)\]</span></p>
 <p>This asks:</p>
 <blockquote class="blockquote">
 <p>After observing the data, how plausible is each possible value of <span class="math inline">\(\theta\)</span>?</p>
 </blockquote>
 <p>The move is the same as before. Earlier, Bayes’ theorem helped us move from the likelihood of evidence under a hypothesis,</p>
-<p><span class="math display">\[
-P(E \mid H)
-\]</span></p>
+<p><span class="math display">\[P(E \mid H)\]</span></p>
 <p>to the posterior probability of the hypothesis after evidence,</p>
-<p><span class="math display">\[
-P(H \mid E)
-\]</span></p>
-<p>Now the hypothesis is no longer just true or false. It is a parameter that can take many possible values. We move from the likelihood of the data under a parameter value,</p>
-<p><span class="math display">\[
-P(\text{data} \mid \theta)
-\]</span></p>
-<p>to a posterior distribution over the parameter,</p>
-<p><span class="math display">\[
-p(\theta \mid \text{data})
-\]</span></p>
-<p>The notation changes slightly because <span class="math inline">\(\theta\)</span> may be continuous. If <span class="math inline">\(\theta\)</span> can take any value between 0 and 1, then we use a density, written with a lowercase (p), rather than a probability mass.</p>
-<p>But the idea is the same. The prior describes our uncertainty about the parameter before seeing the data. The likelihood describes how well each parameter value predicts the data. The posterior describes our uncertainty about the parameter after seeing the data.</p>
+<p><span class="math display">\[P(H \mid E)\]</span></p>
+<p>Now the hypothesis is no longer just true or false. It is a parameter that can take many possible values. We move from the likelihood of the data under a parameter value, <span class="math inline">\(P(\text{data} \mid \theta)\)</span> to a posterior distribution over the parameter, <span class="math inline">\(P(\theta \mid \text{data})\)</span>.</p>
+<p>The notation changes slightly because <span class="math inline">\(\theta\)</span> may be continuous. If <span class="math inline">\(\theta\)</span> can take any value between 0 and 1, then we use a density, written with a lowercase (p), rather than a probability mass. But the idea is the same. The prior describes our uncertainty about the parameter before seeing the data. The likelihood describes how well each parameter value predicts the data. The posterior describes our uncertainty about the parameter after seeing the data.</p>
 <section id="bayes-theorem-for-parameters" class="level3" data-number="8.7.1">
 <h3 data-number="8.7.1" class="anchored" data-anchor-id="bayes-theorem-for-parameters"><span class="header-section-number">8.7.1</span> Bayes’ theorem for parameters</h3>
 <p>Once the unknown quantity is a parameter, Bayes’ theorem has the same structure as before, but the notation changes slightly.</p>
 <p>For a hypothesis (H) and evidence (E), we wrote:</p>
-<p><span class="math display">\[
-P(H \mid E)
+<p><span class="math display">\[P(H \mid E)
 =
-\frac{P(E \mid H)P(H)}{P(E)}
-\]</span></p>
+\frac{P(E \mid H)P(H)}{P(E)}\]</span></p>
 <p>For a parameter <span class="math inline">\(\theta\)</span> and observed data (D), we write:</p>
-<p><span class="math display">\[
-p(\theta \mid D)
+<p><span class="math display">\[p(\theta \mid D)
 =
-\frac{p(D \mid \theta)p(\theta)}{p(D)}
-\]</span></p>
+\frac{p(D \mid \theta)p(\theta)}{p(D)}\]</span></p>
 <p>The symbols look a little different, but the roles are the same.</p>
 <div class="cell">
 <div class="cell-output-display">
@@ -7053,58 +6844,40 @@ p(\theta \mid D)
 </div>
 <p>The prior distribution, <span class="math inline">\(p(\theta)\)</span>, describes what we think about the parameter before seeing the data. The likelihood, <span class="math inline">\(p(D \mid \theta)\)</span>, describes how well each possible value of <span class="math inline">\(\theta\)</span> predicts the data we observed.</p>
 <p>The posterior distribution, <span class="math inline">\(p(\theta \mid D)\)</span>, describes what we think about the parameter after seeing the data. The denominator, <span class="math inline">\(p(D)\)</span>, makes sure that the posterior distribution is a proper probability distribution. When <span class="math inline">\(\theta\)</span> is continuous, this denominator is found by adding up, or integrating, the prior times the likelihood across all possible values of <span class="math inline">\(\theta\)</span>:</p>
-<p><span class="math display">\[
-p(D)
+<p><span class="math display">\[p(D)
 =
-\int p(D \mid \theta)p(\theta),d\theta
-\]</span></p>
+\int p(D \mid \theta)p(\theta),d\theta\]</span></p>
 <p>This expression can look intimidating, but its job is simple. It re-scales the posterior so that the total area under the posterior curve is 1.</p>
 <p>For many Bayesian analyses, the most important part to remember is the proportional form:</p>
-<p><span class="math display">\[
-p(\theta \mid D)
+<p><span class="math display">\[p(\theta \mid D)
 \propto
-p(\theta)p(D \mid \theta)
-\]</span></p>
+p(\theta)p(D \mid \theta)\]</span></p>
 <p>In words:</p>
-<p><span class="math display">\[
-\text{posterior}
+<p><span class="math display">\[\text{posterior}
 \propto
 \text{prior}
 \times
-\text{likelihood}
-\]</span></p>
+\text{likelihood}\]</span></p>
 <p>This is the same idea we have been using throughout the chapter. Values of <span class="math inline">\(\theta\)</span> that had higher prior probability and predicted the data well receive more posterior weight. Values of <span class="math inline">\(\theta\)</span> that had low prior probability or predicted the data poorly receive less posterior weight.</p>
 </section>
 <section id="a-proportion-example" class="level3" data-number="8.7.2">
 <h3 data-number="8.7.2" class="anchored" data-anchor-id="a-proportion-example"><span class="header-section-number">8.7.2</span> A proportion example</h3>
 <p>Suppose a local council is considering a new late-night bus service. The council wants to know what proportion of residents would use the service.</p>
 <p>Let</p>
-<p><span class="math display">\[
-\theta = \text{proportion of residents who would use the late-night bus}
-\]</span></p>
+<p><span class="math display">\[\theta = \text{proportion of residents who would use the late-night bus}\]</span></p>
 <p>The council surveys 40 residents and finds that 26 say they would use the service.</p>
 <p>Let</p>
-<p><span class="math display">\[
-X = \text{number of surveyed residents who say yes}
-\]</span></p>
+<p><span class="math display">\[X = \text{number of surveyed residents who say yes}\]</span></p>
 <p>The observed data are:</p>
-<p><span class="math display">\[
-X = 26
-\]</span></p>
+<p><span class="math display">\[X = 26\]</span></p>
 <p>out of:</p>
-<p><span class="math display">\[
-n = 40
-\]</span></p>
+<p><span class="math display">\[n = 40\]</span></p>
 <p>A simple model is:</p>
-<p><span class="math display">\[
-X \mid \theta \sim \text{Binomial}(40, \theta)
-\]</span></p>
+<p><span class="math display">\[X \mid \theta \sim \text{Binomial}(40, \theta)\]</span></p>
 <p>The likelihood is:</p>
-<p><span class="math display">\[
-P(X = 26 \mid \theta)
+<p><span class="math display">\[P(X = 26 \mid \theta)
 =
-\binom{40}{26}\theta^{26}(1-\theta)^{14}
-\]</span></p>
+\binom{40}{26}\theta^{26}(1-\theta)^{14}\]</span></p>
 <p>This likelihood tells us how compatible each possible value of <span class="math inline">\(\theta\)</span> is with the observed result: 26 yes responses out of 40. But likelihood alone is not yet a posterior distribution. To do Bayesian inference, we also need a prior distribution for <span class="math inline">\(\theta\)</span>.</p>
 <p>That is where the beta distribution becomes useful.</p>
 </section>
@@ -7115,31 +6888,18 @@ P(X = 26 \mid \theta)
 <p>For example, we used the binomial distribution for counts out of a fixed number of trials, the Poisson distribution for counts over time or space, the exponential distribution for waiting times, and the normal distribution for measurements that vary around a centre.</p>
 <p>That same idea applies in Bayesian inference.</p>
 <p>In the late-night bus example, the unknown parameter is:</p>
-<p><span class="math display">\[
-\theta = \text{proportion of residents who would use the late-night bus}
-\]</span></p>
+<p><span class="math display">\[\theta = \text{proportion of residents who would use the late-night bus}\]</span></p>
 <p>Because <span class="math inline">\(\theta\)</span> is a proportion, it must lie between 0 and 1:</p>
-<p><span class="math display">\[
-0 \leq \theta \leq 1
-\]</span></p>
+<p><span class="math display">\[0 \leq \theta \leq 1\]</span></p>
 <p>So if we want to describe our prior uncertainty about <span class="math inline">\(\theta\)</span>, we need a distribution that also lives between 0 and 1.</p>
 <p>The normal distribution is not ideal here because it can place probability below 0 or above 1. A proportion cannot be negative, and it cannot be greater than 1.</p>
 <p>A more natural choice is the <strong>beta distribution</strong>.</p>
 <p>We write:</p>
-<p><span class="math display">\[
-\theta \sim \text{Beta}(\alpha, \beta)
-\]</span></p>
-<p>The beta distribution is a family of distributions on the interval from 0 to 1. By changing the values of <span class="math inline">\(\alpha\)</span> and <span class="math inline">\(\beta\)</span>, we can create many different shapes.</p>
-<div class="cell">
-<div class="cell-output-display">
-<div>
-<figure class="figure">
-<p><img src="8_Bayes_files/figure-html/unnamed-chunk-22-1.png" class="img-fluid figure-img" width="672"></p>
-</figure>
-</div>
-</div>
-</div>
-<p>Each curve describes a different kind of prior belief about <span class="math inline">\(\theta\)</span>.</p>
+<p><span class="math display">\[\theta \sim \text{Beta}(\alpha, \beta)\]</span></p>
+<p>The beta distribution is a family of distributions on the interval from 0 to 1. By changing the values of <span class="math inline">\(\alpha\)</span> and <span class="math inline">\(\beta\)</span>, we can create many different shapes. Play with the app below to see what the beta distribution looks like when you change the parameters:</p>
+<iframe src="interactive/beta_distribution_slider_app.html" width="100%" height="650" style="border: none;">
+</iframe>
+<p>Each curve describes a different kind of prior belief about <span class="math inline">\(\theta\)</span>. For example:</p>
 <div class="cell">
 <div class="cell-output-display">
 <div id="fufamgjpdy" style="padding-left:0px;padding-right:0px;padding-top:10px;padding-bottom:10px;overflow-x:auto;overflow-y:auto;width:auto;height:auto;">
@@ -7623,46 +7383,34 @@ P(X = 26 \mid \theta)
 </div>
 </div>
 <p>The beta distribution has two shape parameters, <span class="math inline">\(\alpha\)</span> and <span class="math inline">\(\beta\)</span>. These parameters control where the distribution places its mass. One useful summary is the mean:</p>
-<p><span class="math display">\[
-E(\theta)
+<p><span class="math display">\[E(\theta)
 =
-\frac{\alpha}{\alpha + \beta}
-\]</span></p>
+\frac{\alpha}{\alpha + \beta}\]</span></p>
 <p>For example, if:</p>
-<p><span class="math display">\[
-\theta \sim \text{Beta}(8,2)
-\]</span></p>
+<p><span class="math display">\[\theta \sim \text{Beta}(8,2)\]</span></p>
 <p>then:</p>
-<p><span class="math display">\[
-\begin{aligned}
+<p><span class="math display">\[\begin{aligned}
 E(\theta)
 &amp;=
 \frac{8}{8 + 2} \\
 &amp;=
 0.80
-\end{aligned}
-\]</span></p>
+\end{aligned}\]</span></p>
 <p>This prior is centred around larger values of <span class="math inline">\(\theta\)</span>. It would be appropriate if, before seeing the survey data, we expected a high proportion of residents to support the late-night bus.</p>
 <p>If instead:</p>
-<p><span class="math display">\[
-\theta \sim \text{Beta}(2,8)
-\]</span></p>
+<p><span class="math display">\[\theta \sim \text{Beta}(2,8)\]</span></p>
 <p>then:</p>
-<p><span class="math display">\[
-\begin{aligned}
+<p><span class="math display">\[\begin{aligned}
 E(\theta)
 &amp;=
 \frac{2}{2 + 8} \\
 &amp;=
 0.20
-\end{aligned}
-\]</span></p>
+\end{aligned}\]</span></p>
 <p>This prior is centred around smaller values of <span class="math inline">\(\theta\)</span>. It would be appropriate if we were sceptical that many residents would use the service.</p>
 <p>The beta distribution is especially useful for unknown proportions because it has the right support and flexible shapes. It can represent weak information, strong information, optimism, scepticism, or something close to neutrality.</p>
 <p>A common starting point is:</p>
-<p><span class="math display">\[
-\theta \sim \text{Beta}(1,1)
-\]</span></p>
+<p><span class="math display">\[\theta \sim \text{Beta}(1,1)\]</span></p>
 <p>This distribution is flat between 0 and 1. It gives the same density to all possible values of <span class="math inline">\(\theta\)</span>, from 0 to 1.</p>
 <p>In the late-night bus example, using a <span class="math inline">\(\text{Beta}(1,1)\)</span> prior means that, before seeing the survey, we are not strongly favouring one value of <span class="math inline">\(\theta\)</span> over another.</p>
 <p>Once we combine this prior with the binomial likelihood, we get a posterior distribution for <span class="math inline">\(\theta\)</span>. That posterior tells us what values of <span class="math inline">\(\theta\)</span> are plausible after observing 26 yes responses out of 40.</p>
@@ -8171,17 +7919,11 @@ E(\theta)
 <section id="beta-binomial" class="level3" data-number="8.9.1">
 <h3 data-number="8.9.1" class="anchored" data-anchor-id="beta-binomial"><span class="header-section-number">8.9.1</span> Beta-binomial</h3>
 <p>For binomial data:</p>
-<p><span class="math display">\[
-X \mid p \sim \text{Binomial}(n,p)
-\]</span></p>
+<p><span class="math display">\[X \mid p \sim \text{Binomial}(n,p)\]</span></p>
 <p>If the prior is:</p>
-<p><span class="math display">\[
-p \sim \text{Beta}(\alpha,\beta)
-\]</span></p>
+<p><span class="math display">\[p \sim \text{Beta}(\alpha,\beta)\]</span></p>
 <p>then after observing <span class="math inline">\(x\)</span> successes out of <span class="math inline">\(n\)</span> trials, the posterior is:</p>
-<p><span class="math display">\[
-p \mid X=x \sim \text{Beta}(\alpha + x,\beta + n - x)
-\]</span></p>
+<p><span class="math display">\[p \mid X=x \sim \text{Beta}(\alpha + x,\beta + n - x)\]</span></p>
 <p>The data add <span class="math inline">\(x\)</span> successes and <span class="math inline">\(n-x\)</span> failures to the prior.</p>
 <div class="cell">
 <div class="cell-output-display">
@@ -8667,34 +8409,20 @@ p \mid X=x \sim \text{Beta}(\alpha + x,\beta + n - x)
 </div>
 <p>Suppose a local council is considering whether to introduce a late-night bus service. A survey of 40 residents asks whether they would use the service. In the survey, 26 people say yes.</p>
 <p>Let:</p>
-<p><span class="math display">\[
-p = \text{the proportion of residents who would use the service}
-\]</span></p>
+<p><span class="math display">\[p = \text{the proportion of residents who would use the service}\]</span></p>
 <p>The data are:</p>
-<p><span class="math display">\[
-x = 26, \qquad n = 40
-\]</span></p>
+<p><span class="math display">\[x = 26, \qquad n = 40\]</span></p>
 <p>The likelihood comes from the binomial model:</p>
-<p><span class="math display">\[
-X \mid p \sim \text{Binomial}(40,p)
-\]</span></p>
+<p><span class="math display">\[X \mid p \sim \text{Binomial}(40,p)\]</span></p>
 <p>If we used maximum likelihood, the estimate would be:</p>
-<p><span class="math display">\[
-\hat{p} = \frac{26}{40} = 0.65
-\]</span></p>
+<p><span class="math display">\[\hat{p} = \frac{26}{40} = 0.65\]</span></p>
 <p>A Bayesian analysis asks for a posterior distribution for <span class="math inline">\(p\)</span>.</p>
 <p>Start with a uniform prior:</p>
-<p><span class="math display">\[
-p \sim \text{Beta}(1,1)
-\]</span></p>
+<p><span class="math display">\[p \sim \text{Beta}(1,1)\]</span></p>
 <p>Using beta-binomial conjugacy:</p>
-<p><span class="math display">\[
-p \mid X=26 \sim \text{Beta}(1+26,1+40-26)
-\]</span></p>
+<p><span class="math display">\[p \mid X=26 \sim \text{Beta}(1+26,1+40-26)\]</span></p>
 <p>So:</p>
-<p><span class="math display">\[
-p \mid X=26 \sim \text{Beta}(27,15)
-\]</span></p>
+<p><span class="math display">\[p \mid X=26 \sim \text{Beta}(27,15)\]</span></p>
 <p><centre></centre></p>
 <div class="cell">
 <div class="cell-output-display">
@@ -8712,60 +8440,38 @@ p \mid X=26 \sim \text{Beta}(27,15)
 <h3 data-number="8.9.2" class="anchored" data-anchor-id="poisson-gamma"><span class="header-section-number">8.9.2</span> Poisson-gamma</h3>
 <p>Suppose a library wants to estimate the average number of people arriving at the front desk each hour.</p>
 <p>Let</p>
-<p><span class="math display">\[
-\lambda = \text{average number of arrivals per hour}
-\]</span></p>
+<p><span class="math display">\[\lambda = \text{average number of arrivals per hour}\]</span></p>
 <p>A natural model for hourly counts is the Poisson distribution:</p>
-<p><span class="math display">\[
-Y_i \mid \lambda \sim \text{Poisson}(\lambda)
-\]</span></p>
+<p><span class="math display">\[Y_i \mid \lambda \sim \text{Poisson}(\lambda)\]</span></p>
 <p>A common conjugate prior for the Poisson rate is the gamma distribution:</p>
-<p><span class="math display">\[
-\lambda \sim \text{Gamma}(\alpha,\beta)
-\]</span></p>
+<p><span class="math display">\[\lambda \sim \text{Gamma}(\alpha,\beta)\]</span></p>
 <p>Here we are using the shape-rate version of the gamma distribution. The first parameter, <span class="math inline">\(\alpha\)</span>, is the shape. The second parameter, <span class="math inline">\(\beta\)</span>, is the rate.</p>
 <p>If we observe counts from <span class="math inline">\(n\)</span> hours:</p>
-<p><span class="math display">\[
-y_1, y_2, \ldots, y_n
-\]</span></p>
+<p><span class="math display">\[y_1, y_2, \ldots, y_n\]</span></p>
 <p>then the posterior is:</p>
-<p><span class="math display">\[
-\lambda \mid y_1,\ldots,y_n
+<p><span class="math display">\[\lambda \mid y_1,\ldots,y_n
 \sim
-\text{Gamma}\left(\alpha + \sum_{i=1}^n y_i,\ \beta + n\right)
-\]</span></p>
+\text{Gamma}\left(\alpha + \sum_{i=1}^n y_i,\ \beta + n\right)\]</span></p>
 <p>This update has the same flavour as the beta-binomial update. The data add information to the prior. For the Poisson-gamma model, the total count, <span class="math inline">\(\sum_{i=1}^n y_i\)</span>, updates the shape parameter, and the number of observed time periods, <span class="math inline">\(n\)</span>, updates the rate parameter.</p>
 <p>For example, suppose the prior is:</p>
-<p><span class="math display">\[
-\lambda \sim \text{Gamma}(3,1)
-\]</span></p>
+<p><span class="math display">\[\lambda \sim \text{Gamma}(3,1)\]</span></p>
 <p>This prior has mean:</p>
-<p><span class="math display">\[
-\frac{3}{1}=3
-\]</span></p>
+<p><span class="math display">\[\frac{3}{1}=3\]</span></p>
 <p>So before collecting new data, the library expects about 3 arrivals per hour.</p>
 <p>Now suppose the library observes arrivals over 4 hours:</p>
-<p><span class="math display">\[
-2,\ 5,\ 4,\ 3
-\]</span></p>
+<p><span class="math display">\[2,\ 5,\ 4,\ 3\]</span></p>
 <p>The total number of arrivals is:</p>
-<p><span class="math display">\[
-2 + 5 + 4 + 3 = 14
-\]</span></p>
+<p><span class="math display">\[2 + 5 + 4 + 3 = 14\]</span></p>
 <p>So the posterior is:</p>
-<p><span class="math display">\[
-\begin{aligned}
+<p><span class="math display">\[\begin{aligned}
 \lambda \mid \text{data}
 &amp;\sim
 \text{Gamma}(3 + 14,\ 1 + 4) \\
 &amp;\sim
 \text{Gamma}(17,5)
-\end{aligned}
-\]</span></p>
+\end{aligned}\]</span></p>
 <p>The posterior mean is:</p>
-<p><span class="math display">\[
-\frac{17}{5}=3.4
-\]</span></p>
+<p><span class="math display">\[\frac{17}{5}=3.4\]</span></p>
 <p>The data have shifted the estimated arrival rate from 3 arrivals per hour to about 3.4 arrivals per hour.</p>
 <p><centre></centre></p>
 <div class="cell">
@@ -8784,63 +8490,39 @@ y_1, y_2, \ldots, y_n
 <h3 data-number="8.9.3" class="anchored" data-anchor-id="exponential-gamma"><span class="header-section-number">8.9.3</span> Exponential-gamma</h3>
 <p>The gamma distribution is also conjugate for the rate of an exponential distribution.</p>
 <p>Suppose we are studying the time between bus arrivals at a stop. Let</p>
-<p><span class="math display">\[
-\lambda = \text{arrival rate of buses per minute}
-\]</span></p>
+<p><span class="math display">\[\lambda = \text{arrival rate of buses per minute}\]</span></p>
 <p>If buses arrive according to a constant rate, then waiting times can be modelled using an exponential distribution:</p>
-<p><span class="math display">\[
-Y_i \mid \lambda \sim \text{Exponential}(\lambda)
-\]</span></p>
+<p><span class="math display">\[Y_i \mid \lambda \sim \text{Exponential}(\lambda)\]</span></p>
 <p>Again, a conjugate prior is:</p>
-<p><span class="math display">\[
-\lambda \sim \text{Gamma}(\alpha,\beta)
-\]</span></p>
+<p><span class="math display">\[\lambda \sim \text{Gamma}(\alpha,\beta)\]</span></p>
 <p>If we observe waiting times:</p>
-<p><span class="math display">\[
-y_1, y_2, \ldots, y_n
-\]</span></p>
+<p><span class="math display">\[y_1, y_2, \ldots, y_n\]</span></p>
 <p>then the posterior is:</p>
-<p><span class="math display">\[
-\lambda \mid y_1,\ldots,y_n
+<p><span class="math display">\[\lambda \mid y_1,\ldots,y_n
 \sim
-\text{Gamma}\left(\alpha + n,\ \beta + \sum_{i=1}^n y_i\right)
-\]</span></p>
+\text{Gamma}\left(\alpha + n,\ \beta + \sum_{i=1}^n y_i\right)\]</span></p>
 <p>Here the number of waiting times, <span class="math inline">\(n\)</span>, updates the shape parameter, while the total waiting time, <span class="math inline">\(\sum_{i=1}^n y_i\)</span>, updates the rate parameter.</p>
 <p>For example, suppose:</p>
-<p><span class="math display">\[
-\lambda \sim \text{Gamma}(2,10)
-\]</span></p>
+<p><span class="math display">\[\lambda \sim \text{Gamma}(2,10)\]</span></p>
 <p>This prior has mean:</p>
-<p><span class="math display">\[
-\frac{2}{10}=0.20
-\]</span></p>
+<p><span class="math display">\[\frac{2}{10}=0.20\]</span></p>
 <p>So before seeing the new data, the expected arrival rate is 0.20 buses per minute, or about one bus every 5 minutes.</p>
 <p>Now suppose we observe three waiting times, in minutes:</p>
-<p><span class="math display">\[
-6,\ 8,\ 11
-\]</span></p>
+<p><span class="math display">\[6,\ 8,\ 11\]</span></p>
 <p>The total waiting time is:</p>
-<p><span class="math display">\[
-6 + 8 + 11 = 25
-\]</span></p>
+<p><span class="math display">\[6 + 8 + 11 = 25\]</span></p>
 <p>So the posterior is:</p>
-<p><span class="math display">\[
-\begin{aligned}
+<p><span class="math display">\[\begin{aligned}
 \lambda \mid \text{data}
 &amp;\sim
 \text{Gamma}(2 + 3,\ 10 + 25) \\
 &amp;\sim
 \text{Gamma}(5,35)
-\end{aligned}
-\]</span></p>
+\end{aligned}\]</span></p>
 <p>The posterior mean is:</p>
-<p><span class="math display">\[
-\frac{5}{35}=0.143
-\]</span></p>
+<p><span class="math display">\[\frac{5}{35}=0.143\]</span></p>
 <p>This corresponds to an average waiting time of about:</p>
-<p><span class="math display">\[
-\frac{1}{0.143}=7.0 \text{ minutes}
-\]</span></p>
+<p><span class="math display">\[\frac{1}{0.143}=7.0 \text{ minutes}\]</span></p>
 <p><centre></centre></p>
 <div class="cell">
 <div class="cell-output-display">
@@ -8858,57 +8540,37 @@ y_1, y_2, \ldots, y_n
 <h3 data-number="8.9.4" class="anchored" data-anchor-id="normal-normal"><span class="header-section-number">8.9.4</span> Normal-normal</h3>
 <p>For measurements, the normal distribution often appears again.</p>
 <p>Suppose a researcher wants to estimate the average mark on a difficult exam. Let</p>
-<p><span class="math display">\[
-\mu = \text{average mark in the population}
-\]</span></p>
+<p><span class="math display">\[\mu = \text{average mark in the population}\]</span></p>
 <p>Assume individual marks follow a normal distribution with known standard deviation <span class="math inline">\(\sigma\)</span>:</p>
-<p><span class="math display">\[
-Y_i \mid \mu \sim N(\mu,\sigma^2)
-\]</span></p>
+<p><span class="math display">\[Y_i \mid \mu \sim N(\mu,\sigma^2)\]</span></p>
 <p>A conjugate prior for <span class="math inline">\(\mu\)</span> is also normal:</p>
-<p><span class="math display">\[
-\mu \sim N(\mu_0,\tau_0^2)
-\]</span></p>
+<p><span class="math display">\[\mu \sim N(\mu_0,\tau_0^2)\]</span></p>
 <p>After observing data, the posterior distribution for <span class="math inline">\(\mu\)</span> is still normal. The formula is a little more complicated than the beta-binomial case, but the idea is the same. The posterior mean is a weighted average of the prior mean and the sample mean.</p>
 <p>For example, suppose the prior is:</p>
-<p><span class="math display">\[
-\mu \sim N(65,10^2)
-\]</span></p>
+<p><span class="math display">\[\mu \sim N(65,10^2)\]</span></p>
 <p>This prior says that, before seeing the new exam results, the average mark is expected to be around 65, but there is still uncertainty.</p>
 <p>Suppose the known standard deviation of individual marks is:</p>
-<p><span class="math display">\[
-\sigma = 12
-\]</span></p>
+<p><span class="math display">\[\sigma = 12\]</span></p>
 <p>Now suppose we observe five marks:</p>
-<p><span class="math display">\[
-58,\ 62,\ 71,\ 67,\ 74
-\]</span></p>
+<p><span class="math display">\[58,\ 62,\ 71,\ 67,\ 74\]</span></p>
 <p>The sample mean is:</p>
-<p><span class="math display">\[
-\bar{y}=66.4
-\]</span></p>
+<p><span class="math display">\[\bar{y}=66.4\]</span></p>
 <p>For the normal-normal model, the posterior variance is:</p>
-<p><span class="math display">\[
-\tau_n^2
+<p><span class="math display">\[\tau_n^2
 =
 \frac{1}
-{\frac{1}{\tau_0^2}+\frac{n}{\sigma^2}}
-\]</span></p>
+{\frac{1}{\tau_0^2}+\frac{n}{\sigma^2}}\]</span></p>
 <p>and the posterior mean is:</p>
-<p><span class="math display">\[
-\mu_n
+<p><span class="math display">\[\mu_n
 =
 \tau_n^2
 \left(
 \frac{\mu_0}{\tau_0^2}
 +
 \frac{n\bar{y}}{\sigma^2}
-\right)
-\]</span></p>
+\right)\]</span></p>
 <p>Using these values, the posterior distribution is approximately:</p>
-<p><span class="math display">\[
-\mu \mid \text{data} \sim N(66.0,4.72^2)
-\]</span></p>
+<p><span class="math display">\[\mu \mid \text{data} \sim N(66.0,4.72^2)\]</span></p>
 <p><centre></centre></p>
 <div class="cell">
 <div class="cell-output-display">
@@ -8936,9 +8598,7 @@ Y_i \mid \mu \sim N(\mu,\sigma^2)
 </div>
 <div class="callout-body-container callout-body">
 <p>Conjugacy is not what makes inference Bayesian. It is a mathematical convenience. The core Bayesian idea is still:</p>
-<p><span class="math display">\[
-\text{posterior} \propto \text{prior} \times \text{likelihood}
-\]</span></p>
+<p><span class="math display">\[\text{posterior} \propto \text{prior} \times \text{likelihood}\]</span></p>
 <p>Conjugate priors are useful because they make the update easy to calculate and easy to explain. But many useful Bayesian models are not conjugate. When the posterior does not have a neat formula, we can still do Bayesian inference using computation.</p>
 <p>For this chapter, we will continue with the beta-binomial model because it is simple, visual, and directly connected to proportions.</p>
 </div>
@@ -8948,11 +8608,9 @@ Y_i \mid \mu \sim N(\mu,\sigma^2)
 <section id="summarising-the-posterior" class="level2" data-number="8.10">
 <h2 data-number="8.10" class="anchored" data-anchor-id="summarising-the-posterior"><span class="header-section-number">8.10</span> Summarising the posterior</h2>
 <p>The posterior distribution contains our updated uncertainty about <span class="math inline">\(\theta\)</span>. In the late-night bus example, after observing 26 yes responses out of 40, we found:</p>
-<p><span class="math display">\[
-\theta \mid X = 26
+<p><span class="math display">\[\theta \mid X = 26
 \sim
-\text{Beta}(27,15)
-\]</span></p>
+\text{Beta}(27,15)\]</span></p>
 <p>This posterior distribution is the full Bayesian answer. It tells us which values of <span class="math inline">\(\theta\)</span> are more plausible and which values are less plausible after seeing the data.</p>
 <p>However, it is often useful to summarise the posterior with a few numbers. For example, we might want to know:</p>
 <ul>
@@ -8961,9 +8619,7 @@ Y_i \mid \mu \sim N(\mu,\sigma^2)
 <li>What is the probability that () is above some meaningful threshold?</li>
 </ul>
 <p>For the late-night bus example, a meaningful threshold might be:</p>
-<p><span class="math display">\[
-\theta &gt; 0.50
-\]</span></p>
+<p><span class="math display">\[\theta &gt; 0.50\]</span></p>
 <p>That is, more than half of residents would use the service.</p>
 <p>We can calculate several posterior summaries using the beta distribution.</p>
 <div class="cell">
@@ -9453,92 +9109,64 @@ Y_i \mid \mu \sim N(\mu,\sigma^2)
 </div>
 </div>
 <p>The posterior mean is the average value of <span class="math inline">\(\theta\)</span> under the posterior distribution. For a beta distribution, the mean is:</p>
-<p><span class="math display">\[
-E(\theta \mid X = 26)
+<p><span class="math display">\[E(\theta \mid X = 26)
 =
-\frac{27}{27 + 15}
-\]</span></p>
+\frac{27}{27 + 15}\]</span></p>
 <p>So:</p>
-<p><span class="math display">\[
-\begin{aligned}
+<p><span class="math display">\[\begin{aligned}
 E(\theta \mid X = 26)
 &amp;=
 \frac{27}{42} \\
 &amp;=
 0.643
-\end{aligned}
-\]</span></p>
+\end{aligned}\]</span></p>
 <p>This is close to the observed sample proportion:</p>
-<p><span class="math display">\[
-\frac{26}{40} = 0.65
-\]</span></p>
+<p><span class="math display">\[\frac{26}{40} = 0.65\]</span></p>
 <p>The small difference comes from the prior. A <span class="math inline">\(\text{Beta}(1,1)\)</span> prior acts as though we began with one prior yes and one prior no, then added the observed data.</p>
 <p>The 95% credible interval gives a range of values containing 95% of the posterior probability.</p>
 <p>In this example, the interval is approximately:</p>
-<p><span class="math display">\[
-0.489 \text{ to } 0.782
-\]</span></p>
+<p><span class="math display">\[0.489 \text{ to } 0.782\]</span></p>
 <p>This means that, under the model and prior, there is 95% posterior probability that the true proportion of residents who would use the late-night bus lies between about 0.49 and 0.78. This interpretation is direct. We are making a probability statement about the parameter, conditional on the model, prior, and observed data.</p>
 <p>Finally, we can calculate the posterior probability that a majority of residents would use the service:</p>
-<p><span class="math display">\[
-P(\theta &gt; 0.50 \mid X = 26)=0.970
-\]</span></p>
+<p><span class="math display">\[P(\theta &gt; 0.50 \mid X = 26)=0.970\]</span></p>
 <p>In this example, this probability is high. The data provide evidence that support may be above 50%, although there is still uncertainty.</p>
 </section>
 <section id="prior-sensitivity" class="level2" data-number="8.11">
 <h2 data-number="8.11" class="anchored" data-anchor-id="prior-sensitivity"><span class="header-section-number">8.11</span> Prior sensitivity</h2>
 <p>The late-night bus example used a flat prior:</p>
-<p><span class="math display">\[
-\theta \sim \text{Beta}(1,1)
-\]</span></p>
+<p><span class="math display">\[\theta \sim \text{Beta}(1,1)\]</span></p>
 <p>After observing 26 yes responses out of 40, the posterior was:</p>
-<p><span class="math display">\[
-\theta \mid X=26
+<p><span class="math display">\[\theta \mid X=26
 \sim
-\text{Beta}(27,15)
-\]</span></p>
+\text{Beta}(27,15)\]</span></p>
 <p>But this was not the only possible prior. Another analyst might begin with a different starting point. For example, suppose the council has tried similar services before and is sceptical that many residents will use the late-night bus. A sceptical prior might place more weight on smaller values of <span class="math inline">\(\theta\)</span>:</p>
-<p><span class="math display">\[
-\theta \sim \text{Beta}(4,8)
-\]</span></p>
+<p><span class="math display">\[\theta \sim \text{Beta}(4,8)\]</span></p>
 <p>This prior has mean:</p>
-<p><span class="math display">\[
-\begin{aligned}
+<p><span class="math display">\[\begin{aligned}
 E(\theta)
 &amp;=
 \frac{4}{4 + 8} \\
 &amp;=
 0.333
-\end{aligned}
-\]</span></p>
+\end{aligned}\]</span></p>
 <p>Another analyst might be more optimistic. Perhaps previous community meetings suggested strong demand for the service. An optimistic prior might place more weight on larger values of <span class="math inline">\(\theta\)</span>:</p>
-<p><span class="math display">\[
-\theta \sim \text{Beta}(8,4)
-\]</span></p>
+<p><span class="math display">\[\theta \sim \text{Beta}(8,4)\]</span></p>
 <p>This prior has mean:</p>
-<p><span class="math display">\[
-\begin{aligned}
+<p><span class="math display">\[\begin{aligned}
 E(\theta)
 &amp;=
 \frac{8}{8 + 4} \\
 &amp;=
 0.667
-\end{aligned}
-\]</span></p>
+\end{aligned}\]</span></p>
 <p>The data are the same in all three analyses:</p>
-<p><span class="math display">\[
-x = 26
-\]</span></p>
+<p><span class="math display">\[x = 26\]</span></p>
 <p>yes responses out of</p>
-<p><span class="math display">\[
-n = 40
-\]</span></p>
+<p><span class="math display">\[n = 40\]</span></p>
 <p>Using the beta-binomial update rule:</p>
-<p><span class="math display">\[
-\theta \mid X=x
+<p><span class="math display">\[\theta \mid X=x
 \sim
-\text{Beta}(\alpha + x,\ \beta + n - x)
-\]</span></p>
+\text{Beta}(\alpha + x,\ \beta + n - x)\]</span></p>
 <p>we get the following posteriors.</p>
 <div class="cell">
 <div class="cell-output-display">
@@ -10000,7 +9628,7 @@ n = 40
 <th id="Posterior" class="gt_col_heading gt_columns_bottom_border gt_left" data-quarto-table-cell-role="th" scope="col">Posterior</th>
 <th id="Posterior-mean" class="gt_col_heading gt_columns_bottom_border gt_right" data-quarto-table-cell-role="th" scope="col">Posterior mean</th>
 <th id="a95%-credible-interval" class="gt_col_heading gt_columns_bottom_border gt_left" data-quarto-table-cell-role="th" scope="col">95% credible interval</th>
-<th id="a$P(\theta->-0.50-\mid-X=26)$" class="gt_col_heading gt_columns_bottom_border gt_right" data-quarto-table-cell-role="th" scope="col">$P(\theta &gt; 0.50 \mid X=26)$</th>
+<th id="prob_majority" class="gt_col_heading gt_columns_bottom_border gt_right" data-quarto-table-cell-role="th" scope="col"><span class="math inline">\(P(\theta &gt; 0.50 \mid X = 26)\)</span></th>
 </tr>
 </thead>
 <tbody class="gt_table_body">
@@ -10010,7 +9638,7 @@ n = 40
 <td class="gt_row gt_left" headers="Posterior"><span class="math inline">\(\text{Beta}(27,15)\)</span></td>
 <td class="gt_row gt_right" headers="Posterior mean">0.643</td>
 <td class="gt_row gt_left" headers="95% credible interval">[0.494, 0.779]</td>
-<td class="gt_row gt_right" headers="$P(\theta > 0.50 \mid X=26)$">0.970</td>
+<td class="gt_row gt_right" headers="prob_majority">0.970</td>
 </tr>
 <tr class="even">
 <td class="gt_row gt_left" headers="Prior"><span class="math inline">\(\text{Beta}(4,8)\)</span></td>
@@ -10018,7 +9646,7 @@ n = 40
 <td class="gt_row gt_left" headers="Posterior"><span class="math inline">\(\text{Beta}(30,22)\)</span></td>
 <td class="gt_row gt_right" headers="Posterior mean">0.577</td>
 <td class="gt_row gt_left" headers="95% credible interval">[0.442, 0.707]</td>
-<td class="gt_row gt_right" headers="$P(\theta > 0.50 \mid X=26)$">0.869</td>
+<td class="gt_row gt_right" headers="prob_majority">0.869</td>
 </tr>
 <tr class="odd">
 <td class="gt_row gt_left" headers="Prior"><span class="math inline">\(\text{Beta}(8,4)\)</span></td>
@@ -10026,7 +9654,7 @@ n = 40
 <td class="gt_row gt_left" headers="Posterior"><span class="math inline">\(\text{Beta}(34,18)\)</span></td>
 <td class="gt_row gt_right" headers="Posterior mean">0.654</td>
 <td class="gt_row gt_left" headers="95% credible interval">[0.521, 0.776]</td>
-<td class="gt_row gt_right" headers="$P(\theta > 0.50 \mid X=26)$">0.988</td>
+<td class="gt_row gt_right" headers="prob_majority">0.988</td>
 </tr>
 </tbody>
 </table>
@@ -10040,7 +9668,7 @@ n = 40
 <div class="cell-output-display">
 <div class="quarto-figure quarto-figure-center">
 <figure class="figure">
-<p><img src="8_Bayes_files/figure-html/unnamed-chunk-32-1.png" class="img-fluid figure-img" width="672"></p>
+<p><img src="8_Bayes_files/figure-html/unnamed-chunk-34-1.png" class="img-fluid figure-img" width="672"></p>
 <figcaption>Different priors lead to different posterior distributions, even after seeing the same data.</figcaption>
 </figure>
 </div>
@@ -10059,37 +9687,31 @@ n = 40
 <h3 data-number="8.11.1" class="anchored" data-anchor-id="what-happens-when-we-collect-more-data"><span class="header-section-number">8.11.1</span> What happens when we collect more data?</h3>
 <p>Priors matter most when the data are limited. To see this, suppose the council runs a much larger survey. Instead of surveying 40 residents, it surveys 400 residents.</p>
 <p>Suppose the observed proportion is the same as before:</p>
-<p><span class="math display">\[
-\frac{260}{400} = 0.65
-\]</span></p>
+<p><span class="math display">\[\frac{260}{400} = 0.65\]</span></p>
 <p>So the data are now:</p>
-<p><span class="math display">\[
-x = 260
-\]</span></p>
+<p><span class="math display">\[x = 260\]</span></p>
 <p>yes responses out of</p>
-<p><span class="math display">\[
-n = 400
-\]</span></p>
+<p><span class="math display">\[n = 400\]</span></p>
 <p>We can repeat the same prior sensitivity analysis using the three priors from the previous section.</p>
 <div class="cell">
 <div class="cell-output-display">
-<div id="jalfxrqkbg" style="padding-left:0px;padding-right:0px;padding-top:10px;padding-bottom:10px;overflow-x:auto;overflow-y:auto;width:auto;height:auto;">
-<style>#jalfxrqkbg table {
+<div id="eyonvzociq" style="padding-left:0px;padding-right:0px;padding-top:10px;padding-bottom:10px;overflow-x:auto;overflow-y:auto;width:auto;height:auto;">
+<style>#eyonvzociq table {
   font-family: system-ui, 'Segoe UI', Roboto, Helvetica, Arial, sans-serif, 'Apple Color Emoji', 'Segoe UI Emoji', 'Segoe UI Symbol', 'Noto Color Emoji';
   -webkit-font-smoothing: antialiased;
   -moz-osx-font-smoothing: grayscale;
 }
 
-#jalfxrqkbg thead, #jalfxrqkbg tbody, #jalfxrqkbg tfoot, #jalfxrqkbg tr, #jalfxrqkbg td, #jalfxrqkbg th {
+#eyonvzociq thead, #eyonvzociq tbody, #eyonvzociq tfoot, #eyonvzociq tr, #eyonvzociq td, #eyonvzociq th {
   border-style: none;
 }
 
-#jalfxrqkbg p {
+#eyonvzociq p {
   margin: 0;
   padding: 0;
 }
 
-#jalfxrqkbg .gt_table {
+#eyonvzociq .gt_table {
   display: table;
   border-collapse: collapse;
   line-height: normal;
@@ -10115,12 +9737,12 @@ n = 400
   border-left-color: #D3D3D3;
 }
 
-#jalfxrqkbg .gt_caption {
+#eyonvzociq .gt_caption {
   padding-top: 4px;
   padding-bottom: 4px;
 }
 
-#jalfxrqkbg .gt_title {
+#eyonvzociq .gt_title {
   color: #333333;
   font-size: 125%;
   font-weight: initial;
@@ -10132,7 +9754,7 @@ n = 400
   border-bottom-width: 0;
 }
 
-#jalfxrqkbg .gt_subtitle {
+#eyonvzociq .gt_subtitle {
   color: #333333;
   font-size: 85%;
   font-weight: initial;
@@ -10144,7 +9766,7 @@ n = 400
   border-top-width: 0;
 }
 
-#jalfxrqkbg .gt_heading {
+#eyonvzociq .gt_heading {
   background-color: #FFFFFF;
   text-align: center;
   border-bottom-color: #FFFFFF;
@@ -10156,13 +9778,13 @@ n = 400
   border-right-color: #D3D3D3;
 }
 
-#jalfxrqkbg .gt_bottom_border {
+#eyonvzociq .gt_bottom_border {
   border-bottom-style: solid;
   border-bottom-width: 2px;
   border-bottom-color: #D3D3D3;
 }
 
-#jalfxrqkbg .gt_col_headings {
+#eyonvzociq .gt_col_headings {
   border-top-style: solid;
   border-top-width: 2px;
   border-top-color: #D3D3D3;
@@ -10177,7 +9799,7 @@ n = 400
   border-right-color: #D3D3D3;
 }
 
-#jalfxrqkbg .gt_col_heading {
+#eyonvzociq .gt_col_heading {
   color: #333333;
   background-color: #FFFFFF;
   font-size: 100%;
@@ -10197,7 +9819,7 @@ n = 400
   overflow-x: hidden;
 }
 
-#jalfxrqkbg .gt_column_spanner_outer {
+#eyonvzociq .gt_column_spanner_outer {
   color: #333333;
   background-color: #FFFFFF;
   font-size: 100%;
@@ -10209,15 +9831,15 @@ n = 400
   padding-right: 4px;
 }
 
-#jalfxrqkbg .gt_column_spanner_outer:first-child {
+#eyonvzociq .gt_column_spanner_outer:first-child {
   padding-left: 0;
 }
 
-#jalfxrqkbg .gt_column_spanner_outer:last-child {
+#eyonvzociq .gt_column_spanner_outer:last-child {
   padding-right: 0;
 }
 
-#jalfxrqkbg .gt_column_spanner {
+#eyonvzociq .gt_column_spanner {
   border-bottom-style: solid;
   border-bottom-width: 2px;
   border-bottom-color: #D3D3D3;
@@ -10229,11 +9851,11 @@ n = 400
   width: 100%;
 }
 
-#jalfxrqkbg .gt_spanner_row {
+#eyonvzociq .gt_spanner_row {
   border-bottom-style: hidden;
 }
 
-#jalfxrqkbg .gt_group_heading {
+#eyonvzociq .gt_group_heading {
   padding-top: 8px;
   padding-bottom: 8px;
   padding-left: 5px;
@@ -10259,7 +9881,7 @@ n = 400
   text-align: left;
 }
 
-#jalfxrqkbg .gt_empty_group_heading {
+#eyonvzociq .gt_empty_group_heading {
   padding: 0.5px;
   color: #333333;
   background-color: #FFFFFF;
@@ -10274,15 +9896,15 @@ n = 400
   vertical-align: middle;
 }
 
-#jalfxrqkbg .gt_from_md > :first-child {
+#eyonvzociq .gt_from_md > :first-child {
   margin-top: 0;
 }
 
-#jalfxrqkbg .gt_from_md > :last-child {
+#eyonvzociq .gt_from_md > :last-child {
   margin-bottom: 0;
 }
 
-#jalfxrqkbg .gt_row {
+#eyonvzociq .gt_row {
   padding-top: 8px;
   padding-bottom: 8px;
   padding-left: 5px;
@@ -10301,7 +9923,7 @@ n = 400
   overflow-x: hidden;
 }
 
-#jalfxrqkbg .gt_stub {
+#eyonvzociq .gt_stub {
   color: #333333;
   background-color: #FFFFFF;
   font-size: 100%;
@@ -10314,7 +9936,7 @@ n = 400
   padding-right: 5px;
 }
 
-#jalfxrqkbg .gt_stub_row_group {
+#eyonvzociq .gt_stub_row_group {
   color: #333333;
   background-color: #FFFFFF;
   font-size: 100%;
@@ -10328,15 +9950,15 @@ n = 400
   vertical-align: top;
 }
 
-#jalfxrqkbg .gt_row_group_first td {
+#eyonvzociq .gt_row_group_first td {
   border-top-width: 2px;
 }
 
-#jalfxrqkbg .gt_row_group_first th {
+#eyonvzociq .gt_row_group_first th {
   border-top-width: 2px;
 }
 
-#jalfxrqkbg .gt_summary_row {
+#eyonvzociq .gt_summary_row {
   color: #333333;
   background-color: #FFFFFF;
   text-transform: inherit;
@@ -10346,16 +9968,16 @@ n = 400
   padding-right: 5px;
 }
 
-#jalfxrqkbg .gt_first_summary_row {
+#eyonvzociq .gt_first_summary_row {
   border-top-style: solid;
   border-top-color: #D3D3D3;
 }
 
-#jalfxrqkbg .gt_first_summary_row.thick {
+#eyonvzociq .gt_first_summary_row.thick {
   border-top-width: 2px;
 }
 
-#jalfxrqkbg .gt_last_summary_row {
+#eyonvzociq .gt_last_summary_row {
   padding-top: 8px;
   padding-bottom: 8px;
   padding-left: 5px;
@@ -10365,7 +9987,7 @@ n = 400
   border-bottom-color: #D3D3D3;
 }
 
-#jalfxrqkbg .gt_grand_summary_row {
+#eyonvzociq .gt_grand_summary_row {
   color: #333333;
   background-color: #FFFFFF;
   text-transform: inherit;
@@ -10375,7 +9997,7 @@ n = 400
   padding-right: 5px;
 }
 
-#jalfxrqkbg .gt_first_grand_summary_row {
+#eyonvzociq .gt_first_grand_summary_row {
   padding-top: 8px;
   padding-bottom: 8px;
   padding-left: 5px;
@@ -10385,7 +10007,7 @@ n = 400
   border-top-color: #D3D3D3;
 }
 
-#jalfxrqkbg .gt_last_grand_summary_row_top {
+#eyonvzociq .gt_last_grand_summary_row_top {
   padding-top: 8px;
   padding-bottom: 8px;
   padding-left: 5px;
@@ -10395,11 +10017,11 @@ n = 400
   border-bottom-color: #D3D3D3;
 }
 
-#jalfxrqkbg .gt_striped {
+#eyonvzociq .gt_striped {
   background-color: rgba(128, 128, 128, 0.05);
 }
 
-#jalfxrqkbg .gt_table_body {
+#eyonvzociq .gt_table_body {
   border-top-style: solid;
   border-top-width: 2px;
   border-top-color: #D3D3D3;
@@ -10408,7 +10030,7 @@ n = 400
   border-bottom-color: #D3D3D3;
 }
 
-#jalfxrqkbg .gt_footnotes {
+#eyonvzociq .gt_footnotes {
   color: #333333;
   background-color: #FFFFFF;
   border-bottom-style: none;
@@ -10422,7 +10044,7 @@ n = 400
   border-right-color: #D3D3D3;
 }
 
-#jalfxrqkbg .gt_footnote {
+#eyonvzociq .gt_footnote {
   margin: 0px;
   font-size: 90%;
   padding-top: 4px;
@@ -10431,7 +10053,7 @@ n = 400
   padding-right: 5px;
 }
 
-#jalfxrqkbg .gt_sourcenotes {
+#eyonvzociq .gt_sourcenotes {
   color: #333333;
   background-color: #FFFFFF;
   border-bottom-style: none;
@@ -10445,7 +10067,7 @@ n = 400
   border-right-color: #D3D3D3;
 }
 
-#jalfxrqkbg .gt_sourcenote {
+#eyonvzociq .gt_sourcenote {
   font-size: 90%;
   padding-top: 4px;
   padding-bottom: 4px;
@@ -10453,72 +10075,72 @@ n = 400
   padding-right: 5px;
 }
 
-#jalfxrqkbg .gt_left {
+#eyonvzociq .gt_left {
   text-align: left;
 }
 
-#jalfxrqkbg .gt_center {
+#eyonvzociq .gt_center {
   text-align: center;
 }
 
-#jalfxrqkbg .gt_right {
+#eyonvzociq .gt_right {
   text-align: right;
   font-variant-numeric: tabular-nums;
 }
 
-#jalfxrqkbg .gt_font_normal {
+#eyonvzociq .gt_font_normal {
   font-weight: normal;
 }
 
-#jalfxrqkbg .gt_font_bold {
+#eyonvzociq .gt_font_bold {
   font-weight: bold;
 }
 
-#jalfxrqkbg .gt_font_italic {
+#eyonvzociq .gt_font_italic {
   font-style: italic;
 }
 
-#jalfxrqkbg .gt_super {
+#eyonvzociq .gt_super {
   font-size: 65%;
 }
 
-#jalfxrqkbg .gt_footnote_marks {
+#eyonvzociq .gt_footnote_marks {
   font-size: 75%;
   vertical-align: 0.4em;
   position: initial;
 }
 
-#jalfxrqkbg .gt_asterisk {
+#eyonvzociq .gt_asterisk {
   font-size: 100%;
   vertical-align: 0;
 }
 
-#jalfxrqkbg .gt_indent_1 {
+#eyonvzociq .gt_indent_1 {
   text-indent: 5px;
 }
 
-#jalfxrqkbg .gt_indent_2 {
+#eyonvzociq .gt_indent_2 {
   text-indent: 10px;
 }
 
-#jalfxrqkbg .gt_indent_3 {
+#eyonvzociq .gt_indent_3 {
   text-indent: 15px;
 }
 
-#jalfxrqkbg .gt_indent_4 {
+#eyonvzociq .gt_indent_4 {
   text-indent: 20px;
 }
 
-#jalfxrqkbg .gt_indent_5 {
+#eyonvzociq .gt_indent_5 {
   text-indent: 25px;
 }
 
-#jalfxrqkbg .katex-display {
+#eyonvzociq .katex-display {
   display: inline-flex !important;
   margin-bottom: 0.75em !important;
 }
 
-#jalfxrqkbg div.Reactable > div.rt-table > div.rt-thead > div.rt-tr.rt-tr-group-header > div.rt-th-group:after {
+#eyonvzociq div.Reactable > div.rt-table > div.rt-thead > div.rt-tr.rt-tr-group-header > div.rt-th-group:after {
   height: 0px !important;
 }
 </style>
@@ -10531,7 +10153,7 @@ n = 400
 <th id="Posterior" class="gt_col_heading gt_columns_bottom_border gt_left" data-quarto-table-cell-role="th" scope="col">Posterior</th>
 <th id="Posterior-mean" class="gt_col_heading gt_columns_bottom_border gt_right" data-quarto-table-cell-role="th" scope="col">Posterior mean</th>
 <th id="a95%-credible-interval" class="gt_col_heading gt_columns_bottom_border gt_left" data-quarto-table-cell-role="th" scope="col">95% credible interval</th>
-<th id="a$P(\theta->-0.50-\mid-X=260)$" class="gt_col_heading gt_columns_bottom_border gt_right" data-quarto-table-cell-role="th" scope="col">$P(\theta &gt; 0.50 \mid X=260)$</th>
+<th id="prob_majority" class="gt_col_heading gt_columns_bottom_border gt_right" data-quarto-table-cell-role="th" scope="col"><span class="math inline">\(P(\theta &gt; 0.50 \mid X = 260)\)</span></th>
 </tr>
 </thead>
 <tbody class="gt_table_body">
@@ -10541,7 +10163,7 @@ n = 400
 <td class="gt_row gt_left" headers="Posterior"><span class="math inline">\(\text{Beta}(261,141)\)</span></td>
 <td class="gt_row gt_right" headers="Posterior mean">0.649</td>
 <td class="gt_row gt_left" headers="95% credible interval">[0.602, 0.695]</td>
-<td class="gt_row gt_right" headers="$P(\theta > 0.50 \mid X=260)$">1.000</td>
+<td class="gt_row gt_right" headers="prob_majority">&gt; 0.999</td>
 </tr>
 <tr class="even">
 <td class="gt_row gt_left" headers="Prior"><span class="math inline">\(\text{Beta}(4,8)\)</span></td>
@@ -10549,7 +10171,7 @@ n = 400
 <td class="gt_row gt_left" headers="Posterior"><span class="math inline">\(\text{Beta}(264,148)\)</span></td>
 <td class="gt_row gt_right" headers="Posterior mean">0.641</td>
 <td class="gt_row gt_left" headers="95% credible interval">[0.594, 0.686]</td>
-<td class="gt_row gt_right" headers="$P(\theta > 0.50 \mid X=260)$">1.000</td>
+<td class="gt_row gt_right" headers="prob_majority">&gt; 0.999</td>
 </tr>
 <tr class="odd">
 <td class="gt_row gt_left" headers="Prior"><span class="math inline">\(\text{Beta}(8,4)\)</span></td>
@@ -10557,7 +10179,7 @@ n = 400
 <td class="gt_row gt_left" headers="Posterior"><span class="math inline">\(\text{Beta}(268,144)\)</span></td>
 <td class="gt_row gt_right" headers="Posterior mean">0.650</td>
 <td class="gt_row gt_left" headers="95% credible interval">[0.604, 0.696]</td>
-<td class="gt_row gt_right" headers="$P(\theta > 0.50 \mid X=260)$">1.000</td>
+<td class="gt_row gt_right" headers="prob_majority">&gt; 0.999</td>
 </tr>
 </tbody>
 </table>
@@ -10570,7 +10192,7 @@ n = 400
 <div class="cell-output-display">
 <div>
 <figure class="figure">
-<p><img src="8_Bayes_files/figure-html/unnamed-chunk-34-1.png" class="img-fluid figure-img" width="672"></p>
+<p><img src="8_Bayes_files/figure-html/unnamed-chunk-36-1.png" class="img-fluid figure-img" width="672"></p>
 </figure>
 </div>
 </div>
@@ -10598,32 +10220,19 @@ n = 400
 <li>the likelihood of the description under each possibility</li>
 </ol>
 <p>Let</p>
-<p><span class="math display">\[
-H = \text{Steve is a librarian}
-\]</span></p>
+<p><span class="math display">\[H = \text{Steve is a librarian}\]</span></p>
 <p>and let</p>
-<p><span class="math display">\[
-E = \text{Steve fits the description}
-\]</span></p>
+<p><span class="math display">\[E = \text{Steve fits the description}\]</span></p>
 <p>Suppose, for illustration, that Steve was chosen from a group where 10% of people are librarians and 90% are farmers:</p>
-<p><span class="math display">\[
-P(H) = 0.10
-\]</span></p>
+<p><span class="math display">\[P(H) = 0.10\]</span></p>
 <p>and</p>
-<p><span class="math display">\[
-P(H^c) = 0.90
-\]</span></p>
+<p><span class="math display">\[P(H^c) = 0.90\]</span></p>
 <p>Now suppose the description is much more common among librarians than farmers:</p>
-<p><span class="math display">\[
-P(E \mid H) = 0.90
-\]</span></p>
+<p><span class="math display">\[P(E \mid H) = 0.90\]</span></p>
 <p>and</p>
-<p><span class="math display">\[
-P(E \mid H^c) = 0.30
-\]</span></p>
+<p><span class="math display">\[P(E \mid H^c) = 0.30\]</span></p>
 <p>So the description is evidence for Steve being a librarian. It is three times more likely under the librarian hypothesis than under the farmer hypothesis:</p>
-<p><span class="math display">\[
-\begin{aligned}
+<p><span class="math display">\[\begin{aligned}
 \text{LR}
 &amp;=
 \frac{P(E \mid H)}{P(E \mid H^c)} \\
@@ -10631,18 +10240,14 @@ P(E \mid H^c) = 0.30
 \frac{0.90}{0.30} \\
 &amp;=
 3
-\end{aligned}
-\]</span></p>
+\end{aligned}\]</span></p>
 <p>But the base rates point in the other direction. Farmers are much more common in the starting population. Using Bayes’ theorem:</p>
-<p><span class="math display">\[
-P(H \mid E)
+<p><span class="math display">\[P(H \mid E)
 =
 \frac{P(H)P(E \mid H)}
-{P(H)P(E \mid H)+P(H^c)P(E \mid H^c)}
-\]</span></p>
+{P(H)P(E \mid H)+P(H^c)P(E \mid H^c)}\]</span></p>
 <p>Substituting the numbers:</p>
-<p><span class="math display">\[
-\begin{aligned}
+<p><span class="math display">\[\begin{aligned}
 P(H \mid E)
 &amp;=
 \frac{0.10 \times 0.90}
@@ -10653,8 +10258,7 @@ P(H \mid E)
 \frac{0.09}{0.36} \\
 &amp;=
 0.25
-\end{aligned}
-\]</span></p>
+\end{aligned}\]</span></p>
 <p>So, under these assumptions, the probability that Steve is a librarian is 25%.</p>
 <p>That may feel surprising. The description really does favour the librarian explanation. But it does not favour it enough to overcome the base rate.</p>
 <p>The description is the likelihood. The base rate is the prior. The posterior depends on both. This is the same lesson we saw in the medical-test example. A positive test may be evidence for disease, but it does not tell the whole story. We also need to know how common the disease was before the test.</p>
@@ -10711,13 +10315,9 @@ P(H \mid E)
 </tbody>
 </table>
 <p>Let</p>
-<p><span class="math display">\[
-H = \text{student joined the club}
-\]</span></p>
+<p><span class="math display">\[H = \text{student joined the club}\]</span></p>
 <p>and let</p>
-<p><span class="math display">\[
-E = \text{student attended the welcome event}
-\]</span></p>
+<p><span class="math display">\[E = \text{student attended the welcome event}\]</span></p>
 <p>Calculate:</p>
 <ol type="1">
 <li><span class="math inline">\(P(H)\)</span></li>
@@ -10740,40 +10340,29 @@ E = \text{student attended the welcome event}
 <div class="callout-body-container callout-body">
 <p>There are 80 students in total.</p>
 <p>The number who joined the club is:</p>
-<p><span class="math display">\[
-24 + 12 = 36
-\]</span></p>
+<p><span class="math display">\[24 + 12 = 36\]</span></p>
 <p>So:</p>
-<p><span class="math display">\[
-P(H)
+<p><span class="math display">\[P(H)
 =
 \frac{36}{80}
 =
-0.45
-\]</span></p>
+0.45\]</span></p>
 <p>The number who attended the welcome event is:</p>
-<p><span class="math display">\[
-24 + 16 = 40
-\]</span></p>
+<p><span class="math display">\[24 + 16 = 40\]</span></p>
 <p>So:</p>
-<p><span class="math display">\[
-P(E)
+<p><span class="math display">\[P(E)
 =
 \frac{40}{80}
 =
-0.50
-\]</span></p>
+0.50\]</span></p>
 <p>The number who both attended the event and joined the club is 24. So:</p>
-<p><span class="math display">\[
-P(H \cap E)
+<p><span class="math display">\[P(H \cap E)
 =
 \frac{24}{80}
 =
-0.30
-\]</span></p>
+0.30\]</span></p>
 <p>The conditional probability is:</p>
-<p><span class="math display">\[
-\begin{aligned}
+<p><span class="math display">\[\begin{aligned}
 P(H \mid E)
 &amp;=
 \frac{P(H \cap E)}{P(E)} \\
@@ -10781,8 +10370,7 @@ P(H \mid E)
 \frac{0.30}{0.50} \\
 &amp;=
 0.60
-\end{aligned}
-\]</span></p>
+\end{aligned}\]</span></p>
 <p>So, among students who attended the welcome event, 60% joined the club.</p>
 </div>
 </div>
@@ -10807,17 +10395,11 @@ P(H \mid E)
 </ul>
 <p>A randomly selected user watched the full show.</p>
 <p>Let</p>
-<p><span class="math display">\[
-H = \text{user watched the trailer}
-\]</span></p>
+<p><span class="math display">\[H = \text{user watched the trailer}\]</span></p>
 <p>and let</p>
-<p><span class="math display">\[
-E = \text{user watched the full show}
-\]</span></p>
+<p><span class="math display">\[E = \text{user watched the full show}\]</span></p>
 <p>Calculate:</p>
-<p><span class="math display">\[
-P(H \mid E)
-\]</span></p>
+<p><span class="math display">\[P(H \mid E)\]</span></p>
 <div class="callout callout-style-default callout-important callout-titled">
 <div class="callout-header d-flex align-content-center collapsed" data-bs-toggle="collapse" data-bs-target=".callout-8-contents" aria-controls="callout-8" aria-expanded="false" aria-label="Toggle callout">
 <div class="callout-icon-container">
@@ -10831,28 +10413,17 @@ P(H \mid E)
 <div id="callout-8" class="callout-8-contents callout-collapse collapse">
 <div class="callout-body-container callout-body">
 <p>We are given:</p>
-<p><span class="math display">\[
-P(H) = 0.40
-\]</span></p>
-<p><span class="math display">\[
-P(H^c) = 0.60
-\]</span></p>
-<p><span class="math display">\[
-P(E \mid H) = 0.30
-\]</span></p>
-<p><span class="math display">\[
-P(E \mid H^c) = 0.10
-\]</span></p>
+<p><span class="math display">\[P(H) = 0.40\]</span></p>
+<p><span class="math display">\[P(H^c) = 0.60\]</span></p>
+<p><span class="math display">\[P(E \mid H) = 0.30\]</span></p>
+<p><span class="math display">\[P(E \mid H^c) = 0.10\]</span></p>
 <p>Using Bayes’ theorem:</p>
-<p><span class="math display">\[
-P(H \mid E)
+<p><span class="math display">\[P(H \mid E)
 =
 \frac{P(H)P(E \mid H)}
-{P(H)P(E \mid H)+P(H^c)P(E \mid H^c)}
-\]</span></p>
+{P(H)P(E \mid H)+P(H^c)P(E \mid H^c)}\]</span></p>
 <p>Substitute the values:</p>
-<p><span class="math display">\[
-\begin{aligned}
+<p><span class="math display">\[\begin{aligned}
 P(H \mid E)
 &amp;=
 \frac{0.40 \times 0.30}
@@ -10863,8 +10434,7 @@ P(H \mid E)
 \frac{0.12}{0.18} \\
 &amp;=
 0.667
-\end{aligned}
-\]</span></p>
+\end{aligned}\]</span></p>
 <p>So, given that the user watched the full show, the probability that they watched the trailer is about 0.67.</p>
 </div>
 </div>
@@ -10889,13 +10459,9 @@ P(H \mid E)
 </ul>
 <p>Sam tests positive.</p>
 <p>Let</p>
-<p><span class="math display">\[
-H = \text{Sam has the allergy}
-\]</span></p>
+<p><span class="math display">\[H = \text{Sam has the allergy}\]</span></p>
 <p>and let</p>
-<p><span class="math display">\[
-E = \text{Sam tests positive}
-\]</span></p>
+<p><span class="math display">\[E = \text{Sam tests positive}\]</span></p>
 <p>Calculate the probability that Sam has the allergy given the positive test.</p>
 <div class="callout callout-style-default callout-important callout-titled">
 <div class="callout-header d-flex align-content-center collapsed" data-bs-toggle="collapse" data-bs-target=".callout-10-contents" aria-controls="callout-10" aria-expanded="false" aria-label="Toggle callout">
@@ -10910,21 +10476,12 @@ E = \text{Sam tests positive}
 <div id="callout-10" class="callout-10-contents callout-collapse collapse">
 <div class="callout-body-container callout-body">
 <p>We are given:</p>
-<p><span class="math display">\[
-P(H) = 0.02
-\]</span></p>
-<p><span class="math display">\[
-P(H^c) = 0.98
-\]</span></p>
-<p><span class="math display">\[
-P(E \mid H) = 0.90
-\]</span></p>
-<p><span class="math display">\[
-P(E \mid H^c) = 0.05
-\]</span></p>
+<p><span class="math display">\[P(H) = 0.02\]</span></p>
+<p><span class="math display">\[P(H^c) = 0.98\]</span></p>
+<p><span class="math display">\[P(E \mid H) = 0.90\]</span></p>
+<p><span class="math display">\[P(E \mid H^c) = 0.05\]</span></p>
 <p>Using Bayes’ theorem:</p>
-<p><span class="math display">\[
-\begin{aligned}
+<p><span class="math display">\[\begin{aligned}
 P(H \mid E)
 &amp;=
 \frac{0.02 \times 0.90}
@@ -10935,8 +10492,7 @@ P(H \mid E)
 \frac{0.018}{0.067} \\
 &amp;=
 0.269
-\end{aligned}
-\]</span></p>
+\end{aligned}\]</span></p>
 <p>So, after a positive test, the probability that Sam has the allergy is about 27%.</p>
 <p>This is much lower than 90% because the allergy is rare and false positives occur.</p>
 </div>
@@ -10973,24 +10529,18 @@ P(H \mid E)
 <div class="callout-body-container callout-body">
 <p>The statement confuses two different conditional probabilities.</p>
 <p>A false positive rate of 5% means:</p>
-<p><span class="math display">\[
-P(\text{positive test} \mid \text{no allergy})
+<p><span class="math display">\[P(\text{positive test} \mid \text{no allergy})
 =
-0.05
-\]</span></p>
+0.05\]</span></p>
 <p>It does not mean:</p>
-<p><span class="math display">\[
-P(\text{no allergy} \mid \text{positive test})
+<p><span class="math display">\[P(\text{no allergy} \mid \text{positive test})
 =
-0.05
-\]</span></p>
+0.05\]</span></p>
 <p>The first probability conditions on Sam not having the allergy. The second conditions on Sam having received a positive test result.</p>
 <p>These probabilities are not the same:</p>
-<p><span class="math display">\[
-P(A \mid B)
+<p><span class="math display">\[P(A \mid B)
 \ne
-P(B \mid A)
-\]</span></p>
+P(B \mid A)\]</span></p>
 <p>To find the probability that Sam has the allergy after a positive test, we need Bayes’ theorem. We need both the test accuracy and the base rate of the allergy.</p>
 </div>
 </div>
@@ -11016,19 +10566,13 @@ P(B \mid A)
 </ul>
 <p>A transaction is flagged.</p>
 <p>Calculate the likelihood ratio:</p>
-<p><span class="math display">\[
-\text{LR}
+<p><span class="math display">\[\text{LR}
 =
-\frac{P(E \mid H)}{P(E \mid H^c)}
-\]</span></p>
+\frac{P(E \mid H)}{P(E \mid H^c)}\]</span></p>
 <p>where:</p>
-<p><span class="math display">\[
-H = \text{transaction is fraudulent}
-\]</span></p>
+<p><span class="math display">\[H = \text{transaction is fraudulent}\]</span></p>
 <p>and</p>
-<p><span class="math display">\[
-E = \text{transaction is flagged}
-\]</span></p>
+<p><span class="math display">\[E = \text{transaction is flagged}\]</span></p>
 <p>Then calculate <span class="math inline">\(P(H \mid E)\)</span>.</p>
 <div class="callout callout-style-default callout-important callout-titled">
 <div class="callout-header d-flex align-content-center collapsed" data-bs-toggle="collapse" data-bs-target=".callout-14-contents" aria-controls="callout-14" aria-expanded="false" aria-label="Toggle callout">
@@ -11043,8 +10587,7 @@ E = \text{transaction is flagged}
 <div id="callout-14" class="callout-14-contents callout-collapse collapse">
 <div class="callout-body-container callout-body">
 <p>The likelihood ratio is:</p>
-<p><span class="math display">\[
-\begin{aligned}
+<p><span class="math display">\[\begin{aligned}
 \text{LR}
 &amp;=
 \frac{P(E \mid H)}{P(E \mid H^c)} \\
@@ -11052,26 +10595,16 @@ E = \text{transaction is flagged}
 \frac{0.70}{0.04} \\
 &amp;=
 17.5
-\end{aligned}
-\]</span></p>
+\end{aligned}\]</span></p>
 <p>The evidence is 17.5 times more likely if the transaction is fraudulent than if it is not fraudulent.</p>
 <p>Now use Bayes’ theorem.</p>
 <p>We are given:</p>
-<p><span class="math display">\[
-P(H) = 0.03
-\]</span></p>
-<p><span class="math display">\[
-P(H^c) = 0.97
-\]</span></p>
-<p><span class="math display">\[
-P(E \mid H) = 0.70
-\]</span></p>
-<p><span class="math display">\[
-P(E \mid H^c) = 0.04
-\]</span></p>
+<p><span class="math display">\[P(H) = 0.03\]</span></p>
+<p><span class="math display">\[P(H^c) = 0.97\]</span></p>
+<p><span class="math display">\[P(E \mid H) = 0.70\]</span></p>
+<p><span class="math display">\[P(E \mid H^c) = 0.04\]</span></p>
 <p>Therefore:</p>
-<p><span class="math display">\[
-\begin{aligned}
+<p><span class="math display">\[\begin{aligned}
 P(H \mid E)
 &amp;=
 \frac{0.03 \times 0.70}
@@ -11082,8 +10615,7 @@ P(H \mid E)
 \frac{0.021}{0.0598} \\
 &amp;=
 0.351
-\end{aligned}
-\]</span></p>
+\end{aligned}\]</span></p>
 <p>So, given that the transaction was flagged, the probability that it is fraudulent is about 35%.</p>
 </div>
 </div>
@@ -11106,13 +10638,9 @@ P(H \mid E)
 </blockquote>
 <p>What statistical mistake is being made?</p>
 <p>Explain using the distinction between:</p>
-<p><span class="math display">\[
-P(\text{evidence} \mid \text{honest})
-\]</span></p>
+<p><span class="math display">\[P(\text{evidence} \mid \text{honest})\]</span></p>
 <p>and</p>
-<p><span class="math display">\[
-P(\text{honest} \mid \text{evidence})
-\]</span></p>
+<p><span class="math display">\[P(\text{honest} \mid \text{evidence})\]</span></p>
 <div class="callout callout-style-default callout-important callout-titled">
 <div class="callout-header d-flex align-content-center collapsed" data-bs-toggle="collapse" data-bs-target=".callout-16-contents" aria-controls="callout-16" aria-expanded="false" aria-label="Toggle callout">
 <div class="callout-icon-container">
@@ -11127,13 +10655,9 @@ P(\text{honest} \mid \text{evidence})
 <div class="callout-body-container callout-body">
 <p>The report is making a version of the prosecutor’s fallacy.</p>
 <p>The statement “only 1 in 500 honest applicants would produce this document pattern” is about:</p>
-<p><span class="math display">\[
-P(\text{evidence} \mid \text{honest})
-\]</span></p>
+<p><span class="math display">\[P(\text{evidence} \mid \text{honest})\]</span></p>
 <p>But the conclusion “there is only a 1 in 500 chance that the applicant is honest” is about:</p>
-<p><span class="math display">\[
-P(\text{honest} \mid \text{evidence})
-\]</span></p>
+<p><span class="math display">\[P(\text{honest} \mid \text{evidence})\]</span></p>
 <p>These are not the same.</p>
 <p>To determine the probability that the applicant is honest given the evidence, we also need to know how likely the evidence is under other explanations, such as fraud or administrative error. We also need the prior probability of those explanations.</p>
 <p>Rare evidence under honesty may be important, but it is not automatically proof of dishonesty.</p>
@@ -11154,14 +10678,10 @@ P(\text{honest} \mid \text{evidence})
 <div class="callout-body-container callout-body">
 <p>A council is studying whether residents support building a new community garden.</p>
 <p>Let</p>
-<p><span class="math display">\[
-\theta = \text{proportion of residents who support the community garden}
-\]</span></p>
+<p><span class="math display">\[\theta = \text{proportion of residents who support the community garden}\]</span></p>
 <p>The council surveys 30 residents, and 21 say they support the proposal.</p>
 <p>Suppose the prior is:</p>
-<p><span class="math display">\[
-\theta \sim \text{Beta}(2,2)
-\]</span></p>
+<p><span class="math display">\[\theta \sim \text{Beta}(2,2)\]</span></p>
 <p>Use the beta-binomial update rule to find the posterior distribution.</p>
 <div class="callout callout-style-default callout-important callout-titled">
 <div class="callout-header d-flex align-content-center collapsed" data-bs-toggle="collapse" data-bs-target=".callout-18-contents" aria-controls="callout-18" aria-expanded="false" aria-label="Toggle callout">
@@ -11176,39 +10696,27 @@ P(\text{honest} \mid \text{evidence})
 <div id="callout-18" class="callout-18-contents callout-collapse collapse">
 <div class="callout-body-container callout-body">
 <p>We are given:</p>
-<p><span class="math display">\[
-\theta \sim \text{Beta}(2,2)
-\]</span></p>
+<p><span class="math display">\[\theta \sim \text{Beta}(2,2)\]</span></p>
 <p>The data are:</p>
-<p><span class="math display">\[
-x = 21
-\]</span></p>
+<p><span class="math display">\[x = 21\]</span></p>
 <p>and:</p>
-<p><span class="math display">\[
-n = 30
-\]</span></p>
+<p><span class="math display">\[n = 30\]</span></p>
 <p>For a beta prior and binomial likelihood:</p>
-<p><span class="math display">\[
-\theta \mid X=x
+<p><span class="math display">\[\theta \mid X=x
 \sim
-\text{Beta}(\alpha + x,\ \beta + n - x)
-\]</span></p>
+\text{Beta}(\alpha + x,\ \beta + n - x)\]</span></p>
 <p>Substitute the values:</p>
-<p><span class="math display">\[
-\begin{aligned}
+<p><span class="math display">\[\begin{aligned}
 \theta \mid X=21
 &amp;\sim
 \text{Beta}(2 + 21,\ 2 + 30 - 21) \\
 &amp;\sim
 \text{Beta}(23,\ 11)
-\end{aligned}
-\]</span></p>
+\end{aligned}\]</span></p>
 <p>So the posterior distribution is:</p>
-<p><span class="math display">\[
-\theta \mid X=21
+<p><span class="math display">\[\theta \mid X=21
 \sim
-\text{Beta}(23,11)
-\]</span></p>
+\text{Beta}(23,11)\]</span></p>
 </div>
 </div>
 </div>
@@ -11225,11 +10733,9 @@ n = 30
 </div>
 <div class="callout-body-container callout-body">
 <p>Using the posterior from Question 7:</p>
-<p><span class="math display">\[
-\theta \mid X=21
+<p><span class="math display">\[\theta \mid X=21
 \sim
-\text{Beta}(23,11)
-\]</span></p>
+\text{Beta}(23,11)\]</span></p>
 <p>Calculate the posterior mean.</p>
 <p>Then interpret it in words.</p>
 <div class="callout callout-style-default callout-important callout-titled">
@@ -11245,22 +10751,15 @@ n = 30
 <div id="callout-20" class="callout-20-contents callout-collapse collapse">
 <div class="callout-body-container callout-body">
 <p>For a beta distribution:</p>
-<p><span class="math display">\[
-E(\theta)
+<p><span class="math display">\[E(\theta)
 =
-\frac{\alpha}{\alpha + \beta}
-\]</span></p>
+\frac{\alpha}{\alpha + \beta}\]</span></p>
 <p>Here:</p>
-<p><span class="math display">\[
-\alpha = 23
-\]</span></p>
+<p><span class="math display">\[\alpha = 23\]</span></p>
 <p>and:</p>
-<p><span class="math display">\[
-\beta = 11
-\]</span></p>
+<p><span class="math display">\[\beta = 11\]</span></p>
 <p>So:</p>
-<p><span class="math display">\[
-\begin{aligned}
+<p><span class="math display">\[\begin{aligned}
 E(\theta \mid X=21)
 &amp;=
 \frac{23}{23 + 11} \\
@@ -11268,8 +10767,7 @@ E(\theta \mid X=21)
 \frac{23}{34} \\
 &amp;=
 0.676
-\end{aligned}
-\]</span></p>
+\end{aligned}\]</span></p>
 <p>The posterior mean is about 0.676.</p>
 <p>This means that, after combining the prior with the survey data, the average value of <span class="math inline">\(\theta\)</span> under the posterior distribution is about 0.68. In context, the posterior centre suggests that around 68% of residents may support the community garden, under the model and prior.</p>
 </div>
@@ -11288,17 +10786,11 @@ E(\theta \mid X=21)
 </div>
 <div class="callout-body-container callout-body">
 <p>Suppose a researcher uses a different prior for the community garden example:</p>
-<p><span class="math display">\[
-\theta \sim \text{Beta}(8,4)
-\]</span></p>
+<p><span class="math display">\[\theta \sim \text{Beta}(8,4)\]</span></p>
 <p>The data are still:</p>
-<p><span class="math display">\[
-x = 21
-\]</span></p>
+<p><span class="math display">\[x = 21\]</span></p>
 <p>supporters out of:</p>
-<p><span class="math display">\[
-n = 30
-\]</span></p>
+<p><span class="math display">\[n = 30\]</span></p>
 <p>Find the posterior distribution and posterior mean.</p>
 <p>How does this compare with the posterior mean from Question 8?</p>
 <div class="callout callout-style-default callout-important callout-titled">
@@ -11314,30 +10806,21 @@ n = 30
 <div id="callout-22" class="callout-22-contents callout-collapse collapse">
 <div class="callout-body-container callout-body">
 <p>The prior is:</p>
-<p><span class="math display">\[
-\theta \sim \text{Beta}(8,4)
-\]</span></p>
+<p><span class="math display">\[\theta \sim \text{Beta}(8,4)\]</span></p>
 <p>The data are:</p>
-<p><span class="math display">\[
-x = 21
-\]</span></p>
+<p><span class="math display">\[x = 21\]</span></p>
 <p>and:</p>
-<p><span class="math display">\[
-n = 30
-\]</span></p>
+<p><span class="math display">\[n = 30\]</span></p>
 <p>Using the beta-binomial update rule:</p>
-<p><span class="math display">\[
-\begin{aligned}
+<p><span class="math display">\[\begin{aligned}
 \theta \mid X=21
 &amp;\sim
 \text{Beta}(8 + 21,\ 4 + 30 - 21) \\
 &amp;\sim
 \text{Beta}(29,\ 13)
-\end{aligned}
-\]</span></p>
+\end{aligned}\]</span></p>
 <p>The posterior mean is:</p>
-<p><span class="math display">\[
-\begin{aligned}
+<p><span class="math display">\[\begin{aligned}
 E(\theta \mid X=21)
 &amp;=
 \frac{29}{29 + 13} \\
@@ -11345,8 +10828,7 @@ E(\theta \mid X=21)
 \frac{29}{42} \\
 &amp;=
 0.690
-\end{aligned}
-\]</span></p>
+\end{aligned}\]</span></p>
 <p>In Question 8, the posterior mean using a <span class="math inline">\(\text{Beta}(2,2)\)</span> prior was about 0.676.</p>
 <p>The <span class="math inline">\(\text{Beta}(8,4)\)</span> prior is more optimistic because it places more weight on larger values of <span class="math inline">\(\theta\)</span>. As a result, the posterior mean is slightly higher.</p>
 <p>The data are the same, but the starting point is different. This is prior sensitivity.</p>
@@ -11367,9 +10849,7 @@ E(\theta \mid X=21)
 <div class="callout-body-container callout-body">
 <p>A survey asks 12 people whether they support a new recycling program. Eight say yes.</p>
 <p>A researcher uses the prior:</p>
-<p><span class="math display">\[
-\theta \sim \text{Beta}(1,1)
-\]</span></p>
+<p><span class="math display">\[\theta \sim \text{Beta}(1,1)\]</span></p>
 <ol type="1">
 <li>Find the posterior distribution.</li>
 <li>Explain why the prior may matter more in this example than in a survey of 1200 people with 800 yes responses.</li>
@@ -11387,40 +10867,28 @@ E(\theta \mid X=21)
 <div id="callout-24" class="callout-24-contents callout-collapse collapse">
 <div class="callout-body-container callout-body">
 <p>The prior is:</p>
-<p><span class="math display">\[
-\theta \sim \text{Beta}(1,1)
-\]</span></p>
+<p><span class="math display">\[\theta \sim \text{Beta}(1,1)\]</span></p>
 <p>The data are:</p>
-<p><span class="math display">\[
-x = 8
-\]</span></p>
+<p><span class="math display">\[x = 8\]</span></p>
 <p>and:</p>
-<p><span class="math display">\[
-n = 12
-\]</span></p>
+<p><span class="math display">\[n = 12\]</span></p>
 <p>Using the beta-binomial update rule:</p>
-<p><span class="math display">\[
-\begin{aligned}
+<p><span class="math display">\[\begin{aligned}
 \theta \mid X=8
 &amp;\sim
 \text{Beta}(1 + 8,\ 1 + 12 - 8) \\
 &amp;\sim
 \text{Beta}(9,\ 5)
-\end{aligned}
-\]</span></p>
+\end{aligned}\]</span></p>
 <p>So the posterior is:</p>
-<p><span class="math display">\[
-\theta \mid X=8
+<p><span class="math display">\[\theta \mid X=8
 \sim
-\text{Beta}(9,5)
-\]</span></p>
+\text{Beta}(9,5)\]</span></p>
 <p>The prior may matter more here because the sample size is small. With only 12 observations, the likelihood contains limited information.</p>
 <p>If the survey had 1200 people with 800 yes responses, the observed proportion would still be:</p>
-<p><span class="math display">\[
-\frac{800}{1200}
+<p><span class="math display">\[\frac{800}{1200}
 =
-0.667
-\]</span></p>
+0.667\]</span></p>
 <p>But the data would contain much more information. In that case, the likelihood would usually dominate the prior more strongly, and different reasonable priors would lead to more similar posteriors.</p>
 </div>
 </div>
@@ -11462,29 +10930,16 @@ n = 12
 <div id="callout-26" class="callout-26-contents callout-collapse collapse">
 <div class="callout-body-container callout-body">
 <p>Let:</p>
-<p><span class="math display">\[
-H = \text{email is spam}
-\]</span></p>
+<p><span class="math display">\[H = \text{email is spam}\]</span></p>
 <p>and:</p>
-<p><span class="math display">\[
-E = \text{email is flagged}
-\]</span></p>
+<p><span class="math display">\[E = \text{email is flagged}\]</span></p>
 <p>We are given:</p>
-<p><span class="math display">\[
-P(H) = 0.20
-\]</span></p>
-<p><span class="math display">\[
-P(H^c) = 0.80
-\]</span></p>
-<p><span class="math display">\[
-P(E \mid H) = 0.95
-\]</span></p>
-<p><span class="math display">\[
-P(E \mid H^c) = 0.10
-\]</span></p>
+<p><span class="math display">\[P(H) = 0.20\]</span></p>
+<p><span class="math display">\[P(H^c) = 0.80\]</span></p>
+<p><span class="math display">\[P(E \mid H) = 0.95\]</span></p>
+<p><span class="math display">\[P(E \mid H^c) = 0.10\]</span></p>
 <p>Using Bayes’ theorem:</p>
-<p><span class="math display">\[
-\begin{aligned}
+<p><span class="math display">\[\begin{aligned}
 P(H \mid E)
 &amp;=
 \frac{0.20 \times 0.95}
@@ -11495,17 +10950,12 @@ P(H \mid E)
 \frac{0.19}{0.27} \\
 &amp;=
 0.704
-\end{aligned}
-\]</span></p>
+\end{aligned}\]</span></p>
 <p>So, given that the email was flagged, the probability that it is spam is about 70%.</p>
 <p>This is not simply 95% because 95% is:</p>
-<p><span class="math display">\[
-P(\text{flagged} \mid \text{spam})
-\]</span></p>
+<p><span class="math display">\[P(\text{flagged} \mid \text{spam})\]</span></p>
 <p>The question asks for:</p>
-<p><span class="math display">\[
-P(\text{spam} \mid \text{flagged})
-\]</span></p>
+<p><span class="math display">\[P(\text{spam} \mid \text{flagged})\]</span></p>
 <p>These are different conditional probabilities. We also need the base rate of spam and the false positive rate.</p>
 </div>
 </div>
@@ -11535,17 +10985,11 @@ P(\text{spam} \mid \text{flagged})
 <li>20% of sales managers fit the description</li>
 </ul>
 <p>Let</p>
-<p><span class="math display">\[
-H = \text{Taylor is an architect}
-\]</span></p>
+<p><span class="math display">\[H = \text{Taylor is an architect}\]</span></p>
 <p>and let</p>
-<p><span class="math display">\[
-E = \text{Taylor fits the description}
-\]</span></p>
+<p><span class="math display">\[E = \text{Taylor fits the description}\]</span></p>
 <p>Calculate:</p>
-<p><span class="math display">\[
-P(H \mid E)
-\]</span></p>
+<p><span class="math display">\[P(H \mid E)\]</span></p>
 <p>Then explain why the answer is not simply 80%.</p>
 <div class="callout callout-style-default callout-important callout-titled">
 <div class="callout-header d-flex align-content-center collapsed" data-bs-toggle="collapse" data-bs-target=".callout-28-contents" aria-controls="callout-28" aria-expanded="false" aria-label="Toggle callout">
@@ -11561,37 +11005,26 @@ P(H \mid E)
 <div class="callout-body-container callout-body">
 <p>First calculate the base rates.</p>
 <p>There are:</p>
-<p><span class="math display">\[
-30 + 270 = 300
-\]</span></p>
+<p><span class="math display">\[30 + 270 = 300\]</span></p>
 <p>people in total.</p>
 <p>So:</p>
-<p><span class="math display">\[
-P(H)
+<p><span class="math display">\[P(H)
 =
 \frac{30}{300}
 =
-0.10
-\]</span></p>
+0.10\]</span></p>
 <p>and:</p>
-<p><span class="math display">\[
-P(H^c)
+<p><span class="math display">\[P(H^c)
 =
 \frac{270}{300}
 =
-0.90
-\]</span></p>
+0.90\]</span></p>
 <p>The likelihoods are:</p>
-<p><span class="math display">\[
-P(E \mid H) = 0.80
-\]</span></p>
+<p><span class="math display">\[P(E \mid H) = 0.80\]</span></p>
 <p>and:</p>
-<p><span class="math display">\[
-P(E \mid H^c) = 0.20
-\]</span></p>
+<p><span class="math display">\[P(E \mid H^c) = 0.20\]</span></p>
 <p>Using Bayes’ theorem:</p>
-<p><span class="math display">\[
-\begin{aligned}
+<p><span class="math display">\[\begin{aligned}
 P(H \mid E)
 &amp;=
 \frac{0.10 \times 0.80}
@@ -11602,17 +11035,12 @@ P(H \mid E)
 \frac{0.08}{0.26} \\
 &amp;=
 0.308
-\end{aligned}
-\]</span></p>
+\end{aligned}\]</span></p>
 <p>So, given the description, the probability that Taylor is an architect is about 31%.</p>
 <p>The answer is not 80% because 80% is:</p>
-<p><span class="math display">\[
-P(\text{fits description} \mid \text{architect})
-\]</span></p>
+<p><span class="math display">\[P(\text{fits description} \mid \text{architect})\]</span></p>
 <p>But the question asks for:</p>
-<p><span class="math display">\[
-P(\text{architect} \mid \text{fits description})
-\]</span></p>
+<p><span class="math display">\[P(\text{architect} \mid \text{fits description})\]</span></p>
 <p>The base rates matter. Sales managers are much more common in the starting group, so some people who fit the description will still be sales managers.</p>
 </div>
 </div>
