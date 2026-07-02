@@ -2,16 +2,13 @@
 <html xmlns="http://www.w3.org/1999/xhtml" lang="en" xml:lang="en"><head>
 
 <meta charset="utf-8">
-<meta name="generator" content="quarto-1.9.37">
+<meta name="generator" content="quarto-1.7.32">
 
 <meta name="viewport" content="width=device-width, initial-scale=1.0, user-scalable=yes">
 
 
 <title>1&nbsp; Better Questions – Statistical Thinking</title>
 <style>
-/* Default styles provided by pandoc.
-** See https://pandoc.org/MANUAL.html#variables-for-html for config info.
-*/
 code{white-space: pre-wrap;}
 span.smallcaps{font-variant: small-caps;}
 div.columns{display: flex; gap: min(4vw, 1.5em);}
@@ -75,14 +72,14 @@ pre > code.sourceCode > span > a:first-child::before { text-decoration: underlin
 <script src="site_libs/quarto-html/tippy.umd.min.js"></script>
 <script src="site_libs/quarto-html/anchor.min.js"></script>
 <link href="site_libs/quarto-html/tippy.css" rel="stylesheet">
-<link href="site_libs/quarto-html/quarto-syntax-highlighting-7f8f88aac4f3542376d5c11b86a4c14d.css" rel="stylesheet" class="quarto-color-scheme" id="quarto-text-highlighting-styles">
-<link href="site_libs/quarto-html/quarto-syntax-highlighting-dark-d0ae9245876894da5ac7e18953ecc5cc.css" rel="stylesheet" class="quarto-color-scheme quarto-color-alternate" id="quarto-text-highlighting-styles">
-<link href="site_libs/quarto-html/quarto-syntax-highlighting-7f8f88aac4f3542376d5c11b86a4c14d.css" rel="stylesheet" class="quarto-color-scheme-extra" id="quarto-text-highlighting-styles">
+<link href="site_libs/quarto-html/quarto-syntax-highlighting-37eea08aefeeee20ff55810ff984fec1.css" rel="stylesheet" class="quarto-color-scheme" id="quarto-text-highlighting-styles">
+<link href="site_libs/quarto-html/quarto-syntax-highlighting-dark-2fef5ea3f8957b3e4ecc936fc74692ca.css" rel="stylesheet" class="quarto-color-scheme quarto-color-alternate" id="quarto-text-highlighting-styles">
+<link href="site_libs/quarto-html/quarto-syntax-highlighting-37eea08aefeeee20ff55810ff984fec1.css" rel="stylesheet" class="quarto-color-scheme-extra" id="quarto-text-highlighting-styles">
 <script src="site_libs/bootstrap/bootstrap.min.js"></script>
 <link href="site_libs/bootstrap/bootstrap-icons.css" rel="stylesheet">
-<link href="site_libs/bootstrap/bootstrap-b9eaee60a963b5d74e9d33cc267de6a6.min.css" rel="stylesheet" append-hash="true" class="quarto-color-scheme" id="quarto-bootstrap" data-mode="light">
-<link href="site_libs/bootstrap/bootstrap-dark-aa873432a3c62897e6c2091c0d30a948.min.css" rel="stylesheet" append-hash="true" class="quarto-color-scheme quarto-color-alternate" id="quarto-bootstrap" data-mode="dark">
-<link href="site_libs/bootstrap/bootstrap-b9eaee60a963b5d74e9d33cc267de6a6.min.css" rel="stylesheet" append-hash="true" class="quarto-color-scheme-extra" id="quarto-bootstrap" data-mode="light">
+<link href="site_libs/bootstrap/bootstrap-c27fdc8e5b00b532d2d5a75ada188648.min.css" rel="stylesheet" append-hash="true" class="quarto-color-scheme" id="quarto-bootstrap" data-mode="light">
+<link href="site_libs/bootstrap/bootstrap-dark-b9e11ad5a37ead2aabff839d95ae3857.min.css" rel="stylesheet" append-hash="true" class="quarto-color-scheme quarto-color-alternate" id="quarto-bootstrap" data-mode="dark">
+<link href="site_libs/bootstrap/bootstrap-c27fdc8e5b00b532d2d5a75ada188648.min.css" rel="stylesheet" append-hash="true" class="quarto-color-scheme-extra" id="quarto-bootstrap" data-mode="light">
 <script id="quarto-search-options" type="application/json">{
   "location": "sidebar",
   "copy-button": false,
@@ -112,7 +109,7 @@ pre > code.sourceCode > span > a:first-child::before { text-decoration: underlin
 }</script>
 
   <script src="https://cdnjs.cloudflare.com/polyfill/v3/polyfill.min.js?features=es6"></script>
-  <script defer="" src="https://cdn.jsdelivr.net/npm/mathjax@3/es5/tex-chtml-full.js" type="text/javascript"></script>
+  <script src="https://cdn.jsdelivr.net/npm/mathjax@3/es5/tex-chtml-full.js" type="text/javascript"></script>
 
 <script type="text/javascript">
 const typesetMath = (el) => {
@@ -125,7 +122,7 @@ const typesetMath = (el) => {
     var macros = [];
     for (var i = 0; i < mathElements.length; i++) {
       var texText = mathElements[i].firstChild;
-      if (mathElements[i].tagName == "SPAN" && texText && texText.data) {
+      if (mathElements[i].tagName == "SPAN") {
         window.katex.render(texText.data, mathElements[i], {
           displayMode: mathElements[i].classList.contains('display'),
           throwOnError: false,
@@ -416,6 +413,12 @@ window.Quarto = {
  <span class="menu-text"><span class="chapter-number">10</span>&nbsp; <span class="chapter-title">Thinking with Frequentist Models</span></span></a>
   </div>
 </li>
+        <li class="sidebar-item">
+  <div class="sidebar-item-container"> 
+  <a href="./11_Models2.html" class="sidebar-item-text sidebar-link">
+ <span class="menu-text"><span class="chapter-number">11</span>&nbsp; <span class="chapter-title">Thinking with Bayesian Regression Models</span></span></a>
+  </div>
+</li>
     </ul>
     </div>
 </nav>
@@ -472,7 +475,7 @@ window.Quarto = {
 <i class="callout-icon"></i>
 </div>
 <div class="callout-title-container flex-fill">
-<span class="screen-reader-only">Note</span>Learning Objectives
+Learning Objectives
 </div>
 </div>
 <div class="callout-body-container callout-body">
@@ -496,7 +499,7 @@ window.Quarto = {
 <div class="cell-output-display">
 <div>
 <figure class="figure">
-<p><img src="images/chapter1/outline.png" class="img-fluid figure-img"></p>
+<p><img src="images/chapter1/outline.png" class="img-fluid figure-img" width="2200"></p>
 </figure>
 </div>
 </div>
@@ -512,7 +515,7 @@ window.Quarto = {
 <div class="cell-output-display">
 <div class="quarto-figure quarto-figure-center">
 <figure class="figure">
-<p><img src="images/chapter1/boatpeople.JPEG" class="img-fluid figure-img"></p>
+<p><img src="images/chapter1/boatpeople.JPEG" class="img-fluid figure-img" width="480"></p>
 <figcaption>Image Source: PH2 Phil Eggman</figcaption>
 </figure>
 </div>
@@ -675,7 +678,7 @@ window.Quarto = {
 <i class="callout-icon"></i>
 </div>
 <div class="callout-title-container flex-fill">
-<span class="screen-reader-only">Note</span>A cautionary tale about expressing uncertainty
+A cautionary tale about expressing uncertainty
 </div>
 </div>
 <div class="callout-body-container callout-body">
@@ -685,7 +688,7 @@ window.Quarto = {
 <div class="cell-output-display">
 <div class="quarto-figure quarto-figure-center">
 <figure class="figure">
-<p><img src="images/chapter1/bayofpigs.png" class="img-fluid figure-img"></p>
+<p><img src="images/chapter1/bayofpigs.png" class="img-fluid figure-img" width="488"></p>
 <figcaption>Image Source: https://www.bbc.com/news/</figcaption>
 </figure>
 </div>
@@ -710,7 +713,7 @@ window.Quarto = {
 <i class="callout-icon"></i>
 </div>
 <div class="callout-title-container flex-fill">
-<span class="screen-reader-only">Important</span>Note about probability
+Note about probability
 </div>
 </div>
 <div class="callout-body-container callout-body">
@@ -727,7 +730,7 @@ window.Quarto = {
 <div class="cell-output-display">
 <div class="quarto-figure quarto-figure-center">
 <figure class="figure">
-<p><img src="images/chapter1/ancientgreeks.png" class="img-fluid figure-img"></p>
+<p><img src="images/chapter1/ancientgreeks.png" class="img-fluid figure-img" width="640"></p>
 <figcaption>Image Source: Letters and Science</figcaption>
 </figure>
 </div>
@@ -744,7 +747,7 @@ window.Quarto = {
 <div class="cell-output-display">
 <div>
 <figure class="figure">
-<p><img src="images/chapter1/astragli.png" class="img-fluid figure-img"></p>
+<p><img src="images/chapter1/astragli.png" class="img-fluid figure-img" width="701"></p>
 </figure>
 </div>
 </div>
@@ -821,7 +824,7 @@ window.Quarto = {
 <div class="cell-output-display">
 <div class="quarto-figure quarto-figure-center">
 <figure class="figure">
-<p><img src="images/chapter1/cicero.jpg" class="img-fluid figure-img"></p>
+<p><img src="images/chapter1/cicero.jpg" class="img-fluid figure-img" width="400"></p>
 <figcaption>Marcus Tullius Cicero</figcaption>
 </figure>
 </div>
@@ -917,7 +920,7 @@ window.Quarto = {
 <i class="callout-icon"></i>
 </div>
 <div class="callout-title-container flex-fill">
-<span class="screen-reader-only">Note</span>Roman Evidence
+Roman Evidence
 </div>
 </div>
 <div class="callout-body-container callout-body">
@@ -928,7 +931,7 @@ window.Quarto = {
 <div class="cell-output-display">
 <div class="quarto-figure quarto-figure-center">
 <figure class="figure">
-<p><img src="images/chapter1/bishop.png" class="img-fluid figure-img"></p>
+<p><img src="images/chapter1/bishop.png" class="img-fluid figure-img" width="701"></p>
 <figcaption>What happens to the bishop is there are only 71 witnesses?</figcaption>
 </figure>
 </div>
@@ -944,7 +947,7 @@ window.Quarto = {
 <i class="callout-icon"></i>
 </div>
 <div class="callout-title-container flex-fill">
-<span class="screen-reader-only">Note</span>Case Study: Timothy Durham
+Case Study: Timothy Durham
 </div>
 </div>
 <div class="callout-body-container callout-body">
@@ -965,23 +968,23 @@ window.Quarto = {
 <p>The true estimate for lab error is unknown, but experts place it around 1%. Suppose we compare the two possible sources of error:</p>
 <div class="cell">
 <div class="cell-output-display">
-<div id="cgvgacxudm" style="padding-left:0px;padding-right:0px;padding-top:10px;padding-bottom:10px;overflow-x:auto;overflow-y:auto;width:auto;height:auto;">
-<style>#cgvgacxudm table {
+<div id="byjbvbrpgp" style="padding-left:0px;padding-right:0px;padding-top:10px;padding-bottom:10px;overflow-x:auto;overflow-y:auto;width:auto;height:auto;">
+<style>#byjbvbrpgp table {
   font-family: system-ui, 'Segoe UI', Roboto, Helvetica, Arial, sans-serif, 'Apple Color Emoji', 'Segoe UI Emoji', 'Segoe UI Symbol', 'Noto Color Emoji';
   -webkit-font-smoothing: antialiased;
   -moz-osx-font-smoothing: grayscale;
 }
 
-#cgvgacxudm thead, #cgvgacxudm tbody, #cgvgacxudm tfoot, #cgvgacxudm tr, #cgvgacxudm td, #cgvgacxudm th {
+#byjbvbrpgp thead, #byjbvbrpgp tbody, #byjbvbrpgp tfoot, #byjbvbrpgp tr, #byjbvbrpgp td, #byjbvbrpgp th {
   border-style: none;
 }
 
-#cgvgacxudm p {
+#byjbvbrpgp p {
   margin: 0;
   padding: 0;
 }
 
-#cgvgacxudm .gt_table {
+#byjbvbrpgp .gt_table {
   display: table;
   border-collapse: collapse;
   line-height: normal;
@@ -1007,12 +1010,12 @@ window.Quarto = {
   border-left-color: #D3D3D3;
 }
 
-#cgvgacxudm .gt_caption {
+#byjbvbrpgp .gt_caption {
   padding-top: 4px;
   padding-bottom: 4px;
 }
 
-#cgvgacxudm .gt_title {
+#byjbvbrpgp .gt_title {
   color: #333333;
   font-size: 125%;
   font-weight: initial;
@@ -1024,7 +1027,7 @@ window.Quarto = {
   border-bottom-width: 0;
 }
 
-#cgvgacxudm .gt_subtitle {
+#byjbvbrpgp .gt_subtitle {
   color: #333333;
   font-size: 85%;
   font-weight: initial;
@@ -1036,7 +1039,7 @@ window.Quarto = {
   border-top-width: 0;
 }
 
-#cgvgacxudm .gt_heading {
+#byjbvbrpgp .gt_heading {
   background-color: #FFFFFF;
   text-align: center;
   border-bottom-color: #FFFFFF;
@@ -1048,13 +1051,13 @@ window.Quarto = {
   border-right-color: #D3D3D3;
 }
 
-#cgvgacxudm .gt_bottom_border {
+#byjbvbrpgp .gt_bottom_border {
   border-bottom-style: solid;
   border-bottom-width: 2px;
   border-bottom-color: #D3D3D3;
 }
 
-#cgvgacxudm .gt_col_headings {
+#byjbvbrpgp .gt_col_headings {
   border-top-style: solid;
   border-top-width: 2px;
   border-top-color: #D3D3D3;
@@ -1069,7 +1072,7 @@ window.Quarto = {
   border-right-color: #D3D3D3;
 }
 
-#cgvgacxudm .gt_col_heading {
+#byjbvbrpgp .gt_col_heading {
   color: #333333;
   background-color: #FFFFFF;
   font-size: 100%;
@@ -1089,7 +1092,7 @@ window.Quarto = {
   overflow-x: hidden;
 }
 
-#cgvgacxudm .gt_column_spanner_outer {
+#byjbvbrpgp .gt_column_spanner_outer {
   color: #333333;
   background-color: #FFFFFF;
   font-size: 100%;
@@ -1101,15 +1104,15 @@ window.Quarto = {
   padding-right: 4px;
 }
 
-#cgvgacxudm .gt_column_spanner_outer:first-child {
+#byjbvbrpgp .gt_column_spanner_outer:first-child {
   padding-left: 0;
 }
 
-#cgvgacxudm .gt_column_spanner_outer:last-child {
+#byjbvbrpgp .gt_column_spanner_outer:last-child {
   padding-right: 0;
 }
 
-#cgvgacxudm .gt_column_spanner {
+#byjbvbrpgp .gt_column_spanner {
   border-bottom-style: solid;
   border-bottom-width: 2px;
   border-bottom-color: #D3D3D3;
@@ -1121,11 +1124,11 @@ window.Quarto = {
   width: 100%;
 }
 
-#cgvgacxudm .gt_spanner_row {
+#byjbvbrpgp .gt_spanner_row {
   border-bottom-style: hidden;
 }
 
-#cgvgacxudm .gt_group_heading {
+#byjbvbrpgp .gt_group_heading {
   padding-top: 8px;
   padding-bottom: 8px;
   padding-left: 5px;
@@ -1151,7 +1154,7 @@ window.Quarto = {
   text-align: left;
 }
 
-#cgvgacxudm .gt_empty_group_heading {
+#byjbvbrpgp .gt_empty_group_heading {
   padding: 0.5px;
   color: #333333;
   background-color: #FFFFFF;
@@ -1166,15 +1169,15 @@ window.Quarto = {
   vertical-align: middle;
 }
 
-#cgvgacxudm .gt_from_md > :first-child {
+#byjbvbrpgp .gt_from_md > :first-child {
   margin-top: 0;
 }
 
-#cgvgacxudm .gt_from_md > :last-child {
+#byjbvbrpgp .gt_from_md > :last-child {
   margin-bottom: 0;
 }
 
-#cgvgacxudm .gt_row {
+#byjbvbrpgp .gt_row {
   padding-top: 8px;
   padding-bottom: 8px;
   padding-left: 5px;
@@ -1193,7 +1196,7 @@ window.Quarto = {
   overflow-x: hidden;
 }
 
-#cgvgacxudm .gt_stub {
+#byjbvbrpgp .gt_stub {
   color: #333333;
   background-color: #FFFFFF;
   font-size: 100%;
@@ -1206,7 +1209,7 @@ window.Quarto = {
   padding-right: 5px;
 }
 
-#cgvgacxudm .gt_stub_row_group {
+#byjbvbrpgp .gt_stub_row_group {
   color: #333333;
   background-color: #FFFFFF;
   font-size: 100%;
@@ -1220,15 +1223,15 @@ window.Quarto = {
   vertical-align: top;
 }
 
-#cgvgacxudm .gt_row_group_first td {
+#byjbvbrpgp .gt_row_group_first td {
   border-top-width: 2px;
 }
 
-#cgvgacxudm .gt_row_group_first th {
+#byjbvbrpgp .gt_row_group_first th {
   border-top-width: 2px;
 }
 
-#cgvgacxudm .gt_summary_row {
+#byjbvbrpgp .gt_summary_row {
   color: #333333;
   background-color: #FFFFFF;
   text-transform: inherit;
@@ -1238,16 +1241,16 @@ window.Quarto = {
   padding-right: 5px;
 }
 
-#cgvgacxudm .gt_first_summary_row {
+#byjbvbrpgp .gt_first_summary_row {
   border-top-style: solid;
   border-top-color: #D3D3D3;
 }
 
-#cgvgacxudm .gt_first_summary_row.thick {
+#byjbvbrpgp .gt_first_summary_row.thick {
   border-top-width: 2px;
 }
 
-#cgvgacxudm .gt_last_summary_row {
+#byjbvbrpgp .gt_last_summary_row {
   padding-top: 8px;
   padding-bottom: 8px;
   padding-left: 5px;
@@ -1257,7 +1260,7 @@ window.Quarto = {
   border-bottom-color: #D3D3D3;
 }
 
-#cgvgacxudm .gt_grand_summary_row {
+#byjbvbrpgp .gt_grand_summary_row {
   color: #333333;
   background-color: #FFFFFF;
   text-transform: inherit;
@@ -1267,7 +1270,7 @@ window.Quarto = {
   padding-right: 5px;
 }
 
-#cgvgacxudm .gt_first_grand_summary_row {
+#byjbvbrpgp .gt_first_grand_summary_row {
   padding-top: 8px;
   padding-bottom: 8px;
   padding-left: 5px;
@@ -1277,7 +1280,7 @@ window.Quarto = {
   border-top-color: #D3D3D3;
 }
 
-#cgvgacxudm .gt_last_grand_summary_row_top {
+#byjbvbrpgp .gt_last_grand_summary_row_top {
   padding-top: 8px;
   padding-bottom: 8px;
   padding-left: 5px;
@@ -1287,11 +1290,11 @@ window.Quarto = {
   border-bottom-color: #D3D3D3;
 }
 
-#cgvgacxudm .gt_striped {
+#byjbvbrpgp .gt_striped {
   background-color: rgba(128, 128, 128, 0.05);
 }
 
-#cgvgacxudm .gt_table_body {
+#byjbvbrpgp .gt_table_body {
   border-top-style: solid;
   border-top-width: 2px;
   border-top-color: #D3D3D3;
@@ -1300,7 +1303,7 @@ window.Quarto = {
   border-bottom-color: #D3D3D3;
 }
 
-#cgvgacxudm .gt_footnotes {
+#byjbvbrpgp .gt_footnotes {
   color: #333333;
   background-color: #FFFFFF;
   border-bottom-style: none;
@@ -1314,7 +1317,7 @@ window.Quarto = {
   border-right-color: #D3D3D3;
 }
 
-#cgvgacxudm .gt_footnote {
+#byjbvbrpgp .gt_footnote {
   margin: 0px;
   font-size: 90%;
   padding-top: 4px;
@@ -1323,7 +1326,7 @@ window.Quarto = {
   padding-right: 5px;
 }
 
-#cgvgacxudm .gt_sourcenotes {
+#byjbvbrpgp .gt_sourcenotes {
   color: #333333;
   background-color: #FFFFFF;
   border-bottom-style: none;
@@ -1337,7 +1340,7 @@ window.Quarto = {
   border-right-color: #D3D3D3;
 }
 
-#cgvgacxudm .gt_sourcenote {
+#byjbvbrpgp .gt_sourcenote {
   font-size: 90%;
   padding-top: 4px;
   padding-bottom: 4px;
@@ -1345,77 +1348,77 @@ window.Quarto = {
   padding-right: 5px;
 }
 
-#cgvgacxudm .gt_left {
+#byjbvbrpgp .gt_left {
   text-align: left;
 }
 
-#cgvgacxudm .gt_center {
+#byjbvbrpgp .gt_center {
   text-align: center;
 }
 
-#cgvgacxudm .gt_right {
+#byjbvbrpgp .gt_right {
   text-align: right;
   font-variant-numeric: tabular-nums;
 }
 
-#cgvgacxudm .gt_font_normal {
+#byjbvbrpgp .gt_font_normal {
   font-weight: normal;
 }
 
-#cgvgacxudm .gt_font_bold {
+#byjbvbrpgp .gt_font_bold {
   font-weight: bold;
 }
 
-#cgvgacxudm .gt_font_italic {
+#byjbvbrpgp .gt_font_italic {
   font-style: italic;
 }
 
-#cgvgacxudm .gt_super {
+#byjbvbrpgp .gt_super {
   font-size: 65%;
 }
 
-#cgvgacxudm .gt_footnote_marks {
+#byjbvbrpgp .gt_footnote_marks {
   font-size: 75%;
   vertical-align: 0.4em;
   position: initial;
 }
 
-#cgvgacxudm .gt_asterisk {
+#byjbvbrpgp .gt_asterisk {
   font-size: 100%;
   vertical-align: 0;
 }
 
-#cgvgacxudm .gt_indent_1 {
+#byjbvbrpgp .gt_indent_1 {
   text-indent: 5px;
 }
 
-#cgvgacxudm .gt_indent_2 {
+#byjbvbrpgp .gt_indent_2 {
   text-indent: 10px;
 }
 
-#cgvgacxudm .gt_indent_3 {
+#byjbvbrpgp .gt_indent_3 {
   text-indent: 15px;
 }
 
-#cgvgacxudm .gt_indent_4 {
+#byjbvbrpgp .gt_indent_4 {
   text-indent: 20px;
 }
 
-#cgvgacxudm .gt_indent_5 {
+#byjbvbrpgp .gt_indent_5 {
   text-indent: 25px;
 }
 
-#cgvgacxudm .katex-display {
+#byjbvbrpgp .katex-display {
   display: inline-flex !important;
   margin-bottom: 0.75em !important;
 }
 
-#cgvgacxudm div.Reactable > div.rt-table > div.rt-thead > div.rt-tr.rt-tr-group-header > div.rt-th-group:after {
+#byjbvbrpgp div.Reactable > div.rt-table > div.rt-thead > div.rt-tr.rt-tr-group-header > div.rt-th-group:after {
   height: 0px !important;
 }
 </style>
 
-<table class="gt_table caption-top table table-sm table-striped small" data-quarto-bootstrap="false">
+<table class="gt_table caption-top table table-sm table-striped small" data-quarto-postprocess="true" data-quarto-disable-processing="false" data-quarto-bootstrap="false">
 <thead>
 <tr class="gt_col_headings header">
 <th id="Possible-source-of-error" class="gt_col_heading gt_columns_bottom_border gt_center" data-quarto-table-cell-role="th" scope="col">Possible source of error</th>
@@ -1475,7 +1478,7 @@ P(\text{random match}) + P(\text{lab error})\]</span></p>
 <i class="callout-icon"></i>
 </div>
 <div class="callout-title-container flex-fill">
-<span class="screen-reader-only">Note</span>Case Study: People v Collins
+Case Study: People v Collins
 </div>
 </div>
 <div class="callout-body-container callout-body">
@@ -1577,23 +1580,23 @@ P(\text{random match}) + P(\text{lab error})\]</span></p>
 <p>A useful way to summarise the habit is this:</p>
 <div class="cell">
 <div class="cell-output-display">
-<div id="vguiyacffw" style="padding-left:0px;padding-right:0px;padding-top:10px;padding-bottom:10px;overflow-x:auto;overflow-y:auto;width:auto;height:auto;">
-<style>#vguiyacffw table {
+<div id="gkanbcslgj" style="padding-left:0px;padding-right:0px;padding-top:10px;padding-bottom:10px;overflow-x:auto;overflow-y:auto;width:auto;height:auto;">
+<style>#gkanbcslgj table {
   font-family: system-ui, 'Segoe UI', Roboto, Helvetica, Arial, sans-serif, 'Apple Color Emoji', 'Segoe UI Emoji', 'Segoe UI Symbol', 'Noto Color Emoji';
   -webkit-font-smoothing: antialiased;
   -moz-osx-font-smoothing: grayscale;
 }
 
-#vguiyacffw thead, #vguiyacffw tbody, #vguiyacffw tfoot, #vguiyacffw tr, #vguiyacffw td, #vguiyacffw th {
+#gkanbcslgj thead, #gkanbcslgj tbody, #gkanbcslgj tfoot, #gkanbcslgj tr, #gkanbcslgj td, #gkanbcslgj th {
   border-style: none;
 }
 
-#vguiyacffw p {
+#gkanbcslgj p {
   margin: 0;
   padding: 0;
 }
 
-#vguiyacffw .gt_table {
+#gkanbcslgj .gt_table {
   display: table;
   border-collapse: collapse;
   line-height: normal;
@@ -1619,12 +1622,12 @@ P(\text{random match}) + P(\text{lab error})\]</span></p>
   border-left-color: #D3D3D3;
 }
 
-#vguiyacffw .gt_caption {
+#gkanbcslgj .gt_caption {
   padding-top: 4px;
   padding-bottom: 4px;
 }
 
-#vguiyacffw .gt_title {
+#gkanbcslgj .gt_title {
   color: #333333;
   font-size: 125%;
   font-weight: initial;
@@ -1636,7 +1639,7 @@ P(\text{random match}) + P(\text{lab error})\]</span></p>
   border-bottom-width: 0;
 }
 
-#vguiyacffw .gt_subtitle {
+#gkanbcslgj .gt_subtitle {
   color: #333333;
   font-size: 85%;
   font-weight: initial;
@@ -1648,7 +1651,7 @@ P(\text{random match}) + P(\text{lab error})\]</span></p>
   border-top-width: 0;
 }
 
-#vguiyacffw .gt_heading {
+#gkanbcslgj .gt_heading {
   background-color: #FFFFFF;
   text-align: center;
   border-bottom-color: #FFFFFF;
@@ -1660,13 +1663,13 @@ P(\text{random match}) + P(\text{lab error})\]</span></p>
   border-right-color: #D3D3D3;
 }
 
-#vguiyacffw .gt_bottom_border {
+#gkanbcslgj .gt_bottom_border {
   border-bottom-style: solid;
   border-bottom-width: 2px;
   border-bottom-color: #D3D3D3;
 }
 
-#vguiyacffw .gt_col_headings {
+#gkanbcslgj .gt_col_headings {
   border-top-style: solid;
   border-top-width: 2px;
   border-top-color: #D3D3D3;
@@ -1681,7 +1684,7 @@ P(\text{random match}) + P(\text{lab error})\]</span></p>
   border-right-color: #D3D3D3;
 }
 
-#vguiyacffw .gt_col_heading {
+#gkanbcslgj .gt_col_heading {
   color: #333333;
   background-color: #FFFFFF;
   font-size: 100%;
@@ -1701,7 +1704,7 @@ P(\text{random match}) + P(\text{lab error})\]</span></p>
   overflow-x: hidden;
 }
 
-#vguiyacffw .gt_column_spanner_outer {
+#gkanbcslgj .gt_column_spanner_outer {
   color: #333333;
   background-color: #FFFFFF;
   font-size: 100%;
@@ -1713,15 +1716,15 @@ P(\text{random match}) + P(\text{lab error})\]</span></p>
   padding-right: 4px;
 }
 
-#vguiyacffw .gt_column_spanner_outer:first-child {
+#gkanbcslgj .gt_column_spanner_outer:first-child {
   padding-left: 0;
 }
 
-#vguiyacffw .gt_column_spanner_outer:last-child {
+#gkanbcslgj .gt_column_spanner_outer:last-child {
   padding-right: 0;
 }
 
-#vguiyacffw .gt_column_spanner {
+#gkanbcslgj .gt_column_spanner {
   border-bottom-style: solid;
   border-bottom-width: 2px;
   border-bottom-color: #D3D3D3;
@@ -1733,11 +1736,11 @@ P(\text{random match}) + P(\text{lab error})\]</span></p>
   width: 100%;
 }
 
-#vguiyacffw .gt_spanner_row {
+#gkanbcslgj .gt_spanner_row {
   border-bottom-style: hidden;
 }
 
-#vguiyacffw .gt_group_heading {
+#gkanbcslgj .gt_group_heading {
   padding-top: 8px;
   padding-bottom: 8px;
   padding-left: 5px;
@@ -1763,7 +1766,7 @@ P(\text{random match}) + P(\text{lab error})\]</span></p>
   text-align: left;
 }
 
-#vguiyacffw .gt_empty_group_heading {
+#gkanbcslgj .gt_empty_group_heading {
   padding: 0.5px;
   color: #333333;
   background-color: #FFFFFF;
@@ -1778,15 +1781,15 @@ P(\text{random match}) + P(\text{lab error})\]</span></p>
   vertical-align: middle;
 }
 
-#vguiyacffw .gt_from_md > :first-child {
+#gkanbcslgj .gt_from_md > :first-child {
   margin-top: 0;
 }
 
-#vguiyacffw .gt_from_md > :last-child {
+#gkanbcslgj .gt_from_md > :last-child {
   margin-bottom: 0;
 }
 
-#vguiyacffw .gt_row {
+#gkanbcslgj .gt_row {
   padding-top: 8px;
   padding-bottom: 8px;
   padding-left: 5px;
@@ -1805,7 +1808,7 @@ P(\text{random match}) + P(\text{lab error})\]</span></p>
   overflow-x: hidden;
 }
 
-#vguiyacffw .gt_stub {
+#gkanbcslgj .gt_stub {
   color: #333333;
   background-color: #FFFFFF;
   font-size: 100%;
@@ -1818,7 +1821,7 @@ P(\text{random match}) + P(\text{lab error})\]</span></p>
   padding-right: 5px;
 }
 
-#vguiyacffw .gt_stub_row_group {
+#gkanbcslgj .gt_stub_row_group {
   color: #333333;
   background-color: #FFFFFF;
   font-size: 100%;
@@ -1832,15 +1835,15 @@ P(\text{random match}) + P(\text{lab error})\]</span></p>
   vertical-align: top;
 }
 
-#vguiyacffw .gt_row_group_first td {
+#gkanbcslgj .gt_row_group_first td {
   border-top-width: 2px;
 }
 
-#vguiyacffw .gt_row_group_first th {
+#gkanbcslgj .gt_row_group_first th {
   border-top-width: 2px;
 }
 
-#vguiyacffw .gt_summary_row {
+#gkanbcslgj .gt_summary_row {
   color: #333333;
   background-color: #FFFFFF;
   text-transform: inherit;
@@ -1850,16 +1853,16 @@ P(\text{random match}) + P(\text{lab error})\]</span></p>
   padding-right: 5px;
 }
 
-#vguiyacffw .gt_first_summary_row {
+#gkanbcslgj .gt_first_summary_row {
   border-top-style: solid;
   border-top-color: #D3D3D3;
 }
 
-#vguiyacffw .gt_first_summary_row.thick {
+#gkanbcslgj .gt_first_summary_row.thick {
   border-top-width: 2px;
 }
 
-#vguiyacffw .gt_last_summary_row {
+#gkanbcslgj .gt_last_summary_row {
   padding-top: 8px;
   padding-bottom: 8px;
   padding-left: 5px;
@@ -1869,7 +1872,7 @@ P(\text{random match}) + P(\text{lab error})\]</span></p>
   border-bottom-color: #D3D3D3;
 }
 
-#vguiyacffw .gt_grand_summary_row {
+#gkanbcslgj .gt_grand_summary_row {
   color: #333333;
   background-color: #FFFFFF;
   text-transform: inherit;
@@ -1879,7 +1882,7 @@ P(\text{random match}) + P(\text{lab error})\]</span></p>
   padding-right: 5px;
 }
 
-#vguiyacffw .gt_first_grand_summary_row {
+#gkanbcslgj .gt_first_grand_summary_row {
   padding-top: 8px;
   padding-bottom: 8px;
   padding-left: 5px;
@@ -1889,7 +1892,7 @@ P(\text{random match}) + P(\text{lab error})\]</span></p>
   border-top-color: #D3D3D3;
 }
 
-#vguiyacffw .gt_last_grand_summary_row_top {
+#gkanbcslgj .gt_last_grand_summary_row_top {
   padding-top: 8px;
   padding-bottom: 8px;
   padding-left: 5px;
@@ -1899,11 +1902,11 @@ P(\text{random match}) + P(\text{lab error})\]</span></p>
   border-bottom-color: #D3D3D3;
 }
 
-#vguiyacffw .gt_striped {
+#gkanbcslgj .gt_striped {
   background-color: rgba(128, 128, 128, 0.05);
 }
 
-#vguiyacffw .gt_table_body {
+#gkanbcslgj .gt_table_body {
   border-top-style: solid;
   border-top-width: 2px;
   border-top-color: #D3D3D3;
@@ -1912,7 +1915,7 @@ P(\text{random match}) + P(\text{lab error})\]</span></p>
   border-bottom-color: #D3D3D3;
 }
 
-#vguiyacffw .gt_footnotes {
+#gkanbcslgj .gt_footnotes {
   color: #333333;
   background-color: #FFFFFF;
   border-bottom-style: none;
@@ -1926,7 +1929,7 @@ P(\text{random match}) + P(\text{lab error})\]</span></p>
   border-right-color: #D3D3D3;
 }
 
-#vguiyacffw .gt_footnote {
+#gkanbcslgj .gt_footnote {
   margin: 0px;
   font-size: 90%;
   padding-top: 4px;
@@ -1935,7 +1938,7 @@ P(\text{random match}) + P(\text{lab error})\]</span></p>
   padding-right: 5px;
 }
 
-#vguiyacffw .gt_sourcenotes {
+#gkanbcslgj .gt_sourcenotes {
   color: #333333;
   background-color: #FFFFFF;
   border-bottom-style: none;
@@ -1949,7 +1952,7 @@ P(\text{random match}) + P(\text{lab error})\]</span></p>
   border-right-color: #D3D3D3;
 }
 
-#vguiyacffw .gt_sourcenote {
+#gkanbcslgj .gt_sourcenote {
   font-size: 90%;
   padding-top: 4px;
   padding-bottom: 4px;
@@ -1957,77 +1960,77 @@ P(\text{random match}) + P(\text{lab error})\]</span></p>
   padding-right: 5px;
 }
 
-#vguiyacffw .gt_left {
+#gkanbcslgj .gt_left {
   text-align: left;
 }
 
-#vguiyacffw .gt_center {
+#gkanbcslgj .gt_center {
   text-align: center;
 }
 
-#vguiyacffw .gt_right {
+#gkanbcslgj .gt_right {
   text-align: right;
   font-variant-numeric: tabular-nums;
 }
 
-#vguiyacffw .gt_font_normal {
+#gkanbcslgj .gt_font_normal {
   font-weight: normal;
 }
 
-#vguiyacffw .gt_font_bold {
+#gkanbcslgj .gt_font_bold {
   font-weight: bold;
 }
 
-#vguiyacffw .gt_font_italic {
+#gkanbcslgj .gt_font_italic {
   font-style: italic;
 }
 
-#vguiyacffw .gt_super {
+#gkanbcslgj .gt_super {
   font-size: 65%;
 }
 
-#vguiyacffw .gt_footnote_marks {
+#gkanbcslgj .gt_footnote_marks {
   font-size: 75%;
   vertical-align: 0.4em;
   position: initial;
 }
 
-#vguiyacffw .gt_asterisk {
+#gkanbcslgj .gt_asterisk {
   font-size: 100%;
   vertical-align: 0;
 }
 
-#vguiyacffw .gt_indent_1 {
+#gkanbcslgj .gt_indent_1 {
   text-indent: 5px;
 }
 
-#vguiyacffw .gt_indent_2 {
+#gkanbcslgj .gt_indent_2 {
   text-indent: 10px;
 }
 
-#vguiyacffw .gt_indent_3 {
+#gkanbcslgj .gt_indent_3 {
   text-indent: 15px;
 }
 
-#vguiyacffw .gt_indent_4 {
+#gkanbcslgj .gt_indent_4 {
   text-indent: 20px;
 }
 
-#vguiyacffw .gt_indent_5 {
+#gkanbcslgj .gt_indent_5 {
   text-indent: 25px;
 }
 
-#vguiyacffw .katex-display {
+#gkanbcslgj .katex-display {
   display: inline-flex !important;
   margin-bottom: 0.75em !important;
 }
 
-#vguiyacffw div.Reactable > div.rt-table > div.rt-thead > div.rt-tr.rt-tr-group-header > div.rt-th-group:after {
+#gkanbcslgj div.Reactable > div.rt-table > div.rt-thead > div.rt-tr.rt-tr-group-header > div.rt-th-group:after {
   height: 0px !important;
 }
 </style>
 
-<table class="gt_table caption-top table table-sm table-striped small" data-quarto-bootstrap="false">
+<table class="gt_table caption-top table table-sm table-striped small" data-quarto-postprocess="true" data-quarto-disable-processing="false" data-quarto-bootstrap="false">
 <thead>
 <tr class="gt_col_headings header">
 <th id="Situation" class="gt_col_heading gt_columns_bottom_border gt_left" data-quarto-table-cell-role="th" scope="col">Situation</th>
@@ -2110,23 +2113,23 @@ P(\text{random match}) + P(\text{lab error})\]</span></p>
 <p>Because this is the first chapter, we will move slowly. Each example introduces only a small number of functions.</p>
 <div class="cell">
 <div class="cell-output-display">
-<div id="qoapknojpb" style="padding-left:0px;padding-right:0px;padding-top:10px;padding-bottom:10px;overflow-x:auto;overflow-y:auto;width:auto;height:auto;">
-<style>#qoapknojpb table {
+<div id="byyrttecnl" style="padding-left:0px;padding-right:0px;padding-top:10px;padding-bottom:10px;overflow-x:auto;overflow-y:auto;width:auto;height:auto;">
+<style>#byyrttecnl table {
   font-family: system-ui, 'Segoe UI', Roboto, Helvetica, Arial, sans-serif, 'Apple Color Emoji', 'Segoe UI Emoji', 'Segoe UI Symbol', 'Noto Color Emoji';
   -webkit-font-smoothing: antialiased;
   -moz-osx-font-smoothing: grayscale;
 }
 
-#qoapknojpb thead, #qoapknojpb tbody, #qoapknojpb tfoot, #qoapknojpb tr, #qoapknojpb td, #qoapknojpb th {
+#byyrttecnl thead, #byyrttecnl tbody, #byyrttecnl tfoot, #byyrttecnl tr, #byyrttecnl td, #byyrttecnl th {
   border-style: none;
 }
 
-#qoapknojpb p {
+#byyrttecnl p {
   margin: 0;
   padding: 0;
 }
 
-#qoapknojpb .gt_table {
+#byyrttecnl .gt_table {
   display: table;
   border-collapse: collapse;
   line-height: normal;
@@ -2152,12 +2155,12 @@ P(\text{random match}) + P(\text{lab error})\]</span></p>
   border-left-color: #D3D3D3;
 }
 
-#qoapknojpb .gt_caption {
+#byyrttecnl .gt_caption {
   padding-top: 4px;
   padding-bottom: 4px;
 }
 
-#qoapknojpb .gt_title {
+#byyrttecnl .gt_title {
   color: #333333;
   font-size: 125%;
   font-weight: initial;
@@ -2169,7 +2172,7 @@ P(\text{random match}) + P(\text{lab error})\]</span></p>
   border-bottom-width: 0;
 }
 
-#qoapknojpb .gt_subtitle {
+#byyrttecnl .gt_subtitle {
   color: #333333;
   font-size: 85%;
   font-weight: initial;
@@ -2181,7 +2184,7 @@ P(\text{random match}) + P(\text{lab error})\]</span></p>
   border-top-width: 0;
 }
 
-#qoapknojpb .gt_heading {
+#byyrttecnl .gt_heading {
   background-color: #FFFFFF;
   text-align: center;
   border-bottom-color: #FFFFFF;
@@ -2193,13 +2196,13 @@ P(\text{random match}) + P(\text{lab error})\]</span></p>
   border-right-color: #D3D3D3;
 }
 
-#qoapknojpb .gt_bottom_border {
+#byyrttecnl .gt_bottom_border {
   border-bottom-style: solid;
   border-bottom-width: 2px;
   border-bottom-color: #D3D3D3;
 }
 
-#qoapknojpb .gt_col_headings {
+#byyrttecnl .gt_col_headings {
   border-top-style: solid;
   border-top-width: 2px;
   border-top-color: #D3D3D3;
@@ -2214,7 +2217,7 @@ P(\text{random match}) + P(\text{lab error})\]</span></p>
   border-right-color: #D3D3D3;
 }
 
-#qoapknojpb .gt_col_heading {
+#byyrttecnl .gt_col_heading {
   color: #333333;
   background-color: #FFFFFF;
   font-size: 100%;
@@ -2234,7 +2237,7 @@ P(\text{random match}) + P(\text{lab error})\]</span></p>
   overflow-x: hidden;
 }
 
-#qoapknojpb .gt_column_spanner_outer {
+#byyrttecnl .gt_column_spanner_outer {
   color: #333333;
   background-color: #FFFFFF;
   font-size: 100%;
@@ -2246,15 +2249,15 @@ P(\text{random match}) + P(\text{lab error})\]</span></p>
   padding-right: 4px;
 }
 
-#qoapknojpb .gt_column_spanner_outer:first-child {
+#byyrttecnl .gt_column_spanner_outer:first-child {
   padding-left: 0;
 }
 
-#qoapknojpb .gt_column_spanner_outer:last-child {
+#byyrttecnl .gt_column_spanner_outer:last-child {
   padding-right: 0;
 }
 
-#qoapknojpb .gt_column_spanner {
+#byyrttecnl .gt_column_spanner {
   border-bottom-style: solid;
   border-bottom-width: 2px;
   border-bottom-color: #D3D3D3;
@@ -2266,11 +2269,11 @@ P(\text{random match}) + P(\text{lab error})\]</span></p>
   width: 100%;
 }
 
-#qoapknojpb .gt_spanner_row {
+#byyrttecnl .gt_spanner_row {
   border-bottom-style: hidden;
 }
 
-#qoapknojpb .gt_group_heading {
+#byyrttecnl .gt_group_heading {
   padding-top: 8px;
   padding-bottom: 8px;
   padding-left: 5px;
@@ -2296,7 +2299,7 @@ P(\text{random match}) + P(\text{lab error})\]</span></p>
   text-align: left;
 }
 
-#qoapknojpb .gt_empty_group_heading {
+#byyrttecnl .gt_empty_group_heading {
   padding: 0.5px;
   color: #333333;
   background-color: #FFFFFF;
@@ -2311,15 +2314,15 @@ P(\text{random match}) + P(\text{lab error})\]</span></p>
   vertical-align: middle;
 }
 
-#qoapknojpb .gt_from_md > :first-child {
+#byyrttecnl .gt_from_md > :first-child {
   margin-top: 0;
 }
 
-#qoapknojpb .gt_from_md > :last-child {
+#byyrttecnl .gt_from_md > :last-child {
   margin-bottom: 0;
 }
 
-#qoapknojpb .gt_row {
+#byyrttecnl .gt_row {
   padding-top: 8px;
   padding-bottom: 8px;
   padding-left: 5px;
@@ -2338,7 +2341,7 @@ P(\text{random match}) + P(\text{lab error})\]</span></p>
   overflow-x: hidden;
 }
 
-#qoapknojpb .gt_stub {
+#byyrttecnl .gt_stub {
   color: #333333;
   background-color: #FFFFFF;
   font-size: 100%;
@@ -2351,7 +2354,7 @@ P(\text{random match}) + P(\text{lab error})\]</span></p>
   padding-right: 5px;
 }
 
-#qoapknojpb .gt_stub_row_group {
+#byyrttecnl .gt_stub_row_group {
   color: #333333;
   background-color: #FFFFFF;
   font-size: 100%;
@@ -2365,15 +2368,15 @@ P(\text{random match}) + P(\text{lab error})\]</span></p>
   vertical-align: top;
 }
 
-#qoapknojpb .gt_row_group_first td {
+#byyrttecnl .gt_row_group_first td {
   border-top-width: 2px;
 }
 
-#qoapknojpb .gt_row_group_first th {
+#byyrttecnl .gt_row_group_first th {
   border-top-width: 2px;
 }
 
-#qoapknojpb .gt_summary_row {
+#byyrttecnl .gt_summary_row {
   color: #333333;
   background-color: #FFFFFF;
   text-transform: inherit;
@@ -2383,16 +2386,16 @@ P(\text{random match}) + P(\text{lab error})\]</span></p>
   padding-right: 5px;
 }
 
-#qoapknojpb .gt_first_summary_row {
+#byyrttecnl .gt_first_summary_row {
   border-top-style: solid;
   border-top-color: #D3D3D3;
 }
 
-#qoapknojpb .gt_first_summary_row.thick {
+#byyrttecnl .gt_first_summary_row.thick {
   border-top-width: 2px;
 }
 
-#qoapknojpb .gt_last_summary_row {
+#byyrttecnl .gt_last_summary_row {
   padding-top: 8px;
   padding-bottom: 8px;
   padding-left: 5px;
@@ -2402,7 +2405,7 @@ P(\text{random match}) + P(\text{lab error})\]</span></p>
   border-bottom-color: #D3D3D3;
 }
 
-#qoapknojpb .gt_grand_summary_row {
+#byyrttecnl .gt_grand_summary_row {
   color: #333333;
   background-color: #FFFFFF;
   text-transform: inherit;
@@ -2412,7 +2415,7 @@ P(\text{random match}) + P(\text{lab error})\]</span></p>
   padding-right: 5px;
 }
 
-#qoapknojpb .gt_first_grand_summary_row {
+#byyrttecnl .gt_first_grand_summary_row {
   padding-top: 8px;
   padding-bottom: 8px;
   padding-left: 5px;
@@ -2422,7 +2425,7 @@ P(\text{random match}) + P(\text{lab error})\]</span></p>
   border-top-color: #D3D3D3;
 }
 
-#qoapknojpb .gt_last_grand_summary_row_top {
+#byyrttecnl .gt_last_grand_summary_row_top {
   padding-top: 8px;
   padding-bottom: 8px;
   padding-left: 5px;
@@ -2432,11 +2435,11 @@ P(\text{random match}) + P(\text{lab error})\]</span></p>
   border-bottom-color: #D3D3D3;
 }
 
-#qoapknojpb .gt_striped {
+#byyrttecnl .gt_striped {
   background-color: rgba(128, 128, 128, 0.05);
 }
 
-#qoapknojpb .gt_table_body {
+#byyrttecnl .gt_table_body {
   border-top-style: solid;
   border-top-width: 2px;
   border-top-color: #D3D3D3;
@@ -2445,7 +2448,7 @@ P(\text{random match}) + P(\text{lab error})\]</span></p>
   border-bottom-color: #D3D3D3;
 }
 
-#qoapknojpb .gt_footnotes {
+#byyrttecnl .gt_footnotes {
   color: #333333;
   background-color: #FFFFFF;
   border-bottom-style: none;
@@ -2459,7 +2462,7 @@ P(\text{random match}) + P(\text{lab error})\]</span></p>
   border-right-color: #D3D3D3;
 }
 
-#qoapknojpb .gt_footnote {
+#byyrttecnl .gt_footnote {
   margin: 0px;
   font-size: 90%;
   padding-top: 4px;
@@ -2468,7 +2471,7 @@ P(\text{random match}) + P(\text{lab error})\]</span></p>
   padding-right: 5px;
 }
 
-#qoapknojpb .gt_sourcenotes {
+#byyrttecnl .gt_sourcenotes {
   color: #333333;
   background-color: #FFFFFF;
   border-bottom-style: none;
@@ -2482,7 +2485,7 @@ P(\text{random match}) + P(\text{lab error})\]</span></p>
   border-right-color: #D3D3D3;
 }
 
-#qoapknojpb .gt_sourcenote {
+#byyrttecnl .gt_sourcenote {
   font-size: 90%;
   padding-top: 4px;
   padding-bottom: 4px;
@@ -2490,77 +2493,77 @@ P(\text{random match}) + P(\text{lab error})\]</span></p>
   padding-right: 5px;
 }
 
-#qoapknojpb .gt_left {
+#byyrttecnl .gt_left {
   text-align: left;
 }
 
-#qoapknojpb .gt_center {
+#byyrttecnl .gt_center {
   text-align: center;
 }
 
-#qoapknojpb .gt_right {
+#byyrttecnl .gt_right {
   text-align: right;
   font-variant-numeric: tabular-nums;
 }
 
-#qoapknojpb .gt_font_normal {
+#byyrttecnl .gt_font_normal {
   font-weight: normal;
 }
 
-#qoapknojpb .gt_font_bold {
+#byyrttecnl .gt_font_bold {
   font-weight: bold;
 }
 
-#qoapknojpb .gt_font_italic {
+#byyrttecnl .gt_font_italic {
   font-style: italic;
 }
 
-#qoapknojpb .gt_super {
+#byyrttecnl .gt_super {
   font-size: 65%;
 }
 
-#qoapknojpb .gt_footnote_marks {
+#byyrttecnl .gt_footnote_marks {
   font-size: 75%;
   vertical-align: 0.4em;
   position: initial;
 }
 
-#qoapknojpb .gt_asterisk {
+#byyrttecnl .gt_asterisk {
   font-size: 100%;
   vertical-align: 0;
 }
 
-#qoapknojpb .gt_indent_1 {
+#byyrttecnl .gt_indent_1 {
   text-indent: 5px;
 }
 
-#qoapknojpb .gt_indent_2 {
+#byyrttecnl .gt_indent_2 {
   text-indent: 10px;
 }
 
-#qoapknojpb .gt_indent_3 {
+#byyrttecnl .gt_indent_3 {
   text-indent: 15px;
 }
 
-#qoapknojpb .gt_indent_4 {
+#byyrttecnl .gt_indent_4 {
   text-indent: 20px;
 }
 
-#qoapknojpb .gt_indent_5 {
+#byyrttecnl .gt_indent_5 {
   text-indent: 25px;
 }
 
-#qoapknojpb .katex-display {
+#byyrttecnl .katex-display {
   display: inline-flex !important;
   margin-bottom: 0.75em !important;
 }
 
-#qoapknojpb div.Reactable > div.rt-table > div.rt-thead > div.rt-tr.rt-tr-group-header > div.rt-th-group:after {
+#byyrttecnl div.Reactable > div.rt-table > div.rt-thead > div.rt-tr.rt-tr-group-header > div.rt-th-group:after {
   height: 0px !important;
 }
 </style>
 
-<table class="gt_table caption-top table table-sm table-striped small" data-quarto-bootstrap="false">
+<table class="gt_table caption-top table table-sm table-striped small" data-quarto-postprocess="true" data-quarto-disable-processing="false" data-quarto-bootstrap="false">
 <thead>
 <tr class="gt_col_headings header">
 <th id="Function" class="gt_col_heading gt_columns_bottom_border gt_left" data-quarto-table-cell-role="th" scope="col">Function</th>
@@ -2635,20 +2638,20 @@ P(\text{random match}) + P(\text{lab error})\]</span></p>
 <p>In the opening, I talked about how my family split across three boats. The point was not that this removed danger. It changed the structure of the risk. To see this idea in a simple way, suppose each boat has a probability of safely arriving. This is not meant to estimate the real historical probability. It is a simplified model that helps us think about possible outcomes.</p>
 <p>Suppose each boat has a 60% chance of arriving safely. This would mean that each boat has a 100% - 60% chance of not surviving (i.e.&nbsp;lost):</p>
 <div class="cell">
-<div class="code-copy-outer-scaffold"><div class="sourceCode cell-code" id="cb1"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb1-1"><a href="#cb1-1" aria-hidden="true" tabindex="-1"></a>p_survive <span class="ot">&lt;-</span> <span class="fl">0.60</span></span>
-<span id="cb1-2"><a href="#cb1-2" aria-hidden="true" tabindex="-1"></a>p_lost <span class="ot">&lt;-</span> <span class="dv">1</span> <span class="sc">-</span> p_survive</span></code></pre></div><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></div>
+<div class="sourceCode cell-code" id="cb1"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb1-1"><a href="#cb1-1" aria-hidden="true" tabindex="-1"></a>p_survive <span class="ot">&lt;-</span> <span class="fl">0.60</span></span>
+<span id="cb1-2"><a href="#cb1-2" aria-hidden="true" tabindex="-1"></a>p_lost <span class="ot">&lt;-</span> <span class="dv">1</span> <span class="sc">-</span> p_survive</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
 </div>
 <p>Now suppose the three boats are treated as independent in this simplified model. This means that the outcome of one boat does not change the probability of what happens to another boat. The probability that all three boats are lost is:</p>
 <div class="cell">
-<div class="code-copy-outer-scaffold"><div class="sourceCode cell-code" id="cb2"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb2-1"><a href="#cb2-1" aria-hidden="true" tabindex="-1"></a>p_all_lost <span class="ot">&lt;-</span> p_lost<span class="sc">^</span><span class="dv">3</span></span></code></pre></div><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></div>
+<div class="sourceCode cell-code" id="cb2"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb2-1"><a href="#cb2-1" aria-hidden="true" tabindex="-1"></a>p_all_lost <span class="ot">&lt;-</span> p_lost<span class="sc">^</span><span class="dv">3</span></span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
 </div>
 <p>The probability that at least one boat arrives safely is the opposite of all three boats being lost. We can calculate it using:</p>
 <div class="cell">
-<div class="code-copy-outer-scaffold"><div class="sourceCode cell-code" id="cb3"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb3-1"><a href="#cb3-1" aria-hidden="true" tabindex="-1"></a>p_at_least_one_survives <span class="ot">&lt;-</span> <span class="dv">1</span> <span class="sc">-</span> p_all_lost</span></code></pre></div><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></div>
+<div class="sourceCode cell-code" id="cb3"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb3-1"><a href="#cb3-1" aria-hidden="true" tabindex="-1"></a>p_at_least_one_survives <span class="ot">&lt;-</span> <span class="dv">1</span> <span class="sc">-</span> p_all_lost</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
 </div>
 <p>We can put these results into a table:</p>
 <div class="cell">
-<div class="code-copy-outer-scaffold"><div class="sourceCode cell-code" id="cb4"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb4-1"><a href="#cb4-1" aria-hidden="true" tabindex="-1"></a>boat_results <span class="ot">&lt;-</span> <span class="fu">data.frame</span>(</span>
+<div class="sourceCode cell-code" id="cb4"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb4-1"><a href="#cb4-1" aria-hidden="true" tabindex="-1"></a>boat_results <span class="ot">&lt;-</span> <span class="fu">data.frame</span>(</span>
 <span id="cb4-2"><a href="#cb4-2" aria-hidden="true" tabindex="-1"></a>  <span class="at">Quantity =</span> <span class="fu">c</span>(</span>
 <span id="cb4-3"><a href="#cb4-3" aria-hidden="true" tabindex="-1"></a>    <span class="st">"Probability one boat arrives safely"</span>,</span>
 <span id="cb4-4"><a href="#cb4-4" aria-hidden="true" tabindex="-1"></a>    <span class="st">"Probability one boat is lost"</span>,</span>
@@ -2668,25 +2671,25 @@ P(\text{random match}) + P(\text{lab error})\]</span></p>
 <span id="cb4-18"><a href="#cb4-18" aria-hidden="true" tabindex="-1"></a>  gt<span class="sc">::</span><span class="fu">fmt_number</span>(</span>
 <span id="cb4-19"><a href="#cb4-19" aria-hidden="true" tabindex="-1"></a>    <span class="at">columns =</span> Probability,</span>
 <span id="cb4-20"><a href="#cb4-20" aria-hidden="true" tabindex="-1"></a>    <span class="at">decimals =</span> <span class="dv">3</span></span>
-<span id="cb4-21"><a href="#cb4-21" aria-hidden="true" tabindex="-1"></a>  )</span></code></pre></div><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></div>
+<span id="cb4-21"><a href="#cb4-21" aria-hidden="true" tabindex="-1"></a>  )</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
 <div class="cell-output-display">
-<div id="nmdrylztes" style="padding-left:0px;padding-right:0px;padding-top:10px;padding-bottom:10px;overflow-x:auto;overflow-y:auto;width:auto;height:auto;">
-<style>#nmdrylztes table {
+<div id="pbplsptnfz" style="padding-left:0px;padding-right:0px;padding-top:10px;padding-bottom:10px;overflow-x:auto;overflow-y:auto;width:auto;height:auto;">
+<style>#pbplsptnfz table {
   font-family: system-ui, 'Segoe UI', Roboto, Helvetica, Arial, sans-serif, 'Apple Color Emoji', 'Segoe UI Emoji', 'Segoe UI Symbol', 'Noto Color Emoji';
   -webkit-font-smoothing: antialiased;
   -moz-osx-font-smoothing: grayscale;
 }
 
-#nmdrylztes thead, #nmdrylztes tbody, #nmdrylztes tfoot, #nmdrylztes tr, #nmdrylztes td, #nmdrylztes th {
+#pbplsptnfz thead, #pbplsptnfz tbody, #pbplsptnfz tfoot, #pbplsptnfz tr, #pbplsptnfz td, #pbplsptnfz th {
   border-style: none;
 }
 
-#nmdrylztes p {
+#pbplsptnfz p {
   margin: 0;
   padding: 0;
 }
 
-#nmdrylztes .gt_table {
+#pbplsptnfz .gt_table {
   display: table;
   border-collapse: collapse;
   line-height: normal;
@@ -2712,12 +2715,12 @@ P(\text{random match}) + P(\text{lab error})\]</span></p>
   border-left-color: #D3D3D3;
 }
 
-#nmdrylztes .gt_caption {
+#pbplsptnfz .gt_caption {
   padding-top: 4px;
   padding-bottom: 4px;
 }
 
-#nmdrylztes .gt_title {
+#pbplsptnfz .gt_title {
   color: #333333;
   font-size: 125%;
   font-weight: initial;
@@ -2729,7 +2732,7 @@ P(\text{random match}) + P(\text{lab error})\]</span></p>
   border-bottom-width: 0;
 }
 
-#nmdrylztes .gt_subtitle {
+#pbplsptnfz .gt_subtitle {
   color: #333333;
   font-size: 85%;
   font-weight: initial;
@@ -2741,7 +2744,7 @@ P(\text{random match}) + P(\text{lab error})\]</span></p>
   border-top-width: 0;
 }
 
-#nmdrylztes .gt_heading {
+#pbplsptnfz .gt_heading {
   background-color: #FFFFFF;
   text-align: center;
   border-bottom-color: #FFFFFF;
@@ -2753,13 +2756,13 @@ P(\text{random match}) + P(\text{lab error})\]</span></p>
   border-right-color: #D3D3D3;
 }
 
-#nmdrylztes .gt_bottom_border {
+#pbplsptnfz .gt_bottom_border {
   border-bottom-style: solid;
   border-bottom-width: 2px;
   border-bottom-color: #D3D3D3;
 }
 
-#nmdrylztes .gt_col_headings {
+#pbplsptnfz .gt_col_headings {
   border-top-style: solid;
   border-top-width: 2px;
   border-top-color: #D3D3D3;
@@ -2774,7 +2777,7 @@ P(\text{random match}) + P(\text{lab error})\]</span></p>
   border-right-color: #D3D3D3;
 }
 
-#nmdrylztes .gt_col_heading {
+#pbplsptnfz .gt_col_heading {
   color: #333333;
   background-color: #FFFFFF;
   font-size: 100%;
@@ -2794,7 +2797,7 @@ P(\text{random match}) + P(\text{lab error})\]</span></p>
   overflow-x: hidden;
 }
 
-#nmdrylztes .gt_column_spanner_outer {
+#pbplsptnfz .gt_column_spanner_outer {
   color: #333333;
   background-color: #FFFFFF;
   font-size: 100%;
@@ -2806,15 +2809,15 @@ P(\text{random match}) + P(\text{lab error})\]</span></p>
   padding-right: 4px;
 }
 
-#nmdrylztes .gt_column_spanner_outer:first-child {
+#pbplsptnfz .gt_column_spanner_outer:first-child {
   padding-left: 0;
 }
 
-#nmdrylztes .gt_column_spanner_outer:last-child {
+#pbplsptnfz .gt_column_spanner_outer:last-child {
   padding-right: 0;
 }
 
-#nmdrylztes .gt_column_spanner {
+#pbplsptnfz .gt_column_spanner {
   border-bottom-style: solid;
   border-bottom-width: 2px;
   border-bottom-color: #D3D3D3;
@@ -2826,11 +2829,11 @@ P(\text{random match}) + P(\text{lab error})\]</span></p>
   width: 100%;
 }
 
-#nmdrylztes .gt_spanner_row {
+#pbplsptnfz .gt_spanner_row {
   border-bottom-style: hidden;
 }
 
-#nmdrylztes .gt_group_heading {
+#pbplsptnfz .gt_group_heading {
   padding-top: 8px;
   padding-bottom: 8px;
   padding-left: 5px;
@@ -2856,7 +2859,7 @@ P(\text{random match}) + P(\text{lab error})\]</span></p>
   text-align: left;
 }
 
-#nmdrylztes .gt_empty_group_heading {
+#pbplsptnfz .gt_empty_group_heading {
   padding: 0.5px;
   color: #333333;
   background-color: #FFFFFF;
@@ -2871,15 +2874,15 @@ P(\text{random match}) + P(\text{lab error})\]</span></p>
   vertical-align: middle;
 }
 
-#nmdrylztes .gt_from_md > :first-child {
+#pbplsptnfz .gt_from_md > :first-child {
   margin-top: 0;
 }
 
-#nmdrylztes .gt_from_md > :last-child {
+#pbplsptnfz .gt_from_md > :last-child {
   margin-bottom: 0;
 }
 
-#nmdrylztes .gt_row {
+#pbplsptnfz .gt_row {
   padding-top: 8px;
   padding-bottom: 8px;
   padding-left: 5px;
@@ -2898,7 +2901,7 @@ P(\text{random match}) + P(\text{lab error})\]</span></p>
   overflow-x: hidden;
 }
 
-#nmdrylztes .gt_stub {
+#pbplsptnfz .gt_stub {
   color: #333333;
   background-color: #FFFFFF;
   font-size: 100%;
@@ -2911,7 +2914,7 @@ P(\text{random match}) + P(\text{lab error})\]</span></p>
   padding-right: 5px;
 }
 
-#nmdrylztes .gt_stub_row_group {
+#pbplsptnfz .gt_stub_row_group {
   color: #333333;
   background-color: #FFFFFF;
   font-size: 100%;
@@ -2925,15 +2928,15 @@ P(\text{random match}) + P(\text{lab error})\]</span></p>
   vertical-align: top;
 }
 
-#nmdrylztes .gt_row_group_first td {
+#pbplsptnfz .gt_row_group_first td {
   border-top-width: 2px;
 }
 
-#nmdrylztes .gt_row_group_first th {
+#pbplsptnfz .gt_row_group_first th {
   border-top-width: 2px;
 }
 
-#nmdrylztes .gt_summary_row {
+#pbplsptnfz .gt_summary_row {
   color: #333333;
   background-color: #FFFFFF;
   text-transform: inherit;
@@ -2943,16 +2946,16 @@ P(\text{random match}) + P(\text{lab error})\]</span></p>
   padding-right: 5px;
 }
 
-#nmdrylztes .gt_first_summary_row {
+#pbplsptnfz .gt_first_summary_row {
   border-top-style: solid;
   border-top-color: #D3D3D3;
 }
 
-#nmdrylztes .gt_first_summary_row.thick {
+#pbplsptnfz .gt_first_summary_row.thick {
   border-top-width: 2px;
 }
 
-#nmdrylztes .gt_last_summary_row {
+#pbplsptnfz .gt_last_summary_row {
   padding-top: 8px;
   padding-bottom: 8px;
   padding-left: 5px;
@@ -2962,7 +2965,7 @@ P(\text{random match}) + P(\text{lab error})\]</span></p>
   border-bottom-color: #D3D3D3;
 }
 
-#nmdrylztes .gt_grand_summary_row {
+#pbplsptnfz .gt_grand_summary_row {
   color: #333333;
   background-color: #FFFFFF;
   text-transform: inherit;
@@ -2972,7 +2975,7 @@ P(\text{random match}) + P(\text{lab error})\]</span></p>
   padding-right: 5px;
 }
 
-#nmdrylztes .gt_first_grand_summary_row {
+#pbplsptnfz .gt_first_grand_summary_row {
   padding-top: 8px;
   padding-bottom: 8px;
   padding-left: 5px;
@@ -2982,7 +2985,7 @@ P(\text{random match}) + P(\text{lab error})\]</span></p>
   border-top-color: #D3D3D3;
 }
 
-#nmdrylztes .gt_last_grand_summary_row_top {
+#pbplsptnfz .gt_last_grand_summary_row_top {
   padding-top: 8px;
   padding-bottom: 8px;
   padding-left: 5px;
@@ -2992,11 +2995,11 @@ P(\text{random match}) + P(\text{lab error})\]</span></p>
   border-bottom-color: #D3D3D3;
 }
 
-#nmdrylztes .gt_striped {
+#pbplsptnfz .gt_striped {
   background-color: rgba(128, 128, 128, 0.05);
 }
 
-#nmdrylztes .gt_table_body {
+#pbplsptnfz .gt_table_body {
   border-top-style: solid;
   border-top-width: 2px;
   border-top-color: #D3D3D3;
@@ -3005,7 +3008,7 @@ P(\text{random match}) + P(\text{lab error})\]</span></p>
   border-bottom-color: #D3D3D3;
 }
 
-#nmdrylztes .gt_footnotes {
+#pbplsptnfz .gt_footnotes {
   color: #333333;
   background-color: #FFFFFF;
   border-bottom-style: none;
@@ -3019,7 +3022,7 @@ P(\text{random match}) + P(\text{lab error})\]</span></p>
   border-right-color: #D3D3D3;
 }
 
-#nmdrylztes .gt_footnote {
+#pbplsptnfz .gt_footnote {
   margin: 0px;
   font-size: 90%;
   padding-top: 4px;
@@ -3028,7 +3031,7 @@ P(\text{random match}) + P(\text{lab error})\]</span></p>
   padding-right: 5px;
 }
 
-#nmdrylztes .gt_sourcenotes {
+#pbplsptnfz .gt_sourcenotes {
   color: #333333;
   background-color: #FFFFFF;
   border-bottom-style: none;
@@ -3042,7 +3045,7 @@ P(\text{random match}) + P(\text{lab error})\]</span></p>
   border-right-color: #D3D3D3;
 }
 
-#nmdrylztes .gt_sourcenote {
+#pbplsptnfz .gt_sourcenote {
   font-size: 90%;
   padding-top: 4px;
   padding-bottom: 4px;
@@ -3050,77 +3053,77 @@ P(\text{random match}) + P(\text{lab error})\]</span></p>
   padding-right: 5px;
 }
 
-#nmdrylztes .gt_left {
+#pbplsptnfz .gt_left {
   text-align: left;
 }
 
-#nmdrylztes .gt_center {
+#pbplsptnfz .gt_center {
   text-align: center;
 }
 
-#nmdrylztes .gt_right {
+#pbplsptnfz .gt_right {
   text-align: right;
   font-variant-numeric: tabular-nums;
 }
 
-#nmdrylztes .gt_font_normal {
+#pbplsptnfz .gt_font_normal {
   font-weight: normal;
 }
 
-#nmdrylztes .gt_font_bold {
+#pbplsptnfz .gt_font_bold {
   font-weight: bold;
 }
 
-#nmdrylztes .gt_font_italic {
+#pbplsptnfz .gt_font_italic {
   font-style: italic;
 }
 
-#nmdrylztes .gt_super {
+#pbplsptnfz .gt_super {
   font-size: 65%;
 }
 
-#nmdrylztes .gt_footnote_marks {
+#pbplsptnfz .gt_footnote_marks {
   font-size: 75%;
   vertical-align: 0.4em;
   position: initial;
 }
 
-#nmdrylztes .gt_asterisk {
+#pbplsptnfz .gt_asterisk {
   font-size: 100%;
   vertical-align: 0;
 }
 
-#nmdrylztes .gt_indent_1 {
+#pbplsptnfz .gt_indent_1 {
   text-indent: 5px;
 }
 
-#nmdrylztes .gt_indent_2 {
+#pbplsptnfz .gt_indent_2 {
   text-indent: 10px;
 }
 
-#nmdrylztes .gt_indent_3 {
+#pbplsptnfz .gt_indent_3 {
   text-indent: 15px;
 }
 
-#nmdrylztes .gt_indent_4 {
+#pbplsptnfz .gt_indent_4 {
   text-indent: 20px;
 }
 
-#nmdrylztes .gt_indent_5 {
+#pbplsptnfz .gt_indent_5 {
   text-indent: 25px;
 }
 
-#nmdrylztes .katex-display {
+#pbplsptnfz .katex-display {
   display: inline-flex !important;
   margin-bottom: 0.75em !important;
 }
 
-#nmdrylztes div.Reactable > div.rt-table > div.rt-thead > div.rt-tr.rt-tr-group-header > div.rt-th-group:after {
+#pbplsptnfz div.Reactable > div.rt-table > div.rt-thead > div.rt-tr.rt-tr-group-header > div.rt-th-group:after {
   height: 0px !important;
 }
 </style>
 
-<table class="gt_table caption-top table table-sm table-striped small" data-quarto-bootstrap="false">
+<table class="gt_table caption-top table table-sm table-striped small" data-quarto-postprocess="true" data-quarto-disable-processing="false" data-quarto-bootstrap="false">
 <thead>
 <tr class="gt_col_headings header">
 <th id="Quantity" class="gt_col_heading gt_columns_bottom_border gt_left" data-quarto-table-cell-role="th" scope="col">Quantity</th>
@@ -3167,7 +3170,7 @@ P(\text{random match}) + P(\text{lab error})\]</span></p>
 <li><code>FALSE</code>is selected with probability 0.40.</li>
 </ul>
 <div class="cell">
-<div class="code-copy-outer-scaffold"><div class="sourceCode cell-code" id="cb5"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb5-1"><a href="#cb5-1" aria-hidden="true" tabindex="-1"></a><span class="fu">set.seed</span>(<span class="dv">2420</span>)</span>
+<div class="sourceCode cell-code" id="cb5"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb5-1"><a href="#cb5-1" aria-hidden="true" tabindex="-1"></a><span class="fu">set.seed</span>(<span class="dv">2420</span>)</span>
 <span id="cb5-2"><a href="#cb5-2" aria-hidden="true" tabindex="-1"></a></span>
 <span id="cb5-3"><a href="#cb5-3" aria-hidden="true" tabindex="-1"></a>n_sim <span class="ot">&lt;-</span> <span class="dv">10000</span></span>
 <span id="cb5-4"><a href="#cb5-4" aria-hidden="true" tabindex="-1"></a></span>
@@ -3178,7 +3181,7 @@ P(\text{random match}) + P(\text{lab error})\]</span></p>
 <span id="cb5-9"><a href="#cb5-9" aria-hidden="true" tabindex="-1"></a>  <span class="at">boat_3 =</span> <span class="fu">sample</span>(<span class="fu">c</span>(<span class="cn">TRUE</span>, <span class="cn">FALSE</span>), <span class="at">size =</span> n_sim, <span class="at">replace =</span> <span class="cn">TRUE</span>, <span class="at">prob =</span> <span class="fu">c</span>(p_survive, p_lost))</span>
 <span id="cb5-10"><a href="#cb5-10" aria-hidden="true" tabindex="-1"></a>)</span>
 <span id="cb5-11"><a href="#cb5-11" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb5-12"><a href="#cb5-12" aria-hidden="true" tabindex="-1"></a>boat_sim</span></code></pre></div><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></div>
+<span id="cb5-12"><a href="#cb5-12" aria-hidden="true" tabindex="-1"></a>boat_sim</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
 <div class="cell-output cell-output-stdout">
 <pre><code># A tibble: 10,000 × 4
    simulation boat_1 boat_2 boat_3
@@ -3198,13 +3201,13 @@ P(\text{random match}) + P(\text{lab error})\]</span></p>
 </div>
 <p>Now we can add new columns to summarise each simulation. The function <code>mutate()</code> adds new columns to a dataset.</p>
 <div class="cell">
-<div class="code-copy-outer-scaffold"><div class="sourceCode cell-code" id="cb7"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb7-1"><a href="#cb7-1" aria-hidden="true" tabindex="-1"></a>boat_sim <span class="ot">&lt;-</span> boat_sim <span class="sc">|&gt;</span></span>
+<div class="sourceCode cell-code" id="cb7"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb7-1"><a href="#cb7-1" aria-hidden="true" tabindex="-1"></a>boat_sim <span class="ot">&lt;-</span> boat_sim <span class="sc">|&gt;</span></span>
 <span id="cb7-2"><a href="#cb7-2" aria-hidden="true" tabindex="-1"></a>  dplyr<span class="sc">::</span><span class="fu">mutate</span>(</span>
 <span id="cb7-3"><a href="#cb7-3" aria-hidden="true" tabindex="-1"></a>    <span class="at">number_survived =</span> boat_1 <span class="sc">+</span> boat_2 <span class="sc">+</span> boat_3,</span>
 <span id="cb7-4"><a href="#cb7-4" aria-hidden="true" tabindex="-1"></a>    <span class="at">at_least_one_survived =</span> number_survived <span class="sc">&gt;=</span> <span class="dv">1</span></span>
 <span id="cb7-5"><a href="#cb7-5" aria-hidden="true" tabindex="-1"></a>  )</span>
 <span id="cb7-6"><a href="#cb7-6" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb7-7"><a href="#cb7-7" aria-hidden="true" tabindex="-1"></a>boat_sim</span></code></pre></div><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></div>
+<span id="cb7-7"><a href="#cb7-7" aria-hidden="true" tabindex="-1"></a>boat_sim</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
 <div class="cell-output cell-output-stdout">
 <pre><code># A tibble: 10,000 × 6
    simulation boat_1 boat_2 boat_3 number_survived at_least_one_survived
@@ -3224,8 +3227,8 @@ P(\text{random match}) + P(\text{lab error})\]</span></p>
 </div>
 <p>Now we can count how many simulations had 0, 1, 2, or 3 surviving boats. The function <code>count()</code> counts how many times each value appears in a column.</p>
 <div class="cell">
-<div class="code-copy-outer-scaffold"><div class="sourceCode cell-code" id="cb9"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb9-1"><a href="#cb9-1" aria-hidden="true" tabindex="-1"></a>boat_sim <span class="sc">|&gt;</span></span>
-<span id="cb9-2"><a href="#cb9-2" aria-hidden="true" tabindex="-1"></a>  dplyr<span class="sc">::</span><span class="fu">count</span>(number_survived)</span></code></pre></div><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></div>
+<div class="sourceCode cell-code" id="cb9"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb9-1"><a href="#cb9-1" aria-hidden="true" tabindex="-1"></a>boat_sim <span class="sc">|&gt;</span></span>
+<span id="cb9-2"><a href="#cb9-2" aria-hidden="true" tabindex="-1"></a>  dplyr<span class="sc">::</span><span class="fu">count</span>(number_survived)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
 <div class="cell-output cell-output-stdout">
 <pre><code># A tibble: 4 × 2
   number_survived     n
@@ -3238,10 +3241,10 @@ P(\text{random match}) + P(\text{lab error})\]</span></p>
 </div>
 <p>Finally, we can estimate the probability that at least one boat survives. The function <code>summarise()</code> reduces a dataset to summary values.</p>
 <div class="cell">
-<div class="code-copy-outer-scaffold"><div class="sourceCode cell-code" id="cb11"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb11-1"><a href="#cb11-1" aria-hidden="true" tabindex="-1"></a>boat_sim <span class="sc">|&gt;</span></span>
+<div class="sourceCode cell-code" id="cb11"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb11-1"><a href="#cb11-1" aria-hidden="true" tabindex="-1"></a>boat_sim <span class="sc">|&gt;</span></span>
 <span id="cb11-2"><a href="#cb11-2" aria-hidden="true" tabindex="-1"></a>  dplyr<span class="sc">::</span><span class="fu">summarise</span>(</span>
 <span id="cb11-3"><a href="#cb11-3" aria-hidden="true" tabindex="-1"></a>    <span class="at">estimated_probability =</span> <span class="fu">mean</span>(at_least_one_survived)</span>
-<span id="cb11-4"><a href="#cb11-4" aria-hidden="true" tabindex="-1"></a>  )</span></code></pre></div><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></div>
+<span id="cb11-4"><a href="#cb11-4" aria-hidden="true" tabindex="-1"></a>  )</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
 <div class="cell-output cell-output-stdout">
 <pre><code># A tibble: 1 × 1
   estimated_probability
@@ -3711,7 +3714,7 @@ P(\text{random match}) + P(\text{lab error})\]</span></p>
 }
 </style>
 
-<table class="gt_table caption-top table table-sm table-striped small" data-quarto-bootstrap="false">
+<table class="gt_table caption-top table table-sm table-striped small" data-quarto-postprocess="true" data-quarto-disable-processing="false" data-quarto-bootstrap="false">
 <thead>
 <tr class="gt_col_headings header">
 <th id="Side" class="gt_col_heading gt_columns_bottom_border gt_left" data-quarto-table-cell-role="th" scope="col">Side</th>
@@ -3753,21 +3756,21 @@ P(\text{random match}) + P(\text{lab error})\]</span></p>
 <p>But the outcomes are not equally likely.</p>
 <p>Now we can simulate tossing one astragalus.</p>
 <div class="cell">
-<div class="code-copy-outer-scaffold"><div class="sourceCode cell-code" id="cb13"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb13-1"><a href="#cb13-1" aria-hidden="true" tabindex="-1"></a><span class="fu">set.seed</span>(<span class="dv">2420</span>)</span>
+<div class="sourceCode cell-code" id="cb13"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb13-1"><a href="#cb13-1" aria-hidden="true" tabindex="-1"></a><span class="fu">set.seed</span>(<span class="dv">2420</span>)</span>
 <span id="cb13-2"><a href="#cb13-2" aria-hidden="true" tabindex="-1"></a></span>
 <span id="cb13-3"><a href="#cb13-3" aria-hidden="true" tabindex="-1"></a><span class="fu">sample</span>(</span>
 <span id="cb13-4"><a href="#cb13-4" aria-hidden="true" tabindex="-1"></a>  <span class="at">x =</span> astragali_probabilities<span class="sc">$</span>Side,</span>
 <span id="cb13-5"><a href="#cb13-5" aria-hidden="true" tabindex="-1"></a>  <span class="at">size =</span> <span class="dv">1</span>,</span>
 <span id="cb13-6"><a href="#cb13-6" aria-hidden="true" tabindex="-1"></a>  <span class="at">replace =</span> <span class="cn">TRUE</span>,</span>
 <span id="cb13-7"><a href="#cb13-7" aria-hidden="true" tabindex="-1"></a>  <span class="at">prob =</span> astragali_probabilities<span class="sc">$</span>Probability</span>
-<span id="cb13-8"><a href="#cb13-8" aria-hidden="true" tabindex="-1"></a>)</span></code></pre></div><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></div>
+<span id="cb13-8"><a href="#cb13-8" aria-hidden="true" tabindex="-1"></a>)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
 <div class="cell-output cell-output-stdout">
 <pre><code>[1] "Side 2"</code></pre>
 </div>
 </div>
 <p>A single toss is uncertain. But if we toss the astragalus many times, we should start to see a pattern. Let’s simulate 10,000 tosses.</p>
 <div class="cell">
-<div class="code-copy-outer-scaffold"><div class="sourceCode cell-code" id="cb15"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb15-1"><a href="#cb15-1" aria-hidden="true" tabindex="-1"></a><span class="fu">set.seed</span>(<span class="dv">2420</span>)</span>
+<div class="sourceCode cell-code" id="cb15"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb15-1"><a href="#cb15-1" aria-hidden="true" tabindex="-1"></a><span class="fu">set.seed</span>(<span class="dv">2420</span>)</span>
 <span id="cb15-2"><a href="#cb15-2" aria-hidden="true" tabindex="-1"></a></span>
 <span id="cb15-3"><a href="#cb15-3" aria-hidden="true" tabindex="-1"></a>n_tosses <span class="ot">&lt;-</span> <span class="dv">10000</span></span>
 <span id="cb15-4"><a href="#cb15-4" aria-hidden="true" tabindex="-1"></a></span>
@@ -3781,7 +3784,7 @@ P(\text{random match}) + P(\text{lab error})\]</span></p>
 <span id="cb15-12"><a href="#cb15-12" aria-hidden="true" tabindex="-1"></a>  )</span>
 <span id="cb15-13"><a href="#cb15-13" aria-hidden="true" tabindex="-1"></a>)</span>
 <span id="cb15-14"><a href="#cb15-14" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb15-15"><a href="#cb15-15" aria-hidden="true" tabindex="-1"></a><span class="fu">head</span>(astragali_tosses,<span class="dv">10</span>)</span></code></pre></div><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></div>
+<span id="cb15-15"><a href="#cb15-15" aria-hidden="true" tabindex="-1"></a><span class="fu">head</span>(astragali_tosses,<span class="dv">10</span>)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
 <div class="cell-output cell-output-stdout">
 <pre><code>   toss   side
 1     1 Side 2
@@ -3798,10 +3801,10 @@ P(\text{random match}) + P(\text{lab error})\]</span></p>
 </div>
 <p>Now we can count how often each side appeared.</p>
 <div class="cell">
-<div class="code-copy-outer-scaffold"><div class="sourceCode cell-code" id="cb17"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb17-1"><a href="#cb17-1" aria-hidden="true" tabindex="-1"></a>astragali_counts <span class="ot">&lt;-</span> astragali_tosses <span class="sc">|&gt;</span></span>
+<div class="sourceCode cell-code" id="cb17"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb17-1"><a href="#cb17-1" aria-hidden="true" tabindex="-1"></a>astragali_counts <span class="ot">&lt;-</span> astragali_tosses <span class="sc">|&gt;</span></span>
 <span id="cb17-2"><a href="#cb17-2" aria-hidden="true" tabindex="-1"></a>  dplyr<span class="sc">::</span><span class="fu">count</span>(side)</span>
 <span id="cb17-3"><a href="#cb17-3" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb17-4"><a href="#cb17-4" aria-hidden="true" tabindex="-1"></a>astragali_counts</span></code></pre></div><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></div>
+<span id="cb17-4"><a href="#cb17-4" aria-hidden="true" tabindex="-1"></a>astragali_counts</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
 <div class="cell-output cell-output-stdout">
 <pre><code>    side    n
 1 Side 1  946
@@ -3812,12 +3815,12 @@ P(\text{random match}) + P(\text{lab error})\]</span></p>
 </div>
 <p>Now we can calculate the observed proportion of each side.</p>
 <div class="cell">
-<div class="code-copy-outer-scaffold"><div class="sourceCode cell-code" id="cb19"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb19-1"><a href="#cb19-1" aria-hidden="true" tabindex="-1"></a>astragali_counts <span class="ot">&lt;-</span> astragali_counts <span class="sc">|&gt;</span></span>
+<div class="sourceCode cell-code" id="cb19"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb19-1"><a href="#cb19-1" aria-hidden="true" tabindex="-1"></a>astragali_counts <span class="ot">&lt;-</span> astragali_counts <span class="sc">|&gt;</span></span>
 <span id="cb19-2"><a href="#cb19-2" aria-hidden="true" tabindex="-1"></a>  dplyr<span class="sc">::</span><span class="fu">mutate</span>(</span>
 <span id="cb19-3"><a href="#cb19-3" aria-hidden="true" tabindex="-1"></a>    <span class="at">observed_proportion =</span> n <span class="sc">/</span> <span class="fu">sum</span>(n)</span>
 <span id="cb19-4"><a href="#cb19-4" aria-hidden="true" tabindex="-1"></a>  )</span>
 <span id="cb19-5"><a href="#cb19-5" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb19-6"><a href="#cb19-6" aria-hidden="true" tabindex="-1"></a>astragali_counts</span></code></pre></div><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></div>
+<span id="cb19-6"><a href="#cb19-6" aria-hidden="true" tabindex="-1"></a>astragali_counts</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
 <div class="cell-output cell-output-stdout">
 <pre><code>    side    n observed_proportion
 1 Side 1  946              0.0946
@@ -3828,13 +3831,13 @@ P(\text{random match}) + P(\text{lab error})\]</span></p>
 </div>
 <p>We can compare the simulated proportions with the original probabilities.</p>
 <div class="cell">
-<div class="code-copy-outer-scaffold"><div class="sourceCode cell-code" id="cb21"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb21-1"><a href="#cb21-1" aria-hidden="true" tabindex="-1"></a>astragali_comparison <span class="ot">&lt;-</span> astragali_counts <span class="sc">|&gt;</span></span>
+<div class="sourceCode cell-code" id="cb21"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb21-1"><a href="#cb21-1" aria-hidden="true" tabindex="-1"></a>astragali_comparison <span class="ot">&lt;-</span> astragali_counts <span class="sc">|&gt;</span></span>
 <span id="cb21-2"><a href="#cb21-2" aria-hidden="true" tabindex="-1"></a>  dplyr<span class="sc">::</span><span class="fu">left_join</span>(</span>
 <span id="cb21-3"><a href="#cb21-3" aria-hidden="true" tabindex="-1"></a>    astragali_probabilities,</span>
 <span id="cb21-4"><a href="#cb21-4" aria-hidden="true" tabindex="-1"></a>    <span class="at">by =</span> <span class="fu">c</span>(<span class="st">"side"</span> <span class="ot">=</span> <span class="st">"Side"</span>)</span>
 <span id="cb21-5"><a href="#cb21-5" aria-hidden="true" tabindex="-1"></a>  )</span>
 <span id="cb21-6"><a href="#cb21-6" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb21-7"><a href="#cb21-7" aria-hidden="true" tabindex="-1"></a>astragali_comparison</span></code></pre></div><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></div>
+<span id="cb21-7"><a href="#cb21-7" aria-hidden="true" tabindex="-1"></a>astragali_comparison</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
 <div class="cell-output cell-output-stdout">
 <pre><code>    side    n observed_proportion Probability
 1 Side 1  946              0.0946         0.1
@@ -3845,13 +3848,13 @@ P(\text{random match}) + P(\text{lab error})\]</span></p>
 </div>
 <p>We can also make a simple bar chart</p>
 <div class="cell">
-<div class="code-copy-outer-scaffold"><div class="sourceCode cell-code" id="cb23"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb23-1"><a href="#cb23-1" aria-hidden="true" tabindex="-1"></a><span class="fu">ggplot</span>(astragali_comparison, <span class="fu">aes</span>(<span class="at">x =</span> side, <span class="at">y =</span> observed_proportion)) <span class="sc">+</span></span>
+<div class="sourceCode cell-code" id="cb23"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb23-1"><a href="#cb23-1" aria-hidden="true" tabindex="-1"></a><span class="fu">ggplot</span>(astragali_comparison, <span class="fu">aes</span>(<span class="at">x =</span> side, <span class="at">y =</span> observed_proportion)) <span class="sc">+</span></span>
 <span id="cb23-2"><a href="#cb23-2" aria-hidden="true" tabindex="-1"></a>  <span class="fu">geom_col</span>() <span class="sc">+</span></span>
 <span id="cb23-3"><a href="#cb23-3" aria-hidden="true" tabindex="-1"></a>  <span class="fu">labs</span>(</span>
 <span id="cb23-4"><a href="#cb23-4" aria-hidden="true" tabindex="-1"></a>    <span class="at">x =</span> <span class="st">"Side"</span>,</span>
 <span id="cb23-5"><a href="#cb23-5" aria-hidden="true" tabindex="-1"></a>    <span class="at">y =</span> <span class="st">"Observed proportion"</span>,</span>
 <span id="cb23-6"><a href="#cb23-6" aria-hidden="true" tabindex="-1"></a>    <span class="at">title =</span> <span class="st">"Simulated astragali tosses"</span></span>
-<span id="cb23-7"><a href="#cb23-7" aria-hidden="true" tabindex="-1"></a>  )</span></code></pre></div><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></div>
+<span id="cb23-7"><a href="#cb23-7" aria-hidden="true" tabindex="-1"></a>  )</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
 <div class="cell-output-display">
 <div>
 <figure class="figure">
@@ -3870,7 +3873,7 @@ P(\text{random match}) + P(\text{lab error})\]</span></p>
 </ul>
 <p>Here is how we can code that comparison in R.</p>
 <div class="cell">
-<div class="code-copy-outer-scaffold"><div class="sourceCode cell-code" id="cb24"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb24-1"><a href="#cb24-1" aria-hidden="true" tabindex="-1"></a>p_random_match <span class="ot">&lt;-</span> <span class="dv">1</span> <span class="sc">/</span> <span class="dv">1000000000</span></span>
+<div class="sourceCode cell-code" id="cb24"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb24-1"><a href="#cb24-1" aria-hidden="true" tabindex="-1"></a>p_random_match <span class="ot">&lt;-</span> <span class="dv">1</span> <span class="sc">/</span> <span class="dv">1000000000</span></span>
 <span id="cb24-2"><a href="#cb24-2" aria-hidden="true" tabindex="-1"></a>p_lab_error <span class="ot">&lt;-</span> <span class="dv">1</span> <span class="sc">/</span> <span class="dv">100</span></span>
 <span id="cb24-3"><a href="#cb24-3" aria-hidden="true" tabindex="-1"></a></span>
 <span id="cb24-4"><a href="#cb24-4" aria-hidden="true" tabindex="-1"></a>dna_errors <span class="ot">&lt;-</span> <span class="fu">data.frame</span>(</span>
@@ -3883,7 +3886,7 @@ P(\text{random match}) + P(\text{lab error})\]</span></p>
 <span id="cb24-11"><a href="#cb24-11" aria-hidden="true" tabindex="-1"></a>  gt<span class="sc">::</span><span class="fu">fmt_number</span>(</span>
 <span id="cb24-12"><a href="#cb24-12" aria-hidden="true" tabindex="-1"></a>    <span class="at">columns =</span> probability,</span>
 <span id="cb24-13"><a href="#cb24-13" aria-hidden="true" tabindex="-1"></a>    <span class="at">decimals =</span> <span class="dv">10</span></span>
-<span id="cb24-14"><a href="#cb24-14" aria-hidden="true" tabindex="-1"></a>  )</span></code></pre></div><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></div>
+<span id="cb24-14"><a href="#cb24-14" aria-hidden="true" tabindex="-1"></a>  )</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
 <div class="cell-output-display">
 <div id="iiovcqlqvt" style="padding-left:0px;padding-right:0px;padding-top:10px;padding-bottom:10px;overflow-x:auto;overflow-y:auto;width:auto;height:auto;">
 <style>#iiovcqlqvt table {
@@ -4335,7 +4338,7 @@ P(\text{random match}) + P(\text{lab error})\]</span></p>
 }
 </style>
 
-<table class="gt_table caption-top table table-sm table-striped small" data-quarto-bootstrap="false">
+<table class="gt_table caption-top table table-sm table-striped small" data-quarto-postprocess="true" data-quarto-disable-processing="false" data-quarto-bootstrap="false">
 <thead>
 <tr class="gt_col_headings header">
 <th id="source" class="gt_col_heading gt_columns_bottom_border gt_left" data-quarto-table-cell-role="th" scope="col">source</th>
@@ -4363,16 +4366,16 @@ P(\text{random match}) + P(\text{lab error})\]</span></p>
 P(\text{random match}) + P(\text{lab error})\]</span></p>
 <p>In R:</p>
 <div class="cell">
-<div class="code-copy-outer-scaffold"><div class="sourceCode cell-code" id="cb25"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb25-1"><a href="#cb25-1" aria-hidden="true" tabindex="-1"></a>p_false_match <span class="ot">&lt;-</span> p_random_match <span class="sc">+</span> p_lab_error</span>
+<div class="sourceCode cell-code" id="cb25"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb25-1"><a href="#cb25-1" aria-hidden="true" tabindex="-1"></a>p_false_match <span class="ot">&lt;-</span> p_random_match <span class="sc">+</span> p_lab_error</span>
 <span id="cb25-2"><a href="#cb25-2" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb25-3"><a href="#cb25-3" aria-hidden="true" tabindex="-1"></a>p_false_match</span></code></pre></div><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></div>
+<span id="cb25-3"><a href="#cb25-3" aria-hidden="true" tabindex="-1"></a>p_false_match</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
 <div class="cell-output cell-output-stdout">
 <pre><code>[1] 0.01</code></pre>
 </div>
 </div>
 <p>Now compare this with the lab-error probability.</p>
 <div class="cell">
-<div class="code-copy-outer-scaffold"><div class="sourceCode cell-code" id="cb27"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb27-1"><a href="#cb27-1" aria-hidden="true" tabindex="-1"></a>p_lab_error</span></code></pre></div><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></div>
+<div class="sourceCode cell-code" id="cb27"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb27-1"><a href="#cb27-1" aria-hidden="true" tabindex="-1"></a>p_lab_error</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
 <div class="cell-output cell-output-stdout">
 <pre><code>[1] 0.01</code></pre>
 </div>
@@ -4380,7 +4383,7 @@ P(\text{random match}) + P(\text{lab error})\]</span></p>
 <p>The values are almost identical, because the random-match probability is tiny compared with the lab-error probability.</p>
 <p>We can show the comparison in a summary table.</p>
 <div class="cell">
-<div class="code-copy-outer-scaffold"><div class="sourceCode cell-code" id="cb29"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb29-1"><a href="#cb29-1" aria-hidden="true" tabindex="-1"></a>dna_summary <span class="ot">&lt;-</span> <span class="fu">data.frame</span>(</span>
+<div class="sourceCode cell-code" id="cb29"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb29-1"><a href="#cb29-1" aria-hidden="true" tabindex="-1"></a>dna_summary <span class="ot">&lt;-</span> <span class="fu">data.frame</span>(</span>
 <span id="cb29-2"><a href="#cb29-2" aria-hidden="true" tabindex="-1"></a>  <span class="at">quantity =</span> <span class="fu">c</span>(</span>
 <span id="cb29-3"><a href="#cb29-3" aria-hidden="true" tabindex="-1"></a>    <span class="st">"Random DNA match"</span>,</span>
 <span id="cb29-4"><a href="#cb29-4" aria-hidden="true" tabindex="-1"></a>    <span class="st">"Laboratory error"</span>,</span>
@@ -4398,7 +4401,7 @@ P(\text{random match}) + P(\text{lab error})\]</span></p>
 <span id="cb29-16"><a href="#cb29-16" aria-hidden="true" tabindex="-1"></a>  gt<span class="sc">::</span><span class="fu">fmt_number</span>(</span>
 <span id="cb29-17"><a href="#cb29-17" aria-hidden="true" tabindex="-1"></a>    <span class="at">columns =</span> probability,</span>
 <span id="cb29-18"><a href="#cb29-18" aria-hidden="true" tabindex="-1"></a>    <span class="at">decimals =</span> <span class="dv">10</span></span>
-<span id="cb29-19"><a href="#cb29-19" aria-hidden="true" tabindex="-1"></a>  )</span></code></pre></div><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></div>
+<span id="cb29-19"><a href="#cb29-19" aria-hidden="true" tabindex="-1"></a>  )</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
 <div class="cell-output-display">
 <div id="rccogsoyxg" style="padding-left:0px;padding-right:0px;padding-top:10px;padding-bottom:10px;overflow-x:auto;overflow-y:auto;width:auto;height:auto;">
 <style>#rccogsoyxg table {
@@ -4850,7 +4853,7 @@ P(\text{random match}) + P(\text{lab error})\]</span></p>
 }
 </style>
 
-<table class="gt_table caption-top table table-sm table-striped small" data-quarto-bootstrap="false">
+<table class="gt_table caption-top table table-sm table-striped small" data-quarto-postprocess="true" data-quarto-disable-processing="false" data-quarto-bootstrap="false">
 <thead>
 <tr class="gt_col_headings header">
 <th id="quantity" class="gt_col_heading gt_columns_bottom_border gt_left" data-quarto-table-cell-role="th" scope="col">quantity</th>
@@ -4878,12 +4881,12 @@ P(\text{random match}) + P(\text{lab error})\]</span></p>
 </div>
 <p>We can also display the same probabilities as percentages.</p>
 <div class="cell">
-<div class="code-copy-outer-scaffold"><div class="sourceCode cell-code" id="cb30"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb30-1"><a href="#cb30-1" aria-hidden="true" tabindex="-1"></a>dna_summary <span class="sc">|&gt;</span></span>
+<div class="sourceCode cell-code" id="cb30"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb30-1"><a href="#cb30-1" aria-hidden="true" tabindex="-1"></a>dna_summary <span class="sc">|&gt;</span></span>
 <span id="cb30-2"><a href="#cb30-2" aria-hidden="true" tabindex="-1"></a>  gt<span class="sc">::</span><span class="fu">gt</span>() <span class="sc">|&gt;</span></span>
 <span id="cb30-3"><a href="#cb30-3" aria-hidden="true" tabindex="-1"></a>  gt<span class="sc">::</span><span class="fu">fmt_percent</span>(</span>
 <span id="cb30-4"><a href="#cb30-4" aria-hidden="true" tabindex="-1"></a>    <span class="at">columns =</span> probability,</span>
 <span id="cb30-5"><a href="#cb30-5" aria-hidden="true" tabindex="-1"></a>    <span class="at">decimals =</span> <span class="dv">6</span></span>
-<span id="cb30-6"><a href="#cb30-6" aria-hidden="true" tabindex="-1"></a>  )</span></code></pre></div><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></div>
+<span id="cb30-6"><a href="#cb30-6" aria-hidden="true" tabindex="-1"></a>  )</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
 <div class="cell-output-display">
 <div id="dpklyxehfe" style="padding-left:0px;padding-right:0px;padding-top:10px;padding-bottom:10px;overflow-x:auto;overflow-y:auto;width:auto;height:auto;">
 <style>#dpklyxehfe table {
@@ -5335,7 +5338,7 @@ P(\text{random match}) + P(\text{lab error})\]</span></p>
 }
 </style>
 
-<table class="gt_table caption-top table table-sm table-striped small" data-quarto-bootstrap="false">
+<table class="gt_table caption-top table table-sm table-striped small" data-quarto-postprocess="true" data-quarto-disable-processing="false" data-quarto-bootstrap="false">
 <thead>
 <tr class="gt_col_headings header">
 <th id="quantity" class="gt_col_heading gt_columns_bottom_border gt_left" data-quarto-table-cell-role="th" scope="col">quantity</th>
@@ -5368,7 +5371,7 @@ P(\text{random match}) + P(\text{lab error})\]</span></p>
 <p>In the chapter, we saw that the prosecution in <em>People v Collins</em> multiplied several probabilities together. The calculation looked precise, but it depended heavily on the probabilities chosen and on the assumption that the characteristics were independent.</p>
 <p>We can code the original calculation in R.</p>
 <div class="cell">
-<div class="code-copy-outer-scaffold"><div class="sourceCode cell-code" id="cb31"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb31-1"><a href="#cb31-1" aria-hidden="true" tabindex="-1"></a>collins <span class="ot">&lt;-</span> <span class="fu">data.frame</span>(</span>
+<div class="sourceCode cell-code" id="cb31"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb31-1"><a href="#cb31-1" aria-hidden="true" tabindex="-1"></a>collins <span class="ot">&lt;-</span> <span class="fu">data.frame</span>(</span>
 <span id="cb31-2"><a href="#cb31-2" aria-hidden="true" tabindex="-1"></a>  <span class="at">characteristic =</span> <span class="fu">c</span>(</span>
 <span id="cb31-3"><a href="#cb31-3" aria-hidden="true" tabindex="-1"></a>    <span class="st">"Partly yellow car"</span>,</span>
 <span id="cb31-4"><a href="#cb31-4" aria-hidden="true" tabindex="-1"></a>    <span class="st">"Man with moustache"</span>,</span>
@@ -5392,7 +5395,7 @@ P(\text{random match}) + P(\text{lab error})\]</span></p>
 <span id="cb31-22"><a href="#cb31-22" aria-hidden="true" tabindex="-1"></a>  gt<span class="sc">::</span><span class="fu">fmt_number</span>(</span>
 <span id="cb31-23"><a href="#cb31-23" aria-hidden="true" tabindex="-1"></a>    <span class="at">columns =</span> probability,</span>
 <span id="cb31-24"><a href="#cb31-24" aria-hidden="true" tabindex="-1"></a>    <span class="at">decimals =</span> <span class="dv">6</span></span>
-<span id="cb31-25"><a href="#cb31-25" aria-hidden="true" tabindex="-1"></a>  )</span></code></pre></div><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></div>
+<span id="cb31-25"><a href="#cb31-25" aria-hidden="true" tabindex="-1"></a>  )</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
 <div class="cell-output-display">
 <div id="pwjdzyvcbx" style="padding-left:0px;padding-right:0px;padding-top:10px;padding-bottom:10px;overflow-x:auto;overflow-y:auto;width:auto;height:auto;">
 <style>#pwjdzyvcbx table {
@@ -5844,7 +5847,7 @@ P(\text{random match}) + P(\text{lab error})\]</span></p>
 }
 </style>
 
-<table class="gt_table caption-top table table-sm table-striped small" data-quarto-bootstrap="false">
+<table class="gt_table caption-top table table-sm table-striped small" data-quarto-postprocess="true" data-quarto-disable-processing="false" data-quarto-bootstrap="false">
 <thead>
 <tr class="gt_col_headings header">
 <th id="characteristic" class="gt_col_heading gt_columns_bottom_border gt_left" data-quarto-table-cell-role="th" scope="col">characteristic</th>
@@ -5884,15 +5887,15 @@ P(\text{random match}) + P(\text{lab error})\]</span></p>
 </div>
 <p>To reproduce the prosecution’s calculation, we multiply all the probabilities.</p>
 <div class="cell">
-<div class="code-copy-outer-scaffold"><div class="sourceCode cell-code" id="cb32"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb32-1"><a href="#cb32-1" aria-hidden="true" tabindex="-1"></a>combined_probability <span class="ot">&lt;-</span> <span class="fu">prod</span>(collins<span class="sc">$</span>probability)</span></code></pre></div><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></div>
+<div class="sourceCode cell-code" id="cb32"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb32-1"><a href="#cb32-1" aria-hidden="true" tabindex="-1"></a>combined_probability <span class="ot">&lt;-</span> <span class="fu">prod</span>(collins<span class="sc">$</span>probability)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
 </div>
 <p>We can convert this into a “1 in …” number.</p>
 <div class="cell">
-<div class="code-copy-outer-scaffold"><div class="sourceCode cell-code" id="cb33"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb33-1"><a href="#cb33-1" aria-hidden="true" tabindex="-1"></a>one_in <span class="ot">&lt;-</span> <span class="dv">1</span> <span class="sc">/</span> combined_probability</span></code></pre></div><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></div>
+<div class="sourceCode cell-code" id="cb33"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb33-1"><a href="#cb33-1" aria-hidden="true" tabindex="-1"></a>one_in <span class="ot">&lt;-</span> <span class="dv">1</span> <span class="sc">/</span> combined_probability</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
 </div>
 <p>This gives the result as approximately 1 in 12 million.</p>
 <div class="cell">
-<div class="code-copy-outer-scaffold"><div class="sourceCode cell-code" id="cb34"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb34-1"><a href="#cb34-1" aria-hidden="true" tabindex="-1"></a>collins_result <span class="ot">&lt;-</span> <span class="fu">data.frame</span>(</span>
+<div class="sourceCode cell-code" id="cb34"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb34-1"><a href="#cb34-1" aria-hidden="true" tabindex="-1"></a>collins_result <span class="ot">&lt;-</span> <span class="fu">data.frame</span>(</span>
 <span id="cb34-2"><a href="#cb34-2" aria-hidden="true" tabindex="-1"></a>  <span class="at">quantity =</span> <span class="fu">c</span>(</span>
 <span id="cb34-3"><a href="#cb34-3" aria-hidden="true" tabindex="-1"></a>    <span class="st">"Combined probability"</span>,</span>
 <span id="cb34-4"><a href="#cb34-4" aria-hidden="true" tabindex="-1"></a>    <span class="st">"Approximately 1 in ..."</span></span>
@@ -5908,7 +5911,7 @@ P(\text{random match}) + P(\text{lab error})\]</span></p>
 <span id="cb34-14"><a href="#cb34-14" aria-hidden="true" tabindex="-1"></a>  gt<span class="sc">::</span><span class="fu">fmt_number</span>(</span>
 <span id="cb34-15"><a href="#cb34-15" aria-hidden="true" tabindex="-1"></a>    <span class="at">columns =</span> value,</span>
 <span id="cb34-16"><a href="#cb34-16" aria-hidden="true" tabindex="-1"></a>    <span class="at">decimals =</span> <span class="dv">0</span></span>
-<span id="cb34-17"><a href="#cb34-17" aria-hidden="true" tabindex="-1"></a>  )</span></code></pre></div><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></div>
+<span id="cb34-17"><a href="#cb34-17" aria-hidden="true" tabindex="-1"></a>  )</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
 <div class="cell-output-display">
 <div id="ofiprhhuqm" style="padding-left:0px;padding-right:0px;padding-top:10px;padding-bottom:10px;overflow-x:auto;overflow-y:auto;width:auto;height:auto;">
 <style>#ofiprhhuqm table {
@@ -6360,7 +6363,7 @@ P(\text{random match}) + P(\text{lab error})\]</span></p>
 }
 </style>
 
-<table class="gt_table caption-top table table-sm table-striped small" data-quarto-bootstrap="false">
+<table class="gt_table caption-top table table-sm table-striped small" data-quarto-postprocess="true" data-quarto-disable-processing="false" data-quarto-bootstrap="false">
 <thead>
 <tr class="gt_col_headings header">
 <th id="quantity" class="gt_col_heading gt_columns_bottom_border gt_left" data-quarto-table-cell-role="th" scope="col">quantity</th>
@@ -6388,7 +6391,7 @@ P(\text{random match}) + P(\text{lab error})\]</span></p>
 <p>The original probabilities were not fixed facts. They were assumptions. We can use R to change them and see how much the final result changes.</p>
 <p>Suppose a student thinks some of the original probabilities are too small. They might update the probabilities like this:</p>
 <div class="cell">
-<div class="code-copy-outer-scaffold"><div class="sourceCode cell-code" id="cb35"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb35-1"><a href="#cb35-1" aria-hidden="true" tabindex="-1"></a>collins_updated <span class="ot">&lt;-</span> <span class="fu">data.frame</span>(</span>
+<div class="sourceCode cell-code" id="cb35"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb35-1"><a href="#cb35-1" aria-hidden="true" tabindex="-1"></a>collins_updated <span class="ot">&lt;-</span> <span class="fu">data.frame</span>(</span>
 <span id="cb35-2"><a href="#cb35-2" aria-hidden="true" tabindex="-1"></a>  <span class="at">characteristic =</span> <span class="fu">c</span>(</span>
 <span id="cb35-3"><a href="#cb35-3" aria-hidden="true" tabindex="-1"></a>    <span class="st">"Partly yellow car"</span>,</span>
 <span id="cb35-4"><a href="#cb35-4" aria-hidden="true" tabindex="-1"></a>    <span class="st">"Man with moustache"</span>,</span>
@@ -6415,7 +6418,7 @@ P(\text{random match}) + P(\text{lab error})\]</span></p>
 <span id="cb35-25"><a href="#cb35-25" aria-hidden="true" tabindex="-1"></a>  )</span>
 <span id="cb35-26"><a href="#cb35-26" aria-hidden="true" tabindex="-1"></a>)</span>
 <span id="cb35-27"><a href="#cb35-27" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb35-28"><a href="#cb35-28" aria-hidden="true" tabindex="-1"></a>collins_updated</span></code></pre></div><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></div>
+<span id="cb35-28"><a href="#cb35-28" aria-hidden="true" tabindex="-1"></a>collins_updated</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
 <div class="cell-output cell-output-stdout">
 <pre><code>             characteristic original_probability updated_probability
 1         Partly yellow car            0.1000000           0.1250000
@@ -6428,17 +6431,17 @@ P(\text{random match}) + P(\text{lab error})\]</span></p>
 </div>
 <p>Now calculate the combined probability for both sets.</p>
 <div class="cell">
-<div class="code-copy-outer-scaffold"><div class="sourceCode cell-code" id="cb37"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb37-1"><a href="#cb37-1" aria-hidden="true" tabindex="-1"></a>original_combined <span class="ot">&lt;-</span> <span class="fu">prod</span>(collins_updated<span class="sc">$</span>original_probability)</span>
-<span id="cb37-2"><a href="#cb37-2" aria-hidden="true" tabindex="-1"></a>updated_combined <span class="ot">&lt;-</span> <span class="fu">prod</span>(collins_updated<span class="sc">$</span>updated_probability)</span></code></pre></div><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></div>
+<div class="sourceCode cell-code" id="cb37"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb37-1"><a href="#cb37-1" aria-hidden="true" tabindex="-1"></a>original_combined <span class="ot">&lt;-</span> <span class="fu">prod</span>(collins_updated<span class="sc">$</span>original_probability)</span>
+<span id="cb37-2"><a href="#cb37-2" aria-hidden="true" tabindex="-1"></a>updated_combined <span class="ot">&lt;-</span> <span class="fu">prod</span>(collins_updated<span class="sc">$</span>updated_probability)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
 </div>
 <p>Now convert both probabilities into “1 in …” values.</p>
 <div class="cell">
-<div class="code-copy-outer-scaffold"><div class="sourceCode cell-code" id="cb38"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb38-1"><a href="#cb38-1" aria-hidden="true" tabindex="-1"></a>original_one_in <span class="ot">&lt;-</span> <span class="dv">1</span> <span class="sc">/</span> original_combined</span>
-<span id="cb38-2"><a href="#cb38-2" aria-hidden="true" tabindex="-1"></a>updated_one_in <span class="ot">&lt;-</span> <span class="dv">1</span> <span class="sc">/</span> updated_combined</span></code></pre></div><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></div>
+<div class="sourceCode cell-code" id="cb38"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb38-1"><a href="#cb38-1" aria-hidden="true" tabindex="-1"></a>original_one_in <span class="ot">&lt;-</span> <span class="dv">1</span> <span class="sc">/</span> original_combined</span>
+<span id="cb38-2"><a href="#cb38-2" aria-hidden="true" tabindex="-1"></a>updated_one_in <span class="ot">&lt;-</span> <span class="dv">1</span> <span class="sc">/</span> updated_combined</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
 </div>
 <p>We can summarise the results in a table.</p>
 <div class="cell">
-<div class="code-copy-outer-scaffold"><div class="sourceCode cell-code" id="cb39"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb39-1"><a href="#cb39-1" aria-hidden="true" tabindex="-1"></a>assumption_comparison <span class="ot">&lt;-</span> <span class="fu">data.frame</span>(</span>
+<div class="sourceCode cell-code" id="cb39"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb39-1"><a href="#cb39-1" aria-hidden="true" tabindex="-1"></a>assumption_comparison <span class="ot">&lt;-</span> <span class="fu">data.frame</span>(</span>
 <span id="cb39-2"><a href="#cb39-2" aria-hidden="true" tabindex="-1"></a>  <span class="at">version =</span> <span class="fu">c</span>(</span>
 <span id="cb39-3"><a href="#cb39-3" aria-hidden="true" tabindex="-1"></a>    <span class="st">"Original assumptions"</span>,</span>
 <span id="cb39-4"><a href="#cb39-4" aria-hidden="true" tabindex="-1"></a>    <span class="st">"Updated assumptions"</span></span>
@@ -6458,7 +6461,7 @@ P(\text{random match}) + P(\text{lab error})\]</span></p>
 <span id="cb39-18"><a href="#cb39-18" aria-hidden="true" tabindex="-1"></a>  gt<span class="sc">::</span><span class="fu">fmt_number</span>(</span>
 <span id="cb39-19"><a href="#cb39-19" aria-hidden="true" tabindex="-1"></a>    <span class="at">columns =</span> <span class="fu">c</span>(combined_probability, one_in),</span>
 <span id="cb39-20"><a href="#cb39-20" aria-hidden="true" tabindex="-1"></a>    <span class="at">decimals =</span> <span class="dv">0</span></span>
-<span id="cb39-21"><a href="#cb39-21" aria-hidden="true" tabindex="-1"></a>  )</span></code></pre></div><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></div>
+<span id="cb39-21"><a href="#cb39-21" aria-hidden="true" tabindex="-1"></a>  )</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
 <div class="cell-output-display">
 <div id="macnyudhce" style="padding-left:0px;padding-right:0px;padding-top:10px;padding-bottom:10px;overflow-x:auto;overflow-y:auto;width:auto;height:auto;">
 <style>#macnyudhce table {
@@ -6910,7 +6913,7 @@ P(\text{random match}) + P(\text{lab error})\]</span></p>
 }
 </style>
 
-<table class="gt_table caption-top table table-sm table-striped small" data-quarto-bootstrap="false">
+<table class="gt_table caption-top table table-sm table-striped small" data-quarto-postprocess="true" data-quarto-disable-processing="false" data-quarto-bootstrap="false">
 <thead>
 <tr class="gt_col_headings header">
 <th id="version" class="gt_col_heading gt_columns_bottom_border gt_left" data-quarto-table-cell-role="th" scope="col">version</th>
@@ -6939,7 +6942,7 @@ P(\text{random match}) + P(\text{lab error})\]</span></p>
 <p>Now, instead of rewriting the whole table, we can update one probability at a time using <code>mutate()</code> and <code>case_when()</code>.</p>
 <p>Suppose we want to change only the probability for “Interracial couple in car” from <code>1 / 1000</code> to <code>1 / 500</code>.</p>
 <div class="cell">
-<div class="code-copy-outer-scaffold"><div class="sourceCode cell-code" id="cb40"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb40-1"><a href="#cb40-1" aria-hidden="true" tabindex="-1"></a>collins_one_update <span class="ot">&lt;-</span> collins <span class="sc">|&gt;</span></span>
+<div class="sourceCode cell-code" id="cb40"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb40-1"><a href="#cb40-1" aria-hidden="true" tabindex="-1"></a>collins_one_update <span class="ot">&lt;-</span> collins <span class="sc">|&gt;</span></span>
 <span id="cb40-2"><a href="#cb40-2" aria-hidden="true" tabindex="-1"></a>  dplyr<span class="sc">::</span><span class="fu">mutate</span>(</span>
 <span id="cb40-3"><a href="#cb40-3" aria-hidden="true" tabindex="-1"></a>    <span class="at">updated_probability =</span> dplyr<span class="sc">::</span><span class="fu">case_when</span>(</span>
 <span id="cb40-4"><a href="#cb40-4" aria-hidden="true" tabindex="-1"></a>      characteristic <span class="sc">==</span> <span class="st">"Interracial couple in car"</span> <span class="sc">~</span> <span class="dv">1</span> <span class="sc">/</span> <span class="dv">3</span>,</span>
@@ -6952,7 +6955,7 @@ P(\text{random match}) + P(\text{lab error})\]</span></p>
 <span id="cb40-11"><a href="#cb40-11" aria-hidden="true" tabindex="-1"></a>  gt<span class="sc">::</span><span class="fu">fmt_number</span>(</span>
 <span id="cb40-12"><a href="#cb40-12" aria-hidden="true" tabindex="-1"></a>    <span class="at">columns =</span> <span class="fu">c</span>(probability, updated_probability),</span>
 <span id="cb40-13"><a href="#cb40-13" aria-hidden="true" tabindex="-1"></a>    <span class="at">decimals =</span> <span class="dv">6</span></span>
-<span id="cb40-14"><a href="#cb40-14" aria-hidden="true" tabindex="-1"></a>  )</span></code></pre></div><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></div>
+<span id="cb40-14"><a href="#cb40-14" aria-hidden="true" tabindex="-1"></a>  )</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
 <div class="cell-output-display">
 <div id="liqoszxdid" style="padding-left:0px;padding-right:0px;padding-top:10px;padding-bottom:10px;overflow-x:auto;overflow-y:auto;width:auto;height:auto;">
 <style>#liqoszxdid table {
@@ -7404,7 +7407,7 @@ P(\text{random match}) + P(\text{lab error})\]</span></p>
 }
 </style>
 
-<table class="gt_table caption-top table table-sm table-striped small" data-quarto-bootstrap="false">
+<table class="gt_table caption-top table table-sm table-striped small" data-quarto-postprocess="true" data-quarto-disable-processing="false" data-quarto-bootstrap="false">
 <thead>
 <tr class="gt_col_headings header">
 <th id="characteristic" class="gt_col_heading gt_columns_bottom_border gt_left" data-quarto-table-cell-role="th" scope="col">characteristic</th>
@@ -7451,11 +7454,11 @@ P(\text{random match}) + P(\text{lab error})\]</span></p>
 </div>
 <p>Now calculate the new combined probability.</p>
 <div class="cell">
-<div class="code-copy-outer-scaffold"><div class="sourceCode cell-code" id="cb41"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb41-1"><a href="#cb41-1" aria-hidden="true" tabindex="-1"></a>one_update_combined <span class="ot">&lt;-</span> <span class="fu">prod</span>(collins_one_update<span class="sc">$</span>updated_probability)</span></code></pre></div><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></div>
+<div class="sourceCode cell-code" id="cb41"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb41-1"><a href="#cb41-1" aria-hidden="true" tabindex="-1"></a>one_update_combined <span class="ot">&lt;-</span> <span class="fu">prod</span>(collins_one_update<span class="sc">$</span>updated_probability)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
 </div>
 <p>Changing just one assumption can noticeably change the final answer.</p>
 <div class="cell">
-<div class="code-copy-outer-scaffold"><div class="sourceCode cell-code" id="cb42"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb42-1"><a href="#cb42-1" aria-hidden="true" tabindex="-1"></a>single_update_comparison <span class="ot">&lt;-</span> <span class="fu">data.frame</span>(</span>
+<div class="sourceCode cell-code" id="cb42"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb42-1"><a href="#cb42-1" aria-hidden="true" tabindex="-1"></a>single_update_comparison <span class="ot">&lt;-</span> <span class="fu">data.frame</span>(</span>
 <span id="cb42-2"><a href="#cb42-2" aria-hidden="true" tabindex="-1"></a>  <span class="at">version =</span> <span class="fu">c</span>(</span>
 <span id="cb42-3"><a href="#cb42-3" aria-hidden="true" tabindex="-1"></a>    <span class="st">"Original"</span>,</span>
 <span id="cb42-4"><a href="#cb42-4" aria-hidden="true" tabindex="-1"></a>    <span class="st">"Updated interracial-couple probability"</span></span>
@@ -7471,7 +7474,7 @@ P(\text{random match}) + P(\text{lab error})\]</span></p>
 <span id="cb42-14"><a href="#cb42-14" aria-hidden="true" tabindex="-1"></a>  gt<span class="sc">::</span><span class="fu">fmt_number</span>(</span>
 <span id="cb42-15"><a href="#cb42-15" aria-hidden="true" tabindex="-1"></a>    <span class="at">columns =</span> one_in,</span>
 <span id="cb42-16"><a href="#cb42-16" aria-hidden="true" tabindex="-1"></a>    <span class="at">decimals =</span> <span class="dv">0</span></span>
-<span id="cb42-17"><a href="#cb42-17" aria-hidden="true" tabindex="-1"></a>  )</span></code></pre></div><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></div>
+<span id="cb42-17"><a href="#cb42-17" aria-hidden="true" tabindex="-1"></a>  )</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
 <div class="cell-output-display">
 <div id="qwcguqvvrd" style="padding-left:0px;padding-right:0px;padding-top:10px;padding-bottom:10px;overflow-x:auto;overflow-y:auto;width:auto;height:auto;">
 <style>#qwcguqvvrd table {
@@ -7923,7 +7926,7 @@ P(\text{random match}) + P(\text{lab error})\]</span></p>
 }
 </style>
 
-<table class="gt_table caption-top table table-sm table-striped small" data-quarto-bootstrap="false">
+<table class="gt_table caption-top table table-sm table-striped small" data-quarto-postprocess="true" data-quarto-disable-processing="false" data-quarto-bootstrap="false">
 <thead>
 <tr class="gt_col_headings header">
 <th id="version" class="gt_col_heading gt_columns_bottom_border gt_left" data-quarto-table-cell-role="th" scope="col">version</th>
@@ -7957,7 +7960,7 @@ P(\text{random match}) + P(\text{lab error})\]</span></p>
 <i class="callout-icon"></i>
 </div>
 <div class="callout-title-container flex-fill">
-<span class="screen-reader-only">Note</span>Question 1
+Question 1
 </div>
 </div>
 <div class="callout-body-container callout-body">
@@ -7970,12 +7973,12 @@ P(\text{random match}) + P(\text{lab error})\]</span></p>
 <p><strong>b.</strong> Write two possible outcomes that could have happened but did not.</p>
 <p><strong>c.</strong> Why can it be misleading to judge the student’s application strategy only by the final result?</p>
 <div class="callout callout-style-default callout-important callout-titled">
-<div class="callout-header d-flex align-content-center collapsed" data-bs-toggle="collapse" data-bs-target=".callout-7-contents" aria-controls="callout-7" aria-expanded="false" aria-label="Toggle callout">
+<div class="callout-header d-flex align-content-center" data-bs-toggle="collapse" data-bs-target=".callout-7-contents" aria-controls="callout-7" aria-expanded="false" aria-label="Toggle callout">
 <div class="callout-icon-container">
 <i class="callout-icon"></i>
 </div>
 <div class="callout-title-container flex-fill">
-<span class="screen-reader-only">Important</span>Click for Solutions
+Click for Solutions
 </div>
 <div class="callout-btn-toggle d-inline-block border-0 py-1 ps-1 pe-0 float-end"><i class="callout-toggle"></i></div>
 </div>
@@ -8001,7 +8004,7 @@ P(\text{random match}) + P(\text{lab error})\]</span></p>
 <i class="callout-icon"></i>
 </div>
 <div class="callout-title-container flex-fill">
-<span class="screen-reader-only">Note</span>Question 2
+Question 2
 </div>
 </div>
 <div class="callout-body-container callout-body">
@@ -8458,7 +8461,7 @@ P(\text{random match}) + P(\text{lab error})\]</span></p>
 }
 </style>
 
-<table class="gt_table caption-top table table-sm table-striped small" data-quarto-bootstrap="false">
+<table class="gt_table caption-top table table-sm table-striped small" data-quarto-postprocess="true" data-quarto-disable-processing="false" data-quarto-bootstrap="false">
 <thead>
 <tr class="gt_col_headings header">
 <th id="Situation" class="gt_col_heading gt_columns_bottom_border gt_left" data-quarto-table-cell-role="th" scope="col">Situation</th>
@@ -8499,12 +8502,12 @@ P(\text{random match}) + P(\text{lab error})\]</span></p>
 </div>
 </div>
 <div class="callout callout-style-default callout-important callout-titled">
-<div class="callout-header d-flex align-content-center collapsed" data-bs-toggle="collapse" data-bs-target=".callout-9-contents" aria-controls="callout-9" aria-expanded="false" aria-label="Toggle callout">
+<div class="callout-header d-flex align-content-center" data-bs-toggle="collapse" data-bs-target=".callout-9-contents" aria-controls="callout-9" aria-expanded="false" aria-label="Toggle callout">
 <div class="callout-icon-container">
 <i class="callout-icon"></i>
 </div>
 <div class="callout-title-container flex-fill">
-<span class="screen-reader-only">Important</span>Click for Solutions
+Click for Solutions
 </div>
 <div class="callout-btn-toggle d-inline-block border-0 py-1 ps-1 pe-0 float-end"><i class="callout-toggle"></i></div>
 </div>
@@ -8963,7 +8966,7 @@ P(\text{random match}) + P(\text{lab error})\]</span></p>
 }
 </style>
 
-<table class="gt_table caption-top table table-sm table-striped small" data-quarto-bootstrap="false">
+<table class="gt_table caption-top table table-sm table-striped small" data-quarto-postprocess="true" data-quarto-disable-processing="false" data-quarto-bootstrap="false">
 <thead>
 <tr class="gt_col_headings header">
 <th id="Situation" class="gt_col_heading gt_columns_bottom_border gt_left" data-quarto-table-cell-role="th" scope="col">Situation</th>
@@ -9014,7 +9017,7 @@ P(\text{random match}) + P(\text{lab error})\]</span></p>
 <i class="callout-icon"></i>
 </div>
 <div class="callout-title-container flex-fill">
-<span class="screen-reader-only">Note</span>Question 3
+Question 3
 </div>
 </div>
 <div class="callout-body-container callout-body">
@@ -9471,7 +9474,7 @@ P(\text{random match}) + P(\text{lab error})\]</span></p>
 }
 </style>
 
-<table class="gt_table caption-top table table-sm table-striped small" data-quarto-bootstrap="false">
+<table class="gt_table caption-top table table-sm table-striped small" data-quarto-postprocess="true" data-quarto-disable-processing="false" data-quarto-bootstrap="false">
 <thead>
 <tr class="gt_col_headings header">
 <th id="Person" class="gt_col_heading gt_columns_bottom_border gt_left" data-quarto-table-cell-role="th" scope="col">Person</th>
@@ -9505,12 +9508,12 @@ P(\text{random match}) + P(\text{lab error})\]</span></p>
 <p><strong>b.</strong> Why might the phrase “a fair chance” cause confusion?</p>
 <p><strong>c.</strong> Rewrite the other three statements using numerical probabilities. There is no single correct answer, but explain your choices.</p>
 <div class="callout callout-style-default callout-important callout-titled">
-<div class="callout-header d-flex align-content-center collapsed" data-bs-toggle="collapse" data-bs-target=".callout-11-contents" aria-controls="callout-11" aria-expanded="false" aria-label="Toggle callout">
+<div class="callout-header d-flex align-content-center" data-bs-toggle="collapse" data-bs-target=".callout-11-contents" aria-controls="callout-11" aria-expanded="false" aria-label="Toggle callout">
 <div class="callout-icon-container">
 <i class="callout-icon"></i>
 </div>
 <div class="callout-title-container flex-fill">
-<span class="screen-reader-only">Important</span>Click for Solutions
+Click for Solutions
 </div>
 <div class="callout-btn-toggle d-inline-block border-0 py-1 ps-1 pe-0 float-end"><i class="callout-toggle"></i></div>
 </div>
@@ -9536,7 +9539,7 @@ P(\text{random match}) + P(\text{lab error})\]</span></p>
 <i class="callout-icon"></i>
 </div>
 <div class="callout-title-container flex-fill">
-<span class="screen-reader-only">Note</span>Question 4
+Question 4
 </div>
 </div>
 <div class="callout-body-container callout-body">
@@ -9556,12 +9559,12 @@ P(\text{random match}) + P(\text{lab error})\]</span></p>
 <p>If these are the only three possible outcomes, what must be the probability of low demand?</p>
 <p><strong>c.</strong> What assumption are you making when you calculate this probability?</p>
 <div class="callout callout-style-default callout-important callout-titled">
-<div class="callout-header d-flex align-content-center collapsed" data-bs-toggle="collapse" data-bs-target=".callout-13-contents" aria-controls="callout-13" aria-expanded="false" aria-label="Toggle callout">
+<div class="callout-header d-flex align-content-center" data-bs-toggle="collapse" data-bs-target=".callout-13-contents" aria-controls="callout-13" aria-expanded="false" aria-label="Toggle callout">
 <div class="callout-icon-container">
 <i class="callout-icon"></i>
 </div>
 <div class="callout-title-container flex-fill">
-<span class="screen-reader-only">Important</span>Click for Solutions
+Click for Solutions
 </div>
 <div class="callout-btn-toggle d-inline-block border-0 py-1 ps-1 pe-0 float-end"><i class="callout-toggle"></i></div>
 </div>
@@ -9586,7 +9589,7 @@ P(\text{random match}) + P(\text{lab error})\]</span></p>
 <i class="callout-icon"></i>
 </div>
 <div class="callout-title-container flex-fill">
-<span class="screen-reader-only">Note</span>Question 5
+Question 5
 </div>
 </div>
 <div class="callout-body-container callout-body">
@@ -9601,12 +9604,12 @@ P(\text{random match}) + P(\text{lab error})\]</span></p>
 <p><strong>b.</strong> Suppose 2,000,000 videos are uploaded that day. Approximately how many videos would we expect to receive 1 million views?</p>
 <p><strong>c.</strong> Explain why a rare event may still occur regularly when there are many opportunities for it to happen.</p>
 <div class="callout callout-style-default callout-important callout-titled">
-<div class="callout-header d-flex align-content-center collapsed" data-bs-toggle="collapse" data-bs-target=".callout-15-contents" aria-controls="callout-15" aria-expanded="false" aria-label="Toggle callout">
+<div class="callout-header d-flex align-content-center" data-bs-toggle="collapse" data-bs-target=".callout-15-contents" aria-controls="callout-15" aria-expanded="false" aria-label="Toggle callout">
 <div class="callout-icon-container">
 <i class="callout-icon"></i>
 </div>
 <div class="callout-title-container flex-fill">
-<span class="screen-reader-only">Important</span>Click for Solutions
+Click for Solutions
 </div>
 <div class="callout-btn-toggle d-inline-block border-0 py-1 ps-1 pe-0 float-end"><i class="callout-toggle"></i></div>
 </div>
@@ -9628,7 +9631,7 @@ P(\text{random match}) + P(\text{lab error})\]</span></p>
 <i class="callout-icon"></i>
 </div>
 <div class="callout-title-container flex-fill">
-<span class="screen-reader-only">Note</span>Question 6
+Question 6
 </div>
 </div>
 <div class="callout-body-container callout-body">
@@ -9638,12 +9641,12 @@ P(\text{random match}) + P(\text{lab error})\]</span></p>
 <p><strong>c.</strong> Why would it be a mistake to conclude that a person matching the description must be the person in the security footage?</p>
 <p><strong>d.</strong> What additional evidence would be useful?</p>
 <div class="callout callout-style-default callout-important callout-titled">
-<div class="callout-header d-flex align-content-center collapsed" data-bs-toggle="collapse" data-bs-target=".callout-17-contents" aria-controls="callout-17" aria-expanded="false" aria-label="Toggle callout">
+<div class="callout-header d-flex align-content-center" data-bs-toggle="collapse" data-bs-target=".callout-17-contents" aria-controls="callout-17" aria-expanded="false" aria-label="Toggle callout">
 <div class="callout-icon-container">
 <i class="callout-icon"></i>
 </div>
 <div class="callout-title-container flex-fill">
-<span class="screen-reader-only">Important</span>Click for Solutions
+Click for Solutions
 </div>
 <div class="callout-btn-toggle d-inline-block border-0 py-1 ps-1 pe-0 float-end"><i class="callout-toggle"></i></div>
 </div>
@@ -9668,7 +9671,7 @@ P(\text{random match}) + P(\text{lab error})\]</span></p>
 <i class="callout-icon"></i>
 </div>
 <div class="callout-title-container flex-fill">
-<span class="screen-reader-only">Note</span>Question 7
+Question 7
 </div>
 </div>
 <div class="callout-body-container callout-body">
@@ -9686,12 +9689,12 @@ P(\text{random match}) + P(\text{lab error})\]</span></p>
 <p><strong>b.</strong> Which probability rule are you using?</p>
 <p><strong>c.</strong> Why does the assumption that the events cannot both happen matter?</p>
 <div class="callout callout-style-default callout-important callout-titled">
-<div class="callout-header d-flex align-content-center collapsed" data-bs-toggle="collapse" data-bs-target=".callout-19-contents" aria-controls="callout-19" aria-expanded="false" aria-label="Toggle callout">
+<div class="callout-header d-flex align-content-center" data-bs-toggle="collapse" data-bs-target=".callout-19-contents" aria-controls="callout-19" aria-expanded="false" aria-label="Toggle callout">
 <div class="callout-icon-container">
 <i class="callout-icon"></i>
 </div>
 <div class="callout-title-container flex-fill">
-<span class="screen-reader-only">Important</span>Click for Solutions
+Click for Solutions
 </div>
 <div class="callout-btn-toggle d-inline-block border-0 py-1 ps-1 pe-0 float-end"><i class="callout-toggle"></i></div>
 </div>
@@ -9714,7 +9717,7 @@ P(\text{random match}) + P(\text{lab error})\]</span></p>
 <i class="callout-icon"></i>
 </div>
 <div class="callout-title-container flex-fill">
-<span class="screen-reader-only">Note</span>Question 8
+Question 8
 </div>
 </div>
 <div class="callout-body-container callout-body">
@@ -9730,12 +9733,12 @@ P(\text{random match}) + P(\text{lab error})\]</span></p>
 <p><span class="math display">\[0.03 + 0.08 = 0.11?\]</span></p>
 <p><strong>c.</strong> In words, what does the subtraction term do in the addition rule?</p>
 <div class="callout callout-style-default callout-important callout-titled">
-<div class="callout-header d-flex align-content-center collapsed" data-bs-toggle="collapse" data-bs-target=".callout-21-contents" aria-controls="callout-21" aria-expanded="false" aria-label="Toggle callout">
+<div class="callout-header d-flex align-content-center" data-bs-toggle="collapse" data-bs-target=".callout-21-contents" aria-controls="callout-21" aria-expanded="false" aria-label="Toggle callout">
 <div class="callout-icon-container">
 <i class="callout-icon"></i>
 </div>
 <div class="callout-title-container flex-fill">
-<span class="screen-reader-only">Important</span>Click for Solutions
+Click for Solutions
 </div>
 <div class="callout-btn-toggle d-inline-block border-0 py-1 ps-1 pe-0 float-end"><i class="callout-toggle"></i></div>
 </div>
@@ -9759,7 +9762,7 @@ P(\text{random match}) + P(\text{lab error})\]</span></p>
 <i class="callout-icon"></i>
 </div>
 <div class="callout-title-container flex-fill">
-<span class="screen-reader-only">Note</span>Question 9
+Question 9
 </div>
 </div>
 <div class="callout-body-container callout-body">
@@ -9773,12 +9776,12 @@ P(\text{random match}) + P(\text{lab error})\]</span></p>
 <p><strong>b.</strong> Is that assumption likely to be reasonable? Explain.</p>
 <p><strong>c.</strong> Give one reason why reading the first reminder might change the probability of reading the second reminder.</p>
 <div class="callout callout-style-default callout-important callout-titled">
-<div class="callout-header d-flex align-content-center collapsed" data-bs-toggle="collapse" data-bs-target=".callout-23-contents" aria-controls="callout-23" aria-expanded="false" aria-label="Toggle callout">
+<div class="callout-header d-flex align-content-center" data-bs-toggle="collapse" data-bs-target=".callout-23-contents" aria-controls="callout-23" aria-expanded="false" aria-label="Toggle callout">
 <div class="callout-icon-container">
 <i class="callout-icon"></i>
 </div>
 <div class="callout-title-container flex-fill">
-<span class="screen-reader-only">Important</span>Click for Solutions
+Click for Solutions
 </div>
 <div class="callout-btn-toggle d-inline-block border-0 py-1 ps-1 pe-0 float-end"><i class="callout-toggle"></i></div>
 </div>
@@ -9798,7 +9801,7 @@ P(\text{random match}) + P(\text{lab error})\]</span></p>
 <i class="callout-icon"></i>
 </div>
 <div class="callout-title-container flex-fill">
-<span class="screen-reader-only">Note</span>Question 10
+Question 10
 </div>
 </div>
 <div class="callout-body-container callout-body">
@@ -9807,12 +9810,12 @@ P(\text{random match}) + P(\text{lab error})\]</span></p>
 <p><strong>b.</strong> What assumption allows you to multiply the probabilities?</p>
 <p><strong>c.</strong> Explain why getting three heads in a row is not evidence that the coin is unfair.</p>
 <div class="callout callout-style-default callout-important callout-titled">
-<div class="callout-header d-flex align-content-center collapsed" data-bs-toggle="collapse" data-bs-target=".callout-25-contents" aria-controls="callout-25" aria-expanded="false" aria-label="Toggle callout">
+<div class="callout-header d-flex align-content-center" data-bs-toggle="collapse" data-bs-target=".callout-25-contents" aria-controls="callout-25" aria-expanded="false" aria-label="Toggle callout">
 <div class="callout-icon-container">
 <i class="callout-icon"></i>
 </div>
 <div class="callout-title-container flex-fill">
-<span class="screen-reader-only">Important</span>Click for Solutions
+Click for Solutions
 </div>
 <div class="callout-btn-toggle d-inline-block border-0 py-1 ps-1 pe-0 float-end"><i class="callout-toggle"></i></div>
 </div>
@@ -9835,7 +9838,7 @@ P(\text{random match}) + P(\text{lab error})\]</span></p>
 <i class="callout-icon"></i>
 </div>
 <div class="callout-title-container flex-fill">
-<span class="screen-reader-only">Note</span>Question 11
+Question 11
 </div>
 </div>
 <div class="callout-body-container callout-body">
@@ -9844,12 +9847,12 @@ P(\text{random match}) + P(\text{lab error})\]</span></p>
 <p><strong>b.</strong> What is the probability that at least one tip is accurate?</p>
 <p><strong>c.</strong> Does receiving two tips guarantee that the story is true? Explain.</p>
 <div class="callout callout-style-default callout-important callout-titled">
-<div class="callout-header d-flex align-content-center collapsed" data-bs-toggle="collapse" data-bs-target=".callout-27-contents" aria-controls="callout-27" aria-expanded="false" aria-label="Toggle callout">
+<div class="callout-header d-flex align-content-center" data-bs-toggle="collapse" data-bs-target=".callout-27-contents" aria-controls="callout-27" aria-expanded="false" aria-label="Toggle callout">
 <div class="callout-icon-container">
 <i class="callout-icon"></i>
 </div>
 <div class="callout-title-container flex-fill">
-<span class="screen-reader-only">Important</span>Click for Solutions
+Click for Solutions
 </div>
 <div class="callout-btn-toggle d-inline-block border-0 py-1 ps-1 pe-0 float-end"><i class="callout-toggle"></i></div>
 </div>
@@ -9874,7 +9877,7 @@ P(\text{random match}) + P(\text{lab error})\]</span></p>
 <i class="callout-icon"></i>
 </div>
 <div class="callout-title-container flex-fill">
-<span class="screen-reader-only">Note</span>Question 12
+Question 12
 </div>
 </div>
 <div class="callout-body-container callout-body">
@@ -9883,12 +9886,12 @@ P(\text{random match}) + P(\text{lab error})\]</span></p>
 <p><strong>b.</strong> How is this similar to two witnesses giving the same account after speaking to each other?</p>
 <p><strong>c.</strong> What better question should the journalist ask before publishing the story?</p>
 <div class="callout callout-style-default callout-important callout-titled">
-<div class="callout-header d-flex align-content-center collapsed" data-bs-toggle="collapse" data-bs-target=".callout-29-contents" aria-controls="callout-29" aria-expanded="false" aria-label="Toggle callout">
+<div class="callout-header d-flex align-content-center" data-bs-toggle="collapse" data-bs-target=".callout-29-contents" aria-controls="callout-29" aria-expanded="false" aria-label="Toggle callout">
 <div class="callout-icon-container">
 <i class="callout-icon"></i>
 </div>
 <div class="callout-title-container flex-fill">
-<span class="screen-reader-only">Important</span>Click for Solutions
+Click for Solutions
 </div>
 <div class="callout-btn-toggle d-inline-block border-0 py-1 ps-1 pe-0 float-end"><i class="callout-toggle"></i></div>
 </div>
@@ -9908,7 +9911,7 @@ P(\text{random match}) + P(\text{lab error})\]</span></p>
 <i class="callout-icon"></i>
 </div>
 <div class="callout-title-container flex-fill">
-<span class="screen-reader-only">Note</span>Question 13
+Question 13
 </div>
 </div>
 <div class="callout-body-container callout-body">
@@ -9924,12 +9927,12 @@ P(\text{random match}) + P(\text{lab error})\]</span></p>
 <p><strong>b.</strong> What is the more relevant question from the patient’s point of view?</p>
 <p><strong>c.</strong> Why do we need additional information, such as how common the condition is, to answer the patient’s question properly?</p>
 <div class="callout callout-style-default callout-important callout-titled">
-<div class="callout-header d-flex align-content-center collapsed" data-bs-toggle="collapse" data-bs-target=".callout-31-contents" aria-controls="callout-31" aria-expanded="false" aria-label="Toggle callout">
+<div class="callout-header d-flex align-content-center" data-bs-toggle="collapse" data-bs-target=".callout-31-contents" aria-controls="callout-31" aria-expanded="false" aria-label="Toggle callout">
 <div class="callout-icon-container">
 <i class="callout-icon"></i>
 </div>
 <div class="callout-title-container flex-fill">
-<span class="screen-reader-only">Important</span>Click for Solutions
+Click for Solutions
 </div>
 <div class="callout-btn-toggle d-inline-block border-0 py-1 ps-1 pe-0 float-end"><i class="callout-toggle"></i></div>
 </div>
@@ -9952,7 +9955,7 @@ P(\text{random match}) + P(\text{lab error})\]</span></p>
 <i class="callout-icon"></i>
 </div>
 <div class="callout-title-container flex-fill">
-<span class="screen-reader-only">Note</span>Question 14
+Question 14
 </div>
 </div>
 <div class="callout-body-container callout-body">
@@ -9968,12 +9971,12 @@ P(\text{random match}) + P(\text{lab error})\]</span></p>
 <p><strong>d.</strong> Write this idea using probability language. Your answer should refer to the idea that:</p>
 <p><span class="math display">\[P(A \text{ and } B) \leq P(A).\]</span></p>
 <div class="callout callout-style-default callout-important callout-titled">
-<div class="callout-header d-flex align-content-center collapsed" data-bs-toggle="collapse" data-bs-target=".callout-33-contents" aria-controls="callout-33" aria-expanded="false" aria-label="Toggle callout">
+<div class="callout-header d-flex align-content-center" data-bs-toggle="collapse" data-bs-target=".callout-33-contents" aria-controls="callout-33" aria-expanded="false" aria-label="Toggle callout">
 <div class="callout-icon-container">
 <i class="callout-icon"></i>
 </div>
 <div class="callout-title-container flex-fill">
-<span class="screen-reader-only">Important</span>Click for Solutions
+Click for Solutions
 </div>
 <div class="callout-btn-toggle d-inline-block border-0 py-1 ps-1 pe-0 float-end"><i class="callout-toggle"></i></div>
 </div>
@@ -9996,7 +9999,7 @@ P(\text{random match}) + P(\text{lab error})\]</span></p>
 <i class="callout-icon"></i>
 </div>
 <div class="callout-title-container flex-fill">
-<span class="screen-reader-only">Note</span>Question 15
+Question 15
 </div>
 </div>
 <div class="callout-body-container callout-body">
@@ -10016,12 +10019,12 @@ P(\text{random match}) + P(\text{lab error})\]</span></p>
 <p><strong>c.</strong> Give one reason the characteristics might not be independent.</p>
 <p><strong>d.</strong> What is a better question than “How rare is this combination of characteristics?”</p>
 <div class="callout callout-style-default callout-important callout-titled">
-<div class="callout-header d-flex align-content-center collapsed" data-bs-toggle="collapse" data-bs-target=".callout-35-contents" aria-controls="callout-35" aria-expanded="false" aria-label="Toggle callout">
+<div class="callout-header d-flex align-content-center" data-bs-toggle="collapse" data-bs-target=".callout-35-contents" aria-controls="callout-35" aria-expanded="false" aria-label="Toggle callout">
 <div class="callout-icon-container">
 <i class="callout-icon"></i>
 </div>
 <div class="callout-title-container flex-fill">
-<span class="screen-reader-only">Important</span>Click for Solutions
+Click for Solutions
 </div>
 <div class="callout-btn-toggle d-inline-block border-0 py-1 ps-1 pe-0 float-end"><i class="callout-toggle"></i></div>
 </div>
@@ -10045,7 +10048,7 @@ P(\text{random match}) + P(\text{lab error})\]</span></p>
 <i class="callout-icon"></i>
 </div>
 <div class="callout-title-container flex-fill">
-<span class="screen-reader-only">Note</span>Question 16
+Question 16
 </div>
 </div>
 <div class="callout-body-container callout-body">
@@ -10502,7 +10505,7 @@ P(\text{random match}) + P(\text{lab error})\]</span></p>
 }
 </style>
 
-<table class="gt_table caption-top table table-sm table-striped small" data-quarto-bootstrap="false">
+<table class="gt_table caption-top table table-sm table-striped small" data-quarto-postprocess="true" data-quarto-disable-processing="false" data-quarto-bootstrap="false">
 <thead>
 <tr class="gt_col_headings header">
 <th id="Situation" class="gt_col_heading gt_columns_bottom_border gt_left" data-quarto-table-cell-role="th" scope="col">Situation</th>
@@ -10550,12 +10553,12 @@ P(\text{random match}) + P(\text{lab error})\]</span></p>
 <li>vividness is not probability.</li>
 </ul>
 <div class="callout callout-style-default callout-important callout-titled">
-<div class="callout-header d-flex align-content-center collapsed" data-bs-toggle="collapse" data-bs-target=".callout-37-contents" aria-controls="callout-37" aria-expanded="false" aria-label="Toggle callout">
+<div class="callout-header d-flex align-content-center" data-bs-toggle="collapse" data-bs-target=".callout-37-contents" aria-controls="callout-37" aria-expanded="false" aria-label="Toggle callout">
 <div class="callout-icon-container">
 <i class="callout-icon"></i>
 </div>
 <div class="callout-title-container flex-fill">
-<span class="screen-reader-only">Important</span>Click for Solutions
+Click for Solutions
 </div>
 <div class="callout-btn-toggle d-inline-block border-0 py-1 ps-1 pe-0 float-end"><i class="callout-toggle"></i></div>
 </div>
@@ -11013,7 +11016,7 @@ P(\text{random match}) + P(\text{lab error})\]</span></p>
 }
 </style>
 
-<table class="gt_table caption-top table table-sm table-striped small" data-quarto-bootstrap="false">
+<table class="gt_table caption-top table table-sm table-striped small" data-quarto-postprocess="true" data-quarto-disable-processing="false" data-quarto-bootstrap="false">
 <thead>
 <tr class="gt_col_headings header">
 <th id="Situation" class="gt_col_heading gt_columns_bottom_border gt_left" data-quarto-table-cell-role="th" scope="col">Situation</th>
@@ -11062,7 +11065,7 @@ P(\text{random match}) + P(\text{lab error})\]</span></p>
 <i class="callout-icon"></i>
 </div>
 <div class="callout-title-container flex-fill">
-<span class="screen-reader-only">Note</span>Question 17
+Question 17
 </div>
 </div>
 <div class="callout-body-container callout-body">
@@ -11087,12 +11090,12 @@ P(\text{random match}) + P(\text{lab error})\]</span></p>
 <li>better question.</li>
 </ul>
 <div class="callout callout-style-default callout-important callout-titled">
-<div class="callout-header d-flex align-content-center collapsed" data-bs-toggle="collapse" data-bs-target=".callout-39-contents" aria-controls="callout-39" aria-expanded="false" aria-label="Toggle callout">
+<div class="callout-header d-flex align-content-center" data-bs-toggle="collapse" data-bs-target=".callout-39-contents" aria-controls="callout-39" aria-expanded="false" aria-label="Toggle callout">
 <div class="callout-icon-container">
 <i class="callout-icon"></i>
 </div>
 <div class="callout-title-container flex-fill">
-<span class="screen-reader-only">Important</span>Click for Solutions
+Click for Solutions
 </div>
 <div class="callout-btn-toggle d-inline-block border-0 py-1 ps-1 pe-0 float-end"><i class="callout-toggle"></i></div>
 </div>
@@ -11114,7 +11117,7 @@ P(\text{random match}) + P(\text{lab error})\]</span></p>
 <i class="callout-icon"></i>
 </div>
 <div class="callout-title-container flex-fill">
-<span class="screen-reader-only">Note</span>Question 18
+Question 18
 </div>
 </div>
 <div class="callout-body-container callout-body">
@@ -11123,12 +11126,12 @@ P(\text{random match}) + P(\text{lab error})\]</span></p>
 <p><strong>b.</strong> Give an example from your own life where the first question you asked was not the best question.</p>
 <p><strong>c.</strong> Rewrite your original question as a better statistical question.</p>
 <div class="callout callout-style-default callout-important callout-titled">
-<div class="callout-header d-flex align-content-center collapsed" data-bs-toggle="collapse" data-bs-target=".callout-41-contents" aria-controls="callout-41" aria-expanded="false" aria-label="Toggle callout">
+<div class="callout-header d-flex align-content-center" data-bs-toggle="collapse" data-bs-target=".callout-41-contents" aria-controls="callout-41" aria-expanded="false" aria-label="Toggle callout">
 <div class="callout-icon-container">
 <i class="callout-icon"></i>
 </div>
 <div class="callout-title-container flex-fill">
-<span class="screen-reader-only">Important</span>Click for Solutions
+Click for Solutions
 </div>
 <div class="callout-btn-toggle d-inline-block border-0 py-1 ps-1 pe-0 float-end"><i class="callout-toggle"></i></div>
 </div>
@@ -11163,210 +11166,416 @@ Better statistical question: How did my preparation, the exam difficulty, and my
 </main> <!-- /main -->
 <script>
 
+
+
 /* update total correct if #webex-total_correct exists */
+
 update_total_correct = function() {
+
   console.log("webex: update total_correct");
 
+
+
   var t = document.getElementsByClassName("webex-total_correct");
+
   for (var i = 0; i < t.length; i++) {
+
     p = t[i].parentElement;
+
     var correct = p.getElementsByClassName("webex-correct").length;
+
     var solvemes = p.getElementsByClassName("webex-solveme").length;
+
     var radiogroups = p.getElementsByClassName("webex-radiogroup").length;
+
     var selects = p.getElementsByClassName("webex-select").length;
 
+
+
     t[i].innerHTML = correct + " of " + (solvemes + radiogroups + selects) + " correct";
+
   }
+
 }
+
+
 
 /* webex-solution button toggling function */
+
 b_func = function() {
+
   console.log("webex: toggle hide");
 
+
+
   var cl = this.parentElement.classList;
+
   if (cl.contains('open')) {
+
     cl.remove("open");
+
   } else {
+
     cl.add("open");
+
   }
+
 }
+
+
 
 /* check answers */
+
 check_func = function() {
+
   console.log("webex: check answers");
 
+
+
   var cl = this.parentElement.classList;
+
   if (cl.contains('unchecked')) {
+
     cl.remove("unchecked");
+
     this.innerHTML = "Hide Answers";
+
   } else {
+
     cl.add("unchecked");
+
     this.innerHTML = "Show Answers";
+
   }
+
 }
+
+
 
 /* function for checking solveme answers */
+
 solveme_func = function(e) {
+
   console.log("webex: check solveme");
 
+
+
   var real_answers = JSON.parse(this.dataset.answer);
+
   var my_answer = this.value;
+
   var cl = this.classList;
+
   if (cl.contains("ignorecase")) {
+
     my_answer = my_answer.toLowerCase();
+
   }
+
   if (cl.contains("nospaces")) {
+
     my_answer = my_answer.replace(/ /g, "")
+
   }
+
+
 
   if (my_answer == "") {
+
     cl.remove("webex-correct");
+
     cl.remove("webex-incorrect");
+
   } else if (real_answers.includes(my_answer)) {
+
     cl.add("webex-correct");
+
     cl.remove("webex-incorrect");
+
   } else {
+
     cl.add("webex-incorrect");
+
     cl.remove("webex-correct");
+
   }
+
+
 
   // match numeric answers within a specified tolerance
+
   if(this.dataset.tol > 0){
+
     var tol = JSON.parse(this.dataset.tol);
+
     var matches = real_answers.map(x => Math.abs(x - my_answer) < tol)
+
     if (matches.reduce((a, b) => a + b, 0) > 0) {
+
       cl.add("webex-correct");
+
     } else {
+
       cl.remove("webex-correct");
+
     }
+
   }
+
+
 
   // added regex bit
+
   if (cl.contains("regex")){
+
     answer_regex = RegExp(real_answers.join("|"))
+
     if (answer_regex.test(my_answer)) {
+
       cl.add("webex-correct");
+
     }
+
   }
 
+
+
   update_total_correct();
+
 }
 
+
+
 /* function for checking select answers */
+
 select_func = function(e) {
+
   console.log("webex: check select");
+
+
 
   var cl = this.classList
 
+
+
   /* add style */
+
   cl.remove("webex-incorrect");
+
   cl.remove("webex-correct");
+
   if (this.value == "answer") {
+
     cl.add("webex-correct");
+
   } else if (this.value != "blank") {
+
     cl.add("webex-incorrect");
+
   }
 
+
+
   update_total_correct();
+
 }
+
+
 
 /* function for checking radiogroups answers */
+
 radiogroups_func = function(e) {
+
   console.log("webex: check radiogroups");
 
+
+
   var checked_button = document.querySelector('input[name=' + this.id + ']:checked');
+
   var cl = checked_button.parentElement.classList;
+
   var labels = checked_button.parentElement.parentElement.children;
 
+
+
   /* get rid of styles */
+
   for (i = 0; i < labels.length; i++) {
+
     labels[i].classList.remove("webex-incorrect");
+
     labels[i].classList.remove("webex-correct");
+
   }
+
+
 
   /* add style */
+
   if (checked_button.value == "answer") {
+
     cl.add("webex-correct");
+
   } else {
+
     cl.add("webex-incorrect");
+
   }
 
+
+
   update_total_correct();
+
 }
+
+
 
 window.onload = function() {
+
   console.log("webex onload");
+
   /* set up solution buttons */
+
   var buttons = document.getElementsByTagName("button");
 
+
+
   for (var i = 0; i < buttons.length; i++) {
+
     if (buttons[i].parentElement.classList.contains('webex-solution')) {
+
       buttons[i].onclick = b_func;
+
     }
+
   }
+
+
 
   var check_sections = document.getElementsByClassName("webex-check");
+
   console.log("check:", check_sections.length);
+
   for (var i = 0; i < check_sections.length; i++) {
+
     check_sections[i].classList.add("unchecked");
 
+
+
     let btn = document.createElement("button");
+
     btn.innerHTML = "Show Answers";
+
     btn.classList.add("webex-check-button");
+
     btn.onclick = check_func;
+
     check_sections[i].appendChild(btn);
 
+
+
     let spn = document.createElement("span");
+
     spn.classList.add("webex-total_correct");
+
     check_sections[i].appendChild(spn);
+
   }
+
+
 
   /* set up webex-solveme inputs */
+
   var solveme = document.getElementsByClassName("webex-solveme");
 
+
+
   for (var i = 0; i < solveme.length; i++) {
+
     /* make sure input boxes don't auto-anything */
+
     solveme[i].setAttribute("autocomplete","off");
+
     solveme[i].setAttribute("autocorrect", "off");
+
     solveme[i].setAttribute("autocapitalize", "off");
+
     solveme[i].setAttribute("spellcheck", "false");
+
     solveme[i].value = "";
 
+
+
     /* adjust answer for ignorecase or nospaces */
+
     var cl = solveme[i].classList;
+
     var real_answer = solveme[i].dataset.answer;
+
     if (cl.contains("ignorecase")) {
+
       real_answer = real_answer.toLowerCase();
+
     }
+
     if (cl.contains("nospaces")) {
+
       real_answer = real_answer.replace(/ /g, "");
+
     }
+
     solveme[i].dataset.answer = real_answer;
 
+
+
     /* attach checking function */
+
     solveme[i].onkeyup = solveme_func;
+
     solveme[i].onchange = solveme_func;
 
+
+
     solveme[i].insertAdjacentHTML("afterend", " <span class='webex-icon'></span>")
+
   }
+
+
 
   /* set up radiogroups */
+
   var radiogroups = document.getElementsByClassName("webex-radiogroup");
+
   for (var i = 0; i < radiogroups.length; i++) {
+
     radiogroups[i].onchange = radiogroups_func;
+
   }
+
+
 
   /* set up selects */
+
   var selects = document.getElementsByClassName("webex-select");
+
   for (var i = 0; i < selects.length; i++) {
+
     selects[i].onchange = select_func;
+
     selects[i].insertAdjacentHTML("afterend", " <span class='webex-icon'></span>")
+
   }
 
+
+
   update_total_correct();
+
 }
 
+
+
 </script>
+
 <script id="quarto-html-after-body" type="application/javascript">
   window.document.addEventListener("DOMContentLoaded", function (event) {
     // Ensure there is a toggle, if there isn't float one in the top right
@@ -11431,14 +11640,13 @@ window.onload = function() {
       e.clearSelection();
     }
     const getTextToCopy = function(trigger) {
-      const outerScaffold = trigger.parentElement.cloneNode(true);
-      const codeEl = outerScaffold.querySelector('code');
-      for (const childEl of codeEl.children) {
-        if (isCodeAnnotation(childEl)) {
-          childEl.remove();
+        const codeEl = trigger.previousElementSibling.cloneNode(true);
+        for (const childEl of codeEl.children) {
+          if (isCodeAnnotation(childEl)) {
+            childEl.remove();
+          }
         }
-      }
-      return codeEl.innerText;
+        return codeEl.innerText;
     }
     const clipboard = new window.ClipboardJS('.code-copy-button:not([data-in-quarto-modal])', {
       text: getTextToCopy

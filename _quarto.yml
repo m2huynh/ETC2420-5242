@@ -27,6 +27,7 @@ book:
     - 8_Bayes.qmd
     - 9_bayes2.qmd
     - 10_Models1.qmd
+    - 11_Models2.qmd
     
 bibliography: references.bib
 
