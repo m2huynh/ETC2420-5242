@@ -41,30 +41,31 @@ knitr::include_graphics("images/chapter8/outline.png")
 
 <br>
 
-## A puzzle about Steve
+## A puzzle about Minh
 
 The Nobel Prize-winning psychologist Daniel Kahneman often used a simple puzzle to show how easily our statistical intuition can be led astray.
 
-Consider the following description:
+Consider the following description (updated to for this unit):
 
-> Steve is very shy and withdrawn, invariably helpful, but with very little interest in people or in the world of reality. A meek and tidy soul, he has a need for order and structure, and a passion for detail.
+> Minh is very shy and withdrawn, invariably helpful, but with very little interest in people or in the world of reality. A meek and tidy soul, he has a need for order and structure, and a passion for detail.
 
-Now suppose Steve has been chosen at random from a group of people. The question is: Which is more likely?
+Now suppose Minh has been chosen at random from a group of people. The question is: Which is more likely?
 
-> Is Steve a librarian; or is Steve a farmer?
+> Is Minh a librarian; or is Minh a farmer?
 
 <center>
+
 ```{r, echo=FALSE}
-#| fig-cap: "Image Source: https://alexlyman.org/blog/bayes.html"
-knitr::include_graphics("images/chapter8/farmer_librarian.png")
+knitr::include_graphics("images/chapter8/Minh.png")
 ```
+
 </center>
 
 <br>
 
 Have a think about what your answer might be.
 
-For now, we will leave Steve’s story unresolved. We will come back to it at the end of the chapter, once we have developed the tools needed to think about this question more carefully.
+For now, we will leave Minh’s story unresolved. We will come back to it at the end of the chapter, once we have developed the tools needed to think about this question more carefully.
 
 ## Two ways to think about probability
 
@@ -290,8 +291,8 @@ is already enough to solve many conditional probability problems. But it has one
 
 Sometimes we do know that joint probability directly. In the coffee and quiz example, the table told us that 7 out of 20 students both drank coffee and completed the quiz. But in many problems, the information is given in a different form. Instead of being told $P(H \cap E)$, we are often told:
 
-- how common $H$ is
-- how likely the evidence $E$ is if $H$ is true
+-   how common $H$ is
+-   how likely the evidence $E$ is if $H$ is true
 
 That is, we are given $P(H)$ and $P(E \mid H)$. This is where the next version of the formula becomes useful. Since
 
@@ -320,14 +321,15 @@ So Baby Bayes says: once we know the evidence happened, we narrow our attention 
 As a side note, there is a real book called **Bayesian Probability for babies**, although this is not where the term baby bayes come from:
 
 <center>
+
 ```{r, echo=FALSE}
 #| fig-cap: "Image Source: https://x.com/beth_fossen/status/1227244290763563008"
 knitr::include_graphics("images/chapter8/EQgMLHAXYAENQck.jpg")
 ```
+
 </center>
 
 <br>
-
 
 ## Baby Bayes
 
@@ -339,9 +341,9 @@ But formulas are not always the easiest place to start. Conditional probability 
 
 In this section, we will use three representations:
 
-- Venn diagrams
-- Tree diagrams
-- Continuous distributions
+-   Venn diagrams
+-   Tree diagrams
+-   Continuous distributions
 
 These methods may look different, but they are all doing the same thing: We condition on the evidence, then ask what proportion of that reduced world belongs to the event or explanation we care about.
 
@@ -349,9 +351,9 @@ These methods may look different, but they are all doing the same thing: We cond
 
 Suppose we have two soccer players, Amy and Jody. Across many matches:
 
-- 70% of the time, neither Amy nor Jody scores a goal
-- Amy scores a goal 20% of the time
-- Jody scores a goal 25% of the time
+-   70% of the time, neither Amy nor Jody scores a goal
+-   Amy scores a goal 20% of the time
+-   Jody scores a goal 25% of the time
 
 On a particular match day, Jody scored a goal. What is the probability that Amy also scored a goal?
 
@@ -474,8 +476,8 @@ The evidence is that Jody scored. So we restrict attention to the Jody circle.
 
 Inside the Jody circle, there are two possibilities:
 
-- Amy also scored
-- Amy did not score
+-   Amy also scored
+-   Amy did not score
 
 The total probability inside the Jody circle is:
 
@@ -509,10 +511,10 @@ For that kind of problem, a tree diagram is usually more useful.
 
 Suppose the Monash DataNerds football team has a star player named Minh.
 
-- In any given match, there is a 10% chance that Minh is injured
-- If Minh is injured, there is a 40% chance that the team loses
-- If Minh is not injured, there is a 5% chance that the team loses
-- In the most recent match, the team lost
+-   In any given match, there is a 10% chance that Minh is injured
+-   If Minh is injured, there is a 40% chance that the team loses
+-   If Minh is not injured, there is a 5% chance that the team loses
+-   In the most recent match, the team lost
 
 What is the probability that Minh was injured?
 
@@ -1197,8 +1199,8 @@ Suppose there is a disease called Disease X, and a test has been developed for t
 
 The test is reasonably accurate:
 
-- If someone has Disease X, the test returns positive 80% of the time
-- If someone does not have Disease X, the test returns negative 80% of the time
+-   If someone has Disease X, the test returns positive 80% of the time
+-   If someone does not have Disease X, the test returns negative 80% of the time
 
 Equivalently, among people who do not have the disease, the test gives a false positive 20% of the time.
 
@@ -1292,10 +1294,10 @@ disease_table |>
 
 Out of 100 people:
 
-- 10 have Disease X
-- 90 do not have Disease X
-- 8 people with the disease test positive
-- 18 people without the disease also test positive
+-   10 have Disease X
+-   90 do not have Disease X
+-   8 people with the disease test positive
+-   18 people without the disease also test positive
 
 So there are:
 
@@ -1326,9 +1328,9 @@ Up to this point, we have called the formula **Baby Bayes** because we have been
 
 In each example, there were two possible explanations:
 
-- Minh was injured or not injured
-- Minh had Disease X or did not have Disease X
-- someone took the pill or did not take the pill
+-   Minh was injured or not injured
+-   Minh had Disease X or did not have Disease X
+-   someone took the pill or did not take the pill
 
 For these examples, the formula was:
 
@@ -1426,8 +1428,8 @@ So the positive result raised the probability from 10% to about 31%. That is a m
 
 Suppose Disease Y affects only 1 in 1000 people. The test behaves the same way:
 
-- If someone has the disease, the test returns positive 80% of the time
-- If someone does not have the disease, the test gives a false positive 20% of the time
+-   If someone has the disease, the test returns positive 80% of the time
+-   If someone does not have the disease, the test gives a false positive 20% of the time
 
 Now imagine testing 1000 people.
 
@@ -1551,9 +1553,9 @@ Suppose a sporting competition uses a test for a banned substance.
 
 Assume:
 
-- 10% of athletes have used the banned substance
-- If an athlete used the substance, the test returns positive 50% of the time
-- If an athlete did not use the substance, the test returns positive 1% of the time
+-   10% of athletes have used the banned substance
+-   If an athlete used the substance, the test returns positive 50% of the time
+-   If an athlete did not use the substance, the test returns positive 1% of the time
 
 Minh is an athlete and receives a positive test.
 
@@ -1698,14 +1700,15 @@ This mistake appears in many settings, but it is especially serious when probabi
 A tragic example is the case of Sally Clark in the United Kingdom.
 
 <center>
+
 ```{r, echo=FALSE}
 #| classes: .enlarge-image
 knitr::include_graphics("images/chapter8/sally.jpg")
 ```
+
 </center>
 
 <br>
-
 
 Clark’s first baby died suddenly at 11 weeks. The death was recorded as sudden infant death syndrome, usually abbreviated as SIDS. SIDS is a diagnosis used when a baby dies unexpectedly and no clear cause is found after investigation. Clark later had a second baby, who also died suddenly, this time at 8 weeks. After the second death, Clark was accused of murdering both children.
 
@@ -1777,10 +1780,10 @@ $$P(\text{innocence} \mid \text{evidence})
 
 That conclusion does not follow.
 
-Bayesian reasoning asks us to keep the direction of the conditional probability clear: 
+Bayesian reasoning asks us to keep the direction of the conditional probability clear:
 
-- $P(\text{evidence} \mid \text{hypothesis})$ is a likelihood.
-- $P(\text{hypothesis} \mid \text{evidence})$ is a posterior probability.
+-   $P(\text{evidence} \mid \text{hypothesis})$ is a likelihood.
+-   $P(\text{hypothesis} \mid \text{evidence})$ is a posterior probability.
 
 They are connected by Bayes' theorem, but they are not interchangeable.
 
@@ -1790,11 +1793,11 @@ The examples so far have been useful because they were small enough to see clear
 
 But statistical inference often asks a different kind of question. Instead of asking whether a single hypothesis is true, we often want to learn about an unknown quantity. For example, we might want to know:
 
-- the proportion of voters who support a policy
-- the average income in a population
-- the probability that a customer clicks on an advertisement
-- the infection rate in a community
-- the difference between two treatment effects
+-   the proportion of voters who support a policy
+-   the average income in a population
+-   the probability that a customer clicks on an advertisement
+-   the infection rate in a community
+-   the difference between two treatment effects
 
 These unknown quantities are called **parameters**.
 
@@ -1996,7 +1999,9 @@ $$\theta \sim \text{Beta}(\alpha, \beta)$$
 
 The beta distribution is a family of distributions on the interval from 0 to 1. By changing the values of $\alpha$ and $\beta$, we can create many different shapes. Play with the app below to see what the beta distribution looks like when you change the parameters:
 
-<iframe src="interactive/beta_distribution_slider_app.html" width="100%" height="650" style="border: none;"></iframe>
+<iframe src="interactive/beta_distribution_slider_app.html" width="100%" height="650" style="border: none;">
+
+</iframe>
 
 Each curve describes a different kind of prior belief about $\theta$. For example:
 
@@ -2453,9 +2458,9 @@ This posterior distribution is the full Bayesian answer. It tells us which value
 
 However, it is often useful to summarise the posterior with a few numbers. For example, we might want to know:
 
-- What is the centre of the posterior?
-- What range of values contains most of the posterior probability?
-- What is the probability that (\theta) is above some meaningful threshold?
+-   What is the centre of the posterior?
+-   What range of values contains most of the posterior probability?
+-   What is the probability that (\theta) is above some meaningful threshold?
 
 For the late-night bus example, a meaningful threshold might be:
 
@@ -2840,18 +2845,18 @@ This illustrates an important feature of Bayesian inference. When the data are w
 
 That does not mean the prior disappears. It means the posterior is shaped by both the prior and the data, and the balance depends on how much information the data contain. In practice, this is why prior sensitivity is useful. It helps us see whether our conclusions are robust to different reasonable starting points.
 
-## Returning to Steve
+## Returning to Minh
 
-At the beginning of the chapter, we met Steve. As a reminder:
+At the beginning of the chapter, we met Minh. As a reminder:
 
-> Steve is very shy and withdrawn, invariably helpful, but with very little interest in people or in the world of reality. A meek and tidy soul, he has a need for order and structure, and a passion for detail.
+> Minh is very shy and withdrawn, invariably helpful, but with very little interest in people or in the world of reality. A meek and tidy soul, he has a need for order and structure, and a passion for detail.
 >
 > The question is:
 >
 > Which is more likely?
 >
-> - Steve is a librarian or;
-> - Steve is a farmer.
+> -   Minh is a librarian or;
+> -   Minh is a farmer.
 
 Many people are drawn toward the librarian answer. The description feels like it fits a librarian. But Bayes' theorem reminds us that fit is not the only thing that matters.
 
@@ -2862,13 +2867,13 @@ We need two ingredients:
 
 Let
 
-$$H = \text{Steve is a librarian}$$
+$$H = \text{Minh is a librarian}$$
 
 and let
 
-$$E = \text{Steve fits the description}$$
+$$E = \text{Minh fits the description}$$
 
-Suppose, for illustration, that Steve was chosen from a group where 10% of people are librarians and 90% are farmers:
+Suppose, for illustration, that Minh was chosen from a group where 10% of people are librarians and 90% are farmers:
 
 $$P(H) = 0.10$$
 
@@ -2884,7 +2889,7 @@ and
 
 $$P(E \mid H^c) = 0.30$$
 
-So the description is evidence for Steve being a librarian. It is three times more likely under the librarian hypothesis than under the farmer hypothesis:
+So the description is evidence for Minh being a librarian. It is three times more likely under the librarian hypothesis than under the farmer hypothesis:
 
 $$\begin{aligned}
 \text{LR}
@@ -2918,17 +2923,17 @@ P(H \mid E)
 0.25
 \end{aligned}$$
 
-So, under these assumptions, the probability that Steve is a librarian is 25%.
+So, under these assumptions, the probability that Minh is a librarian is 25%.
 
 That may feel surprising. The description really does favour the librarian explanation. But it does not favour it enough to overcome the base rate.
 
 The description is the likelihood. The base rate is the prior. The posterior depends on both. This is the same lesson we saw in the medical-test example. A positive test may be evidence for disease, but it does not tell the whole story. We also need to know how common the disease was before the test.
 
-Steve's story is useful because it shows how easily our intuition can focus on resemblance and forget base rates. Bayes' theorem gives us a way to slow down.
+Minh's story is useful because it shows how easily our intuition can focus on resemblance and forget base rates. Bayes' theorem gives us a way to slow down.
 
 Instead of asking only:
 
-> Does Steve sound like a librarian?
+> Does Minh sound like a librarian?
 
 we ask:
 
@@ -3029,9 +3034,9 @@ So, among students who attended the welcome event, 60% joined the club.
 
 A streaming service recommends a new show. Suppose:
 
-- 40% of users watch the trailer
-- Among users who watch the trailer, 30% watch the full show
-- Among users who do not watch the trailer, 10% watch the full show
+-   40% of users watch the trailer
+-   Among users who watch the trailer, 30% watch the full show
+-   Among users who do not watch the trailer, 10% watch the full show
 
 A randomly selected user watched the full show.
 
@@ -3091,9 +3096,9 @@ So, given that the user watched the full show, the probability that they watched
 
 A workplace uses a screening test for a rare allergy. Suppose:
 
-- 2% of employees have the allergy
-- If an employee has the allergy, the test returns positive 90% of the time
-- If an employee does not have the allergy, the test returns positive 5% of the time
+-   2% of employees have the allergy
+-   If an employee has the allergy, the test returns positive 90% of the time
+-   If an employee does not have the allergy, the test returns positive 5% of the time
 
 Sam tests positive.
 
@@ -3186,9 +3191,9 @@ A fraud detection system flags transactions as suspicious.
 
 Suppose:
 
-- 3% of transactions are fraudulent
-- If a transaction is fraudulent, the system flags it 70% of the time
-- If a transaction is not fraudulent, the system flags it 4% of the time
+-   3% of transactions are fraudulent
+-   If a transaction is fraudulent, the system flags it 70% of the time
+-   If a transaction is not fraudulent, the system flags it 4% of the time
 
 A transaction is flagged.
 
@@ -3524,9 +3529,9 @@ A machine-learning model classifies emails as spam or not spam.
 
 Suppose:
 
-- 20% of emails are spam
-- If an email is spam, the model flags it 95% of the time
-- If an email is not spam, the model flags it 10% of the time
+-   20% of emails are spam
+-   If an email is spam, the model flags it 95% of the time
+-   If an email is not spam, the model flags it 10% of the time
 
 An email is flagged.
 
@@ -3586,19 +3591,19 @@ These are different conditional probabilities. We also need the base rate of spa
 :::: callout-note
 ## Question 12
 
-Return to the Steve-style reasoning from the end of the chapter, but use a new example.
+Return to the Minh-style reasoning from the end of the chapter, but use a new example.
 
 Suppose Taylor is described as careful, quiet, organised, and very interested in fine details.
 
 Taylor has been chosen at random from a group containing:
 
-- 30 architects
-- 270 sales managers
+-   30 architects
+-   270 sales managers
 
 Suppose:
 
-- 80% of architects fit the description
-- 20% of sales managers fit the description
+-   80% of architects fit the description
+-   20% of sales managers fit the description
 
 Let
 
