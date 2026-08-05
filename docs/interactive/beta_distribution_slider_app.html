@@ -1,0 +1,324 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>Beta Distribution Explorer</title>
+  <style>
+    body {
+      font-family: system-ui, -apple-system, BlinkMacSystemFont, "Segoe UI", sans-serif;
+      margin: 0;
+      padding: 24px;
+      background: #fafafa;
+      color: #222;
+    }
+
+    .app {
+      max-width: 900px;
+      margin: 0 auto;
+      background: white;
+      border: 1px solid #e6e6e6;
+      border-radius: 16px;
+      padding: 24px;
+      box-shadow: 0 8px 24px rgba(0, 0, 0, 0.06);
+    }
+
+    h1 {
+      font-size: 1.4rem;
+      margin: 0 0 8px;
+      font-weight: 650;
+    }
+
+    .subtitle {
+      color: #666;
+      margin-bottom: 24px;
+      line-height: 1.45;
+    }
+
+    .controls {
+      display: grid;
+      grid-template-columns: 1fr 1fr;
+      gap: 20px;
+      margin-bottom: 20px;
+    }
+
+    .control {
+      background: #f7f7f7;
+      border-radius: 12px;
+      padding: 16px;
+    }
+
+    .control-header {
+      display: flex;
+      justify-content: space-between;
+      align-items: baseline;
+      gap: 12px;
+      margin-bottom: 10px;
+      font-weight: 600;
+    }
+
+    .value {
+      font-variant-numeric: tabular-nums;
+      color: #444;
+      background: white;
+      border: 1px solid #ddd;
+      padding: 3px 8px;
+      border-radius: 8px;
+      min-width: 48px;
+      text-align: center;
+    }
+
+    input[type="range"] {
+      width: 100%;
+      accent-color: #333;
+    }
+
+    .summary {
+      display: flex;
+      flex-wrap: wrap;
+      gap: 12px;
+      margin: 10px 0 20px;
+      color: #444;
+      font-size: 0.95rem;
+    }
+
+    .summary span {
+      background: #f4f4f4;
+      border-radius: 999px;
+      padding: 6px 11px;
+    }
+
+    canvas {
+      width: 100%;
+      height: 420px;
+      display: block;
+    }
+
+    @media (max-width: 650px) {
+      body { padding: 12px; }
+      .app { padding: 16px; }
+      .controls { grid-template-columns: 1fr; }
+      canvas { height: 340px; }
+    }
+  </style>
+</head>
+<body>
+  <main class="app">
+    <h1>Beta Distribution Explorer</h1>
+    <div class="subtitle">
+      Adjust the alpha and beta parameters to see how the Beta distribution changes.
+    </div>
+
+    <section class="controls">
+      <div class="control">
+        <div class="control-header">
+          <label for="alpha">Alpha, &alpha;</label>
+          <span class="value" id="alphaValue">2.0</span>
+        </div>
+        <input id="alpha" type="range" min="0.2" max="30" step="0.1" value="2" />
+      </div>
+
+      <div class="control">
+        <div class="control-header">
+          <label for="beta">Beta, &beta;</label>
+          <span class="value" id="betaValue">2.0</span>
+        </div>
+        <input id="beta" type="range" min="0.2" max="30" step="0.1" value="2" />
+      </div>
+    </section>
+
+    <div class="summary">
+      <span id="meanText">Mean: 0.500</span>
+      <span id="modeText">Mode: 0.500</span>
+      <span id="varianceText">Variance: 0.050</span>
+    </div>
+
+    <canvas id="plot" width="900" height="500" aria-label="Beta distribution plot"></canvas>
+  </main>
+
+  <script>
+    const alphaSlider = document.getElementById("alpha");
+    const betaSlider = document.getElementById("beta");
+    const alphaValue = document.getElementById("alphaValue");
+    const betaValue = document.getElementById("betaValue");
+    const meanText = document.getElementById("meanText");
+    const modeText = document.getElementById("modeText");
+    const varianceText = document.getElementById("varianceText");
+    const canvas = document.getElementById("plot");
+    const ctx = canvas.getContext("2d");
+
+    function logGamma(z) {
+      const g = 7;
+      const p = [
+        0.99999999999980993,
+        676.5203681218851,
+        -1259.1392167224028,
+        771.32342877765313,
+        -176.61502916214059,
+        12.507343278686905,
+        -0.13857109526572012,
+        9.9843695780195716e-6,
+        1.5056327351493116e-7
+      ];
+
+      if (z < 0.5) {
+        return Math.log(Math.PI) - Math.log(Math.sin(Math.PI * z)) - logGamma(1 - z);
+      }
+
+      z -= 1;
+      let x = p[0];
+      for (let i = 1; i < p.length; i++) x += p[i] / (z + i);
+      const t = z + g + 0.5;
+      return 0.5 * Math.log(2 * Math.PI) + (z + 0.5) * Math.log(t) - t + Math.log(x);
+    }
+
+    function betaPdf(x, a, b) {
+      if (x <= 0 || x >= 1) return 0;
+      const logPdf =
+        (a - 1) * Math.log(x) +
+        (b - 1) * Math.log(1 - x) -
+        (logGamma(a) + logGamma(b) - logGamma(a + b));
+      return Math.exp(logPdf);
+    }
+
+    function drawAxes(plotLeft, plotTop, plotWidth, plotHeight, yMax) {
+      ctx.strokeStyle = "#d0d0d0";
+      ctx.lineWidth = 1;
+      ctx.fillStyle = "#555";
+      ctx.font = "13px system-ui, sans-serif";
+      ctx.textAlign = "center";
+      ctx.textBaseline = "top";
+
+      for (let i = 0; i <= 10; i++) {
+        const x = plotLeft + (i / 10) * plotWidth;
+        ctx.beginPath();
+        ctx.moveTo(x, plotTop);
+        ctx.lineTo(x, plotTop + plotHeight);
+        ctx.stroke();
+        ctx.fillText((i / 10).toFixed(1), x, plotTop + plotHeight + 10);
+      }
+
+      ctx.textAlign = "right";
+      ctx.textBaseline = "middle";
+      for (let i = 0; i <= 5; i++) {
+        const yValue = (i / 5) * yMax;
+        const y = plotTop + plotHeight - (yValue / yMax) * plotHeight;
+        ctx.beginPath();
+        ctx.moveTo(plotLeft, y);
+        ctx.lineTo(plotLeft + plotWidth, y);
+        ctx.stroke();
+        ctx.fillText(yValue.toFixed(1), plotLeft - 10, y);
+      }
+
+      ctx.strokeStyle = "#333";
+      ctx.lineWidth = 1.5;
+      ctx.beginPath();
+      ctx.moveTo(plotLeft, plotTop + plotHeight);
+      ctx.lineTo(plotLeft + plotWidth, plotTop + plotHeight);
+      ctx.moveTo(plotLeft, plotTop);
+      ctx.lineTo(plotLeft, plotTop + plotHeight);
+      ctx.stroke();
+
+      ctx.fillStyle = "#222";
+      ctx.font = "14px system-ui, sans-serif";
+      ctx.textAlign = "center";
+      ctx.textBaseline = "top";
+      ctx.fillText("p", plotLeft + plotWidth / 2, plotTop + plotHeight + 42);
+
+      ctx.save();
+      ctx.translate(18, plotTop + plotHeight / 2);
+      ctx.rotate(-Math.PI / 2);
+      ctx.textAlign = "center";
+      ctx.textBaseline = "middle";
+      ctx.fillText("Density", 0, 0);
+      ctx.restore();
+    }
+
+    function updatePlot() {
+      const a = parseFloat(alphaSlider.value);
+      const b = parseFloat(betaSlider.value);
+
+      alphaValue.textContent = a.toFixed(1);
+      betaValue.textContent = b.toFixed(1);
+
+      const mean = a / (a + b);
+      const variance = (a * b) / (((a + b) ** 2) * (a + b + 1));
+      meanText.textContent = `Mean: ${mean.toFixed(3)}`;
+      varianceText.textContent = `Variance: ${variance.toFixed(3)}`;
+
+      if (a > 1 && b > 1) {
+        const mode = (a - 1) / (a + b - 2);
+        modeText.textContent = `Mode: ${mode.toFixed(3)}`;
+      } else {
+        modeText.textContent = "Mode: boundary";
+      }
+
+      const width = canvas.width;
+      const height = canvas.height;
+      const plotLeft = 70;
+      const plotRight = 24;
+      const plotTop = 24;
+      const plotBottom = 76;
+      const plotWidth = width - plotLeft - plotRight;
+      const plotHeight = height - plotTop - plotBottom;
+
+      ctx.clearRect(0, 0, width, height);
+
+      const points = [];
+      const n = 600;
+      for (let i = 0; i <= n; i++) {
+        const x = 0.001 + (0.998 * i) / n;
+        points.push({ x, y: betaPdf(x, a, b) });
+      }
+
+      let yMax = Math.max(...points.map(d => d.y));
+      yMax = Math.max(1, yMax * 1.15);
+
+      drawAxes(plotLeft, plotTop, plotWidth, plotHeight, yMax);
+
+      ctx.beginPath();
+      points.forEach((d, i) => {
+        const px = plotLeft + d.x * plotWidth;
+        const py = plotTop + plotHeight - (d.y / yMax) * plotHeight;
+        if (i === 0) ctx.moveTo(px, plotTop + plotHeight);
+        ctx.lineTo(px, py);
+      });
+      ctx.lineTo(plotLeft + plotWidth, plotTop + plotHeight);
+      ctx.closePath();
+      ctx.fillStyle = "rgba(40, 40, 40, 0.18)";
+      ctx.fill();
+
+      ctx.beginPath();
+      points.forEach((d, i) => {
+        const px = plotLeft + d.x * plotWidth;
+        const py = plotTop + plotHeight - (d.y / yMax) * plotHeight;
+        if (i === 0) ctx.moveTo(px, py);
+        else ctx.lineTo(px, py);
+      });
+      ctx.strokeStyle = "#222";
+      ctx.lineWidth = 3;
+      ctx.stroke();
+
+      const meanX = plotLeft + mean * plotWidth;
+      ctx.setLineDash([6, 5]);
+      ctx.strokeStyle = "rgba(0, 0, 0, 0.45)";
+      ctx.lineWidth = 1.4;
+      ctx.beginPath();
+      ctx.moveTo(meanX, plotTop);
+      ctx.lineTo(meanX, plotTop + plotHeight);
+      ctx.stroke();
+      ctx.setLineDash([]);
+
+      ctx.fillStyle = "#333";
+      ctx.font = "13px system-ui, sans-serif";
+      ctx.textAlign = "center";
+      ctx.textBaseline = "bottom";
+      ctx.fillText("mean", meanX, plotTop - 4);
+    }
+
+    alphaSlider.addEventListener("input", updatePlot);
+    betaSlider.addEventListener("input", updatePlot);
+    updatePlot();
+  </script>
+</body>
+</html>

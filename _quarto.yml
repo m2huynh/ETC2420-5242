@@ -1,6 +1,9 @@
 project:
   type: book
   output-dir: docs
+  resources: 
+    - images/**
+    - interactive/**
 
 book:
   title: "Statistical Thinking"
