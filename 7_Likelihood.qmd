@@ -18,15 +18,15 @@ set.seed(2420)
 
 By the end of this chapter, you should be able to:
 
-1. Explain why likelihood requires a probability model for the data.
-2. Describe a statistical model as a simplified probability story about how data might have been generated.
-3. Recognise why the normal distribution is not appropriate for every kind of data.
-4. Match common data types to plausible probability models, including Bernoulli, binomial, Poisson, exponential, gamma, and normal models.
-5. Distinguish between a probability mass function and a probability density function.
-6. Distinguish between probability and likelihood.
-7. Construct and interpret a simple likelihood function for binary data.
-8. Explain maximum likelihood estimation as choosing the parameter value that makes the observed data most likely.
-9. Explain why log-likelihoods are often easier to work with than likelihoods.
+1.  Explain why likelihood requires a probability model for the data.
+2.  Describe a statistical model as a simplified probability story about how data might have been generated.
+3.  Recognise why the normal distribution is not appropriate for every kind of data.
+4.  Match common data types to plausible probability models, including Bernoulli, binomial, Poisson, exponential, gamma, and normal models.
+5.  Distinguish between a probability mass function and a probability density function.
+6.  Distinguish between probability and likelihood.
+7.  Construct and interpret a simple likelihood function for binary data.
+8.  Explain maximum likelihood estimation as choosing the parameter value that makes the observed data most likely.
+9.  Explain why log-likelihoods are often easier to work with than likelihoods.
 :::
 
 ## Introduction
@@ -125,19 +125,19 @@ model_table |>
 
 This table is not a list to memorise. It is a habit of thought. Before fitting a model, ask what values the variable can take and what shape the data might reasonably have.
 
-:::: {.callout-important}
+::: callout-important
 ### A useful habit
 
 Before choosing a model, ask:
 
-1. What values are possible?
-2. Are the data discrete or continuous?
-3. Are there natural bounds, such as 0 or 1?
-4. Is the distribution likely to be symmetric or skewed?
-5. What process might have generated the observations?
-::::
+1.  What values are possible?
+2.  Are the data discrete or continuous?
+3.  Are there natural bounds, such as 0 or 1?
+4.  Is the distribution likely to be symmetric or skewed?
+5.  What process might have generated the observations?
+:::
 
-This chapter is about what happens after we choose such a model. Once we have a probability model, the data can tell us which versions of that model are more or less plausible. If the model contains an unknown parameter, different parameter values describe different possible data-generating processes. Some values would make the observed data seem quite likely. Other values would make the observed data seem surprising. 
+This chapter is about what happens after we choose such a model. Once we have a probability model, the data can tell us which versions of that model are more or less plausible. If the model contains an unknown parameter, different parameter values describe different possible data-generating processes. Some values would make the observed data seem quite likely. Other values would make the observed data seem surprising.
 
 The tool we use to compare these possibilities is called **likelihood**.
 
@@ -202,7 +202,6 @@ ggplot(waiting_pdf, aes(x = x, y = density)) +
   )
 ```
 
-
 This is the probability that the waiting time is between 5 and 10 minutes. For continuous random variables, probabilities are described using a **probability density function**, or pdf.
 
 The distinction matters because likelihood uses the model's probability rule. For discrete data, likelihood is built from probabilities of observed values. For continuous data, likelihood is built from densities at observed values.
@@ -242,8 +241,7 @@ Y =
 1, & \text{if a student used public transport}\\
 0, & \text{otherwise}
 \end{cases}
-$$
-The model has one parameter:
+$$ The model has one parameter:
 
 $$
 p = P(Y = 1).
@@ -297,7 +295,6 @@ ggplot(bernoulli_data, aes(x = factor(y), y = probability)) +
   )
 ```
 
-
 ### Binomial model: number of successes
 
 A **binomial** model is used when we count the number of successes in a fixed number of independent trials, each with the same probability of success.
@@ -344,17 +341,16 @@ ggplot(binomial_data, aes(x = y, y = probability)) +
   )
 ```
 
-
 ### Poisson model: counts in time or space
 
 A **Poisson** model is often used for counts of events in a fixed amount of time or space.
 
 Examples include:
 
-- the number of calls to a service centre in an hour;
-- the number of hospital admissions in a week;
-- the number of traffic accidents at an intersection in a month;
-- the number of goals scored by a team in a match.
+-   the number of calls to a service centre in an hour;
+-   the number of hospital admissions in a week;
+-   the number of traffic accidents at an intersection in a month;
+-   the number of goals scored by a team in a match.
 
 A Poisson model has one parameter, usually written as $\lambda$. This parameter is the expected count in the interval of interest.
 
@@ -397,10 +393,10 @@ An **exponential** model is often used for waiting times.
 
 For example:
 
-- time until the next bus arrives;
-- time until a machine fails;
-- time until the next customer arrives;
-- time between calls to a hotline.
+-   time until the next bus arrives;
+-   time until a machine fails;
+-   time until the next customer arrives;
+-   time between calls to a hotline.
 
 If $Y$ is a waiting time, then $Y$ cannot be negative. This is one reason the normal distribution may not be appropriate.
 
@@ -438,11 +434,11 @@ A **gamma** model is also used for positive, right-skewed data. It is more flexi
 
 Examples include:
 
-- rainfall amounts on wet days;
-- insurance claim sizes;
-- some kinds of waiting times;
-- some biomedical measurements;
-- household income, at least as a rough first model.
+-   rainfall amounts on wet days;
+-   insurance claim sizes;
+-   some kinds of waiting times;
+-   some biomedical measurements;
+-   household income, at least as a rough first model.
 
 The gamma distribution has two parameters, often called a shape and a rate. We will not derive its formula here. The important idea is that the gamma model can represent a range of positive skewed shapes.
 
@@ -581,19 +577,19 @@ Different parameter values describe different versions of the same model. For ex
 
 The model family is the same. The parameter value changes the story.
 
-:::: {.callout-important}
+::: callout-important
 ### Model family and fitted model
 
 A **model family** is a set of possible models, such as all Bernoulli models with different values of $p$.
 
 A **fitted model** is what we get after using data to choose particular parameter values from that family.
-::::
+:::
 
 This gives us a three-step process:
 
-1. Choose a model family.
-2. Use data to estimate the parameter values.
-3. Check whether the fitted model is reasonable for the data.
+1.  Choose a model family.
+2.  Use data to estimate the parameter values.
+3.  Check whether the fitted model is reasonable for the data.
 
 In this chapter, likelihood gives us a method for the second step. But the first and third steps are just as important.
 
@@ -909,7 +905,6 @@ mean_wait <- mean(wait_times)
 mean_wait
 ```
 
-
 ```{r}
 #| echo: false
 #| message: false
@@ -1002,8 +997,6 @@ ggplot(normal_fit_data, aes(x = value, y = density, linetype = Fit)) +
 
 The rug marks show the observed data values. Both curves are centred at the sample mean. The difference is in the spread: the MLE variance uses $n$, so it is slightly smaller than the usual sample variance, which uses $n - 1$. This makes the MLE curve slightly narrower.
 
-
-
 ### MLE cannot fix a bad model
 
 Maximum likelihood finds the best-fitting parameter value **within the model we chose**. Howwever, it does not prove that the model itself was a good idea. This is similar to the warning from the bootstrap chapter:
@@ -1064,11 +1057,11 @@ A fitted model should be checked against the data.
 
 There are many ways to do this. At this stage, the most important habit is visual:
 
-- plot the data;
-- overlay the fitted model where appropriate;
-- compare the empirical distribution with the fitted distribution;
-- use quantile-quantile plots for continuous data;
-- ask whether simulated data from the model look like the real data.
+-   plot the data;
+-   overlay the fitted model where appropriate;
+-   compare the empirical distribution with the fitted distribution;
+-   use quantile-quantile plots for continuous data;
+-   ask whether simulated data from the model look like the real data.
 
 A **quantile-quantile plot**, or QQ plot, compares the quantiles of the observed data with the quantiles expected under the fitted model. If the model is a good description of the data, the points should lie roughly along a straight line.
 
@@ -1095,7 +1088,7 @@ The curved pattern suggests that the normal model is struggling to describe the 
 
 This is not a failure of maximum likelihood. MLE did exactly what it was asked to do: it found the best-fitting normal model. The issue is that the normal family may not have been a sensible family for these data.
 
-:::: {.callout-important}
+::: callout-important
 ### The model-checking question
 
 Do not only ask:
@@ -1105,7 +1098,7 @@ Do not only ask:
 Also ask:
 
 > Does the fitted model generate data that look like the data we observed?
-::::
+:::
 
 ## Our journey ahead
 
@@ -1137,7 +1130,6 @@ knitr::include_graphics("images/chapter7/outlineteaser.png")
 <br>
 
 This is why likelihood sits in the middle of the course. It grows out of probability and uncertainty. It gives us maximum likelihood estimation in this chapter. It also prepares us for Bayesian inference, where the same likelihood becomes part of a broader story about learning from data.
-
 
 ## Exercises
 
