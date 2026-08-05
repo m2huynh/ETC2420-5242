@@ -2,17 +2,23 @@
 <html xmlns="http://www.w3.org/1999/xhtml" lang="en" xml:lang="en"><head>
 
 <meta charset="utf-8">
-<meta name="generator" content="quarto-1.7.32">
+<meta name="generator" content="quarto-1.10.18">
 
 <meta name="viewport" content="width=device-width, initial-scale=1.0, user-scalable=yes">
 
 
 <title>1&nbsp; Better Questions – Statistical Thinking</title>
 <style>
-code{white-space: pre-wrap;}
+/* Default styles provided by pandoc.
+** See https://pandoc.org/MANUAL.html#variables-for-html for config info.
+*/
 span.smallcaps{font-variant: small-caps;}
-div.columns{display: flex; gap: min(4vw, 1.5em);}
-div.column{flex: auto; overflow-x: auto;}
+div.columns{display: flex; gap: 1.5em;}
+div.column{flex: auto;}
+@media screen {
+div.columns{gap: min(4vw, 1.5em);}
+div.column{overflow-x: auto;}
+}
 div.hanging-indent{margin-left: 1.5em; text-indent: -1.5em;}
 ul.task-list{list-style: none;}
 ul.task-list li input[type="checkbox"] {
@@ -72,14 +78,14 @@ pre > code.sourceCode > span > a:first-child::before { text-decoration: underlin
 <script src="site_libs/quarto-html/tippy.umd.min.js"></script>
 <script src="site_libs/quarto-html/anchor.min.js"></script>
 <link href="site_libs/quarto-html/tippy.css" rel="stylesheet">
-<link href="site_libs/quarto-html/quarto-syntax-highlighting-37eea08aefeeee20ff55810ff984fec1.css" rel="stylesheet" class="quarto-color-scheme" id="quarto-text-highlighting-styles">
-<link href="site_libs/quarto-html/quarto-syntax-highlighting-dark-2fef5ea3f8957b3e4ecc936fc74692ca.css" rel="stylesheet" class="quarto-color-scheme quarto-color-alternate" id="quarto-text-highlighting-styles">
-<link href="site_libs/quarto-html/quarto-syntax-highlighting-37eea08aefeeee20ff55810ff984fec1.css" rel="stylesheet" class="quarto-color-scheme-extra" id="quarto-text-highlighting-styles">
+<link href="site_libs/quarto-html/quarto-syntax-highlighting-64a204ab8560d761af7679ceaba22944.css" rel="stylesheet" class="quarto-color-scheme" id="quarto-text-highlighting-styles">
+<link href="site_libs/quarto-html/quarto-syntax-highlighting-dark-b85bc7c33db8c58e0ec93c3465666fed.css" rel="stylesheet" class="quarto-color-scheme quarto-color-alternate" id="quarto-text-highlighting-styles">
+<link href="site_libs/quarto-html/quarto-syntax-highlighting-64a204ab8560d761af7679ceaba22944.css" rel="stylesheet" class="quarto-color-scheme-extra" id="quarto-text-highlighting-styles">
 <script src="site_libs/bootstrap/bootstrap.min.js"></script>
 <link href="site_libs/bootstrap/bootstrap-icons.css" rel="stylesheet">
-<link href="site_libs/bootstrap/bootstrap-c27fdc8e5b00b532d2d5a75ada188648.min.css" rel="stylesheet" append-hash="true" class="quarto-color-scheme" id="quarto-bootstrap" data-mode="light">
-<link href="site_libs/bootstrap/bootstrap-dark-b9e11ad5a37ead2aabff839d95ae3857.min.css" rel="stylesheet" append-hash="true" class="quarto-color-scheme quarto-color-alternate" id="quarto-bootstrap" data-mode="dark">
-<link href="site_libs/bootstrap/bootstrap-c27fdc8e5b00b532d2d5a75ada188648.min.css" rel="stylesheet" append-hash="true" class="quarto-color-scheme-extra" id="quarto-bootstrap" data-mode="light">
+<link href="site_libs/bootstrap/bootstrap-f07248834697d125d844cdaf4174b45d.min.css" rel="stylesheet" append-hash="true" class="quarto-color-scheme" id="quarto-bootstrap" data-mode="light">
+<link href="site_libs/bootstrap/bootstrap-dark-a64f2b92d8b4b45ab5f5d9261e8b8c9d.min.css" rel="stylesheet" append-hash="true" class="quarto-color-scheme quarto-color-alternate" id="quarto-bootstrap" data-mode="dark">
+<link href="site_libs/bootstrap/bootstrap-f07248834697d125d844cdaf4174b45d.min.css" rel="stylesheet" append-hash="true" class="quarto-color-scheme-extra" id="quarto-bootstrap" data-mode="light">
 <script id="quarto-search-options" type="application/json">{
   "location": "sidebar",
   "copy-button": false,
@@ -109,7 +115,7 @@ pre > code.sourceCode > span > a:first-child::before { text-decoration: underlin
 }</script>
 
   <script src="https://cdnjs.cloudflare.com/polyfill/v3/polyfill.min.js?features=es6"></script>
-  <script src="https://cdn.jsdelivr.net/npm/mathjax@3/es5/tex-chtml-full.js" type="text/javascript"></script>
+  <script defer="" src="https://cdn.jsdelivr.net/npm/mathjax@4/tex-chtml.js" type="text/javascript"></script>
 
 <script type="text/javascript">
 const typesetMath = (el) => {
@@ -122,7 +128,7 @@ const typesetMath = (el) => {
     var macros = [];
     for (var i = 0; i < mathElements.length; i++) {
       var texText = mathElements[i].firstChild;
-      if (mathElements[i].tagName == "SPAN") {
+      if (mathElements[i].tagName == "SPAN" && texText && texText.data) {
         window.katex.render(texText.data, mathElements[i], {
           displayMode: mathElements[i].classList.contains('display'),
           throwOnError: false,
@@ -389,36 +395,6 @@ window.Quarto = {
  <span class="menu-text"><span class="chapter-number">6</span>&nbsp; <span class="chapter-title">Simulation-Based Inference</span></span></a>
   </div>
 </li>
-        <li class="sidebar-item">
-  <div class="sidebar-item-container"> 
-  <a href="./7_Likelihood.html" class="sidebar-item-text sidebar-link">
- <span class="menu-text"><span class="chapter-number">7</span>&nbsp; <span class="chapter-title">Likelihood</span></span></a>
-  </div>
-</li>
-        <li class="sidebar-item">
-  <div class="sidebar-item-container"> 
-  <a href="./8_Bayes.html" class="sidebar-item-text sidebar-link">
- <span class="menu-text"><span class="chapter-number">8</span>&nbsp; <span class="chapter-title">Bayesian Inference</span></span></a>
-  </div>
-</li>
-        <li class="sidebar-item">
-  <div class="sidebar-item-container"> 
-  <a href="./9_bayes2.html" class="sidebar-item-text sidebar-link">
- <span class="menu-text"><span class="chapter-number">9</span>&nbsp; <span class="chapter-title">Bayesian Simulation and Decisions</span></span></a>
-  </div>
-</li>
-        <li class="sidebar-item">
-  <div class="sidebar-item-container"> 
-  <a href="./10_Models1.html" class="sidebar-item-text sidebar-link">
- <span class="menu-text"><span class="chapter-number">10</span>&nbsp; <span class="chapter-title">Thinking with Frequentist Models</span></span></a>
-  </div>
-</li>
-        <li class="sidebar-item">
-  <div class="sidebar-item-container"> 
-  <a href="./11_Models2.html" class="sidebar-item-text sidebar-link">
- <span class="menu-text"><span class="chapter-number">11</span>&nbsp; <span class="chapter-title">Thinking with Bayesian Regression Models</span></span></a>
-  </div>
-</li>
     </ul>
     </div>
 </nav>
@@ -475,7 +451,7 @@ window.Quarto = {
 <i class="callout-icon"></i>
 </div>
 <div class="callout-title-container flex-fill">
-Learning Objectives
+<span class="screen-reader-only">Note</span>Learning Objectives
 </div>
 </div>
 <div class="callout-body-container callout-body">
@@ -678,7 +654,7 @@ Learning Objectives
 <i class="callout-icon"></i>
 </div>
 <div class="callout-title-container flex-fill">
-A cautionary tale about expressing uncertainty
+<span class="screen-reader-only">Note</span>A cautionary tale about expressing uncertainty
 </div>
 </div>
 <div class="callout-body-container callout-body">
@@ -713,7 +689,7 @@ A cautionary tale about expressing uncertainty
 <i class="callout-icon"></i>
 </div>
 <div class="callout-title-container flex-fill">
-Note about probability
+<span class="screen-reader-only">Important</span>Note about probability
 </div>
 </div>
 <div class="callout-body-container callout-body">
@@ -920,7 +896,7 @@ Note about probability
 <i class="callout-icon"></i>
 </div>
 <div class="callout-title-container flex-fill">
-Roman Evidence
+<span class="screen-reader-only">Note</span>Roman Evidence
 </div>
 </div>
 <div class="callout-body-container callout-body">
@@ -947,7 +923,7 @@ Roman Evidence
 <i class="callout-icon"></i>
 </div>
 <div class="callout-title-container flex-fill">
-Case Study: Timothy Durham
+<span class="screen-reader-only">Note</span>Case Study: Timothy Durham
 </div>
 </div>
 <div class="callout-body-container callout-body">
@@ -968,23 +944,23 @@ Case Study: Timothy Durham
 <p>The true estimate for lab error is unknown, but experts place it around 1%. Suppose we compare the two possible sources of error:</p>
 <div class="cell">
 <div class="cell-output-display">
-<div id="bkyjabnwdb" style="padding-left:0px;padding-right:0px;padding-top:10px;padding-bottom:10px;overflow-x:auto;overflow-y:auto;width:auto;height:auto;">
-<style>#bkyjabnwdb table {
+<div id="ksvdmczrmz" style="padding-left:0px;padding-right:0px;padding-top:10px;padding-bottom:10px;overflow-x:auto;overflow-y:auto;width:auto;height:auto;">
+<style>#ksvdmczrmz table {
   font-family: system-ui, 'Segoe UI', Roboto, Helvetica, Arial, sans-serif, 'Apple Color Emoji', 'Segoe UI Emoji', 'Segoe UI Symbol', 'Noto Color Emoji';
   -webkit-font-smoothing: antialiased;
   -moz-osx-font-smoothing: grayscale;
 }
 
-#bkyjabnwdb thead, #bkyjabnwdb tbody, #bkyjabnwdb tfoot, #bkyjabnwdb tr, #bkyjabnwdb td, #bkyjabnwdb th {
+#ksvdmczrmz thead, #ksvdmczrmz tbody, #ksvdmczrmz tfoot, #ksvdmczrmz tr, #ksvdmczrmz td, #ksvdmczrmz th {
   border-style: none;
 }
 
-#bkyjabnwdb p {
+#ksvdmczrmz p {
   margin: 0;
   padding: 0;
 }
 
-#bkyjabnwdb .gt_table {
+#ksvdmczrmz .gt_table {
   display: table;
   border-collapse: collapse;
   line-height: normal;
@@ -1010,12 +986,12 @@ Case Study: Timothy Durham
   border-left-color: #D3D3D3;
 }
 
-#bkyjabnwdb .gt_caption {
+#ksvdmczrmz .gt_caption {
   padding-top: 4px;
   padding-bottom: 4px;
 }
 
-#bkyjabnwdb .gt_title {
+#ksvdmczrmz .gt_title {
   color: #333333;
   font-size: 125%;
   font-weight: initial;
@@ -1027,7 +1003,7 @@ Case Study: Timothy Durham
   border-bottom-width: 0;
 }
 
-#bkyjabnwdb .gt_subtitle {
+#ksvdmczrmz .gt_subtitle {
   color: #333333;
   font-size: 85%;
   font-weight: initial;
@@ -1039,7 +1015,7 @@ Case Study: Timothy Durham
   border-top-width: 0;
 }
 
-#bkyjabnwdb .gt_heading {
+#ksvdmczrmz .gt_heading {
   background-color: #FFFFFF;
   text-align: center;
   border-bottom-color: #FFFFFF;
@@ -1051,13 +1027,13 @@ Case Study: Timothy Durham
   border-right-color: #D3D3D3;
 }
 
-#bkyjabnwdb .gt_bottom_border {
+#ksvdmczrmz .gt_bottom_border {
   border-bottom-style: solid;
   border-bottom-width: 2px;
   border-bottom-color: #D3D3D3;
 }
 
-#bkyjabnwdb .gt_col_headings {
+#ksvdmczrmz .gt_col_headings {
   border-top-style: solid;
   border-top-width: 2px;
   border-top-color: #D3D3D3;
@@ -1072,7 +1048,7 @@ Case Study: Timothy Durham
   border-right-color: #D3D3D3;
 }
 
-#bkyjabnwdb .gt_col_heading {
+#ksvdmczrmz .gt_col_heading {
   color: #333333;
   background-color: #FFFFFF;
   font-size: 100%;
@@ -1092,7 +1068,7 @@ Case Study: Timothy Durham
   overflow-x: hidden;
 }
 
-#bkyjabnwdb .gt_column_spanner_outer {
+#ksvdmczrmz .gt_column_spanner_outer {
   color: #333333;
   background-color: #FFFFFF;
   font-size: 100%;
@@ -1104,15 +1080,15 @@ Case Study: Timothy Durham
   padding-right: 4px;
 }
 
-#bkyjabnwdb .gt_column_spanner_outer:first-child {
+#ksvdmczrmz .gt_column_spanner_outer:first-child {
   padding-left: 0;
 }
 
-#bkyjabnwdb .gt_column_spanner_outer:last-child {
+#ksvdmczrmz .gt_column_spanner_outer:last-child {
   padding-right: 0;
 }
 
-#bkyjabnwdb .gt_column_spanner {
+#ksvdmczrmz .gt_column_spanner {
   border-bottom-style: solid;
   border-bottom-width: 2px;
   border-bottom-color: #D3D3D3;
@@ -1124,11 +1100,11 @@ Case Study: Timothy Durham
   width: 100%;
 }
 
-#bkyjabnwdb .gt_spanner_row {
+#ksvdmczrmz .gt_spanner_row {
   border-bottom-style: hidden;
 }
 
-#bkyjabnwdb .gt_group_heading {
+#ksvdmczrmz .gt_group_heading {
   padding-top: 8px;
   padding-bottom: 8px;
   padding-left: 5px;
@@ -1154,7 +1130,7 @@ Case Study: Timothy Durham
   text-align: left;
 }
 
-#bkyjabnwdb .gt_empty_group_heading {
+#ksvdmczrmz .gt_empty_group_heading {
   padding: 0.5px;
   color: #333333;
   background-color: #FFFFFF;
@@ -1169,15 +1145,15 @@ Case Study: Timothy Durham
   vertical-align: middle;
 }
 
-#bkyjabnwdb .gt_from_md > :first-child {
+#ksvdmczrmz .gt_from_md > :first-child {
   margin-top: 0;
 }
 
-#bkyjabnwdb .gt_from_md > :last-child {
+#ksvdmczrmz .gt_from_md > :last-child {
   margin-bottom: 0;
 }
 
-#bkyjabnwdb .gt_row {
+#ksvdmczrmz .gt_row {
   padding-top: 8px;
   padding-bottom: 8px;
   padding-left: 5px;
@@ -1196,7 +1172,7 @@ Case Study: Timothy Durham
   overflow-x: hidden;
 }
 
-#bkyjabnwdb .gt_stub {
+#ksvdmczrmz .gt_stub {
   color: #333333;
   background-color: #FFFFFF;
   font-size: 100%;
@@ -1209,7 +1185,7 @@ Case Study: Timothy Durham
   padding-right: 5px;
 }
 
-#bkyjabnwdb .gt_stub_row_group {
+#ksvdmczrmz .gt_stub_row_group {
   color: #333333;
   background-color: #FFFFFF;
   font-size: 100%;
@@ -1223,15 +1199,15 @@ Case Study: Timothy Durham
   vertical-align: top;
 }
 
-#bkyjabnwdb .gt_row_group_first td {
+#ksvdmczrmz .gt_row_group_first td {
   border-top-width: 2px;
 }
 
-#bkyjabnwdb .gt_row_group_first th {
+#ksvdmczrmz .gt_row_group_first th {
   border-top-width: 2px;
 }
 
-#bkyjabnwdb .gt_summary_row {
+#ksvdmczrmz .gt_summary_row {
   color: #333333;
   background-color: #FFFFFF;
   text-transform: inherit;
@@ -1241,16 +1217,16 @@ Case Study: Timothy Durham
   padding-right: 5px;
 }
 
-#bkyjabnwdb .gt_first_summary_row {
+#ksvdmczrmz .gt_first_summary_row {
   border-top-style: solid;
   border-top-color: #D3D3D3;
 }
 
-#bkyjabnwdb .gt_first_summary_row.thick {
+#ksvdmczrmz .gt_first_summary_row.thick {
   border-top-width: 2px;
 }
 
-#bkyjabnwdb .gt_last_summary_row {
+#ksvdmczrmz .gt_last_summary_row {
   padding-top: 8px;
   padding-bottom: 8px;
   padding-left: 5px;
@@ -1260,7 +1236,7 @@ Case Study: Timothy Durham
   border-bottom-color: #D3D3D3;
 }
 
-#bkyjabnwdb .gt_grand_summary_row {
+#ksvdmczrmz .gt_grand_summary_row {
   color: #333333;
   background-color: #FFFFFF;
   text-transform: inherit;
@@ -1270,7 +1246,7 @@ Case Study: Timothy Durham
   padding-right: 5px;
 }
 
-#bkyjabnwdb .gt_first_grand_summary_row {
+#ksvdmczrmz .gt_first_grand_summary_row {
   padding-top: 8px;
   padding-bottom: 8px;
   padding-left: 5px;
@@ -1280,7 +1256,7 @@ Case Study: Timothy Durham
   border-top-color: #D3D3D3;
 }
 
-#bkyjabnwdb .gt_last_grand_summary_row_top {
+#ksvdmczrmz .gt_last_grand_summary_row_top {
   padding-top: 8px;
   padding-bottom: 8px;
   padding-left: 5px;
@@ -1290,11 +1266,11 @@ Case Study: Timothy Durham
   border-bottom-color: #D3D3D3;
 }
 
-#bkyjabnwdb .gt_striped {
+#ksvdmczrmz .gt_striped {
   background-color: rgba(128, 128, 128, 0.05);
 }
 
-#bkyjabnwdb .gt_table_body {
+#ksvdmczrmz .gt_table_body {
   border-top-style: solid;
   border-top-width: 2px;
   border-top-color: #D3D3D3;
@@ -1303,7 +1279,7 @@ Case Study: Timothy Durham
   border-bottom-color: #D3D3D3;
 }
 
-#bkyjabnwdb .gt_footnotes {
+#ksvdmczrmz .gt_footnotes {
   color: #333333;
   background-color: #FFFFFF;
   border-bottom-style: none;
@@ -1317,7 +1293,7 @@ Case Study: Timothy Durham
   border-right-color: #D3D3D3;
 }
 
-#bkyjabnwdb .gt_footnote {
+#ksvdmczrmz .gt_footnote {
   margin: 0px;
   font-size: 90%;
   padding-top: 4px;
@@ -1326,7 +1302,7 @@ Case Study: Timothy Durham
   padding-right: 5px;
 }
 
-#bkyjabnwdb .gt_sourcenotes {
+#ksvdmczrmz .gt_sourcenotes {
   color: #333333;
   background-color: #FFFFFF;
   border-bottom-style: none;
@@ -1340,7 +1316,7 @@ Case Study: Timothy Durham
   border-right-color: #D3D3D3;
 }
 
-#bkyjabnwdb .gt_sourcenote {
+#ksvdmczrmz .gt_sourcenote {
   font-size: 90%;
   padding-top: 4px;
   padding-bottom: 4px;
@@ -1348,77 +1324,77 @@ Case Study: Timothy Durham
   padding-right: 5px;
 }
 
-#bkyjabnwdb .gt_left {
+#ksvdmczrmz .gt_left {
   text-align: left;
 }
 
-#bkyjabnwdb .gt_center {
+#ksvdmczrmz .gt_center {
   text-align: center;
 }
 
-#bkyjabnwdb .gt_right {
+#ksvdmczrmz .gt_right {
   text-align: right;
   font-variant-numeric: tabular-nums;
 }
 
-#bkyjabnwdb .gt_font_normal {
+#ksvdmczrmz .gt_font_normal {
   font-weight: normal;
 }
 
-#bkyjabnwdb .gt_font_bold {
+#ksvdmczrmz .gt_font_bold {
   font-weight: bold;
 }
 
-#bkyjabnwdb .gt_font_italic {
+#ksvdmczrmz .gt_font_italic {
   font-style: italic;
 }
 
-#bkyjabnwdb .gt_super {
+#ksvdmczrmz .gt_super {
   font-size: 65%;
 }
 
-#bkyjabnwdb .gt_footnote_marks {
+#ksvdmczrmz .gt_footnote_marks {
   font-size: 75%;
   vertical-align: 0.4em;
   position: initial;
 }
 
-#bkyjabnwdb .gt_asterisk {
+#ksvdmczrmz .gt_asterisk {
   font-size: 100%;
   vertical-align: 0;
 }
 
-#bkyjabnwdb .gt_indent_1 {
+#ksvdmczrmz .gt_indent_1 {
   text-indent: 5px;
 }
 
-#bkyjabnwdb .gt_indent_2 {
+#ksvdmczrmz .gt_indent_2 {
   text-indent: 10px;
 }
 
-#bkyjabnwdb .gt_indent_3 {
+#ksvdmczrmz .gt_indent_3 {
   text-indent: 15px;
 }
 
-#bkyjabnwdb .gt_indent_4 {
+#ksvdmczrmz .gt_indent_4 {
   text-indent: 20px;
 }
 
-#bkyjabnwdb .gt_indent_5 {
+#ksvdmczrmz .gt_indent_5 {
   text-indent: 25px;
 }
 
-#bkyjabnwdb .katex-display {
+#ksvdmczrmz .katex-display {
   display: inline-flex !important;
   margin-bottom: 0.75em !important;
 }
 
-#bkyjabnwdb div.Reactable > div.rt-table > div.rt-thead > div.rt-tr.rt-tr-group-header > div.rt-th-group:after {
+#ksvdmczrmz div.Reactable > div.rt-table > div.rt-thead > div.rt-tr.rt-tr-group-header > div.rt-th-group:after {
   height: 0px !important;
 }
 </style>
 
-<table class="gt_table caption-top table table-sm table-striped small" data-quarto-postprocess="true" data-quarto-disable-processing="false" data-quarto-bootstrap="false">
+<table class="gt_table caption-top table table-sm table-striped small" data-quarto-bootstrap="false">
 <thead>
 <tr class="gt_col_headings header">
 <th id="Possible-source-of-error" class="gt_col_heading gt_columns_bottom_border gt_center" data-quarto-table-cell-role="th" scope="col">Possible source of error</th>
@@ -1478,7 +1454,7 @@ P(\text{random match}) + P(\text{lab error})\]</span></p>
 <i class="callout-icon"></i>
 </div>
 <div class="callout-title-container flex-fill">
-Case Study: People v Collins
+<span class="screen-reader-only">Note</span>Case Study: People v Collins
 </div>
 </div>
 <div class="callout-body-container callout-body">
@@ -1580,23 +1556,23 @@ Case Study: People v Collins
 <p>A useful way to summarise the habit is this:</p>
 <div class="cell">
 <div class="cell-output-display">
-<div id="rmifoodutm" style="padding-left:0px;padding-right:0px;padding-top:10px;padding-bottom:10px;overflow-x:auto;overflow-y:auto;width:auto;height:auto;">
-<style>#rmifoodutm table {
+<div id="rzwkfgzapo" style="padding-left:0px;padding-right:0px;padding-top:10px;padding-bottom:10px;overflow-x:auto;overflow-y:auto;width:auto;height:auto;">
+<style>#rzwkfgzapo table {
   font-family: system-ui, 'Segoe UI', Roboto, Helvetica, Arial, sans-serif, 'Apple Color Emoji', 'Segoe UI Emoji', 'Segoe UI Symbol', 'Noto Color Emoji';
   -webkit-font-smoothing: antialiased;
   -moz-osx-font-smoothing: grayscale;
 }
 
-#rmifoodutm thead, #rmifoodutm tbody, #rmifoodutm tfoot, #rmifoodutm tr, #rmifoodutm td, #rmifoodutm th {
+#rzwkfgzapo thead, #rzwkfgzapo tbody, #rzwkfgzapo tfoot, #rzwkfgzapo tr, #rzwkfgzapo td, #rzwkfgzapo th {
   border-style: none;
 }
 
-#rmifoodutm p {
+#rzwkfgzapo p {
   margin: 0;
   padding: 0;
 }
 
-#rmifoodutm .gt_table {
+#rzwkfgzapo .gt_table {
   display: table;
   border-collapse: collapse;
   line-height: normal;
@@ -1622,12 +1598,12 @@ Case Study: People v Collins
   border-left-color: #D3D3D3;
 }
 
-#rmifoodutm .gt_caption {
+#rzwkfgzapo .gt_caption {
   padding-top: 4px;
   padding-bottom: 4px;
 }
 
-#rmifoodutm .gt_title {
+#rzwkfgzapo .gt_title {
   color: #333333;
   font-size: 125%;
   font-weight: initial;
@@ -1639,7 +1615,7 @@ Case Study: People v Collins
   border-bottom-width: 0;
 }
 
-#rmifoodutm .gt_subtitle {
+#rzwkfgzapo .gt_subtitle {
   color: #333333;
   font-size: 85%;
   font-weight: initial;
@@ -1651,7 +1627,7 @@ Case Study: People v Collins
   border-top-width: 0;
 }
 
-#rmifoodutm .gt_heading {
+#rzwkfgzapo .gt_heading {
   background-color: #FFFFFF;
   text-align: center;
   border-bottom-color: #FFFFFF;
@@ -1663,13 +1639,13 @@ Case Study: People v Collins
   border-right-color: #D3D3D3;
 }
 
-#rmifoodutm .gt_bottom_border {
+#rzwkfgzapo .gt_bottom_border {
   border-bottom-style: solid;
   border-bottom-width: 2px;
   border-bottom-color: #D3D3D3;
 }
 
-#rmifoodutm .gt_col_headings {
+#rzwkfgzapo .gt_col_headings {
   border-top-style: solid;
   border-top-width: 2px;
   border-top-color: #D3D3D3;
@@ -1684,7 +1660,7 @@ Case Study: People v Collins
   border-right-color: #D3D3D3;
 }
 
-#rmifoodutm .gt_col_heading {
+#rzwkfgzapo .gt_col_heading {
   color: #333333;
   background-color: #FFFFFF;
   font-size: 100%;
@@ -1704,7 +1680,7 @@ Case Study: People v Collins
   overflow-x: hidden;
 }
 
-#rmifoodutm .gt_column_spanner_outer {
+#rzwkfgzapo .gt_column_spanner_outer {
   color: #333333;
   background-color: #FFFFFF;
   font-size: 100%;
@@ -1716,15 +1692,15 @@ Case Study: People v Collins
   padding-right: 4px;
 }
 
-#rmifoodutm .gt_column_spanner_outer:first-child {
+#rzwkfgzapo .gt_column_spanner_outer:first-child {
   padding-left: 0;
 }
 
-#rmifoodutm .gt_column_spanner_outer:last-child {
+#rzwkfgzapo .gt_column_spanner_outer:last-child {
   padding-right: 0;
 }
 
-#rmifoodutm .gt_column_spanner {
+#rzwkfgzapo .gt_column_spanner {
   border-bottom-style: solid;
   border-bottom-width: 2px;
   border-bottom-color: #D3D3D3;
@@ -1736,11 +1712,11 @@ Case Study: People v Collins
   width: 100%;
 }
 
-#rmifoodutm .gt_spanner_row {
+#rzwkfgzapo .gt_spanner_row {
   border-bottom-style: hidden;
 }
 
-#rmifoodutm .gt_group_heading {
+#rzwkfgzapo .gt_group_heading {
   padding-top: 8px;
   padding-bottom: 8px;
   padding-left: 5px;
@@ -1766,7 +1742,7 @@ Case Study: People v Collins
   text-align: left;
 }
 
-#rmifoodutm .gt_empty_group_heading {
+#rzwkfgzapo .gt_empty_group_heading {
   padding: 0.5px;
   color: #333333;
   background-color: #FFFFFF;
@@ -1781,15 +1757,15 @@ Case Study: People v Collins
   vertical-align: middle;
 }
 
-#rmifoodutm .gt_from_md > :first-child {
+#rzwkfgzapo .gt_from_md > :first-child {
   margin-top: 0;
 }
 
-#rmifoodutm .gt_from_md > :last-child {
+#rzwkfgzapo .gt_from_md > :last-child {
   margin-bottom: 0;
 }
 
-#rmifoodutm .gt_row {
+#rzwkfgzapo .gt_row {
   padding-top: 8px;
   padding-bottom: 8px;
   padding-left: 5px;
@@ -1808,7 +1784,7 @@ Case Study: People v Collins
   overflow-x: hidden;
 }
 
-#rmifoodutm .gt_stub {
+#rzwkfgzapo .gt_stub {
   color: #333333;
   background-color: #FFFFFF;
   font-size: 100%;
@@ -1821,7 +1797,7 @@ Case Study: People v Collins
   padding-right: 5px;
 }
 
-#rmifoodutm .gt_stub_row_group {
+#rzwkfgzapo .gt_stub_row_group {
   color: #333333;
   background-color: #FFFFFF;
   font-size: 100%;
@@ -1835,15 +1811,15 @@ Case Study: People v Collins
   vertical-align: top;
 }
 
-#rmifoodutm .gt_row_group_first td {
+#rzwkfgzapo .gt_row_group_first td {
   border-top-width: 2px;
 }
 
-#rmifoodutm .gt_row_group_first th {
+#rzwkfgzapo .gt_row_group_first th {
   border-top-width: 2px;
 }
 
-#rmifoodutm .gt_summary_row {
+#rzwkfgzapo .gt_summary_row {
   color: #333333;
   background-color: #FFFFFF;
   text-transform: inherit;
@@ -1853,16 +1829,16 @@ Case Study: People v Collins
   padding-right: 5px;
 }
 
-#rmifoodutm .gt_first_summary_row {
+#rzwkfgzapo .gt_first_summary_row {
   border-top-style: solid;
   border-top-color: #D3D3D3;
 }
 
-#rmifoodutm .gt_first_summary_row.thick {
+#rzwkfgzapo .gt_first_summary_row.thick {
   border-top-width: 2px;
 }
 
-#rmifoodutm .gt_last_summary_row {
+#rzwkfgzapo .gt_last_summary_row {
   padding-top: 8px;
   padding-bottom: 8px;
   padding-left: 5px;
@@ -1872,7 +1848,7 @@ Case Study: People v Collins
   border-bottom-color: #D3D3D3;
 }
 
-#rmifoodutm .gt_grand_summary_row {
+#rzwkfgzapo .gt_grand_summary_row {
   color: #333333;
   background-color: #FFFFFF;
   text-transform: inherit;
@@ -1882,7 +1858,7 @@ Case Study: People v Collins
   padding-right: 5px;
 }
 
-#rmifoodutm .gt_first_grand_summary_row {
+#rzwkfgzapo .gt_first_grand_summary_row {
   padding-top: 8px;
   padding-bottom: 8px;
   padding-left: 5px;
@@ -1892,7 +1868,7 @@ Case Study: People v Collins
   border-top-color: #D3D3D3;
 }
 
-#rmifoodutm .gt_last_grand_summary_row_top {
+#rzwkfgzapo .gt_last_grand_summary_row_top {
   padding-top: 8px;
   padding-bottom: 8px;
   padding-left: 5px;
@@ -1902,11 +1878,11 @@ Case Study: People v Collins
   border-bottom-color: #D3D3D3;
 }
 
-#rmifoodutm .gt_striped {
+#rzwkfgzapo .gt_striped {
   background-color: rgba(128, 128, 128, 0.05);
 }
 
-#rmifoodutm .gt_table_body {
+#rzwkfgzapo .gt_table_body {
   border-top-style: solid;
   border-top-width: 2px;
   border-top-color: #D3D3D3;
@@ -1915,7 +1891,7 @@ Case Study: People v Collins
   border-bottom-color: #D3D3D3;
 }
 
-#rmifoodutm .gt_footnotes {
+#rzwkfgzapo .gt_footnotes {
   color: #333333;
   background-color: #FFFFFF;
   border-bottom-style: none;
@@ -1929,7 +1905,7 @@ Case Study: People v Collins
   border-right-color: #D3D3D3;
 }
 
-#rmifoodutm .gt_footnote {
+#rzwkfgzapo .gt_footnote {
   margin: 0px;
   font-size: 90%;
   padding-top: 4px;
@@ -1938,7 +1914,7 @@ Case Study: People v Collins
   padding-right: 5px;
 }
 
-#rmifoodutm .gt_sourcenotes {
+#rzwkfgzapo .gt_sourcenotes {
   color: #333333;
   background-color: #FFFFFF;
   border-bottom-style: none;
@@ -1952,7 +1928,7 @@ Case Study: People v Collins
   border-right-color: #D3D3D3;
 }
 
-#rmifoodutm .gt_sourcenote {
+#rzwkfgzapo .gt_sourcenote {
   font-size: 90%;
   padding-top: 4px;
   padding-bottom: 4px;
@@ -1960,77 +1936,77 @@ Case Study: People v Collins
   padding-right: 5px;
 }
 
-#rmifoodutm .gt_left {
+#rzwkfgzapo .gt_left {
   text-align: left;
 }
 
-#rmifoodutm .gt_center {
+#rzwkfgzapo .gt_center {
   text-align: center;
 }
 
-#rmifoodutm .gt_right {
+#rzwkfgzapo .gt_right {
   text-align: right;
   font-variant-numeric: tabular-nums;
 }
 
-#rmifoodutm .gt_font_normal {
+#rzwkfgzapo .gt_font_normal {
   font-weight: normal;
 }
 
-#rmifoodutm .gt_font_bold {
+#rzwkfgzapo .gt_font_bold {
   font-weight: bold;
 }
 
-#rmifoodutm .gt_font_italic {
+#rzwkfgzapo .gt_font_italic {
   font-style: italic;
 }
 
-#rmifoodutm .gt_super {
+#rzwkfgzapo .gt_super {
   font-size: 65%;
 }
 
-#rmifoodutm .gt_footnote_marks {
+#rzwkfgzapo .gt_footnote_marks {
   font-size: 75%;
   vertical-align: 0.4em;
   position: initial;
 }
 
-#rmifoodutm .gt_asterisk {
+#rzwkfgzapo .gt_asterisk {
   font-size: 100%;
   vertical-align: 0;
 }
 
-#rmifoodutm .gt_indent_1 {
+#rzwkfgzapo .gt_indent_1 {
   text-indent: 5px;
 }
 
-#rmifoodutm .gt_indent_2 {
+#rzwkfgzapo .gt_indent_2 {
   text-indent: 10px;
 }
 
-#rmifoodutm .gt_indent_3 {
+#rzwkfgzapo .gt_indent_3 {
   text-indent: 15px;
 }
 
-#rmifoodutm .gt_indent_4 {
+#rzwkfgzapo .gt_indent_4 {
   text-indent: 20px;
 }
 
-#rmifoodutm .gt_indent_5 {
+#rzwkfgzapo .gt_indent_5 {
   text-indent: 25px;
 }
 
-#rmifoodutm .katex-display {
+#rzwkfgzapo .katex-display {
   display: inline-flex !important;
   margin-bottom: 0.75em !important;
 }
 
-#rmifoodutm div.Reactable > div.rt-table > div.rt-thead > div.rt-tr.rt-tr-group-header > div.rt-th-group:after {
+#rzwkfgzapo div.Reactable > div.rt-table > div.rt-thead > div.rt-tr.rt-tr-group-header > div.rt-th-group:after {
   height: 0px !important;
 }
 </style>
 
-<table class="gt_table caption-top table table-sm table-striped small" data-quarto-postprocess="true" data-quarto-disable-processing="false" data-quarto-bootstrap="false">
+<table class="gt_table caption-top table table-sm table-striped small" data-quarto-bootstrap="false">
 <thead>
 <tr class="gt_col_headings header">
 <th id="Situation" class="gt_col_heading gt_columns_bottom_border gt_left" data-quarto-table-cell-role="th" scope="col">Situation</th>
@@ -2113,23 +2089,23 @@ Case Study: People v Collins
 <p>Because this is the first chapter, we will move slowly. Each example introduces only a small number of functions.</p>
 <div class="cell">
 <div class="cell-output-display">
-<div id="qdtelcaedl" style="padding-left:0px;padding-right:0px;padding-top:10px;padding-bottom:10px;overflow-x:auto;overflow-y:auto;width:auto;height:auto;">
-<style>#qdtelcaedl table {
+<div id="wfcvyxbtxw" style="padding-left:0px;padding-right:0px;padding-top:10px;padding-bottom:10px;overflow-x:auto;overflow-y:auto;width:auto;height:auto;">
+<style>#wfcvyxbtxw table {
   font-family: system-ui, 'Segoe UI', Roboto, Helvetica, Arial, sans-serif, 'Apple Color Emoji', 'Segoe UI Emoji', 'Segoe UI Symbol', 'Noto Color Emoji';
   -webkit-font-smoothing: antialiased;
   -moz-osx-font-smoothing: grayscale;
 }
 
-#qdtelcaedl thead, #qdtelcaedl tbody, #qdtelcaedl tfoot, #qdtelcaedl tr, #qdtelcaedl td, #qdtelcaedl th {
+#wfcvyxbtxw thead, #wfcvyxbtxw tbody, #wfcvyxbtxw tfoot, #wfcvyxbtxw tr, #wfcvyxbtxw td, #wfcvyxbtxw th {
   border-style: none;
 }
 
-#qdtelcaedl p {
+#wfcvyxbtxw p {
   margin: 0;
   padding: 0;
 }
 
-#qdtelcaedl .gt_table {
+#wfcvyxbtxw .gt_table {
   display: table;
   border-collapse: collapse;
   line-height: normal;
@@ -2155,12 +2131,12 @@ Case Study: People v Collins
   border-left-color: #D3D3D3;
 }
 
-#qdtelcaedl .gt_caption {
+#wfcvyxbtxw .gt_caption {
   padding-top: 4px;
   padding-bottom: 4px;
 }
 
-#qdtelcaedl .gt_title {
+#wfcvyxbtxw .gt_title {
   color: #333333;
   font-size: 125%;
   font-weight: initial;
@@ -2172,7 +2148,7 @@ Case Study: People v Collins
   border-bottom-width: 0;
 }
 
-#qdtelcaedl .gt_subtitle {
+#wfcvyxbtxw .gt_subtitle {
   color: #333333;
   font-size: 85%;
   font-weight: initial;
@@ -2184,7 +2160,7 @@ Case Study: People v Collins
   border-top-width: 0;
 }
 
-#qdtelcaedl .gt_heading {
+#wfcvyxbtxw .gt_heading {
   background-color: #FFFFFF;
   text-align: center;
   border-bottom-color: #FFFFFF;
@@ -2196,13 +2172,13 @@ Case Study: People v Collins
   border-right-color: #D3D3D3;
 }
 
-#qdtelcaedl .gt_bottom_border {
+#wfcvyxbtxw .gt_bottom_border {
   border-bottom-style: solid;
   border-bottom-width: 2px;
   border-bottom-color: #D3D3D3;
 }
 
-#qdtelcaedl .gt_col_headings {
+#wfcvyxbtxw .gt_col_headings {
   border-top-style: solid;
   border-top-width: 2px;
   border-top-color: #D3D3D3;
@@ -2217,7 +2193,7 @@ Case Study: People v Collins
   border-right-color: #D3D3D3;
 }
 
-#qdtelcaedl .gt_col_heading {
+#wfcvyxbtxw .gt_col_heading {
   color: #333333;
   background-color: #FFFFFF;
   font-size: 100%;
@@ -2237,7 +2213,7 @@ Case Study: People v Collins
   overflow-x: hidden;
 }
 
-#qdtelcaedl .gt_column_spanner_outer {
+#wfcvyxbtxw .gt_column_spanner_outer {
   color: #333333;
   background-color: #FFFFFF;
   font-size: 100%;
@@ -2249,15 +2225,15 @@ Case Study: People v Collins
   padding-right: 4px;
 }
 
-#qdtelcaedl .gt_column_spanner_outer:first-child {
+#wfcvyxbtxw .gt_column_spanner_outer:first-child {
   padding-left: 0;
 }
 
-#qdtelcaedl .gt_column_spanner_outer:last-child {
+#wfcvyxbtxw .gt_column_spanner_outer:last-child {
   padding-right: 0;
 }
 
-#qdtelcaedl .gt_column_spanner {
+#wfcvyxbtxw .gt_column_spanner {
   border-bottom-style: solid;
   border-bottom-width: 2px;
   border-bottom-color: #D3D3D3;
@@ -2269,11 +2245,11 @@ Case Study: People v Collins
   width: 100%;
 }
 
-#qdtelcaedl .gt_spanner_row {
+#wfcvyxbtxw .gt_spanner_row {
   border-bottom-style: hidden;
 }
 
-#qdtelcaedl .gt_group_heading {
+#wfcvyxbtxw .gt_group_heading {
   padding-top: 8px;
   padding-bottom: 8px;
   padding-left: 5px;
@@ -2299,7 +2275,7 @@ Case Study: People v Collins
   text-align: left;
 }
 
-#qdtelcaedl .gt_empty_group_heading {
+#wfcvyxbtxw .gt_empty_group_heading {
   padding: 0.5px;
   color: #333333;
   background-color: #FFFFFF;
@@ -2314,15 +2290,15 @@ Case Study: People v Collins
   vertical-align: middle;
 }
 
-#qdtelcaedl .gt_from_md > :first-child {
+#wfcvyxbtxw .gt_from_md > :first-child {
   margin-top: 0;
 }
 
-#qdtelcaedl .gt_from_md > :last-child {
+#wfcvyxbtxw .gt_from_md > :last-child {
   margin-bottom: 0;
 }
 
-#qdtelcaedl .gt_row {
+#wfcvyxbtxw .gt_row {
   padding-top: 8px;
   padding-bottom: 8px;
   padding-left: 5px;
@@ -2341,7 +2317,7 @@ Case Study: People v Collins
   overflow-x: hidden;
 }
 
-#qdtelcaedl .gt_stub {
+#wfcvyxbtxw .gt_stub {
   color: #333333;
   background-color: #FFFFFF;
   font-size: 100%;
@@ -2354,7 +2330,7 @@ Case Study: People v Collins
   padding-right: 5px;
 }
 
-#qdtelcaedl .gt_stub_row_group {
+#wfcvyxbtxw .gt_stub_row_group {
   color: #333333;
   background-color: #FFFFFF;
   font-size: 100%;
@@ -2368,15 +2344,15 @@ Case Study: People v Collins
   vertical-align: top;
 }
 
-#qdtelcaedl .gt_row_group_first td {
+#wfcvyxbtxw .gt_row_group_first td {
   border-top-width: 2px;
 }
 
-#qdtelcaedl .gt_row_group_first th {
+#wfcvyxbtxw .gt_row_group_first th {
   border-top-width: 2px;
 }
 
-#qdtelcaedl .gt_summary_row {
+#wfcvyxbtxw .gt_summary_row {
   color: #333333;
   background-color: #FFFFFF;
   text-transform: inherit;
@@ -2386,16 +2362,16 @@ Case Study: People v Collins
   padding-right: 5px;
 }
 
-#qdtelcaedl .gt_first_summary_row {
+#wfcvyxbtxw .gt_first_summary_row {
   border-top-style: solid;
   border-top-color: #D3D3D3;
 }
 
-#qdtelcaedl .gt_first_summary_row.thick {
+#wfcvyxbtxw .gt_first_summary_row.thick {
   border-top-width: 2px;
 }
 
-#qdtelcaedl .gt_last_summary_row {
+#wfcvyxbtxw .gt_last_summary_row {
   padding-top: 8px;
   padding-bottom: 8px;
   padding-left: 5px;
@@ -2405,7 +2381,7 @@ Case Study: People v Collins
   border-bottom-color: #D3D3D3;
 }
 
-#qdtelcaedl .gt_grand_summary_row {
+#wfcvyxbtxw .gt_grand_summary_row {
   color: #333333;
   background-color: #FFFFFF;
   text-transform: inherit;
@@ -2415,7 +2391,7 @@ Case Study: People v Collins
   padding-right: 5px;
 }
 
-#qdtelcaedl .gt_first_grand_summary_row {
+#wfcvyxbtxw .gt_first_grand_summary_row {
   padding-top: 8px;
   padding-bottom: 8px;
   padding-left: 5px;
@@ -2425,7 +2401,7 @@ Case Study: People v Collins
   border-top-color: #D3D3D3;
 }
 
-#qdtelcaedl .gt_last_grand_summary_row_top {
+#wfcvyxbtxw .gt_last_grand_summary_row_top {
   padding-top: 8px;
   padding-bottom: 8px;
   padding-left: 5px;
@@ -2435,11 +2411,11 @@ Case Study: People v Collins
   border-bottom-color: #D3D3D3;
 }
 
-#qdtelcaedl .gt_striped {
+#wfcvyxbtxw .gt_striped {
   background-color: rgba(128, 128, 128, 0.05);
 }
 
-#qdtelcaedl .gt_table_body {
+#wfcvyxbtxw .gt_table_body {
   border-top-style: solid;
   border-top-width: 2px;
   border-top-color: #D3D3D3;
@@ -2448,7 +2424,7 @@ Case Study: People v Collins
   border-bottom-color: #D3D3D3;
 }
 
-#qdtelcaedl .gt_footnotes {
+#wfcvyxbtxw .gt_footnotes {
   color: #333333;
   background-color: #FFFFFF;
   border-bottom-style: none;
@@ -2462,7 +2438,7 @@ Case Study: People v Collins
   border-right-color: #D3D3D3;
 }
 
-#qdtelcaedl .gt_footnote {
+#wfcvyxbtxw .gt_footnote {
   margin: 0px;
   font-size: 90%;
   padding-top: 4px;
@@ -2471,7 +2447,7 @@ Case Study: People v Collins
   padding-right: 5px;
 }
 
-#qdtelcaedl .gt_sourcenotes {
+#wfcvyxbtxw .gt_sourcenotes {
   color: #333333;
   background-color: #FFFFFF;
   border-bottom-style: none;
@@ -2485,7 +2461,7 @@ Case Study: People v Collins
   border-right-color: #D3D3D3;
 }
 
-#qdtelcaedl .gt_sourcenote {
+#wfcvyxbtxw .gt_sourcenote {
   font-size: 90%;
   padding-top: 4px;
   padding-bottom: 4px;
@@ -2493,77 +2469,77 @@ Case Study: People v Collins
   padding-right: 5px;
 }
 
-#qdtelcaedl .gt_left {
+#wfcvyxbtxw .gt_left {
   text-align: left;
 }
 
-#qdtelcaedl .gt_center {
+#wfcvyxbtxw .gt_center {
   text-align: center;
 }
 
-#qdtelcaedl .gt_right {
+#wfcvyxbtxw .gt_right {
   text-align: right;
   font-variant-numeric: tabular-nums;
 }
 
-#qdtelcaedl .gt_font_normal {
+#wfcvyxbtxw .gt_font_normal {
   font-weight: normal;
 }
 
-#qdtelcaedl .gt_font_bold {
+#wfcvyxbtxw .gt_font_bold {
   font-weight: bold;
 }
 
-#qdtelcaedl .gt_font_italic {
+#wfcvyxbtxw .gt_font_italic {
   font-style: italic;
 }
 
-#qdtelcaedl .gt_super {
+#wfcvyxbtxw .gt_super {
   font-size: 65%;
 }
 
-#qdtelcaedl .gt_footnote_marks {
+#wfcvyxbtxw .gt_footnote_marks {
   font-size: 75%;
   vertical-align: 0.4em;
   position: initial;
 }
 
-#qdtelcaedl .gt_asterisk {
+#wfcvyxbtxw .gt_asterisk {
   font-size: 100%;
   vertical-align: 0;
 }
 
-#qdtelcaedl .gt_indent_1 {
+#wfcvyxbtxw .gt_indent_1 {
   text-indent: 5px;
 }
 
-#qdtelcaedl .gt_indent_2 {
+#wfcvyxbtxw .gt_indent_2 {
   text-indent: 10px;
 }
 
-#qdtelcaedl .gt_indent_3 {
+#wfcvyxbtxw .gt_indent_3 {
   text-indent: 15px;
 }
 
-#qdtelcaedl .gt_indent_4 {
+#wfcvyxbtxw .gt_indent_4 {
   text-indent: 20px;
 }
 
-#qdtelcaedl .gt_indent_5 {
+#wfcvyxbtxw .gt_indent_5 {
   text-indent: 25px;
 }
 
-#qdtelcaedl .katex-display {
+#wfcvyxbtxw .katex-display {
   display: inline-flex !important;
   margin-bottom: 0.75em !important;
 }
 
-#qdtelcaedl div.Reactable > div.rt-table > div.rt-thead > div.rt-tr.rt-tr-group-header > div.rt-th-group:after {
+#wfcvyxbtxw div.Reactable > div.rt-table > div.rt-thead > div.rt-tr.rt-tr-group-header > div.rt-th-group:after {
   height: 0px !important;
 }
 </style>
 
-<table class="gt_table caption-top table table-sm table-striped small" data-quarto-postprocess="true" data-quarto-disable-processing="false" data-quarto-bootstrap="false">
+<table class="gt_table caption-top table table-sm table-striped small" data-quarto-bootstrap="false">
 <thead>
 <tr class="gt_col_headings header">
 <th id="Function" class="gt_col_heading gt_columns_bottom_border gt_left" data-quarto-table-cell-role="th" scope="col">Function</th>
@@ -2638,20 +2614,20 @@ Case Study: People v Collins
 <p>In the opening, I talked about how my family split across three boats. The point was not that this removed danger. It changed the structure of the risk. To see this idea in a simple way, suppose each boat has a probability of safely arriving. This is not meant to estimate the real historical probability. It is a simplified model that helps us think about possible outcomes.</p>
 <p>Suppose each boat has a 60% chance of arriving safely. This would mean that each boat has a 100% - 60% chance of not surviving (i.e.&nbsp;lost):</p>
 <div class="cell">
-<div class="sourceCode cell-code" id="cb1"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb1-1"><a href="#cb1-1" aria-hidden="true" tabindex="-1"></a>p_survive <span class="ot">&lt;-</span> <span class="fl">0.60</span></span>
-<span id="cb1-2"><a href="#cb1-2" aria-hidden="true" tabindex="-1"></a>p_lost <span class="ot">&lt;-</span> <span class="dv">1</span> <span class="sc">-</span> p_survive</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="code-copy-outer-scaffold"><div class="sourceCode cell-code" id="cb1"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb1-1"><a href="#cb1-1" aria-hidden="true" tabindex="-1"></a>p_survive <span class="ot">&lt;-</span> <span class="fl">0.60</span></span>
+<span id="cb1-2"><a href="#cb1-2" aria-hidden="true" tabindex="-1"></a>p_lost <span class="ot">&lt;-</span> <span class="dv">1</span> <span class="sc">-</span> p_survive</span></code></pre></div><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></div>
 </div>
 <p>Now suppose the three boats are treated as independent in this simplified model. This means that the outcome of one boat does not change the probability of what happens to another boat. The probability that all three boats are lost is:</p>
 <div class="cell">
-<div class="sourceCode cell-code" id="cb2"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb2-1"><a href="#cb2-1" aria-hidden="true" tabindex="-1"></a>p_all_lost <span class="ot">&lt;-</span> p_lost<span class="sc">^</span><span class="dv">3</span></span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="code-copy-outer-scaffold"><div class="sourceCode cell-code" id="cb2"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb2-1"><a href="#cb2-1" aria-hidden="true" tabindex="-1"></a>p_all_lost <span class="ot">&lt;-</span> p_lost<span class="sc">^</span><span class="dv">3</span></span></code></pre></div><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></div>
 </div>
 <p>The probability that at least one boat arrives safely is the opposite of all three boats being lost. We can calculate it using:</p>
 <div class="cell">
-<div class="sourceCode cell-code" id="cb3"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb3-1"><a href="#cb3-1" aria-hidden="true" tabindex="-1"></a>p_at_least_one_survives <span class="ot">&lt;-</span> <span class="dv">1</span> <span class="sc">-</span> p_all_lost</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="code-copy-outer-scaffold"><div class="sourceCode cell-code" id="cb3"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb3-1"><a href="#cb3-1" aria-hidden="true" tabindex="-1"></a>p_at_least_one_survives <span class="ot">&lt;-</span> <span class="dv">1</span> <span class="sc">-</span> p_all_lost</span></code></pre></div><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></div>
 </div>
 <p>We can put these results into a table:</p>
 <div class="cell">
-<div class="sourceCode cell-code" id="cb4"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb4-1"><a href="#cb4-1" aria-hidden="true" tabindex="-1"></a>boat_results <span class="ot">&lt;-</span> <span class="fu">data.frame</span>(</span>
+<div class="code-copy-outer-scaffold"><div class="sourceCode cell-code" id="cb4"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb4-1"><a href="#cb4-1" aria-hidden="true" tabindex="-1"></a>boat_results <span class="ot">&lt;-</span> <span class="fu">data.frame</span>(</span>
 <span id="cb4-2"><a href="#cb4-2" aria-hidden="true" tabindex="-1"></a>  <span class="at">Quantity =</span> <span class="fu">c</span>(</span>
 <span id="cb4-3"><a href="#cb4-3" aria-hidden="true" tabindex="-1"></a>    <span class="st">"Probability one boat arrives safely"</span>,</span>
 <span id="cb4-4"><a href="#cb4-4" aria-hidden="true" tabindex="-1"></a>    <span class="st">"Probability one boat is lost"</span>,</span>
@@ -2671,25 +2647,25 @@ Case Study: People v Collins
 <span id="cb4-18"><a href="#cb4-18" aria-hidden="true" tabindex="-1"></a>  gt<span class="sc">::</span><span class="fu">fmt_number</span>(</span>
 <span id="cb4-19"><a href="#cb4-19" aria-hidden="true" tabindex="-1"></a>    <span class="at">columns =</span> Probability,</span>
 <span id="cb4-20"><a href="#cb4-20" aria-hidden="true" tabindex="-1"></a>    <span class="at">decimals =</span> <span class="dv">3</span></span>
-<span id="cb4-21"><a href="#cb4-21" aria-hidden="true" tabindex="-1"></a>  )</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<span id="cb4-21"><a href="#cb4-21" aria-hidden="true" tabindex="-1"></a>  )</span></code></pre></div><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></div>
 <div class="cell-output-display">
-<div id="zwhkpikwmm" style="padding-left:0px;padding-right:0px;padding-top:10px;padding-bottom:10px;overflow-x:auto;overflow-y:auto;width:auto;height:auto;">
-<style>#zwhkpikwmm table {
+<div id="fmsbtpkqbu" style="padding-left:0px;padding-right:0px;padding-top:10px;padding-bottom:10px;overflow-x:auto;overflow-y:auto;width:auto;height:auto;">
+<style>#fmsbtpkqbu table {
   font-family: system-ui, 'Segoe UI', Roboto, Helvetica, Arial, sans-serif, 'Apple Color Emoji', 'Segoe UI Emoji', 'Segoe UI Symbol', 'Noto Color Emoji';
   -webkit-font-smoothing: antialiased;
   -moz-osx-font-smoothing: grayscale;
 }
 
-#zwhkpikwmm thead, #zwhkpikwmm tbody, #zwhkpikwmm tfoot, #zwhkpikwmm tr, #zwhkpikwmm td, #zwhkpikwmm th {
+#fmsbtpkqbu thead, #fmsbtpkqbu tbody, #fmsbtpkqbu tfoot, #fmsbtpkqbu tr, #fmsbtpkqbu td, #fmsbtpkqbu th {
   border-style: none;
 }
 
-#zwhkpikwmm p {
+#fmsbtpkqbu p {
   margin: 0;
   padding: 0;
 }
 
-#zwhkpikwmm .gt_table {
+#fmsbtpkqbu .gt_table {
   display: table;
   border-collapse: collapse;
   line-height: normal;
@@ -2715,12 +2691,12 @@ Case Study: People v Collins
   border-left-color: #D3D3D3;
 }
 
-#zwhkpikwmm .gt_caption {
+#fmsbtpkqbu .gt_caption {
   padding-top: 4px;
   padding-bottom: 4px;
 }
 
-#zwhkpikwmm .gt_title {
+#fmsbtpkqbu .gt_title {
   color: #333333;
   font-size: 125%;
   font-weight: initial;
@@ -2732,7 +2708,7 @@ Case Study: People v Collins
   border-bottom-width: 0;
 }
 
-#zwhkpikwmm .gt_subtitle {
+#fmsbtpkqbu .gt_subtitle {
   color: #333333;
   font-size: 85%;
   font-weight: initial;
@@ -2744,7 +2720,7 @@ Case Study: People v Collins
   border-top-width: 0;
 }
 
-#zwhkpikwmm .gt_heading {
+#fmsbtpkqbu .gt_heading {
   background-color: #FFFFFF;
   text-align: center;
   border-bottom-color: #FFFFFF;
@@ -2756,13 +2732,13 @@ Case Study: People v Collins
   border-right-color: #D3D3D3;
 }
 
-#zwhkpikwmm .gt_bottom_border {
+#fmsbtpkqbu .gt_bottom_border {
   border-bottom-style: solid;
   border-bottom-width: 2px;
   border-bottom-color: #D3D3D3;
 }
 
-#zwhkpikwmm .gt_col_headings {
+#fmsbtpkqbu .gt_col_headings {
   border-top-style: solid;
   border-top-width: 2px;
   border-top-color: #D3D3D3;
@@ -2777,7 +2753,7 @@ Case Study: People v Collins
   border-right-color: #D3D3D3;
 }
 
-#zwhkpikwmm .gt_col_heading {
+#fmsbtpkqbu .gt_col_heading {
   color: #333333;
   background-color: #FFFFFF;
   font-size: 100%;
@@ -2797,7 +2773,7 @@ Case Study: People v Collins
   overflow-x: hidden;
 }
 
-#zwhkpikwmm .gt_column_spanner_outer {
+#fmsbtpkqbu .gt_column_spanner_outer {
   color: #333333;
   background-color: #FFFFFF;
   font-size: 100%;
@@ -2809,15 +2785,15 @@ Case Study: People v Collins
   padding-right: 4px;
 }
 
-#zwhkpikwmm .gt_column_spanner_outer:first-child {
+#fmsbtpkqbu .gt_column_spanner_outer:first-child {
   padding-left: 0;
 }
 
-#zwhkpikwmm .gt_column_spanner_outer:last-child {
+#fmsbtpkqbu .gt_column_spanner_outer:last-child {
   padding-right: 0;
 }
 
-#zwhkpikwmm .gt_column_spanner {
+#fmsbtpkqbu .gt_column_spanner {
   border-bottom-style: solid;
   border-bottom-width: 2px;
   border-bottom-color: #D3D3D3;
@@ -2829,11 +2805,11 @@ Case Study: People v Collins
   width: 100%;
 }
 
-#zwhkpikwmm .gt_spanner_row {
+#fmsbtpkqbu .gt_spanner_row {
   border-bottom-style: hidden;
 }
 
-#zwhkpikwmm .gt_group_heading {
+#fmsbtpkqbu .gt_group_heading {
   padding-top: 8px;
   padding-bottom: 8px;
   padding-left: 5px;
@@ -2859,7 +2835,7 @@ Case Study: People v Collins
   text-align: left;
 }
 
-#zwhkpikwmm .gt_empty_group_heading {
+#fmsbtpkqbu .gt_empty_group_heading {
   padding: 0.5px;
   color: #333333;
   background-color: #FFFFFF;
@@ -2874,15 +2850,15 @@ Case Study: People v Collins
   vertical-align: middle;
 }
 
-#zwhkpikwmm .gt_from_md > :first-child {
+#fmsbtpkqbu .gt_from_md > :first-child {
   margin-top: 0;
 }
 
-#zwhkpikwmm .gt_from_md > :last-child {
+#fmsbtpkqbu .gt_from_md > :last-child {
   margin-bottom: 0;
 }
 
-#zwhkpikwmm .gt_row {
+#fmsbtpkqbu .gt_row {
   padding-top: 8px;
   padding-bottom: 8px;
   padding-left: 5px;
@@ -2901,7 +2877,7 @@ Case Study: People v Collins
   overflow-x: hidden;
 }
 
-#zwhkpikwmm .gt_stub {
+#fmsbtpkqbu .gt_stub {
   color: #333333;
   background-color: #FFFFFF;
   font-size: 100%;
@@ -2914,7 +2890,7 @@ Case Study: People v Collins
   padding-right: 5px;
 }
 
-#zwhkpikwmm .gt_stub_row_group {
+#fmsbtpkqbu .gt_stub_row_group {
   color: #333333;
   background-color: #FFFFFF;
   font-size: 100%;
@@ -2928,15 +2904,15 @@ Case Study: People v Collins
   vertical-align: top;
 }
 
-#zwhkpikwmm .gt_row_group_first td {
+#fmsbtpkqbu .gt_row_group_first td {
   border-top-width: 2px;
 }
 
-#zwhkpikwmm .gt_row_group_first th {
+#fmsbtpkqbu .gt_row_group_first th {
   border-top-width: 2px;
 }
 
-#zwhkpikwmm .gt_summary_row {
+#fmsbtpkqbu .gt_summary_row {
   color: #333333;
   background-color: #FFFFFF;
   text-transform: inherit;
@@ -2946,16 +2922,16 @@ Case Study: People v Collins
   padding-right: 5px;
 }
 
-#zwhkpikwmm .gt_first_summary_row {
+#fmsbtpkqbu .gt_first_summary_row {
   border-top-style: solid;
   border-top-color: #D3D3D3;
 }
 
-#zwhkpikwmm .gt_first_summary_row.thick {
+#fmsbtpkqbu .gt_first_summary_row.thick {
   border-top-width: 2px;
 }
 
-#zwhkpikwmm .gt_last_summary_row {
+#fmsbtpkqbu .gt_last_summary_row {
   padding-top: 8px;
   padding-bottom: 8px;
   padding-left: 5px;
@@ -2965,7 +2941,7 @@ Case Study: People v Collins
   border-bottom-color: #D3D3D3;
 }
 
-#zwhkpikwmm .gt_grand_summary_row {
+#fmsbtpkqbu .gt_grand_summary_row {
   color: #333333;
   background-color: #FFFFFF;
   text-transform: inherit;
@@ -2975,7 +2951,7 @@ Case Study: People v Collins
   padding-right: 5px;
 }
 
-#zwhkpikwmm .gt_first_grand_summary_row {
+#fmsbtpkqbu .gt_first_grand_summary_row {
   padding-top: 8px;
   padding-bottom: 8px;
   padding-left: 5px;
@@ -2985,7 +2961,7 @@ Case Study: People v Collins
   border-top-color: #D3D3D3;
 }
 
-#zwhkpikwmm .gt_last_grand_summary_row_top {
+#fmsbtpkqbu .gt_last_grand_summary_row_top {
   padding-top: 8px;
   padding-bottom: 8px;
   padding-left: 5px;
@@ -2995,11 +2971,11 @@ Case Study: People v Collins
   border-bottom-color: #D3D3D3;
 }
 
-#zwhkpikwmm .gt_striped {
+#fmsbtpkqbu .gt_striped {
   background-color: rgba(128, 128, 128, 0.05);
 }
 
-#zwhkpikwmm .gt_table_body {
+#fmsbtpkqbu .gt_table_body {
   border-top-style: solid;
   border-top-width: 2px;
   border-top-color: #D3D3D3;
@@ -3008,7 +2984,7 @@ Case Study: People v Collins
   border-bottom-color: #D3D3D3;
 }
 
-#zwhkpikwmm .gt_footnotes {
+#fmsbtpkqbu .gt_footnotes {
   color: #333333;
   background-color: #FFFFFF;
   border-bottom-style: none;
@@ -3022,7 +2998,7 @@ Case Study: People v Collins
   border-right-color: #D3D3D3;
 }
 
-#zwhkpikwmm .gt_footnote {
+#fmsbtpkqbu .gt_footnote {
   margin: 0px;
   font-size: 90%;
   padding-top: 4px;
@@ -3031,7 +3007,7 @@ Case Study: People v Collins
   padding-right: 5px;
 }
 
-#zwhkpikwmm .gt_sourcenotes {
+#fmsbtpkqbu .gt_sourcenotes {
   color: #333333;
   background-color: #FFFFFF;
   border-bottom-style: none;
@@ -3045,7 +3021,7 @@ Case Study: People v Collins
   border-right-color: #D3D3D3;
 }
 
-#zwhkpikwmm .gt_sourcenote {
+#fmsbtpkqbu .gt_sourcenote {
   font-size: 90%;
   padding-top: 4px;
   padding-bottom: 4px;
@@ -3053,77 +3029,77 @@ Case Study: People v Collins
   padding-right: 5px;
 }
 
-#zwhkpikwmm .gt_left {
+#fmsbtpkqbu .gt_left {
   text-align: left;
 }
 
-#zwhkpikwmm .gt_center {
+#fmsbtpkqbu .gt_center {
   text-align: center;
 }
 
-#zwhkpikwmm .gt_right {
+#fmsbtpkqbu .gt_right {
   text-align: right;
   font-variant-numeric: tabular-nums;
 }
 
-#zwhkpikwmm .gt_font_normal {
+#fmsbtpkqbu .gt_font_normal {
   font-weight: normal;
 }
 
-#zwhkpikwmm .gt_font_bold {
+#fmsbtpkqbu .gt_font_bold {
   font-weight: bold;
 }
 
-#zwhkpikwmm .gt_font_italic {
+#fmsbtpkqbu .gt_font_italic {
   font-style: italic;
 }
 
-#zwhkpikwmm .gt_super {
+#fmsbtpkqbu .gt_super {
   font-size: 65%;
 }
 
-#zwhkpikwmm .gt_footnote_marks {
+#fmsbtpkqbu .gt_footnote_marks {
   font-size: 75%;
   vertical-align: 0.4em;
   position: initial;
 }
 
-#zwhkpikwmm .gt_asterisk {
+#fmsbtpkqbu .gt_asterisk {
   font-size: 100%;
   vertical-align: 0;
 }
 
-#zwhkpikwmm .gt_indent_1 {
+#fmsbtpkqbu .gt_indent_1 {
   text-indent: 5px;
 }
 
-#zwhkpikwmm .gt_indent_2 {
+#fmsbtpkqbu .gt_indent_2 {
   text-indent: 10px;
 }
 
-#zwhkpikwmm .gt_indent_3 {
+#fmsbtpkqbu .gt_indent_3 {
   text-indent: 15px;
 }
 
-#zwhkpikwmm .gt_indent_4 {
+#fmsbtpkqbu .gt_indent_4 {
   text-indent: 20px;
 }
 
-#zwhkpikwmm .gt_indent_5 {
+#fmsbtpkqbu .gt_indent_5 {
   text-indent: 25px;
 }
 
-#zwhkpikwmm .katex-display {
+#fmsbtpkqbu .katex-display {
   display: inline-flex !important;
   margin-bottom: 0.75em !important;
 }
 
-#zwhkpikwmm div.Reactable > div.rt-table > div.rt-thead > div.rt-tr.rt-tr-group-header > div.rt-th-group:after {
+#fmsbtpkqbu div.Reactable > div.rt-table > div.rt-thead > div.rt-tr.rt-tr-group-header > div.rt-th-group:after {
   height: 0px !important;
 }
 </style>
 
-<table class="gt_table caption-top table table-sm table-striped small" data-quarto-postprocess="true" data-quarto-disable-processing="false" data-quarto-bootstrap="false">
+<table class="gt_table caption-top table table-sm table-striped small" data-quarto-bootstrap="false">
 <thead>
 <tr class="gt_col_headings header">
 <th id="Quantity" class="gt_col_heading gt_columns_bottom_border gt_left" data-quarto-table-cell-role="th" scope="col">Quantity</th>
@@ -3170,7 +3146,7 @@ Case Study: People v Collins
 <li><code>FALSE</code>is selected with probability 0.40.</li>
 </ul>
 <div class="cell">
-<div class="sourceCode cell-code" id="cb5"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb5-1"><a href="#cb5-1" aria-hidden="true" tabindex="-1"></a><span class="fu">set.seed</span>(<span class="dv">2420</span>)</span>
+<div class="code-copy-outer-scaffold"><div class="sourceCode cell-code" id="cb5"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb5-1"><a href="#cb5-1" aria-hidden="true" tabindex="-1"></a><span class="fu">set.seed</span>(<span class="dv">2420</span>)</span>
 <span id="cb5-2"><a href="#cb5-2" aria-hidden="true" tabindex="-1"></a></span>
 <span id="cb5-3"><a href="#cb5-3" aria-hidden="true" tabindex="-1"></a>n_sim <span class="ot">&lt;-</span> <span class="dv">10000</span></span>
 <span id="cb5-4"><a href="#cb5-4" aria-hidden="true" tabindex="-1"></a></span>
@@ -3181,7 +3157,7 @@ Case Study: People v Collins
 <span id="cb5-9"><a href="#cb5-9" aria-hidden="true" tabindex="-1"></a>  <span class="at">boat_3 =</span> <span class="fu">sample</span>(<span class="fu">c</span>(<span class="cn">TRUE</span>, <span class="cn">FALSE</span>), <span class="at">size =</span> n_sim, <span class="at">replace =</span> <span class="cn">TRUE</span>, <span class="at">prob =</span> <span class="fu">c</span>(p_survive, p_lost))</span>
 <span id="cb5-10"><a href="#cb5-10" aria-hidden="true" tabindex="-1"></a>)</span>
 <span id="cb5-11"><a href="#cb5-11" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb5-12"><a href="#cb5-12" aria-hidden="true" tabindex="-1"></a>boat_sim</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<span id="cb5-12"><a href="#cb5-12" aria-hidden="true" tabindex="-1"></a>boat_sim</span></code></pre></div><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></div>
 <div class="cell-output cell-output-stdout">
 <pre><code># A tibble: 10,000 × 4
    simulation boat_1 boat_2 boat_3
@@ -3201,13 +3177,13 @@ Case Study: People v Collins
 </div>
 <p>Now we can add new columns to summarise each simulation. The function <code>mutate()</code> adds new columns to a dataset.</p>
 <div class="cell">
-<div class="sourceCode cell-code" id="cb7"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb7-1"><a href="#cb7-1" aria-hidden="true" tabindex="-1"></a>boat_sim <span class="ot">&lt;-</span> boat_sim <span class="sc">|&gt;</span></span>
+<div class="code-copy-outer-scaffold"><div class="sourceCode cell-code" id="cb7"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb7-1"><a href="#cb7-1" aria-hidden="true" tabindex="-1"></a>boat_sim <span class="ot">&lt;-</span> boat_sim <span class="sc">|&gt;</span></span>
 <span id="cb7-2"><a href="#cb7-2" aria-hidden="true" tabindex="-1"></a>  dplyr<span class="sc">::</span><span class="fu">mutate</span>(</span>
 <span id="cb7-3"><a href="#cb7-3" aria-hidden="true" tabindex="-1"></a>    <span class="at">number_survived =</span> boat_1 <span class="sc">+</span> boat_2 <span class="sc">+</span> boat_3,</span>
 <span id="cb7-4"><a href="#cb7-4" aria-hidden="true" tabindex="-1"></a>    <span class="at">at_least_one_survived =</span> number_survived <span class="sc">&gt;=</span> <span class="dv">1</span></span>
 <span id="cb7-5"><a href="#cb7-5" aria-hidden="true" tabindex="-1"></a>  )</span>
 <span id="cb7-6"><a href="#cb7-6" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb7-7"><a href="#cb7-7" aria-hidden="true" tabindex="-1"></a>boat_sim</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<span id="cb7-7"><a href="#cb7-7" aria-hidden="true" tabindex="-1"></a>boat_sim</span></code></pre></div><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></div>
 <div class="cell-output cell-output-stdout">
 <pre><code># A tibble: 10,000 × 6
    simulation boat_1 boat_2 boat_3 number_survived at_least_one_survived
@@ -3227,8 +3203,8 @@ Case Study: People v Collins
 </div>
 <p>Now we can count how many simulations had 0, 1, 2, or 3 surviving boats. The function <code>count()</code> counts how many times each value appears in a column.</p>
 <div class="cell">
-<div class="sourceCode cell-code" id="cb9"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb9-1"><a href="#cb9-1" aria-hidden="true" tabindex="-1"></a>boat_sim <span class="sc">|&gt;</span></span>
-<span id="cb9-2"><a href="#cb9-2" aria-hidden="true" tabindex="-1"></a>  dplyr<span class="sc">::</span><span class="fu">count</span>(number_survived)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="code-copy-outer-scaffold"><div class="sourceCode cell-code" id="cb9"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb9-1"><a href="#cb9-1" aria-hidden="true" tabindex="-1"></a>boat_sim <span class="sc">|&gt;</span></span>
+<span id="cb9-2"><a href="#cb9-2" aria-hidden="true" tabindex="-1"></a>  dplyr<span class="sc">::</span><span class="fu">count</span>(number_survived)</span></code></pre></div><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></div>
 <div class="cell-output cell-output-stdout">
 <pre><code># A tibble: 4 × 2
   number_survived     n
@@ -3241,10 +3217,10 @@ Case Study: People v Collins
 </div>
 <p>Finally, we can estimate the probability that at least one boat survives. The function <code>summarise()</code> reduces a dataset to summary values.</p>
 <div class="cell">
-<div class="sourceCode cell-code" id="cb11"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb11-1"><a href="#cb11-1" aria-hidden="true" tabindex="-1"></a>boat_sim <span class="sc">|&gt;</span></span>
+<div class="code-copy-outer-scaffold"><div class="sourceCode cell-code" id="cb11"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb11-1"><a href="#cb11-1" aria-hidden="true" tabindex="-1"></a>boat_sim <span class="sc">|&gt;</span></span>
 <span id="cb11-2"><a href="#cb11-2" aria-hidden="true" tabindex="-1"></a>  dplyr<span class="sc">::</span><span class="fu">summarise</span>(</span>
 <span id="cb11-3"><a href="#cb11-3" aria-hidden="true" tabindex="-1"></a>    <span class="at">estimated_probability =</span> <span class="fu">mean</span>(at_least_one_survived)</span>
-<span id="cb11-4"><a href="#cb11-4" aria-hidden="true" tabindex="-1"></a>  )</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<span id="cb11-4"><a href="#cb11-4" aria-hidden="true" tabindex="-1"></a>  )</span></code></pre></div><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></div>
 <div class="cell-output cell-output-stdout">
 <pre><code># A tibble: 1 × 1
   estimated_probability
@@ -3714,7 +3690,7 @@ Case Study: People v Collins
 }
 </style>
 
-<table class="gt_table caption-top table table-sm table-striped small" data-quarto-postprocess="true" data-quarto-disable-processing="false" data-quarto-bootstrap="false">
+<table class="gt_table caption-top table table-sm table-striped small" data-quarto-bootstrap="false">
 <thead>
 <tr class="gt_col_headings header">
 <th id="Side" class="gt_col_heading gt_columns_bottom_border gt_left" data-quarto-table-cell-role="th" scope="col">Side</th>
@@ -3756,21 +3732,21 @@ Case Study: People v Collins
 <p>But the outcomes are not equally likely.</p>
 <p>Now we can simulate tossing one astragalus.</p>
 <div class="cell">
-<div class="sourceCode cell-code" id="cb13"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb13-1"><a href="#cb13-1" aria-hidden="true" tabindex="-1"></a><span class="fu">set.seed</span>(<span class="dv">2420</span>)</span>
+<div class="code-copy-outer-scaffold"><div class="sourceCode cell-code" id="cb13"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb13-1"><a href="#cb13-1" aria-hidden="true" tabindex="-1"></a><span class="fu">set.seed</span>(<span class="dv">2420</span>)</span>
 <span id="cb13-2"><a href="#cb13-2" aria-hidden="true" tabindex="-1"></a></span>
 <span id="cb13-3"><a href="#cb13-3" aria-hidden="true" tabindex="-1"></a><span class="fu">sample</span>(</span>
 <span id="cb13-4"><a href="#cb13-4" aria-hidden="true" tabindex="-1"></a>  <span class="at">x =</span> astragali_probabilities<span class="sc">$</span>Side,</span>
 <span id="cb13-5"><a href="#cb13-5" aria-hidden="true" tabindex="-1"></a>  <span class="at">size =</span> <span class="dv">1</span>,</span>
 <span id="cb13-6"><a href="#cb13-6" aria-hidden="true" tabindex="-1"></a>  <span class="at">replace =</span> <span class="cn">TRUE</span>,</span>
 <span id="cb13-7"><a href="#cb13-7" aria-hidden="true" tabindex="-1"></a>  <span class="at">prob =</span> astragali_probabilities<span class="sc">$</span>Probability</span>
-<span id="cb13-8"><a href="#cb13-8" aria-hidden="true" tabindex="-1"></a>)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<span id="cb13-8"><a href="#cb13-8" aria-hidden="true" tabindex="-1"></a>)</span></code></pre></div><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></div>
 <div class="cell-output cell-output-stdout">
 <pre><code>[1] "Side 2"</code></pre>
 </div>
 </div>
 <p>A single toss is uncertain. But if we toss the astragalus many times, we should start to see a pattern. Let’s simulate 10,000 tosses.</p>
 <div class="cell">
-<div class="sourceCode cell-code" id="cb15"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb15-1"><a href="#cb15-1" aria-hidden="true" tabindex="-1"></a><span class="fu">set.seed</span>(<span class="dv">2420</span>)</span>
+<div class="code-copy-outer-scaffold"><div class="sourceCode cell-code" id="cb15"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb15-1"><a href="#cb15-1" aria-hidden="true" tabindex="-1"></a><span class="fu">set.seed</span>(<span class="dv">2420</span>)</span>
 <span id="cb15-2"><a href="#cb15-2" aria-hidden="true" tabindex="-1"></a></span>
 <span id="cb15-3"><a href="#cb15-3" aria-hidden="true" tabindex="-1"></a>n_tosses <span class="ot">&lt;-</span> <span class="dv">10000</span></span>
 <span id="cb15-4"><a href="#cb15-4" aria-hidden="true" tabindex="-1"></a></span>
@@ -3784,7 +3760,7 @@ Case Study: People v Collins
 <span id="cb15-12"><a href="#cb15-12" aria-hidden="true" tabindex="-1"></a>  )</span>
 <span id="cb15-13"><a href="#cb15-13" aria-hidden="true" tabindex="-1"></a>)</span>
 <span id="cb15-14"><a href="#cb15-14" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb15-15"><a href="#cb15-15" aria-hidden="true" tabindex="-1"></a><span class="fu">head</span>(astragali_tosses,<span class="dv">10</span>)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<span id="cb15-15"><a href="#cb15-15" aria-hidden="true" tabindex="-1"></a><span class="fu">head</span>(astragali_tosses,<span class="dv">10</span>)</span></code></pre></div><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></div>
 <div class="cell-output cell-output-stdout">
 <pre><code>   toss   side
 1     1 Side 2
@@ -3801,10 +3777,10 @@ Case Study: People v Collins
 </div>
 <p>Now we can count how often each side appeared.</p>
 <div class="cell">
-<div class="sourceCode cell-code" id="cb17"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb17-1"><a href="#cb17-1" aria-hidden="true" tabindex="-1"></a>astragali_counts <span class="ot">&lt;-</span> astragali_tosses <span class="sc">|&gt;</span></span>
+<div class="code-copy-outer-scaffold"><div class="sourceCode cell-code" id="cb17"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb17-1"><a href="#cb17-1" aria-hidden="true" tabindex="-1"></a>astragali_counts <span class="ot">&lt;-</span> astragali_tosses <span class="sc">|&gt;</span></span>
 <span id="cb17-2"><a href="#cb17-2" aria-hidden="true" tabindex="-1"></a>  dplyr<span class="sc">::</span><span class="fu">count</span>(side)</span>
 <span id="cb17-3"><a href="#cb17-3" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb17-4"><a href="#cb17-4" aria-hidden="true" tabindex="-1"></a>astragali_counts</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<span id="cb17-4"><a href="#cb17-4" aria-hidden="true" tabindex="-1"></a>astragali_counts</span></code></pre></div><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></div>
 <div class="cell-output cell-output-stdout">
 <pre><code>    side    n
 1 Side 1  946
@@ -3815,12 +3791,12 @@ Case Study: People v Collins
 </div>
 <p>Now we can calculate the observed proportion of each side.</p>
 <div class="cell">
-<div class="sourceCode cell-code" id="cb19"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb19-1"><a href="#cb19-1" aria-hidden="true" tabindex="-1"></a>astragali_counts <span class="ot">&lt;-</span> astragali_counts <span class="sc">|&gt;</span></span>
+<div class="code-copy-outer-scaffold"><div class="sourceCode cell-code" id="cb19"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb19-1"><a href="#cb19-1" aria-hidden="true" tabindex="-1"></a>astragali_counts <span class="ot">&lt;-</span> astragali_counts <span class="sc">|&gt;</span></span>
 <span id="cb19-2"><a href="#cb19-2" aria-hidden="true" tabindex="-1"></a>  dplyr<span class="sc">::</span><span class="fu">mutate</span>(</span>
 <span id="cb19-3"><a href="#cb19-3" aria-hidden="true" tabindex="-1"></a>    <span class="at">observed_proportion =</span> n <span class="sc">/</span> <span class="fu">sum</span>(n)</span>
 <span id="cb19-4"><a href="#cb19-4" aria-hidden="true" tabindex="-1"></a>  )</span>
 <span id="cb19-5"><a href="#cb19-5" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb19-6"><a href="#cb19-6" aria-hidden="true" tabindex="-1"></a>astragali_counts</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<span id="cb19-6"><a href="#cb19-6" aria-hidden="true" tabindex="-1"></a>astragali_counts</span></code></pre></div><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></div>
 <div class="cell-output cell-output-stdout">
 <pre><code>    side    n observed_proportion
 1 Side 1  946              0.0946
@@ -3831,13 +3807,13 @@ Case Study: People v Collins
 </div>
 <p>We can compare the simulated proportions with the original probabilities.</p>
 <div class="cell">
-<div class="sourceCode cell-code" id="cb21"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb21-1"><a href="#cb21-1" aria-hidden="true" tabindex="-1"></a>astragali_comparison <span class="ot">&lt;-</span> astragali_counts <span class="sc">|&gt;</span></span>
+<div class="code-copy-outer-scaffold"><div class="sourceCode cell-code" id="cb21"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb21-1"><a href="#cb21-1" aria-hidden="true" tabindex="-1"></a>astragali_comparison <span class="ot">&lt;-</span> astragali_counts <span class="sc">|&gt;</span></span>
 <span id="cb21-2"><a href="#cb21-2" aria-hidden="true" tabindex="-1"></a>  dplyr<span class="sc">::</span><span class="fu">left_join</span>(</span>
 <span id="cb21-3"><a href="#cb21-3" aria-hidden="true" tabindex="-1"></a>    astragali_probabilities,</span>
 <span id="cb21-4"><a href="#cb21-4" aria-hidden="true" tabindex="-1"></a>    <span class="at">by =</span> <span class="fu">c</span>(<span class="st">"side"</span> <span class="ot">=</span> <span class="st">"Side"</span>)</span>
 <span id="cb21-5"><a href="#cb21-5" aria-hidden="true" tabindex="-1"></a>  )</span>
 <span id="cb21-6"><a href="#cb21-6" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb21-7"><a href="#cb21-7" aria-hidden="true" tabindex="-1"></a>astragali_comparison</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<span id="cb21-7"><a href="#cb21-7" aria-hidden="true" tabindex="-1"></a>astragali_comparison</span></code></pre></div><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></div>
 <div class="cell-output cell-output-stdout">
 <pre><code>    side    n observed_proportion Probability
 1 Side 1  946              0.0946         0.1
@@ -3848,13 +3824,13 @@ Case Study: People v Collins
 </div>
 <p>We can also make a simple bar chart</p>
 <div class="cell">
-<div class="sourceCode cell-code" id="cb23"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb23-1"><a href="#cb23-1" aria-hidden="true" tabindex="-1"></a><span class="fu">ggplot</span>(astragali_comparison, <span class="fu">aes</span>(<span class="at">x =</span> side, <span class="at">y =</span> observed_proportion)) <span class="sc">+</span></span>
+<div class="code-copy-outer-scaffold"><div class="sourceCode cell-code" id="cb23"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb23-1"><a href="#cb23-1" aria-hidden="true" tabindex="-1"></a><span class="fu">ggplot</span>(astragali_comparison, <span class="fu">aes</span>(<span class="at">x =</span> side, <span class="at">y =</span> observed_proportion)) <span class="sc">+</span></span>
 <span id="cb23-2"><a href="#cb23-2" aria-hidden="true" tabindex="-1"></a>  <span class="fu">geom_col</span>() <span class="sc">+</span></span>
 <span id="cb23-3"><a href="#cb23-3" aria-hidden="true" tabindex="-1"></a>  <span class="fu">labs</span>(</span>
 <span id="cb23-4"><a href="#cb23-4" aria-hidden="true" tabindex="-1"></a>    <span class="at">x =</span> <span class="st">"Side"</span>,</span>
 <span id="cb23-5"><a href="#cb23-5" aria-hidden="true" tabindex="-1"></a>    <span class="at">y =</span> <span class="st">"Observed proportion"</span>,</span>
 <span id="cb23-6"><a href="#cb23-6" aria-hidden="true" tabindex="-1"></a>    <span class="at">title =</span> <span class="st">"Simulated astragali tosses"</span></span>
-<span id="cb23-7"><a href="#cb23-7" aria-hidden="true" tabindex="-1"></a>  )</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<span id="cb23-7"><a href="#cb23-7" aria-hidden="true" tabindex="-1"></a>  )</span></code></pre></div><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></div>
 <div class="cell-output-display">
 <div>
 <figure class="figure">
@@ -3873,7 +3849,7 @@ Case Study: People v Collins
 </ul>
 <p>Here is how we can code that comparison in R.</p>
 <div class="cell">
-<div class="sourceCode cell-code" id="cb24"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb24-1"><a href="#cb24-1" aria-hidden="true" tabindex="-1"></a>p_random_match <span class="ot">&lt;-</span> <span class="dv">1</span> <span class="sc">/</span> <span class="dv">1000000000</span></span>
+<div class="code-copy-outer-scaffold"><div class="sourceCode cell-code" id="cb24"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb24-1"><a href="#cb24-1" aria-hidden="true" tabindex="-1"></a>p_random_match <span class="ot">&lt;-</span> <span class="dv">1</span> <span class="sc">/</span> <span class="dv">1000000000</span></span>
 <span id="cb24-2"><a href="#cb24-2" aria-hidden="true" tabindex="-1"></a>p_lab_error <span class="ot">&lt;-</span> <span class="dv">1</span> <span class="sc">/</span> <span class="dv">100</span></span>
 <span id="cb24-3"><a href="#cb24-3" aria-hidden="true" tabindex="-1"></a></span>
 <span id="cb24-4"><a href="#cb24-4" aria-hidden="true" tabindex="-1"></a>dna_errors <span class="ot">&lt;-</span> <span class="fu">data.frame</span>(</span>
@@ -3886,7 +3862,7 @@ Case Study: People v Collins
 <span id="cb24-11"><a href="#cb24-11" aria-hidden="true" tabindex="-1"></a>  gt<span class="sc">::</span><span class="fu">fmt_number</span>(</span>
 <span id="cb24-12"><a href="#cb24-12" aria-hidden="true" tabindex="-1"></a>    <span class="at">columns =</span> probability,</span>
 <span id="cb24-13"><a href="#cb24-13" aria-hidden="true" tabindex="-1"></a>    <span class="at">decimals =</span> <span class="dv">10</span></span>
-<span id="cb24-14"><a href="#cb24-14" aria-hidden="true" tabindex="-1"></a>  )</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<span id="cb24-14"><a href="#cb24-14" aria-hidden="true" tabindex="-1"></a>  )</span></code></pre></div><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></div>
 <div class="cell-output-display">
 <div id="iiovcqlqvt" style="padding-left:0px;padding-right:0px;padding-top:10px;padding-bottom:10px;overflow-x:auto;overflow-y:auto;width:auto;height:auto;">
 <style>#iiovcqlqvt table {
@@ -4338,7 +4314,7 @@ Case Study: People v Collins
 }
 </style>
 
-<table class="gt_table caption-top table table-sm table-striped small" data-quarto-postprocess="true" data-quarto-disable-processing="false" data-quarto-bootstrap="false">
+<table class="gt_table caption-top table table-sm table-striped small" data-quarto-bootstrap="false">
 <thead>
 <tr class="gt_col_headings header">
 <th id="source" class="gt_col_heading gt_columns_bottom_border gt_left" data-quarto-table-cell-role="th" scope="col">source</th>
@@ -4366,16 +4342,16 @@ Case Study: People v Collins
 P(\text{random match}) + P(\text{lab error})\]</span></p>
 <p>In R:</p>
 <div class="cell">
-<div class="sourceCode cell-code" id="cb25"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb25-1"><a href="#cb25-1" aria-hidden="true" tabindex="-1"></a>p_false_match <span class="ot">&lt;-</span> p_random_match <span class="sc">+</span> p_lab_error</span>
+<div class="code-copy-outer-scaffold"><div class="sourceCode cell-code" id="cb25"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb25-1"><a href="#cb25-1" aria-hidden="true" tabindex="-1"></a>p_false_match <span class="ot">&lt;-</span> p_random_match <span class="sc">+</span> p_lab_error</span>
 <span id="cb25-2"><a href="#cb25-2" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb25-3"><a href="#cb25-3" aria-hidden="true" tabindex="-1"></a>p_false_match</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<span id="cb25-3"><a href="#cb25-3" aria-hidden="true" tabindex="-1"></a>p_false_match</span></code></pre></div><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></div>
 <div class="cell-output cell-output-stdout">
 <pre><code>[1] 0.01</code></pre>
 </div>
 </div>
 <p>Now compare this with the lab-error probability.</p>
 <div class="cell">
-<div class="sourceCode cell-code" id="cb27"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb27-1"><a href="#cb27-1" aria-hidden="true" tabindex="-1"></a>p_lab_error</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="code-copy-outer-scaffold"><div class="sourceCode cell-code" id="cb27"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb27-1"><a href="#cb27-1" aria-hidden="true" tabindex="-1"></a>p_lab_error</span></code></pre></div><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></div>
 <div class="cell-output cell-output-stdout">
 <pre><code>[1] 0.01</code></pre>
 </div>
@@ -4383,7 +4359,7 @@ P(\text{random match}) + P(\text{lab error})\]</span></p>
 <p>The values are almost identical, because the random-match probability is tiny compared with the lab-error probability.</p>
 <p>We can show the comparison in a summary table.</p>
 <div class="cell">
-<div class="sourceCode cell-code" id="cb29"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb29-1"><a href="#cb29-1" aria-hidden="true" tabindex="-1"></a>dna_summary <span class="ot">&lt;-</span> <span class="fu">data.frame</span>(</span>
+<div class="code-copy-outer-scaffold"><div class="sourceCode cell-code" id="cb29"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb29-1"><a href="#cb29-1" aria-hidden="true" tabindex="-1"></a>dna_summary <span class="ot">&lt;-</span> <span class="fu">data.frame</span>(</span>
 <span id="cb29-2"><a href="#cb29-2" aria-hidden="true" tabindex="-1"></a>  <span class="at">quantity =</span> <span class="fu">c</span>(</span>
 <span id="cb29-3"><a href="#cb29-3" aria-hidden="true" tabindex="-1"></a>    <span class="st">"Random DNA match"</span>,</span>
 <span id="cb29-4"><a href="#cb29-4" aria-hidden="true" tabindex="-1"></a>    <span class="st">"Laboratory error"</span>,</span>
@@ -4401,7 +4377,7 @@ P(\text{random match}) + P(\text{lab error})\]</span></p>
 <span id="cb29-16"><a href="#cb29-16" aria-hidden="true" tabindex="-1"></a>  gt<span class="sc">::</span><span class="fu">fmt_number</span>(</span>
 <span id="cb29-17"><a href="#cb29-17" aria-hidden="true" tabindex="-1"></a>    <span class="at">columns =</span> probability,</span>
 <span id="cb29-18"><a href="#cb29-18" aria-hidden="true" tabindex="-1"></a>    <span class="at">decimals =</span> <span class="dv">10</span></span>
-<span id="cb29-19"><a href="#cb29-19" aria-hidden="true" tabindex="-1"></a>  )</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<span id="cb29-19"><a href="#cb29-19" aria-hidden="true" tabindex="-1"></a>  )</span></code></pre></div><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></div>
 <div class="cell-output-display">
 <div id="rccogsoyxg" style="padding-left:0px;padding-right:0px;padding-top:10px;padding-bottom:10px;overflow-x:auto;overflow-y:auto;width:auto;height:auto;">
 <style>#rccogsoyxg table {
@@ -4853,7 +4829,7 @@ P(\text{random match}) + P(\text{lab error})\]</span></p>
 }
 </style>
 
-<table class="gt_table caption-top table table-sm table-striped small" data-quarto-postprocess="true" data-quarto-disable-processing="false" data-quarto-bootstrap="false">
+<table class="gt_table caption-top table table-sm table-striped small" data-quarto-bootstrap="false">
 <thead>
 <tr class="gt_col_headings header">
 <th id="quantity" class="gt_col_heading gt_columns_bottom_border gt_left" data-quarto-table-cell-role="th" scope="col">quantity</th>
@@ -4881,12 +4857,12 @@ P(\text{random match}) + P(\text{lab error})\]</span></p>
 </div>
 <p>We can also display the same probabilities as percentages.</p>
 <div class="cell">
-<div class="sourceCode cell-code" id="cb30"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb30-1"><a href="#cb30-1" aria-hidden="true" tabindex="-1"></a>dna_summary <span class="sc">|&gt;</span></span>
+<div class="code-copy-outer-scaffold"><div class="sourceCode cell-code" id="cb30"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb30-1"><a href="#cb30-1" aria-hidden="true" tabindex="-1"></a>dna_summary <span class="sc">|&gt;</span></span>
 <span id="cb30-2"><a href="#cb30-2" aria-hidden="true" tabindex="-1"></a>  gt<span class="sc">::</span><span class="fu">gt</span>() <span class="sc">|&gt;</span></span>
 <span id="cb30-3"><a href="#cb30-3" aria-hidden="true" tabindex="-1"></a>  gt<span class="sc">::</span><span class="fu">fmt_percent</span>(</span>
 <span id="cb30-4"><a href="#cb30-4" aria-hidden="true" tabindex="-1"></a>    <span class="at">columns =</span> probability,</span>
 <span id="cb30-5"><a href="#cb30-5" aria-hidden="true" tabindex="-1"></a>    <span class="at">decimals =</span> <span class="dv">6</span></span>
-<span id="cb30-6"><a href="#cb30-6" aria-hidden="true" tabindex="-1"></a>  )</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<span id="cb30-6"><a href="#cb30-6" aria-hidden="true" tabindex="-1"></a>  )</span></code></pre></div><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></div>
 <div class="cell-output-display">
 <div id="dpklyxehfe" style="padding-left:0px;padding-right:0px;padding-top:10px;padding-bottom:10px;overflow-x:auto;overflow-y:auto;width:auto;height:auto;">
 <style>#dpklyxehfe table {
@@ -5338,7 +5314,7 @@ P(\text{random match}) + P(\text{lab error})\]</span></p>
 }
 </style>
 
-<table class="gt_table caption-top table table-sm table-striped small" data-quarto-postprocess="true" data-quarto-disable-processing="false" data-quarto-bootstrap="false">
+<table class="gt_table caption-top table table-sm table-striped small" data-quarto-bootstrap="false">
 <thead>
 <tr class="gt_col_headings header">
 <th id="quantity" class="gt_col_heading gt_columns_bottom_border gt_left" data-quarto-table-cell-role="th" scope="col">quantity</th>
@@ -5371,7 +5347,7 @@ P(\text{random match}) + P(\text{lab error})\]</span></p>
 <p>In the chapter, we saw that the prosecution in <em>People v Collins</em> multiplied several probabilities together. The calculation looked precise, but it depended heavily on the probabilities chosen and on the assumption that the characteristics were independent.</p>
 <p>We can code the original calculation in R.</p>
 <div class="cell">
-<div class="sourceCode cell-code" id="cb31"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb31-1"><a href="#cb31-1" aria-hidden="true" tabindex="-1"></a>collins <span class="ot">&lt;-</span> <span class="fu">data.frame</span>(</span>
+<div class="code-copy-outer-scaffold"><div class="sourceCode cell-code" id="cb31"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb31-1"><a href="#cb31-1" aria-hidden="true" tabindex="-1"></a>collins <span class="ot">&lt;-</span> <span class="fu">data.frame</span>(</span>
 <span id="cb31-2"><a href="#cb31-2" aria-hidden="true" tabindex="-1"></a>  <span class="at">characteristic =</span> <span class="fu">c</span>(</span>
 <span id="cb31-3"><a href="#cb31-3" aria-hidden="true" tabindex="-1"></a>    <span class="st">"Partly yellow car"</span>,</span>
 <span id="cb31-4"><a href="#cb31-4" aria-hidden="true" tabindex="-1"></a>    <span class="st">"Man with moustache"</span>,</span>
@@ -5395,7 +5371,7 @@ P(\text{random match}) + P(\text{lab error})\]</span></p>
 <span id="cb31-22"><a href="#cb31-22" aria-hidden="true" tabindex="-1"></a>  gt<span class="sc">::</span><span class="fu">fmt_number</span>(</span>
 <span id="cb31-23"><a href="#cb31-23" aria-hidden="true" tabindex="-1"></a>    <span class="at">columns =</span> probability,</span>
 <span id="cb31-24"><a href="#cb31-24" aria-hidden="true" tabindex="-1"></a>    <span class="at">decimals =</span> <span class="dv">6</span></span>
-<span id="cb31-25"><a href="#cb31-25" aria-hidden="true" tabindex="-1"></a>  )</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<span id="cb31-25"><a href="#cb31-25" aria-hidden="true" tabindex="-1"></a>  )</span></code></pre></div><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></div>
 <div class="cell-output-display">
 <div id="pwjdzyvcbx" style="padding-left:0px;padding-right:0px;padding-top:10px;padding-bottom:10px;overflow-x:auto;overflow-y:auto;width:auto;height:auto;">
 <style>#pwjdzyvcbx table {
@@ -5847,7 +5823,7 @@ P(\text{random match}) + P(\text{lab error})\]</span></p>
 }
 </style>
 
-<table class="gt_table caption-top table table-sm table-striped small" data-quarto-postprocess="true" data-quarto-disable-processing="false" data-quarto-bootstrap="false">
+<table class="gt_table caption-top table table-sm table-striped small" data-quarto-bootstrap="false">
 <thead>
 <tr class="gt_col_headings header">
 <th id="characteristic" class="gt_col_heading gt_columns_bottom_border gt_left" data-quarto-table-cell-role="th" scope="col">characteristic</th>
@@ -5887,15 +5863,15 @@ P(\text{random match}) + P(\text{lab error})\]</span></p>
 </div>
 <p>To reproduce the prosecution’s calculation, we multiply all the probabilities.</p>
 <div class="cell">
-<div class="sourceCode cell-code" id="cb32"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb32-1"><a href="#cb32-1" aria-hidden="true" tabindex="-1"></a>combined_probability <span class="ot">&lt;-</span> <span class="fu">prod</span>(collins<span class="sc">$</span>probability)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="code-copy-outer-scaffold"><div class="sourceCode cell-code" id="cb32"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb32-1"><a href="#cb32-1" aria-hidden="true" tabindex="-1"></a>combined_probability <span class="ot">&lt;-</span> <span class="fu">prod</span>(collins<span class="sc">$</span>probability)</span></code></pre></div><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></div>
 </div>
 <p>We can convert this into a “1 in …” number.</p>
 <div class="cell">
-<div class="sourceCode cell-code" id="cb33"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb33-1"><a href="#cb33-1" aria-hidden="true" tabindex="-1"></a>one_in <span class="ot">&lt;-</span> <span class="dv">1</span> <span class="sc">/</span> combined_probability</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="code-copy-outer-scaffold"><div class="sourceCode cell-code" id="cb33"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb33-1"><a href="#cb33-1" aria-hidden="true" tabindex="-1"></a>one_in <span class="ot">&lt;-</span> <span class="dv">1</span> <span class="sc">/</span> combined_probability</span></code></pre></div><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></div>
 </div>
 <p>This gives the result as approximately 1 in 12 million.</p>
 <div class="cell">
-<div class="sourceCode cell-code" id="cb34"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb34-1"><a href="#cb34-1" aria-hidden="true" tabindex="-1"></a>collins_result <span class="ot">&lt;-</span> <span class="fu">data.frame</span>(</span>
+<div class="code-copy-outer-scaffold"><div class="sourceCode cell-code" id="cb34"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb34-1"><a href="#cb34-1" aria-hidden="true" tabindex="-1"></a>collins_result <span class="ot">&lt;-</span> <span class="fu">data.frame</span>(</span>
 <span id="cb34-2"><a href="#cb34-2" aria-hidden="true" tabindex="-1"></a>  <span class="at">quantity =</span> <span class="fu">c</span>(</span>
 <span id="cb34-3"><a href="#cb34-3" aria-hidden="true" tabindex="-1"></a>    <span class="st">"Combined probability"</span>,</span>
 <span id="cb34-4"><a href="#cb34-4" aria-hidden="true" tabindex="-1"></a>    <span class="st">"Approximately 1 in ..."</span></span>
@@ -5911,7 +5887,7 @@ P(\text{random match}) + P(\text{lab error})\]</span></p>
 <span id="cb34-14"><a href="#cb34-14" aria-hidden="true" tabindex="-1"></a>  gt<span class="sc">::</span><span class="fu">fmt_number</span>(</span>
 <span id="cb34-15"><a href="#cb34-15" aria-hidden="true" tabindex="-1"></a>    <span class="at">columns =</span> value,</span>
 <span id="cb34-16"><a href="#cb34-16" aria-hidden="true" tabindex="-1"></a>    <span class="at">decimals =</span> <span class="dv">0</span></span>
-<span id="cb34-17"><a href="#cb34-17" aria-hidden="true" tabindex="-1"></a>  )</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<span id="cb34-17"><a href="#cb34-17" aria-hidden="true" tabindex="-1"></a>  )</span></code></pre></div><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></div>
 <div class="cell-output-display">
 <div id="ofiprhhuqm" style="padding-left:0px;padding-right:0px;padding-top:10px;padding-bottom:10px;overflow-x:auto;overflow-y:auto;width:auto;height:auto;">
 <style>#ofiprhhuqm table {
@@ -6363,7 +6339,7 @@ P(\text{random match}) + P(\text{lab error})\]</span></p>
 }
 </style>
 
-<table class="gt_table caption-top table table-sm table-striped small" data-quarto-postprocess="true" data-quarto-disable-processing="false" data-quarto-bootstrap="false">
+<table class="gt_table caption-top table table-sm table-striped small" data-quarto-bootstrap="false">
 <thead>
 <tr class="gt_col_headings header">
 <th id="quantity" class="gt_col_heading gt_columns_bottom_border gt_left" data-quarto-table-cell-role="th" scope="col">quantity</th>
@@ -6391,7 +6367,7 @@ P(\text{random match}) + P(\text{lab error})\]</span></p>
 <p>The original probabilities were not fixed facts. They were assumptions. We can use R to change them and see how much the final result changes.</p>
 <p>Suppose a student thinks some of the original probabilities are too small. They might update the probabilities like this:</p>
 <div class="cell">
-<div class="sourceCode cell-code" id="cb35"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb35-1"><a href="#cb35-1" aria-hidden="true" tabindex="-1"></a>collins_updated <span class="ot">&lt;-</span> <span class="fu">data.frame</span>(</span>
+<div class="code-copy-outer-scaffold"><div class="sourceCode cell-code" id="cb35"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb35-1"><a href="#cb35-1" aria-hidden="true" tabindex="-1"></a>collins_updated <span class="ot">&lt;-</span> <span class="fu">data.frame</span>(</span>
 <span id="cb35-2"><a href="#cb35-2" aria-hidden="true" tabindex="-1"></a>  <span class="at">characteristic =</span> <span class="fu">c</span>(</span>
 <span id="cb35-3"><a href="#cb35-3" aria-hidden="true" tabindex="-1"></a>    <span class="st">"Partly yellow car"</span>,</span>
 <span id="cb35-4"><a href="#cb35-4" aria-hidden="true" tabindex="-1"></a>    <span class="st">"Man with moustache"</span>,</span>
@@ -6418,7 +6394,7 @@ P(\text{random match}) + P(\text{lab error})\]</span></p>
 <span id="cb35-25"><a href="#cb35-25" aria-hidden="true" tabindex="-1"></a>  )</span>
 <span id="cb35-26"><a href="#cb35-26" aria-hidden="true" tabindex="-1"></a>)</span>
 <span id="cb35-27"><a href="#cb35-27" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb35-28"><a href="#cb35-28" aria-hidden="true" tabindex="-1"></a>collins_updated</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<span id="cb35-28"><a href="#cb35-28" aria-hidden="true" tabindex="-1"></a>collins_updated</span></code></pre></div><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></div>
 <div class="cell-output cell-output-stdout">
 <pre><code>             characteristic original_probability updated_probability
 1         Partly yellow car            0.1000000           0.1250000
@@ -6431,17 +6407,17 @@ P(\text{random match}) + P(\text{lab error})\]</span></p>
 </div>
 <p>Now calculate the combined probability for both sets.</p>
 <div class="cell">
-<div class="sourceCode cell-code" id="cb37"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb37-1"><a href="#cb37-1" aria-hidden="true" tabindex="-1"></a>original_combined <span class="ot">&lt;-</span> <span class="fu">prod</span>(collins_updated<span class="sc">$</span>original_probability)</span>
-<span id="cb37-2"><a href="#cb37-2" aria-hidden="true" tabindex="-1"></a>updated_combined <span class="ot">&lt;-</span> <span class="fu">prod</span>(collins_updated<span class="sc">$</span>updated_probability)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="code-copy-outer-scaffold"><div class="sourceCode cell-code" id="cb37"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb37-1"><a href="#cb37-1" aria-hidden="true" tabindex="-1"></a>original_combined <span class="ot">&lt;-</span> <span class="fu">prod</span>(collins_updated<span class="sc">$</span>original_probability)</span>
+<span id="cb37-2"><a href="#cb37-2" aria-hidden="true" tabindex="-1"></a>updated_combined <span class="ot">&lt;-</span> <span class="fu">prod</span>(collins_updated<span class="sc">$</span>updated_probability)</span></code></pre></div><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></div>
 </div>
 <p>Now convert both probabilities into “1 in …” values.</p>
 <div class="cell">
-<div class="sourceCode cell-code" id="cb38"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb38-1"><a href="#cb38-1" aria-hidden="true" tabindex="-1"></a>original_one_in <span class="ot">&lt;-</span> <span class="dv">1</span> <span class="sc">/</span> original_combined</span>
-<span id="cb38-2"><a href="#cb38-2" aria-hidden="true" tabindex="-1"></a>updated_one_in <span class="ot">&lt;-</span> <span class="dv">1</span> <span class="sc">/</span> updated_combined</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="code-copy-outer-scaffold"><div class="sourceCode cell-code" id="cb38"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb38-1"><a href="#cb38-1" aria-hidden="true" tabindex="-1"></a>original_one_in <span class="ot">&lt;-</span> <span class="dv">1</span> <span class="sc">/</span> original_combined</span>
+<span id="cb38-2"><a href="#cb38-2" aria-hidden="true" tabindex="-1"></a>updated_one_in <span class="ot">&lt;-</span> <span class="dv">1</span> <span class="sc">/</span> updated_combined</span></code></pre></div><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></div>
 </div>
 <p>We can summarise the results in a table.</p>
 <div class="cell">
-<div class="sourceCode cell-code" id="cb39"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb39-1"><a href="#cb39-1" aria-hidden="true" tabindex="-1"></a>assumption_comparison <span class="ot">&lt;-</span> <span class="fu">data.frame</span>(</span>
+<div class="code-copy-outer-scaffold"><div class="sourceCode cell-code" id="cb39"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb39-1"><a href="#cb39-1" aria-hidden="true" tabindex="-1"></a>assumption_comparison <span class="ot">&lt;-</span> <span class="fu">data.frame</span>(</span>
 <span id="cb39-2"><a href="#cb39-2" aria-hidden="true" tabindex="-1"></a>  <span class="at">version =</span> <span class="fu">c</span>(</span>
 <span id="cb39-3"><a href="#cb39-3" aria-hidden="true" tabindex="-1"></a>    <span class="st">"Original assumptions"</span>,</span>
 <span id="cb39-4"><a href="#cb39-4" aria-hidden="true" tabindex="-1"></a>    <span class="st">"Updated assumptions"</span></span>
@@ -6461,7 +6437,7 @@ P(\text{random match}) + P(\text{lab error})\]</span></p>
 <span id="cb39-18"><a href="#cb39-18" aria-hidden="true" tabindex="-1"></a>  gt<span class="sc">::</span><span class="fu">fmt_number</span>(</span>
 <span id="cb39-19"><a href="#cb39-19" aria-hidden="true" tabindex="-1"></a>    <span class="at">columns =</span> <span class="fu">c</span>(combined_probability, one_in),</span>
 <span id="cb39-20"><a href="#cb39-20" aria-hidden="true" tabindex="-1"></a>    <span class="at">decimals =</span> <span class="dv">0</span></span>
-<span id="cb39-21"><a href="#cb39-21" aria-hidden="true" tabindex="-1"></a>  )</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<span id="cb39-21"><a href="#cb39-21" aria-hidden="true" tabindex="-1"></a>  )</span></code></pre></div><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></div>
 <div class="cell-output-display">
 <div id="macnyudhce" style="padding-left:0px;padding-right:0px;padding-top:10px;padding-bottom:10px;overflow-x:auto;overflow-y:auto;width:auto;height:auto;">
 <style>#macnyudhce table {
@@ -6913,7 +6889,7 @@ P(\text{random match}) + P(\text{lab error})\]</span></p>
 }
 </style>
 
-<table class="gt_table caption-top table table-sm table-striped small" data-quarto-postprocess="true" data-quarto-disable-processing="false" data-quarto-bootstrap="false">
+<table class="gt_table caption-top table table-sm table-striped small" data-quarto-bootstrap="false">
 <thead>
 <tr class="gt_col_headings header">
 <th id="version" class="gt_col_heading gt_columns_bottom_border gt_left" data-quarto-table-cell-role="th" scope="col">version</th>
@@ -6942,7 +6918,7 @@ P(\text{random match}) + P(\text{lab error})\]</span></p>
 <p>Now, instead of rewriting the whole table, we can update one probability at a time using <code>mutate()</code> and <code>case_when()</code>.</p>
 <p>Suppose we want to change only the probability for “Interracial couple in car” from <code>1 / 1000</code> to <code>1 / 500</code>.</p>
 <div class="cell">
-<div class="sourceCode cell-code" id="cb40"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb40-1"><a href="#cb40-1" aria-hidden="true" tabindex="-1"></a>collins_one_update <span class="ot">&lt;-</span> collins <span class="sc">|&gt;</span></span>
+<div class="code-copy-outer-scaffold"><div class="sourceCode cell-code" id="cb40"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb40-1"><a href="#cb40-1" aria-hidden="true" tabindex="-1"></a>collins_one_update <span class="ot">&lt;-</span> collins <span class="sc">|&gt;</span></span>
 <span id="cb40-2"><a href="#cb40-2" aria-hidden="true" tabindex="-1"></a>  dplyr<span class="sc">::</span><span class="fu">mutate</span>(</span>
 <span id="cb40-3"><a href="#cb40-3" aria-hidden="true" tabindex="-1"></a>    <span class="at">updated_probability =</span> dplyr<span class="sc">::</span><span class="fu">case_when</span>(</span>
 <span id="cb40-4"><a href="#cb40-4" aria-hidden="true" tabindex="-1"></a>      characteristic <span class="sc">==</span> <span class="st">"Interracial couple in car"</span> <span class="sc">~</span> <span class="dv">1</span> <span class="sc">/</span> <span class="dv">3</span>,</span>
@@ -6955,7 +6931,7 @@ P(\text{random match}) + P(\text{lab error})\]</span></p>
 <span id="cb40-11"><a href="#cb40-11" aria-hidden="true" tabindex="-1"></a>  gt<span class="sc">::</span><span class="fu">fmt_number</span>(</span>
 <span id="cb40-12"><a href="#cb40-12" aria-hidden="true" tabindex="-1"></a>    <span class="at">columns =</span> <span class="fu">c</span>(probability, updated_probability),</span>
 <span id="cb40-13"><a href="#cb40-13" aria-hidden="true" tabindex="-1"></a>    <span class="at">decimals =</span> <span class="dv">6</span></span>
-<span id="cb40-14"><a href="#cb40-14" aria-hidden="true" tabindex="-1"></a>  )</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<span id="cb40-14"><a href="#cb40-14" aria-hidden="true" tabindex="-1"></a>  )</span></code></pre></div><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></div>
 <div class="cell-output-display">
 <div id="liqoszxdid" style="padding-left:0px;padding-right:0px;padding-top:10px;padding-bottom:10px;overflow-x:auto;overflow-y:auto;width:auto;height:auto;">
 <style>#liqoszxdid table {
@@ -7407,7 +7383,7 @@ P(\text{random match}) + P(\text{lab error})\]</span></p>
 }
 </style>
 
-<table class="gt_table caption-top table table-sm table-striped small" data-quarto-postprocess="true" data-quarto-disable-processing="false" data-quarto-bootstrap="false">
+<table class="gt_table caption-top table table-sm table-striped small" data-quarto-bootstrap="false">
 <thead>
 <tr class="gt_col_headings header">
 <th id="characteristic" class="gt_col_heading gt_columns_bottom_border gt_left" data-quarto-table-cell-role="th" scope="col">characteristic</th>
@@ -7454,11 +7430,11 @@ P(\text{random match}) + P(\text{lab error})\]</span></p>
 </div>
 <p>Now calculate the new combined probability.</p>
 <div class="cell">
-<div class="sourceCode cell-code" id="cb41"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb41-1"><a href="#cb41-1" aria-hidden="true" tabindex="-1"></a>one_update_combined <span class="ot">&lt;-</span> <span class="fu">prod</span>(collins_one_update<span class="sc">$</span>updated_probability)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="code-copy-outer-scaffold"><div class="sourceCode cell-code" id="cb41"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb41-1"><a href="#cb41-1" aria-hidden="true" tabindex="-1"></a>one_update_combined <span class="ot">&lt;-</span> <span class="fu">prod</span>(collins_one_update<span class="sc">$</span>updated_probability)</span></code></pre></div><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></div>
 </div>
 <p>Changing just one assumption can noticeably change the final answer.</p>
 <div class="cell">
-<div class="sourceCode cell-code" id="cb42"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb42-1"><a href="#cb42-1" aria-hidden="true" tabindex="-1"></a>single_update_comparison <span class="ot">&lt;-</span> <span class="fu">data.frame</span>(</span>
+<div class="code-copy-outer-scaffold"><div class="sourceCode cell-code" id="cb42"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb42-1"><a href="#cb42-1" aria-hidden="true" tabindex="-1"></a>single_update_comparison <span class="ot">&lt;-</span> <span class="fu">data.frame</span>(</span>
 <span id="cb42-2"><a href="#cb42-2" aria-hidden="true" tabindex="-1"></a>  <span class="at">version =</span> <span class="fu">c</span>(</span>
 <span id="cb42-3"><a href="#cb42-3" aria-hidden="true" tabindex="-1"></a>    <span class="st">"Original"</span>,</span>
 <span id="cb42-4"><a href="#cb42-4" aria-hidden="true" tabindex="-1"></a>    <span class="st">"Updated interracial-couple probability"</span></span>
@@ -7474,7 +7450,7 @@ P(\text{random match}) + P(\text{lab error})\]</span></p>
 <span id="cb42-14"><a href="#cb42-14" aria-hidden="true" tabindex="-1"></a>  gt<span class="sc">::</span><span class="fu">fmt_number</span>(</span>
 <span id="cb42-15"><a href="#cb42-15" aria-hidden="true" tabindex="-1"></a>    <span class="at">columns =</span> one_in,</span>
 <span id="cb42-16"><a href="#cb42-16" aria-hidden="true" tabindex="-1"></a>    <span class="at">decimals =</span> <span class="dv">0</span></span>
-<span id="cb42-17"><a href="#cb42-17" aria-hidden="true" tabindex="-1"></a>  )</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<span id="cb42-17"><a href="#cb42-17" aria-hidden="true" tabindex="-1"></a>  )</span></code></pre></div><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></div>
 <div class="cell-output-display">
 <div id="qwcguqvvrd" style="padding-left:0px;padding-right:0px;padding-top:10px;padding-bottom:10px;overflow-x:auto;overflow-y:auto;width:auto;height:auto;">
 <style>#qwcguqvvrd table {
@@ -7926,7 +7902,7 @@ P(\text{random match}) + P(\text{lab error})\]</span></p>
 }
 </style>
 
-<table class="gt_table caption-top table table-sm table-striped small" data-quarto-postprocess="true" data-quarto-disable-processing="false" data-quarto-bootstrap="false">
+<table class="gt_table caption-top table table-sm table-striped small" data-quarto-bootstrap="false">
 <thead>
 <tr class="gt_col_headings header">
 <th id="version" class="gt_col_heading gt_columns_bottom_border gt_left" data-quarto-table-cell-role="th" scope="col">version</th>
@@ -7960,7 +7936,7 @@ P(\text{random match}) + P(\text{lab error})\]</span></p>
 <i class="callout-icon"></i>
 </div>
 <div class="callout-title-container flex-fill">
-Question 1
+<span class="screen-reader-only">Note</span>Question 1
 </div>
 </div>
 <div class="callout-body-container callout-body">
@@ -7973,12 +7949,12 @@ Question 1
 <p><strong>b.</strong> Write two possible outcomes that could have happened but did not.</p>
 <p><strong>c.</strong> Why can it be misleading to judge the student’s application strategy only by the final result?</p>
 <div class="callout callout-style-default callout-important callout-titled">
-<div class="callout-header d-flex align-content-center" data-bs-toggle="collapse" data-bs-target=".callout-7-contents" aria-controls="callout-7" aria-expanded="false" aria-label="Toggle callout">
+<div class="callout-header d-flex align-content-center collapsed" data-bs-toggle="collapse" data-bs-target=".callout-7-contents" aria-controls="callout-7" aria-expanded="false" aria-label="Toggle callout">
 <div class="callout-icon-container">
 <i class="callout-icon"></i>
 </div>
 <div class="callout-title-container flex-fill">
-Click for Solutions
+<span class="screen-reader-only">Important</span>Click for Solutions
 </div>
 <div class="callout-btn-toggle d-inline-block border-0 py-1 ps-1 pe-0 float-end"><i class="callout-toggle"></i></div>
 </div>
@@ -8004,7 +7980,7 @@ Click for Solutions
 <i class="callout-icon"></i>
 </div>
 <div class="callout-title-container flex-fill">
-Question 2
+<span class="screen-reader-only">Note</span>Question 2
 </div>
 </div>
 <div class="callout-body-container callout-body">
@@ -8461,7 +8437,7 @@ Question 2
 }
 </style>
 
-<table class="gt_table caption-top table table-sm table-striped small" data-quarto-postprocess="true" data-quarto-disable-processing="false" data-quarto-bootstrap="false">
+<table class="gt_table caption-top table table-sm table-striped small" data-quarto-bootstrap="false">
 <thead>
 <tr class="gt_col_headings header">
 <th id="Situation" class="gt_col_heading gt_columns_bottom_border gt_left" data-quarto-table-cell-role="th" scope="col">Situation</th>
@@ -8502,12 +8478,12 @@ Question 2
 </div>
 </div>
 <div class="callout callout-style-default callout-important callout-titled">
-<div class="callout-header d-flex align-content-center" data-bs-toggle="collapse" data-bs-target=".callout-9-contents" aria-controls="callout-9" aria-expanded="false" aria-label="Toggle callout">
+<div class="callout-header d-flex align-content-center collapsed" data-bs-toggle="collapse" data-bs-target=".callout-9-contents" aria-controls="callout-9" aria-expanded="false" aria-label="Toggle callout">
 <div class="callout-icon-container">
 <i class="callout-icon"></i>
 </div>
 <div class="callout-title-container flex-fill">
-Click for Solutions
+<span class="screen-reader-only">Important</span>Click for Solutions
 </div>
 <div class="callout-btn-toggle d-inline-block border-0 py-1 ps-1 pe-0 float-end"><i class="callout-toggle"></i></div>
 </div>
@@ -8966,7 +8942,7 @@ Click for Solutions
 }
 </style>
 
-<table class="gt_table caption-top table table-sm table-striped small" data-quarto-postprocess="true" data-quarto-disable-processing="false" data-quarto-bootstrap="false">
+<table class="gt_table caption-top table table-sm table-striped small" data-quarto-bootstrap="false">
 <thead>
 <tr class="gt_col_headings header">
 <th id="Situation" class="gt_col_heading gt_columns_bottom_border gt_left" data-quarto-table-cell-role="th" scope="col">Situation</th>
@@ -9017,7 +8993,7 @@ Click for Solutions
 <i class="callout-icon"></i>
 </div>
 <div class="callout-title-container flex-fill">
-Question 3
+<span class="screen-reader-only">Note</span>Question 3
 </div>
 </div>
 <div class="callout-body-container callout-body">
@@ -9474,7 +9450,7 @@ Question 3
 }
 </style>
 
-<table class="gt_table caption-top table table-sm table-striped small" data-quarto-postprocess="true" data-quarto-disable-processing="false" data-quarto-bootstrap="false">
+<table class="gt_table caption-top table table-sm table-striped small" data-quarto-bootstrap="false">
 <thead>
 <tr class="gt_col_headings header">
 <th id="Person" class="gt_col_heading gt_columns_bottom_border gt_left" data-quarto-table-cell-role="th" scope="col">Person</th>
@@ -9508,12 +9484,12 @@ Question 3
 <p><strong>b.</strong> Why might the phrase “a fair chance” cause confusion?</p>
 <p><strong>c.</strong> Rewrite the other three statements using numerical probabilities. There is no single correct answer, but explain your choices.</p>
 <div class="callout callout-style-default callout-important callout-titled">
-<div class="callout-header d-flex align-content-center" data-bs-toggle="collapse" data-bs-target=".callout-11-contents" aria-controls="callout-11" aria-expanded="false" aria-label="Toggle callout">
+<div class="callout-header d-flex align-content-center collapsed" data-bs-toggle="collapse" data-bs-target=".callout-11-contents" aria-controls="callout-11" aria-expanded="false" aria-label="Toggle callout">
 <div class="callout-icon-container">
 <i class="callout-icon"></i>
 </div>
 <div class="callout-title-container flex-fill">
-Click for Solutions
+<span class="screen-reader-only">Important</span>Click for Solutions
 </div>
 <div class="callout-btn-toggle d-inline-block border-0 py-1 ps-1 pe-0 float-end"><i class="callout-toggle"></i></div>
 </div>
@@ -9539,7 +9515,7 @@ Click for Solutions
 <i class="callout-icon"></i>
 </div>
 <div class="callout-title-container flex-fill">
-Question 4
+<span class="screen-reader-only">Note</span>Question 4
 </div>
 </div>
 <div class="callout-body-container callout-body">
@@ -9559,12 +9535,12 @@ Question 4
 <p>If these are the only three possible outcomes, what must be the probability of low demand?</p>
 <p><strong>c.</strong> What assumption are you making when you calculate this probability?</p>
 <div class="callout callout-style-default callout-important callout-titled">
-<div class="callout-header d-flex align-content-center" data-bs-toggle="collapse" data-bs-target=".callout-13-contents" aria-controls="callout-13" aria-expanded="false" aria-label="Toggle callout">
+<div class="callout-header d-flex align-content-center collapsed" data-bs-toggle="collapse" data-bs-target=".callout-13-contents" aria-controls="callout-13" aria-expanded="false" aria-label="Toggle callout">
 <div class="callout-icon-container">
 <i class="callout-icon"></i>
 </div>
 <div class="callout-title-container flex-fill">
-Click for Solutions
+<span class="screen-reader-only">Important</span>Click for Solutions
 </div>
 <div class="callout-btn-toggle d-inline-block border-0 py-1 ps-1 pe-0 float-end"><i class="callout-toggle"></i></div>
 </div>
@@ -9589,7 +9565,7 @@ Click for Solutions
 <i class="callout-icon"></i>
 </div>
 <div class="callout-title-container flex-fill">
-Question 5
+<span class="screen-reader-only">Note</span>Question 5
 </div>
 </div>
 <div class="callout-body-container callout-body">
@@ -9604,12 +9580,12 @@ Question 5
 <p><strong>b.</strong> Suppose 2,000,000 videos are uploaded that day. Approximately how many videos would we expect to receive 1 million views?</p>
 <p><strong>c.</strong> Explain why a rare event may still occur regularly when there are many opportunities for it to happen.</p>
 <div class="callout callout-style-default callout-important callout-titled">
-<div class="callout-header d-flex align-content-center" data-bs-toggle="collapse" data-bs-target=".callout-15-contents" aria-controls="callout-15" aria-expanded="false" aria-label="Toggle callout">
+<div class="callout-header d-flex align-content-center collapsed" data-bs-toggle="collapse" data-bs-target=".callout-15-contents" aria-controls="callout-15" aria-expanded="false" aria-label="Toggle callout">
 <div class="callout-icon-container">
 <i class="callout-icon"></i>
 </div>
 <div class="callout-title-container flex-fill">
-Click for Solutions
+<span class="screen-reader-only">Important</span>Click for Solutions
 </div>
 <div class="callout-btn-toggle d-inline-block border-0 py-1 ps-1 pe-0 float-end"><i class="callout-toggle"></i></div>
 </div>
@@ -9631,7 +9607,7 @@ Click for Solutions
 <i class="callout-icon"></i>
 </div>
 <div class="callout-title-container flex-fill">
-Question 6
+<span class="screen-reader-only">Note</span>Question 6
 </div>
 </div>
 <div class="callout-body-container callout-body">
@@ -9641,12 +9617,12 @@ Question 6
 <p><strong>c.</strong> Why would it be a mistake to conclude that a person matching the description must be the person in the security footage?</p>
 <p><strong>d.</strong> What additional evidence would be useful?</p>
 <div class="callout callout-style-default callout-important callout-titled">
-<div class="callout-header d-flex align-content-center" data-bs-toggle="collapse" data-bs-target=".callout-17-contents" aria-controls="callout-17" aria-expanded="false" aria-label="Toggle callout">
+<div class="callout-header d-flex align-content-center collapsed" data-bs-toggle="collapse" data-bs-target=".callout-17-contents" aria-controls="callout-17" aria-expanded="false" aria-label="Toggle callout">
 <div class="callout-icon-container">
 <i class="callout-icon"></i>
 </div>
 <div class="callout-title-container flex-fill">
-Click for Solutions
+<span class="screen-reader-only">Important</span>Click for Solutions
 </div>
 <div class="callout-btn-toggle d-inline-block border-0 py-1 ps-1 pe-0 float-end"><i class="callout-toggle"></i></div>
 </div>
@@ -9671,7 +9647,7 @@ Click for Solutions
 <i class="callout-icon"></i>
 </div>
 <div class="callout-title-container flex-fill">
-Question 7
+<span class="screen-reader-only">Note</span>Question 7
 </div>
 </div>
 <div class="callout-body-container callout-body">
@@ -9689,12 +9665,12 @@ Question 7
 <p><strong>b.</strong> Which probability rule are you using?</p>
 <p><strong>c.</strong> Why does the assumption that the events cannot both happen matter?</p>
 <div class="callout callout-style-default callout-important callout-titled">
-<div class="callout-header d-flex align-content-center" data-bs-toggle="collapse" data-bs-target=".callout-19-contents" aria-controls="callout-19" aria-expanded="false" aria-label="Toggle callout">
+<div class="callout-header d-flex align-content-center collapsed" data-bs-toggle="collapse" data-bs-target=".callout-19-contents" aria-controls="callout-19" aria-expanded="false" aria-label="Toggle callout">
 <div class="callout-icon-container">
 <i class="callout-icon"></i>
 </div>
 <div class="callout-title-container flex-fill">
-Click for Solutions
+<span class="screen-reader-only">Important</span>Click for Solutions
 </div>
 <div class="callout-btn-toggle d-inline-block border-0 py-1 ps-1 pe-0 float-end"><i class="callout-toggle"></i></div>
 </div>
@@ -9717,7 +9693,7 @@ Click for Solutions
 <i class="callout-icon"></i>
 </div>
 <div class="callout-title-container flex-fill">
-Question 8
+<span class="screen-reader-only">Note</span>Question 8
 </div>
 </div>
 <div class="callout-body-container callout-body">
@@ -9733,12 +9709,12 @@ Question 8
 <p><span class="math display">\[0.03 + 0.08 = 0.11?\]</span></p>
 <p><strong>c.</strong> In words, what does the subtraction term do in the addition rule?</p>
 <div class="callout callout-style-default callout-important callout-titled">
-<div class="callout-header d-flex align-content-center" data-bs-toggle="collapse" data-bs-target=".callout-21-contents" aria-controls="callout-21" aria-expanded="false" aria-label="Toggle callout">
+<div class="callout-header d-flex align-content-center collapsed" data-bs-toggle="collapse" data-bs-target=".callout-21-contents" aria-controls="callout-21" aria-expanded="false" aria-label="Toggle callout">
 <div class="callout-icon-container">
 <i class="callout-icon"></i>
 </div>
 <div class="callout-title-container flex-fill">
-Click for Solutions
+<span class="screen-reader-only">Important</span>Click for Solutions
 </div>
 <div class="callout-btn-toggle d-inline-block border-0 py-1 ps-1 pe-0 float-end"><i class="callout-toggle"></i></div>
 </div>
@@ -9762,7 +9738,7 @@ Click for Solutions
 <i class="callout-icon"></i>
 </div>
 <div class="callout-title-container flex-fill">
-Question 9
+<span class="screen-reader-only">Note</span>Question 9
 </div>
 </div>
 <div class="callout-body-container callout-body">
@@ -9776,12 +9752,12 @@ Question 9
 <p><strong>b.</strong> Is that assumption likely to be reasonable? Explain.</p>
 <p><strong>c.</strong> Give one reason why reading the first reminder might change the probability of reading the second reminder.</p>
 <div class="callout callout-style-default callout-important callout-titled">
-<div class="callout-header d-flex align-content-center" data-bs-toggle="collapse" data-bs-target=".callout-23-contents" aria-controls="callout-23" aria-expanded="false" aria-label="Toggle callout">
+<div class="callout-header d-flex align-content-center collapsed" data-bs-toggle="collapse" data-bs-target=".callout-23-contents" aria-controls="callout-23" aria-expanded="false" aria-label="Toggle callout">
 <div class="callout-icon-container">
 <i class="callout-icon"></i>
 </div>
 <div class="callout-title-container flex-fill">
-Click for Solutions
+<span class="screen-reader-only">Important</span>Click for Solutions
 </div>
 <div class="callout-btn-toggle d-inline-block border-0 py-1 ps-1 pe-0 float-end"><i class="callout-toggle"></i></div>
 </div>
@@ -9801,7 +9777,7 @@ Click for Solutions
 <i class="callout-icon"></i>
 </div>
 <div class="callout-title-container flex-fill">
-Question 10
+<span class="screen-reader-only">Note</span>Question 10
 </div>
 </div>
 <div class="callout-body-container callout-body">
@@ -9810,12 +9786,12 @@ Question 10
 <p><strong>b.</strong> What assumption allows you to multiply the probabilities?</p>
 <p><strong>c.</strong> Explain why getting three heads in a row is not evidence that the coin is unfair.</p>
 <div class="callout callout-style-default callout-important callout-titled">
-<div class="callout-header d-flex align-content-center" data-bs-toggle="collapse" data-bs-target=".callout-25-contents" aria-controls="callout-25" aria-expanded="false" aria-label="Toggle callout">
+<div class="callout-header d-flex align-content-center collapsed" data-bs-toggle="collapse" data-bs-target=".callout-25-contents" aria-controls="callout-25" aria-expanded="false" aria-label="Toggle callout">
 <div class="callout-icon-container">
 <i class="callout-icon"></i>
 </div>
 <div class="callout-title-container flex-fill">
-Click for Solutions
+<span class="screen-reader-only">Important</span>Click for Solutions
 </div>
 <div class="callout-btn-toggle d-inline-block border-0 py-1 ps-1 pe-0 float-end"><i class="callout-toggle"></i></div>
 </div>
@@ -9838,7 +9814,7 @@ Click for Solutions
 <i class="callout-icon"></i>
 </div>
 <div class="callout-title-container flex-fill">
-Question 11
+<span class="screen-reader-only">Note</span>Question 11
 </div>
 </div>
 <div class="callout-body-container callout-body">
@@ -9847,12 +9823,12 @@ Question 11
 <p><strong>b.</strong> What is the probability that at least one tip is accurate?</p>
 <p><strong>c.</strong> Does receiving two tips guarantee that the story is true? Explain.</p>
 <div class="callout callout-style-default callout-important callout-titled">
-<div class="callout-header d-flex align-content-center" data-bs-toggle="collapse" data-bs-target=".callout-27-contents" aria-controls="callout-27" aria-expanded="false" aria-label="Toggle callout">
+<div class="callout-header d-flex align-content-center collapsed" data-bs-toggle="collapse" data-bs-target=".callout-27-contents" aria-controls="callout-27" aria-expanded="false" aria-label="Toggle callout">
 <div class="callout-icon-container">
 <i class="callout-icon"></i>
 </div>
 <div class="callout-title-container flex-fill">
-Click for Solutions
+<span class="screen-reader-only">Important</span>Click for Solutions
 </div>
 <div class="callout-btn-toggle d-inline-block border-0 py-1 ps-1 pe-0 float-end"><i class="callout-toggle"></i></div>
 </div>
@@ -9877,7 +9853,7 @@ Click for Solutions
 <i class="callout-icon"></i>
 </div>
 <div class="callout-title-container flex-fill">
-Question 12
+<span class="screen-reader-only">Note</span>Question 12
 </div>
 </div>
 <div class="callout-body-container callout-body">
@@ -9886,12 +9862,12 @@ Question 12
 <p><strong>b.</strong> How is this similar to two witnesses giving the same account after speaking to each other?</p>
 <p><strong>c.</strong> What better question should the journalist ask before publishing the story?</p>
 <div class="callout callout-style-default callout-important callout-titled">
-<div class="callout-header d-flex align-content-center" data-bs-toggle="collapse" data-bs-target=".callout-29-contents" aria-controls="callout-29" aria-expanded="false" aria-label="Toggle callout">
+<div class="callout-header d-flex align-content-center collapsed" data-bs-toggle="collapse" data-bs-target=".callout-29-contents" aria-controls="callout-29" aria-expanded="false" aria-label="Toggle callout">
 <div class="callout-icon-container">
 <i class="callout-icon"></i>
 </div>
 <div class="callout-title-container flex-fill">
-Click for Solutions
+<span class="screen-reader-only">Important</span>Click for Solutions
 </div>
 <div class="callout-btn-toggle d-inline-block border-0 py-1 ps-1 pe-0 float-end"><i class="callout-toggle"></i></div>
 </div>
@@ -9911,7 +9887,7 @@ Click for Solutions
 <i class="callout-icon"></i>
 </div>
 <div class="callout-title-container flex-fill">
-Question 13
+<span class="screen-reader-only">Note</span>Question 13
 </div>
 </div>
 <div class="callout-body-container callout-body">
@@ -9927,12 +9903,12 @@ Question 13
 <p><strong>b.</strong> What is the more relevant question from the patient’s point of view?</p>
 <p><strong>c.</strong> Why do we need additional information, such as how common the condition is, to answer the patient’s question properly?</p>
 <div class="callout callout-style-default callout-important callout-titled">
-<div class="callout-header d-flex align-content-center" data-bs-toggle="collapse" data-bs-target=".callout-31-contents" aria-controls="callout-31" aria-expanded="false" aria-label="Toggle callout">
+<div class="callout-header d-flex align-content-center collapsed" data-bs-toggle="collapse" data-bs-target=".callout-31-contents" aria-controls="callout-31" aria-expanded="false" aria-label="Toggle callout">
 <div class="callout-icon-container">
 <i class="callout-icon"></i>
 </div>
 <div class="callout-title-container flex-fill">
-Click for Solutions
+<span class="screen-reader-only">Important</span>Click for Solutions
 </div>
 <div class="callout-btn-toggle d-inline-block border-0 py-1 ps-1 pe-0 float-end"><i class="callout-toggle"></i></div>
 </div>
@@ -9955,7 +9931,7 @@ Click for Solutions
 <i class="callout-icon"></i>
 </div>
 <div class="callout-title-container flex-fill">
-Question 14
+<span class="screen-reader-only">Note</span>Question 14
 </div>
 </div>
 <div class="callout-body-container callout-body">
@@ -9971,12 +9947,12 @@ Question 14
 <p><strong>d.</strong> Write this idea using probability language. Your answer should refer to the idea that:</p>
 <p><span class="math display">\[P(A \text{ and } B) \leq P(A).\]</span></p>
 <div class="callout callout-style-default callout-important callout-titled">
-<div class="callout-header d-flex align-content-center" data-bs-toggle="collapse" data-bs-target=".callout-33-contents" aria-controls="callout-33" aria-expanded="false" aria-label="Toggle callout">
+<div class="callout-header d-flex align-content-center collapsed" data-bs-toggle="collapse" data-bs-target=".callout-33-contents" aria-controls="callout-33" aria-expanded="false" aria-label="Toggle callout">
 <div class="callout-icon-container">
 <i class="callout-icon"></i>
 </div>
 <div class="callout-title-container flex-fill">
-Click for Solutions
+<span class="screen-reader-only">Important</span>Click for Solutions
 </div>
 <div class="callout-btn-toggle d-inline-block border-0 py-1 ps-1 pe-0 float-end"><i class="callout-toggle"></i></div>
 </div>
@@ -9999,7 +9975,7 @@ Click for Solutions
 <i class="callout-icon"></i>
 </div>
 <div class="callout-title-container flex-fill">
-Question 15
+<span class="screen-reader-only">Note</span>Question 15
 </div>
 </div>
 <div class="callout-body-container callout-body">
@@ -10019,12 +9995,12 @@ Question 15
 <p><strong>c.</strong> Give one reason the characteristics might not be independent.</p>
 <p><strong>d.</strong> What is a better question than “How rare is this combination of characteristics?”</p>
 <div class="callout callout-style-default callout-important callout-titled">
-<div class="callout-header d-flex align-content-center" data-bs-toggle="collapse" data-bs-target=".callout-35-contents" aria-controls="callout-35" aria-expanded="false" aria-label="Toggle callout">
+<div class="callout-header d-flex align-content-center collapsed" data-bs-toggle="collapse" data-bs-target=".callout-35-contents" aria-controls="callout-35" aria-expanded="false" aria-label="Toggle callout">
 <div class="callout-icon-container">
 <i class="callout-icon"></i>
 </div>
 <div class="callout-title-container flex-fill">
-Click for Solutions
+<span class="screen-reader-only">Important</span>Click for Solutions
 </div>
 <div class="callout-btn-toggle d-inline-block border-0 py-1 ps-1 pe-0 float-end"><i class="callout-toggle"></i></div>
 </div>
@@ -10048,7 +10024,7 @@ Click for Solutions
 <i class="callout-icon"></i>
 </div>
 <div class="callout-title-container flex-fill">
-Question 16
+<span class="screen-reader-only">Note</span>Question 16
 </div>
 </div>
 <div class="callout-body-container callout-body">
@@ -10505,7 +10481,7 @@ Question 16
 }
 </style>
 
-<table class="gt_table caption-top table table-sm table-striped small" data-quarto-postprocess="true" data-quarto-disable-processing="false" data-quarto-bootstrap="false">
+<table class="gt_table caption-top table table-sm table-striped small" data-quarto-bootstrap="false">
 <thead>
 <tr class="gt_col_headings header">
 <th id="Situation" class="gt_col_heading gt_columns_bottom_border gt_left" data-quarto-table-cell-role="th" scope="col">Situation</th>
@@ -10553,12 +10529,12 @@ Question 16
 <li>vividness is not probability.</li>
 </ul>
 <div class="callout callout-style-default callout-important callout-titled">
-<div class="callout-header d-flex align-content-center" data-bs-toggle="collapse" data-bs-target=".callout-37-contents" aria-controls="callout-37" aria-expanded="false" aria-label="Toggle callout">
+<div class="callout-header d-flex align-content-center collapsed" data-bs-toggle="collapse" data-bs-target=".callout-37-contents" aria-controls="callout-37" aria-expanded="false" aria-label="Toggle callout">
 <div class="callout-icon-container">
 <i class="callout-icon"></i>
 </div>
 <div class="callout-title-container flex-fill">
-Click for Solutions
+<span class="screen-reader-only">Important</span>Click for Solutions
 </div>
 <div class="callout-btn-toggle d-inline-block border-0 py-1 ps-1 pe-0 float-end"><i class="callout-toggle"></i></div>
 </div>
@@ -11016,7 +10992,7 @@ Click for Solutions
 }
 </style>
 
-<table class="gt_table caption-top table table-sm table-striped small" data-quarto-postprocess="true" data-quarto-disable-processing="false" data-quarto-bootstrap="false">
+<table class="gt_table caption-top table table-sm table-striped small" data-quarto-bootstrap="false">
 <thead>
 <tr class="gt_col_headings header">
 <th id="Situation" class="gt_col_heading gt_columns_bottom_border gt_left" data-quarto-table-cell-role="th" scope="col">Situation</th>
@@ -11065,7 +11041,7 @@ Click for Solutions
 <i class="callout-icon"></i>
 </div>
 <div class="callout-title-container flex-fill">
-Question 17
+<span class="screen-reader-only">Note</span>Question 17
 </div>
 </div>
 <div class="callout-body-container callout-body">
@@ -11090,12 +11066,12 @@ Question 17
 <li>better question.</li>
 </ul>
 <div class="callout callout-style-default callout-important callout-titled">
-<div class="callout-header d-flex align-content-center" data-bs-toggle="collapse" data-bs-target=".callout-39-contents" aria-controls="callout-39" aria-expanded="false" aria-label="Toggle callout">
+<div class="callout-header d-flex align-content-center collapsed" data-bs-toggle="collapse" data-bs-target=".callout-39-contents" aria-controls="callout-39" aria-expanded="false" aria-label="Toggle callout">
 <div class="callout-icon-container">
 <i class="callout-icon"></i>
 </div>
 <div class="callout-title-container flex-fill">
-Click for Solutions
+<span class="screen-reader-only">Important</span>Click for Solutions
 </div>
 <div class="callout-btn-toggle d-inline-block border-0 py-1 ps-1 pe-0 float-end"><i class="callout-toggle"></i></div>
 </div>
@@ -11117,7 +11093,7 @@ Click for Solutions
 <i class="callout-icon"></i>
 </div>
 <div class="callout-title-container flex-fill">
-Question 18
+<span class="screen-reader-only">Note</span>Question 18
 </div>
 </div>
 <div class="callout-body-container callout-body">
@@ -11126,12 +11102,12 @@ Question 18
 <p><strong>b.</strong> Give an example from your own life where the first question you asked was not the best question.</p>
 <p><strong>c.</strong> Rewrite your original question as a better statistical question.</p>
 <div class="callout callout-style-default callout-important callout-titled">
-<div class="callout-header d-flex align-content-center" data-bs-toggle="collapse" data-bs-target=".callout-41-contents" aria-controls="callout-41" aria-expanded="false" aria-label="Toggle callout">
+<div class="callout-header d-flex align-content-center collapsed" data-bs-toggle="collapse" data-bs-target=".callout-41-contents" aria-controls="callout-41" aria-expanded="false" aria-label="Toggle callout">
 <div class="callout-icon-container">
 <i class="callout-icon"></i>
 </div>
 <div class="callout-title-container flex-fill">
-Click for Solutions
+<span class="screen-reader-only">Important</span>Click for Solutions
 </div>
 <div class="callout-btn-toggle d-inline-block border-0 py-1 ps-1 pe-0 float-end"><i class="callout-toggle"></i></div>
 </div>
@@ -11640,13 +11616,14 @@ window.onload = function() {
       e.clearSelection();
     }
     const getTextToCopy = function(trigger) {
-        const codeEl = trigger.previousElementSibling.cloneNode(true);
-        for (const childEl of codeEl.children) {
-          if (isCodeAnnotation(childEl)) {
-            childEl.remove();
-          }
+      const outerScaffold = trigger.parentElement.cloneNode(true);
+      const codeEl = outerScaffold.querySelector('code');
+      for (const childEl of codeEl.children) {
+        if (isCodeAnnotation(childEl)) {
+          childEl.remove();
         }
-        return codeEl.innerText;
+      }
+      return codeEl.innerText;
     }
     const clipboard = new window.ClipboardJS('.code-copy-button:not([data-in-quarto-modal])', {
       text: getTextToCopy

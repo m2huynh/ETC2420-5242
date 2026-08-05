@@ -671,8 +671,8 @@ $$
 
 So the probability of four heads in a row is:
 
-\$\$ P(HHHH) =
-
+$$
+P(HHHH) =
 \frac{1}{2}
 \times
 \frac{1}{2}
@@ -680,12 +680,9 @@ So the probability of four heads in a row is:
 \frac{1}{2}
 \times
 \frac{1}{2}
-
 = \frac{1}{16}
-
 = 0.0625
-
-\$\$
+$$
 
 So four heads in a row is unusual, but not astonishing (6.25%). If many people flipped coins four times, we would expect some of them to get four heads. Seeing four heads should make us curious, but it is not enough on its own to prove that the coin is biased.
 
@@ -697,14 +694,13 @@ $$
 
 This feels much more suspicious. Again, under the fair coin model:
 
-\$\$ P(10 \text{ heads in a row})
 
-= \left(\frac{1}{2}\right)\^{10}
-
+$$
+P(10 \text{ heads in a row})
+= \left(\frac{1}{2}\right)^{10}
 \frac{1}{1024}
 \approx 0.00098
-
-\$\$
+$$
 
 Ten heads in a row does not logically prove that the coin is biased. Rare events can happen. But it gives us much stronger reason to question the fairness of the coin than four heads in a row. The same kind of result can mean different things depending on how much evidence we have. Four heads in a row may be a coincidence. Ten heads in a row is harder to dismiss.
 
@@ -1015,15 +1011,11 @@ wine_a |>
 
 The mean rating is:
 
-\$\$
-
+$$
 \bar{x} =
-
 \frac{88 + 89 + 90 + 91 + 92}{5}
-
 =90
-
-\$\$
+$$
 
 Now suppose another wine, Wine B, receives these ratings:
 
@@ -1043,15 +1035,11 @@ wine_b |>
 
 The mean rating is also:
 
-\$\$
-
+$$
 \bar{x} =
-
 \frac{80 + 85 + 90 + 95 + 100}{5}
-
 = 90
-
-\$\$
+$$
 
 If we look only at the average, the two wines appear identical. Both are “90-point wines”. But they are not the same kind of 90.
 
@@ -1258,7 +1246,6 @@ bell_curve |>
     y = "Density"
   )
 ```
-
 
 But the bell curve did not first appear as a mysterious picture in a statistics textbook. It emerged from a much older question:
 
@@ -1774,7 +1761,6 @@ accuracy_precision |>
   )
 ```
 
-
 The normal distribution gives us one way to describe this uncertainty. It says: do not look only at the observed value. Ask how much variation surrounds it. This is why the bell curve became so deeply connected to statistics. It joined three ideas that have been running through the chapter:
 
 1.  **A centre**: values tend to cluster around some typical value.
@@ -1835,9 +1821,9 @@ The function `rnorm()` generates random numbers from a normal distribution.
 
 In this example:
 
-- `n = 30` means we generate 30 random errors,
-- `mean = 0` means the random errors are centred around zero,
-- `sd = 2` means the random errors typically vary by about 2 units.
+-   `n = 30` means we generate 30 random errors,
+-   `mean = 0` means the random errors are centred around zero,
+-   `sd = 2` means the random errors typically vary by about 2 units.
 
 We can summarise the observed measurements.
 
@@ -1949,10 +1935,10 @@ The function `sample()` randomly samples values from a set.
 
 Here:
 
-- `x = c("Red", "Blue")` gives the possible outcomes,
-- `size = n_draws` says how many draws to make,
-- `replace = TRUE` means each ball is replaced before the next draw,
-- `prob = c(0.6, 0.4)` gives the probabilities of red and blue.
+-   `x = c("Red", "Blue")` gives the possible outcomes,
+-   `size = n_draws` says how many draws to make,
+-   `replace = TRUE` means each ball is replaced before the next draw,
+-   `prob = c(0.6, 0.4)` gives the probabilities of red and blue.
 
 Now we calculate the running proportion of red balls.
 
@@ -2112,9 +2098,9 @@ The function `rbinom()` simulates the number of successes in a fixed number of t
 
 Here:
 
-- `n = n_simulations` says how many simulated samples to generate,
-- `size` gives the number of shots in each sample,
-- `prob = true_probability` gives the true chance of making each shot.
+-   `n = n_simulations` says how many simulated samples to generate,
+-   `size` gives the number of shots in each sample,
+-   `prob = true_probability` gives the true chance of making each shot.
 
 Now we plot the simulated shooting percentages.
 
@@ -2169,8 +2155,8 @@ The function `dnorm()` calculates the height of the normal curve at each value o
 
 Here:
 
-- `mean = 50` sets the centre of the curve,
-- `sd = 2` sets the spread of the curve.
+-   `mean = 50` sets the centre of the curve,
+-   `sd = 2` sets the spread of the curve.
 
 We can plot the curve.
 
@@ -2228,7 +2214,6 @@ normal_curves |>
 ```
 
 Both curves are centred at 50. But the narrower curve is more precise: repeated measurements cluster tightly around the centre. The wider curve is less precise: repeated measurements are more spread out.
-
 
 ## Exercises
 

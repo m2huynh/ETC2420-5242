@@ -2,17 +2,23 @@
 <html xmlns="http://www.w3.org/1999/xhtml" lang="en" xml:lang="en"><head>
 
 <meta charset="utf-8">
-<meta name="generator" content="quarto-1.7.32">
+<meta name="generator" content="quarto-1.10.18">
 
 <meta name="viewport" content="width=device-width, initial-scale=1.0, user-scalable=yes">
 
 
 <title>2&nbsp; Probability – Statistical Thinking</title>
 <style>
-code{white-space: pre-wrap;}
+/* Default styles provided by pandoc.
+** See https://pandoc.org/MANUAL.html#variables-for-html for config info.
+*/
 span.smallcaps{font-variant: small-caps;}
-div.columns{display: flex; gap: min(4vw, 1.5em);}
-div.column{flex: auto; overflow-x: auto;}
+div.columns{display: flex; gap: 1.5em;}
+div.column{flex: auto;}
+@media screen {
+div.columns{gap: min(4vw, 1.5em);}
+div.column{overflow-x: auto;}
+}
 div.hanging-indent{margin-left: 1.5em; text-indent: -1.5em;}
 ul.task-list{list-style: none;}
 ul.task-list li input[type="checkbox"] {
@@ -72,14 +78,14 @@ pre > code.sourceCode > span > a:first-child::before { text-decoration: underlin
 <script src="site_libs/quarto-html/tippy.umd.min.js"></script>
 <script src="site_libs/quarto-html/anchor.min.js"></script>
 <link href="site_libs/quarto-html/tippy.css" rel="stylesheet">
-<link href="site_libs/quarto-html/quarto-syntax-highlighting-37eea08aefeeee20ff55810ff984fec1.css" rel="stylesheet" class="quarto-color-scheme" id="quarto-text-highlighting-styles">
-<link href="site_libs/quarto-html/quarto-syntax-highlighting-dark-2fef5ea3f8957b3e4ecc936fc74692ca.css" rel="stylesheet" class="quarto-color-scheme quarto-color-alternate" id="quarto-text-highlighting-styles">
-<link href="site_libs/quarto-html/quarto-syntax-highlighting-37eea08aefeeee20ff55810ff984fec1.css" rel="stylesheet" class="quarto-color-scheme-extra" id="quarto-text-highlighting-styles">
+<link href="site_libs/quarto-html/quarto-syntax-highlighting-64a204ab8560d761af7679ceaba22944.css" rel="stylesheet" class="quarto-color-scheme" id="quarto-text-highlighting-styles">
+<link href="site_libs/quarto-html/quarto-syntax-highlighting-dark-b85bc7c33db8c58e0ec93c3465666fed.css" rel="stylesheet" class="quarto-color-scheme quarto-color-alternate" id="quarto-text-highlighting-styles">
+<link href="site_libs/quarto-html/quarto-syntax-highlighting-64a204ab8560d761af7679ceaba22944.css" rel="stylesheet" class="quarto-color-scheme-extra" id="quarto-text-highlighting-styles">
 <script src="site_libs/bootstrap/bootstrap.min.js"></script>
 <link href="site_libs/bootstrap/bootstrap-icons.css" rel="stylesheet">
-<link href="site_libs/bootstrap/bootstrap-c27fdc8e5b00b532d2d5a75ada188648.min.css" rel="stylesheet" append-hash="true" class="quarto-color-scheme" id="quarto-bootstrap" data-mode="light">
-<link href="site_libs/bootstrap/bootstrap-dark-b9e11ad5a37ead2aabff839d95ae3857.min.css" rel="stylesheet" append-hash="true" class="quarto-color-scheme quarto-color-alternate" id="quarto-bootstrap" data-mode="dark">
-<link href="site_libs/bootstrap/bootstrap-c27fdc8e5b00b532d2d5a75ada188648.min.css" rel="stylesheet" append-hash="true" class="quarto-color-scheme-extra" id="quarto-bootstrap" data-mode="light">
+<link href="site_libs/bootstrap/bootstrap-f07248834697d125d844cdaf4174b45d.min.css" rel="stylesheet" append-hash="true" class="quarto-color-scheme" id="quarto-bootstrap" data-mode="light">
+<link href="site_libs/bootstrap/bootstrap-dark-a64f2b92d8b4b45ab5f5d9261e8b8c9d.min.css" rel="stylesheet" append-hash="true" class="quarto-color-scheme quarto-color-alternate" id="quarto-bootstrap" data-mode="dark">
+<link href="site_libs/bootstrap/bootstrap-f07248834697d125d844cdaf4174b45d.min.css" rel="stylesheet" append-hash="true" class="quarto-color-scheme-extra" id="quarto-bootstrap" data-mode="light">
 <script id="quarto-search-options" type="application/json">{
   "location": "sidebar",
   "copy-button": false,
@@ -109,7 +115,7 @@ pre > code.sourceCode > span > a:first-child::before { text-decoration: underlin
 }</script>
 
   <script src="https://cdnjs.cloudflare.com/polyfill/v3/polyfill.min.js?features=es6"></script>
-  <script src="https://cdn.jsdelivr.net/npm/mathjax@3/es5/tex-chtml-full.js" type="text/javascript"></script>
+  <script defer="" src="https://cdn.jsdelivr.net/npm/mathjax@4/tex-chtml.js" type="text/javascript"></script>
 
 <script type="text/javascript">
 const typesetMath = (el) => {
@@ -122,7 +128,7 @@ const typesetMath = (el) => {
     var macros = [];
     for (var i = 0; i < mathElements.length; i++) {
       var texText = mathElements[i].firstChild;
-      if (mathElements[i].tagName == "SPAN") {
+      if (mathElements[i].tagName == "SPAN" && texText && texText.data) {
         window.katex.render(texText.data, mathElements[i], {
           displayMode: mathElements[i].classList.contains('display'),
           throwOnError: false,
@@ -389,36 +395,6 @@ window.Quarto = {
  <span class="menu-text"><span class="chapter-number">6</span>&nbsp; <span class="chapter-title">Simulation-Based Inference</span></span></a>
   </div>
 </li>
-        <li class="sidebar-item">
-  <div class="sidebar-item-container"> 
-  <a href="./7_Likelihood.html" class="sidebar-item-text sidebar-link">
- <span class="menu-text"><span class="chapter-number">7</span>&nbsp; <span class="chapter-title">Likelihood</span></span></a>
-  </div>
-</li>
-        <li class="sidebar-item">
-  <div class="sidebar-item-container"> 
-  <a href="./8_Bayes.html" class="sidebar-item-text sidebar-link">
- <span class="menu-text"><span class="chapter-number">8</span>&nbsp; <span class="chapter-title">Bayesian Inference</span></span></a>
-  </div>
-</li>
-        <li class="sidebar-item">
-  <div class="sidebar-item-container"> 
-  <a href="./9_bayes2.html" class="sidebar-item-text sidebar-link">
- <span class="menu-text"><span class="chapter-number">9</span>&nbsp; <span class="chapter-title">Bayesian Simulation and Decisions</span></span></a>
-  </div>
-</li>
-        <li class="sidebar-item">
-  <div class="sidebar-item-container"> 
-  <a href="./10_Models1.html" class="sidebar-item-text sidebar-link">
- <span class="menu-text"><span class="chapter-number">10</span>&nbsp; <span class="chapter-title">Thinking with Frequentist Models</span></span></a>
-  </div>
-</li>
-        <li class="sidebar-item">
-  <div class="sidebar-item-container"> 
-  <a href="./11_Models2.html" class="sidebar-item-text sidebar-link">
- <span class="menu-text"><span class="chapter-number">11</span>&nbsp; <span class="chapter-title">Thinking with Bayesian Regression Models</span></span></a>
-  </div>
-</li>
     </ul>
     </div>
 </nav>
@@ -489,7 +465,7 @@ window.Quarto = {
 <i class="callout-icon"></i>
 </div>
 <div class="callout-title-container flex-fill">
-Learning Objectives
+<span class="screen-reader-only">Note</span>Learning Objectives
 </div>
 </div>
 <div class="callout-body-container callout-body">
@@ -559,12 +535,12 @@ Learning Objectives
 <li>Would you say it does not matter?</li>
 </ul>
 <div class="callout callout-style-default callout-note callout-titled">
-<div class="callout-header d-flex align-content-center" data-bs-toggle="collapse" data-bs-target=".callout-2-contents" aria-controls="callout-2" aria-expanded="false" aria-label="Toggle callout">
+<div class="callout-header d-flex align-content-center collapsed" data-bs-toggle="collapse" data-bs-target=".callout-2-contents" aria-controls="callout-2" aria-expanded="false" aria-label="Toggle callout">
 <div class="callout-icon-container">
 <i class="callout-icon"></i>
 </div>
 <div class="callout-title-container flex-fill">
-Click to see what Mariln suggests you should do
+<span class="screen-reader-only">Note</span>Click to see what Mariln suggests you should do
 </div>
 <div class="callout-btn-toggle d-inline-block border-0 py-1 ps-1 pe-0 float-end"><i class="callout-toggle"></i></div>
 </div>
@@ -621,7 +597,7 @@ Click to see what Mariln suggests you should do
 <i class="callout-icon"></i>
 </div>
 <div class="callout-title-container flex-fill">
-Some terminology
+<span class="screen-reader-only">Note</span>Some terminology
 </div>
 </div>
 <div class="callout-body-container callout-body">
@@ -805,7 +781,7 @@ P(\text{win by staying}) = \frac{1}{3}.
 <i class="callout-icon"></i>
 </div>
 <div class="callout-title-container flex-fill">
-Bonus Round
+<span class="screen-reader-only">Note</span>Bonus Round
 </div>
 </div>
 <div class="callout-body-container callout-body">
@@ -932,12 +908,12 @@ P(\text{sum is 10}) = \frac{27}{216}.
 </blockquote>
 <p>Most people guess a number much larger than the true answer. There are 365 possible birthdays, so it feels as though we would need a very large group before a shared birthday becomes likely. Many people guess 100, 150, or even more.</p>
 <div class="callout callout-style-default callout-note callout-titled">
-<div class="callout-header d-flex align-content-center" data-bs-toggle="collapse" data-bs-target=".callout-5-contents" aria-controls="callout-5" aria-expanded="false" aria-label="Toggle callout">
+<div class="callout-header d-flex align-content-center collapsed" data-bs-toggle="collapse" data-bs-target=".callout-5-contents" aria-controls="callout-5" aria-expanded="false" aria-label="Toggle callout">
 <div class="callout-icon-container">
 <i class="callout-icon"></i>
 </div>
 <div class="callout-title-container flex-fill">
-Click to see answer
+<span class="screen-reader-only">Note</span>Click to see answer
 </div>
 <div class="callout-btn-toggle d-inline-block border-0 py-1 ps-1 pe-0 float-end"><i class="callout-toggle"></i></div>
 </div>
@@ -1102,7 +1078,7 @@ P(A)
 <i class="callout-icon"></i>
 </div>
 <div class="callout-title-container flex-fill">
-The Problem of Points
+<span class="screen-reader-only">Note</span>The Problem of Points
 </div>
 </div>
 <div class="callout-body-container callout-body">
@@ -1150,23 +1126,23 @@ P(TT)=\frac{1}{2}\times\frac{1}{2}=\frac{1}{4}
 \]</span></p>
 <div class="cell">
 <div class="cell-output-display">
-<div id="pifzhqcliq" style="padding-left:0px;padding-right:0px;padding-top:10px;padding-bottom:10px;overflow-x:auto;overflow-y:auto;width:auto;height:auto;">
-<style>#pifzhqcliq table {
+<div id="htajhhvvga" style="padding-left:0px;padding-right:0px;padding-top:10px;padding-bottom:10px;overflow-x:auto;overflow-y:auto;width:auto;height:auto;">
+<style>#htajhhvvga table {
   font-family: system-ui, 'Segoe UI', Roboto, Helvetica, Arial, sans-serif, 'Apple Color Emoji', 'Segoe UI Emoji', 'Segoe UI Symbol', 'Noto Color Emoji';
   -webkit-font-smoothing: antialiased;
   -moz-osx-font-smoothing: grayscale;
 }
 
-#pifzhqcliq thead, #pifzhqcliq tbody, #pifzhqcliq tfoot, #pifzhqcliq tr, #pifzhqcliq td, #pifzhqcliq th {
+#htajhhvvga thead, #htajhhvvga tbody, #htajhhvvga tfoot, #htajhhvvga tr, #htajhhvvga td, #htajhhvvga th {
   border-style: none;
 }
 
-#pifzhqcliq p {
+#htajhhvvga p {
   margin: 0;
   padding: 0;
 }
 
-#pifzhqcliq .gt_table {
+#htajhhvvga .gt_table {
   display: table;
   border-collapse: collapse;
   line-height: normal;
@@ -1192,12 +1168,12 @@ P(TT)=\frac{1}{2}\times\frac{1}{2}=\frac{1}{4}
   border-left-color: #D3D3D3;
 }
 
-#pifzhqcliq .gt_caption {
+#htajhhvvga .gt_caption {
   padding-top: 4px;
   padding-bottom: 4px;
 }
 
-#pifzhqcliq .gt_title {
+#htajhhvvga .gt_title {
   color: #333333;
   font-size: 125%;
   font-weight: initial;
@@ -1209,7 +1185,7 @@ P(TT)=\frac{1}{2}\times\frac{1}{2}=\frac{1}{4}
   border-bottom-width: 0;
 }
 
-#pifzhqcliq .gt_subtitle {
+#htajhhvvga .gt_subtitle {
   color: #333333;
   font-size: 85%;
   font-weight: initial;
@@ -1221,7 +1197,7 @@ P(TT)=\frac{1}{2}\times\frac{1}{2}=\frac{1}{4}
   border-top-width: 0;
 }
 
-#pifzhqcliq .gt_heading {
+#htajhhvvga .gt_heading {
   background-color: #FFFFFF;
   text-align: center;
   border-bottom-color: #FFFFFF;
@@ -1233,13 +1209,13 @@ P(TT)=\frac{1}{2}\times\frac{1}{2}=\frac{1}{4}
   border-right-color: #D3D3D3;
 }
 
-#pifzhqcliq .gt_bottom_border {
+#htajhhvvga .gt_bottom_border {
   border-bottom-style: solid;
   border-bottom-width: 2px;
   border-bottom-color: #D3D3D3;
 }
 
-#pifzhqcliq .gt_col_headings {
+#htajhhvvga .gt_col_headings {
   border-top-style: solid;
   border-top-width: 2px;
   border-top-color: #D3D3D3;
@@ -1254,7 +1230,7 @@ P(TT)=\frac{1}{2}\times\frac{1}{2}=\frac{1}{4}
   border-right-color: #D3D3D3;
 }
 
-#pifzhqcliq .gt_col_heading {
+#htajhhvvga .gt_col_heading {
   color: #333333;
   background-color: #FFFFFF;
   font-size: 100%;
@@ -1274,7 +1250,7 @@ P(TT)=\frac{1}{2}\times\frac{1}{2}=\frac{1}{4}
   overflow-x: hidden;
 }
 
-#pifzhqcliq .gt_column_spanner_outer {
+#htajhhvvga .gt_column_spanner_outer {
   color: #333333;
   background-color: #FFFFFF;
   font-size: 100%;
@@ -1286,15 +1262,15 @@ P(TT)=\frac{1}{2}\times\frac{1}{2}=\frac{1}{4}
   padding-right: 4px;
 }
 
-#pifzhqcliq .gt_column_spanner_outer:first-child {
+#htajhhvvga .gt_column_spanner_outer:first-child {
   padding-left: 0;
 }
 
-#pifzhqcliq .gt_column_spanner_outer:last-child {
+#htajhhvvga .gt_column_spanner_outer:last-child {
   padding-right: 0;
 }
 
-#pifzhqcliq .gt_column_spanner {
+#htajhhvvga .gt_column_spanner {
   border-bottom-style: solid;
   border-bottom-width: 2px;
   border-bottom-color: #D3D3D3;
@@ -1306,11 +1282,11 @@ P(TT)=\frac{1}{2}\times\frac{1}{2}=\frac{1}{4}
   width: 100%;
 }
 
-#pifzhqcliq .gt_spanner_row {
+#htajhhvvga .gt_spanner_row {
   border-bottom-style: hidden;
 }
 
-#pifzhqcliq .gt_group_heading {
+#htajhhvvga .gt_group_heading {
   padding-top: 8px;
   padding-bottom: 8px;
   padding-left: 5px;
@@ -1336,7 +1312,7 @@ P(TT)=\frac{1}{2}\times\frac{1}{2}=\frac{1}{4}
   text-align: left;
 }
 
-#pifzhqcliq .gt_empty_group_heading {
+#htajhhvvga .gt_empty_group_heading {
   padding: 0.5px;
   color: #333333;
   background-color: #FFFFFF;
@@ -1351,15 +1327,15 @@ P(TT)=\frac{1}{2}\times\frac{1}{2}=\frac{1}{4}
   vertical-align: middle;
 }
 
-#pifzhqcliq .gt_from_md > :first-child {
+#htajhhvvga .gt_from_md > :first-child {
   margin-top: 0;
 }
 
-#pifzhqcliq .gt_from_md > :last-child {
+#htajhhvvga .gt_from_md > :last-child {
   margin-bottom: 0;
 }
 
-#pifzhqcliq .gt_row {
+#htajhhvvga .gt_row {
   padding-top: 8px;
   padding-bottom: 8px;
   padding-left: 5px;
@@ -1378,7 +1354,7 @@ P(TT)=\frac{1}{2}\times\frac{1}{2}=\frac{1}{4}
   overflow-x: hidden;
 }
 
-#pifzhqcliq .gt_stub {
+#htajhhvvga .gt_stub {
   color: #333333;
   background-color: #FFFFFF;
   font-size: 100%;
@@ -1391,7 +1367,7 @@ P(TT)=\frac{1}{2}\times\frac{1}{2}=\frac{1}{4}
   padding-right: 5px;
 }
 
-#pifzhqcliq .gt_stub_row_group {
+#htajhhvvga .gt_stub_row_group {
   color: #333333;
   background-color: #FFFFFF;
   font-size: 100%;
@@ -1405,15 +1381,15 @@ P(TT)=\frac{1}{2}\times\frac{1}{2}=\frac{1}{4}
   vertical-align: top;
 }
 
-#pifzhqcliq .gt_row_group_first td {
+#htajhhvvga .gt_row_group_first td {
   border-top-width: 2px;
 }
 
-#pifzhqcliq .gt_row_group_first th {
+#htajhhvvga .gt_row_group_first th {
   border-top-width: 2px;
 }
 
-#pifzhqcliq .gt_summary_row {
+#htajhhvvga .gt_summary_row {
   color: #333333;
   background-color: #FFFFFF;
   text-transform: inherit;
@@ -1423,16 +1399,16 @@ P(TT)=\frac{1}{2}\times\frac{1}{2}=\frac{1}{4}
   padding-right: 5px;
 }
 
-#pifzhqcliq .gt_first_summary_row {
+#htajhhvvga .gt_first_summary_row {
   border-top-style: solid;
   border-top-color: #D3D3D3;
 }
 
-#pifzhqcliq .gt_first_summary_row.thick {
+#htajhhvvga .gt_first_summary_row.thick {
   border-top-width: 2px;
 }
 
-#pifzhqcliq .gt_last_summary_row {
+#htajhhvvga .gt_last_summary_row {
   padding-top: 8px;
   padding-bottom: 8px;
   padding-left: 5px;
@@ -1442,7 +1418,7 @@ P(TT)=\frac{1}{2}\times\frac{1}{2}=\frac{1}{4}
   border-bottom-color: #D3D3D3;
 }
 
-#pifzhqcliq .gt_grand_summary_row {
+#htajhhvvga .gt_grand_summary_row {
   color: #333333;
   background-color: #FFFFFF;
   text-transform: inherit;
@@ -1452,7 +1428,7 @@ P(TT)=\frac{1}{2}\times\frac{1}{2}=\frac{1}{4}
   padding-right: 5px;
 }
 
-#pifzhqcliq .gt_first_grand_summary_row {
+#htajhhvvga .gt_first_grand_summary_row {
   padding-top: 8px;
   padding-bottom: 8px;
   padding-left: 5px;
@@ -1462,7 +1438,7 @@ P(TT)=\frac{1}{2}\times\frac{1}{2}=\frac{1}{4}
   border-top-color: #D3D3D3;
 }
 
-#pifzhqcliq .gt_last_grand_summary_row_top {
+#htajhhvvga .gt_last_grand_summary_row_top {
   padding-top: 8px;
   padding-bottom: 8px;
   padding-left: 5px;
@@ -1472,11 +1448,11 @@ P(TT)=\frac{1}{2}\times\frac{1}{2}=\frac{1}{4}
   border-bottom-color: #D3D3D3;
 }
 
-#pifzhqcliq .gt_striped {
+#htajhhvvga .gt_striped {
   background-color: rgba(128, 128, 128, 0.05);
 }
 
-#pifzhqcliq .gt_table_body {
+#htajhhvvga .gt_table_body {
   border-top-style: solid;
   border-top-width: 2px;
   border-top-color: #D3D3D3;
@@ -1485,7 +1461,7 @@ P(TT)=\frac{1}{2}\times\frac{1}{2}=\frac{1}{4}
   border-bottom-color: #D3D3D3;
 }
 
-#pifzhqcliq .gt_footnotes {
+#htajhhvvga .gt_footnotes {
   color: #333333;
   background-color: #FFFFFF;
   border-bottom-style: none;
@@ -1499,7 +1475,7 @@ P(TT)=\frac{1}{2}\times\frac{1}{2}=\frac{1}{4}
   border-right-color: #D3D3D3;
 }
 
-#pifzhqcliq .gt_footnote {
+#htajhhvvga .gt_footnote {
   margin: 0px;
   font-size: 90%;
   padding-top: 4px;
@@ -1508,7 +1484,7 @@ P(TT)=\frac{1}{2}\times\frac{1}{2}=\frac{1}{4}
   padding-right: 5px;
 }
 
-#pifzhqcliq .gt_sourcenotes {
+#htajhhvvga .gt_sourcenotes {
   color: #333333;
   background-color: #FFFFFF;
   border-bottom-style: none;
@@ -1522,7 +1498,7 @@ P(TT)=\frac{1}{2}\times\frac{1}{2}=\frac{1}{4}
   border-right-color: #D3D3D3;
 }
 
-#pifzhqcliq .gt_sourcenote {
+#htajhhvvga .gt_sourcenote {
   font-size: 90%;
   padding-top: 4px;
   padding-bottom: 4px;
@@ -1530,77 +1506,77 @@ P(TT)=\frac{1}{2}\times\frac{1}{2}=\frac{1}{4}
   padding-right: 5px;
 }
 
-#pifzhqcliq .gt_left {
+#htajhhvvga .gt_left {
   text-align: left;
 }
 
-#pifzhqcliq .gt_center {
+#htajhhvvga .gt_center {
   text-align: center;
 }
 
-#pifzhqcliq .gt_right {
+#htajhhvvga .gt_right {
   text-align: right;
   font-variant-numeric: tabular-nums;
 }
 
-#pifzhqcliq .gt_font_normal {
+#htajhhvvga .gt_font_normal {
   font-weight: normal;
 }
 
-#pifzhqcliq .gt_font_bold {
+#htajhhvvga .gt_font_bold {
   font-weight: bold;
 }
 
-#pifzhqcliq .gt_font_italic {
+#htajhhvvga .gt_font_italic {
   font-style: italic;
 }
 
-#pifzhqcliq .gt_super {
+#htajhhvvga .gt_super {
   font-size: 65%;
 }
 
-#pifzhqcliq .gt_footnote_marks {
+#htajhhvvga .gt_footnote_marks {
   font-size: 75%;
   vertical-align: 0.4em;
   position: initial;
 }
 
-#pifzhqcliq .gt_asterisk {
+#htajhhvvga .gt_asterisk {
   font-size: 100%;
   vertical-align: 0;
 }
 
-#pifzhqcliq .gt_indent_1 {
+#htajhhvvga .gt_indent_1 {
   text-indent: 5px;
 }
 
-#pifzhqcliq .gt_indent_2 {
+#htajhhvvga .gt_indent_2 {
   text-indent: 10px;
 }
 
-#pifzhqcliq .gt_indent_3 {
+#htajhhvvga .gt_indent_3 {
   text-indent: 15px;
 }
 
-#pifzhqcliq .gt_indent_4 {
+#htajhhvvga .gt_indent_4 {
   text-indent: 20px;
 }
 
-#pifzhqcliq .gt_indent_5 {
+#htajhhvvga .gt_indent_5 {
   text-indent: 25px;
 }
 
-#pifzhqcliq .katex-display {
+#htajhhvvga .katex-display {
   display: inline-flex !important;
   margin-bottom: 0.75em !important;
 }
 
-#pifzhqcliq div.Reactable > div.rt-table > div.rt-thead > div.rt-tr.rt-tr-group-header > div.rt-th-group:after {
+#htajhhvvga div.Reactable > div.rt-table > div.rt-thead > div.rt-tr.rt-tr-group-header > div.rt-th-group:after {
   height: 0px !important;
 }
 </style>
 
-<table class="gt_table caption-top table table-sm table-striped small" data-quarto-postprocess="true" data-quarto-disable-processing="false" data-quarto-bootstrap="false">
+<table class="gt_table caption-top table table-sm table-striped small" data-quarto-bootstrap="false">
 <thead>
 <tr class="gt_col_headings header">
 <th id="Future-flips" class="gt_col_heading gt_columns_bottom_border gt_center" data-quarto-table-cell-role="th" scope="col">Future flips</th>
@@ -1779,23 +1755,23 @@ p_1x_1+p_2x_2+p_3x_3+\cdots+p_kx_k
 <p>Expected value is easiest to understand through a simple game. Suppose you pay $10 to play a game in which a fair coin is tossed. If the coin lands heads, you receive $30. If it lands tails, you receive nothing.</p>
 <div class="cell">
 <div class="cell-output-display">
-<div id="icqpxujkby" style="padding-left:0px;padding-right:0px;padding-top:10px;padding-bottom:10px;overflow-x:auto;overflow-y:auto;width:auto;height:auto;">
-<style>#icqpxujkby table {
+<div id="dofbfcbasg" style="padding-left:0px;padding-right:0px;padding-top:10px;padding-bottom:10px;overflow-x:auto;overflow-y:auto;width:auto;height:auto;">
+<style>#dofbfcbasg table {
   font-family: system-ui, 'Segoe UI', Roboto, Helvetica, Arial, sans-serif, 'Apple Color Emoji', 'Segoe UI Emoji', 'Segoe UI Symbol', 'Noto Color Emoji';
   -webkit-font-smoothing: antialiased;
   -moz-osx-font-smoothing: grayscale;
 }
 
-#icqpxujkby thead, #icqpxujkby tbody, #icqpxujkby tfoot, #icqpxujkby tr, #icqpxujkby td, #icqpxujkby th {
+#dofbfcbasg thead, #dofbfcbasg tbody, #dofbfcbasg tfoot, #dofbfcbasg tr, #dofbfcbasg td, #dofbfcbasg th {
   border-style: none;
 }
 
-#icqpxujkby p {
+#dofbfcbasg p {
   margin: 0;
   padding: 0;
 }
 
-#icqpxujkby .gt_table {
+#dofbfcbasg .gt_table {
   display: table;
   border-collapse: collapse;
   line-height: normal;
@@ -1821,12 +1797,12 @@ p_1x_1+p_2x_2+p_3x_3+\cdots+p_kx_k
   border-left-color: #D3D3D3;
 }
 
-#icqpxujkby .gt_caption {
+#dofbfcbasg .gt_caption {
   padding-top: 4px;
   padding-bottom: 4px;
 }
 
-#icqpxujkby .gt_title {
+#dofbfcbasg .gt_title {
   color: #333333;
   font-size: 125%;
   font-weight: initial;
@@ -1838,7 +1814,7 @@ p_1x_1+p_2x_2+p_3x_3+\cdots+p_kx_k
   border-bottom-width: 0;
 }
 
-#icqpxujkby .gt_subtitle {
+#dofbfcbasg .gt_subtitle {
   color: #333333;
   font-size: 85%;
   font-weight: initial;
@@ -1850,7 +1826,7 @@ p_1x_1+p_2x_2+p_3x_3+\cdots+p_kx_k
   border-top-width: 0;
 }
 
-#icqpxujkby .gt_heading {
+#dofbfcbasg .gt_heading {
   background-color: #FFFFFF;
   text-align: center;
   border-bottom-color: #FFFFFF;
@@ -1862,13 +1838,13 @@ p_1x_1+p_2x_2+p_3x_3+\cdots+p_kx_k
   border-right-color: #D3D3D3;
 }
 
-#icqpxujkby .gt_bottom_border {
+#dofbfcbasg .gt_bottom_border {
   border-bottom-style: solid;
   border-bottom-width: 2px;
   border-bottom-color: #D3D3D3;
 }
 
-#icqpxujkby .gt_col_headings {
+#dofbfcbasg .gt_col_headings {
   border-top-style: solid;
   border-top-width: 2px;
   border-top-color: #D3D3D3;
@@ -1883,7 +1859,7 @@ p_1x_1+p_2x_2+p_3x_3+\cdots+p_kx_k
   border-right-color: #D3D3D3;
 }
 
-#icqpxujkby .gt_col_heading {
+#dofbfcbasg .gt_col_heading {
   color: #333333;
   background-color: #FFFFFF;
   font-size: 100%;
@@ -1903,7 +1879,7 @@ p_1x_1+p_2x_2+p_3x_3+\cdots+p_kx_k
   overflow-x: hidden;
 }
 
-#icqpxujkby .gt_column_spanner_outer {
+#dofbfcbasg .gt_column_spanner_outer {
   color: #333333;
   background-color: #FFFFFF;
   font-size: 100%;
@@ -1915,15 +1891,15 @@ p_1x_1+p_2x_2+p_3x_3+\cdots+p_kx_k
   padding-right: 4px;
 }
 
-#icqpxujkby .gt_column_spanner_outer:first-child {
+#dofbfcbasg .gt_column_spanner_outer:first-child {
   padding-left: 0;
 }
 
-#icqpxujkby .gt_column_spanner_outer:last-child {
+#dofbfcbasg .gt_column_spanner_outer:last-child {
   padding-right: 0;
 }
 
-#icqpxujkby .gt_column_spanner {
+#dofbfcbasg .gt_column_spanner {
   border-bottom-style: solid;
   border-bottom-width: 2px;
   border-bottom-color: #D3D3D3;
@@ -1935,11 +1911,11 @@ p_1x_1+p_2x_2+p_3x_3+\cdots+p_kx_k
   width: 100%;
 }
 
-#icqpxujkby .gt_spanner_row {
+#dofbfcbasg .gt_spanner_row {
   border-bottom-style: hidden;
 }
 
-#icqpxujkby .gt_group_heading {
+#dofbfcbasg .gt_group_heading {
   padding-top: 8px;
   padding-bottom: 8px;
   padding-left: 5px;
@@ -1965,7 +1941,7 @@ p_1x_1+p_2x_2+p_3x_3+\cdots+p_kx_k
   text-align: left;
 }
 
-#icqpxujkby .gt_empty_group_heading {
+#dofbfcbasg .gt_empty_group_heading {
   padding: 0.5px;
   color: #333333;
   background-color: #FFFFFF;
@@ -1980,15 +1956,15 @@ p_1x_1+p_2x_2+p_3x_3+\cdots+p_kx_k
   vertical-align: middle;
 }
 
-#icqpxujkby .gt_from_md > :first-child {
+#dofbfcbasg .gt_from_md > :first-child {
   margin-top: 0;
 }
 
-#icqpxujkby .gt_from_md > :last-child {
+#dofbfcbasg .gt_from_md > :last-child {
   margin-bottom: 0;
 }
 
-#icqpxujkby .gt_row {
+#dofbfcbasg .gt_row {
   padding-top: 8px;
   padding-bottom: 8px;
   padding-left: 5px;
@@ -2007,7 +1983,7 @@ p_1x_1+p_2x_2+p_3x_3+\cdots+p_kx_k
   overflow-x: hidden;
 }
 
-#icqpxujkby .gt_stub {
+#dofbfcbasg .gt_stub {
   color: #333333;
   background-color: #FFFFFF;
   font-size: 100%;
@@ -2020,7 +1996,7 @@ p_1x_1+p_2x_2+p_3x_3+\cdots+p_kx_k
   padding-right: 5px;
 }
 
-#icqpxujkby .gt_stub_row_group {
+#dofbfcbasg .gt_stub_row_group {
   color: #333333;
   background-color: #FFFFFF;
   font-size: 100%;
@@ -2034,15 +2010,15 @@ p_1x_1+p_2x_2+p_3x_3+\cdots+p_kx_k
   vertical-align: top;
 }
 
-#icqpxujkby .gt_row_group_first td {
+#dofbfcbasg .gt_row_group_first td {
   border-top-width: 2px;
 }
 
-#icqpxujkby .gt_row_group_first th {
+#dofbfcbasg .gt_row_group_first th {
   border-top-width: 2px;
 }
 
-#icqpxujkby .gt_summary_row {
+#dofbfcbasg .gt_summary_row {
   color: #333333;
   background-color: #FFFFFF;
   text-transform: inherit;
@@ -2052,16 +2028,16 @@ p_1x_1+p_2x_2+p_3x_3+\cdots+p_kx_k
   padding-right: 5px;
 }
 
-#icqpxujkby .gt_first_summary_row {
+#dofbfcbasg .gt_first_summary_row {
   border-top-style: solid;
   border-top-color: #D3D3D3;
 }
 
-#icqpxujkby .gt_first_summary_row.thick {
+#dofbfcbasg .gt_first_summary_row.thick {
   border-top-width: 2px;
 }
 
-#icqpxujkby .gt_last_summary_row {
+#dofbfcbasg .gt_last_summary_row {
   padding-top: 8px;
   padding-bottom: 8px;
   padding-left: 5px;
@@ -2071,7 +2047,7 @@ p_1x_1+p_2x_2+p_3x_3+\cdots+p_kx_k
   border-bottom-color: #D3D3D3;
 }
 
-#icqpxujkby .gt_grand_summary_row {
+#dofbfcbasg .gt_grand_summary_row {
   color: #333333;
   background-color: #FFFFFF;
   text-transform: inherit;
@@ -2081,7 +2057,7 @@ p_1x_1+p_2x_2+p_3x_3+\cdots+p_kx_k
   padding-right: 5px;
 }
 
-#icqpxujkby .gt_first_grand_summary_row {
+#dofbfcbasg .gt_first_grand_summary_row {
   padding-top: 8px;
   padding-bottom: 8px;
   padding-left: 5px;
@@ -2091,7 +2067,7 @@ p_1x_1+p_2x_2+p_3x_3+\cdots+p_kx_k
   border-top-color: #D3D3D3;
 }
 
-#icqpxujkby .gt_last_grand_summary_row_top {
+#dofbfcbasg .gt_last_grand_summary_row_top {
   padding-top: 8px;
   padding-bottom: 8px;
   padding-left: 5px;
@@ -2101,11 +2077,11 @@ p_1x_1+p_2x_2+p_3x_3+\cdots+p_kx_k
   border-bottom-color: #D3D3D3;
 }
 
-#icqpxujkby .gt_striped {
+#dofbfcbasg .gt_striped {
   background-color: rgba(128, 128, 128, 0.05);
 }
 
-#icqpxujkby .gt_table_body {
+#dofbfcbasg .gt_table_body {
   border-top-style: solid;
   border-top-width: 2px;
   border-top-color: #D3D3D3;
@@ -2114,7 +2090,7 @@ p_1x_1+p_2x_2+p_3x_3+\cdots+p_kx_k
   border-bottom-color: #D3D3D3;
 }
 
-#icqpxujkby .gt_footnotes {
+#dofbfcbasg .gt_footnotes {
   color: #333333;
   background-color: #FFFFFF;
   border-bottom-style: none;
@@ -2128,7 +2104,7 @@ p_1x_1+p_2x_2+p_3x_3+\cdots+p_kx_k
   border-right-color: #D3D3D3;
 }
 
-#icqpxujkby .gt_footnote {
+#dofbfcbasg .gt_footnote {
   margin: 0px;
   font-size: 90%;
   padding-top: 4px;
@@ -2137,7 +2113,7 @@ p_1x_1+p_2x_2+p_3x_3+\cdots+p_kx_k
   padding-right: 5px;
 }
 
-#icqpxujkby .gt_sourcenotes {
+#dofbfcbasg .gt_sourcenotes {
   color: #333333;
   background-color: #FFFFFF;
   border-bottom-style: none;
@@ -2151,7 +2127,7 @@ p_1x_1+p_2x_2+p_3x_3+\cdots+p_kx_k
   border-right-color: #D3D3D3;
 }
 
-#icqpxujkby .gt_sourcenote {
+#dofbfcbasg .gt_sourcenote {
   font-size: 90%;
   padding-top: 4px;
   padding-bottom: 4px;
@@ -2159,77 +2135,77 @@ p_1x_1+p_2x_2+p_3x_3+\cdots+p_kx_k
   padding-right: 5px;
 }
 
-#icqpxujkby .gt_left {
+#dofbfcbasg .gt_left {
   text-align: left;
 }
 
-#icqpxujkby .gt_center {
+#dofbfcbasg .gt_center {
   text-align: center;
 }
 
-#icqpxujkby .gt_right {
+#dofbfcbasg .gt_right {
   text-align: right;
   font-variant-numeric: tabular-nums;
 }
 
-#icqpxujkby .gt_font_normal {
+#dofbfcbasg .gt_font_normal {
   font-weight: normal;
 }
 
-#icqpxujkby .gt_font_bold {
+#dofbfcbasg .gt_font_bold {
   font-weight: bold;
 }
 
-#icqpxujkby .gt_font_italic {
+#dofbfcbasg .gt_font_italic {
   font-style: italic;
 }
 
-#icqpxujkby .gt_super {
+#dofbfcbasg .gt_super {
   font-size: 65%;
 }
 
-#icqpxujkby .gt_footnote_marks {
+#dofbfcbasg .gt_footnote_marks {
   font-size: 75%;
   vertical-align: 0.4em;
   position: initial;
 }
 
-#icqpxujkby .gt_asterisk {
+#dofbfcbasg .gt_asterisk {
   font-size: 100%;
   vertical-align: 0;
 }
 
-#icqpxujkby .gt_indent_1 {
+#dofbfcbasg .gt_indent_1 {
   text-indent: 5px;
 }
 
-#icqpxujkby .gt_indent_2 {
+#dofbfcbasg .gt_indent_2 {
   text-indent: 10px;
 }
 
-#icqpxujkby .gt_indent_3 {
+#dofbfcbasg .gt_indent_3 {
   text-indent: 15px;
 }
 
-#icqpxujkby .gt_indent_4 {
+#dofbfcbasg .gt_indent_4 {
   text-indent: 20px;
 }
 
-#icqpxujkby .gt_indent_5 {
+#dofbfcbasg .gt_indent_5 {
   text-indent: 25px;
 }
 
-#icqpxujkby .katex-display {
+#dofbfcbasg .katex-display {
   display: inline-flex !important;
   margin-bottom: 0.75em !important;
 }
 
-#icqpxujkby div.Reactable > div.rt-table > div.rt-thead > div.rt-tr.rt-tr-group-header > div.rt-th-group:after {
+#dofbfcbasg div.Reactable > div.rt-table > div.rt-thead > div.rt-tr.rt-tr-group-header > div.rt-th-group:after {
   height: 0px !important;
 }
 </style>
 
-<table class="gt_table caption-top table table-sm table-striped small" data-quarto-postprocess="true" data-quarto-disable-processing="false" data-quarto-bootstrap="false">
+<table class="gt_table caption-top table table-sm table-striped small" data-quarto-bootstrap="false">
 <thead>
 <tr class="gt_col_headings header">
 <th id="Outcome" class="gt_col_heading gt_columns_bottom_border gt_left" data-quarto-table-cell-role="th" scope="col">Outcome</th>
@@ -2273,23 +2249,23 @@ E(\text{winnings})
 <p>Now change the game slightly. Suppose it still costs $10 to play, and the coin is still fair, but the prize for heads is now only $15.</p>
 <div class="cell">
 <div class="cell-output-display">
-<div id="cisgewyymb" style="padding-left:0px;padding-right:0px;padding-top:10px;padding-bottom:10px;overflow-x:auto;overflow-y:auto;width:auto;height:auto;">
-<style>#cisgewyymb table {
+<div id="sfdzrqccke" style="padding-left:0px;padding-right:0px;padding-top:10px;padding-bottom:10px;overflow-x:auto;overflow-y:auto;width:auto;height:auto;">
+<style>#sfdzrqccke table {
   font-family: system-ui, 'Segoe UI', Roboto, Helvetica, Arial, sans-serif, 'Apple Color Emoji', 'Segoe UI Emoji', 'Segoe UI Symbol', 'Noto Color Emoji';
   -webkit-font-smoothing: antialiased;
   -moz-osx-font-smoothing: grayscale;
 }
 
-#cisgewyymb thead, #cisgewyymb tbody, #cisgewyymb tfoot, #cisgewyymb tr, #cisgewyymb td, #cisgewyymb th {
+#sfdzrqccke thead, #sfdzrqccke tbody, #sfdzrqccke tfoot, #sfdzrqccke tr, #sfdzrqccke td, #sfdzrqccke th {
   border-style: none;
 }
 
-#cisgewyymb p {
+#sfdzrqccke p {
   margin: 0;
   padding: 0;
 }
 
-#cisgewyymb .gt_table {
+#sfdzrqccke .gt_table {
   display: table;
   border-collapse: collapse;
   line-height: normal;
@@ -2315,12 +2291,12 @@ E(\text{winnings})
   border-left-color: #D3D3D3;
 }
 
-#cisgewyymb .gt_caption {
+#sfdzrqccke .gt_caption {
   padding-top: 4px;
   padding-bottom: 4px;
 }
 
-#cisgewyymb .gt_title {
+#sfdzrqccke .gt_title {
   color: #333333;
   font-size: 125%;
   font-weight: initial;
@@ -2332,7 +2308,7 @@ E(\text{winnings})
   border-bottom-width: 0;
 }
 
-#cisgewyymb .gt_subtitle {
+#sfdzrqccke .gt_subtitle {
   color: #333333;
   font-size: 85%;
   font-weight: initial;
@@ -2344,7 +2320,7 @@ E(\text{winnings})
   border-top-width: 0;
 }
 
-#cisgewyymb .gt_heading {
+#sfdzrqccke .gt_heading {
   background-color: #FFFFFF;
   text-align: center;
   border-bottom-color: #FFFFFF;
@@ -2356,13 +2332,13 @@ E(\text{winnings})
   border-right-color: #D3D3D3;
 }
 
-#cisgewyymb .gt_bottom_border {
+#sfdzrqccke .gt_bottom_border {
   border-bottom-style: solid;
   border-bottom-width: 2px;
   border-bottom-color: #D3D3D3;
 }
 
-#cisgewyymb .gt_col_headings {
+#sfdzrqccke .gt_col_headings {
   border-top-style: solid;
   border-top-width: 2px;
   border-top-color: #D3D3D3;
@@ -2377,7 +2353,7 @@ E(\text{winnings})
   border-right-color: #D3D3D3;
 }
 
-#cisgewyymb .gt_col_heading {
+#sfdzrqccke .gt_col_heading {
   color: #333333;
   background-color: #FFFFFF;
   font-size: 100%;
@@ -2397,7 +2373,7 @@ E(\text{winnings})
   overflow-x: hidden;
 }
 
-#cisgewyymb .gt_column_spanner_outer {
+#sfdzrqccke .gt_column_spanner_outer {
   color: #333333;
   background-color: #FFFFFF;
   font-size: 100%;
@@ -2409,15 +2385,15 @@ E(\text{winnings})
   padding-right: 4px;
 }
 
-#cisgewyymb .gt_column_spanner_outer:first-child {
+#sfdzrqccke .gt_column_spanner_outer:first-child {
   padding-left: 0;
 }
 
-#cisgewyymb .gt_column_spanner_outer:last-child {
+#sfdzrqccke .gt_column_spanner_outer:last-child {
   padding-right: 0;
 }
 
-#cisgewyymb .gt_column_spanner {
+#sfdzrqccke .gt_column_spanner {
   border-bottom-style: solid;
   border-bottom-width: 2px;
   border-bottom-color: #D3D3D3;
@@ -2429,11 +2405,11 @@ E(\text{winnings})
   width: 100%;
 }
 
-#cisgewyymb .gt_spanner_row {
+#sfdzrqccke .gt_spanner_row {
   border-bottom-style: hidden;
 }
 
-#cisgewyymb .gt_group_heading {
+#sfdzrqccke .gt_group_heading {
   padding-top: 8px;
   padding-bottom: 8px;
   padding-left: 5px;
@@ -2459,7 +2435,7 @@ E(\text{winnings})
   text-align: left;
 }
 
-#cisgewyymb .gt_empty_group_heading {
+#sfdzrqccke .gt_empty_group_heading {
   padding: 0.5px;
   color: #333333;
   background-color: #FFFFFF;
@@ -2474,15 +2450,15 @@ E(\text{winnings})
   vertical-align: middle;
 }
 
-#cisgewyymb .gt_from_md > :first-child {
+#sfdzrqccke .gt_from_md > :first-child {
   margin-top: 0;
 }
 
-#cisgewyymb .gt_from_md > :last-child {
+#sfdzrqccke .gt_from_md > :last-child {
   margin-bottom: 0;
 }
 
-#cisgewyymb .gt_row {
+#sfdzrqccke .gt_row {
   padding-top: 8px;
   padding-bottom: 8px;
   padding-left: 5px;
@@ -2501,7 +2477,7 @@ E(\text{winnings})
   overflow-x: hidden;
 }
 
-#cisgewyymb .gt_stub {
+#sfdzrqccke .gt_stub {
   color: #333333;
   background-color: #FFFFFF;
   font-size: 100%;
@@ -2514,7 +2490,7 @@ E(\text{winnings})
   padding-right: 5px;
 }
 
-#cisgewyymb .gt_stub_row_group {
+#sfdzrqccke .gt_stub_row_group {
   color: #333333;
   background-color: #FFFFFF;
   font-size: 100%;
@@ -2528,15 +2504,15 @@ E(\text{winnings})
   vertical-align: top;
 }
 
-#cisgewyymb .gt_row_group_first td {
+#sfdzrqccke .gt_row_group_first td {
   border-top-width: 2px;
 }
 
-#cisgewyymb .gt_row_group_first th {
+#sfdzrqccke .gt_row_group_first th {
   border-top-width: 2px;
 }
 
-#cisgewyymb .gt_summary_row {
+#sfdzrqccke .gt_summary_row {
   color: #333333;
   background-color: #FFFFFF;
   text-transform: inherit;
@@ -2546,16 +2522,16 @@ E(\text{winnings})
   padding-right: 5px;
 }
 
-#cisgewyymb .gt_first_summary_row {
+#sfdzrqccke .gt_first_summary_row {
   border-top-style: solid;
   border-top-color: #D3D3D3;
 }
 
-#cisgewyymb .gt_first_summary_row.thick {
+#sfdzrqccke .gt_first_summary_row.thick {
   border-top-width: 2px;
 }
 
-#cisgewyymb .gt_last_summary_row {
+#sfdzrqccke .gt_last_summary_row {
   padding-top: 8px;
   padding-bottom: 8px;
   padding-left: 5px;
@@ -2565,7 +2541,7 @@ E(\text{winnings})
   border-bottom-color: #D3D3D3;
 }
 
-#cisgewyymb .gt_grand_summary_row {
+#sfdzrqccke .gt_grand_summary_row {
   color: #333333;
   background-color: #FFFFFF;
   text-transform: inherit;
@@ -2575,7 +2551,7 @@ E(\text{winnings})
   padding-right: 5px;
 }
 
-#cisgewyymb .gt_first_grand_summary_row {
+#sfdzrqccke .gt_first_grand_summary_row {
   padding-top: 8px;
   padding-bottom: 8px;
   padding-left: 5px;
@@ -2585,7 +2561,7 @@ E(\text{winnings})
   border-top-color: #D3D3D3;
 }
 
-#cisgewyymb .gt_last_grand_summary_row_top {
+#sfdzrqccke .gt_last_grand_summary_row_top {
   padding-top: 8px;
   padding-bottom: 8px;
   padding-left: 5px;
@@ -2595,11 +2571,11 @@ E(\text{winnings})
   border-bottom-color: #D3D3D3;
 }
 
-#cisgewyymb .gt_striped {
+#sfdzrqccke .gt_striped {
   background-color: rgba(128, 128, 128, 0.05);
 }
 
-#cisgewyymb .gt_table_body {
+#sfdzrqccke .gt_table_body {
   border-top-style: solid;
   border-top-width: 2px;
   border-top-color: #D3D3D3;
@@ -2608,7 +2584,7 @@ E(\text{winnings})
   border-bottom-color: #D3D3D3;
 }
 
-#cisgewyymb .gt_footnotes {
+#sfdzrqccke .gt_footnotes {
   color: #333333;
   background-color: #FFFFFF;
   border-bottom-style: none;
@@ -2622,7 +2598,7 @@ E(\text{winnings})
   border-right-color: #D3D3D3;
 }
 
-#cisgewyymb .gt_footnote {
+#sfdzrqccke .gt_footnote {
   margin: 0px;
   font-size: 90%;
   padding-top: 4px;
@@ -2631,7 +2607,7 @@ E(\text{winnings})
   padding-right: 5px;
 }
 
-#cisgewyymb .gt_sourcenotes {
+#sfdzrqccke .gt_sourcenotes {
   color: #333333;
   background-color: #FFFFFF;
   border-bottom-style: none;
@@ -2645,7 +2621,7 @@ E(\text{winnings})
   border-right-color: #D3D3D3;
 }
 
-#cisgewyymb .gt_sourcenote {
+#sfdzrqccke .gt_sourcenote {
   font-size: 90%;
   padding-top: 4px;
   padding-bottom: 4px;
@@ -2653,77 +2629,77 @@ E(\text{winnings})
   padding-right: 5px;
 }
 
-#cisgewyymb .gt_left {
+#sfdzrqccke .gt_left {
   text-align: left;
 }
 
-#cisgewyymb .gt_center {
+#sfdzrqccke .gt_center {
   text-align: center;
 }
 
-#cisgewyymb .gt_right {
+#sfdzrqccke .gt_right {
   text-align: right;
   font-variant-numeric: tabular-nums;
 }
 
-#cisgewyymb .gt_font_normal {
+#sfdzrqccke .gt_font_normal {
   font-weight: normal;
 }
 
-#cisgewyymb .gt_font_bold {
+#sfdzrqccke .gt_font_bold {
   font-weight: bold;
 }
 
-#cisgewyymb .gt_font_italic {
+#sfdzrqccke .gt_font_italic {
   font-style: italic;
 }
 
-#cisgewyymb .gt_super {
+#sfdzrqccke .gt_super {
   font-size: 65%;
 }
 
-#cisgewyymb .gt_footnote_marks {
+#sfdzrqccke .gt_footnote_marks {
   font-size: 75%;
   vertical-align: 0.4em;
   position: initial;
 }
 
-#cisgewyymb .gt_asterisk {
+#sfdzrqccke .gt_asterisk {
   font-size: 100%;
   vertical-align: 0;
 }
 
-#cisgewyymb .gt_indent_1 {
+#sfdzrqccke .gt_indent_1 {
   text-indent: 5px;
 }
 
-#cisgewyymb .gt_indent_2 {
+#sfdzrqccke .gt_indent_2 {
   text-indent: 10px;
 }
 
-#cisgewyymb .gt_indent_3 {
+#sfdzrqccke .gt_indent_3 {
   text-indent: 15px;
 }
 
-#cisgewyymb .gt_indent_4 {
+#sfdzrqccke .gt_indent_4 {
   text-indent: 20px;
 }
 
-#cisgewyymb .gt_indent_5 {
+#sfdzrqccke .gt_indent_5 {
   text-indent: 25px;
 }
 
-#cisgewyymb .katex-display {
+#sfdzrqccke .katex-display {
   display: inline-flex !important;
   margin-bottom: 0.75em !important;
 }
 
-#cisgewyymb div.Reactable > div.rt-table > div.rt-thead > div.rt-tr.rt-tr-group-header > div.rt-th-group:after {
+#sfdzrqccke div.Reactable > div.rt-table > div.rt-thead > div.rt-tr.rt-tr-group-header > div.rt-th-group:after {
   height: 0px !important;
 }
 </style>
 
-<table class="gt_table caption-top table table-sm table-striped small" data-quarto-postprocess="true" data-quarto-disable-processing="false" data-quarto-bootstrap="false">
+<table class="gt_table caption-top table table-sm table-striped small" data-quarto-bootstrap="false">
 <thead>
 <tr class="gt_col_headings header">
 <th id="Outcome" class="gt_col_heading gt_columns_bottom_border gt_left" data-quarto-table-cell-role="th" scope="col">Outcome</th>
@@ -2774,7 +2750,7 @@ E(\text{winnings})
 <i class="callout-icon"></i>
 </div>
 <div class="callout-title-container flex-fill">
-Everyday expectation
+<span class="screen-reader-only">Note</span>Everyday expectation
 </div>
 </div>
 <div class="callout-body-container callout-body">
@@ -2788,23 +2764,23 @@ Everyday expectation
 <p>The choice can be summarised like this:</p>
 <div class="cell">
 <div class="cell-output-display">
-<div id="pesfxjzfgi" style="padding-left:0px;padding-right:0px;padding-top:10px;padding-bottom:10px;overflow-x:auto;overflow-y:auto;width:auto;height:auto;">
-<style>#pesfxjzfgi table {
+<div id="kzfnbpewkf" style="padding-left:0px;padding-right:0px;padding-top:10px;padding-bottom:10px;overflow-x:auto;overflow-y:auto;width:auto;height:auto;">
+<style>#kzfnbpewkf table {
   font-family: system-ui, 'Segoe UI', Roboto, Helvetica, Arial, sans-serif, 'Apple Color Emoji', 'Segoe UI Emoji', 'Segoe UI Symbol', 'Noto Color Emoji';
   -webkit-font-smoothing: antialiased;
   -moz-osx-font-smoothing: grayscale;
 }
 
-#pesfxjzfgi thead, #pesfxjzfgi tbody, #pesfxjzfgi tfoot, #pesfxjzfgi tr, #pesfxjzfgi td, #pesfxjzfgi th {
+#kzfnbpewkf thead, #kzfnbpewkf tbody, #kzfnbpewkf tfoot, #kzfnbpewkf tr, #kzfnbpewkf td, #kzfnbpewkf th {
   border-style: none;
 }
 
-#pesfxjzfgi p {
+#kzfnbpewkf p {
   margin: 0;
   padding: 0;
 }
 
-#pesfxjzfgi .gt_table {
+#kzfnbpewkf .gt_table {
   display: table;
   border-collapse: collapse;
   line-height: normal;
@@ -2830,12 +2806,12 @@ Everyday expectation
   border-left-color: #D3D3D3;
 }
 
-#pesfxjzfgi .gt_caption {
+#kzfnbpewkf .gt_caption {
   padding-top: 4px;
   padding-bottom: 4px;
 }
 
-#pesfxjzfgi .gt_title {
+#kzfnbpewkf .gt_title {
   color: #333333;
   font-size: 125%;
   font-weight: initial;
@@ -2847,7 +2823,7 @@ Everyday expectation
   border-bottom-width: 0;
 }
 
-#pesfxjzfgi .gt_subtitle {
+#kzfnbpewkf .gt_subtitle {
   color: #333333;
   font-size: 85%;
   font-weight: initial;
@@ -2859,7 +2835,7 @@ Everyday expectation
   border-top-width: 0;
 }
 
-#pesfxjzfgi .gt_heading {
+#kzfnbpewkf .gt_heading {
   background-color: #FFFFFF;
   text-align: center;
   border-bottom-color: #FFFFFF;
@@ -2871,13 +2847,13 @@ Everyday expectation
   border-right-color: #D3D3D3;
 }
 
-#pesfxjzfgi .gt_bottom_border {
+#kzfnbpewkf .gt_bottom_border {
   border-bottom-style: solid;
   border-bottom-width: 2px;
   border-bottom-color: #D3D3D3;
 }
 
-#pesfxjzfgi .gt_col_headings {
+#kzfnbpewkf .gt_col_headings {
   border-top-style: solid;
   border-top-width: 2px;
   border-top-color: #D3D3D3;
@@ -2892,7 +2868,7 @@ Everyday expectation
   border-right-color: #D3D3D3;
 }
 
-#pesfxjzfgi .gt_col_heading {
+#kzfnbpewkf .gt_col_heading {
   color: #333333;
   background-color: #FFFFFF;
   font-size: 100%;
@@ -2912,7 +2888,7 @@ Everyday expectation
   overflow-x: hidden;
 }
 
-#pesfxjzfgi .gt_column_spanner_outer {
+#kzfnbpewkf .gt_column_spanner_outer {
   color: #333333;
   background-color: #FFFFFF;
   font-size: 100%;
@@ -2924,15 +2900,15 @@ Everyday expectation
   padding-right: 4px;
 }
 
-#pesfxjzfgi .gt_column_spanner_outer:first-child {
+#kzfnbpewkf .gt_column_spanner_outer:first-child {
   padding-left: 0;
 }
 
-#pesfxjzfgi .gt_column_spanner_outer:last-child {
+#kzfnbpewkf .gt_column_spanner_outer:last-child {
   padding-right: 0;
 }
 
-#pesfxjzfgi .gt_column_spanner {
+#kzfnbpewkf .gt_column_spanner {
   border-bottom-style: solid;
   border-bottom-width: 2px;
   border-bottom-color: #D3D3D3;
@@ -2944,11 +2920,11 @@ Everyday expectation
   width: 100%;
 }
 
-#pesfxjzfgi .gt_spanner_row {
+#kzfnbpewkf .gt_spanner_row {
   border-bottom-style: hidden;
 }
 
-#pesfxjzfgi .gt_group_heading {
+#kzfnbpewkf .gt_group_heading {
   padding-top: 8px;
   padding-bottom: 8px;
   padding-left: 5px;
@@ -2974,7 +2950,7 @@ Everyday expectation
   text-align: left;
 }
 
-#pesfxjzfgi .gt_empty_group_heading {
+#kzfnbpewkf .gt_empty_group_heading {
   padding: 0.5px;
   color: #333333;
   background-color: #FFFFFF;
@@ -2989,15 +2965,15 @@ Everyday expectation
   vertical-align: middle;
 }
 
-#pesfxjzfgi .gt_from_md > :first-child {
+#kzfnbpewkf .gt_from_md > :first-child {
   margin-top: 0;
 }
 
-#pesfxjzfgi .gt_from_md > :last-child {
+#kzfnbpewkf .gt_from_md > :last-child {
   margin-bottom: 0;
 }
 
-#pesfxjzfgi .gt_row {
+#kzfnbpewkf .gt_row {
   padding-top: 8px;
   padding-bottom: 8px;
   padding-left: 5px;
@@ -3016,7 +2992,7 @@ Everyday expectation
   overflow-x: hidden;
 }
 
-#pesfxjzfgi .gt_stub {
+#kzfnbpewkf .gt_stub {
   color: #333333;
   background-color: #FFFFFF;
   font-size: 100%;
@@ -3029,7 +3005,7 @@ Everyday expectation
   padding-right: 5px;
 }
 
-#pesfxjzfgi .gt_stub_row_group {
+#kzfnbpewkf .gt_stub_row_group {
   color: #333333;
   background-color: #FFFFFF;
   font-size: 100%;
@@ -3043,15 +3019,15 @@ Everyday expectation
   vertical-align: top;
 }
 
-#pesfxjzfgi .gt_row_group_first td {
+#kzfnbpewkf .gt_row_group_first td {
   border-top-width: 2px;
 }
 
-#pesfxjzfgi .gt_row_group_first th {
+#kzfnbpewkf .gt_row_group_first th {
   border-top-width: 2px;
 }
 
-#pesfxjzfgi .gt_summary_row {
+#kzfnbpewkf .gt_summary_row {
   color: #333333;
   background-color: #FFFFFF;
   text-transform: inherit;
@@ -3061,16 +3037,16 @@ Everyday expectation
   padding-right: 5px;
 }
 
-#pesfxjzfgi .gt_first_summary_row {
+#kzfnbpewkf .gt_first_summary_row {
   border-top-style: solid;
   border-top-color: #D3D3D3;
 }
 
-#pesfxjzfgi .gt_first_summary_row.thick {
+#kzfnbpewkf .gt_first_summary_row.thick {
   border-top-width: 2px;
 }
 
-#pesfxjzfgi .gt_last_summary_row {
+#kzfnbpewkf .gt_last_summary_row {
   padding-top: 8px;
   padding-bottom: 8px;
   padding-left: 5px;
@@ -3080,7 +3056,7 @@ Everyday expectation
   border-bottom-color: #D3D3D3;
 }
 
-#pesfxjzfgi .gt_grand_summary_row {
+#kzfnbpewkf .gt_grand_summary_row {
   color: #333333;
   background-color: #FFFFFF;
   text-transform: inherit;
@@ -3090,7 +3066,7 @@ Everyday expectation
   padding-right: 5px;
 }
 
-#pesfxjzfgi .gt_first_grand_summary_row {
+#kzfnbpewkf .gt_first_grand_summary_row {
   padding-top: 8px;
   padding-bottom: 8px;
   padding-left: 5px;
@@ -3100,7 +3076,7 @@ Everyday expectation
   border-top-color: #D3D3D3;
 }
 
-#pesfxjzfgi .gt_last_grand_summary_row_top {
+#kzfnbpewkf .gt_last_grand_summary_row_top {
   padding-top: 8px;
   padding-bottom: 8px;
   padding-left: 5px;
@@ -3110,11 +3086,11 @@ Everyday expectation
   border-bottom-color: #D3D3D3;
 }
 
-#pesfxjzfgi .gt_striped {
+#kzfnbpewkf .gt_striped {
   background-color: rgba(128, 128, 128, 0.05);
 }
 
-#pesfxjzfgi .gt_table_body {
+#kzfnbpewkf .gt_table_body {
   border-top-style: solid;
   border-top-width: 2px;
   border-top-color: #D3D3D3;
@@ -3123,7 +3099,7 @@ Everyday expectation
   border-bottom-color: #D3D3D3;
 }
 
-#pesfxjzfgi .gt_footnotes {
+#kzfnbpewkf .gt_footnotes {
   color: #333333;
   background-color: #FFFFFF;
   border-bottom-style: none;
@@ -3137,7 +3113,7 @@ Everyday expectation
   border-right-color: #D3D3D3;
 }
 
-#pesfxjzfgi .gt_footnote {
+#kzfnbpewkf .gt_footnote {
   margin: 0px;
   font-size: 90%;
   padding-top: 4px;
@@ -3146,7 +3122,7 @@ Everyday expectation
   padding-right: 5px;
 }
 
-#pesfxjzfgi .gt_sourcenotes {
+#kzfnbpewkf .gt_sourcenotes {
   color: #333333;
   background-color: #FFFFFF;
   border-bottom-style: none;
@@ -3160,7 +3136,7 @@ Everyday expectation
   border-right-color: #D3D3D3;
 }
 
-#pesfxjzfgi .gt_sourcenote {
+#kzfnbpewkf .gt_sourcenote {
   font-size: 90%;
   padding-top: 4px;
   padding-bottom: 4px;
@@ -3168,77 +3144,77 @@ Everyday expectation
   padding-right: 5px;
 }
 
-#pesfxjzfgi .gt_left {
+#kzfnbpewkf .gt_left {
   text-align: left;
 }
 
-#pesfxjzfgi .gt_center {
+#kzfnbpewkf .gt_center {
   text-align: center;
 }
 
-#pesfxjzfgi .gt_right {
+#kzfnbpewkf .gt_right {
   text-align: right;
   font-variant-numeric: tabular-nums;
 }
 
-#pesfxjzfgi .gt_font_normal {
+#kzfnbpewkf .gt_font_normal {
   font-weight: normal;
 }
 
-#pesfxjzfgi .gt_font_bold {
+#kzfnbpewkf .gt_font_bold {
   font-weight: bold;
 }
 
-#pesfxjzfgi .gt_font_italic {
+#kzfnbpewkf .gt_font_italic {
   font-style: italic;
 }
 
-#pesfxjzfgi .gt_super {
+#kzfnbpewkf .gt_super {
   font-size: 65%;
 }
 
-#pesfxjzfgi .gt_footnote_marks {
+#kzfnbpewkf .gt_footnote_marks {
   font-size: 75%;
   vertical-align: 0.4em;
   position: initial;
 }
 
-#pesfxjzfgi .gt_asterisk {
+#kzfnbpewkf .gt_asterisk {
   font-size: 100%;
   vertical-align: 0;
 }
 
-#pesfxjzfgi .gt_indent_1 {
+#kzfnbpewkf .gt_indent_1 {
   text-indent: 5px;
 }
 
-#pesfxjzfgi .gt_indent_2 {
+#kzfnbpewkf .gt_indent_2 {
   text-indent: 10px;
 }
 
-#pesfxjzfgi .gt_indent_3 {
+#kzfnbpewkf .gt_indent_3 {
   text-indent: 15px;
 }
 
-#pesfxjzfgi .gt_indent_4 {
+#kzfnbpewkf .gt_indent_4 {
   text-indent: 20px;
 }
 
-#pesfxjzfgi .gt_indent_5 {
+#kzfnbpewkf .gt_indent_5 {
   text-indent: 25px;
 }
 
-#pesfxjzfgi .katex-display {
+#kzfnbpewkf .katex-display {
   display: inline-flex !important;
   margin-bottom: 0.75em !important;
 }
 
-#pesfxjzfgi div.Reactable > div.rt-table > div.rt-thead > div.rt-tr.rt-tr-group-header > div.rt-th-group:after {
+#kzfnbpewkf div.Reactable > div.rt-table > div.rt-thead > div.rt-tr.rt-tr-group-header > div.rt-th-group:after {
   height: 0px !important;
 }
 </style>
 
-<table class="gt_table caption-top table table-sm table-striped small" data-quarto-postprocess="true" data-quarto-disable-processing="false" data-quarto-bootstrap="false">
+<table class="gt_table caption-top table table-sm table-striped small" data-quarto-bootstrap="false">
 <thead>
 <tr class="gt_col_headings header">
 <th id="Choice" class="gt_col_heading gt_columns_bottom_border gt_left" data-quarto-table-cell-role="th" scope="col">Choice</th>
@@ -3331,23 +3307,23 @@ P(\text{no prize})\times 0 \\
 <p>This is another example of probability helping us separate two different questions:</p>
 <div class="cell">
 <div class="cell-output-display">
-<div id="grjolbpqkh" style="padding-left:0px;padding-right:0px;padding-top:10px;padding-bottom:10px;overflow-x:auto;overflow-y:auto;width:auto;height:auto;">
-<style>#grjolbpqkh table {
+<div id="cqbugjlyxd" style="padding-left:0px;padding-right:0px;padding-top:10px;padding-bottom:10px;overflow-x:auto;overflow-y:auto;width:auto;height:auto;">
+<style>#cqbugjlyxd table {
   font-family: system-ui, 'Segoe UI', Roboto, Helvetica, Arial, sans-serif, 'Apple Color Emoji', 'Segoe UI Emoji', 'Segoe UI Symbol', 'Noto Color Emoji';
   -webkit-font-smoothing: antialiased;
   -moz-osx-font-smoothing: grayscale;
 }
 
-#grjolbpqkh thead, #grjolbpqkh tbody, #grjolbpqkh tfoot, #grjolbpqkh tr, #grjolbpqkh td, #grjolbpqkh th {
+#cqbugjlyxd thead, #cqbugjlyxd tbody, #cqbugjlyxd tfoot, #cqbugjlyxd tr, #cqbugjlyxd td, #cqbugjlyxd th {
   border-style: none;
 }
 
-#grjolbpqkh p {
+#cqbugjlyxd p {
   margin: 0;
   padding: 0;
 }
 
-#grjolbpqkh .gt_table {
+#cqbugjlyxd .gt_table {
   display: table;
   border-collapse: collapse;
   line-height: normal;
@@ -3373,12 +3349,12 @@ P(\text{no prize})\times 0 \\
   border-left-color: #D3D3D3;
 }
 
-#grjolbpqkh .gt_caption {
+#cqbugjlyxd .gt_caption {
   padding-top: 4px;
   padding-bottom: 4px;
 }
 
-#grjolbpqkh .gt_title {
+#cqbugjlyxd .gt_title {
   color: #333333;
   font-size: 125%;
   font-weight: initial;
@@ -3390,7 +3366,7 @@ P(\text{no prize})\times 0 \\
   border-bottom-width: 0;
 }
 
-#grjolbpqkh .gt_subtitle {
+#cqbugjlyxd .gt_subtitle {
   color: #333333;
   font-size: 85%;
   font-weight: initial;
@@ -3402,7 +3378,7 @@ P(\text{no prize})\times 0 \\
   border-top-width: 0;
 }
 
-#grjolbpqkh .gt_heading {
+#cqbugjlyxd .gt_heading {
   background-color: #FFFFFF;
   text-align: center;
   border-bottom-color: #FFFFFF;
@@ -3414,13 +3390,13 @@ P(\text{no prize})\times 0 \\
   border-right-color: #D3D3D3;
 }
 
-#grjolbpqkh .gt_bottom_border {
+#cqbugjlyxd .gt_bottom_border {
   border-bottom-style: solid;
   border-bottom-width: 2px;
   border-bottom-color: #D3D3D3;
 }
 
-#grjolbpqkh .gt_col_headings {
+#cqbugjlyxd .gt_col_headings {
   border-top-style: solid;
   border-top-width: 2px;
   border-top-color: #D3D3D3;
@@ -3435,7 +3411,7 @@ P(\text{no prize})\times 0 \\
   border-right-color: #D3D3D3;
 }
 
-#grjolbpqkh .gt_col_heading {
+#cqbugjlyxd .gt_col_heading {
   color: #333333;
   background-color: #FFFFFF;
   font-size: 100%;
@@ -3455,7 +3431,7 @@ P(\text{no prize})\times 0 \\
   overflow-x: hidden;
 }
 
-#grjolbpqkh .gt_column_spanner_outer {
+#cqbugjlyxd .gt_column_spanner_outer {
   color: #333333;
   background-color: #FFFFFF;
   font-size: 100%;
@@ -3467,15 +3443,15 @@ P(\text{no prize})\times 0 \\
   padding-right: 4px;
 }
 
-#grjolbpqkh .gt_column_spanner_outer:first-child {
+#cqbugjlyxd .gt_column_spanner_outer:first-child {
   padding-left: 0;
 }
 
-#grjolbpqkh .gt_column_spanner_outer:last-child {
+#cqbugjlyxd .gt_column_spanner_outer:last-child {
   padding-right: 0;
 }
 
-#grjolbpqkh .gt_column_spanner {
+#cqbugjlyxd .gt_column_spanner {
   border-bottom-style: solid;
   border-bottom-width: 2px;
   border-bottom-color: #D3D3D3;
@@ -3487,11 +3463,11 @@ P(\text{no prize})\times 0 \\
   width: 100%;
 }
 
-#grjolbpqkh .gt_spanner_row {
+#cqbugjlyxd .gt_spanner_row {
   border-bottom-style: hidden;
 }
 
-#grjolbpqkh .gt_group_heading {
+#cqbugjlyxd .gt_group_heading {
   padding-top: 8px;
   padding-bottom: 8px;
   padding-left: 5px;
@@ -3517,7 +3493,7 @@ P(\text{no prize})\times 0 \\
   text-align: left;
 }
 
-#grjolbpqkh .gt_empty_group_heading {
+#cqbugjlyxd .gt_empty_group_heading {
   padding: 0.5px;
   color: #333333;
   background-color: #FFFFFF;
@@ -3532,15 +3508,15 @@ P(\text{no prize})\times 0 \\
   vertical-align: middle;
 }
 
-#grjolbpqkh .gt_from_md > :first-child {
+#cqbugjlyxd .gt_from_md > :first-child {
   margin-top: 0;
 }
 
-#grjolbpqkh .gt_from_md > :last-child {
+#cqbugjlyxd .gt_from_md > :last-child {
   margin-bottom: 0;
 }
 
-#grjolbpqkh .gt_row {
+#cqbugjlyxd .gt_row {
   padding-top: 8px;
   padding-bottom: 8px;
   padding-left: 5px;
@@ -3559,7 +3535,7 @@ P(\text{no prize})\times 0 \\
   overflow-x: hidden;
 }
 
-#grjolbpqkh .gt_stub {
+#cqbugjlyxd .gt_stub {
   color: #333333;
   background-color: #FFFFFF;
   font-size: 100%;
@@ -3572,7 +3548,7 @@ P(\text{no prize})\times 0 \\
   padding-right: 5px;
 }
 
-#grjolbpqkh .gt_stub_row_group {
+#cqbugjlyxd .gt_stub_row_group {
   color: #333333;
   background-color: #FFFFFF;
   font-size: 100%;
@@ -3586,15 +3562,15 @@ P(\text{no prize})\times 0 \\
   vertical-align: top;
 }
 
-#grjolbpqkh .gt_row_group_first td {
+#cqbugjlyxd .gt_row_group_first td {
   border-top-width: 2px;
 }
 
-#grjolbpqkh .gt_row_group_first th {
+#cqbugjlyxd .gt_row_group_first th {
   border-top-width: 2px;
 }
 
-#grjolbpqkh .gt_summary_row {
+#cqbugjlyxd .gt_summary_row {
   color: #333333;
   background-color: #FFFFFF;
   text-transform: inherit;
@@ -3604,16 +3580,16 @@ P(\text{no prize})\times 0 \\
   padding-right: 5px;
 }
 
-#grjolbpqkh .gt_first_summary_row {
+#cqbugjlyxd .gt_first_summary_row {
   border-top-style: solid;
   border-top-color: #D3D3D3;
 }
 
-#grjolbpqkh .gt_first_summary_row.thick {
+#cqbugjlyxd .gt_first_summary_row.thick {
   border-top-width: 2px;
 }
 
-#grjolbpqkh .gt_last_summary_row {
+#cqbugjlyxd .gt_last_summary_row {
   padding-top: 8px;
   padding-bottom: 8px;
   padding-left: 5px;
@@ -3623,7 +3599,7 @@ P(\text{no prize})\times 0 \\
   border-bottom-color: #D3D3D3;
 }
 
-#grjolbpqkh .gt_grand_summary_row {
+#cqbugjlyxd .gt_grand_summary_row {
   color: #333333;
   background-color: #FFFFFF;
   text-transform: inherit;
@@ -3633,7 +3609,7 @@ P(\text{no prize})\times 0 \\
   padding-right: 5px;
 }
 
-#grjolbpqkh .gt_first_grand_summary_row {
+#cqbugjlyxd .gt_first_grand_summary_row {
   padding-top: 8px;
   padding-bottom: 8px;
   padding-left: 5px;
@@ -3643,7 +3619,7 @@ P(\text{no prize})\times 0 \\
   border-top-color: #D3D3D3;
 }
 
-#grjolbpqkh .gt_last_grand_summary_row_top {
+#cqbugjlyxd .gt_last_grand_summary_row_top {
   padding-top: 8px;
   padding-bottom: 8px;
   padding-left: 5px;
@@ -3653,11 +3629,11 @@ P(\text{no prize})\times 0 \\
   border-bottom-color: #D3D3D3;
 }
 
-#grjolbpqkh .gt_striped {
+#cqbugjlyxd .gt_striped {
   background-color: rgba(128, 128, 128, 0.05);
 }
 
-#grjolbpqkh .gt_table_body {
+#cqbugjlyxd .gt_table_body {
   border-top-style: solid;
   border-top-width: 2px;
   border-top-color: #D3D3D3;
@@ -3666,7 +3642,7 @@ P(\text{no prize})\times 0 \\
   border-bottom-color: #D3D3D3;
 }
 
-#grjolbpqkh .gt_footnotes {
+#cqbugjlyxd .gt_footnotes {
   color: #333333;
   background-color: #FFFFFF;
   border-bottom-style: none;
@@ -3680,7 +3656,7 @@ P(\text{no prize})\times 0 \\
   border-right-color: #D3D3D3;
 }
 
-#grjolbpqkh .gt_footnote {
+#cqbugjlyxd .gt_footnote {
   margin: 0px;
   font-size: 90%;
   padding-top: 4px;
@@ -3689,7 +3665,7 @@ P(\text{no prize})\times 0 \\
   padding-right: 5px;
 }
 
-#grjolbpqkh .gt_sourcenotes {
+#cqbugjlyxd .gt_sourcenotes {
   color: #333333;
   background-color: #FFFFFF;
   border-bottom-style: none;
@@ -3703,7 +3679,7 @@ P(\text{no prize})\times 0 \\
   border-right-color: #D3D3D3;
 }
 
-#grjolbpqkh .gt_sourcenote {
+#cqbugjlyxd .gt_sourcenote {
   font-size: 90%;
   padding-top: 4px;
   padding-bottom: 4px;
@@ -3711,77 +3687,77 @@ P(\text{no prize})\times 0 \\
   padding-right: 5px;
 }
 
-#grjolbpqkh .gt_left {
+#cqbugjlyxd .gt_left {
   text-align: left;
 }
 
-#grjolbpqkh .gt_center {
+#cqbugjlyxd .gt_center {
   text-align: center;
 }
 
-#grjolbpqkh .gt_right {
+#cqbugjlyxd .gt_right {
   text-align: right;
   font-variant-numeric: tabular-nums;
 }
 
-#grjolbpqkh .gt_font_normal {
+#cqbugjlyxd .gt_font_normal {
   font-weight: normal;
 }
 
-#grjolbpqkh .gt_font_bold {
+#cqbugjlyxd .gt_font_bold {
   font-weight: bold;
 }
 
-#grjolbpqkh .gt_font_italic {
+#cqbugjlyxd .gt_font_italic {
   font-style: italic;
 }
 
-#grjolbpqkh .gt_super {
+#cqbugjlyxd .gt_super {
   font-size: 65%;
 }
 
-#grjolbpqkh .gt_footnote_marks {
+#cqbugjlyxd .gt_footnote_marks {
   font-size: 75%;
   vertical-align: 0.4em;
   position: initial;
 }
 
-#grjolbpqkh .gt_asterisk {
+#cqbugjlyxd .gt_asterisk {
   font-size: 100%;
   vertical-align: 0;
 }
 
-#grjolbpqkh .gt_indent_1 {
+#cqbugjlyxd .gt_indent_1 {
   text-indent: 5px;
 }
 
-#grjolbpqkh .gt_indent_2 {
+#cqbugjlyxd .gt_indent_2 {
   text-indent: 10px;
 }
 
-#grjolbpqkh .gt_indent_3 {
+#cqbugjlyxd .gt_indent_3 {
   text-indent: 15px;
 }
 
-#grjolbpqkh .gt_indent_4 {
+#cqbugjlyxd .gt_indent_4 {
   text-indent: 20px;
 }
 
-#grjolbpqkh .gt_indent_5 {
+#cqbugjlyxd .gt_indent_5 {
   text-indent: 25px;
 }
 
-#grjolbpqkh .katex-display {
+#cqbugjlyxd .katex-display {
   display: inline-flex !important;
   margin-bottom: 0.75em !important;
 }
 
-#grjolbpqkh div.Reactable > div.rt-table > div.rt-thead > div.rt-tr.rt-tr-group-header > div.rt-th-group:after {
+#cqbugjlyxd div.Reactable > div.rt-table > div.rt-thead > div.rt-tr.rt-tr-group-header > div.rt-th-group:after {
   height: 0px !important;
 }
 </style>
 
-<table class="gt_table caption-top table table-sm table-striped small" data-quarto-postprocess="true" data-quarto-disable-processing="false" data-quarto-bootstrap="false">
+<table class="gt_table caption-top table table-sm table-striped small" data-quarto-bootstrap="false">
 <thead>
 <tr class="gt_col_headings header">
 <th id="Question" class="gt_col_heading gt_columns_bottom_border gt_left" data-quarto-table-cell-role="th" scope="col">Question</th>
@@ -3818,23 +3794,23 @@ P(\text{no prize})\times 0 \\
 \]</span></p>
 <div class="cell">
 <div class="cell-output-display">
-<div id="hphxvsvwgn" style="padding-left:0px;padding-right:0px;padding-top:10px;padding-bottom:10px;overflow-x:auto;overflow-y:auto;width:auto;height:auto;">
-<style>#hphxvsvwgn table {
+<div id="sgbklgpklp" style="padding-left:0px;padding-right:0px;padding-top:10px;padding-bottom:10px;overflow-x:auto;overflow-y:auto;width:auto;height:auto;">
+<style>#sgbklgpklp table {
   font-family: system-ui, 'Segoe UI', Roboto, Helvetica, Arial, sans-serif, 'Apple Color Emoji', 'Segoe UI Emoji', 'Segoe UI Symbol', 'Noto Color Emoji';
   -webkit-font-smoothing: antialiased;
   -moz-osx-font-smoothing: grayscale;
 }
 
-#hphxvsvwgn thead, #hphxvsvwgn tbody, #hphxvsvwgn tfoot, #hphxvsvwgn tr, #hphxvsvwgn td, #hphxvsvwgn th {
+#sgbklgpklp thead, #sgbklgpklp tbody, #sgbklgpklp tfoot, #sgbklgpklp tr, #sgbklgpklp td, #sgbklgpklp th {
   border-style: none;
 }
 
-#hphxvsvwgn p {
+#sgbklgpklp p {
   margin: 0;
   padding: 0;
 }
 
-#hphxvsvwgn .gt_table {
+#sgbklgpklp .gt_table {
   display: table;
   border-collapse: collapse;
   line-height: normal;
@@ -3860,12 +3836,12 @@ P(\text{no prize})\times 0 \\
   border-left-color: #D3D3D3;
 }
 
-#hphxvsvwgn .gt_caption {
+#sgbklgpklp .gt_caption {
   padding-top: 4px;
   padding-bottom: 4px;
 }
 
-#hphxvsvwgn .gt_title {
+#sgbklgpklp .gt_title {
   color: #333333;
   font-size: 125%;
   font-weight: initial;
@@ -3877,7 +3853,7 @@ P(\text{no prize})\times 0 \\
   border-bottom-width: 0;
 }
 
-#hphxvsvwgn .gt_subtitle {
+#sgbklgpklp .gt_subtitle {
   color: #333333;
   font-size: 85%;
   font-weight: initial;
@@ -3889,7 +3865,7 @@ P(\text{no prize})\times 0 \\
   border-top-width: 0;
 }
 
-#hphxvsvwgn .gt_heading {
+#sgbklgpklp .gt_heading {
   background-color: #FFFFFF;
   text-align: center;
   border-bottom-color: #FFFFFF;
@@ -3901,13 +3877,13 @@ P(\text{no prize})\times 0 \\
   border-right-color: #D3D3D3;
 }
 
-#hphxvsvwgn .gt_bottom_border {
+#sgbklgpklp .gt_bottom_border {
   border-bottom-style: solid;
   border-bottom-width: 2px;
   border-bottom-color: #D3D3D3;
 }
 
-#hphxvsvwgn .gt_col_headings {
+#sgbklgpklp .gt_col_headings {
   border-top-style: solid;
   border-top-width: 2px;
   border-top-color: #D3D3D3;
@@ -3922,7 +3898,7 @@ P(\text{no prize})\times 0 \\
   border-right-color: #D3D3D3;
 }
 
-#hphxvsvwgn .gt_col_heading {
+#sgbklgpklp .gt_col_heading {
   color: #333333;
   background-color: #FFFFFF;
   font-size: 100%;
@@ -3942,7 +3918,7 @@ P(\text{no prize})\times 0 \\
   overflow-x: hidden;
 }
 
-#hphxvsvwgn .gt_column_spanner_outer {
+#sgbklgpklp .gt_column_spanner_outer {
   color: #333333;
   background-color: #FFFFFF;
   font-size: 100%;
@@ -3954,15 +3930,15 @@ P(\text{no prize})\times 0 \\
   padding-right: 4px;
 }
 
-#hphxvsvwgn .gt_column_spanner_outer:first-child {
+#sgbklgpklp .gt_column_spanner_outer:first-child {
   padding-left: 0;
 }
 
-#hphxvsvwgn .gt_column_spanner_outer:last-child {
+#sgbklgpklp .gt_column_spanner_outer:last-child {
   padding-right: 0;
 }
 
-#hphxvsvwgn .gt_column_spanner {
+#sgbklgpklp .gt_column_spanner {
   border-bottom-style: solid;
   border-bottom-width: 2px;
   border-bottom-color: #D3D3D3;
@@ -3974,11 +3950,11 @@ P(\text{no prize})\times 0 \\
   width: 100%;
 }
 
-#hphxvsvwgn .gt_spanner_row {
+#sgbklgpklp .gt_spanner_row {
   border-bottom-style: hidden;
 }
 
-#hphxvsvwgn .gt_group_heading {
+#sgbklgpklp .gt_group_heading {
   padding-top: 8px;
   padding-bottom: 8px;
   padding-left: 5px;
@@ -4004,7 +3980,7 @@ P(\text{no prize})\times 0 \\
   text-align: left;
 }
 
-#hphxvsvwgn .gt_empty_group_heading {
+#sgbklgpklp .gt_empty_group_heading {
   padding: 0.5px;
   color: #333333;
   background-color: #FFFFFF;
@@ -4019,15 +3995,15 @@ P(\text{no prize})\times 0 \\
   vertical-align: middle;
 }
 
-#hphxvsvwgn .gt_from_md > :first-child {
+#sgbklgpklp .gt_from_md > :first-child {
   margin-top: 0;
 }
 
-#hphxvsvwgn .gt_from_md > :last-child {
+#sgbklgpklp .gt_from_md > :last-child {
   margin-bottom: 0;
 }
 
-#hphxvsvwgn .gt_row {
+#sgbklgpklp .gt_row {
   padding-top: 8px;
   padding-bottom: 8px;
   padding-left: 5px;
@@ -4046,7 +4022,7 @@ P(\text{no prize})\times 0 \\
   overflow-x: hidden;
 }
 
-#hphxvsvwgn .gt_stub {
+#sgbklgpklp .gt_stub {
   color: #333333;
   background-color: #FFFFFF;
   font-size: 100%;
@@ -4059,7 +4035,7 @@ P(\text{no prize})\times 0 \\
   padding-right: 5px;
 }
 
-#hphxvsvwgn .gt_stub_row_group {
+#sgbklgpklp .gt_stub_row_group {
   color: #333333;
   background-color: #FFFFFF;
   font-size: 100%;
@@ -4073,15 +4049,15 @@ P(\text{no prize})\times 0 \\
   vertical-align: top;
 }
 
-#hphxvsvwgn .gt_row_group_first td {
+#sgbklgpklp .gt_row_group_first td {
   border-top-width: 2px;
 }
 
-#hphxvsvwgn .gt_row_group_first th {
+#sgbklgpklp .gt_row_group_first th {
   border-top-width: 2px;
 }
 
-#hphxvsvwgn .gt_summary_row {
+#sgbklgpklp .gt_summary_row {
   color: #333333;
   background-color: #FFFFFF;
   text-transform: inherit;
@@ -4091,16 +4067,16 @@ P(\text{no prize})\times 0 \\
   padding-right: 5px;
 }
 
-#hphxvsvwgn .gt_first_summary_row {
+#sgbklgpklp .gt_first_summary_row {
   border-top-style: solid;
   border-top-color: #D3D3D3;
 }
 
-#hphxvsvwgn .gt_first_summary_row.thick {
+#sgbklgpklp .gt_first_summary_row.thick {
   border-top-width: 2px;
 }
 
-#hphxvsvwgn .gt_last_summary_row {
+#sgbklgpklp .gt_last_summary_row {
   padding-top: 8px;
   padding-bottom: 8px;
   padding-left: 5px;
@@ -4110,7 +4086,7 @@ P(\text{no prize})\times 0 \\
   border-bottom-color: #D3D3D3;
 }
 
-#hphxvsvwgn .gt_grand_summary_row {
+#sgbklgpklp .gt_grand_summary_row {
   color: #333333;
   background-color: #FFFFFF;
   text-transform: inherit;
@@ -4120,7 +4096,7 @@ P(\text{no prize})\times 0 \\
   padding-right: 5px;
 }
 
-#hphxvsvwgn .gt_first_grand_summary_row {
+#sgbklgpklp .gt_first_grand_summary_row {
   padding-top: 8px;
   padding-bottom: 8px;
   padding-left: 5px;
@@ -4130,7 +4106,7 @@ P(\text{no prize})\times 0 \\
   border-top-color: #D3D3D3;
 }
 
-#hphxvsvwgn .gt_last_grand_summary_row_top {
+#sgbklgpklp .gt_last_grand_summary_row_top {
   padding-top: 8px;
   padding-bottom: 8px;
   padding-left: 5px;
@@ -4140,11 +4116,11 @@ P(\text{no prize})\times 0 \\
   border-bottom-color: #D3D3D3;
 }
 
-#hphxvsvwgn .gt_striped {
+#sgbklgpklp .gt_striped {
   background-color: rgba(128, 128, 128, 0.05);
 }
 
-#hphxvsvwgn .gt_table_body {
+#sgbklgpklp .gt_table_body {
   border-top-style: solid;
   border-top-width: 2px;
   border-top-color: #D3D3D3;
@@ -4153,7 +4129,7 @@ P(\text{no prize})\times 0 \\
   border-bottom-color: #D3D3D3;
 }
 
-#hphxvsvwgn .gt_footnotes {
+#sgbklgpklp .gt_footnotes {
   color: #333333;
   background-color: #FFFFFF;
   border-bottom-style: none;
@@ -4167,7 +4143,7 @@ P(\text{no prize})\times 0 \\
   border-right-color: #D3D3D3;
 }
 
-#hphxvsvwgn .gt_footnote {
+#sgbklgpklp .gt_footnote {
   margin: 0px;
   font-size: 90%;
   padding-top: 4px;
@@ -4176,7 +4152,7 @@ P(\text{no prize})\times 0 \\
   padding-right: 5px;
 }
 
-#hphxvsvwgn .gt_sourcenotes {
+#sgbklgpklp .gt_sourcenotes {
   color: #333333;
   background-color: #FFFFFF;
   border-bottom-style: none;
@@ -4190,7 +4166,7 @@ P(\text{no prize})\times 0 \\
   border-right-color: #D3D3D3;
 }
 
-#hphxvsvwgn .gt_sourcenote {
+#sgbklgpklp .gt_sourcenote {
   font-size: 90%;
   padding-top: 4px;
   padding-bottom: 4px;
@@ -4198,77 +4174,77 @@ P(\text{no prize})\times 0 \\
   padding-right: 5px;
 }
 
-#hphxvsvwgn .gt_left {
+#sgbklgpklp .gt_left {
   text-align: left;
 }
 
-#hphxvsvwgn .gt_center {
+#sgbklgpklp .gt_center {
   text-align: center;
 }
 
-#hphxvsvwgn .gt_right {
+#sgbklgpklp .gt_right {
   text-align: right;
   font-variant-numeric: tabular-nums;
 }
 
-#hphxvsvwgn .gt_font_normal {
+#sgbklgpklp .gt_font_normal {
   font-weight: normal;
 }
 
-#hphxvsvwgn .gt_font_bold {
+#sgbklgpklp .gt_font_bold {
   font-weight: bold;
 }
 
-#hphxvsvwgn .gt_font_italic {
+#sgbklgpklp .gt_font_italic {
   font-style: italic;
 }
 
-#hphxvsvwgn .gt_super {
+#sgbklgpklp .gt_super {
   font-size: 65%;
 }
 
-#hphxvsvwgn .gt_footnote_marks {
+#sgbklgpklp .gt_footnote_marks {
   font-size: 75%;
   vertical-align: 0.4em;
   position: initial;
 }
 
-#hphxvsvwgn .gt_asterisk {
+#sgbklgpklp .gt_asterisk {
   font-size: 100%;
   vertical-align: 0;
 }
 
-#hphxvsvwgn .gt_indent_1 {
+#sgbklgpklp .gt_indent_1 {
   text-indent: 5px;
 }
 
-#hphxvsvwgn .gt_indent_2 {
+#sgbklgpklp .gt_indent_2 {
   text-indent: 10px;
 }
 
-#hphxvsvwgn .gt_indent_3 {
+#sgbklgpklp .gt_indent_3 {
   text-indent: 15px;
 }
 
-#hphxvsvwgn .gt_indent_4 {
+#sgbklgpklp .gt_indent_4 {
   text-indent: 20px;
 }
 
-#hphxvsvwgn .gt_indent_5 {
+#sgbklgpklp .gt_indent_5 {
   text-indent: 25px;
 }
 
-#hphxvsvwgn .katex-display {
+#sgbklgpklp .katex-display {
   display: inline-flex !important;
   margin-bottom: 0.75em !important;
 }
 
-#hphxvsvwgn div.Reactable > div.rt-table > div.rt-thead > div.rt-tr.rt-tr-group-header > div.rt-th-group:after {
+#sgbklgpklp div.Reactable > div.rt-table > div.rt-thead > div.rt-tr.rt-tr-group-header > div.rt-th-group:after {
   height: 0px !important;
 }
 </style>
 
-<table class="gt_table caption-top table table-sm table-striped small" data-quarto-postprocess="true" data-quarto-disable-processing="false" data-quarto-bootstrap="false">
+<table class="gt_table caption-top table table-sm table-striped small" data-quarto-bootstrap="false">
 <thead>
 <tr class="gt_col_headings header">
 <th id="Quantity" class="gt_col_heading gt_columns_bottom_border gt_left" data-quarto-table-cell-role="th" scope="col">Quantity</th>
@@ -4334,8 +4310,8 @@ P(\text{no prize})\times 0 \\
 <p>The goal of this section is not to replace the reasoning from the chapter. The goal is to show that the same logic can be expressed in code. This is useful because code allows us to list sample spaces, simulate random processes many times, and check whether our answers make sense.</p>
 <p>The code below uses the packages loaded at the start of the chapter. If you are running this section by itself, run the following code first.</p>
 <div class="cell">
-<div class="sourceCode cell-code" id="cb1"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb1-1"><a href="#cb1-1" aria-hidden="true" tabindex="-1"></a><span class="fu">library</span>(tidyverse)</span>
-<span id="cb1-2"><a href="#cb1-2" aria-hidden="true" tabindex="-1"></a><span class="fu">library</span>(gt)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="code-copy-outer-scaffold"><div class="sourceCode cell-code" id="cb1"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb1-1"><a href="#cb1-1" aria-hidden="true" tabindex="-1"></a><span class="fu">library</span>(tidyverse)</span>
+<span id="cb1-2"><a href="#cb1-2" aria-hidden="true" tabindex="-1"></a><span class="fu">library</span>(gt)</span></code></pre></div><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></div>
 </div>
 <section id="simulating-the-monty-hall-problem" class="level3" data-number="2.7.1">
 <h3 data-number="2.7.1" class="anchored" data-anchor-id="simulating-the-monty-hall-problem"><span class="header-section-number">2.7.1</span> Simulating the Monty Hall problem</h3>
@@ -4348,7 +4324,7 @@ P(\text{no prize})\times 0 \\
 </ol>
 <p>We can write a function that plays one game.</p>
 <div class="cell">
-<div class="sourceCode cell-code" id="cb2"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb2-1"><a href="#cb2-1" aria-hidden="true" tabindex="-1"></a>sample_one <span class="ot">&lt;-</span> <span class="cf">function</span>(x) {</span>
+<div class="code-copy-outer-scaffold"><div class="sourceCode cell-code" id="cb2"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb2-1"><a href="#cb2-1" aria-hidden="true" tabindex="-1"></a>sample_one <span class="ot">&lt;-</span> <span class="cf">function</span>(x) {</span>
 <span id="cb2-2"><a href="#cb2-2" aria-hidden="true" tabindex="-1"></a>  <span class="fu">tibble</span>(<span class="at">value =</span> x) <span class="sc">|&gt;</span></span>
 <span id="cb2-3"><a href="#cb2-3" aria-hidden="true" tabindex="-1"></a>    <span class="fu">slice_sample</span>(<span class="at">n =</span> <span class="dv">1</span>) <span class="sc">|&gt;</span></span>
 <span id="cb2-4"><a href="#cb2-4" aria-hidden="true" tabindex="-1"></a>    <span class="fu">pull</span>(value)</span>
@@ -4379,17 +4355,17 @@ P(\text{no prize})\times 0 \\
 <span id="cb2-29"><a href="#cb2-29" aria-hidden="true" tabindex="-1"></a>    )</span>
 <span id="cb2-30"><a href="#cb2-30" aria-hidden="true" tabindex="-1"></a>}</span>
 <span id="cb2-31"><a href="#cb2-31" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb2-32"><a href="#cb2-32" aria-hidden="true" tabindex="-1"></a><span class="fu">play_monty</span>()</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<span id="cb2-32"><a href="#cb2-32" aria-hidden="true" tabindex="-1"></a><span class="fu">play_monty</span>()</span></code></pre></div><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></div>
 <div class="cell-output cell-output-stdout">
 <pre><code># A tibble: 1 × 6
     car first_choice host_opens switch_choice stay_win switch_win
   &lt;int&gt;        &lt;int&gt;      &lt;int&gt;         &lt;int&gt; &lt;lgl&gt;    &lt;lgl&gt;     
-1     2            1          3             2 FALSE    TRUE      </code></pre>
+1     3            2          1             3 FALSE    TRUE      </code></pre>
 </div>
 </div>
 <p>Because one game is not very informative, we repeat the game many times.</p>
 <div class="cell">
-<div class="sourceCode cell-code" id="cb4"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb4-1"><a href="#cb4-1" aria-hidden="true" tabindex="-1"></a><span class="fu">set.seed</span>(<span class="dv">24205242</span>)</span>
+<div class="code-copy-outer-scaffold"><div class="sourceCode cell-code" id="cb4"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb4-1"><a href="#cb4-1" aria-hidden="true" tabindex="-1"></a><span class="fu">set.seed</span>(<span class="dv">24205242</span>)</span>
 <span id="cb4-2"><a href="#cb4-2" aria-hidden="true" tabindex="-1"></a></span>
 <span id="cb4-3"><a href="#cb4-3" aria-hidden="true" tabindex="-1"></a>n_games <span class="ot">&lt;-</span> <span class="dv">1000</span></span>
 <span id="cb4-4"><a href="#cb4-4" aria-hidden="true" tabindex="-1"></a></span>
@@ -4409,7 +4385,7 @@ P(\text{no prize})\times 0 \\
 <span id="cb4-18"><a href="#cb4-18" aria-hidden="true" tabindex="-1"></a>    <span class="at">values_to =</span> <span class="st">"Win rate"</span></span>
 <span id="cb4-19"><a href="#cb4-19" aria-hidden="true" tabindex="-1"></a>  )</span>
 <span id="cb4-20"><a href="#cb4-20" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb4-21"><a href="#cb4-21" aria-hidden="true" tabindex="-1"></a>monty_summary</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<span id="cb4-21"><a href="#cb4-21" aria-hidden="true" tabindex="-1"></a>monty_summary</span></code></pre></div><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></div>
 <div class="cell-output cell-output-stdout">
 <pre><code># A tibble: 2 × 2
   Strategy `Win rate`
@@ -4878,7 +4854,7 @@ Table&nbsp;2.1: Simulated win rates for staying and switching in the Monty Hall 
 }
 </style>
 
-<table class="gt_table do-not-create-environment cell caption-top table table-sm table-striped small" data-quarto-postprocess="true" data-quarto-disable-processing="false" data-quarto-bootstrap="false">
+<table class="gt_table cell caption-top table table-sm table-striped small" data-quarto-bootstrap="false">
 <thead>
 <tr class="gt_col_headings header">
 <th id="Strategy" class="gt_col_heading gt_columns_bottom_border gt_center" data-quarto-table-cell-role="th" scope="col">Strategy</th>
@@ -4921,12 +4897,12 @@ S = \{BB, BG, GB, GG\}
 \]</span></p>
 <p>We can create this sample space in R.</p>
 <div class="cell">
-<div class="sourceCode cell-code" id="cb6"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb6-1"><a href="#cb6-1" aria-hidden="true" tabindex="-1"></a>children <span class="ot">&lt;-</span> <span class="fu">crossing</span>(</span>
+<div class="code-copy-outer-scaffold"><div class="sourceCode cell-code" id="cb6"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb6-1"><a href="#cb6-1" aria-hidden="true" tabindex="-1"></a>children <span class="ot">&lt;-</span> <span class="fu">crossing</span>(</span>
 <span id="cb6-2"><a href="#cb6-2" aria-hidden="true" tabindex="-1"></a>  <span class="at">older =</span> <span class="fu">c</span>(<span class="st">"Boy"</span>, <span class="st">"Girl"</span>),</span>
 <span id="cb6-3"><a href="#cb6-3" aria-hidden="true" tabindex="-1"></a>  <span class="at">younger =</span> <span class="fu">c</span>(<span class="st">"Boy"</span>, <span class="st">"Girl"</span>)</span>
 <span id="cb6-4"><a href="#cb6-4" aria-hidden="true" tabindex="-1"></a>)</span>
 <span id="cb6-5"><a href="#cb6-5" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb6-6"><a href="#cb6-6" aria-hidden="true" tabindex="-1"></a>children</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<span id="cb6-6"><a href="#cb6-6" aria-hidden="true" tabindex="-1"></a>children</span></code></pre></div><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></div>
 <div class="cell-output cell-output-stdout">
 <pre><code># A tibble: 4 × 2
   older younger
@@ -4940,14 +4916,14 @@ S = \{BB, BG, GB, GG\}
 <p>The function <code>crossing()</code> creates all combinations of the values supplied to it. Here, it creates all possible combinations of the older child’s sex and the younger child’s sex.</p>
 <p>Now suppose we are told that at least one child is a girl. We can filter the sample space to keep only the outcomes consistent with that information.</p>
 <div class="cell">
-<div class="sourceCode cell-code" id="cb8"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb8-1"><a href="#cb8-1" aria-hidden="true" tabindex="-1"></a>children_at_least_one_girl <span class="ot">&lt;-</span> children <span class="sc">|&gt;</span></span>
+<div class="code-copy-outer-scaffold"><div class="sourceCode cell-code" id="cb8"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb8-1"><a href="#cb8-1" aria-hidden="true" tabindex="-1"></a>children_at_least_one_girl <span class="ot">&lt;-</span> children <span class="sc">|&gt;</span></span>
 <span id="cb8-2"><a href="#cb8-2" aria-hidden="true" tabindex="-1"></a>  <span class="fu">mutate</span>(</span>
 <span id="cb8-3"><a href="#cb8-3" aria-hidden="true" tabindex="-1"></a>    <span class="at">at_least_one_girl =</span> older <span class="sc">==</span> <span class="st">"Girl"</span> <span class="sc">|</span> younger <span class="sc">==</span> <span class="st">"Girl"</span>,</span>
 <span id="cb8-4"><a href="#cb8-4" aria-hidden="true" tabindex="-1"></a>    <span class="at">both_girls =</span> older <span class="sc">==</span> <span class="st">"Girl"</span> <span class="sc">&amp;</span> younger <span class="sc">==</span> <span class="st">"Girl"</span></span>
 <span id="cb8-5"><a href="#cb8-5" aria-hidden="true" tabindex="-1"></a>  ) <span class="sc">|&gt;</span></span>
 <span id="cb8-6"><a href="#cb8-6" aria-hidden="true" tabindex="-1"></a>  <span class="fu">filter</span>(at_least_one_girl)</span>
 <span id="cb8-7"><a href="#cb8-7" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb8-8"><a href="#cb8-8" aria-hidden="true" tabindex="-1"></a>children_at_least_one_girl</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<span id="cb8-8"><a href="#cb8-8" aria-hidden="true" tabindex="-1"></a>children_at_least_one_girl</span></code></pre></div><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></div>
 <div class="cell-output cell-output-stdout">
 <pre><code># A tibble: 3 × 4
   older younger at_least_one_girl both_girls
@@ -4960,10 +4936,10 @@ S = \{BB, BG, GB, GG\}
 <p>The symbol <code>|</code> means “or”, and the symbol <code>&amp;</code> means “and”. So the code <code>older == "Girl" | younger == "Girl"</code> checks whether at least one child is a girl, while <code>older == "Girl" &amp; younger == "Girl"</code> checks whether both children are girls.</p>
 <p>We can now calculate the probability that both children are girls, given that at least one child is a girl.</p>
 <div class="cell">
-<div class="sourceCode cell-code" id="cb10"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb10-1"><a href="#cb10-1" aria-hidden="true" tabindex="-1"></a>children_at_least_one_girl <span class="sc">|&gt;</span></span>
+<div class="code-copy-outer-scaffold"><div class="sourceCode cell-code" id="cb10"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb10-1"><a href="#cb10-1" aria-hidden="true" tabindex="-1"></a>children_at_least_one_girl <span class="sc">|&gt;</span></span>
 <span id="cb10-2"><a href="#cb10-2" aria-hidden="true" tabindex="-1"></a>  <span class="fu">summarise</span>(</span>
 <span id="cb10-3"><a href="#cb10-3" aria-hidden="true" tabindex="-1"></a>    <span class="at">probability_both_girls =</span> <span class="fu">mean</span>(both_girls)</span>
-<span id="cb10-4"><a href="#cb10-4" aria-hidden="true" tabindex="-1"></a>  )</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<span id="cb10-4"><a href="#cb10-4" aria-hidden="true" tabindex="-1"></a>  )</span></code></pre></div><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></div>
 <div class="cell-output cell-output-stdout">
 <pre><code># A tibble: 1 × 1
   probability_both_girls
@@ -5434,7 +5410,7 @@ Table&nbsp;2.2: Reduced sample space when at least one child is a girl
 }
 </style>
 
-<table class="gt_table do-not-create-environment cell caption-top table table-sm table-striped small" data-quarto-postprocess="true" data-quarto-disable-processing="false" data-quarto-bootstrap="false">
+<table class="gt_table cell caption-top table table-sm table-striped small" data-quarto-bootstrap="false">
 <thead>
 <tr class="gt_col_headings header">
 <th id="older" class="gt_col_heading gt_columns_bottom_border gt_center" data-quarto-table-cell-role="th" scope="col">Older child</th>
@@ -5490,7 +5466,7 @@ Table&nbsp;2.2: Reduced sample space when at least one child is a girl
 \]</span></p>
 <p>We can turn this into a function.</p>
 <div class="cell">
-<div class="sourceCode cell-code" id="cb12"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb12-1"><a href="#cb12-1" aria-hidden="true" tabindex="-1"></a>birthday_probability <span class="ot">&lt;-</span> <span class="cf">function</span>(n_people, <span class="at">n_days =</span> <span class="dv">365</span>) {</span>
+<div class="code-copy-outer-scaffold"><div class="sourceCode cell-code" id="cb12"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb12-1"><a href="#cb12-1" aria-hidden="true" tabindex="-1"></a>birthday_probability <span class="ot">&lt;-</span> <span class="cf">function</span>(n_people, <span class="at">n_days =</span> <span class="dv">365</span>) {</span>
 <span id="cb12-2"><a href="#cb12-2" aria-hidden="true" tabindex="-1"></a>  </span>
 <span id="cb12-3"><a href="#cb12-3" aria-hidden="true" tabindex="-1"></a>  prob_no_match <span class="ot">&lt;-</span> <span class="fu">prod</span>((n_days <span class="sc">-</span> <span class="dv">0</span><span class="sc">:</span>(n_people <span class="sc">-</span> <span class="dv">1</span>)) <span class="sc">/</span> n_days)</span>
 <span id="cb12-4"><a href="#cb12-4" aria-hidden="true" tabindex="-1"></a>  </span>
@@ -5499,7 +5475,7 @@ Table&nbsp;2.2: Reduced sample space when at least one child is a girl
 <span id="cb12-7"><a href="#cb12-7" aria-hidden="true" tabindex="-1"></a>  prob_match</span>
 <span id="cb12-8"><a href="#cb12-8" aria-hidden="true" tabindex="-1"></a>}</span>
 <span id="cb12-9"><a href="#cb12-9" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb12-10"><a href="#cb12-10" aria-hidden="true" tabindex="-1"></a><span class="fu">birthday_probability</span>(<span class="at">n_people =</span> <span class="dv">23</span>)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<span id="cb12-10"><a href="#cb12-10" aria-hidden="true" tabindex="-1"></a><span class="fu">birthday_probability</span>(<span class="at">n_people =</span> <span class="dv">23</span>)</span></code></pre></div><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></div>
 <div class="cell-output cell-output-stdout">
 <pre><code>[1] 0.5072972</code></pre>
 </div>
@@ -5507,14 +5483,14 @@ Table&nbsp;2.2: Reduced sample space when at least one child is a girl
 <p>The argument <code>n_people</code> is the number of people in the group. The argument <code>n_days</code> is the number of possible birthdays, set to 365 by default. The function <code>prod()</code> multiplies all the values in a vector.</p>
 <p>We can use the function for several group sizes.</p>
 <div class="cell">
-<div class="sourceCode cell-code" id="cb14"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb14-1"><a href="#cb14-1" aria-hidden="true" tabindex="-1"></a>birthday_summary <span class="ot">&lt;-</span> <span class="fu">tibble</span>(</span>
+<div class="code-copy-outer-scaffold"><div class="sourceCode cell-code" id="cb14"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb14-1"><a href="#cb14-1" aria-hidden="true" tabindex="-1"></a>birthday_summary <span class="ot">&lt;-</span> <span class="fu">tibble</span>(</span>
 <span id="cb14-2"><a href="#cb14-2" aria-hidden="true" tabindex="-1"></a>  <span class="at">n_people =</span> <span class="fu">c</span>(<span class="dv">5</span>, <span class="dv">10</span>, <span class="dv">20</span>, <span class="dv">23</span>, <span class="dv">30</span>, <span class="dv">40</span>, <span class="dv">50</span>)</span>
 <span id="cb14-3"><a href="#cb14-3" aria-hidden="true" tabindex="-1"></a>) <span class="sc">|&gt;</span></span>
 <span id="cb14-4"><a href="#cb14-4" aria-hidden="true" tabindex="-1"></a>  <span class="fu">mutate</span>(</span>
 <span id="cb14-5"><a href="#cb14-5" aria-hidden="true" tabindex="-1"></a>    <span class="at">probability_shared_birthday =</span> <span class="fu">map_dbl</span>(n_people, birthday_probability)</span>
 <span id="cb14-6"><a href="#cb14-6" aria-hidden="true" tabindex="-1"></a>  )</span>
 <span id="cb14-7"><a href="#cb14-7" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb14-8"><a href="#cb14-8" aria-hidden="true" tabindex="-1"></a>birthday_summary</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<span id="cb14-8"><a href="#cb14-8" aria-hidden="true" tabindex="-1"></a>birthday_summary</span></code></pre></div><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></div>
 <div class="cell-output cell-output-stdout">
 <pre><code># A tibble: 7 × 2
   n_people probability_shared_birthday
@@ -5987,7 +5963,7 @@ Table&nbsp;2.3: Probability of at least one shared birthday for different group 
 }
 </style>
 
-<table class="gt_table do-not-create-environment cell caption-top table table-sm table-striped small" data-quarto-postprocess="true" data-quarto-disable-processing="false" data-quarto-bootstrap="false">
+<table class="gt_table cell caption-top table table-sm table-striped small" data-quarto-bootstrap="false">
 <thead>
 <tr class="gt_col_headings header">
 <th id="n_people" class="gt_col_heading gt_columns_bottom_border gt_center" data-quarto-table-cell-role="th" scope="col">Number of people</th>
@@ -6034,7 +6010,7 @@ Table&nbsp;2.3: Probability of at least one shared birthday for different group 
 </div>
 <p>We can also plot the probability as the group size increases.</p>
 <div class="cell">
-<div class="sourceCode cell-code" id="cb16"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb16-1"><a href="#cb16-1" aria-hidden="true" tabindex="-1"></a>birthday_plot_data <span class="ot">&lt;-</span> <span class="fu">tibble</span>(</span>
+<div class="code-copy-outer-scaffold"><div class="sourceCode cell-code" id="cb16"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb16-1"><a href="#cb16-1" aria-hidden="true" tabindex="-1"></a>birthday_plot_data <span class="ot">&lt;-</span> <span class="fu">tibble</span>(</span>
 <span id="cb16-2"><a href="#cb16-2" aria-hidden="true" tabindex="-1"></a>  <span class="at">n_people =</span> <span class="dv">1</span><span class="sc">:</span><span class="dv">60</span></span>
 <span id="cb16-3"><a href="#cb16-3" aria-hidden="true" tabindex="-1"></a>) <span class="sc">|&gt;</span></span>
 <span id="cb16-4"><a href="#cb16-4" aria-hidden="true" tabindex="-1"></a>  <span class="fu">mutate</span>(</span>
@@ -6050,7 +6026,7 @@ Table&nbsp;2.3: Probability of at least one shared birthday for different group 
 <span id="cb16-14"><a href="#cb16-14" aria-hidden="true" tabindex="-1"></a>  <span class="fu">labs</span>(</span>
 <span id="cb16-15"><a href="#cb16-15" aria-hidden="true" tabindex="-1"></a>    <span class="at">x =</span> <span class="st">"Number of people"</span>,</span>
 <span id="cb16-16"><a href="#cb16-16" aria-hidden="true" tabindex="-1"></a>    <span class="at">y =</span> <span class="st">"Probability of at least one shared birthday"</span></span>
-<span id="cb16-17"><a href="#cb16-17" aria-hidden="true" tabindex="-1"></a>  )</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<span id="cb16-17"><a href="#cb16-17" aria-hidden="true" tabindex="-1"></a>  )</span></code></pre></div><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></div>
 <div class="cell-output-display">
 <div id="fig-birthday-problem" class="quarto-float quarto-figure quarto-figure-center anchored">
 <figure class="quarto-float quarto-float-fig figure">
@@ -6074,7 +6050,7 @@ Figure&nbsp;2.1: Probability of at least one shared birthday as group size incre
 \]</span></p>
 <p>We can put the two choices into a data frame.</p>
 <div class="cell">
-<div class="sourceCode cell-code" id="cb17"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb17-1"><a href="#cb17-1" aria-hidden="true" tabindex="-1"></a>parking <span class="ot">&lt;-</span> <span class="fu">tibble</span>(</span>
+<div class="code-copy-outer-scaffold"><div class="sourceCode cell-code" id="cb17"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb17-1"><a href="#cb17-1" aria-hidden="true" tabindex="-1"></a>parking <span class="ot">&lt;-</span> <span class="fu">tibble</span>(</span>
 <span id="cb17-2"><a href="#cb17-2" aria-hidden="true" tabindex="-1"></a>  <span class="at">choice =</span> <span class="fu">c</span>(<span class="st">"Pay using O-Park"</span>, <span class="st">"Do not pay"</span>),</span>
 <span id="cb17-3"><a href="#cb17-3" aria-hidden="true" tabindex="-1"></a>  <span class="at">certain_cost =</span> <span class="fu">c</span>(<span class="fl">5.50</span>, <span class="dv">0</span>),</span>
 <span id="cb17-4"><a href="#cb17-4" aria-hidden="true" tabindex="-1"></a>  <span class="at">fine_amount =</span> <span class="fu">c</span>(<span class="dv">0</span>, <span class="dv">125</span>),</span>
@@ -6084,7 +6060,7 @@ Figure&nbsp;2.1: Probability of at least one shared birthday as group size incre
 <span id="cb17-8"><a href="#cb17-8" aria-hidden="true" tabindex="-1"></a>    <span class="at">expected_cost =</span> certain_cost <span class="sc">+</span> probability_of_fine <span class="sc">*</span> fine_amount</span>
 <span id="cb17-9"><a href="#cb17-9" aria-hidden="true" tabindex="-1"></a>  )</span>
 <span id="cb17-10"><a href="#cb17-10" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb17-11"><a href="#cb17-11" aria-hidden="true" tabindex="-1"></a>parking</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<span id="cb17-11"><a href="#cb17-11" aria-hidden="true" tabindex="-1"></a>parking</span></code></pre></div><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></div>
 <div class="cell-output cell-output-stdout">
 <pre><code># A tibble: 2 × 5
   choice           certain_cost fine_amount probability_of_fine expected_cost
@@ -6564,7 +6540,7 @@ Table&nbsp;2.4: Expected cost of paying for parking or risking a fine
 }
 </style>
 
-<table class="gt_table do-not-create-environment cell caption-top table table-sm table-striped small" data-quarto-postprocess="true" data-quarto-disable-processing="false" data-quarto-bootstrap="false">
+<table class="gt_table cell caption-top table table-sm table-striped small" data-quarto-bootstrap="false">
 <thead>
 <tr class="gt_col_headings header">
 <th id="choice" class="gt_col_heading gt_columns_bottom_border gt_center" data-quarto-table-cell-role="th" scope="col">Choice</th>
@@ -6600,12 +6576,12 @@ Table&nbsp;2.4: Expected cost of paying for parking or risking a fine
 </div>
 <p>This calculation depends on the probability of being fined. We can also calculate the break-even probability: the probability of a fine that would make the expected cost of not paying equal to the cost of paying.</p>
 <div class="cell">
-<div class="sourceCode cell-code" id="cb19"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb19-1"><a href="#cb19-1" aria-hidden="true" tabindex="-1"></a>parking_cost <span class="ot">&lt;-</span> <span class="fl">5.50</span></span>
+<div class="code-copy-outer-scaffold"><div class="sourceCode cell-code" id="cb19"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb19-1"><a href="#cb19-1" aria-hidden="true" tabindex="-1"></a>parking_cost <span class="ot">&lt;-</span> <span class="fl">5.50</span></span>
 <span id="cb19-2"><a href="#cb19-2" aria-hidden="true" tabindex="-1"></a>fine_amount <span class="ot">&lt;-</span> <span class="dv">125</span></span>
 <span id="cb19-3"><a href="#cb19-3" aria-hidden="true" tabindex="-1"></a></span>
 <span id="cb19-4"><a href="#cb19-4" aria-hidden="true" tabindex="-1"></a>break_even_probability <span class="ot">&lt;-</span> parking_cost <span class="sc">/</span> fine_amount</span>
 <span id="cb19-5"><a href="#cb19-5" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb19-6"><a href="#cb19-6" aria-hidden="true" tabindex="-1"></a>break_even_probability</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<span id="cb19-6"><a href="#cb19-6" aria-hidden="true" tabindex="-1"></a>break_even_probability</span></code></pre></div><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></div>
 <div class="cell-output cell-output-stdout">
 <pre><code>[1] 0.044</code></pre>
 </div>
@@ -7077,7 +7053,7 @@ Table&nbsp;2.5: Break-even probability for the campus parking example
 }
 </style>
 
-<table class="gt_table do-not-create-environment cell caption-top table table-sm table-striped small" data-quarto-postprocess="true" data-quarto-disable-processing="false" data-quarto-bootstrap="false">
+<table class="gt_table cell caption-top table table-sm table-striped small" data-quarto-bootstrap="false">
 <thead>
 <tr class="gt_col_headings header">
 <th id="Quantity" class="gt_col_heading gt_columns_bottom_border gt_center" data-quarto-table-cell-role="th" scope="col">Quantity</th>
@@ -7121,7 +7097,7 @@ Table&nbsp;2.5: Break-even probability for the campus parking example
 <i class="callout-icon"></i>
 </div>
 <div class="callout-title-container flex-fill">
-Question 1
+<span class="screen-reader-only">Note</span>Question 1
 </div>
 </div>
 <div class="callout-body-container callout-body">
@@ -7130,12 +7106,12 @@ Question 1
 <p><strong>b.</strong> Write the event “roll a number greater than 4” as a set.</p>
 <p><strong>c.</strong> Calculate the probability of rolling a number greater than 4.</p>
 <div class="callout callout-style-default callout-important callout-titled">
-<div class="callout-header d-flex align-content-center" data-bs-toggle="collapse" data-bs-target=".callout-8-contents" aria-controls="callout-8" aria-expanded="false" aria-label="Toggle callout">
+<div class="callout-header d-flex align-content-center collapsed" data-bs-toggle="collapse" data-bs-target=".callout-8-contents" aria-controls="callout-8" aria-expanded="false" aria-label="Toggle callout">
 <div class="callout-icon-container">
 <i class="callout-icon"></i>
 </div>
 <div class="callout-title-container flex-fill">
-Click for Solutions
+<span class="screen-reader-only">Important</span>Click for Solutions
 </div>
 <div class="callout-btn-toggle d-inline-block border-0 py-1 ps-1 pe-0 float-end"><i class="callout-toggle"></i></div>
 </div>
@@ -7164,7 +7140,7 @@ P(\text{greater than 4}) = \frac{2}{6} = \frac{1}{3}
 <i class="callout-icon"></i>
 </div>
 <div class="callout-title-container flex-fill">
-Question 2
+<span class="screen-reader-only">Note</span>Question 2
 </div>
 </div>
 <div class="callout-body-container callout-body">
@@ -7173,12 +7149,12 @@ Question 2
 <p><strong>b.</strong> What is the probability of getting exactly two heads?</p>
 <p><strong>c.</strong> What is the probability of getting at least one tail?</p>
 <div class="callout callout-style-default callout-important callout-titled">
-<div class="callout-header d-flex align-content-center" data-bs-toggle="collapse" data-bs-target=".callout-10-contents" aria-controls="callout-10" aria-expanded="false" aria-label="Toggle callout">
+<div class="callout-header d-flex align-content-center collapsed" data-bs-toggle="collapse" data-bs-target=".callout-10-contents" aria-controls="callout-10" aria-expanded="false" aria-label="Toggle callout">
 <div class="callout-icon-container">
 <i class="callout-icon"></i>
 </div>
 <div class="callout-title-container flex-fill">
-Click for Solutions
+<span class="screen-reader-only">Important</span>Click for Solutions
 </div>
 <div class="callout-btn-toggle d-inline-block border-0 py-1 ps-1 pe-0 float-end"><i class="callout-toggle"></i></div>
 </div>
@@ -7221,7 +7197,7 @@ P(\text{at least one tail}) = 1 - P(\text{no tails})
 <i class="callout-icon"></i>
 </div>
 <div class="callout-title-container flex-fill">
-Question 3
+<span class="screen-reader-only">Note</span>Question 3
 </div>
 </div>
 <div class="callout-body-container callout-body">
@@ -7231,12 +7207,12 @@ Question 3
 <p><strong>c.</strong> If you are told that at least one child is a girl, what is the probability that both children are girls?</p>
 <p><strong>d.</strong> If you are told that the older child is a girl, what is the probability that both children are girls?</p>
 <div class="callout callout-style-default callout-important callout-titled">
-<div class="callout-header d-flex align-content-center" data-bs-toggle="collapse" data-bs-target=".callout-12-contents" aria-controls="callout-12" aria-expanded="false" aria-label="Toggle callout">
+<div class="callout-header d-flex align-content-center collapsed" data-bs-toggle="collapse" data-bs-target=".callout-12-contents" aria-controls="callout-12" aria-expanded="false" aria-label="Toggle callout">
 <div class="callout-icon-container">
 <i class="callout-icon"></i>
 </div>
 <div class="callout-title-container flex-fill">
-Click for Solutions
+<span class="screen-reader-only">Important</span>Click for Solutions
 </div>
 <div class="callout-btn-toggle d-inline-block border-0 py-1 ps-1 pe-0 float-end"><i class="callout-toggle"></i></div>
 </div>
@@ -7277,7 +7253,7 @@ P(\text{both girls} \mid \text{older child is a girl}) = \frac{1}{2}
 <i class="callout-icon"></i>
 </div>
 <div class="callout-title-container flex-fill">
-Question 4
+<span class="screen-reader-only">Note</span>Question 4
 </div>
 </div>
 <div class="callout-body-container callout-body">
@@ -7286,12 +7262,12 @@ Question 4
 <p><strong>b.</strong> What is the probability that the leaking tyre is a front tyre?</p>
 <p><strong>c.</strong> A mechanic checks the rear left tyre and finds that it is not leaking. What is the probability that the leaking tyre is now a front tyre?</p>
 <div class="callout callout-style-default callout-important callout-titled">
-<div class="callout-header d-flex align-content-center" data-bs-toggle="collapse" data-bs-target=".callout-14-contents" aria-controls="callout-14" aria-expanded="false" aria-label="Toggle callout">
+<div class="callout-header d-flex align-content-center collapsed" data-bs-toggle="collapse" data-bs-target=".callout-14-contents" aria-controls="callout-14" aria-expanded="false" aria-label="Toggle callout">
 <div class="callout-icon-container">
 <i class="callout-icon"></i>
 </div>
 <div class="callout-title-container flex-fill">
-Click for Solutions
+<span class="screen-reader-only">Important</span>Click for Solutions
 </div>
 <div class="callout-btn-toggle d-inline-block border-0 py-1 ps-1 pe-0 float-end"><i class="callout-toggle"></i></div>
 </div>
@@ -7324,7 +7300,7 @@ P(\text{front tyre} \mid \text{rear left is not leaking}) = \frac{2}{3}
 <i class="callout-icon"></i>
 </div>
 <div class="callout-title-container flex-fill">
-Question 5
+<span class="screen-reader-only">Note</span>Question 5
 </div>
 </div>
 <div class="callout-body-container callout-body">
@@ -7782,7 +7758,7 @@ Question 5
 }
 </style>
 
-<table class="gt_table caption-top table table-sm table-striped small" data-quarto-postprocess="true" data-quarto-disable-processing="false" data-quarto-bootstrap="false">
+<table class="gt_table caption-top table table-sm table-striped small" data-quarto-bootstrap="false">
 <thead>
 <tr class="gt_col_headings header">
 <th id="Total-of-9" class="gt_col_heading gt_columns_bottom_border gt_center" data-quarto-table-cell-role="th" scope="col">Total of 9</th>
@@ -7825,12 +7801,12 @@ Question 5
 <p><strong>b.</strong> If there are 25 ordered outcomes that sum to 9 and 27 ordered outcomes that sum to 10, calculate both probabilities.</p>
 <p><strong>c.</strong> Which total is more likely?</p>
 <div class="callout callout-style-default callout-important callout-titled">
-<div class="callout-header d-flex align-content-center" data-bs-toggle="collapse" data-bs-target=".callout-16-contents" aria-controls="callout-16" aria-expanded="false" aria-label="Toggle callout">
+<div class="callout-header d-flex align-content-center collapsed" data-bs-toggle="collapse" data-bs-target=".callout-16-contents" aria-controls="callout-16" aria-expanded="false" aria-label="Toggle callout">
 <div class="callout-icon-container">
 <i class="callout-icon"></i>
 </div>
 <div class="callout-title-container flex-fill">
-Click for Solutions
+<span class="screen-reader-only">Important</span>Click for Solutions
 </div>
 <div class="callout-btn-toggle d-inline-block border-0 py-1 ps-1 pe-0 float-end"><i class="callout-toggle"></i></div>
 </div>
@@ -7865,7 +7841,7 @@ P(\text{sum is 10}) = \frac{27}{216}
 <i class="callout-icon"></i>
 </div>
 <div class="callout-title-container flex-fill">
-Question 6
+<span class="screen-reader-only">Note</span>Question 6
 </div>
 </div>
 <div class="callout-body-container callout-body">
@@ -7874,12 +7850,12 @@ Question 6
 <p><strong>b.</strong> Why is the birthday problem not mainly about the probability that one particular student shares your birthday?</p>
 <p><strong>c.</strong> Explain in words why a shared birthday becomes more likely than many people expect.</p>
 <div class="callout callout-style-default callout-important callout-titled">
-<div class="callout-header d-flex align-content-center" data-bs-toggle="collapse" data-bs-target=".callout-18-contents" aria-controls="callout-18" aria-expanded="false" aria-label="Toggle callout">
+<div class="callout-header d-flex align-content-center collapsed" data-bs-toggle="collapse" data-bs-target=".callout-18-contents" aria-controls="callout-18" aria-expanded="false" aria-label="Toggle callout">
 <div class="callout-icon-container">
 <i class="callout-icon"></i>
 </div>
 <div class="callout-title-container flex-fill">
-Click for Solutions
+<span class="screen-reader-only">Important</span>Click for Solutions
 </div>
 <div class="callout-btn-toggle d-inline-block border-0 py-1 ps-1 pe-0 float-end"><i class="callout-toggle"></i></div>
 </div>
@@ -7902,7 +7878,7 @@ Click for Solutions
 <i class="callout-icon"></i>
 </div>
 <div class="callout-title-container flex-fill">
-Question 7
+<span class="screen-reader-only">Note</span>Question 7
 </div>
 </div>
 <div class="callout-body-container callout-body">
@@ -7914,12 +7890,12 @@ Question 7
 <p><strong>b.</strong> Why is this different from asking whether some combination will repeat after many lottery draws?</p>
 <p><strong>c.</strong> If there have been 3,016 lottery draws, how many pairs of draws are there?</p>
 <div class="callout callout-style-default callout-important callout-titled">
-<div class="callout-header d-flex align-content-center" data-bs-toggle="collapse" data-bs-target=".callout-20-contents" aria-controls="callout-20" aria-expanded="false" aria-label="Toggle callout">
+<div class="callout-header d-flex align-content-center collapsed" data-bs-toggle="collapse" data-bs-target=".callout-20-contents" aria-controls="callout-20" aria-expanded="false" aria-label="Toggle callout">
 <div class="callout-icon-container">
 <i class="callout-icon"></i>
 </div>
 <div class="callout-title-container flex-fill">
-Click for Solutions
+<span class="screen-reader-only">Important</span>Click for Solutions
 </div>
 <div class="callout-btn-toggle d-inline-block border-0 py-1 ps-1 pe-0 float-end"><i class="callout-toggle"></i></div>
 </div>
@@ -7948,7 +7924,7 @@ Click for Solutions
 <i class="callout-icon"></i>
 </div>
 <div class="callout-title-container flex-fill">
-Question 8
+<span class="screen-reader-only">Note</span>Question 8
 </div>
 </div>
 <div class="callout-body-container callout-body">
@@ -7963,12 +7939,12 @@ H,\;T,\;H
 <p><strong>c.</strong> What is the probability that Harry eventually wins?</p>
 <p><strong>d.</strong> How should the $100 prize be divided fairly?</p>
 <div class="callout callout-style-default callout-important callout-titled">
-<div class="callout-header d-flex align-content-center" data-bs-toggle="collapse" data-bs-target=".callout-22-contents" aria-controls="callout-22" aria-expanded="false" aria-label="Toggle callout">
+<div class="callout-header d-flex align-content-center collapsed" data-bs-toggle="collapse" data-bs-target=".callout-22-contents" aria-controls="callout-22" aria-expanded="false" aria-label="Toggle callout">
 <div class="callout-icon-container">
 <i class="callout-icon"></i>
 </div>
 <div class="callout-title-container flex-fill">
-Click for Solutions
+<span class="screen-reader-only">Important</span>Click for Solutions
 </div>
 <div class="callout-btn-toggle d-inline-block border-0 py-1 ps-1 pe-0 float-end"><i class="callout-toggle"></i></div>
 </div>
@@ -8018,7 +7994,7 @@ P(\text{Harry wins})
 <i class="callout-icon"></i>
 </div>
 <div class="callout-title-container flex-fill">
-Question 9
+<span class="screen-reader-only">Note</span>Question 9
 </div>
 </div>
 <div class="callout-body-container callout-body">
@@ -8033,12 +8009,12 @@ Question 9
 <p><strong>a.</strong> What is wrong with this reasoning?</p>
 <p><strong>b.</strong> What does this teach us about sample spaces?</p>
 <div class="callout callout-style-default callout-important callout-titled">
-<div class="callout-header d-flex align-content-center" data-bs-toggle="collapse" data-bs-target=".callout-24-contents" aria-controls="callout-24" aria-expanded="false" aria-label="Toggle callout">
+<div class="callout-header d-flex align-content-center collapsed" data-bs-toggle="collapse" data-bs-target=".callout-24-contents" aria-controls="callout-24" aria-expanded="false" aria-label="Toggle callout">
 <div class="callout-icon-container">
 <i class="callout-icon"></i>
 </div>
 <div class="callout-title-container flex-fill">
-Click for Solutions
+<span class="screen-reader-only">Important</span>Click for Solutions
 </div>
 <div class="callout-btn-toggle d-inline-block border-0 py-1 ps-1 pe-0 float-end"><i class="callout-toggle"></i></div>
 </div>
@@ -8057,7 +8033,7 @@ Click for Solutions
 <i class="callout-icon"></i>
 </div>
 <div class="callout-title-container flex-fill">
-Question 10
+<span class="screen-reader-only">Note</span>Question 10
 </div>
 </div>
 <div class="callout-body-container callout-body">
@@ -8066,12 +8042,12 @@ Question 10
 <p><strong>b.</strong> How many ways are there to choose 3 guests from the 8 guests to sit at a small side table, if order does not matter?</p>
 <p><strong>c.</strong> Explain the difference between parts <strong>a</strong> and <strong>b</strong>.</p>
 <div class="callout callout-style-default callout-important callout-titled">
-<div class="callout-header d-flex align-content-center" data-bs-toggle="collapse" data-bs-target=".callout-26-contents" aria-controls="callout-26" aria-expanded="false" aria-label="Toggle callout">
+<div class="callout-header d-flex align-content-center collapsed" data-bs-toggle="collapse" data-bs-target=".callout-26-contents" aria-controls="callout-26" aria-expanded="false" aria-label="Toggle callout">
 <div class="callout-icon-container">
 <i class="callout-icon"></i>
 </div>
 <div class="callout-title-container flex-fill">
-Click for Solutions
+<span class="screen-reader-only">Important</span>Click for Solutions
 </div>
 <div class="callout-btn-toggle d-inline-block border-0 py-1 ps-1 pe-0 float-end"><i class="callout-toggle"></i></div>
 </div>
@@ -8100,7 +8076,7 @@ Click for Solutions
 <i class="callout-icon"></i>
 </div>
 <div class="callout-title-container flex-fill">
-Question 11
+<span class="screen-reader-only">Note</span>Question 11
 </div>
 </div>
 <div class="callout-body-container callout-body">
@@ -8127,12 +8103,12 @@ Question 11
 <p><strong>b.</strong> What is <span class="math inline">\(\binom{5}{3}\)</span>?</p>
 <p><strong>c.</strong> Why are these two values the same?</p>
 <div class="callout callout-style-default callout-important callout-titled">
-<div class="callout-header d-flex align-content-center" data-bs-toggle="collapse" data-bs-target=".callout-28-contents" aria-controls="callout-28" aria-expanded="false" aria-label="Toggle callout">
+<div class="callout-header d-flex align-content-center collapsed" data-bs-toggle="collapse" data-bs-target=".callout-28-contents" aria-controls="callout-28" aria-expanded="false" aria-label="Toggle callout">
 <div class="callout-icon-container">
 <i class="callout-icon"></i>
 </div>
 <div class="callout-title-container flex-fill">
-Click for Solutions
+<span class="screen-reader-only">Important</span>Click for Solutions
 </div>
 <div class="callout-btn-toggle d-inline-block border-0 py-1 ps-1 pe-0 float-end"><i class="callout-toggle"></i></div>
 </div>
@@ -8161,7 +8137,7 @@ Click for Solutions
 <i class="callout-icon"></i>
 </div>
 <div class="callout-title-container flex-fill">
-Question 12
+<span class="screen-reader-only">Note</span>Question 12
 </div>
 </div>
 <div class="callout-body-container callout-body">
@@ -8170,12 +8146,12 @@ Question 12
 <p><strong>b.</strong> How many total sequences are possible when a fair coin is tossed 5 times?</p>
 <p><strong>c.</strong> What is the probability of getting exactly 2 heads?</p>
 <div class="callout callout-style-default callout-important callout-titled">
-<div class="callout-header d-flex align-content-center" data-bs-toggle="collapse" data-bs-target=".callout-30-contents" aria-controls="callout-30" aria-expanded="false" aria-label="Toggle callout">
+<div class="callout-header d-flex align-content-center collapsed" data-bs-toggle="collapse" data-bs-target=".callout-30-contents" aria-controls="callout-30" aria-expanded="false" aria-label="Toggle callout">
 <div class="callout-icon-container">
 <i class="callout-icon"></i>
 </div>
 <div class="callout-title-container flex-fill">
-Click for Solutions
+<span class="screen-reader-only">Important</span>Click for Solutions
 </div>
 <div class="callout-btn-toggle d-inline-block border-0 py-1 ps-1 pe-0 float-end"><i class="callout-toggle"></i></div>
 </div>
@@ -8208,7 +8184,7 @@ P(\text{exactly 2 heads}) = \frac{10}{32} = \frac{5}{16}
 <i class="callout-icon"></i>
 </div>
 <div class="callout-title-container flex-fill">
-Question 13
+<span class="screen-reader-only">Note</span>Question 13
 </div>
 </div>
 <div class="callout-body-container callout-body">
@@ -8665,7 +8641,7 @@ Question 13
 }
 </style>
 
-<table class="gt_table caption-top table table-sm table-striped small" data-quarto-postprocess="true" data-quarto-disable-processing="false" data-quarto-bootstrap="false">
+<table class="gt_table caption-top table table-sm table-striped small" data-quarto-bootstrap="false">
 <thead>
 <tr class="gt_col_headings header">
 <th id="Situation" class="gt_col_heading gt_columns_bottom_border gt_left" data-quarto-table-cell-role="th" scope="col">Situation</th>
@@ -8700,12 +8676,12 @@ Question 13
 </div>
 </div>
 <div class="callout callout-style-default callout-important callout-titled">
-<div class="callout-header d-flex align-content-center" data-bs-toggle="collapse" data-bs-target=".callout-32-contents" aria-controls="callout-32" aria-expanded="false" aria-label="Toggle callout">
+<div class="callout-header d-flex align-content-center collapsed" data-bs-toggle="collapse" data-bs-target=".callout-32-contents" aria-controls="callout-32" aria-expanded="false" aria-label="Toggle callout">
 <div class="callout-icon-container">
 <i class="callout-icon"></i>
 </div>
 <div class="callout-title-container flex-fill">
-Click for Solutions
+<span class="screen-reader-only">Important</span>Click for Solutions
 </div>
 <div class="callout-btn-toggle d-inline-block border-0 py-1 ps-1 pe-0 float-end"><i class="callout-toggle"></i></div>
 </div>
@@ -9163,7 +9139,7 @@ Click for Solutions
 }
 </style>
 
-<table class="gt_table caption-top table table-sm table-striped small" data-quarto-postprocess="true" data-quarto-disable-processing="false" data-quarto-bootstrap="false">
+<table class="gt_table caption-top table table-sm table-striped small" data-quarto-bootstrap="false">
 <thead>
 <tr class="gt_col_headings header">
 <th id="Situation" class="gt_col_heading gt_columns_bottom_border gt_left" data-quarto-table-cell-role="th" scope="col">Situation</th>
@@ -9208,7 +9184,7 @@ Click for Solutions
 <i class="callout-icon"></i>
 </div>
 <div class="callout-title-container flex-fill">
-Question 14
+<span class="screen-reader-only">Note</span>Question 14
 </div>
 </div>
 <div class="callout-body-container callout-body">
@@ -9217,12 +9193,12 @@ Question 14
 <p><strong>b.</strong> Calculate the number of possible focus groups.</p>
 <p><strong>c.</strong> Why would listing all possible focus groups by hand be impractical?</p>
 <div class="callout callout-style-default callout-important callout-titled">
-<div class="callout-header d-flex align-content-center" data-bs-toggle="collapse" data-bs-target=".callout-34-contents" aria-controls="callout-34" aria-expanded="false" aria-label="Toggle callout">
+<div class="callout-header d-flex align-content-center collapsed" data-bs-toggle="collapse" data-bs-target=".callout-34-contents" aria-controls="callout-34" aria-expanded="false" aria-label="Toggle callout">
 <div class="callout-icon-container">
 <i class="callout-icon"></i>
 </div>
 <div class="callout-title-container flex-fill">
-Click for Solutions
+<span class="screen-reader-only">Important</span>Click for Solutions
 </div>
 <div class="callout-btn-toggle d-inline-block border-0 py-1 ps-1 pe-0 float-end"><i class="callout-toggle"></i></div>
 </div>
@@ -9248,7 +9224,7 @@ Click for Solutions
 <i class="callout-icon"></i>
 </div>
 <div class="callout-title-container flex-fill">
-Question 15
+<span class="screen-reader-only">Note</span>Question 15
 </div>
 </div>
 <div class="callout-body-container callout-body">
@@ -9260,12 +9236,12 @@ Question 15
 <p><strong>b.</strong> Use either the birthday problem, lottery example, or social media example to support your answer.</p>
 <p><strong>c.</strong> Write a better statistical question to ask when a rare event occurs.</p>
 <div class="callout callout-style-default callout-important callout-titled">
-<div class="callout-header d-flex align-content-center" data-bs-toggle="collapse" data-bs-target=".callout-36-contents" aria-controls="callout-36" aria-expanded="false" aria-label="Toggle callout">
+<div class="callout-header d-flex align-content-center collapsed" data-bs-toggle="collapse" data-bs-target=".callout-36-contents" aria-controls="callout-36" aria-expanded="false" aria-label="Toggle callout">
 <div class="callout-icon-container">
 <i class="callout-icon"></i>
 </div>
 <div class="callout-title-container flex-fill">
-Click for Solutions
+<span class="screen-reader-only">Important</span>Click for Solutions
 </div>
 <div class="callout-btn-toggle d-inline-block border-0 py-1 ps-1 pe-0 float-end"><i class="callout-toggle"></i></div>
 </div>
@@ -9764,13 +9740,14 @@ window.onload = function() {
       e.clearSelection();
     }
     const getTextToCopy = function(trigger) {
-        const codeEl = trigger.previousElementSibling.cloneNode(true);
-        for (const childEl of codeEl.children) {
-          if (isCodeAnnotation(childEl)) {
-            childEl.remove();
-          }
+      const outerScaffold = trigger.parentElement.cloneNode(true);
+      const codeEl = outerScaffold.querySelector('code');
+      for (const childEl of codeEl.children) {
+        if (isCodeAnnotation(childEl)) {
+          childEl.remove();
         }
-        return codeEl.innerText;
+      }
+      return codeEl.innerText;
     }
     const clipboard = new window.ClipboardJS('.code-copy-button:not([data-in-quarto-modal])', {
       text: getTextToCopy

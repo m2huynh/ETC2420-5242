@@ -2,17 +2,23 @@
 <html xmlns="http://www.w3.org/1999/xhtml" lang="en" xml:lang="en"><head>
 
 <meta charset="utf-8">
-<meta name="generator" content="quarto-1.7.32">
+<meta name="generator" content="quarto-1.10.18">
 
 <meta name="viewport" content="width=device-width, initial-scale=1.0, user-scalable=yes">
 
 
 <title>3&nbsp; Measurement and Error – Statistical Thinking</title>
 <style>
-code{white-space: pre-wrap;}
+/* Default styles provided by pandoc.
+** See https://pandoc.org/MANUAL.html#variables-for-html for config info.
+*/
 span.smallcaps{font-variant: small-caps;}
-div.columns{display: flex; gap: min(4vw, 1.5em);}
-div.column{flex: auto; overflow-x: auto;}
+div.columns{display: flex; gap: 1.5em;}
+div.column{flex: auto;}
+@media screen {
+div.columns{gap: min(4vw, 1.5em);}
+div.column{overflow-x: auto;}
+}
 div.hanging-indent{margin-left: 1.5em; text-indent: -1.5em;}
 ul.task-list{list-style: none;}
 ul.task-list li input[type="checkbox"] {
@@ -72,14 +78,14 @@ pre > code.sourceCode > span > a:first-child::before { text-decoration: underlin
 <script src="site_libs/quarto-html/tippy.umd.min.js"></script>
 <script src="site_libs/quarto-html/anchor.min.js"></script>
 <link href="site_libs/quarto-html/tippy.css" rel="stylesheet">
-<link href="site_libs/quarto-html/quarto-syntax-highlighting-37eea08aefeeee20ff55810ff984fec1.css" rel="stylesheet" class="quarto-color-scheme" id="quarto-text-highlighting-styles">
-<link href="site_libs/quarto-html/quarto-syntax-highlighting-dark-2fef5ea3f8957b3e4ecc936fc74692ca.css" rel="stylesheet" class="quarto-color-scheme quarto-color-alternate" id="quarto-text-highlighting-styles">
-<link href="site_libs/quarto-html/quarto-syntax-highlighting-37eea08aefeeee20ff55810ff984fec1.css" rel="stylesheet" class="quarto-color-scheme-extra" id="quarto-text-highlighting-styles">
+<link href="site_libs/quarto-html/quarto-syntax-highlighting-64a204ab8560d761af7679ceaba22944.css" rel="stylesheet" class="quarto-color-scheme" id="quarto-text-highlighting-styles">
+<link href="site_libs/quarto-html/quarto-syntax-highlighting-dark-b85bc7c33db8c58e0ec93c3465666fed.css" rel="stylesheet" class="quarto-color-scheme quarto-color-alternate" id="quarto-text-highlighting-styles">
+<link href="site_libs/quarto-html/quarto-syntax-highlighting-64a204ab8560d761af7679ceaba22944.css" rel="stylesheet" class="quarto-color-scheme-extra" id="quarto-text-highlighting-styles">
 <script src="site_libs/bootstrap/bootstrap.min.js"></script>
 <link href="site_libs/bootstrap/bootstrap-icons.css" rel="stylesheet">
-<link href="site_libs/bootstrap/bootstrap-c27fdc8e5b00b532d2d5a75ada188648.min.css" rel="stylesheet" append-hash="true" class="quarto-color-scheme" id="quarto-bootstrap" data-mode="light">
-<link href="site_libs/bootstrap/bootstrap-dark-b9e11ad5a37ead2aabff839d95ae3857.min.css" rel="stylesheet" append-hash="true" class="quarto-color-scheme quarto-color-alternate" id="quarto-bootstrap" data-mode="dark">
-<link href="site_libs/bootstrap/bootstrap-c27fdc8e5b00b532d2d5a75ada188648.min.css" rel="stylesheet" append-hash="true" class="quarto-color-scheme-extra" id="quarto-bootstrap" data-mode="light">
+<link href="site_libs/bootstrap/bootstrap-f07248834697d125d844cdaf4174b45d.min.css" rel="stylesheet" append-hash="true" class="quarto-color-scheme" id="quarto-bootstrap" data-mode="light">
+<link href="site_libs/bootstrap/bootstrap-dark-a64f2b92d8b4b45ab5f5d9261e8b8c9d.min.css" rel="stylesheet" append-hash="true" class="quarto-color-scheme quarto-color-alternate" id="quarto-bootstrap" data-mode="dark">
+<link href="site_libs/bootstrap/bootstrap-f07248834697d125d844cdaf4174b45d.min.css" rel="stylesheet" append-hash="true" class="quarto-color-scheme-extra" id="quarto-bootstrap" data-mode="light">
 <script id="quarto-search-options" type="application/json">{
   "location": "sidebar",
   "copy-button": false,
@@ -109,7 +115,7 @@ pre > code.sourceCode > span > a:first-child::before { text-decoration: underlin
 }</script>
 
   <script src="https://cdnjs.cloudflare.com/polyfill/v3/polyfill.min.js?features=es6"></script>
-  <script src="https://cdn.jsdelivr.net/npm/mathjax@3/es5/tex-chtml-full.js" type="text/javascript"></script>
+  <script defer="" src="https://cdn.jsdelivr.net/npm/mathjax@4/tex-chtml.js" type="text/javascript"></script>
 
 <script type="text/javascript">
 const typesetMath = (el) => {
@@ -122,7 +128,7 @@ const typesetMath = (el) => {
     var macros = [];
     for (var i = 0; i < mathElements.length; i++) {
       var texText = mathElements[i].firstChild;
-      if (mathElements[i].tagName == "SPAN") {
+      if (mathElements[i].tagName == "SPAN" && texText && texText.data) {
         window.katex.render(texText.data, mathElements[i], {
           displayMode: mathElements[i].classList.contains('display'),
           throwOnError: false,
@@ -389,36 +395,6 @@ window.Quarto = {
  <span class="menu-text"><span class="chapter-number">6</span>&nbsp; <span class="chapter-title">Simulation-Based Inference</span></span></a>
   </div>
 </li>
-        <li class="sidebar-item">
-  <div class="sidebar-item-container"> 
-  <a href="./7_Likelihood.html" class="sidebar-item-text sidebar-link">
- <span class="menu-text"><span class="chapter-number">7</span>&nbsp; <span class="chapter-title">Likelihood</span></span></a>
-  </div>
-</li>
-        <li class="sidebar-item">
-  <div class="sidebar-item-container"> 
-  <a href="./8_Bayes.html" class="sidebar-item-text sidebar-link">
- <span class="menu-text"><span class="chapter-number">8</span>&nbsp; <span class="chapter-title">Bayesian Inference</span></span></a>
-  </div>
-</li>
-        <li class="sidebar-item">
-  <div class="sidebar-item-container"> 
-  <a href="./9_bayes2.html" class="sidebar-item-text sidebar-link">
- <span class="menu-text"><span class="chapter-number">9</span>&nbsp; <span class="chapter-title">Bayesian Simulation and Decisions</span></span></a>
-  </div>
-</li>
-        <li class="sidebar-item">
-  <div class="sidebar-item-container"> 
-  <a href="./10_Models1.html" class="sidebar-item-text sidebar-link">
- <span class="menu-text"><span class="chapter-number">10</span>&nbsp; <span class="chapter-title">Thinking with Frequentist Models</span></span></a>
-  </div>
-</li>
-        <li class="sidebar-item">
-  <div class="sidebar-item-container"> 
-  <a href="./11_Models2.html" class="sidebar-item-text sidebar-link">
- <span class="menu-text"><span class="chapter-number">11</span>&nbsp; <span class="chapter-title">Thinking with Bayesian Regression Models</span></span></a>
-  </div>
-</li>
     </ul>
     </div>
 </nav>
@@ -477,7 +453,7 @@ window.Quarto = {
 <i class="callout-icon"></i>
 </div>
 <div class="callout-title-container flex-fill">
-Learning Objectives
+<span class="screen-reader-only">Note</span>Learning Objectives
 </div>
 </div>
 <div class="callout-body-container callout-body">
@@ -528,23 +504,23 @@ Learning Objectives
 <p>Each number is produced by a process. And every process can introduce uncertainty. To see this more clearly, consider the wine rating again. Suppose we ask five critics to taste the same bottle independently. Their ratings might look like this:</p>
 <div class="cell">
 <div class="cell-output-display">
-<div id="jcpsasgamx" style="padding-left:0px;padding-right:0px;padding-top:10px;padding-bottom:10px;overflow-x:auto;overflow-y:auto;width:auto;height:auto;">
-<style>#jcpsasgamx table {
+<div id="mypfrxothd" style="padding-left:0px;padding-right:0px;padding-top:10px;padding-bottom:10px;overflow-x:auto;overflow-y:auto;width:auto;height:auto;">
+<style>#mypfrxothd table {
   font-family: system-ui, 'Segoe UI', Roboto, Helvetica, Arial, sans-serif, 'Apple Color Emoji', 'Segoe UI Emoji', 'Segoe UI Symbol', 'Noto Color Emoji';
   -webkit-font-smoothing: antialiased;
   -moz-osx-font-smoothing: grayscale;
 }
 
-#jcpsasgamx thead, #jcpsasgamx tbody, #jcpsasgamx tfoot, #jcpsasgamx tr, #jcpsasgamx td, #jcpsasgamx th {
+#mypfrxothd thead, #mypfrxothd tbody, #mypfrxothd tfoot, #mypfrxothd tr, #mypfrxothd td, #mypfrxothd th {
   border-style: none;
 }
 
-#jcpsasgamx p {
+#mypfrxothd p {
   margin: 0;
   padding: 0;
 }
 
-#jcpsasgamx .gt_table {
+#mypfrxothd .gt_table {
   display: table;
   border-collapse: collapse;
   line-height: normal;
@@ -570,12 +546,12 @@ Learning Objectives
   border-left-color: #D3D3D3;
 }
 
-#jcpsasgamx .gt_caption {
+#mypfrxothd .gt_caption {
   padding-top: 4px;
   padding-bottom: 4px;
 }
 
-#jcpsasgamx .gt_title {
+#mypfrxothd .gt_title {
   color: #333333;
   font-size: 125%;
   font-weight: initial;
@@ -587,7 +563,7 @@ Learning Objectives
   border-bottom-width: 0;
 }
 
-#jcpsasgamx .gt_subtitle {
+#mypfrxothd .gt_subtitle {
   color: #333333;
   font-size: 85%;
   font-weight: initial;
@@ -599,7 +575,7 @@ Learning Objectives
   border-top-width: 0;
 }
 
-#jcpsasgamx .gt_heading {
+#mypfrxothd .gt_heading {
   background-color: #FFFFFF;
   text-align: center;
   border-bottom-color: #FFFFFF;
@@ -611,13 +587,13 @@ Learning Objectives
   border-right-color: #D3D3D3;
 }
 
-#jcpsasgamx .gt_bottom_border {
+#mypfrxothd .gt_bottom_border {
   border-bottom-style: solid;
   border-bottom-width: 2px;
   border-bottom-color: #D3D3D3;
 }
 
-#jcpsasgamx .gt_col_headings {
+#mypfrxothd .gt_col_headings {
   border-top-style: solid;
   border-top-width: 2px;
   border-top-color: #D3D3D3;
@@ -632,7 +608,7 @@ Learning Objectives
   border-right-color: #D3D3D3;
 }
 
-#jcpsasgamx .gt_col_heading {
+#mypfrxothd .gt_col_heading {
   color: #333333;
   background-color: #FFFFFF;
   font-size: 100%;
@@ -652,7 +628,7 @@ Learning Objectives
   overflow-x: hidden;
 }
 
-#jcpsasgamx .gt_column_spanner_outer {
+#mypfrxothd .gt_column_spanner_outer {
   color: #333333;
   background-color: #FFFFFF;
   font-size: 100%;
@@ -664,15 +640,15 @@ Learning Objectives
   padding-right: 4px;
 }
 
-#jcpsasgamx .gt_column_spanner_outer:first-child {
+#mypfrxothd .gt_column_spanner_outer:first-child {
   padding-left: 0;
 }
 
-#jcpsasgamx .gt_column_spanner_outer:last-child {
+#mypfrxothd .gt_column_spanner_outer:last-child {
   padding-right: 0;
 }
 
-#jcpsasgamx .gt_column_spanner {
+#mypfrxothd .gt_column_spanner {
   border-bottom-style: solid;
   border-bottom-width: 2px;
   border-bottom-color: #D3D3D3;
@@ -684,11 +660,11 @@ Learning Objectives
   width: 100%;
 }
 
-#jcpsasgamx .gt_spanner_row {
+#mypfrxothd .gt_spanner_row {
   border-bottom-style: hidden;
 }
 
-#jcpsasgamx .gt_group_heading {
+#mypfrxothd .gt_group_heading {
   padding-top: 8px;
   padding-bottom: 8px;
   padding-left: 5px;
@@ -714,7 +690,7 @@ Learning Objectives
   text-align: left;
 }
 
-#jcpsasgamx .gt_empty_group_heading {
+#mypfrxothd .gt_empty_group_heading {
   padding: 0.5px;
   color: #333333;
   background-color: #FFFFFF;
@@ -729,15 +705,15 @@ Learning Objectives
   vertical-align: middle;
 }
 
-#jcpsasgamx .gt_from_md > :first-child {
+#mypfrxothd .gt_from_md > :first-child {
   margin-top: 0;
 }
 
-#jcpsasgamx .gt_from_md > :last-child {
+#mypfrxothd .gt_from_md > :last-child {
   margin-bottom: 0;
 }
 
-#jcpsasgamx .gt_row {
+#mypfrxothd .gt_row {
   padding-top: 8px;
   padding-bottom: 8px;
   padding-left: 5px;
@@ -756,7 +732,7 @@ Learning Objectives
   overflow-x: hidden;
 }
 
-#jcpsasgamx .gt_stub {
+#mypfrxothd .gt_stub {
   color: #333333;
   background-color: #FFFFFF;
   font-size: 100%;
@@ -769,7 +745,7 @@ Learning Objectives
   padding-right: 5px;
 }
 
-#jcpsasgamx .gt_stub_row_group {
+#mypfrxothd .gt_stub_row_group {
   color: #333333;
   background-color: #FFFFFF;
   font-size: 100%;
@@ -783,15 +759,15 @@ Learning Objectives
   vertical-align: top;
 }
 
-#jcpsasgamx .gt_row_group_first td {
+#mypfrxothd .gt_row_group_first td {
   border-top-width: 2px;
 }
 
-#jcpsasgamx .gt_row_group_first th {
+#mypfrxothd .gt_row_group_first th {
   border-top-width: 2px;
 }
 
-#jcpsasgamx .gt_summary_row {
+#mypfrxothd .gt_summary_row {
   color: #333333;
   background-color: #FFFFFF;
   text-transform: inherit;
@@ -801,16 +777,16 @@ Learning Objectives
   padding-right: 5px;
 }
 
-#jcpsasgamx .gt_first_summary_row {
+#mypfrxothd .gt_first_summary_row {
   border-top-style: solid;
   border-top-color: #D3D3D3;
 }
 
-#jcpsasgamx .gt_first_summary_row.thick {
+#mypfrxothd .gt_first_summary_row.thick {
   border-top-width: 2px;
 }
 
-#jcpsasgamx .gt_last_summary_row {
+#mypfrxothd .gt_last_summary_row {
   padding-top: 8px;
   padding-bottom: 8px;
   padding-left: 5px;
@@ -820,7 +796,7 @@ Learning Objectives
   border-bottom-color: #D3D3D3;
 }
 
-#jcpsasgamx .gt_grand_summary_row {
+#mypfrxothd .gt_grand_summary_row {
   color: #333333;
   background-color: #FFFFFF;
   text-transform: inherit;
@@ -830,7 +806,7 @@ Learning Objectives
   padding-right: 5px;
 }
 
-#jcpsasgamx .gt_first_grand_summary_row {
+#mypfrxothd .gt_first_grand_summary_row {
   padding-top: 8px;
   padding-bottom: 8px;
   padding-left: 5px;
@@ -840,7 +816,7 @@ Learning Objectives
   border-top-color: #D3D3D3;
 }
 
-#jcpsasgamx .gt_last_grand_summary_row_top {
+#mypfrxothd .gt_last_grand_summary_row_top {
   padding-top: 8px;
   padding-bottom: 8px;
   padding-left: 5px;
@@ -850,11 +826,11 @@ Learning Objectives
   border-bottom-color: #D3D3D3;
 }
 
-#jcpsasgamx .gt_striped {
+#mypfrxothd .gt_striped {
   background-color: rgba(128, 128, 128, 0.05);
 }
 
-#jcpsasgamx .gt_table_body {
+#mypfrxothd .gt_table_body {
   border-top-style: solid;
   border-top-width: 2px;
   border-top-color: #D3D3D3;
@@ -863,7 +839,7 @@ Learning Objectives
   border-bottom-color: #D3D3D3;
 }
 
-#jcpsasgamx .gt_footnotes {
+#mypfrxothd .gt_footnotes {
   color: #333333;
   background-color: #FFFFFF;
   border-bottom-style: none;
@@ -877,7 +853,7 @@ Learning Objectives
   border-right-color: #D3D3D3;
 }
 
-#jcpsasgamx .gt_footnote {
+#mypfrxothd .gt_footnote {
   margin: 0px;
   font-size: 90%;
   padding-top: 4px;
@@ -886,7 +862,7 @@ Learning Objectives
   padding-right: 5px;
 }
 
-#jcpsasgamx .gt_sourcenotes {
+#mypfrxothd .gt_sourcenotes {
   color: #333333;
   background-color: #FFFFFF;
   border-bottom-style: none;
@@ -900,7 +876,7 @@ Learning Objectives
   border-right-color: #D3D3D3;
 }
 
-#jcpsasgamx .gt_sourcenote {
+#mypfrxothd .gt_sourcenote {
   font-size: 90%;
   padding-top: 4px;
   padding-bottom: 4px;
@@ -908,77 +884,77 @@ Learning Objectives
   padding-right: 5px;
 }
 
-#jcpsasgamx .gt_left {
+#mypfrxothd .gt_left {
   text-align: left;
 }
 
-#jcpsasgamx .gt_center {
+#mypfrxothd .gt_center {
   text-align: center;
 }
 
-#jcpsasgamx .gt_right {
+#mypfrxothd .gt_right {
   text-align: right;
   font-variant-numeric: tabular-nums;
 }
 
-#jcpsasgamx .gt_font_normal {
+#mypfrxothd .gt_font_normal {
   font-weight: normal;
 }
 
-#jcpsasgamx .gt_font_bold {
+#mypfrxothd .gt_font_bold {
   font-weight: bold;
 }
 
-#jcpsasgamx .gt_font_italic {
+#mypfrxothd .gt_font_italic {
   font-style: italic;
 }
 
-#jcpsasgamx .gt_super {
+#mypfrxothd .gt_super {
   font-size: 65%;
 }
 
-#jcpsasgamx .gt_footnote_marks {
+#mypfrxothd .gt_footnote_marks {
   font-size: 75%;
   vertical-align: 0.4em;
   position: initial;
 }
 
-#jcpsasgamx .gt_asterisk {
+#mypfrxothd .gt_asterisk {
   font-size: 100%;
   vertical-align: 0;
 }
 
-#jcpsasgamx .gt_indent_1 {
+#mypfrxothd .gt_indent_1 {
   text-indent: 5px;
 }
 
-#jcpsasgamx .gt_indent_2 {
+#mypfrxothd .gt_indent_2 {
   text-indent: 10px;
 }
 
-#jcpsasgamx .gt_indent_3 {
+#mypfrxothd .gt_indent_3 {
   text-indent: 15px;
 }
 
-#jcpsasgamx .gt_indent_4 {
+#mypfrxothd .gt_indent_4 {
   text-indent: 20px;
 }
 
-#jcpsasgamx .gt_indent_5 {
+#mypfrxothd .gt_indent_5 {
   text-indent: 25px;
 }
 
-#jcpsasgamx .katex-display {
+#mypfrxothd .katex-display {
   display: inline-flex !important;
   margin-bottom: 0.75em !important;
 }
 
-#jcpsasgamx div.Reactable > div.rt-table > div.rt-thead > div.rt-tr.rt-tr-group-header > div.rt-th-group:after {
+#mypfrxothd div.Reactable > div.rt-table > div.rt-thead > div.rt-tr.rt-tr-group-header > div.rt-th-group:after {
   height: 0px !important;
 }
 </style>
 
-<table class="gt_table caption-top table table-sm table-striped small" data-quarto-postprocess="true" data-quarto-disable-processing="false" data-quarto-bootstrap="false">
+<table class="gt_table caption-top table table-sm table-striped small" data-quarto-bootstrap="false">
 <thead>
 <tr class="gt_col_headings header">
 <th id="critic" class="gt_col_heading gt_columns_bottom_border gt_left" data-quarto-table-cell-role="th" scope="col">Critic</th>
@@ -1031,23 +1007,23 @@ Learning Objectives
 <p>The difficult part is that we usually do not get to see the true value directly. We see only the observed value. That is why measurement matters. The same issue appears in many everyday situations.</p>
 <div class="cell">
 <div class="cell-output-display">
-<div id="wcauiajrxa" style="padding-left:0px;padding-right:0px;padding-top:10px;padding-bottom:10px;overflow-x:auto;overflow-y:auto;width:auto;height:auto;">
-<style>#wcauiajrxa table {
+<div id="yhxjtnvhfg" style="padding-left:0px;padding-right:0px;padding-top:10px;padding-bottom:10px;overflow-x:auto;overflow-y:auto;width:auto;height:auto;">
+<style>#yhxjtnvhfg table {
   font-family: system-ui, 'Segoe UI', Roboto, Helvetica, Arial, sans-serif, 'Apple Color Emoji', 'Segoe UI Emoji', 'Segoe UI Symbol', 'Noto Color Emoji';
   -webkit-font-smoothing: antialiased;
   -moz-osx-font-smoothing: grayscale;
 }
 
-#wcauiajrxa thead, #wcauiajrxa tbody, #wcauiajrxa tfoot, #wcauiajrxa tr, #wcauiajrxa td, #wcauiajrxa th {
+#yhxjtnvhfg thead, #yhxjtnvhfg tbody, #yhxjtnvhfg tfoot, #yhxjtnvhfg tr, #yhxjtnvhfg td, #yhxjtnvhfg th {
   border-style: none;
 }
 
-#wcauiajrxa p {
+#yhxjtnvhfg p {
   margin: 0;
   padding: 0;
 }
 
-#wcauiajrxa .gt_table {
+#yhxjtnvhfg .gt_table {
   display: table;
   border-collapse: collapse;
   line-height: normal;
@@ -1073,12 +1049,12 @@ Learning Objectives
   border-left-color: #D3D3D3;
 }
 
-#wcauiajrxa .gt_caption {
+#yhxjtnvhfg .gt_caption {
   padding-top: 4px;
   padding-bottom: 4px;
 }
 
-#wcauiajrxa .gt_title {
+#yhxjtnvhfg .gt_title {
   color: #333333;
   font-size: 125%;
   font-weight: initial;
@@ -1090,7 +1066,7 @@ Learning Objectives
   border-bottom-width: 0;
 }
 
-#wcauiajrxa .gt_subtitle {
+#yhxjtnvhfg .gt_subtitle {
   color: #333333;
   font-size: 85%;
   font-weight: initial;
@@ -1102,7 +1078,7 @@ Learning Objectives
   border-top-width: 0;
 }
 
-#wcauiajrxa .gt_heading {
+#yhxjtnvhfg .gt_heading {
   background-color: #FFFFFF;
   text-align: center;
   border-bottom-color: #FFFFFF;
@@ -1114,13 +1090,13 @@ Learning Objectives
   border-right-color: #D3D3D3;
 }
 
-#wcauiajrxa .gt_bottom_border {
+#yhxjtnvhfg .gt_bottom_border {
   border-bottom-style: solid;
   border-bottom-width: 2px;
   border-bottom-color: #D3D3D3;
 }
 
-#wcauiajrxa .gt_col_headings {
+#yhxjtnvhfg .gt_col_headings {
   border-top-style: solid;
   border-top-width: 2px;
   border-top-color: #D3D3D3;
@@ -1135,7 +1111,7 @@ Learning Objectives
   border-right-color: #D3D3D3;
 }
 
-#wcauiajrxa .gt_col_heading {
+#yhxjtnvhfg .gt_col_heading {
   color: #333333;
   background-color: #FFFFFF;
   font-size: 100%;
@@ -1155,7 +1131,7 @@ Learning Objectives
   overflow-x: hidden;
 }
 
-#wcauiajrxa .gt_column_spanner_outer {
+#yhxjtnvhfg .gt_column_spanner_outer {
   color: #333333;
   background-color: #FFFFFF;
   font-size: 100%;
@@ -1167,15 +1143,15 @@ Learning Objectives
   padding-right: 4px;
 }
 
-#wcauiajrxa .gt_column_spanner_outer:first-child {
+#yhxjtnvhfg .gt_column_spanner_outer:first-child {
   padding-left: 0;
 }
 
-#wcauiajrxa .gt_column_spanner_outer:last-child {
+#yhxjtnvhfg .gt_column_spanner_outer:last-child {
   padding-right: 0;
 }
 
-#wcauiajrxa .gt_column_spanner {
+#yhxjtnvhfg .gt_column_spanner {
   border-bottom-style: solid;
   border-bottom-width: 2px;
   border-bottom-color: #D3D3D3;
@@ -1187,11 +1163,11 @@ Learning Objectives
   width: 100%;
 }
 
-#wcauiajrxa .gt_spanner_row {
+#yhxjtnvhfg .gt_spanner_row {
   border-bottom-style: hidden;
 }
 
-#wcauiajrxa .gt_group_heading {
+#yhxjtnvhfg .gt_group_heading {
   padding-top: 8px;
   padding-bottom: 8px;
   padding-left: 5px;
@@ -1217,7 +1193,7 @@ Learning Objectives
   text-align: left;
 }
 
-#wcauiajrxa .gt_empty_group_heading {
+#yhxjtnvhfg .gt_empty_group_heading {
   padding: 0.5px;
   color: #333333;
   background-color: #FFFFFF;
@@ -1232,15 +1208,15 @@ Learning Objectives
   vertical-align: middle;
 }
 
-#wcauiajrxa .gt_from_md > :first-child {
+#yhxjtnvhfg .gt_from_md > :first-child {
   margin-top: 0;
 }
 
-#wcauiajrxa .gt_from_md > :last-child {
+#yhxjtnvhfg .gt_from_md > :last-child {
   margin-bottom: 0;
 }
 
-#wcauiajrxa .gt_row {
+#yhxjtnvhfg .gt_row {
   padding-top: 8px;
   padding-bottom: 8px;
   padding-left: 5px;
@@ -1259,7 +1235,7 @@ Learning Objectives
   overflow-x: hidden;
 }
 
-#wcauiajrxa .gt_stub {
+#yhxjtnvhfg .gt_stub {
   color: #333333;
   background-color: #FFFFFF;
   font-size: 100%;
@@ -1272,7 +1248,7 @@ Learning Objectives
   padding-right: 5px;
 }
 
-#wcauiajrxa .gt_stub_row_group {
+#yhxjtnvhfg .gt_stub_row_group {
   color: #333333;
   background-color: #FFFFFF;
   font-size: 100%;
@@ -1286,15 +1262,15 @@ Learning Objectives
   vertical-align: top;
 }
 
-#wcauiajrxa .gt_row_group_first td {
+#yhxjtnvhfg .gt_row_group_first td {
   border-top-width: 2px;
 }
 
-#wcauiajrxa .gt_row_group_first th {
+#yhxjtnvhfg .gt_row_group_first th {
   border-top-width: 2px;
 }
 
-#wcauiajrxa .gt_summary_row {
+#yhxjtnvhfg .gt_summary_row {
   color: #333333;
   background-color: #FFFFFF;
   text-transform: inherit;
@@ -1304,16 +1280,16 @@ Learning Objectives
   padding-right: 5px;
 }
 
-#wcauiajrxa .gt_first_summary_row {
+#yhxjtnvhfg .gt_first_summary_row {
   border-top-style: solid;
   border-top-color: #D3D3D3;
 }
 
-#wcauiajrxa .gt_first_summary_row.thick {
+#yhxjtnvhfg .gt_first_summary_row.thick {
   border-top-width: 2px;
 }
 
-#wcauiajrxa .gt_last_summary_row {
+#yhxjtnvhfg .gt_last_summary_row {
   padding-top: 8px;
   padding-bottom: 8px;
   padding-left: 5px;
@@ -1323,7 +1299,7 @@ Learning Objectives
   border-bottom-color: #D3D3D3;
 }
 
-#wcauiajrxa .gt_grand_summary_row {
+#yhxjtnvhfg .gt_grand_summary_row {
   color: #333333;
   background-color: #FFFFFF;
   text-transform: inherit;
@@ -1333,7 +1309,7 @@ Learning Objectives
   padding-right: 5px;
 }
 
-#wcauiajrxa .gt_first_grand_summary_row {
+#yhxjtnvhfg .gt_first_grand_summary_row {
   padding-top: 8px;
   padding-bottom: 8px;
   padding-left: 5px;
@@ -1343,7 +1319,7 @@ Learning Objectives
   border-top-color: #D3D3D3;
 }
 
-#wcauiajrxa .gt_last_grand_summary_row_top {
+#yhxjtnvhfg .gt_last_grand_summary_row_top {
   padding-top: 8px;
   padding-bottom: 8px;
   padding-left: 5px;
@@ -1353,11 +1329,11 @@ Learning Objectives
   border-bottom-color: #D3D3D3;
 }
 
-#wcauiajrxa .gt_striped {
+#yhxjtnvhfg .gt_striped {
   background-color: rgba(128, 128, 128, 0.05);
 }
 
-#wcauiajrxa .gt_table_body {
+#yhxjtnvhfg .gt_table_body {
   border-top-style: solid;
   border-top-width: 2px;
   border-top-color: #D3D3D3;
@@ -1366,7 +1342,7 @@ Learning Objectives
   border-bottom-color: #D3D3D3;
 }
 
-#wcauiajrxa .gt_footnotes {
+#yhxjtnvhfg .gt_footnotes {
   color: #333333;
   background-color: #FFFFFF;
   border-bottom-style: none;
@@ -1380,7 +1356,7 @@ Learning Objectives
   border-right-color: #D3D3D3;
 }
 
-#wcauiajrxa .gt_footnote {
+#yhxjtnvhfg .gt_footnote {
   margin: 0px;
   font-size: 90%;
   padding-top: 4px;
@@ -1389,7 +1365,7 @@ Learning Objectives
   padding-right: 5px;
 }
 
-#wcauiajrxa .gt_sourcenotes {
+#yhxjtnvhfg .gt_sourcenotes {
   color: #333333;
   background-color: #FFFFFF;
   border-bottom-style: none;
@@ -1403,7 +1379,7 @@ Learning Objectives
   border-right-color: #D3D3D3;
 }
 
-#wcauiajrxa .gt_sourcenote {
+#yhxjtnvhfg .gt_sourcenote {
   font-size: 90%;
   padding-top: 4px;
   padding-bottom: 4px;
@@ -1411,77 +1387,77 @@ Learning Objectives
   padding-right: 5px;
 }
 
-#wcauiajrxa .gt_left {
+#yhxjtnvhfg .gt_left {
   text-align: left;
 }
 
-#wcauiajrxa .gt_center {
+#yhxjtnvhfg .gt_center {
   text-align: center;
 }
 
-#wcauiajrxa .gt_right {
+#yhxjtnvhfg .gt_right {
   text-align: right;
   font-variant-numeric: tabular-nums;
 }
 
-#wcauiajrxa .gt_font_normal {
+#yhxjtnvhfg .gt_font_normal {
   font-weight: normal;
 }
 
-#wcauiajrxa .gt_font_bold {
+#yhxjtnvhfg .gt_font_bold {
   font-weight: bold;
 }
 
-#wcauiajrxa .gt_font_italic {
+#yhxjtnvhfg .gt_font_italic {
   font-style: italic;
 }
 
-#wcauiajrxa .gt_super {
+#yhxjtnvhfg .gt_super {
   font-size: 65%;
 }
 
-#wcauiajrxa .gt_footnote_marks {
+#yhxjtnvhfg .gt_footnote_marks {
   font-size: 75%;
   vertical-align: 0.4em;
   position: initial;
 }
 
-#wcauiajrxa .gt_asterisk {
+#yhxjtnvhfg .gt_asterisk {
   font-size: 100%;
   vertical-align: 0;
 }
 
-#wcauiajrxa .gt_indent_1 {
+#yhxjtnvhfg .gt_indent_1 {
   text-indent: 5px;
 }
 
-#wcauiajrxa .gt_indent_2 {
+#yhxjtnvhfg .gt_indent_2 {
   text-indent: 10px;
 }
 
-#wcauiajrxa .gt_indent_3 {
+#yhxjtnvhfg .gt_indent_3 {
   text-indent: 15px;
 }
 
-#wcauiajrxa .gt_indent_4 {
+#yhxjtnvhfg .gt_indent_4 {
   text-indent: 20px;
 }
 
-#wcauiajrxa .gt_indent_5 {
+#yhxjtnvhfg .gt_indent_5 {
   text-indent: 25px;
 }
 
-#wcauiajrxa .katex-display {
+#yhxjtnvhfg .katex-display {
   display: inline-flex !important;
   margin-bottom: 0.75em !important;
 }
 
-#wcauiajrxa div.Reactable > div.rt-table > div.rt-thead > div.rt-tr.rt-tr-group-header > div.rt-th-group:after {
+#yhxjtnvhfg div.Reactable > div.rt-table > div.rt-thead > div.rt-tr.rt-tr-group-header > div.rt-th-group:after {
   height: 0px !important;
 }
 </style>
 
-<table class="gt_table caption-top table table-sm table-striped small" data-quarto-postprocess="true" data-quarto-disable-processing="false" data-quarto-bootstrap="false">
+<table class="gt_table caption-top table table-sm table-striped small" data-quarto-bootstrap="false">
 <thead>
 <tr class="gt_col_headings header">
 <th id="situation" class="gt_col_heading gt_columns_bottom_border gt_left" data-quarto-table-cell-role="th" scope="col">Situation</th>
@@ -1553,23 +1529,23 @@ Learning Objectives
 <p>Imagine a bathroom scale. You step on it five times in a row and it gives these readings:</p>
 <div class="cell">
 <div class="cell-output-display">
-<div id="gbkalklnou" style="padding-left:0px;padding-right:0px;padding-top:10px;padding-bottom:10px;overflow-x:auto;overflow-y:auto;width:auto;height:auto;">
-<style>#gbkalklnou table {
+<div id="yrxtawhksv" style="padding-left:0px;padding-right:0px;padding-top:10px;padding-bottom:10px;overflow-x:auto;overflow-y:auto;width:auto;height:auto;">
+<style>#yrxtawhksv table {
   font-family: system-ui, 'Segoe UI', Roboto, Helvetica, Arial, sans-serif, 'Apple Color Emoji', 'Segoe UI Emoji', 'Segoe UI Symbol', 'Noto Color Emoji';
   -webkit-font-smoothing: antialiased;
   -moz-osx-font-smoothing: grayscale;
 }
 
-#gbkalklnou thead, #gbkalklnou tbody, #gbkalklnou tfoot, #gbkalklnou tr, #gbkalklnou td, #gbkalklnou th {
+#yrxtawhksv thead, #yrxtawhksv tbody, #yrxtawhksv tfoot, #yrxtawhksv tr, #yrxtawhksv td, #yrxtawhksv th {
   border-style: none;
 }
 
-#gbkalklnou p {
+#yrxtawhksv p {
   margin: 0;
   padding: 0;
 }
 
-#gbkalklnou .gt_table {
+#yrxtawhksv .gt_table {
   display: table;
   border-collapse: collapse;
   line-height: normal;
@@ -1595,12 +1571,12 @@ Learning Objectives
   border-left-color: #D3D3D3;
 }
 
-#gbkalklnou .gt_caption {
+#yrxtawhksv .gt_caption {
   padding-top: 4px;
   padding-bottom: 4px;
 }
 
-#gbkalklnou .gt_title {
+#yrxtawhksv .gt_title {
   color: #333333;
   font-size: 125%;
   font-weight: initial;
@@ -1612,7 +1588,7 @@ Learning Objectives
   border-bottom-width: 0;
 }
 
-#gbkalklnou .gt_subtitle {
+#yrxtawhksv .gt_subtitle {
   color: #333333;
   font-size: 85%;
   font-weight: initial;
@@ -1624,7 +1600,7 @@ Learning Objectives
   border-top-width: 0;
 }
 
-#gbkalklnou .gt_heading {
+#yrxtawhksv .gt_heading {
   background-color: #FFFFFF;
   text-align: center;
   border-bottom-color: #FFFFFF;
@@ -1636,13 +1612,13 @@ Learning Objectives
   border-right-color: #D3D3D3;
 }
 
-#gbkalklnou .gt_bottom_border {
+#yrxtawhksv .gt_bottom_border {
   border-bottom-style: solid;
   border-bottom-width: 2px;
   border-bottom-color: #D3D3D3;
 }
 
-#gbkalklnou .gt_col_headings {
+#yrxtawhksv .gt_col_headings {
   border-top-style: solid;
   border-top-width: 2px;
   border-top-color: #D3D3D3;
@@ -1657,7 +1633,7 @@ Learning Objectives
   border-right-color: #D3D3D3;
 }
 
-#gbkalklnou .gt_col_heading {
+#yrxtawhksv .gt_col_heading {
   color: #333333;
   background-color: #FFFFFF;
   font-size: 100%;
@@ -1677,7 +1653,7 @@ Learning Objectives
   overflow-x: hidden;
 }
 
-#gbkalklnou .gt_column_spanner_outer {
+#yrxtawhksv .gt_column_spanner_outer {
   color: #333333;
   background-color: #FFFFFF;
   font-size: 100%;
@@ -1689,15 +1665,15 @@ Learning Objectives
   padding-right: 4px;
 }
 
-#gbkalklnou .gt_column_spanner_outer:first-child {
+#yrxtawhksv .gt_column_spanner_outer:first-child {
   padding-left: 0;
 }
 
-#gbkalklnou .gt_column_spanner_outer:last-child {
+#yrxtawhksv .gt_column_spanner_outer:last-child {
   padding-right: 0;
 }
 
-#gbkalklnou .gt_column_spanner {
+#yrxtawhksv .gt_column_spanner {
   border-bottom-style: solid;
   border-bottom-width: 2px;
   border-bottom-color: #D3D3D3;
@@ -1709,11 +1685,11 @@ Learning Objectives
   width: 100%;
 }
 
-#gbkalklnou .gt_spanner_row {
+#yrxtawhksv .gt_spanner_row {
   border-bottom-style: hidden;
 }
 
-#gbkalklnou .gt_group_heading {
+#yrxtawhksv .gt_group_heading {
   padding-top: 8px;
   padding-bottom: 8px;
   padding-left: 5px;
@@ -1739,7 +1715,7 @@ Learning Objectives
   text-align: left;
 }
 
-#gbkalklnou .gt_empty_group_heading {
+#yrxtawhksv .gt_empty_group_heading {
   padding: 0.5px;
   color: #333333;
   background-color: #FFFFFF;
@@ -1754,15 +1730,15 @@ Learning Objectives
   vertical-align: middle;
 }
 
-#gbkalklnou .gt_from_md > :first-child {
+#yrxtawhksv .gt_from_md > :first-child {
   margin-top: 0;
 }
 
-#gbkalklnou .gt_from_md > :last-child {
+#yrxtawhksv .gt_from_md > :last-child {
   margin-bottom: 0;
 }
 
-#gbkalklnou .gt_row {
+#yrxtawhksv .gt_row {
   padding-top: 8px;
   padding-bottom: 8px;
   padding-left: 5px;
@@ -1781,7 +1757,7 @@ Learning Objectives
   overflow-x: hidden;
 }
 
-#gbkalklnou .gt_stub {
+#yrxtawhksv .gt_stub {
   color: #333333;
   background-color: #FFFFFF;
   font-size: 100%;
@@ -1794,7 +1770,7 @@ Learning Objectives
   padding-right: 5px;
 }
 
-#gbkalklnou .gt_stub_row_group {
+#yrxtawhksv .gt_stub_row_group {
   color: #333333;
   background-color: #FFFFFF;
   font-size: 100%;
@@ -1808,15 +1784,15 @@ Learning Objectives
   vertical-align: top;
 }
 
-#gbkalklnou .gt_row_group_first td {
+#yrxtawhksv .gt_row_group_first td {
   border-top-width: 2px;
 }
 
-#gbkalklnou .gt_row_group_first th {
+#yrxtawhksv .gt_row_group_first th {
   border-top-width: 2px;
 }
 
-#gbkalklnou .gt_summary_row {
+#yrxtawhksv .gt_summary_row {
   color: #333333;
   background-color: #FFFFFF;
   text-transform: inherit;
@@ -1826,16 +1802,16 @@ Learning Objectives
   padding-right: 5px;
 }
 
-#gbkalklnou .gt_first_summary_row {
+#yrxtawhksv .gt_first_summary_row {
   border-top-style: solid;
   border-top-color: #D3D3D3;
 }
 
-#gbkalklnou .gt_first_summary_row.thick {
+#yrxtawhksv .gt_first_summary_row.thick {
   border-top-width: 2px;
 }
 
-#gbkalklnou .gt_last_summary_row {
+#yrxtawhksv .gt_last_summary_row {
   padding-top: 8px;
   padding-bottom: 8px;
   padding-left: 5px;
@@ -1845,7 +1821,7 @@ Learning Objectives
   border-bottom-color: #D3D3D3;
 }
 
-#gbkalklnou .gt_grand_summary_row {
+#yrxtawhksv .gt_grand_summary_row {
   color: #333333;
   background-color: #FFFFFF;
   text-transform: inherit;
@@ -1855,7 +1831,7 @@ Learning Objectives
   padding-right: 5px;
 }
 
-#gbkalklnou .gt_first_grand_summary_row {
+#yrxtawhksv .gt_first_grand_summary_row {
   padding-top: 8px;
   padding-bottom: 8px;
   padding-left: 5px;
@@ -1865,7 +1841,7 @@ Learning Objectives
   border-top-color: #D3D3D3;
 }
 
-#gbkalklnou .gt_last_grand_summary_row_top {
+#yrxtawhksv .gt_last_grand_summary_row_top {
   padding-top: 8px;
   padding-bottom: 8px;
   padding-left: 5px;
@@ -1875,11 +1851,11 @@ Learning Objectives
   border-bottom-color: #D3D3D3;
 }
 
-#gbkalklnou .gt_striped {
+#yrxtawhksv .gt_striped {
   background-color: rgba(128, 128, 128, 0.05);
 }
 
-#gbkalklnou .gt_table_body {
+#yrxtawhksv .gt_table_body {
   border-top-style: solid;
   border-top-width: 2px;
   border-top-color: #D3D3D3;
@@ -1888,7 +1864,7 @@ Learning Objectives
   border-bottom-color: #D3D3D3;
 }
 
-#gbkalklnou .gt_footnotes {
+#yrxtawhksv .gt_footnotes {
   color: #333333;
   background-color: #FFFFFF;
   border-bottom-style: none;
@@ -1902,7 +1878,7 @@ Learning Objectives
   border-right-color: #D3D3D3;
 }
 
-#gbkalklnou .gt_footnote {
+#yrxtawhksv .gt_footnote {
   margin: 0px;
   font-size: 90%;
   padding-top: 4px;
@@ -1911,7 +1887,7 @@ Learning Objectives
   padding-right: 5px;
 }
 
-#gbkalklnou .gt_sourcenotes {
+#yrxtawhksv .gt_sourcenotes {
   color: #333333;
   background-color: #FFFFFF;
   border-bottom-style: none;
@@ -1925,7 +1901,7 @@ Learning Objectives
   border-right-color: #D3D3D3;
 }
 
-#gbkalklnou .gt_sourcenote {
+#yrxtawhksv .gt_sourcenote {
   font-size: 90%;
   padding-top: 4px;
   padding-bottom: 4px;
@@ -1933,77 +1909,77 @@ Learning Objectives
   padding-right: 5px;
 }
 
-#gbkalklnou .gt_left {
+#yrxtawhksv .gt_left {
   text-align: left;
 }
 
-#gbkalklnou .gt_center {
+#yrxtawhksv .gt_center {
   text-align: center;
 }
 
-#gbkalklnou .gt_right {
+#yrxtawhksv .gt_right {
   text-align: right;
   font-variant-numeric: tabular-nums;
 }
 
-#gbkalklnou .gt_font_normal {
+#yrxtawhksv .gt_font_normal {
   font-weight: normal;
 }
 
-#gbkalklnou .gt_font_bold {
+#yrxtawhksv .gt_font_bold {
   font-weight: bold;
 }
 
-#gbkalklnou .gt_font_italic {
+#yrxtawhksv .gt_font_italic {
   font-style: italic;
 }
 
-#gbkalklnou .gt_super {
+#yrxtawhksv .gt_super {
   font-size: 65%;
 }
 
-#gbkalklnou .gt_footnote_marks {
+#yrxtawhksv .gt_footnote_marks {
   font-size: 75%;
   vertical-align: 0.4em;
   position: initial;
 }
 
-#gbkalklnou .gt_asterisk {
+#yrxtawhksv .gt_asterisk {
   font-size: 100%;
   vertical-align: 0;
 }
 
-#gbkalklnou .gt_indent_1 {
+#yrxtawhksv .gt_indent_1 {
   text-indent: 5px;
 }
 
-#gbkalklnou .gt_indent_2 {
+#yrxtawhksv .gt_indent_2 {
   text-indent: 10px;
 }
 
-#gbkalklnou .gt_indent_3 {
+#yrxtawhksv .gt_indent_3 {
   text-indent: 15px;
 }
 
-#gbkalklnou .gt_indent_4 {
+#yrxtawhksv .gt_indent_4 {
   text-indent: 20px;
 }
 
-#gbkalklnou .gt_indent_5 {
+#yrxtawhksv .gt_indent_5 {
   text-indent: 25px;
 }
 
-#gbkalklnou .katex-display {
+#yrxtawhksv .katex-display {
   display: inline-flex !important;
   margin-bottom: 0.75em !important;
 }
 
-#gbkalklnou div.Reactable > div.rt-table > div.rt-thead > div.rt-tr.rt-tr-group-header > div.rt-th-group:after {
+#yrxtawhksv div.Reactable > div.rt-table > div.rt-thead > div.rt-tr.rt-tr-group-header > div.rt-th-group:after {
   height: 0px !important;
 }
 </style>
 
-<table class="gt_table caption-top table table-sm table-striped small" data-quarto-postprocess="true" data-quarto-disable-processing="false" data-quarto-bootstrap="false">
+<table class="gt_table caption-top table table-sm table-striped small" data-quarto-bootstrap="false">
 <thead>
 <tr class="gt_col_headings header">
 <th id="attempt" class="gt_col_heading gt_columns_bottom_border gt_left" data-quarto-table-cell-role="th" scope="col">Attempt</th>
@@ -2042,23 +2018,23 @@ Learning Objectives
 <p>Now imagine a different scale. This scale is faulty. Every time you step on it, it adds ~2 kilograms. If your true weight is 70 kilograms, the scale might show:</p>
 <div class="cell">
 <div class="cell-output-display">
-<div id="hmcitlpxpt" style="padding-left:0px;padding-right:0px;padding-top:10px;padding-bottom:10px;overflow-x:auto;overflow-y:auto;width:auto;height:auto;">
-<style>#hmcitlpxpt table {
+<div id="utgpgufvrn" style="padding-left:0px;padding-right:0px;padding-top:10px;padding-bottom:10px;overflow-x:auto;overflow-y:auto;width:auto;height:auto;">
+<style>#utgpgufvrn table {
   font-family: system-ui, 'Segoe UI', Roboto, Helvetica, Arial, sans-serif, 'Apple Color Emoji', 'Segoe UI Emoji', 'Segoe UI Symbol', 'Noto Color Emoji';
   -webkit-font-smoothing: antialiased;
   -moz-osx-font-smoothing: grayscale;
 }
 
-#hmcitlpxpt thead, #hmcitlpxpt tbody, #hmcitlpxpt tfoot, #hmcitlpxpt tr, #hmcitlpxpt td, #hmcitlpxpt th {
+#utgpgufvrn thead, #utgpgufvrn tbody, #utgpgufvrn tfoot, #utgpgufvrn tr, #utgpgufvrn td, #utgpgufvrn th {
   border-style: none;
 }
 
-#hmcitlpxpt p {
+#utgpgufvrn p {
   margin: 0;
   padding: 0;
 }
 
-#hmcitlpxpt .gt_table {
+#utgpgufvrn .gt_table {
   display: table;
   border-collapse: collapse;
   line-height: normal;
@@ -2084,12 +2060,12 @@ Learning Objectives
   border-left-color: #D3D3D3;
 }
 
-#hmcitlpxpt .gt_caption {
+#utgpgufvrn .gt_caption {
   padding-top: 4px;
   padding-bottom: 4px;
 }
 
-#hmcitlpxpt .gt_title {
+#utgpgufvrn .gt_title {
   color: #333333;
   font-size: 125%;
   font-weight: initial;
@@ -2101,7 +2077,7 @@ Learning Objectives
   border-bottom-width: 0;
 }
 
-#hmcitlpxpt .gt_subtitle {
+#utgpgufvrn .gt_subtitle {
   color: #333333;
   font-size: 85%;
   font-weight: initial;
@@ -2113,7 +2089,7 @@ Learning Objectives
   border-top-width: 0;
 }
 
-#hmcitlpxpt .gt_heading {
+#utgpgufvrn .gt_heading {
   background-color: #FFFFFF;
   text-align: center;
   border-bottom-color: #FFFFFF;
@@ -2125,13 +2101,13 @@ Learning Objectives
   border-right-color: #D3D3D3;
 }
 
-#hmcitlpxpt .gt_bottom_border {
+#utgpgufvrn .gt_bottom_border {
   border-bottom-style: solid;
   border-bottom-width: 2px;
   border-bottom-color: #D3D3D3;
 }
 
-#hmcitlpxpt .gt_col_headings {
+#utgpgufvrn .gt_col_headings {
   border-top-style: solid;
   border-top-width: 2px;
   border-top-color: #D3D3D3;
@@ -2146,7 +2122,7 @@ Learning Objectives
   border-right-color: #D3D3D3;
 }
 
-#hmcitlpxpt .gt_col_heading {
+#utgpgufvrn .gt_col_heading {
   color: #333333;
   background-color: #FFFFFF;
   font-size: 100%;
@@ -2166,7 +2142,7 @@ Learning Objectives
   overflow-x: hidden;
 }
 
-#hmcitlpxpt .gt_column_spanner_outer {
+#utgpgufvrn .gt_column_spanner_outer {
   color: #333333;
   background-color: #FFFFFF;
   font-size: 100%;
@@ -2178,15 +2154,15 @@ Learning Objectives
   padding-right: 4px;
 }
 
-#hmcitlpxpt .gt_column_spanner_outer:first-child {
+#utgpgufvrn .gt_column_spanner_outer:first-child {
   padding-left: 0;
 }
 
-#hmcitlpxpt .gt_column_spanner_outer:last-child {
+#utgpgufvrn .gt_column_spanner_outer:last-child {
   padding-right: 0;
 }
 
-#hmcitlpxpt .gt_column_spanner {
+#utgpgufvrn .gt_column_spanner {
   border-bottom-style: solid;
   border-bottom-width: 2px;
   border-bottom-color: #D3D3D3;
@@ -2198,11 +2174,11 @@ Learning Objectives
   width: 100%;
 }
 
-#hmcitlpxpt .gt_spanner_row {
+#utgpgufvrn .gt_spanner_row {
   border-bottom-style: hidden;
 }
 
-#hmcitlpxpt .gt_group_heading {
+#utgpgufvrn .gt_group_heading {
   padding-top: 8px;
   padding-bottom: 8px;
   padding-left: 5px;
@@ -2228,7 +2204,7 @@ Learning Objectives
   text-align: left;
 }
 
-#hmcitlpxpt .gt_empty_group_heading {
+#utgpgufvrn .gt_empty_group_heading {
   padding: 0.5px;
   color: #333333;
   background-color: #FFFFFF;
@@ -2243,15 +2219,15 @@ Learning Objectives
   vertical-align: middle;
 }
 
-#hmcitlpxpt .gt_from_md > :first-child {
+#utgpgufvrn .gt_from_md > :first-child {
   margin-top: 0;
 }
 
-#hmcitlpxpt .gt_from_md > :last-child {
+#utgpgufvrn .gt_from_md > :last-child {
   margin-bottom: 0;
 }
 
-#hmcitlpxpt .gt_row {
+#utgpgufvrn .gt_row {
   padding-top: 8px;
   padding-bottom: 8px;
   padding-left: 5px;
@@ -2270,7 +2246,7 @@ Learning Objectives
   overflow-x: hidden;
 }
 
-#hmcitlpxpt .gt_stub {
+#utgpgufvrn .gt_stub {
   color: #333333;
   background-color: #FFFFFF;
   font-size: 100%;
@@ -2283,7 +2259,7 @@ Learning Objectives
   padding-right: 5px;
 }
 
-#hmcitlpxpt .gt_stub_row_group {
+#utgpgufvrn .gt_stub_row_group {
   color: #333333;
   background-color: #FFFFFF;
   font-size: 100%;
@@ -2297,15 +2273,15 @@ Learning Objectives
   vertical-align: top;
 }
 
-#hmcitlpxpt .gt_row_group_first td {
+#utgpgufvrn .gt_row_group_first td {
   border-top-width: 2px;
 }
 
-#hmcitlpxpt .gt_row_group_first th {
+#utgpgufvrn .gt_row_group_first th {
   border-top-width: 2px;
 }
 
-#hmcitlpxpt .gt_summary_row {
+#utgpgufvrn .gt_summary_row {
   color: #333333;
   background-color: #FFFFFF;
   text-transform: inherit;
@@ -2315,16 +2291,16 @@ Learning Objectives
   padding-right: 5px;
 }
 
-#hmcitlpxpt .gt_first_summary_row {
+#utgpgufvrn .gt_first_summary_row {
   border-top-style: solid;
   border-top-color: #D3D3D3;
 }
 
-#hmcitlpxpt .gt_first_summary_row.thick {
+#utgpgufvrn .gt_first_summary_row.thick {
   border-top-width: 2px;
 }
 
-#hmcitlpxpt .gt_last_summary_row {
+#utgpgufvrn .gt_last_summary_row {
   padding-top: 8px;
   padding-bottom: 8px;
   padding-left: 5px;
@@ -2334,7 +2310,7 @@ Learning Objectives
   border-bottom-color: #D3D3D3;
 }
 
-#hmcitlpxpt .gt_grand_summary_row {
+#utgpgufvrn .gt_grand_summary_row {
   color: #333333;
   background-color: #FFFFFF;
   text-transform: inherit;
@@ -2344,7 +2320,7 @@ Learning Objectives
   padding-right: 5px;
 }
 
-#hmcitlpxpt .gt_first_grand_summary_row {
+#utgpgufvrn .gt_first_grand_summary_row {
   padding-top: 8px;
   padding-bottom: 8px;
   padding-left: 5px;
@@ -2354,7 +2330,7 @@ Learning Objectives
   border-top-color: #D3D3D3;
 }
 
-#hmcitlpxpt .gt_last_grand_summary_row_top {
+#utgpgufvrn .gt_last_grand_summary_row_top {
   padding-top: 8px;
   padding-bottom: 8px;
   padding-left: 5px;
@@ -2364,11 +2340,11 @@ Learning Objectives
   border-bottom-color: #D3D3D3;
 }
 
-#hmcitlpxpt .gt_striped {
+#utgpgufvrn .gt_striped {
   background-color: rgba(128, 128, 128, 0.05);
 }
 
-#hmcitlpxpt .gt_table_body {
+#utgpgufvrn .gt_table_body {
   border-top-style: solid;
   border-top-width: 2px;
   border-top-color: #D3D3D3;
@@ -2377,7 +2353,7 @@ Learning Objectives
   border-bottom-color: #D3D3D3;
 }
 
-#hmcitlpxpt .gt_footnotes {
+#utgpgufvrn .gt_footnotes {
   color: #333333;
   background-color: #FFFFFF;
   border-bottom-style: none;
@@ -2391,7 +2367,7 @@ Learning Objectives
   border-right-color: #D3D3D3;
 }
 
-#hmcitlpxpt .gt_footnote {
+#utgpgufvrn .gt_footnote {
   margin: 0px;
   font-size: 90%;
   padding-top: 4px;
@@ -2400,7 +2376,7 @@ Learning Objectives
   padding-right: 5px;
 }
 
-#hmcitlpxpt .gt_sourcenotes {
+#utgpgufvrn .gt_sourcenotes {
   color: #333333;
   background-color: #FFFFFF;
   border-bottom-style: none;
@@ -2414,7 +2390,7 @@ Learning Objectives
   border-right-color: #D3D3D3;
 }
 
-#hmcitlpxpt .gt_sourcenote {
+#utgpgufvrn .gt_sourcenote {
   font-size: 90%;
   padding-top: 4px;
   padding-bottom: 4px;
@@ -2422,77 +2398,77 @@ Learning Objectives
   padding-right: 5px;
 }
 
-#hmcitlpxpt .gt_left {
+#utgpgufvrn .gt_left {
   text-align: left;
 }
 
-#hmcitlpxpt .gt_center {
+#utgpgufvrn .gt_center {
   text-align: center;
 }
 
-#hmcitlpxpt .gt_right {
+#utgpgufvrn .gt_right {
   text-align: right;
   font-variant-numeric: tabular-nums;
 }
 
-#hmcitlpxpt .gt_font_normal {
+#utgpgufvrn .gt_font_normal {
   font-weight: normal;
 }
 
-#hmcitlpxpt .gt_font_bold {
+#utgpgufvrn .gt_font_bold {
   font-weight: bold;
 }
 
-#hmcitlpxpt .gt_font_italic {
+#utgpgufvrn .gt_font_italic {
   font-style: italic;
 }
 
-#hmcitlpxpt .gt_super {
+#utgpgufvrn .gt_super {
   font-size: 65%;
 }
 
-#hmcitlpxpt .gt_footnote_marks {
+#utgpgufvrn .gt_footnote_marks {
   font-size: 75%;
   vertical-align: 0.4em;
   position: initial;
 }
 
-#hmcitlpxpt .gt_asterisk {
+#utgpgufvrn .gt_asterisk {
   font-size: 100%;
   vertical-align: 0;
 }
 
-#hmcitlpxpt .gt_indent_1 {
+#utgpgufvrn .gt_indent_1 {
   text-indent: 5px;
 }
 
-#hmcitlpxpt .gt_indent_2 {
+#utgpgufvrn .gt_indent_2 {
   text-indent: 10px;
 }
 
-#hmcitlpxpt .gt_indent_3 {
+#utgpgufvrn .gt_indent_3 {
   text-indent: 15px;
 }
 
-#hmcitlpxpt .gt_indent_4 {
+#utgpgufvrn .gt_indent_4 {
   text-indent: 20px;
 }
 
-#hmcitlpxpt .gt_indent_5 {
+#utgpgufvrn .gt_indent_5 {
   text-indent: 25px;
 }
 
-#hmcitlpxpt .katex-display {
+#utgpgufvrn .katex-display {
   display: inline-flex !important;
   margin-bottom: 0.75em !important;
 }
 
-#hmcitlpxpt div.Reactable > div.rt-table > div.rt-thead > div.rt-tr.rt-tr-group-header > div.rt-th-group:after {
+#utgpgufvrn div.Reactable > div.rt-table > div.rt-thead > div.rt-tr.rt-tr-group-header > div.rt-th-group:after {
   height: 0px !important;
 }
 </style>
 
-<table class="gt_table caption-top table table-sm table-striped small" data-quarto-postprocess="true" data-quarto-disable-processing="false" data-quarto-bootstrap="false">
+<table class="gt_table caption-top table table-sm table-striped small" data-quarto-bootstrap="false">
 <thead>
 <tr class="gt_col_headings header">
 <th id="attempt" class="gt_col_heading gt_columns_bottom_border gt_left" data-quarto-table-cell-role="th" scope="col">Attempt</th>
@@ -2544,23 +2520,23 @@ Learning Objectives
 <p>The difference between random error and systematic error can be summarised like this:</p>
 <div class="cell">
 <div class="cell-output-display">
-<div id="xjmqnlqrxg" style="padding-left:0px;padding-right:0px;padding-top:10px;padding-bottom:10px;overflow-x:auto;overflow-y:auto;width:auto;height:auto;">
-<style>#xjmqnlqrxg table {
+<div id="dtwrrzcqep" style="padding-left:0px;padding-right:0px;padding-top:10px;padding-bottom:10px;overflow-x:auto;overflow-y:auto;width:auto;height:auto;">
+<style>#dtwrrzcqep table {
   font-family: system-ui, 'Segoe UI', Roboto, Helvetica, Arial, sans-serif, 'Apple Color Emoji', 'Segoe UI Emoji', 'Segoe UI Symbol', 'Noto Color Emoji';
   -webkit-font-smoothing: antialiased;
   -moz-osx-font-smoothing: grayscale;
 }
 
-#xjmqnlqrxg thead, #xjmqnlqrxg tbody, #xjmqnlqrxg tfoot, #xjmqnlqrxg tr, #xjmqnlqrxg td, #xjmqnlqrxg th {
+#dtwrrzcqep thead, #dtwrrzcqep tbody, #dtwrrzcqep tfoot, #dtwrrzcqep tr, #dtwrrzcqep td, #dtwrrzcqep th {
   border-style: none;
 }
 
-#xjmqnlqrxg p {
+#dtwrrzcqep p {
   margin: 0;
   padding: 0;
 }
 
-#xjmqnlqrxg .gt_table {
+#dtwrrzcqep .gt_table {
   display: table;
   border-collapse: collapse;
   line-height: normal;
@@ -2586,12 +2562,12 @@ Learning Objectives
   border-left-color: #D3D3D3;
 }
 
-#xjmqnlqrxg .gt_caption {
+#dtwrrzcqep .gt_caption {
   padding-top: 4px;
   padding-bottom: 4px;
 }
 
-#xjmqnlqrxg .gt_title {
+#dtwrrzcqep .gt_title {
   color: #333333;
   font-size: 125%;
   font-weight: initial;
@@ -2603,7 +2579,7 @@ Learning Objectives
   border-bottom-width: 0;
 }
 
-#xjmqnlqrxg .gt_subtitle {
+#dtwrrzcqep .gt_subtitle {
   color: #333333;
   font-size: 85%;
   font-weight: initial;
@@ -2615,7 +2591,7 @@ Learning Objectives
   border-top-width: 0;
 }
 
-#xjmqnlqrxg .gt_heading {
+#dtwrrzcqep .gt_heading {
   background-color: #FFFFFF;
   text-align: center;
   border-bottom-color: #FFFFFF;
@@ -2627,13 +2603,13 @@ Learning Objectives
   border-right-color: #D3D3D3;
 }
 
-#xjmqnlqrxg .gt_bottom_border {
+#dtwrrzcqep .gt_bottom_border {
   border-bottom-style: solid;
   border-bottom-width: 2px;
   border-bottom-color: #D3D3D3;
 }
 
-#xjmqnlqrxg .gt_col_headings {
+#dtwrrzcqep .gt_col_headings {
   border-top-style: solid;
   border-top-width: 2px;
   border-top-color: #D3D3D3;
@@ -2648,7 +2624,7 @@ Learning Objectives
   border-right-color: #D3D3D3;
 }
 
-#xjmqnlqrxg .gt_col_heading {
+#dtwrrzcqep .gt_col_heading {
   color: #333333;
   background-color: #FFFFFF;
   font-size: 100%;
@@ -2668,7 +2644,7 @@ Learning Objectives
   overflow-x: hidden;
 }
 
-#xjmqnlqrxg .gt_column_spanner_outer {
+#dtwrrzcqep .gt_column_spanner_outer {
   color: #333333;
   background-color: #FFFFFF;
   font-size: 100%;
@@ -2680,15 +2656,15 @@ Learning Objectives
   padding-right: 4px;
 }
 
-#xjmqnlqrxg .gt_column_spanner_outer:first-child {
+#dtwrrzcqep .gt_column_spanner_outer:first-child {
   padding-left: 0;
 }
 
-#xjmqnlqrxg .gt_column_spanner_outer:last-child {
+#dtwrrzcqep .gt_column_spanner_outer:last-child {
   padding-right: 0;
 }
 
-#xjmqnlqrxg .gt_column_spanner {
+#dtwrrzcqep .gt_column_spanner {
   border-bottom-style: solid;
   border-bottom-width: 2px;
   border-bottom-color: #D3D3D3;
@@ -2700,11 +2676,11 @@ Learning Objectives
   width: 100%;
 }
 
-#xjmqnlqrxg .gt_spanner_row {
+#dtwrrzcqep .gt_spanner_row {
   border-bottom-style: hidden;
 }
 
-#xjmqnlqrxg .gt_group_heading {
+#dtwrrzcqep .gt_group_heading {
   padding-top: 8px;
   padding-bottom: 8px;
   padding-left: 5px;
@@ -2730,7 +2706,7 @@ Learning Objectives
   text-align: left;
 }
 
-#xjmqnlqrxg .gt_empty_group_heading {
+#dtwrrzcqep .gt_empty_group_heading {
   padding: 0.5px;
   color: #333333;
   background-color: #FFFFFF;
@@ -2745,15 +2721,15 @@ Learning Objectives
   vertical-align: middle;
 }
 
-#xjmqnlqrxg .gt_from_md > :first-child {
+#dtwrrzcqep .gt_from_md > :first-child {
   margin-top: 0;
 }
 
-#xjmqnlqrxg .gt_from_md > :last-child {
+#dtwrrzcqep .gt_from_md > :last-child {
   margin-bottom: 0;
 }
 
-#xjmqnlqrxg .gt_row {
+#dtwrrzcqep .gt_row {
   padding-top: 8px;
   padding-bottom: 8px;
   padding-left: 5px;
@@ -2772,7 +2748,7 @@ Learning Objectives
   overflow-x: hidden;
 }
 
-#xjmqnlqrxg .gt_stub {
+#dtwrrzcqep .gt_stub {
   color: #333333;
   background-color: #FFFFFF;
   font-size: 100%;
@@ -2785,7 +2761,7 @@ Learning Objectives
   padding-right: 5px;
 }
 
-#xjmqnlqrxg .gt_stub_row_group {
+#dtwrrzcqep .gt_stub_row_group {
   color: #333333;
   background-color: #FFFFFF;
   font-size: 100%;
@@ -2799,15 +2775,15 @@ Learning Objectives
   vertical-align: top;
 }
 
-#xjmqnlqrxg .gt_row_group_first td {
+#dtwrrzcqep .gt_row_group_first td {
   border-top-width: 2px;
 }
 
-#xjmqnlqrxg .gt_row_group_first th {
+#dtwrrzcqep .gt_row_group_first th {
   border-top-width: 2px;
 }
 
-#xjmqnlqrxg .gt_summary_row {
+#dtwrrzcqep .gt_summary_row {
   color: #333333;
   background-color: #FFFFFF;
   text-transform: inherit;
@@ -2817,16 +2793,16 @@ Learning Objectives
   padding-right: 5px;
 }
 
-#xjmqnlqrxg .gt_first_summary_row {
+#dtwrrzcqep .gt_first_summary_row {
   border-top-style: solid;
   border-top-color: #D3D3D3;
 }
 
-#xjmqnlqrxg .gt_first_summary_row.thick {
+#dtwrrzcqep .gt_first_summary_row.thick {
   border-top-width: 2px;
 }
 
-#xjmqnlqrxg .gt_last_summary_row {
+#dtwrrzcqep .gt_last_summary_row {
   padding-top: 8px;
   padding-bottom: 8px;
   padding-left: 5px;
@@ -2836,7 +2812,7 @@ Learning Objectives
   border-bottom-color: #D3D3D3;
 }
 
-#xjmqnlqrxg .gt_grand_summary_row {
+#dtwrrzcqep .gt_grand_summary_row {
   color: #333333;
   background-color: #FFFFFF;
   text-transform: inherit;
@@ -2846,7 +2822,7 @@ Learning Objectives
   padding-right: 5px;
 }
 
-#xjmqnlqrxg .gt_first_grand_summary_row {
+#dtwrrzcqep .gt_first_grand_summary_row {
   padding-top: 8px;
   padding-bottom: 8px;
   padding-left: 5px;
@@ -2856,7 +2832,7 @@ Learning Objectives
   border-top-color: #D3D3D3;
 }
 
-#xjmqnlqrxg .gt_last_grand_summary_row_top {
+#dtwrrzcqep .gt_last_grand_summary_row_top {
   padding-top: 8px;
   padding-bottom: 8px;
   padding-left: 5px;
@@ -2866,11 +2842,11 @@ Learning Objectives
   border-bottom-color: #D3D3D3;
 }
 
-#xjmqnlqrxg .gt_striped {
+#dtwrrzcqep .gt_striped {
   background-color: rgba(128, 128, 128, 0.05);
 }
 
-#xjmqnlqrxg .gt_table_body {
+#dtwrrzcqep .gt_table_body {
   border-top-style: solid;
   border-top-width: 2px;
   border-top-color: #D3D3D3;
@@ -2879,7 +2855,7 @@ Learning Objectives
   border-bottom-color: #D3D3D3;
 }
 
-#xjmqnlqrxg .gt_footnotes {
+#dtwrrzcqep .gt_footnotes {
   color: #333333;
   background-color: #FFFFFF;
   border-bottom-style: none;
@@ -2893,7 +2869,7 @@ Learning Objectives
   border-right-color: #D3D3D3;
 }
 
-#xjmqnlqrxg .gt_footnote {
+#dtwrrzcqep .gt_footnote {
   margin: 0px;
   font-size: 90%;
   padding-top: 4px;
@@ -2902,7 +2878,7 @@ Learning Objectives
   padding-right: 5px;
 }
 
-#xjmqnlqrxg .gt_sourcenotes {
+#dtwrrzcqep .gt_sourcenotes {
   color: #333333;
   background-color: #FFFFFF;
   border-bottom-style: none;
@@ -2916,7 +2892,7 @@ Learning Objectives
   border-right-color: #D3D3D3;
 }
 
-#xjmqnlqrxg .gt_sourcenote {
+#dtwrrzcqep .gt_sourcenote {
   font-size: 90%;
   padding-top: 4px;
   padding-bottom: 4px;
@@ -2924,77 +2900,77 @@ Learning Objectives
   padding-right: 5px;
 }
 
-#xjmqnlqrxg .gt_left {
+#dtwrrzcqep .gt_left {
   text-align: left;
 }
 
-#xjmqnlqrxg .gt_center {
+#dtwrrzcqep .gt_center {
   text-align: center;
 }
 
-#xjmqnlqrxg .gt_right {
+#dtwrrzcqep .gt_right {
   text-align: right;
   font-variant-numeric: tabular-nums;
 }
 
-#xjmqnlqrxg .gt_font_normal {
+#dtwrrzcqep .gt_font_normal {
   font-weight: normal;
 }
 
-#xjmqnlqrxg .gt_font_bold {
+#dtwrrzcqep .gt_font_bold {
   font-weight: bold;
 }
 
-#xjmqnlqrxg .gt_font_italic {
+#dtwrrzcqep .gt_font_italic {
   font-style: italic;
 }
 
-#xjmqnlqrxg .gt_super {
+#dtwrrzcqep .gt_super {
   font-size: 65%;
 }
 
-#xjmqnlqrxg .gt_footnote_marks {
+#dtwrrzcqep .gt_footnote_marks {
   font-size: 75%;
   vertical-align: 0.4em;
   position: initial;
 }
 
-#xjmqnlqrxg .gt_asterisk {
+#dtwrrzcqep .gt_asterisk {
   font-size: 100%;
   vertical-align: 0;
 }
 
-#xjmqnlqrxg .gt_indent_1 {
+#dtwrrzcqep .gt_indent_1 {
   text-indent: 5px;
 }
 
-#xjmqnlqrxg .gt_indent_2 {
+#dtwrrzcqep .gt_indent_2 {
   text-indent: 10px;
 }
 
-#xjmqnlqrxg .gt_indent_3 {
+#dtwrrzcqep .gt_indent_3 {
   text-indent: 15px;
 }
 
-#xjmqnlqrxg .gt_indent_4 {
+#dtwrrzcqep .gt_indent_4 {
   text-indent: 20px;
 }
 
-#xjmqnlqrxg .gt_indent_5 {
+#dtwrrzcqep .gt_indent_5 {
   text-indent: 25px;
 }
 
-#xjmqnlqrxg .katex-display {
+#dtwrrzcqep .katex-display {
   display: inline-flex !important;
   margin-bottom: 0.75em !important;
 }
 
-#xjmqnlqrxg div.Reactable > div.rt-table > div.rt-thead > div.rt-tr.rt-tr-group-header > div.rt-th-group:after {
+#dtwrrzcqep div.Reactable > div.rt-table > div.rt-thead > div.rt-tr.rt-tr-group-header > div.rt-th-group:after {
   height: 0px !important;
 }
 </style>
 
-<table class="gt_table caption-top table table-sm table-striped small" data-quarto-postprocess="true" data-quarto-disable-processing="false" data-quarto-bootstrap="false">
+<table class="gt_table caption-top table table-sm table-striped small" data-quarto-bootstrap="false">
 <thead>
 <tr class="gt_col_headings header">
 <th id="type" class="gt_col_heading gt_columns_bottom_border gt_left" data-quarto-table-cell-role="th" scope="col">Type of error</th>
@@ -3056,7 +3032,7 @@ Learning Objectives
 <i class="callout-icon"></i>
 </div>
 <div class="callout-title-container flex-fill">
-Case Study: Joseph Jagger
+<span class="screen-reader-only">Note</span>Case Study: Joseph Jagger
 </div>
 </div>
 <div class="callout-body-container callout-body">
@@ -3078,23 +3054,23 @@ P(\text{any particular number}) = \frac{1}{37}
 <p>We can summarise his reasoning like this:</p>
 <div class="cell">
 <div class="cell-output-display">
-<div id="ckanujjfed" style="padding-left:0px;padding-right:0px;padding-top:10px;padding-bottom:10px;overflow-x:auto;overflow-y:auto;width:auto;height:auto;">
-<style>#ckanujjfed table {
+<div id="aakrexkwzw" style="padding-left:0px;padding-right:0px;padding-top:10px;padding-bottom:10px;overflow-x:auto;overflow-y:auto;width:auto;height:auto;">
+<style>#aakrexkwzw table {
   font-family: system-ui, 'Segoe UI', Roboto, Helvetica, Arial, sans-serif, 'Apple Color Emoji', 'Segoe UI Emoji', 'Segoe UI Symbol', 'Noto Color Emoji';
   -webkit-font-smoothing: antialiased;
   -moz-osx-font-smoothing: grayscale;
 }
 
-#ckanujjfed thead, #ckanujjfed tbody, #ckanujjfed tfoot, #ckanujjfed tr, #ckanujjfed td, #ckanujjfed th {
+#aakrexkwzw thead, #aakrexkwzw tbody, #aakrexkwzw tfoot, #aakrexkwzw tr, #aakrexkwzw td, #aakrexkwzw th {
   border-style: none;
 }
 
-#ckanujjfed p {
+#aakrexkwzw p {
   margin: 0;
   padding: 0;
 }
 
-#ckanujjfed .gt_table {
+#aakrexkwzw .gt_table {
   display: table;
   border-collapse: collapse;
   line-height: normal;
@@ -3120,12 +3096,12 @@ P(\text{any particular number}) = \frac{1}{37}
   border-left-color: #D3D3D3;
 }
 
-#ckanujjfed .gt_caption {
+#aakrexkwzw .gt_caption {
   padding-top: 4px;
   padding-bottom: 4px;
 }
 
-#ckanujjfed .gt_title {
+#aakrexkwzw .gt_title {
   color: #333333;
   font-size: 125%;
   font-weight: initial;
@@ -3137,7 +3113,7 @@ P(\text{any particular number}) = \frac{1}{37}
   border-bottom-width: 0;
 }
 
-#ckanujjfed .gt_subtitle {
+#aakrexkwzw .gt_subtitle {
   color: #333333;
   font-size: 85%;
   font-weight: initial;
@@ -3149,7 +3125,7 @@ P(\text{any particular number}) = \frac{1}{37}
   border-top-width: 0;
 }
 
-#ckanujjfed .gt_heading {
+#aakrexkwzw .gt_heading {
   background-color: #FFFFFF;
   text-align: center;
   border-bottom-color: #FFFFFF;
@@ -3161,13 +3137,13 @@ P(\text{any particular number}) = \frac{1}{37}
   border-right-color: #D3D3D3;
 }
 
-#ckanujjfed .gt_bottom_border {
+#aakrexkwzw .gt_bottom_border {
   border-bottom-style: solid;
   border-bottom-width: 2px;
   border-bottom-color: #D3D3D3;
 }
 
-#ckanujjfed .gt_col_headings {
+#aakrexkwzw .gt_col_headings {
   border-top-style: solid;
   border-top-width: 2px;
   border-top-color: #D3D3D3;
@@ -3182,7 +3158,7 @@ P(\text{any particular number}) = \frac{1}{37}
   border-right-color: #D3D3D3;
 }
 
-#ckanujjfed .gt_col_heading {
+#aakrexkwzw .gt_col_heading {
   color: #333333;
   background-color: #FFFFFF;
   font-size: 100%;
@@ -3202,7 +3178,7 @@ P(\text{any particular number}) = \frac{1}{37}
   overflow-x: hidden;
 }
 
-#ckanujjfed .gt_column_spanner_outer {
+#aakrexkwzw .gt_column_spanner_outer {
   color: #333333;
   background-color: #FFFFFF;
   font-size: 100%;
@@ -3214,15 +3190,15 @@ P(\text{any particular number}) = \frac{1}{37}
   padding-right: 4px;
 }
 
-#ckanujjfed .gt_column_spanner_outer:first-child {
+#aakrexkwzw .gt_column_spanner_outer:first-child {
   padding-left: 0;
 }
 
-#ckanujjfed .gt_column_spanner_outer:last-child {
+#aakrexkwzw .gt_column_spanner_outer:last-child {
   padding-right: 0;
 }
 
-#ckanujjfed .gt_column_spanner {
+#aakrexkwzw .gt_column_spanner {
   border-bottom-style: solid;
   border-bottom-width: 2px;
   border-bottom-color: #D3D3D3;
@@ -3234,11 +3210,11 @@ P(\text{any particular number}) = \frac{1}{37}
   width: 100%;
 }
 
-#ckanujjfed .gt_spanner_row {
+#aakrexkwzw .gt_spanner_row {
   border-bottom-style: hidden;
 }
 
-#ckanujjfed .gt_group_heading {
+#aakrexkwzw .gt_group_heading {
   padding-top: 8px;
   padding-bottom: 8px;
   padding-left: 5px;
@@ -3264,7 +3240,7 @@ P(\text{any particular number}) = \frac{1}{37}
   text-align: left;
 }
 
-#ckanujjfed .gt_empty_group_heading {
+#aakrexkwzw .gt_empty_group_heading {
   padding: 0.5px;
   color: #333333;
   background-color: #FFFFFF;
@@ -3279,15 +3255,15 @@ P(\text{any particular number}) = \frac{1}{37}
   vertical-align: middle;
 }
 
-#ckanujjfed .gt_from_md > :first-child {
+#aakrexkwzw .gt_from_md > :first-child {
   margin-top: 0;
 }
 
-#ckanujjfed .gt_from_md > :last-child {
+#aakrexkwzw .gt_from_md > :last-child {
   margin-bottom: 0;
 }
 
-#ckanujjfed .gt_row {
+#aakrexkwzw .gt_row {
   padding-top: 8px;
   padding-bottom: 8px;
   padding-left: 5px;
@@ -3306,7 +3282,7 @@ P(\text{any particular number}) = \frac{1}{37}
   overflow-x: hidden;
 }
 
-#ckanujjfed .gt_stub {
+#aakrexkwzw .gt_stub {
   color: #333333;
   background-color: #FFFFFF;
   font-size: 100%;
@@ -3319,7 +3295,7 @@ P(\text{any particular number}) = \frac{1}{37}
   padding-right: 5px;
 }
 
-#ckanujjfed .gt_stub_row_group {
+#aakrexkwzw .gt_stub_row_group {
   color: #333333;
   background-color: #FFFFFF;
   font-size: 100%;
@@ -3333,15 +3309,15 @@ P(\text{any particular number}) = \frac{1}{37}
   vertical-align: top;
 }
 
-#ckanujjfed .gt_row_group_first td {
+#aakrexkwzw .gt_row_group_first td {
   border-top-width: 2px;
 }
 
-#ckanujjfed .gt_row_group_first th {
+#aakrexkwzw .gt_row_group_first th {
   border-top-width: 2px;
 }
 
-#ckanujjfed .gt_summary_row {
+#aakrexkwzw .gt_summary_row {
   color: #333333;
   background-color: #FFFFFF;
   text-transform: inherit;
@@ -3351,16 +3327,16 @@ P(\text{any particular number}) = \frac{1}{37}
   padding-right: 5px;
 }
 
-#ckanujjfed .gt_first_summary_row {
+#aakrexkwzw .gt_first_summary_row {
   border-top-style: solid;
   border-top-color: #D3D3D3;
 }
 
-#ckanujjfed .gt_first_summary_row.thick {
+#aakrexkwzw .gt_first_summary_row.thick {
   border-top-width: 2px;
 }
 
-#ckanujjfed .gt_last_summary_row {
+#aakrexkwzw .gt_last_summary_row {
   padding-top: 8px;
   padding-bottom: 8px;
   padding-left: 5px;
@@ -3370,7 +3346,7 @@ P(\text{any particular number}) = \frac{1}{37}
   border-bottom-color: #D3D3D3;
 }
 
-#ckanujjfed .gt_grand_summary_row {
+#aakrexkwzw .gt_grand_summary_row {
   color: #333333;
   background-color: #FFFFFF;
   text-transform: inherit;
@@ -3380,7 +3356,7 @@ P(\text{any particular number}) = \frac{1}{37}
   padding-right: 5px;
 }
 
-#ckanujjfed .gt_first_grand_summary_row {
+#aakrexkwzw .gt_first_grand_summary_row {
   padding-top: 8px;
   padding-bottom: 8px;
   padding-left: 5px;
@@ -3390,7 +3366,7 @@ P(\text{any particular number}) = \frac{1}{37}
   border-top-color: #D3D3D3;
 }
 
-#ckanujjfed .gt_last_grand_summary_row_top {
+#aakrexkwzw .gt_last_grand_summary_row_top {
   padding-top: 8px;
   padding-bottom: 8px;
   padding-left: 5px;
@@ -3400,11 +3376,11 @@ P(\text{any particular number}) = \frac{1}{37}
   border-bottom-color: #D3D3D3;
 }
 
-#ckanujjfed .gt_striped {
+#aakrexkwzw .gt_striped {
   background-color: rgba(128, 128, 128, 0.05);
 }
 
-#ckanujjfed .gt_table_body {
+#aakrexkwzw .gt_table_body {
   border-top-style: solid;
   border-top-width: 2px;
   border-top-color: #D3D3D3;
@@ -3413,7 +3389,7 @@ P(\text{any particular number}) = \frac{1}{37}
   border-bottom-color: #D3D3D3;
 }
 
-#ckanujjfed .gt_footnotes {
+#aakrexkwzw .gt_footnotes {
   color: #333333;
   background-color: #FFFFFF;
   border-bottom-style: none;
@@ -3427,7 +3403,7 @@ P(\text{any particular number}) = \frac{1}{37}
   border-right-color: #D3D3D3;
 }
 
-#ckanujjfed .gt_footnote {
+#aakrexkwzw .gt_footnote {
   margin: 0px;
   font-size: 90%;
   padding-top: 4px;
@@ -3436,7 +3412,7 @@ P(\text{any particular number}) = \frac{1}{37}
   padding-right: 5px;
 }
 
-#ckanujjfed .gt_sourcenotes {
+#aakrexkwzw .gt_sourcenotes {
   color: #333333;
   background-color: #FFFFFF;
   border-bottom-style: none;
@@ -3450,7 +3426,7 @@ P(\text{any particular number}) = \frac{1}{37}
   border-right-color: #D3D3D3;
 }
 
-#ckanujjfed .gt_sourcenote {
+#aakrexkwzw .gt_sourcenote {
   font-size: 90%;
   padding-top: 4px;
   padding-bottom: 4px;
@@ -3458,77 +3434,77 @@ P(\text{any particular number}) = \frac{1}{37}
   padding-right: 5px;
 }
 
-#ckanujjfed .gt_left {
+#aakrexkwzw .gt_left {
   text-align: left;
 }
 
-#ckanujjfed .gt_center {
+#aakrexkwzw .gt_center {
   text-align: center;
 }
 
-#ckanujjfed .gt_right {
+#aakrexkwzw .gt_right {
   text-align: right;
   font-variant-numeric: tabular-nums;
 }
 
-#ckanujjfed .gt_font_normal {
+#aakrexkwzw .gt_font_normal {
   font-weight: normal;
 }
 
-#ckanujjfed .gt_font_bold {
+#aakrexkwzw .gt_font_bold {
   font-weight: bold;
 }
 
-#ckanujjfed .gt_font_italic {
+#aakrexkwzw .gt_font_italic {
   font-style: italic;
 }
 
-#ckanujjfed .gt_super {
+#aakrexkwzw .gt_super {
   font-size: 65%;
 }
 
-#ckanujjfed .gt_footnote_marks {
+#aakrexkwzw .gt_footnote_marks {
   font-size: 75%;
   vertical-align: 0.4em;
   position: initial;
 }
 
-#ckanujjfed .gt_asterisk {
+#aakrexkwzw .gt_asterisk {
   font-size: 100%;
   vertical-align: 0;
 }
 
-#ckanujjfed .gt_indent_1 {
+#aakrexkwzw .gt_indent_1 {
   text-indent: 5px;
 }
 
-#ckanujjfed .gt_indent_2 {
+#aakrexkwzw .gt_indent_2 {
   text-indent: 10px;
 }
 
-#ckanujjfed .gt_indent_3 {
+#aakrexkwzw .gt_indent_3 {
   text-indent: 15px;
 }
 
-#ckanujjfed .gt_indent_4 {
+#aakrexkwzw .gt_indent_4 {
   text-indent: 20px;
 }
 
-#ckanujjfed .gt_indent_5 {
+#aakrexkwzw .gt_indent_5 {
   text-indent: 25px;
 }
 
-#ckanujjfed .katex-display {
+#aakrexkwzw .katex-display {
   display: inline-flex !important;
   margin-bottom: 0.75em !important;
 }
 
-#ckanujjfed div.Reactable > div.rt-table > div.rt-thead > div.rt-tr.rt-tr-group-header > div.rt-th-group:after {
+#aakrexkwzw div.Reactable > div.rt-table > div.rt-thead > div.rt-tr.rt-tr-group-header > div.rt-th-group:after {
   height: 0px !important;
 }
 </style>
 
-<table class="gt_table caption-top table table-sm table-striped small" data-quarto-postprocess="true" data-quarto-disable-processing="false" data-quarto-bootstrap="false">
+<table class="gt_table caption-top table table-sm table-striped small" data-quarto-bootstrap="false">
 <thead>
 <tr class="gt_col_headings header">
 <th id="step" class="gt_col_heading gt_columns_bottom_border gt_left" data-quarto-table-cell-role="th" scope="col">Step</th>
@@ -3570,23 +3546,23 @@ P(\text{any particular number}) = \frac{1}{37}
 <p>Jagger had beaten the casino, but not by defeating randomness. He won by discovering that the randomness was not quite random. If a roulette wheel is perfectly fair, uneven results will still occur. Some numbers will appear more often than others over a short period. A fair wheel does not politely arrange itself so that every number appears exactly the same number of times. Randomness produces clusters, streaks, gaps, and surprises. So when Jagger observed that some numbers appeared more often than others, there were two possible explanations:</p>
 <div class="cell">
 <div class="cell-output-display">
-<div id="cgyqxosxdp" style="padding-left:0px;padding-right:0px;padding-top:10px;padding-bottom:10px;overflow-x:auto;overflow-y:auto;width:auto;height:auto;">
-<style>#cgyqxosxdp table {
+<div id="qhqycuqhtw" style="padding-left:0px;padding-right:0px;padding-top:10px;padding-bottom:10px;overflow-x:auto;overflow-y:auto;width:auto;height:auto;">
+<style>#qhqycuqhtw table {
   font-family: system-ui, 'Segoe UI', Roboto, Helvetica, Arial, sans-serif, 'Apple Color Emoji', 'Segoe UI Emoji', 'Segoe UI Symbol', 'Noto Color Emoji';
   -webkit-font-smoothing: antialiased;
   -moz-osx-font-smoothing: grayscale;
 }
 
-#cgyqxosxdp thead, #cgyqxosxdp tbody, #cgyqxosxdp tfoot, #cgyqxosxdp tr, #cgyqxosxdp td, #cgyqxosxdp th {
+#qhqycuqhtw thead, #qhqycuqhtw tbody, #qhqycuqhtw tfoot, #qhqycuqhtw tr, #qhqycuqhtw td, #qhqycuqhtw th {
   border-style: none;
 }
 
-#cgyqxosxdp p {
+#qhqycuqhtw p {
   margin: 0;
   padding: 0;
 }
 
-#cgyqxosxdp .gt_table {
+#qhqycuqhtw .gt_table {
   display: table;
   border-collapse: collapse;
   line-height: normal;
@@ -3612,12 +3588,12 @@ P(\text{any particular number}) = \frac{1}{37}
   border-left-color: #D3D3D3;
 }
 
-#cgyqxosxdp .gt_caption {
+#qhqycuqhtw .gt_caption {
   padding-top: 4px;
   padding-bottom: 4px;
 }
 
-#cgyqxosxdp .gt_title {
+#qhqycuqhtw .gt_title {
   color: #333333;
   font-size: 125%;
   font-weight: initial;
@@ -3629,7 +3605,7 @@ P(\text{any particular number}) = \frac{1}{37}
   border-bottom-width: 0;
 }
 
-#cgyqxosxdp .gt_subtitle {
+#qhqycuqhtw .gt_subtitle {
   color: #333333;
   font-size: 85%;
   font-weight: initial;
@@ -3641,7 +3617,7 @@ P(\text{any particular number}) = \frac{1}{37}
   border-top-width: 0;
 }
 
-#cgyqxosxdp .gt_heading {
+#qhqycuqhtw .gt_heading {
   background-color: #FFFFFF;
   text-align: center;
   border-bottom-color: #FFFFFF;
@@ -3653,13 +3629,13 @@ P(\text{any particular number}) = \frac{1}{37}
   border-right-color: #D3D3D3;
 }
 
-#cgyqxosxdp .gt_bottom_border {
+#qhqycuqhtw .gt_bottom_border {
   border-bottom-style: solid;
   border-bottom-width: 2px;
   border-bottom-color: #D3D3D3;
 }
 
-#cgyqxosxdp .gt_col_headings {
+#qhqycuqhtw .gt_col_headings {
   border-top-style: solid;
   border-top-width: 2px;
   border-top-color: #D3D3D3;
@@ -3674,7 +3650,7 @@ P(\text{any particular number}) = \frac{1}{37}
   border-right-color: #D3D3D3;
 }
 
-#cgyqxosxdp .gt_col_heading {
+#qhqycuqhtw .gt_col_heading {
   color: #333333;
   background-color: #FFFFFF;
   font-size: 100%;
@@ -3694,7 +3670,7 @@ P(\text{any particular number}) = \frac{1}{37}
   overflow-x: hidden;
 }
 
-#cgyqxosxdp .gt_column_spanner_outer {
+#qhqycuqhtw .gt_column_spanner_outer {
   color: #333333;
   background-color: #FFFFFF;
   font-size: 100%;
@@ -3706,15 +3682,15 @@ P(\text{any particular number}) = \frac{1}{37}
   padding-right: 4px;
 }
 
-#cgyqxosxdp .gt_column_spanner_outer:first-child {
+#qhqycuqhtw .gt_column_spanner_outer:first-child {
   padding-left: 0;
 }
 
-#cgyqxosxdp .gt_column_spanner_outer:last-child {
+#qhqycuqhtw .gt_column_spanner_outer:last-child {
   padding-right: 0;
 }
 
-#cgyqxosxdp .gt_column_spanner {
+#qhqycuqhtw .gt_column_spanner {
   border-bottom-style: solid;
   border-bottom-width: 2px;
   border-bottom-color: #D3D3D3;
@@ -3726,11 +3702,11 @@ P(\text{any particular number}) = \frac{1}{37}
   width: 100%;
 }
 
-#cgyqxosxdp .gt_spanner_row {
+#qhqycuqhtw .gt_spanner_row {
   border-bottom-style: hidden;
 }
 
-#cgyqxosxdp .gt_group_heading {
+#qhqycuqhtw .gt_group_heading {
   padding-top: 8px;
   padding-bottom: 8px;
   padding-left: 5px;
@@ -3756,7 +3732,7 @@ P(\text{any particular number}) = \frac{1}{37}
   text-align: left;
 }
 
-#cgyqxosxdp .gt_empty_group_heading {
+#qhqycuqhtw .gt_empty_group_heading {
   padding: 0.5px;
   color: #333333;
   background-color: #FFFFFF;
@@ -3771,15 +3747,15 @@ P(\text{any particular number}) = \frac{1}{37}
   vertical-align: middle;
 }
 
-#cgyqxosxdp .gt_from_md > :first-child {
+#qhqycuqhtw .gt_from_md > :first-child {
   margin-top: 0;
 }
 
-#cgyqxosxdp .gt_from_md > :last-child {
+#qhqycuqhtw .gt_from_md > :last-child {
   margin-bottom: 0;
 }
 
-#cgyqxosxdp .gt_row {
+#qhqycuqhtw .gt_row {
   padding-top: 8px;
   padding-bottom: 8px;
   padding-left: 5px;
@@ -3798,7 +3774,7 @@ P(\text{any particular number}) = \frac{1}{37}
   overflow-x: hidden;
 }
 
-#cgyqxosxdp .gt_stub {
+#qhqycuqhtw .gt_stub {
   color: #333333;
   background-color: #FFFFFF;
   font-size: 100%;
@@ -3811,7 +3787,7 @@ P(\text{any particular number}) = \frac{1}{37}
   padding-right: 5px;
 }
 
-#cgyqxosxdp .gt_stub_row_group {
+#qhqycuqhtw .gt_stub_row_group {
   color: #333333;
   background-color: #FFFFFF;
   font-size: 100%;
@@ -3825,15 +3801,15 @@ P(\text{any particular number}) = \frac{1}{37}
   vertical-align: top;
 }
 
-#cgyqxosxdp .gt_row_group_first td {
+#qhqycuqhtw .gt_row_group_first td {
   border-top-width: 2px;
 }
 
-#cgyqxosxdp .gt_row_group_first th {
+#qhqycuqhtw .gt_row_group_first th {
   border-top-width: 2px;
 }
 
-#cgyqxosxdp .gt_summary_row {
+#qhqycuqhtw .gt_summary_row {
   color: #333333;
   background-color: #FFFFFF;
   text-transform: inherit;
@@ -3843,16 +3819,16 @@ P(\text{any particular number}) = \frac{1}{37}
   padding-right: 5px;
 }
 
-#cgyqxosxdp .gt_first_summary_row {
+#qhqycuqhtw .gt_first_summary_row {
   border-top-style: solid;
   border-top-color: #D3D3D3;
 }
 
-#cgyqxosxdp .gt_first_summary_row.thick {
+#qhqycuqhtw .gt_first_summary_row.thick {
   border-top-width: 2px;
 }
 
-#cgyqxosxdp .gt_last_summary_row {
+#qhqycuqhtw .gt_last_summary_row {
   padding-top: 8px;
   padding-bottom: 8px;
   padding-left: 5px;
@@ -3862,7 +3838,7 @@ P(\text{any particular number}) = \frac{1}{37}
   border-bottom-color: #D3D3D3;
 }
 
-#cgyqxosxdp .gt_grand_summary_row {
+#qhqycuqhtw .gt_grand_summary_row {
   color: #333333;
   background-color: #FFFFFF;
   text-transform: inherit;
@@ -3872,7 +3848,7 @@ P(\text{any particular number}) = \frac{1}{37}
   padding-right: 5px;
 }
 
-#cgyqxosxdp .gt_first_grand_summary_row {
+#qhqycuqhtw .gt_first_grand_summary_row {
   padding-top: 8px;
   padding-bottom: 8px;
   padding-left: 5px;
@@ -3882,7 +3858,7 @@ P(\text{any particular number}) = \frac{1}{37}
   border-top-color: #D3D3D3;
 }
 
-#cgyqxosxdp .gt_last_grand_summary_row_top {
+#qhqycuqhtw .gt_last_grand_summary_row_top {
   padding-top: 8px;
   padding-bottom: 8px;
   padding-left: 5px;
@@ -3892,11 +3868,11 @@ P(\text{any particular number}) = \frac{1}{37}
   border-bottom-color: #D3D3D3;
 }
 
-#cgyqxosxdp .gt_striped {
+#qhqycuqhtw .gt_striped {
   background-color: rgba(128, 128, 128, 0.05);
 }
 
-#cgyqxosxdp .gt_table_body {
+#qhqycuqhtw .gt_table_body {
   border-top-style: solid;
   border-top-width: 2px;
   border-top-color: #D3D3D3;
@@ -3905,7 +3881,7 @@ P(\text{any particular number}) = \frac{1}{37}
   border-bottom-color: #D3D3D3;
 }
 
-#cgyqxosxdp .gt_footnotes {
+#qhqycuqhtw .gt_footnotes {
   color: #333333;
   background-color: #FFFFFF;
   border-bottom-style: none;
@@ -3919,7 +3895,7 @@ P(\text{any particular number}) = \frac{1}{37}
   border-right-color: #D3D3D3;
 }
 
-#cgyqxosxdp .gt_footnote {
+#qhqycuqhtw .gt_footnote {
   margin: 0px;
   font-size: 90%;
   padding-top: 4px;
@@ -3928,7 +3904,7 @@ P(\text{any particular number}) = \frac{1}{37}
   padding-right: 5px;
 }
 
-#cgyqxosxdp .gt_sourcenotes {
+#qhqycuqhtw .gt_sourcenotes {
   color: #333333;
   background-color: #FFFFFF;
   border-bottom-style: none;
@@ -3942,7 +3918,7 @@ P(\text{any particular number}) = \frac{1}{37}
   border-right-color: #D3D3D3;
 }
 
-#cgyqxosxdp .gt_sourcenote {
+#qhqycuqhtw .gt_sourcenote {
   font-size: 90%;
   padding-top: 4px;
   padding-bottom: 4px;
@@ -3950,77 +3926,77 @@ P(\text{any particular number}) = \frac{1}{37}
   padding-right: 5px;
 }
 
-#cgyqxosxdp .gt_left {
+#qhqycuqhtw .gt_left {
   text-align: left;
 }
 
-#cgyqxosxdp .gt_center {
+#qhqycuqhtw .gt_center {
   text-align: center;
 }
 
-#cgyqxosxdp .gt_right {
+#qhqycuqhtw .gt_right {
   text-align: right;
   font-variant-numeric: tabular-nums;
 }
 
-#cgyqxosxdp .gt_font_normal {
+#qhqycuqhtw .gt_font_normal {
   font-weight: normal;
 }
 
-#cgyqxosxdp .gt_font_bold {
+#qhqycuqhtw .gt_font_bold {
   font-weight: bold;
 }
 
-#cgyqxosxdp .gt_font_italic {
+#qhqycuqhtw .gt_font_italic {
   font-style: italic;
 }
 
-#cgyqxosxdp .gt_super {
+#qhqycuqhtw .gt_super {
   font-size: 65%;
 }
 
-#cgyqxosxdp .gt_footnote_marks {
+#qhqycuqhtw .gt_footnote_marks {
   font-size: 75%;
   vertical-align: 0.4em;
   position: initial;
 }
 
-#cgyqxosxdp .gt_asterisk {
+#qhqycuqhtw .gt_asterisk {
   font-size: 100%;
   vertical-align: 0;
 }
 
-#cgyqxosxdp .gt_indent_1 {
+#qhqycuqhtw .gt_indent_1 {
   text-indent: 5px;
 }
 
-#cgyqxosxdp .gt_indent_2 {
+#qhqycuqhtw .gt_indent_2 {
   text-indent: 10px;
 }
 
-#cgyqxosxdp .gt_indent_3 {
+#qhqycuqhtw .gt_indent_3 {
   text-indent: 15px;
 }
 
-#cgyqxosxdp .gt_indent_4 {
+#qhqycuqhtw .gt_indent_4 {
   text-indent: 20px;
 }
 
-#cgyqxosxdp .gt_indent_5 {
+#qhqycuqhtw .gt_indent_5 {
   text-indent: 25px;
 }
 
-#cgyqxosxdp .katex-display {
+#qhqycuqhtw .katex-display {
   display: inline-flex !important;
   margin-bottom: 0.75em !important;
 }
 
-#cgyqxosxdp div.Reactable > div.rt-table > div.rt-thead > div.rt-tr.rt-tr-group-header > div.rt-th-group:after {
+#qhqycuqhtw div.Reactable > div.rt-table > div.rt-thead > div.rt-tr.rt-tr-group-header > div.rt-th-group:after {
   height: 0px !important;
 }
 </style>
 
-<table class="gt_table caption-top table table-sm table-striped small" data-quarto-postprocess="true" data-quarto-disable-processing="false" data-quarto-bootstrap="false">
+<table class="gt_table caption-top table table-sm table-striped small" data-quarto-bootstrap="false">
 <thead>
 <tr class="gt_col_headings header">
 <th id="explanation" class="gt_col_heading gt_columns_bottom_border gt_left" data-quarto-table-cell-role="th" scope="col">Possible explanation</th>
@@ -4052,23 +4028,23 @@ P(\text{any particular number}) = \frac{1}{37}
 </ul>
 <div class="cell">
 <div class="cell-output-display">
-<div id="tzhxcoyuad" style="padding-left:0px;padding-right:0px;padding-top:10px;padding-bottom:10px;overflow-x:auto;overflow-y:auto;width:auto;height:auto;">
-<style>#tzhxcoyuad table {
+<div id="tjyeemseit" style="padding-left:0px;padding-right:0px;padding-top:10px;padding-bottom:10px;overflow-x:auto;overflow-y:auto;width:auto;height:auto;">
+<style>#tjyeemseit table {
   font-family: system-ui, 'Segoe UI', Roboto, Helvetica, Arial, sans-serif, 'Apple Color Emoji', 'Segoe UI Emoji', 'Segoe UI Symbol', 'Noto Color Emoji';
   -webkit-font-smoothing: antialiased;
   -moz-osx-font-smoothing: grayscale;
 }
 
-#tzhxcoyuad thead, #tzhxcoyuad tbody, #tzhxcoyuad tfoot, #tzhxcoyuad tr, #tzhxcoyuad td, #tzhxcoyuad th {
+#tjyeemseit thead, #tjyeemseit tbody, #tjyeemseit tfoot, #tjyeemseit tr, #tjyeemseit td, #tjyeemseit th {
   border-style: none;
 }
 
-#tzhxcoyuad p {
+#tjyeemseit p {
   margin: 0;
   padding: 0;
 }
 
-#tzhxcoyuad .gt_table {
+#tjyeemseit .gt_table {
   display: table;
   border-collapse: collapse;
   line-height: normal;
@@ -4094,12 +4070,12 @@ P(\text{any particular number}) = \frac{1}{37}
   border-left-color: #D3D3D3;
 }
 
-#tzhxcoyuad .gt_caption {
+#tjyeemseit .gt_caption {
   padding-top: 4px;
   padding-bottom: 4px;
 }
 
-#tzhxcoyuad .gt_title {
+#tjyeemseit .gt_title {
   color: #333333;
   font-size: 125%;
   font-weight: initial;
@@ -4111,7 +4087,7 @@ P(\text{any particular number}) = \frac{1}{37}
   border-bottom-width: 0;
 }
 
-#tzhxcoyuad .gt_subtitle {
+#tjyeemseit .gt_subtitle {
   color: #333333;
   font-size: 85%;
   font-weight: initial;
@@ -4123,7 +4099,7 @@ P(\text{any particular number}) = \frac{1}{37}
   border-top-width: 0;
 }
 
-#tzhxcoyuad .gt_heading {
+#tjyeemseit .gt_heading {
   background-color: #FFFFFF;
   text-align: center;
   border-bottom-color: #FFFFFF;
@@ -4135,13 +4111,13 @@ P(\text{any particular number}) = \frac{1}{37}
   border-right-color: #D3D3D3;
 }
 
-#tzhxcoyuad .gt_bottom_border {
+#tjyeemseit .gt_bottom_border {
   border-bottom-style: solid;
   border-bottom-width: 2px;
   border-bottom-color: #D3D3D3;
 }
 
-#tzhxcoyuad .gt_col_headings {
+#tjyeemseit .gt_col_headings {
   border-top-style: solid;
   border-top-width: 2px;
   border-top-color: #D3D3D3;
@@ -4156,7 +4132,7 @@ P(\text{any particular number}) = \frac{1}{37}
   border-right-color: #D3D3D3;
 }
 
-#tzhxcoyuad .gt_col_heading {
+#tjyeemseit .gt_col_heading {
   color: #333333;
   background-color: #FFFFFF;
   font-size: 100%;
@@ -4176,7 +4152,7 @@ P(\text{any particular number}) = \frac{1}{37}
   overflow-x: hidden;
 }
 
-#tzhxcoyuad .gt_column_spanner_outer {
+#tjyeemseit .gt_column_spanner_outer {
   color: #333333;
   background-color: #FFFFFF;
   font-size: 100%;
@@ -4188,15 +4164,15 @@ P(\text{any particular number}) = \frac{1}{37}
   padding-right: 4px;
 }
 
-#tzhxcoyuad .gt_column_spanner_outer:first-child {
+#tjyeemseit .gt_column_spanner_outer:first-child {
   padding-left: 0;
 }
 
-#tzhxcoyuad .gt_column_spanner_outer:last-child {
+#tjyeemseit .gt_column_spanner_outer:last-child {
   padding-right: 0;
 }
 
-#tzhxcoyuad .gt_column_spanner {
+#tjyeemseit .gt_column_spanner {
   border-bottom-style: solid;
   border-bottom-width: 2px;
   border-bottom-color: #D3D3D3;
@@ -4208,11 +4184,11 @@ P(\text{any particular number}) = \frac{1}{37}
   width: 100%;
 }
 
-#tzhxcoyuad .gt_spanner_row {
+#tjyeemseit .gt_spanner_row {
   border-bottom-style: hidden;
 }
 
-#tzhxcoyuad .gt_group_heading {
+#tjyeemseit .gt_group_heading {
   padding-top: 8px;
   padding-bottom: 8px;
   padding-left: 5px;
@@ -4238,7 +4214,7 @@ P(\text{any particular number}) = \frac{1}{37}
   text-align: left;
 }
 
-#tzhxcoyuad .gt_empty_group_heading {
+#tjyeemseit .gt_empty_group_heading {
   padding: 0.5px;
   color: #333333;
   background-color: #FFFFFF;
@@ -4253,15 +4229,15 @@ P(\text{any particular number}) = \frac{1}{37}
   vertical-align: middle;
 }
 
-#tzhxcoyuad .gt_from_md > :first-child {
+#tjyeemseit .gt_from_md > :first-child {
   margin-top: 0;
 }
 
-#tzhxcoyuad .gt_from_md > :last-child {
+#tjyeemseit .gt_from_md > :last-child {
   margin-bottom: 0;
 }
 
-#tzhxcoyuad .gt_row {
+#tjyeemseit .gt_row {
   padding-top: 8px;
   padding-bottom: 8px;
   padding-left: 5px;
@@ -4280,7 +4256,7 @@ P(\text{any particular number}) = \frac{1}{37}
   overflow-x: hidden;
 }
 
-#tzhxcoyuad .gt_stub {
+#tjyeemseit .gt_stub {
   color: #333333;
   background-color: #FFFFFF;
   font-size: 100%;
@@ -4293,7 +4269,7 @@ P(\text{any particular number}) = \frac{1}{37}
   padding-right: 5px;
 }
 
-#tzhxcoyuad .gt_stub_row_group {
+#tjyeemseit .gt_stub_row_group {
   color: #333333;
   background-color: #FFFFFF;
   font-size: 100%;
@@ -4307,15 +4283,15 @@ P(\text{any particular number}) = \frac{1}{37}
   vertical-align: top;
 }
 
-#tzhxcoyuad .gt_row_group_first td {
+#tjyeemseit .gt_row_group_first td {
   border-top-width: 2px;
 }
 
-#tzhxcoyuad .gt_row_group_first th {
+#tjyeemseit .gt_row_group_first th {
   border-top-width: 2px;
 }
 
-#tzhxcoyuad .gt_summary_row {
+#tjyeemseit .gt_summary_row {
   color: #333333;
   background-color: #FFFFFF;
   text-transform: inherit;
@@ -4325,16 +4301,16 @@ P(\text{any particular number}) = \frac{1}{37}
   padding-right: 5px;
 }
 
-#tzhxcoyuad .gt_first_summary_row {
+#tjyeemseit .gt_first_summary_row {
   border-top-style: solid;
   border-top-color: #D3D3D3;
 }
 
-#tzhxcoyuad .gt_first_summary_row.thick {
+#tjyeemseit .gt_first_summary_row.thick {
   border-top-width: 2px;
 }
 
-#tzhxcoyuad .gt_last_summary_row {
+#tjyeemseit .gt_last_summary_row {
   padding-top: 8px;
   padding-bottom: 8px;
   padding-left: 5px;
@@ -4344,7 +4320,7 @@ P(\text{any particular number}) = \frac{1}{37}
   border-bottom-color: #D3D3D3;
 }
 
-#tzhxcoyuad .gt_grand_summary_row {
+#tjyeemseit .gt_grand_summary_row {
   color: #333333;
   background-color: #FFFFFF;
   text-transform: inherit;
@@ -4354,7 +4330,7 @@ P(\text{any particular number}) = \frac{1}{37}
   padding-right: 5px;
 }
 
-#tzhxcoyuad .gt_first_grand_summary_row {
+#tjyeemseit .gt_first_grand_summary_row {
   padding-top: 8px;
   padding-bottom: 8px;
   padding-left: 5px;
@@ -4364,7 +4340,7 @@ P(\text{any particular number}) = \frac{1}{37}
   border-top-color: #D3D3D3;
 }
 
-#tzhxcoyuad .gt_last_grand_summary_row_top {
+#tjyeemseit .gt_last_grand_summary_row_top {
   padding-top: 8px;
   padding-bottom: 8px;
   padding-left: 5px;
@@ -4374,11 +4350,11 @@ P(\text{any particular number}) = \frac{1}{37}
   border-bottom-color: #D3D3D3;
 }
 
-#tzhxcoyuad .gt_striped {
+#tjyeemseit .gt_striped {
   background-color: rgba(128, 128, 128, 0.05);
 }
 
-#tzhxcoyuad .gt_table_body {
+#tjyeemseit .gt_table_body {
   border-top-style: solid;
   border-top-width: 2px;
   border-top-color: #D3D3D3;
@@ -4387,7 +4363,7 @@ P(\text{any particular number}) = \frac{1}{37}
   border-bottom-color: #D3D3D3;
 }
 
-#tzhxcoyuad .gt_footnotes {
+#tjyeemseit .gt_footnotes {
   color: #333333;
   background-color: #FFFFFF;
   border-bottom-style: none;
@@ -4401,7 +4377,7 @@ P(\text{any particular number}) = \frac{1}{37}
   border-right-color: #D3D3D3;
 }
 
-#tzhxcoyuad .gt_footnote {
+#tjyeemseit .gt_footnote {
   margin: 0px;
   font-size: 90%;
   padding-top: 4px;
@@ -4410,7 +4386,7 @@ P(\text{any particular number}) = \frac{1}{37}
   padding-right: 5px;
 }
 
-#tzhxcoyuad .gt_sourcenotes {
+#tjyeemseit .gt_sourcenotes {
   color: #333333;
   background-color: #FFFFFF;
   border-bottom-style: none;
@@ -4424,7 +4400,7 @@ P(\text{any particular number}) = \frac{1}{37}
   border-right-color: #D3D3D3;
 }
 
-#tzhxcoyuad .gt_sourcenote {
+#tjyeemseit .gt_sourcenote {
   font-size: 90%;
   padding-top: 4px;
   padding-bottom: 4px;
@@ -4432,77 +4408,77 @@ P(\text{any particular number}) = \frac{1}{37}
   padding-right: 5px;
 }
 
-#tzhxcoyuad .gt_left {
+#tjyeemseit .gt_left {
   text-align: left;
 }
 
-#tzhxcoyuad .gt_center {
+#tjyeemseit .gt_center {
   text-align: center;
 }
 
-#tzhxcoyuad .gt_right {
+#tjyeemseit .gt_right {
   text-align: right;
   font-variant-numeric: tabular-nums;
 }
 
-#tzhxcoyuad .gt_font_normal {
+#tjyeemseit .gt_font_normal {
   font-weight: normal;
 }
 
-#tzhxcoyuad .gt_font_bold {
+#tjyeemseit .gt_font_bold {
   font-weight: bold;
 }
 
-#tzhxcoyuad .gt_font_italic {
+#tjyeemseit .gt_font_italic {
   font-style: italic;
 }
 
-#tzhxcoyuad .gt_super {
+#tjyeemseit .gt_super {
   font-size: 65%;
 }
 
-#tzhxcoyuad .gt_footnote_marks {
+#tjyeemseit .gt_footnote_marks {
   font-size: 75%;
   vertical-align: 0.4em;
   position: initial;
 }
 
-#tzhxcoyuad .gt_asterisk {
+#tjyeemseit .gt_asterisk {
   font-size: 100%;
   vertical-align: 0;
 }
 
-#tzhxcoyuad .gt_indent_1 {
+#tjyeemseit .gt_indent_1 {
   text-indent: 5px;
 }
 
-#tzhxcoyuad .gt_indent_2 {
+#tjyeemseit .gt_indent_2 {
   text-indent: 10px;
 }
 
-#tzhxcoyuad .gt_indent_3 {
+#tjyeemseit .gt_indent_3 {
   text-indent: 15px;
 }
 
-#tzhxcoyuad .gt_indent_4 {
+#tjyeemseit .gt_indent_4 {
   text-indent: 20px;
 }
 
-#tzhxcoyuad .gt_indent_5 {
+#tjyeemseit .gt_indent_5 {
   text-indent: 25px;
 }
 
-#tzhxcoyuad .katex-display {
+#tjyeemseit .katex-display {
   display: inline-flex !important;
   margin-bottom: 0.75em !important;
 }
 
-#tzhxcoyuad div.Reactable > div.rt-table > div.rt-thead > div.rt-tr.rt-tr-group-header > div.rt-th-group:after {
+#tjyeemseit div.Reactable > div.rt-table > div.rt-thead > div.rt-tr.rt-tr-group-header > div.rt-th-group:after {
   height: 0px !important;
 }
 </style>
 
-<table class="gt_table caption-top table table-sm table-striped small" data-quarto-postprocess="true" data-quarto-disable-processing="false" data-quarto-bootstrap="false">
+<table class="gt_table caption-top table table-sm table-striped small" data-quarto-bootstrap="false">
 <thead>
 <tr class="gt_col_headings header">
 <th id="term" class="gt_col_heading gt_columns_bottom_border gt_left" data-quarto-table-cell-role="th" scope="col">Term</th>
@@ -4603,7 +4579,7 @@ P(\text{heads}) = \frac{1}{2}
 <i class="callout-icon"></i>
 </div>
 <div class="callout-title-container flex-fill">
-Zeno’s Paradox
+<span class="screen-reader-only">Note</span>Zeno’s Paradox
 </div>
 </div>
 <div class="callout-body-container callout-body">
@@ -4681,23 +4657,23 @@ Zeno’s Paradox
 <p>The observed proportion is not exactly 0.6 at every stage. It can wander. But with more observations, it tends to become more stable.</p>
 <div class="cell">
 <div class="cell-output-display">
-<div id="oacoompvss" style="padding-left:0px;padding-right:0px;padding-top:10px;padding-bottom:10px;overflow-x:auto;overflow-y:auto;width:auto;height:auto;">
-<style>#oacoompvss table {
+<div id="wahvnlzglk" style="padding-left:0px;padding-right:0px;padding-top:10px;padding-bottom:10px;overflow-x:auto;overflow-y:auto;width:auto;height:auto;">
+<style>#wahvnlzglk table {
   font-family: system-ui, 'Segoe UI', Roboto, Helvetica, Arial, sans-serif, 'Apple Color Emoji', 'Segoe UI Emoji', 'Segoe UI Symbol', 'Noto Color Emoji';
   -webkit-font-smoothing: antialiased;
   -moz-osx-font-smoothing: grayscale;
 }
 
-#oacoompvss thead, #oacoompvss tbody, #oacoompvss tfoot, #oacoompvss tr, #oacoompvss td, #oacoompvss th {
+#wahvnlzglk thead, #wahvnlzglk tbody, #wahvnlzglk tfoot, #wahvnlzglk tr, #wahvnlzglk td, #wahvnlzglk th {
   border-style: none;
 }
 
-#oacoompvss p {
+#wahvnlzglk p {
   margin: 0;
   padding: 0;
 }
 
-#oacoompvss .gt_table {
+#wahvnlzglk .gt_table {
   display: table;
   border-collapse: collapse;
   line-height: normal;
@@ -4723,12 +4699,12 @@ Zeno’s Paradox
   border-left-color: #D3D3D3;
 }
 
-#oacoompvss .gt_caption {
+#wahvnlzglk .gt_caption {
   padding-top: 4px;
   padding-bottom: 4px;
 }
 
-#oacoompvss .gt_title {
+#wahvnlzglk .gt_title {
   color: #333333;
   font-size: 125%;
   font-weight: initial;
@@ -4740,7 +4716,7 @@ Zeno’s Paradox
   border-bottom-width: 0;
 }
 
-#oacoompvss .gt_subtitle {
+#wahvnlzglk .gt_subtitle {
   color: #333333;
   font-size: 85%;
   font-weight: initial;
@@ -4752,7 +4728,7 @@ Zeno’s Paradox
   border-top-width: 0;
 }
 
-#oacoompvss .gt_heading {
+#wahvnlzglk .gt_heading {
   background-color: #FFFFFF;
   text-align: center;
   border-bottom-color: #FFFFFF;
@@ -4764,13 +4740,13 @@ Zeno’s Paradox
   border-right-color: #D3D3D3;
 }
 
-#oacoompvss .gt_bottom_border {
+#wahvnlzglk .gt_bottom_border {
   border-bottom-style: solid;
   border-bottom-width: 2px;
   border-bottom-color: #D3D3D3;
 }
 
-#oacoompvss .gt_col_headings {
+#wahvnlzglk .gt_col_headings {
   border-top-style: solid;
   border-top-width: 2px;
   border-top-color: #D3D3D3;
@@ -4785,7 +4761,7 @@ Zeno’s Paradox
   border-right-color: #D3D3D3;
 }
 
-#oacoompvss .gt_col_heading {
+#wahvnlzglk .gt_col_heading {
   color: #333333;
   background-color: #FFFFFF;
   font-size: 100%;
@@ -4805,7 +4781,7 @@ Zeno’s Paradox
   overflow-x: hidden;
 }
 
-#oacoompvss .gt_column_spanner_outer {
+#wahvnlzglk .gt_column_spanner_outer {
   color: #333333;
   background-color: #FFFFFF;
   font-size: 100%;
@@ -4817,15 +4793,15 @@ Zeno’s Paradox
   padding-right: 4px;
 }
 
-#oacoompvss .gt_column_spanner_outer:first-child {
+#wahvnlzglk .gt_column_spanner_outer:first-child {
   padding-left: 0;
 }
 
-#oacoompvss .gt_column_spanner_outer:last-child {
+#wahvnlzglk .gt_column_spanner_outer:last-child {
   padding-right: 0;
 }
 
-#oacoompvss .gt_column_spanner {
+#wahvnlzglk .gt_column_spanner {
   border-bottom-style: solid;
   border-bottom-width: 2px;
   border-bottom-color: #D3D3D3;
@@ -4837,11 +4813,11 @@ Zeno’s Paradox
   width: 100%;
 }
 
-#oacoompvss .gt_spanner_row {
+#wahvnlzglk .gt_spanner_row {
   border-bottom-style: hidden;
 }
 
-#oacoompvss .gt_group_heading {
+#wahvnlzglk .gt_group_heading {
   padding-top: 8px;
   padding-bottom: 8px;
   padding-left: 5px;
@@ -4867,7 +4843,7 @@ Zeno’s Paradox
   text-align: left;
 }
 
-#oacoompvss .gt_empty_group_heading {
+#wahvnlzglk .gt_empty_group_heading {
   padding: 0.5px;
   color: #333333;
   background-color: #FFFFFF;
@@ -4882,15 +4858,15 @@ Zeno’s Paradox
   vertical-align: middle;
 }
 
-#oacoompvss .gt_from_md > :first-child {
+#wahvnlzglk .gt_from_md > :first-child {
   margin-top: 0;
 }
 
-#oacoompvss .gt_from_md > :last-child {
+#wahvnlzglk .gt_from_md > :last-child {
   margin-bottom: 0;
 }
 
-#oacoompvss .gt_row {
+#wahvnlzglk .gt_row {
   padding-top: 8px;
   padding-bottom: 8px;
   padding-left: 5px;
@@ -4909,7 +4885,7 @@ Zeno’s Paradox
   overflow-x: hidden;
 }
 
-#oacoompvss .gt_stub {
+#wahvnlzglk .gt_stub {
   color: #333333;
   background-color: #FFFFFF;
   font-size: 100%;
@@ -4922,7 +4898,7 @@ Zeno’s Paradox
   padding-right: 5px;
 }
 
-#oacoompvss .gt_stub_row_group {
+#wahvnlzglk .gt_stub_row_group {
   color: #333333;
   background-color: #FFFFFF;
   font-size: 100%;
@@ -4936,15 +4912,15 @@ Zeno’s Paradox
   vertical-align: top;
 }
 
-#oacoompvss .gt_row_group_first td {
+#wahvnlzglk .gt_row_group_first td {
   border-top-width: 2px;
 }
 
-#oacoompvss .gt_row_group_first th {
+#wahvnlzglk .gt_row_group_first th {
   border-top-width: 2px;
 }
 
-#oacoompvss .gt_summary_row {
+#wahvnlzglk .gt_summary_row {
   color: #333333;
   background-color: #FFFFFF;
   text-transform: inherit;
@@ -4954,16 +4930,16 @@ Zeno’s Paradox
   padding-right: 5px;
 }
 
-#oacoompvss .gt_first_summary_row {
+#wahvnlzglk .gt_first_summary_row {
   border-top-style: solid;
   border-top-color: #D3D3D3;
 }
 
-#oacoompvss .gt_first_summary_row.thick {
+#wahvnlzglk .gt_first_summary_row.thick {
   border-top-width: 2px;
 }
 
-#oacoompvss .gt_last_summary_row {
+#wahvnlzglk .gt_last_summary_row {
   padding-top: 8px;
   padding-bottom: 8px;
   padding-left: 5px;
@@ -4973,7 +4949,7 @@ Zeno’s Paradox
   border-bottom-color: #D3D3D3;
 }
 
-#oacoompvss .gt_grand_summary_row {
+#wahvnlzglk .gt_grand_summary_row {
   color: #333333;
   background-color: #FFFFFF;
   text-transform: inherit;
@@ -4983,7 +4959,7 @@ Zeno’s Paradox
   padding-right: 5px;
 }
 
-#oacoompvss .gt_first_grand_summary_row {
+#wahvnlzglk .gt_first_grand_summary_row {
   padding-top: 8px;
   padding-bottom: 8px;
   padding-left: 5px;
@@ -4993,7 +4969,7 @@ Zeno’s Paradox
   border-top-color: #D3D3D3;
 }
 
-#oacoompvss .gt_last_grand_summary_row_top {
+#wahvnlzglk .gt_last_grand_summary_row_top {
   padding-top: 8px;
   padding-bottom: 8px;
   padding-left: 5px;
@@ -5003,11 +4979,11 @@ Zeno’s Paradox
   border-bottom-color: #D3D3D3;
 }
 
-#oacoompvss .gt_striped {
+#wahvnlzglk .gt_striped {
   background-color: rgba(128, 128, 128, 0.05);
 }
 
-#oacoompvss .gt_table_body {
+#wahvnlzglk .gt_table_body {
   border-top-style: solid;
   border-top-width: 2px;
   border-top-color: #D3D3D3;
@@ -5016,7 +4992,7 @@ Zeno’s Paradox
   border-bottom-color: #D3D3D3;
 }
 
-#oacoompvss .gt_footnotes {
+#wahvnlzglk .gt_footnotes {
   color: #333333;
   background-color: #FFFFFF;
   border-bottom-style: none;
@@ -5030,7 +5006,7 @@ Zeno’s Paradox
   border-right-color: #D3D3D3;
 }
 
-#oacoompvss .gt_footnote {
+#wahvnlzglk .gt_footnote {
   margin: 0px;
   font-size: 90%;
   padding-top: 4px;
@@ -5039,7 +5015,7 @@ Zeno’s Paradox
   padding-right: 5px;
 }
 
-#oacoompvss .gt_sourcenotes {
+#wahvnlzglk .gt_sourcenotes {
   color: #333333;
   background-color: #FFFFFF;
   border-bottom-style: none;
@@ -5053,7 +5029,7 @@ Zeno’s Paradox
   border-right-color: #D3D3D3;
 }
 
-#oacoompvss .gt_sourcenote {
+#wahvnlzglk .gt_sourcenote {
   font-size: 90%;
   padding-top: 4px;
   padding-bottom: 4px;
@@ -5061,77 +5037,77 @@ Zeno’s Paradox
   padding-right: 5px;
 }
 
-#oacoompvss .gt_left {
+#wahvnlzglk .gt_left {
   text-align: left;
 }
 
-#oacoompvss .gt_center {
+#wahvnlzglk .gt_center {
   text-align: center;
 }
 
-#oacoompvss .gt_right {
+#wahvnlzglk .gt_right {
   text-align: right;
   font-variant-numeric: tabular-nums;
 }
 
-#oacoompvss .gt_font_normal {
+#wahvnlzglk .gt_font_normal {
   font-weight: normal;
 }
 
-#oacoompvss .gt_font_bold {
+#wahvnlzglk .gt_font_bold {
   font-weight: bold;
 }
 
-#oacoompvss .gt_font_italic {
+#wahvnlzglk .gt_font_italic {
   font-style: italic;
 }
 
-#oacoompvss .gt_super {
+#wahvnlzglk .gt_super {
   font-size: 65%;
 }
 
-#oacoompvss .gt_footnote_marks {
+#wahvnlzglk .gt_footnote_marks {
   font-size: 75%;
   vertical-align: 0.4em;
   position: initial;
 }
 
-#oacoompvss .gt_asterisk {
+#wahvnlzglk .gt_asterisk {
   font-size: 100%;
   vertical-align: 0;
 }
 
-#oacoompvss .gt_indent_1 {
+#wahvnlzglk .gt_indent_1 {
   text-indent: 5px;
 }
 
-#oacoompvss .gt_indent_2 {
+#wahvnlzglk .gt_indent_2 {
   text-indent: 10px;
 }
 
-#oacoompvss .gt_indent_3 {
+#wahvnlzglk .gt_indent_3 {
   text-indent: 15px;
 }
 
-#oacoompvss .gt_indent_4 {
+#wahvnlzglk .gt_indent_4 {
   text-indent: 20px;
 }
 
-#oacoompvss .gt_indent_5 {
+#wahvnlzglk .gt_indent_5 {
   text-indent: 25px;
 }
 
-#oacoompvss .katex-display {
+#wahvnlzglk .katex-display {
   display: inline-flex !important;
   margin-bottom: 0.75em !important;
 }
 
-#oacoompvss div.Reactable > div.rt-table > div.rt-thead > div.rt-tr.rt-tr-group-header > div.rt-th-group:after {
+#wahvnlzglk div.Reactable > div.rt-table > div.rt-thead > div.rt-tr.rt-tr-group-header > div.rt-th-group:after {
   height: 0px !important;
 }
 </style>
 
-<table class="gt_table caption-top table table-sm table-striped small" data-quarto-postprocess="true" data-quarto-disable-processing="false" data-quarto-bootstrap="false">
+<table class="gt_table caption-top table table-sm table-striped small" data-quarto-bootstrap="false">
 <thead>
 <tr class="gt_col_headings header">
 <th id="draws" class="gt_col_heading gt_columns_bottom_border gt_right" data-quarto-table-cell-role="th" scope="col">Number of draws</th>
@@ -5205,19 +5181,30 @@ H,\ H,\ H,\ H
 P(H) = \frac{1}{2}
 \]</span></p>
 <p>So the probability of four heads in a row is:</p>
-<p>$$ P(HHHH) =</p>
-<p>= </p>
-<p>= 0.0625</p>
-<p>$$</p>
+<p><span class="math display">\[
+P(HHHH) =
+\frac{1}{2}
+\times
+\frac{1}{2}
+\times
+\frac{1}{2}
+\times
+\frac{1}{2}
+= \frac{1}{16}
+= 0.0625
+\]</span></p>
 <p>So four heads in a row is unusual, but not astonishing (6.25%). If many people flipped coins four times, we would expect some of them to get four heads. Seeing four heads should make us curious, but it is not enough on its own to prove that the coin is biased.</p>
 <p>Now suppose the same person flips the coin ten times, and the result is:</p>
 <p><span class="math display">\[
 H,\ H,\ H,\ H,\ H,\ H,\ H,\ H,\ H,\ H
 \]</span></p>
 <p>This feels much more suspicious. Again, under the fair coin model:</p>
-<p>$$ P(10 )</p>
-<p>= ()^{10}</p>
-<p>$$</p>
+<p><span class="math display">\[
+P(10 \text{ heads in a row})
+= \left(\frac{1}{2}\right)^{10}
+\frac{1}{1024}
+\approx 0.00098
+\]</span></p>
 <p>Ten heads in a row does not logically prove that the coin is biased. Rare events can happen. But it gives us much stronger reason to question the fairness of the coin than four heads in a row. The same kind of result can mean different things depending on how much evidence we have. Four heads in a row may be a coincidence. Ten heads in a row is harder to dismiss.</p>
 <p>But even then, we should be careful. The conclusion is not automatically:</p>
 <blockquote class="blockquote">
@@ -5697,7 +5684,7 @@ H,\ H,\ H,\ H,\ H,\ H,\ H,\ H,\ H,\ H
 }
 </style>
 
-<table class="gt_table caption-top table table-sm table-striped small" data-quarto-postprocess="true" data-quarto-disable-processing="false" data-quarto-bootstrap="false">
+<table class="gt_table caption-top table table-sm table-striped small" data-quarto-bootstrap="false">
 <thead>
 <tr class="gt_col_headings header">
 <th id="situation" class="gt_col_heading gt_columns_bottom_border gt_left" data-quarto-table-cell-role="th" scope="col">Situation</th>
@@ -6218,7 +6205,7 @@ H,\ H,\ H,\ H,\ H,\ H,\ H,\ H,\ H,\ H
 }
 </style>
 
-<table class="gt_table caption-top table table-sm table-striped small" data-quarto-postprocess="true" data-quarto-disable-processing="false" data-quarto-bootstrap="false">
+<table class="gt_table caption-top table table-sm table-striped small" data-quarto-bootstrap="false">
 <thead>
 <tr class="gt_col_headings header">
 <th id="question" class="gt_col_heading gt_columns_bottom_border gt_left" data-quarto-table-cell-role="th" scope="col">Question</th>
@@ -6723,7 +6710,7 @@ P(\text{live to 100} \mid \text{already lived to 90})
 }
 </style>
 
-<table class="gt_table caption-top table table-sm table-striped small" data-quarto-postprocess="true" data-quarto-disable-processing="false" data-quarto-bootstrap="false">
+<table class="gt_table caption-top table table-sm table-striped small" data-quarto-bootstrap="false">
 <thead>
 <tr class="gt_col_headings header">
 <th id="probability_statement" class="gt_col_heading gt_columns_bottom_border gt_left" data-quarto-table-cell-role="th" scope="col">Probability statement</th>
@@ -7202,7 +7189,7 @@ P(\text{live to 100} \mid \text{already lived to 90})
 }
 </style>
 
-<table class="gt_table caption-top table table-sm table-striped small" data-quarto-postprocess="true" data-quarto-disable-processing="false" data-quarto-bootstrap="false">
+<table class="gt_table caption-top table table-sm table-striped small" data-quarto-bootstrap="false">
 <thead>
 <tr class="gt_col_headings header">
 <th id="person" class="gt_col_heading gt_columns_bottom_border gt_left" data-quarto-table-cell-role="th" scope="col">Person</th>
@@ -7709,7 +7696,7 @@ P(\text{live to 100} \mid \text{already lived to 90})
 }
 </style>
 
-<table class="gt_table caption-top table table-sm table-striped small" data-quarto-postprocess="true" data-quarto-disable-processing="false" data-quarto-bootstrap="false">
+<table class="gt_table caption-top table table-sm table-striped small" data-quarto-bootstrap="false">
 <thead>
 <tr class="gt_col_headings header">
 <th id="mean_age" class="gt_col_heading gt_columns_bottom_border gt_right" data-quarto-table-cell-role="th" scope="col">Mean age at death</th>
@@ -8219,7 +8206,7 @@ P(\text{live to 100} \mid \text{already lived to 90})
 }
 </style>
 
-<table class="gt_table caption-top table table-sm table-striped small" data-quarto-postprocess="true" data-quarto-disable-processing="false" data-quarto-bootstrap="false">
+<table class="gt_table caption-top table table-sm table-striped small" data-quarto-bootstrap="false">
 <thead>
 <tr class="gt_col_headings header">
 <th id="critic" class="gt_col_heading gt_columns_bottom_border gt_left" data-quarto-table-cell-role="th" scope="col">Critic</th>
@@ -8254,10 +8241,11 @@ P(\text{live to 100} \mid \text{already lived to 90})
 </div>
 </div>
 <p>The mean rating is:</p>
-<p>$$</p>
-<p>{x} =</p>
-<p>=90</p>
-<p>$$</p>
+<p><span class="math display">\[
+\bar{x} =
+\frac{88 + 89 + 90 + 91 + 92}{5}
+=90
+\]</span></p>
 <p>Now suppose another wine, Wine B, receives these ratings:</p>
 <div class="cell">
 <div class="cell-output-display">
@@ -8711,7 +8699,7 @@ P(\text{live to 100} \mid \text{already lived to 90})
 }
 </style>
 
-<table class="gt_table caption-top table table-sm table-striped small" data-quarto-postprocess="true" data-quarto-disable-processing="false" data-quarto-bootstrap="false">
+<table class="gt_table caption-top table table-sm table-striped small" data-quarto-bootstrap="false">
 <thead>
 <tr class="gt_col_headings header">
 <th id="critic" class="gt_col_heading gt_columns_bottom_border gt_left" data-quarto-table-cell-role="th" scope="col">Critic</th>
@@ -8746,10 +8734,11 @@ P(\text{live to 100} \mid \text{already lived to 90})
 </div>
 </div>
 <p>The mean rating is also:</p>
-<p>$$</p>
-<p>{x} =</p>
-<p>= 90</p>
-<p>$$</p>
+<p><span class="math display">\[
+\bar{x} =
+\frac{80 + 85 + 90 + 95 + 100}{5}
+= 90
+\]</span></p>
 <p>If we look only at the average, the two wines appear identical. Both are “90-point wines”. But they are not the same kind of 90.</p>
 <ul>
 <li>Wine A receives scores that are tightly clustered around 90. The critics mostly agree. One gives 88, another gives 92, but nobody is far from the centre.</li>
@@ -9208,7 +9197,7 @@ P(\text{live to 100} \mid \text{already lived to 90})
 }
 </style>
 
-<table class="gt_table caption-top table table-sm table-striped small" data-quarto-postprocess="true" data-quarto-disable-processing="false" data-quarto-bootstrap="false">
+<table class="gt_table caption-top table table-sm table-striped small" data-quarto-bootstrap="false">
 <thead>
 <tr class="gt_col_headings header">
 <th id="wine" class="gt_col_heading gt_columns_bottom_border gt_left" data-quarto-table-cell-role="th" scope="col">Wine</th>
@@ -9690,7 +9679,7 @@ P(\text{live to 100} \mid \text{already lived to 90})
 }
 </style>
 
-<table class="gt_table caption-top table table-sm table-striped small" data-quarto-postprocess="true" data-quarto-disable-processing="false" data-quarto-bootstrap="false">
+<table class="gt_table caption-top table table-sm table-striped small" data-quarto-bootstrap="false">
 <thead>
 <tr class="gt_col_headings header">
 <th id="critic" class="gt_col_heading gt_columns_bottom_border gt_left" data-quarto-table-cell-role="th" scope="col">Critic</th>
@@ -10189,7 +10178,7 @@ P(\text{live to 100} \mid \text{already lived to 90})
 }
 </style>
 
-<table class="gt_table caption-top table table-sm table-striped small" data-quarto-postprocess="true" data-quarto-disable-processing="false" data-quarto-bootstrap="false">
+<table class="gt_table caption-top table table-sm table-striped small" data-quarto-bootstrap="false">
 <thead>
 <tr class="gt_col_headings header">
 <th id="critic" class="gt_col_heading gt_columns_bottom_border gt_left" data-quarto-table-cell-role="th" scope="col">Critic</th>
@@ -10702,7 +10691,7 @@ P(\text{live to 100} \mid \text{already lived to 90})
 }
 </style>
 
-<table class="gt_table caption-top table table-sm table-striped small" data-quarto-postprocess="true" data-quarto-disable-processing="false" data-quarto-bootstrap="false">
+<table class="gt_table caption-top table table-sm table-striped small" data-quarto-bootstrap="false">
 <thead>
 <tr class="gt_col_headings header">
 <th id="wine" class="gt_col_heading gt_columns_bottom_border gt_left" data-quarto-table-cell-role="th" scope="col">Wine</th>
@@ -11188,7 +11177,7 @@ P(\text{live to 100} \mid \text{already lived to 90})
 }
 </style>
 
-<table class="gt_table caption-top table table-sm table-striped small" data-quarto-postprocess="true" data-quarto-disable-processing="false" data-quarto-bootstrap="false">
+<table class="gt_table caption-top table table-sm table-striped small" data-quarto-bootstrap="false">
 <thead>
 <tr class="gt_col_headings header">
 <th id="context" class="gt_col_heading gt_columns_bottom_border gt_left" data-quarto-table-cell-role="th" scope="col">Context</th>
@@ -11249,7 +11238,7 @@ P(\text{live to 100} \mid \text{already lived to 90})
 <h2 data-number="3.7" class="anchored" data-anchor-id="de-moivre-and-the-shape-of-repeated-chance"><span class="header-section-number">3.7</span> De Moivre and the shape of repeated chance</h2>
 <p>Repeated measurements do not merely vary. Often, they vary in patterned ways. Values close to the centre may be common. Values far from the centre may be rare. The spread may have a shape. That idea leads us to one of the most important patterns in statistics: the <em>bell curve</em>.</p>
 <div class="cell">
-<div class="sourceCode cell-code" id="cb1"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb1-1"><a href="#cb1-1" aria-hidden="true" tabindex="-1"></a>bell_curve <span class="ot">&lt;-</span> <span class="fu">tibble</span>(</span>
+<div class="code-copy-outer-scaffold"><div class="sourceCode cell-code" id="cb1"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb1-1"><a href="#cb1-1" aria-hidden="true" tabindex="-1"></a>bell_curve <span class="ot">&lt;-</span> <span class="fu">tibble</span>(</span>
 <span id="cb1-2"><a href="#cb1-2" aria-hidden="true" tabindex="-1"></a>  <span class="at">x =</span> <span class="fu">seq</span>(<span class="sc">-</span><span class="dv">4</span>, <span class="dv">4</span>, <span class="at">length.out =</span> <span class="dv">1000</span>),</span>
 <span id="cb1-3"><a href="#cb1-3" aria-hidden="true" tabindex="-1"></a>  <span class="at">density =</span> <span class="fu">dnorm</span>(x, <span class="at">mean =</span> <span class="dv">0</span>, <span class="at">sd =</span> <span class="dv">1</span>)</span>
 <span id="cb1-4"><a href="#cb1-4" aria-hidden="true" tabindex="-1"></a>)</span>
@@ -11260,7 +11249,7 @@ P(\text{live to 100} \mid \text{already lived to 90})
 <span id="cb1-9"><a href="#cb1-9" aria-hidden="true" tabindex="-1"></a>  <span class="fu">labs</span>(</span>
 <span id="cb1-10"><a href="#cb1-10" aria-hidden="true" tabindex="-1"></a>    <span class="at">x =</span> <span class="st">"Value"</span>,</span>
 <span id="cb1-11"><a href="#cb1-11" aria-hidden="true" tabindex="-1"></a>    <span class="at">y =</span> <span class="st">"Density"</span></span>
-<span id="cb1-12"><a href="#cb1-12" aria-hidden="true" tabindex="-1"></a>  )</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<span id="cb1-12"><a href="#cb1-12" aria-hidden="true" tabindex="-1"></a>  )</span></code></pre></div><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></div>
 <div class="cell-output-display">
 <div>
 <figure class="figure">
@@ -11793,7 +11782,7 @@ HHH,\ HHT,\ HTH,\ THH,\ HTT,\ THT,\ TTH,\ TTT
 }
 </style>
 
-<table class="gt_table caption-top table table-sm table-striped small" data-quarto-postprocess="true" data-quarto-disable-processing="false" data-quarto-bootstrap="false">
+<table class="gt_table caption-top table table-sm table-striped small" data-quarto-bootstrap="false">
 <thead>
 <tr class="gt_col_headings header">
 <th id="tosses" class="gt_col_heading gt_columns_bottom_border gt_right" data-quarto-table-cell-role="th" scope="col">Number of coin tosses</th>
@@ -12304,7 +12293,7 @@ TTTTTT
 }
 </style>
 
-<table class="gt_table caption-top table table-sm table-striped small" data-quarto-postprocess="true" data-quarto-disable-processing="false" data-quarto-bootstrap="false">
+<table class="gt_table caption-top table table-sm table-striped small" data-quarto-bootstrap="false">
 <thead>
 <tr class="gt_col_headings header">
 <th id="heads" class="gt_col_heading gt_columns_bottom_border gt_right" data-quarto-table-cell-role="th" scope="col">Number of heads in 20 tosses</th>
@@ -13053,7 +13042,7 @@ X \sim N(90, 8)
 }
 </style>
 
-<table class="gt_table caption-top table table-sm table-striped small" data-quarto-postprocess="true" data-quarto-disable-processing="false" data-quarto-bootstrap="false">
+<table class="gt_table caption-top table table-sm table-striped small" data-quarto-bootstrap="false">
 <thead>
 <tr class="gt_col_headings header">
 <th id="pattern" class="gt_col_heading gt_columns_bottom_border gt_left" data-quarto-table-cell-role="th" scope="col">Pattern</th>
@@ -13120,7 +13109,7 @@ X \sim N(90, 8)
 <p>We can simulate this idea in R.</p>
 <p>Suppose the true value of an object is 100. We measure it 30 times. The measurement device has small random error, but no systematic error.</p>
 <div class="cell">
-<div class="sourceCode cell-code" id="cb2"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb2-1"><a href="#cb2-1" aria-hidden="true" tabindex="-1"></a><span class="fu">set.seed</span>(<span class="dv">24205242</span>)</span>
+<div class="code-copy-outer-scaffold"><div class="sourceCode cell-code" id="cb2"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb2-1"><a href="#cb2-1" aria-hidden="true" tabindex="-1"></a><span class="fu">set.seed</span>(<span class="dv">24205242</span>)</span>
 <span id="cb2-2"><a href="#cb2-2" aria-hidden="true" tabindex="-1"></a></span>
 <span id="cb2-3"><a href="#cb2-3" aria-hidden="true" tabindex="-1"></a>random_error_measurements <span class="ot">&lt;-</span> <span class="fu">tibble</span>(</span>
 <span id="cb2-4"><a href="#cb2-4" aria-hidden="true" tabindex="-1"></a>  <span class="at">measurement =</span> <span class="dv">1</span><span class="sc">:</span><span class="dv">30</span>,</span>
@@ -13130,7 +13119,7 @@ X \sim N(90, 8)
 <span id="cb2-8"><a href="#cb2-8" aria-hidden="true" tabindex="-1"></a>  <span class="at">observed_value =</span> true_value <span class="sc">+</span> systematic_error <span class="sc">+</span> random_error</span>
 <span id="cb2-9"><a href="#cb2-9" aria-hidden="true" tabindex="-1"></a>)</span>
 <span id="cb2-10"><a href="#cb2-10" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb2-11"><a href="#cb2-11" aria-hidden="true" tabindex="-1"></a>random_error_measurements</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<span id="cb2-11"><a href="#cb2-11" aria-hidden="true" tabindex="-1"></a>random_error_measurements</span></code></pre></div><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></div>
 <div class="cell-output cell-output-stdout">
 <pre><code># A tibble: 30 × 5
    measurement true_value systematic_error random_error observed_value
@@ -13157,13 +13146,13 @@ X \sim N(90, 8)
 </ul>
 <p>We can summarise the observed measurements.</p>
 <div class="cell">
-<div class="sourceCode cell-code" id="cb4"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb4-1"><a href="#cb4-1" aria-hidden="true" tabindex="-1"></a>random_error_measurements <span class="sc">|&gt;</span></span>
+<div class="code-copy-outer-scaffold"><div class="sourceCode cell-code" id="cb4"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb4-1"><a href="#cb4-1" aria-hidden="true" tabindex="-1"></a>random_error_measurements <span class="sc">|&gt;</span></span>
 <span id="cb4-2"><a href="#cb4-2" aria-hidden="true" tabindex="-1"></a>  <span class="fu">summarise</span>(</span>
 <span id="cb4-3"><a href="#cb4-3" aria-hidden="true" tabindex="-1"></a>    <span class="at">mean_observed =</span> <span class="fu">mean</span>(observed_value),</span>
 <span id="cb4-4"><a href="#cb4-4" aria-hidden="true" tabindex="-1"></a>    <span class="at">sd_observed =</span> <span class="fu">sd</span>(observed_value),</span>
 <span id="cb4-5"><a href="#cb4-5" aria-hidden="true" tabindex="-1"></a>    <span class="at">minimum =</span> <span class="fu">min</span>(observed_value),</span>
 <span id="cb4-6"><a href="#cb4-6" aria-hidden="true" tabindex="-1"></a>    <span class="at">maximum =</span> <span class="fu">max</span>(observed_value)</span>
-<span id="cb4-7"><a href="#cb4-7" aria-hidden="true" tabindex="-1"></a>  )</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<span id="cb4-7"><a href="#cb4-7" aria-hidden="true" tabindex="-1"></a>  )</span></code></pre></div><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></div>
 <div class="cell-output cell-output-stdout">
 <pre><code># A tibble: 1 × 4
   mean_observed sd_observed minimum maximum
@@ -13174,7 +13163,7 @@ X \sim N(90, 8)
 <p>The mean observed value should be close to 100, because the random errors are centred around zero. The individual measurements vary, but they do not consistently lean upward or downward.</p>
 <p>Now suppose the measurement device is biased upward by 5 units. This is systematic error.</p>
 <div class="cell">
-<div class="sourceCode cell-code" id="cb6"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb6-1"><a href="#cb6-1" aria-hidden="true" tabindex="-1"></a><span class="fu">set.seed</span>(<span class="dv">24205242</span>)</span>
+<div class="code-copy-outer-scaffold"><div class="sourceCode cell-code" id="cb6"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb6-1"><a href="#cb6-1" aria-hidden="true" tabindex="-1"></a><span class="fu">set.seed</span>(<span class="dv">24205242</span>)</span>
 <span id="cb6-2"><a href="#cb6-2" aria-hidden="true" tabindex="-1"></a></span>
 <span id="cb6-3"><a href="#cb6-3" aria-hidden="true" tabindex="-1"></a>systematic_error_measurements <span class="ot">&lt;-</span> <span class="fu">tibble</span>(</span>
 <span id="cb6-4"><a href="#cb6-4" aria-hidden="true" tabindex="-1"></a>  <span class="at">measurement =</span> <span class="dv">1</span><span class="sc">:</span><span class="dv">30</span>,</span>
@@ -13184,7 +13173,7 @@ X \sim N(90, 8)
 <span id="cb6-8"><a href="#cb6-8" aria-hidden="true" tabindex="-1"></a>  <span class="at">observed_value =</span> true_value <span class="sc">+</span> systematic_error <span class="sc">+</span> random_error</span>
 <span id="cb6-9"><a href="#cb6-9" aria-hidden="true" tabindex="-1"></a>)</span>
 <span id="cb6-10"><a href="#cb6-10" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb6-11"><a href="#cb6-11" aria-hidden="true" tabindex="-1"></a>systematic_error_measurements</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<span id="cb6-11"><a href="#cb6-11" aria-hidden="true" tabindex="-1"></a>systematic_error_measurements</span></code></pre></div><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></div>
 <div class="cell-output cell-output-stdout">
 <pre><code># A tibble: 30 × 5
    measurement true_value systematic_error random_error observed_value
@@ -13205,7 +13194,7 @@ X \sim N(90, 8)
 <p>The random error is the same kind of noise as before, but the measurements are now centred around the wrong value.</p>
 <p>We can compare the two measurement processes.</p>
 <div class="cell">
-<div class="sourceCode cell-code" id="cb8"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb8-1"><a href="#cb8-1" aria-hidden="true" tabindex="-1"></a>measurement_comparison <span class="ot">&lt;-</span> <span class="fu">bind_rows</span>(</span>
+<div class="code-copy-outer-scaffold"><div class="sourceCode cell-code" id="cb8"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb8-1"><a href="#cb8-1" aria-hidden="true" tabindex="-1"></a>measurement_comparison <span class="ot">&lt;-</span> <span class="fu">bind_rows</span>(</span>
 <span id="cb8-2"><a href="#cb8-2" aria-hidden="true" tabindex="-1"></a>  random_error_measurements <span class="sc">|&gt;</span></span>
 <span id="cb8-3"><a href="#cb8-3" aria-hidden="true" tabindex="-1"></a>    <span class="fu">mutate</span>(<span class="at">process =</span> <span class="st">"Random error only"</span>),</span>
 <span id="cb8-4"><a href="#cb8-4" aria-hidden="true" tabindex="-1"></a>  systematic_error_measurements <span class="sc">|&gt;</span></span>
@@ -13218,7 +13207,7 @@ X \sim N(90, 8)
 <span id="cb8-11"><a href="#cb8-11" aria-hidden="true" tabindex="-1"></a>    <span class="at">mean_observed =</span> <span class="fu">mean</span>(observed_value),</span>
 <span id="cb8-12"><a href="#cb8-12" aria-hidden="true" tabindex="-1"></a>    <span class="at">sd_observed =</span> <span class="fu">sd</span>(observed_value),</span>
 <span id="cb8-13"><a href="#cb8-13" aria-hidden="true" tabindex="-1"></a>    <span class="at">.groups =</span> <span class="st">"drop"</span></span>
-<span id="cb8-14"><a href="#cb8-14" aria-hidden="true" tabindex="-1"></a>  )</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<span id="cb8-14"><a href="#cb8-14" aria-hidden="true" tabindex="-1"></a>  )</span></code></pre></div><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></div>
 <div class="cell-output cell-output-stdout">
 <pre><code># A tibble: 2 × 3
   process                            mean_observed sd_observed
@@ -13230,7 +13219,7 @@ X \sim N(90, 8)
 <p>The function <code>bind_rows()</code> stacks two data frames on top of each other. The function <code>group_by()</code> tells R to calculate the summary separately for each measurement process.</p>
 <p>We can also plot the measurements.</p>
 <div class="cell">
-<div class="sourceCode cell-code" id="cb10"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb10-1"><a href="#cb10-1" aria-hidden="true" tabindex="-1"></a>measurement_comparison <span class="sc">|&gt;</span></span>
+<div class="code-copy-outer-scaffold"><div class="sourceCode cell-code" id="cb10"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb10-1"><a href="#cb10-1" aria-hidden="true" tabindex="-1"></a>measurement_comparison <span class="sc">|&gt;</span></span>
 <span id="cb10-2"><a href="#cb10-2" aria-hidden="true" tabindex="-1"></a>  <span class="fu">ggplot</span>(<span class="fu">aes</span>(<span class="at">x =</span> measurement, <span class="at">y =</span> observed_value)) <span class="sc">+</span></span>
 <span id="cb10-3"><a href="#cb10-3" aria-hidden="true" tabindex="-1"></a>  <span class="fu">geom_point</span>() <span class="sc">+</span></span>
 <span id="cb10-4"><a href="#cb10-4" aria-hidden="true" tabindex="-1"></a>  <span class="fu">geom_hline</span>(<span class="at">yintercept =</span> <span class="dv">100</span>, <span class="at">linetype =</span> <span class="st">"dashed"</span>) <span class="sc">+</span></span>
@@ -13238,7 +13227,7 @@ X \sim N(90, 8)
 <span id="cb10-6"><a href="#cb10-6" aria-hidden="true" tabindex="-1"></a>  <span class="fu">labs</span>(</span>
 <span id="cb10-7"><a href="#cb10-7" aria-hidden="true" tabindex="-1"></a>    <span class="at">x =</span> <span class="st">"Measurement number"</span>,</span>
 <span id="cb10-8"><a href="#cb10-8" aria-hidden="true" tabindex="-1"></a>    <span class="at">y =</span> <span class="st">"Observed value"</span></span>
-<span id="cb10-9"><a href="#cb10-9" aria-hidden="true" tabindex="-1"></a>  )</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<span id="cb10-9"><a href="#cb10-9" aria-hidden="true" tabindex="-1"></a>  )</span></code></pre></div><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></div>
 <div class="cell-output-display">
 <div id="fig-random-systematic-error" class="quarto-float quarto-figure quarto-figure-center anchored">
 <figure class="quarto-float quarto-float-fig figure">
@@ -13260,7 +13249,7 @@ Figure&nbsp;3.1: Repeated measurements with and without systematic error
 <p>Suppose a box contains red and blue balls. The probability of drawing a red ball is 0.6. We draw one ball, record its colour, put it back, and repeat this many times.</p>
 <p>We can simulate this in R.</p>
 <div class="cell">
-<div class="sourceCode cell-code" id="cb11"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb11-1"><a href="#cb11-1" aria-hidden="true" tabindex="-1"></a><span class="fu">set.seed</span>(<span class="dv">24205242</span>)</span>
+<div class="code-copy-outer-scaffold"><div class="sourceCode cell-code" id="cb11"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb11-1"><a href="#cb11-1" aria-hidden="true" tabindex="-1"></a><span class="fu">set.seed</span>(<span class="dv">24205242</span>)</span>
 <span id="cb11-2"><a href="#cb11-2" aria-hidden="true" tabindex="-1"></a></span>
 <span id="cb11-3"><a href="#cb11-3" aria-hidden="true" tabindex="-1"></a>n_draws <span class="ot">&lt;-</span> <span class="dv">1000</span></span>
 <span id="cb11-4"><a href="#cb11-4" aria-hidden="true" tabindex="-1"></a></span>
@@ -13274,7 +13263,7 @@ Figure&nbsp;3.1: Repeated measurements with and without systematic error
 <span id="cb11-12"><a href="#cb11-12" aria-hidden="true" tabindex="-1"></a>  )</span>
 <span id="cb11-13"><a href="#cb11-13" aria-hidden="true" tabindex="-1"></a>)</span>
 <span id="cb11-14"><a href="#cb11-14" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb11-15"><a href="#cb11-15" aria-hidden="true" tabindex="-1"></a>urn_draws</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<span id="cb11-15"><a href="#cb11-15" aria-hidden="true" tabindex="-1"></a>urn_draws</span></code></pre></div><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></div>
 <div class="cell-output cell-output-stdout">
 <pre><code># A tibble: 1,000 × 2
     draw colour
@@ -13302,13 +13291,13 @@ Figure&nbsp;3.1: Repeated measurements with and without systematic error
 </ul>
 <p>Now we calculate the running proportion of red balls.</p>
 <div class="cell">
-<div class="sourceCode cell-code" id="cb13"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb13-1"><a href="#cb13-1" aria-hidden="true" tabindex="-1"></a>urn_draws <span class="ot">&lt;-</span> urn_draws <span class="sc">|&gt;</span></span>
+<div class="code-copy-outer-scaffold"><div class="sourceCode cell-code" id="cb13"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb13-1"><a href="#cb13-1" aria-hidden="true" tabindex="-1"></a>urn_draws <span class="ot">&lt;-</span> urn_draws <span class="sc">|&gt;</span></span>
 <span id="cb13-2"><a href="#cb13-2" aria-hidden="true" tabindex="-1"></a>  <span class="fu">mutate</span>(</span>
 <span id="cb13-3"><a href="#cb13-3" aria-hidden="true" tabindex="-1"></a>    <span class="at">red_so_far =</span> <span class="fu">cumsum</span>(colour <span class="sc">==</span> <span class="st">"Red"</span>),</span>
 <span id="cb13-4"><a href="#cb13-4" aria-hidden="true" tabindex="-1"></a>    <span class="at">proportion_red =</span> red_so_far <span class="sc">/</span> draw</span>
 <span id="cb13-5"><a href="#cb13-5" aria-hidden="true" tabindex="-1"></a>  )</span>
 <span id="cb13-6"><a href="#cb13-6" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb13-7"><a href="#cb13-7" aria-hidden="true" tabindex="-1"></a>urn_draws</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<span id="cb13-7"><a href="#cb13-7" aria-hidden="true" tabindex="-1"></a>urn_draws</span></code></pre></div><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></div>
 <div class="cell-output cell-output-stdout">
 <pre><code># A tibble: 1,000 × 4
     draw colour red_so_far proportion_red
@@ -13329,14 +13318,14 @@ Figure&nbsp;3.1: Repeated measurements with and without systematic error
 <p>The expression <code>colour == "Red"</code> returns <code>TRUE</code> when the draw is red and <code>FALSE</code> otherwise. In R, <code>TRUE</code> is treated as 1 and <code>FALSE</code> is treated as 0. So <code>cumsum(colour == "Red")</code> counts how many red balls have appeared so far.</p>
 <p>We can plot the running proportion.</p>
 <div class="cell">
-<div class="sourceCode cell-code" id="cb15"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb15-1"><a href="#cb15-1" aria-hidden="true" tabindex="-1"></a>urn_draws <span class="sc">|&gt;</span></span>
+<div class="code-copy-outer-scaffold"><div class="sourceCode cell-code" id="cb15"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb15-1"><a href="#cb15-1" aria-hidden="true" tabindex="-1"></a>urn_draws <span class="sc">|&gt;</span></span>
 <span id="cb15-2"><a href="#cb15-2" aria-hidden="true" tabindex="-1"></a>  <span class="fu">ggplot</span>(<span class="fu">aes</span>(<span class="at">x =</span> draw, <span class="at">y =</span> proportion_red)) <span class="sc">+</span></span>
 <span id="cb15-3"><a href="#cb15-3" aria-hidden="true" tabindex="-1"></a>  <span class="fu">geom_line</span>() <span class="sc">+</span></span>
 <span id="cb15-4"><a href="#cb15-4" aria-hidden="true" tabindex="-1"></a>  <span class="fu">geom_hline</span>(<span class="at">yintercept =</span> <span class="fl">0.6</span>, <span class="at">linetype =</span> <span class="st">"dashed"</span>) <span class="sc">+</span></span>
 <span id="cb15-5"><a href="#cb15-5" aria-hidden="true" tabindex="-1"></a>  <span class="fu">labs</span>(</span>
 <span id="cb15-6"><a href="#cb15-6" aria-hidden="true" tabindex="-1"></a>    <span class="at">x =</span> <span class="st">"Number of draws"</span>,</span>
 <span id="cb15-7"><a href="#cb15-7" aria-hidden="true" tabindex="-1"></a>    <span class="at">y =</span> <span class="st">"Observed proportion of red balls"</span></span>
-<span id="cb15-8"><a href="#cb15-8" aria-hidden="true" tabindex="-1"></a>  )</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<span id="cb15-8"><a href="#cb15-8" aria-hidden="true" tabindex="-1"></a>  )</span></code></pre></div><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></div>
 <div class="cell-output-display">
 <div id="fig-law-large-numbers" class="quarto-float quarto-figure quarto-figure-center anchored">
 <figure class="quarto-float quarto-float-fig figure">
@@ -13363,13 +13352,13 @@ P(\text{red}) = 0.6.
 <p>The law of large numbers helps explain why large samples are often more stable than small samples. The same observed proportion can mean different things depending on how many observations it is based on.</p>
 <p>Suppose a basketball player makes 8 out of 10 shots.</p>
 <div class="cell">
-<div class="sourceCode cell-code" id="cb16"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb16-1"><a href="#cb16-1" aria-hidden="true" tabindex="-1"></a>small_sample <span class="ot">&lt;-</span> <span class="fu">tibble</span>(</span>
+<div class="code-copy-outer-scaffold"><div class="sourceCode cell-code" id="cb16"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb16-1"><a href="#cb16-1" aria-hidden="true" tabindex="-1"></a>small_sample <span class="ot">&lt;-</span> <span class="fu">tibble</span>(</span>
 <span id="cb16-2"><a href="#cb16-2" aria-hidden="true" tabindex="-1"></a>  <span class="at">shots_taken =</span> <span class="dv">10</span>,</span>
 <span id="cb16-3"><a href="#cb16-3" aria-hidden="true" tabindex="-1"></a>  <span class="at">shots_made =</span> <span class="dv">8</span>,</span>
 <span id="cb16-4"><a href="#cb16-4" aria-hidden="true" tabindex="-1"></a>  <span class="at">shooting_percentage =</span> shots_made <span class="sc">/</span> shots_taken</span>
 <span id="cb16-5"><a href="#cb16-5" aria-hidden="true" tabindex="-1"></a>)</span>
 <span id="cb16-6"><a href="#cb16-6" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb16-7"><a href="#cb16-7" aria-hidden="true" tabindex="-1"></a>small_sample</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<span id="cb16-7"><a href="#cb16-7" aria-hidden="true" tabindex="-1"></a>small_sample</span></code></pre></div><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></div>
 <div class="cell-output cell-output-stdout">
 <pre><code># A tibble: 1 × 3
   shots_taken shots_made shooting_percentage
@@ -13380,13 +13369,13 @@ P(\text{red}) = 0.6.
 <p>The shooting percentage is 80%. But this is based on only 10 shots. A short run can easily be affected by chance.</p>
 <p>Now suppose a player makes 80 out of 100 shots.</p>
 <div class="cell">
-<div class="sourceCode cell-code" id="cb18"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb18-1"><a href="#cb18-1" aria-hidden="true" tabindex="-1"></a>larger_sample <span class="ot">&lt;-</span> <span class="fu">tibble</span>(</span>
+<div class="code-copy-outer-scaffold"><div class="sourceCode cell-code" id="cb18"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb18-1"><a href="#cb18-1" aria-hidden="true" tabindex="-1"></a>larger_sample <span class="ot">&lt;-</span> <span class="fu">tibble</span>(</span>
 <span id="cb18-2"><a href="#cb18-2" aria-hidden="true" tabindex="-1"></a>  <span class="at">shots_taken =</span> <span class="dv">100</span>,</span>
 <span id="cb18-3"><a href="#cb18-3" aria-hidden="true" tabindex="-1"></a>  <span class="at">shots_made =</span> <span class="dv">80</span>,</span>
 <span id="cb18-4"><a href="#cb18-4" aria-hidden="true" tabindex="-1"></a>  <span class="at">shooting_percentage =</span> shots_made <span class="sc">/</span> shots_taken</span>
 <span id="cb18-5"><a href="#cb18-5" aria-hidden="true" tabindex="-1"></a>)</span>
 <span id="cb18-6"><a href="#cb18-6" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb18-7"><a href="#cb18-7" aria-hidden="true" tabindex="-1"></a>larger_sample</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<span id="cb18-7"><a href="#cb18-7" aria-hidden="true" tabindex="-1"></a>larger_sample</span></code></pre></div><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></div>
 <div class="cell-output cell-output-stdout">
 <pre><code># A tibble: 1 × 3
   shots_taken shots_made shooting_percentage
@@ -13854,7 +13843,7 @@ Table&nbsp;3.1: The same percentage can carry different amounts of evidence
 }
 </style>
 
-<table class="gt_table do-not-create-environment cell caption-top table table-sm table-striped small" data-quarto-postprocess="true" data-quarto-disable-processing="false" data-quarto-bootstrap="false">
+<table class="gt_table cell caption-top table table-sm table-striped small" data-quarto-bootstrap="false">
 <thead>
 <tr class="gt_col_headings header">
 <th id="sample_size" class="gt_col_heading gt_columns_bottom_border gt_center" data-quarto-table-cell-role="th" scope="col">Situation</th>
@@ -13889,7 +13878,7 @@ Table&nbsp;3.1: The same percentage can carry different amounts of evidence
 <p>We can see this more directly by simulating many players who all have the same true shooting probability.</p>
 <p>Suppose the true probability of making a shot is 0.7. We simulate many short samples of 10 shots, and many larger samples of 100 shots.</p>
 <div class="cell">
-<div class="sourceCode cell-code" id="cb20"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb20-1"><a href="#cb20-1" aria-hidden="true" tabindex="-1"></a><span class="fu">set.seed</span>(<span class="dv">24205242</span>)</span>
+<div class="code-copy-outer-scaffold"><div class="sourceCode cell-code" id="cb20"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb20-1"><a href="#cb20-1" aria-hidden="true" tabindex="-1"></a><span class="fu">set.seed</span>(<span class="dv">24205242</span>)</span>
 <span id="cb20-2"><a href="#cb20-2" aria-hidden="true" tabindex="-1"></a></span>
 <span id="cb20-3"><a href="#cb20-3" aria-hidden="true" tabindex="-1"></a>n_simulations <span class="ot">&lt;-</span> <span class="dv">5000</span></span>
 <span id="cb20-4"><a href="#cb20-4" aria-hidden="true" tabindex="-1"></a>true_probability <span class="ot">&lt;-</span> <span class="fl">0.7</span></span>
@@ -13919,7 +13908,7 @@ Table&nbsp;3.1: The same percentage can carry different amounts of evidence
 <span id="cb20-28"><a href="#cb20-28" aria-hidden="true" tabindex="-1"></a>    <span class="at">sample_size =</span> <span class="fu">paste</span>(shots_taken, <span class="st">"shots"</span>)</span>
 <span id="cb20-29"><a href="#cb20-29" aria-hidden="true" tabindex="-1"></a>  )</span>
 <span id="cb20-30"><a href="#cb20-30" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb20-31"><a href="#cb20-31" aria-hidden="true" tabindex="-1"></a>shooting_simulations</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<span id="cb20-31"><a href="#cb20-31" aria-hidden="true" tabindex="-1"></a>shooting_simulations</span></code></pre></div><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></div>
 <div class="cell-output cell-output-stdout">
 <pre><code># A tibble: 10,000 × 5
    simulation shots_taken shots_made shooting_percentage sample_size
@@ -13946,14 +13935,14 @@ Table&nbsp;3.1: The same percentage can carry different amounts of evidence
 </ul>
 <p>Now we plot the simulated shooting percentages.</p>
 <div class="cell">
-<div class="sourceCode cell-code" id="cb22"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb22-1"><a href="#cb22-1" aria-hidden="true" tabindex="-1"></a>shooting_simulations <span class="sc">|&gt;</span></span>
+<div class="code-copy-outer-scaffold"><div class="sourceCode cell-code" id="cb22"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb22-1"><a href="#cb22-1" aria-hidden="true" tabindex="-1"></a>shooting_simulations <span class="sc">|&gt;</span></span>
 <span id="cb22-2"><a href="#cb22-2" aria-hidden="true" tabindex="-1"></a>  <span class="fu">ggplot</span>(<span class="fu">aes</span>(<span class="at">x =</span> shooting_percentage)) <span class="sc">+</span></span>
 <span id="cb22-3"><a href="#cb22-3" aria-hidden="true" tabindex="-1"></a>  <span class="fu">geom_histogram</span>(<span class="at">bins =</span> <span class="dv">25</span>) <span class="sc">+</span></span>
 <span id="cb22-4"><a href="#cb22-4" aria-hidden="true" tabindex="-1"></a>  <span class="fu">facet_wrap</span>(<span class="sc">~</span> sample_size, <span class="at">ncol =</span> <span class="dv">1</span>) <span class="sc">+</span></span>
 <span id="cb22-5"><a href="#cb22-5" aria-hidden="true" tabindex="-1"></a>  <span class="fu">labs</span>(</span>
 <span id="cb22-6"><a href="#cb22-6" aria-hidden="true" tabindex="-1"></a>    <span class="at">x =</span> <span class="st">"Observed shooting percentage"</span>,</span>
 <span id="cb22-7"><a href="#cb22-7" aria-hidden="true" tabindex="-1"></a>    <span class="at">y =</span> <span class="st">"Number of simulations"</span></span>
-<span id="cb22-8"><a href="#cb22-8" aria-hidden="true" tabindex="-1"></a>  )</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<span id="cb22-8"><a href="#cb22-8" aria-hidden="true" tabindex="-1"></a>  )</span></code></pre></div><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></div>
 <div class="cell-output-display">
 <div id="fig-small-large-samples" class="quarto-float quarto-figure quarto-figure-center anchored">
 <figure class="quarto-float quarto-float-fig figure">
@@ -13983,12 +13972,12 @@ X \sim N(50, 2)
 \]</span></p>
 <p>In R, we can draw the bell curve using <code>dnorm()</code>.</p>
 <div class="cell">
-<div class="sourceCode cell-code" id="cb23"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb23-1"><a href="#cb23-1" aria-hidden="true" tabindex="-1"></a>bell_curve <span class="ot">&lt;-</span> <span class="fu">tibble</span>(</span>
+<div class="code-copy-outer-scaffold"><div class="sourceCode cell-code" id="cb23"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb23-1"><a href="#cb23-1" aria-hidden="true" tabindex="-1"></a>bell_curve <span class="ot">&lt;-</span> <span class="fu">tibble</span>(</span>
 <span id="cb23-2"><a href="#cb23-2" aria-hidden="true" tabindex="-1"></a>  <span class="at">x =</span> <span class="fu">seq</span>(<span class="dv">40</span>, <span class="dv">60</span>, <span class="at">length.out =</span> <span class="dv">1000</span>),</span>
 <span id="cb23-3"><a href="#cb23-3" aria-hidden="true" tabindex="-1"></a>  <span class="at">density =</span> <span class="fu">dnorm</span>(x, <span class="at">mean =</span> <span class="dv">50</span>, <span class="at">sd =</span> <span class="dv">2</span>)</span>
 <span id="cb23-4"><a href="#cb23-4" aria-hidden="true" tabindex="-1"></a>)</span>
 <span id="cb23-5"><a href="#cb23-5" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb23-6"><a href="#cb23-6" aria-hidden="true" tabindex="-1"></a>bell_curve</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<span id="cb23-6"><a href="#cb23-6" aria-hidden="true" tabindex="-1"></a>bell_curve</span></code></pre></div><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></div>
 <div class="cell-output cell-output-stdout">
 <pre><code># A tibble: 1,000 × 2
        x     density
@@ -14015,13 +14004,13 @@ X \sim N(50, 2)
 </ul>
 <p>We can plot the curve.</p>
 <div class="cell">
-<div class="sourceCode cell-code" id="cb25"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb25-1"><a href="#cb25-1" aria-hidden="true" tabindex="-1"></a>bell_curve <span class="sc">|&gt;</span></span>
+<div class="code-copy-outer-scaffold"><div class="sourceCode cell-code" id="cb25"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb25-1"><a href="#cb25-1" aria-hidden="true" tabindex="-1"></a>bell_curve <span class="sc">|&gt;</span></span>
 <span id="cb25-2"><a href="#cb25-2" aria-hidden="true" tabindex="-1"></a>  <span class="fu">ggplot</span>(<span class="fu">aes</span>(<span class="at">x =</span> x, <span class="at">y =</span> density)) <span class="sc">+</span></span>
 <span id="cb25-3"><a href="#cb25-3" aria-hidden="true" tabindex="-1"></a>  <span class="fu">geom_line</span>(<span class="at">linewidth =</span> <span class="dv">1</span>) <span class="sc">+</span></span>
 <span id="cb25-4"><a href="#cb25-4" aria-hidden="true" tabindex="-1"></a>  <span class="fu">labs</span>(</span>
 <span id="cb25-5"><a href="#cb25-5" aria-hidden="true" tabindex="-1"></a>    <span class="at">x =</span> <span class="st">"Observed value"</span>,</span>
 <span id="cb25-6"><a href="#cb25-6" aria-hidden="true" tabindex="-1"></a>    <span class="at">y =</span> <span class="st">"Density"</span></span>
-<span id="cb25-7"><a href="#cb25-7" aria-hidden="true" tabindex="-1"></a>  )</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<span id="cb25-7"><a href="#cb25-7" aria-hidden="true" tabindex="-1"></a>  )</span></code></pre></div><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></div>
 <div class="cell-output-display">
 <div id="fig-normal-bell-curve" class="quarto-float quarto-figure quarto-figure-center anchored">
 <figure class="quarto-float quarto-float-fig figure">
@@ -14038,7 +14027,7 @@ Figure&nbsp;3.4: A normal distribution centred at 50 with standard deviation 2
 <p>The curve is highest near 50. Values close to 50 are more common. Values far from 50 are less common.</p>
 <p>Now compare two measurement processes. Both are centred around 50, but one has smaller measurement error and the other has larger measurement error.</p>
 <div class="cell">
-<div class="sourceCode cell-code" id="cb26"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb26-1"><a href="#cb26-1" aria-hidden="true" tabindex="-1"></a>normal_curves <span class="ot">&lt;-</span> <span class="fu">tibble</span>(</span>
+<div class="code-copy-outer-scaffold"><div class="sourceCode cell-code" id="cb26"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb26-1"><a href="#cb26-1" aria-hidden="true" tabindex="-1"></a>normal_curves <span class="ot">&lt;-</span> <span class="fu">tibble</span>(</span>
 <span id="cb26-2"><a href="#cb26-2" aria-hidden="true" tabindex="-1"></a>  <span class="at">x =</span> <span class="fu">rep</span>(<span class="fu">seq</span>(<span class="dv">35</span>, <span class="dv">65</span>, <span class="at">length.out =</span> <span class="dv">1000</span>), <span class="dv">2</span>),</span>
 <span id="cb26-3"><a href="#cb26-3" aria-hidden="true" tabindex="-1"></a>  <span class="at">process =</span> <span class="fu">rep</span>(</span>
 <span id="cb26-4"><a href="#cb26-4" aria-hidden="true" tabindex="-1"></a>    <span class="fu">c</span>(<span class="st">"More precise measurement"</span>, <span class="st">"Less precise measurement"</span>),</span>
@@ -14052,7 +14041,7 @@ Figure&nbsp;3.4: A normal distribution centred at 50 with standard deviation 2
 <span id="cb26-12"><a href="#cb26-12" aria-hidden="true" tabindex="-1"></a>    )</span>
 <span id="cb26-13"><a href="#cb26-13" aria-hidden="true" tabindex="-1"></a>  )</span>
 <span id="cb26-14"><a href="#cb26-14" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb26-15"><a href="#cb26-15" aria-hidden="true" tabindex="-1"></a>normal_curves</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<span id="cb26-15"><a href="#cb26-15" aria-hidden="true" tabindex="-1"></a>normal_curves</span></code></pre></div><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></div>
 <div class="cell-output cell-output-stdout">
 <pre><code># A tibble: 2,000 × 3
        x process                   density
@@ -14072,14 +14061,14 @@ Figure&nbsp;3.4: A normal distribution centred at 50 with standard deviation 2
 </div>
 <p>The function <code>case_when()</code> lets us calculate different values depending on a condition. Here, we use standard deviation 2 for the more precise process and standard deviation 6 for the less precise process.</p>
 <div class="cell">
-<div class="sourceCode cell-code" id="cb28"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb28-1"><a href="#cb28-1" aria-hidden="true" tabindex="-1"></a>normal_curves <span class="sc">|&gt;</span></span>
+<div class="code-copy-outer-scaffold"><div class="sourceCode cell-code" id="cb28"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb28-1"><a href="#cb28-1" aria-hidden="true" tabindex="-1"></a>normal_curves <span class="sc">|&gt;</span></span>
 <span id="cb28-2"><a href="#cb28-2" aria-hidden="true" tabindex="-1"></a>  <span class="fu">ggplot</span>(<span class="fu">aes</span>(<span class="at">x =</span> x, <span class="at">y =</span> density, <span class="at">linetype =</span> process)) <span class="sc">+</span></span>
 <span id="cb28-3"><a href="#cb28-3" aria-hidden="true" tabindex="-1"></a>  <span class="fu">geom_line</span>(<span class="at">linewidth =</span> <span class="dv">1</span>) <span class="sc">+</span></span>
 <span id="cb28-4"><a href="#cb28-4" aria-hidden="true" tabindex="-1"></a>  <span class="fu">labs</span>(</span>
 <span id="cb28-5"><a href="#cb28-5" aria-hidden="true" tabindex="-1"></a>    <span class="at">x =</span> <span class="st">"Observed value"</span>,</span>
 <span id="cb28-6"><a href="#cb28-6" aria-hidden="true" tabindex="-1"></a>    <span class="at">y =</span> <span class="st">"Density"</span>,</span>
 <span id="cb28-7"><a href="#cb28-7" aria-hidden="true" tabindex="-1"></a>    <span class="at">linetype =</span> <span class="st">"Measurement process"</span></span>
-<span id="cb28-8"><a href="#cb28-8" aria-hidden="true" tabindex="-1"></a>  )</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<span id="cb28-8"><a href="#cb28-8" aria-hidden="true" tabindex="-1"></a>  )</span></code></pre></div><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></div>
 <div class="cell-output-display">
 <div id="fig-compare-normal-curves" class="quarto-float quarto-figure quarto-figure-center anchored">
 <figure class="quarto-float quarto-float-fig figure">
@@ -14105,7 +14094,7 @@ Figure&nbsp;3.5: Two normal distributions with the same mean but different stand
 <i class="callout-icon"></i>
 </div>
 <div class="callout-title-container flex-fill">
-Question 1
+<span class="screen-reader-only">Note</span>Question 1
 </div>
 </div>
 <div class="callout-body-container callout-body">
@@ -14151,12 +14140,12 @@ Question 1
 </tbody>
 </table>
 <div class="callout callout-style-default callout-important callout-titled">
-<div class="callout-header d-flex align-content-center" data-bs-toggle="collapse" data-bs-target=".callout-4-contents" aria-controls="callout-4" aria-expanded="false" aria-label="Toggle callout">
+<div class="callout-header d-flex align-content-center collapsed" data-bs-toggle="collapse" data-bs-target=".callout-4-contents" aria-controls="callout-4" aria-expanded="false" aria-label="Toggle callout">
 <div class="callout-icon-container">
 <i class="callout-icon"></i>
 </div>
 <div class="callout-title-container flex-fill">
-Click for Solutions
+<span class="screen-reader-only">Important</span>Click for Solutions
 </div>
 <div class="callout-btn-toggle d-inline-block border-0 py-1 ps-1 pe-0 float-end"><i class="callout-toggle"></i></div>
 </div>
@@ -14230,7 +14219,7 @@ Click for Solutions
 <i class="callout-icon"></i>
 </div>
 <div class="callout-title-container flex-fill">
-Question 2
+<span class="screen-reader-only">Note</span>Question 2
 </div>
 </div>
 <div class="callout-body-container callout-body">
@@ -14244,12 +14233,12 @@ Question 2
 <li><p>A kitchen scale gives slightly different readings because the bowl is not placed in exactly the same position each time.</p></li>
 </ol>
 <div class="callout callout-style-default callout-important callout-titled">
-<div class="callout-header d-flex align-content-center" data-bs-toggle="collapse" data-bs-target=".callout-6-contents" aria-controls="callout-6" aria-expanded="false" aria-label="Toggle callout">
+<div class="callout-header d-flex align-content-center collapsed" data-bs-toggle="collapse" data-bs-target=".callout-6-contents" aria-controls="callout-6" aria-expanded="false" aria-label="Toggle callout">
 <div class="callout-icon-container">
 <i class="callout-icon"></i>
 </div>
 <div class="callout-title-container flex-fill">
-Click for Solutions
+<span class="screen-reader-only">Important</span>Click for Solutions
 </div>
 <div class="callout-btn-toggle d-inline-block border-0 py-1 ps-1 pe-0 float-end"><i class="callout-toggle"></i></div>
 </div>
@@ -14275,7 +14264,7 @@ Click for Solutions
 <i class="callout-icon"></i>
 </div>
 <div class="callout-title-container flex-fill">
-Question 3
+<span class="screen-reader-only">Note</span>Question 3
 </div>
 </div>
 <div class="callout-body-container callout-body">
@@ -14296,12 +14285,12 @@ Question 3
 <li><p>How should we interpret this result?</p></li>
 </ol>
 <div class="callout callout-style-default callout-important callout-titled">
-<div class="callout-header d-flex align-content-center" data-bs-toggle="collapse" data-bs-target=".callout-8-contents" aria-controls="callout-8" aria-expanded="false" aria-label="Toggle callout">
+<div class="callout-header d-flex align-content-center collapsed" data-bs-toggle="collapse" data-bs-target=".callout-8-contents" aria-controls="callout-8" aria-expanded="false" aria-label="Toggle callout">
 <div class="callout-icon-container">
 <i class="callout-icon"></i>
 </div>
 <div class="callout-title-container flex-fill">
-Click for Solutions
+<span class="screen-reader-only">Important</span>Click for Solutions
 </div>
 <div class="callout-btn-toggle d-inline-block border-0 py-1 ps-1 pe-0 float-end"><i class="callout-toggle"></i></div>
 </div>
@@ -14346,7 +14335,7 @@ P(6,6,6,6,6,6)
 <i class="callout-icon"></i>
 </div>
 <div class="callout-title-container flex-fill">
-Question 4
+<span class="screen-reader-only">Note</span>Question 4
 </div>
 </div>
 <div class="callout-body-container callout-body">
@@ -14361,12 +14350,12 @@ Question 4
 <li><p>Does the larger number of reviews guarantee that the second service is better? Explain.</p></li>
 </ol>
 <div class="callout callout-style-default callout-important callout-titled">
-<div class="callout-header d-flex align-content-center" data-bs-toggle="collapse" data-bs-target=".callout-10-contents" aria-controls="callout-10" aria-expanded="false" aria-label="Toggle callout">
+<div class="callout-header d-flex align-content-center collapsed" data-bs-toggle="collapse" data-bs-target=".callout-10-contents" aria-controls="callout-10" aria-expanded="false" aria-label="Toggle callout">
 <div class="callout-icon-container">
 <i class="callout-icon"></i>
 </div>
 <div class="callout-title-container flex-fill">
-Click for Solutions
+<span class="screen-reader-only">Important</span>Click for Solutions
 </div>
 <div class="callout-btn-toggle d-inline-block border-0 py-1 ps-1 pe-0 float-end"><i class="callout-toggle"></i></div>
 </div>
@@ -14388,7 +14377,7 @@ Click for Solutions
 <i class="callout-icon"></i>
 </div>
 <div class="callout-title-container flex-fill">
-Question 5
+<span class="screen-reader-only">Note</span>Question 5
 </div>
 </div>
 <div class="callout-body-container callout-body">
@@ -14436,12 +14425,12 @@ Question 5
 <li><p>Explain why the two blends should not be interpreted in the same way, even if they have the same mean.</p></li>
 </ol>
 <div class="callout callout-style-default callout-important callout-titled">
-<div class="callout-header d-flex align-content-center" data-bs-toggle="collapse" data-bs-target=".callout-12-contents" aria-controls="callout-12" aria-expanded="false" aria-label="Toggle callout">
+<div class="callout-header d-flex align-content-center collapsed" data-bs-toggle="collapse" data-bs-target=".callout-12-contents" aria-controls="callout-12" aria-expanded="false" aria-label="Toggle callout">
 <div class="callout-icon-container">
 <i class="callout-icon"></i>
 </div>
 <div class="callout-title-container flex-fill">
-Click for Solutions
+<span class="screen-reader-only">Important</span>Click for Solutions
 </div>
 <div class="callout-btn-toggle d-inline-block border-0 py-1 ps-1 pe-0 float-end"><i class="callout-toggle"></i></div>
 </div>
@@ -14486,7 +14475,7 @@ Click for Solutions
 <i class="callout-icon"></i>
 </div>
 <div class="callout-title-container flex-fill">
-Question 6
+<span class="screen-reader-only">Note</span>Question 6
 </div>
 </div>
 <div class="callout-body-container callout-body">
@@ -14505,12 +14494,12 @@ Question 6
 <li><p>What might this tell us about the two students?</p></li>
 </ol>
 <div class="callout callout-style-default callout-important callout-titled">
-<div class="callout-header d-flex align-content-center" data-bs-toggle="collapse" data-bs-target=".callout-14-contents" aria-controls="callout-14" aria-expanded="false" aria-label="Toggle callout">
+<div class="callout-header d-flex align-content-center collapsed" data-bs-toggle="collapse" data-bs-target=".callout-14-contents" aria-controls="callout-14" aria-expanded="false" aria-label="Toggle callout">
 <div class="callout-icon-container">
 <i class="callout-icon"></i>
 </div>
 <div class="callout-title-container flex-fill">
-Click for Solutions
+<span class="screen-reader-only">Important</span>Click for Solutions
 </div>
 <div class="callout-btn-toggle d-inline-block border-0 py-1 ps-1 pe-0 float-end"><i class="callout-toggle"></i></div>
 </div>
@@ -14553,7 +14542,7 @@ Click for Solutions
 <i class="callout-icon"></i>
 </div>
 <div class="callout-title-container flex-fill">
-Question 7
+<span class="screen-reader-only">Note</span>Question 7
 </div>
 </div>
 <div class="callout-body-container callout-body">
@@ -14568,12 +14557,12 @@ Question 7
 <li><p>What would be more worrying: this pattern, or six measurements all close to 1.08 kg? Explain.</p></li>
 </ol>
 <div class="callout callout-style-default callout-important callout-titled">
-<div class="callout-header d-flex align-content-center" data-bs-toggle="collapse" data-bs-target=".callout-16-contents" aria-controls="callout-16" aria-expanded="false" aria-label="Toggle callout">
+<div class="callout-header d-flex align-content-center collapsed" data-bs-toggle="collapse" data-bs-target=".callout-16-contents" aria-controls="callout-16" aria-expanded="false" aria-label="Toggle callout">
 <div class="callout-icon-container">
 <i class="callout-icon"></i>
 </div>
 <div class="callout-title-container flex-fill">
-Click for Solutions
+<span class="screen-reader-only">Important</span>Click for Solutions
 </div>
 <div class="callout-btn-toggle d-inline-block border-0 py-1 ps-1 pe-0 float-end"><i class="callout-toggle"></i></div>
 </div>
@@ -14595,7 +14584,7 @@ Click for Solutions
 <i class="callout-icon"></i>
 </div>
 <div class="callout-title-container flex-fill">
-Question 8
+<span class="screen-reader-only">Note</span>Question 8
 </div>
 </div>
 <div class="callout-body-container callout-body">
@@ -14606,12 +14595,12 @@ Question 8
 <li><p>According to the law of large numbers, what should happen to the observed proportion of red balls as the number of draws becomes very large?</p></li>
 </ol>
 <div class="callout callout-style-default callout-important callout-titled">
-<div class="callout-header d-flex align-content-center" data-bs-toggle="collapse" data-bs-target=".callout-18-contents" aria-controls="callout-18" aria-expanded="false" aria-label="Toggle callout">
+<div class="callout-header d-flex align-content-center collapsed" data-bs-toggle="collapse" data-bs-target=".callout-18-contents" aria-controls="callout-18" aria-expanded="false" aria-label="Toggle callout">
 <div class="callout-icon-container">
 <i class="callout-icon"></i>
 </div>
 <div class="callout-title-container flex-fill">
-Click for Solutions
+<span class="screen-reader-only">Important</span>Click for Solutions
 </div>
 <div class="callout-btn-toggle d-inline-block border-0 py-1 ps-1 pe-0 float-end"><i class="callout-toggle"></i></div>
 </div>
@@ -14642,7 +14631,7 @@ P(\text{red})
 <i class="callout-icon"></i>
 </div>
 <div class="callout-title-container flex-fill">
-Question 9
+<span class="screen-reader-only">Note</span>Question 9
 </div>
 </div>
 <div class="callout-body-container callout-body">
@@ -14653,12 +14642,12 @@ Question 9
 <li><p>Give two reasons why individual commute times might vary around the average.</p></li>
 </ol>
 <div class="callout callout-style-default callout-important callout-titled">
-<div class="callout-header d-flex align-content-center" data-bs-toggle="collapse" data-bs-target=".callout-20-contents" aria-controls="callout-20" aria-expanded="false" aria-label="Toggle callout">
+<div class="callout-header d-flex align-content-center collapsed" data-bs-toggle="collapse" data-bs-target=".callout-20-contents" aria-controls="callout-20" aria-expanded="false" aria-label="Toggle callout">
 <div class="callout-icon-container">
 <i class="callout-icon"></i>
 </div>
 <div class="callout-title-container flex-fill">
-Click for Solutions
+<span class="screen-reader-only">Important</span>Click for Solutions
 </div>
 <div class="callout-btn-toggle d-inline-block border-0 py-1 ps-1 pe-0 float-end"><i class="callout-toggle"></i></div>
 </div>
@@ -14681,7 +14670,7 @@ Click for Solutions
 <i class="callout-icon"></i>
 </div>
 <div class="callout-title-container flex-fill">
-Question 10
+<span class="screen-reader-only">Note</span>Question 10
 </div>
 </div>
 <div class="callout-body-container callout-body">
@@ -14693,12 +14682,12 @@ Question 10
 <li><p>“The bell curve applies to all data.”</p></li>
 </ol>
 <div class="callout callout-style-default callout-important callout-titled">
-<div class="callout-header d-flex align-content-center" data-bs-toggle="collapse" data-bs-target=".callout-22-contents" aria-controls="callout-22" aria-expanded="false" aria-label="Toggle callout">
+<div class="callout-header d-flex align-content-center collapsed" data-bs-toggle="collapse" data-bs-target=".callout-22-contents" aria-controls="callout-22" aria-expanded="false" aria-label="Toggle callout">
 <div class="callout-icon-container">
 <i class="callout-icon"></i>
 </div>
 <div class="callout-title-container flex-fill">
-Click for Solutions
+<span class="screen-reader-only">Important</span>Click for Solutions
 </div>
 <div class="callout-btn-toggle d-inline-block border-0 py-1 ps-1 pe-0 float-end"><i class="callout-toggle"></i></div>
 </div>
@@ -14721,7 +14710,7 @@ Click for Solutions
 <i class="callout-icon"></i>
 </div>
 <div class="callout-title-container flex-fill">
-Question 11
+<span class="screen-reader-only">Note</span>Question 11
 </div>
 </div>
 <div class="callout-body-container callout-body">
@@ -14736,12 +14725,12 @@ X \sim N(120, 15)
 <li><p>Would a value of 122 be surprising? Would a value of 180 be more surprising? Explain.</p></li>
 </ol>
 <div class="callout callout-style-default callout-important callout-titled">
-<div class="callout-header d-flex align-content-center" data-bs-toggle="collapse" data-bs-target=".callout-24-contents" aria-controls="callout-24" aria-expanded="false" aria-label="Toggle callout">
+<div class="callout-header d-flex align-content-center collapsed" data-bs-toggle="collapse" data-bs-target=".callout-24-contents" aria-controls="callout-24" aria-expanded="false" aria-label="Toggle callout">
 <div class="callout-icon-container">
 <i class="callout-icon"></i>
 </div>
 <div class="callout-title-container flex-fill">
-Click for Solutions
+<span class="screen-reader-only">Important</span>Click for Solutions
 </div>
 <div class="callout-btn-toggle d-inline-block border-0 py-1 ps-1 pe-0 float-end"><i class="callout-toggle"></i></div>
 </div>
@@ -14768,7 +14757,7 @@ Click for Solutions
 <i class="callout-icon"></i>
 </div>
 <div class="callout-title-container flex-fill">
-Question 12
+<span class="screen-reader-only">Note</span>Question 12
 </div>
 </div>
 <div class="callout-body-container callout-body">
@@ -14825,12 +14814,12 @@ Question 12
 <li><p>What is meant by the phrase “the centre is crowded”?</p></li>
 </ol>
 <div class="callout callout-style-default callout-important callout-titled">
-<div class="callout-header d-flex align-content-center" data-bs-toggle="collapse" data-bs-target=".callout-26-contents" aria-controls="callout-26" aria-expanded="false" aria-label="Toggle callout">
+<div class="callout-header d-flex align-content-center collapsed" data-bs-toggle="collapse" data-bs-target=".callout-26-contents" aria-controls="callout-26" aria-expanded="false" aria-label="Toggle callout">
 <div class="callout-icon-container">
 <i class="callout-icon"></i>
 </div>
 <div class="callout-title-container flex-fill">
-Click for Solutions
+<span class="screen-reader-only">Important</span>Click for Solutions
 </div>
 <div class="callout-btn-toggle d-inline-block border-0 py-1 ps-1 pe-0 float-end"><i class="callout-toggle"></i></div>
 </div>
@@ -14862,7 +14851,7 @@ HHHHHHHH.
 <i class="callout-icon"></i>
 </div>
 <div class="callout-title-container flex-fill">
-Question 13
+<span class="screen-reader-only">Note</span>Question 13
 </div>
 </div>
 <div class="callout-body-container callout-body">
@@ -14872,12 +14861,12 @@ Question 13
 </blockquote>
 <p>Your response should use at least two examples not already used in your answer above.</p>
 <div class="callout callout-style-default callout-important callout-titled">
-<div class="callout-header d-flex align-content-center" data-bs-toggle="collapse" data-bs-target=".callout-28-contents" aria-controls="callout-28" aria-expanded="false" aria-label="Toggle callout">
+<div class="callout-header d-flex align-content-center collapsed" data-bs-toggle="collapse" data-bs-target=".callout-28-contents" aria-controls="callout-28" aria-expanded="false" aria-label="Toggle callout">
 <div class="callout-icon-container">
 <i class="callout-icon"></i>
 </div>
 <div class="callout-title-container flex-fill">
-Click for Solutions
+<span class="screen-reader-only">Important</span>Click for Solutions
 </div>
 <div class="callout-btn-toggle d-inline-block border-0 py-1 ps-1 pe-0 float-end"><i class="callout-toggle"></i></div>
 </div>
@@ -15373,13 +15362,14 @@ window.onload = function() {
       e.clearSelection();
     }
     const getTextToCopy = function(trigger) {
-        const codeEl = trigger.previousElementSibling.cloneNode(true);
-        for (const childEl of codeEl.children) {
-          if (isCodeAnnotation(childEl)) {
-            childEl.remove();
-          }
+      const outerScaffold = trigger.parentElement.cloneNode(true);
+      const codeEl = outerScaffold.querySelector('code');
+      for (const childEl of codeEl.children) {
+        if (isCodeAnnotation(childEl)) {
+          childEl.remove();
         }
-        return codeEl.innerText;
+      }
+      return codeEl.innerText;
     }
     const clipboard = new window.ClipboardJS('.code-copy-button:not([data-in-quarto-modal])', {
       text: getTextToCopy
