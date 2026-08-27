@@ -694,7 +694,6 @@ $$
 
 This feels much more suspicious. Again, under the fair coin model:
 
-
 $$
 P(10 \text{ heads in a row})
 = \left(\frac{1}{2}\right)^{10}
@@ -2230,7 +2229,7 @@ For each situation below, identify:
 4.  one possible source of systematic error.
 
 | Situation | Description |
-|------------------------------------|------------------------------------|
+|----|----|
 | A | A university course receives an average student evaluation score of 4.2 out of 5. |
 | B | A fitness tracker reports that someone walked 8,740 steps in a day. |
 | C | A newspaper survey reports that 61% of readers support a new stadium. |
@@ -2243,7 +2242,7 @@ For each situation below, identify:
 There are several reasonable answers. One possible set is shown below.
 
 | Situation | What we want to know | What we observe | Possible random error | Possible systematic error |
-|---------------|---------------|---------------|---------------|---------------|
+|----|----|----|----|----|
 | A | Quality of the course | Student evaluation score | Only a few students may respond | Students with strong opinions may be more likely to complete the survey |
 | B | Actual walking activity | Step count | The tracker may misread some arm movements | The device may consistently overcount steps for this person's walking style |
 | C | Public opinion about the stadium | Survey percentage | A different group of readers may give a different result | Newspaper readers may not represent the whole population |

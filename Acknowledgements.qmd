@@ -1,0 +1,13 @@
+## Acknowledgements & References {.unnumbered}
+
+Many of the ideas, examples, activities, and explanations presented in this book have been adapted from a wide range of sources. The material also builds on learning content developed by current and former Monash University staff who have taught and contributed to ETC2420 and ETC5242 over many years. I gratefully acknowledge these contributions, which provided an important foundation for this book. While every effort has been made to acknowledge specific sources where appropriate, the influence of these earlier materials extends throughout the book.
+
+Several external resources also helped shape my thinking about probability, statistics, and uncertainty (and have been adapted in this resource). I particularly recommend the following books for readers interested in exploring these ideas further:
+
+- Mlodinow, L. (2008). The drunkard’s walk: How randomness rules our lives. Pantheon Books.
+- Spiegelhalter, D. (2024). The art of uncertainty: How to navigate chance, ignorance, risk and luck. Pelican Books.
+- Clayton, A. (2021). Bernoulli’s fallacy: Statistical illogic and the crisis of modern science. Columbia University Press.
+- Silver, N. (2012). The signal and the noise: Why so many predictions fail—but some don’t. The Penguin Press.
+- Roback, P and Legler J. (2021). Beyond Multiple Linear Regression: Applied Generalized Linear Models and Multilevel Models in R
+
+

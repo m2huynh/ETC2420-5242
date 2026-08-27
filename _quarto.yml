@@ -20,6 +20,7 @@ book:
     
   chapters:
     - index.qmd
+    - Acknowledgements.qmd
     - 1_Questions.qmd
     - 2_Probability.qmd
     - 3_MeasurementError.qmd
