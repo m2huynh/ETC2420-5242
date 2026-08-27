@@ -292,6 +292,48 @@ curious, careful, sceptical, and evidence-based.
 
 \bookmarksetup{startatroot}
 
+\chapter*{Acknowledgements \&
+References}\label{acknowledgements-references}
+\addcontentsline{toc}{chapter}{Acknowledgements \& References}
+
+\markboth{Acknowledgements \& References}{Acknowledgements \&
+References}
+
+Many of the ideas, examples, activities, and explanations presented in
+this book have been adapted from a wide range of sources. The material
+also builds on learning content developed by current and former Monash
+University staff who have taught and contributed to ETC2420 and ETC5242
+over many years. I gratefully acknowledge these contributions, which
+provided an important foundation for this book. While every effort has
+been made to acknowledge specific sources where appropriate, the
+influence of these earlier materials extends throughout the book.
+
+Several external resources also helped shape my thinking about
+probability, statistics, and uncertainty (and have been adapted in this
+resource). I particularly recommend the following books for readers
+interested in exploring these ideas further:
+
+\begin{itemize}
+\tightlist
+\item
+  Mlodinow, L. (2008). The drunkard's walk: How randomness rules our
+  lives. Pantheon Books.
+\item
+  Spiegelhalter, D. (2024). The art of uncertainty: How to navigate
+  chance, ignorance, risk and luck. Pelican Books.
+\item
+  Clayton, A. (2021). Bernoulli's fallacy: Statistical illogic and the
+  crisis of modern science. Columbia University Press.
+\item
+  Silver, N. (2012). The signal and the noise: Why so many predictions
+  fail---but some don't. The Penguin Press.
+\item
+  Roback, P and Legler J. (2021). Beyond Multiple Linear Regression:
+  Applied Generalized Linear Models and Multilevel Models in R
+\end{itemize}
+
+\bookmarksetup{startatroot}
+
 \chapter{Better Questions}\label{better-questions}
 
 \begin{tcolorbox}[enhanced jigsaw, arc=.35mm, bottomrule=.15mm, bottomtitle=1mm, breakable, colback=white, colbacktitle=quarto-callout-note-color!10!white, colframe=quarto-callout-note-color-frame, coltitle=black, left=2mm, leftrule=.75mm, opacityback=0, opacitybacktitle=0.6, rightrule=.15mm, title=\textcolor{quarto-callout-note-color}{\faInfo}\hspace{0.5em}{Learning Objectives}, titlerule=0mm, toprule=.15mm, toptitle=1mm]
@@ -5265,7 +5307,7 @@ We can write a function that plays one game.
 # A tibble: 1 x 6
     car first_choice host_opens switch_choice stay_win switch_win
   <int>        <int>      <int>         <int> <lgl>    <lgl>     
-1     1            3          2             1 FALSE    TRUE      
+1     2            3          1             2 FALSE    TRUE      
 \end{verbatim}
 
 Because one game is not very informative, we repeat the game many times.
@@ -29335,23 +29377,17 @@ We can use diagnostic plots for each model.
 \end{Highlighting}
 \end{Shaded}
 
-\pandocbounded{\includegraphics[keepaspectratio]{10_Models1_files/figure-pdf/unnamed-chunk-58-1.pdf}}
-
 \begin{Shaded}
 \begin{Highlighting}[]
 \NormalTok{performance}\SpecialCharTok{::}\FunctionTok{check\_model}\NormalTok{(model\_2)}
 \end{Highlighting}
 \end{Shaded}
 
-\pandocbounded{\includegraphics[keepaspectratio]{10_Models1_files/figure-pdf/unnamed-chunk-59-1.pdf}}
-
 \begin{Shaded}
 \begin{Highlighting}[]
 \NormalTok{performance}\SpecialCharTok{::}\FunctionTok{check\_model}\NormalTok{(model\_3)}
 \end{Highlighting}
 \end{Shaded}
-
-\pandocbounded{\includegraphics[keepaspectratio]{10_Models1_files/figure-pdf/unnamed-chunk-60-1.pdf}}
 
 These plots help us assess whether the models are reasonable. They are
 not automatic pass/fail tests, but they help us identify potential
